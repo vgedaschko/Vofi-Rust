@@ -6,20 +6,20 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [ ] Recherchenotizen und Bericht nach Abschluss aus der Sitzung in dieses Repo übernehmen (`research_notes/`, `reports/`)
-- [~] Recherche: bestehende Lösungen (VOFI-/Immobilienkalkulationssoftware) und ihr Funktionsumfang
-- [~] Best Practices darstellen (VOFI-Methodik, Finanzmodellierung, Softwarearchitektur)
-- [~] Fachberatung Einsatzgebiet Immobilien: wichtige Features, Kennzahlen, Fördermodule (KfW, NBank)
-- [~] Einschätzung: Rust durchgängig sinnvoll oder Ausnahmen (v. a. Frontend)?
+- [~] Recherchebericht wird nach Prüfrunde 1 überarbeitet (Auftrag: `docs/pruefung/2026-11-17-recherchebericht/sichtung.md`); danach zweite Runde mit den Rollen unter 8 und Protokoll
 
 ## Als Nächstes
 
-- [ ] Prüfrunde über den Recherchebericht (fachexperte, finanzmathematiker, investor, praktiker, slop)
+- [ ] Vorstudie Wirtschaftlichkeit: Eigenbau gegen Kauf und Excel-Ausbau, mit Mengengerüst des Auftraggebers und Aufwandsschätzung nach dem Architekturentwurf
 - [ ] Anforderungsdokument / Feature-Scope (MVP vs. später) aus Recherche + Antworten ableiten
 - [ ] Architekturentwurf (Rechenkern, API, Datenmodell, Mehrbenutzer/Rechte, Frontend)
 - [ ] Fachliches Rechenmodell spezifizieren (VOFI-Tabellenstruktur, Kennzahlen, Steuern, Fördermittel)
 
 ## Wartet auf Nutzer
+
+- [ ] Gespräch mit der NBank: Rechenweise der Renditeprüfung (Überkompensation) erfragen
+- [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
+- [ ] Mengengerüst für die Wirtschaftlichkeitsrechnung: Projekte pro Jahr, Zeitaufwand je Kalkulation heute, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau
 
 
 ## Später
@@ -31,6 +31,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-17 Prüfrunde 1 zum Recherchebericht: sechs Prüfer plus Lotse, Befunde nachgeprüft und gesichtet
 - [x] 2026-11-17 Prüfer eingerichtet: 14 Rollen (inkl. Jurist) in `.claude/agents/`, Ablauf `/pruefrunde`, Regeln und Protokoll in `docs/pruefung/`
 - [x] 2026-11-17 Geklärt: Arbeitsstand liegt auf `main` von `Vofi-Rust`; die älteren Repos `VoFi` und `NBank` werden nicht weiterverwendet
 - [x] 2026-11-17 Repo `vgedaschko/Vofi-Rust` angelegt und angebunden; Hook, Aufgabenliste und Konzeptdokumente umgezogen
