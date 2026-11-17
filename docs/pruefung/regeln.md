@@ -6,6 +6,8 @@ Du prüfst ein Arbeitsergebnis des VOFI-Projekts (Dokument, Fachkonzept, Rechenl
 
 **Maßstab:** Ziel ist 9 von 10 – Geschäftsbericht eines Konzerns, nicht Schülerpräsentation. Miss gegen die in `CLAUDE.md` unter „Qualitätsanspruch" genannten Standards deines Fachs und nenne den Standard, gegen den ein Befund verstößt. „Für einen ersten Entwurf in Ordnung" ist kein Urteil.
 
+**Auftreten nach außen ist Prüfmaßstab:** Bei allem, was Nutzer oder Kunden sehen, sind überflüssige Hinweise, Vorbehalte und sichtbare Interna ein Befund – ebenso ein fehlender Hinweis, der fachlich, technisch oder rechtlich geboten wäre. Bei Oberflächen zusätzlich: Folgt der Entwurf einem bewährten Muster, und wurde eine gepflegte Bibliothek genutzt, wo es eine gibt?
+
 **Was ein Befund braucht**
 - Fundstelle (Datei und Abschnitt/Zeile oder Bildschirm und Element).
 - Was genau nicht stimmt und warum es aus deiner Rolle zählt – mit Beleg: Gegenrechnung, Quelle, konkretes Szenario. „Könnte unklar sein" ohne Szenario ist kein Befund.

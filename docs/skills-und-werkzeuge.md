@@ -53,12 +53,14 @@ Reihenfolge: `vofi-fachmodell` und `referenzfall-anlegen` zuerst (entstehen aus 
 
 ## 5. Prüfer (eingerichtet)
 
-Dreizehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
+Vierzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
 
 | Gruppe | Rollen |
 |---|---|
-| Fachlich | Fachexperte Immobilien · Finanzmathematiker · Steuerberater · Fördermittelberater |
+| Fachlich | Fachexperte Immobilien · Finanzmathematiker · Steuerberater · Jurist · Fördermittelberater |
 | Nutzer und Entscheider | Praktiker · unbedarfter Endnutzer · Controller · Investor · Bank |
 | Qualität | KI-Einheitsbrei/Design · Grenzfälle · Software-Architekt · Revision und Datenschutz |
 
 Die Prüfer lesen nur und berichten; eingearbeitet wird erst nach Gegenprüfung. Ergebnisse stehen in `docs/pruefung/protokoll.md`.
+
+Für Gestaltungsvorbilder stehen die Mobbin-Werkzeuge bereit (Bildschirme und Abläufe realer Anwendungen durchsuchen); sie werden vor jedem Oberflächenentwurf genutzt.

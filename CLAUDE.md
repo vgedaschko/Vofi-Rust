@@ -23,7 +23,26 @@ Strikt an Branchenstandards und anerkannten Best Practices ausrichten und im Zwe
 | Code | Rust API Guidelines, `clippy` ohne Warnungen, jede fachliche Regel mit Test und Referenzfall, exakte Geldbeträge |
 | Sicherheit und Daten | OWASP ASVS, DSGVO, lückenloses Änderungsprotokoll |
 
-Wo ein Ergebnis den Maßstab noch nicht erreicht, das offen sagen und benennen, was zur 9 fehlt – nicht als fertig ausgeben.
+Wo ein Ergebnis den Maßstab noch nicht erreicht, das dem Auftraggeber offen sagen und benennen, was zur 9 fehlt – nicht als fertig ausgeben.
+
+### Auftreten nach außen
+
+Alles, was Nutzer oder Kunden sehen (Oberfläche, Berichte, Exporte), tritt auf wie das Produkt eines professionellen Hauses:
+
+- Keine Hinweisflut. Interne Einschränkungen, Unsicherheiten und Entstehungsdetails bleiben hinter den Kulissen (Protokoll, `TASKS.md`, Entwicklerdokumentation).
+- Ein Hinweis erscheint nur, wenn er fachlich, technisch oder rechtlich Gewicht hat – etwa Stand-Datum einer Förderkondition, eine Annahme, die das Ergebnis trägt, eine Rechengrenze, eine rechtlich gebotene Abgrenzung. Dann einmal, an der Stelle, an der er gebraucht wird, in einem Satz.
+- Dasselbe gilt für Dokumente an den Auftraggeber: Ergebnis zuerst, Belegqualität gebündelt und knapp, keine wiederholten Vorbehalte.
+
+### Gestaltung und Bedienung
+
+- An bewährten Vorbildern ausrichten, nicht frei erfinden: vor dem Entwurf einer Ansicht Referenzen aus guten Finanz-, Analyse- und Tabellenanwendungen ansehen (über die Mobbin-Werkzeuge, sofern verfügbar) und das Muster benennen, dem der Entwurf folgt.
+- Fertige, gepflegte Bibliotheken für Standardbausteine einsetzen (Tabellen, Diagramme, Formulare, Dialoge, Datumswahl) statt sie neu zu bauen. Eigenbau nur dort, wo das Fachliche es verlangt (VOFI-Tabelle, Förderlogik) – mit kurzer Begründung.
+- Auswahl einer Bibliothek nach Pflegezustand, Lizenz, Barrierefreiheit und Passung zum Gestaltungssystem; die Entscheidung trifft Claude und hält sie fest.
+
+## Agenten und Modelle
+
+- Agenten (Recherche, Prüfer, Zuarbeit) laufen standardmäßig mit dem neuesten Opus-Modell.
+- Das neueste Fable-Modell nur für wirklich komplexe oder folgenreiche Aufgaben: Spezifikation und Nachrechnen des Rechenkerns, Steuer- und Rechtslogik mit Auswirkung auf Ergebnisse, Sicherheits- und Rechtearchitektur, abschließende Berichte.
 
 ## Prüfrunden
 

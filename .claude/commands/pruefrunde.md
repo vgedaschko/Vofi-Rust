@@ -10,16 +10,16 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
    | Prüfobjekt | Üblicherweise |
    |---|---|
    | Recherche, Bericht, Dokumentation | fachexperte, finanzmathematiker (wenn Zahlen), investor, slop |
-   | Fachkonzept, Rechenmodell | fachexperte, finanzmathematiker, steuerberater, foerdermittel, controller, grenzfaelle |
+   | Fachkonzept, Rechenmodell | fachexperte, finanzmathematiker, steuerberater, jurist, foerdermittel, controller, grenzfaelle |
    | Architektur, Datenmodell | architekt, revision, controller |
    | Oberfläche, Eingabemasken | praktiker, endnutzer, slop, controller |
-   | Kundenbericht, Export | endnutzer, investor, bank, slop |
+   | Kundenbericht, Export | endnutzer, investor, bank, jurist, slop |
    | Rechencode | finanzmathematiker, grenzfaelle, architekt |
-   | Anmeldung, Rechte, Kundenzugang | revision, architekt |
+   | Anmeldung, Rechte, Kundenzugang | revision, architekt, jurist |
 
    Fehlt für eine spezielle Frage eine passende Rolle, lege einen neuen Prüfer nach dem Muster der vorhandenen an.
 
-2. **Parallel starten.** Jeder Prüfer bekommt den Pfad des Prüfobjekts und, falls nötig, die konkrete Frage – nicht deine eigene Einschätzung, sonst bestätigt er sie nur. Sind die Agententypen nicht registriert, starte einen allgemeinen Agenten mit dem Auftrag, zuerst die jeweilige Datei `.claude/agents/pruefer-<rolle>.md` zu lesen und in dieser Rolle zu prüfen.
+2. **Parallel starten.** Modell: das neueste Opus (in den Rollendateien voreingestellt); Fable nur, wenn das Prüfobjekt komplex oder folgenreich ist (Rechenkern, Steuer- und Rechtslogik, Sicherheitsarchitektur). Jeder Prüfer bekommt den Pfad des Prüfobjekts und, falls nötig, die konkrete Frage – nicht deine eigene Einschätzung, sonst bestätigt er sie nur. Sind die Agententypen nicht registriert, starte einen allgemeinen Agenten mit dem Auftrag, zuerst die jeweilige Datei `.claude/agents/pruefer-<rolle>.md` zu lesen und in dieser Rolle zu prüfen.
 
 3. **Befunde sichten – nicht ungeprüft übernehmen.** Doppelte zusammenführen. Jeden Befund mit Schweregrad „kritisch" oder „wichtig" selbst an der Fundstelle nachprüfen: Prüfer irren sich auch. Dann entscheiden: übernehmen · ablehnen (mit Grund) · Rückfrage an den Auftraggeber (nur fachlich/betriebswirtschaftlich).
 
