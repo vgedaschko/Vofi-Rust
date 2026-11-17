@@ -25,6 +25,6 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
 
 4. **Einarbeiten.** Übernommene Befunde direkt im Prüfobjekt beheben; was nicht sofort geht, als Aufgabe in `TASKS.md`.
 
-5. **Protokollieren** in `docs/pruefung/protokoll.md`: Datum, Prüfobjekt, eingesetzte Rollen, Zahl der Befunde je Schweregrad, was übernommen und was mit welchem Grund abgelehnt wurde. Widersprechen sich zwei Rollen, den Zielkonflikt benennen statt ihn stillschweigend zu entscheiden.
+5. **Protokollieren** in `docs/pruefung/protokoll.md`: Datum, Prüfobjekt, eingesetzte Rollen, Note je Rolle, Zahl der Befunde je Schweregrad, was übernommen und was mit welchem Grund abgelehnt wurde. Widersprechen sich zwei Rollen, den Zielkonflikt benennen statt ihn stillschweigend zu entscheiden.
 
-6. **Wiederholen nur bei Bedarf.** Eine zweite Runde lohnt sich, wenn kritische Befunde größere Änderungen ausgelöst haben; dann nur die betroffenen Rollen erneut. Höchstens zwei Runden je Prüfobjekt, danach an den Auftraggeber berichten.
+6. **Wiederholen nur bei Bedarf.** Eine zweite Runde lohnt sich, wenn kritische Befunde größere Änderungen ausgelöst haben oder eine Rolle unter 8 von 10 bewertet hat; dann nur die betroffenen Rollen erneut. Höchstens zwei Runden je Prüfobjekt, danach an den Auftraggeber berichten.
