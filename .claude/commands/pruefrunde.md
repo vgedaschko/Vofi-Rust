@@ -17,6 +17,8 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
    | Rechencode | finanzmathematiker, grenzfaelle, architekt |
    | Anmeldung, Rechte, Kundenzugang | revision, architekt, jurist |
 
+   Auf Zuruf und an Meilensteinen zusätzlich: **lotse** – der Blick von der Brücke. Er hält eine Rede statt einer Befundliste; verwertbar ist sein Schlusssatz.
+
    Fehlt für eine spezielle Frage eine passende Rolle, lege einen neuen Prüfer nach dem Muster der vorhandenen an.
 
 2. **Parallel starten.** Modell: das neueste Opus (in den Rollendateien voreingestellt); Fable nur, wenn das Prüfobjekt komplex oder folgenreich ist (Rechenkern, Steuer- und Rechtslogik, Sicherheitsarchitektur). Jeder Prüfer bekommt den Pfad des Prüfobjekts und, falls nötig, die konkrete Frage – nicht deine eigene Einschätzung, sonst bestätigt er sie nur. Sind die Agententypen nicht registriert, starte einen allgemeinen Agenten mit dem Auftrag, zuerst die jeweilige Datei `.claude/agents/pruefer-<rolle>.md` zu lesen und in dieser Rolle zu prüfen.
