@@ -1,0 +1,23 @@
+[package]
+name = "mcbench"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+rand = { version = "0.9", default-features = false, features = ["std"] }
+rand_distr = { version = "0.5", default-features = false, features = ["alloc"] }
+libm = "0.2"
+rand_chacha = { version = "0.9", default-features = false }
+rand_xoshiro = "0.7"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rayon = "1"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
