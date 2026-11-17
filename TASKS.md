@@ -20,8 +20,6 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Wartet auf Nutzer
 
-- [ ] Entscheiden: Arbeitsstand von Branch `ccr-f9f11dfd-jz4kva` nach `main` übernehmen?
-- [ ] Klären: Enthalten die älteren Repos `VoFi` und `NBank` Vorarbeiten, die einfließen sollen?
 
 ## Später
 
@@ -32,6 +30,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-17 Geklärt: Arbeitsstand liegt auf `main` von `Vofi-Rust`; die älteren Repos `VoFi` und `NBank` werden nicht weiterverwendet
 - [x] 2026-11-17 Repo `vgedaschko/Vofi-Rust` angelegt und angebunden; Hook, Aufgabenliste und Konzeptdokumente umgezogen
 - [x] 2026-11-17 Skill-Empfehlungen → `docs/skills-und-werkzeuge.md`
 - [x] 2026-11-17 Fragenkatalog beantwortet → `docs/entscheidungen.md`
