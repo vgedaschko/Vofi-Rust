@@ -14,6 +14,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Als Nächstes
 
+- [ ] Prüfrunde über den Recherchebericht (fachexperte, finanzmathematiker, investor, praktiker, slop)
 - [ ] Anforderungsdokument / Feature-Scope (MVP vs. später) aus Recherche + Antworten ableiten
 - [ ] Architekturentwurf (Rechenkern, API, Datenmodell, Mehrbenutzer/Rechte, Frontend)
 - [ ] Fachliches Rechenmodell spezifizieren (VOFI-Tabellenstruktur, Kennzahlen, Steuern, Fördermittel)
@@ -30,6 +31,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-17 Prüfer eingerichtet: 13 Rollen in `.claude/agents/`, Ablauf `/pruefrunde`, Regeln und Protokoll in `docs/pruefung/`
 - [x] 2026-11-17 Geklärt: Arbeitsstand liegt auf `main` von `Vofi-Rust`; die älteren Repos `VoFi` und `NBank` werden nicht weiterverwendet
 - [x] 2026-11-17 Repo `vgedaschko/Vofi-Rust` angelegt und angebunden; Hook, Aufgabenliste und Konzeptdokumente umgezogen
 - [x] 2026-11-17 Skill-Empfehlungen → `docs/skills-und-werkzeuge.md`

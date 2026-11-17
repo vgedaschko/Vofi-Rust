@@ -50,3 +50,15 @@ Hier steckt der größte Hebel, weil kein allgemeiner Skill das Fachwissen mitbr
 | `referenzfall-anlegen` | Wie ein Lehrbuch- oder Praxisfall zum automatischen Test wird (Eingaben, erwartete Tabelle, Toleranzen, Invarianten wie Finanzierungssaldo = 0) | Neue Formel, neuer Fehlerfall |
 
 Reihenfolge: `vofi-fachmodell` und `referenzfall-anlegen` zuerst (entstehen aus dem Fachkonzept), `foerderprogramm-pflegen` mit dem Fördermodul, `steuer-regeln` mit dem Steuermodul.
+
+## 5. Prüfer (eingerichtet)
+
+Dreizehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
+
+| Gruppe | Rollen |
+|---|---|
+| Fachlich | Fachexperte Immobilien · Finanzmathematiker · Steuerberater · Fördermittelberater |
+| Nutzer und Entscheider | Praktiker · unbedarfter Endnutzer · Controller · Investor · Bank |
+| Qualität | KI-Einheitsbrei/Design · Grenzfälle · Software-Architekt · Revision und Datenschutz |
+
+Die Prüfer lesen nur und berichten; eingearbeitet wird erst nach Gegenprüfung. Ergebnisse stehen in `docs/pruefung/protokoll.md`.
