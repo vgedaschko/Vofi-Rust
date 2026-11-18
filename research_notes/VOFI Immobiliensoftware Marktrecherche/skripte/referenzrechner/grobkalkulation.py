@@ -95,11 +95,13 @@ class Vorgaben:
     bemessungszeitraum: Optional[int] = None    # H-32 in Jahren; None = Zinsbindung des Bankdarlehens
     bewirtschaftung_mindest: Optional[D] = None     # H-33; None = Katalogwert KAT-14
     anlaufleerstand_neubau: Optional[int] = None    # H-34: Monate bis zur Erstvermietung; None = H-28
+    bauabschnitt_rohbau: Optional[D] = None         # H-37: Anteil der Bauzeit bis zur Fertigstellung des Rohbaus
+    bauabschnitt_innenputz: Optional[D] = None      # H-37: Anteil der Bauzeit bis zur Fertigstellung des Innenputzes
     vorlauf: Optional[int] = None               # H-35: Voreinstellung des Vorlaufs bis zum Baubeginn (E-23)
     leerstandskosten_je_qm: D = NULL            # H-36: Betriebskosten leerstehender Flaechen, Euro je m2 und Jahr
     anpassungsdauer: Optional[int] = None       # H-23: Voreinstellung der Anpassungsdauer (E-53)
     # Schalter der Modellannahmen; Voreinstellung ist die vorsichtige Lesart
-    ma026_foerder_nachrang: bool = False    # Foerderdarlehen belegt den Beleihungsraum der Bank nicht
+    ma026_foerder_nachrang: bool = False    # Lesart 1: die Bank rechnet ihre Quote ohne das nachrangige Foerderdarlehen
     ma026_vertragszins: bool = False        # Kapitaldienstrechnung mit Vertragskonditionen statt kalkulatorisch
     ma026_ertrag_vorhaben: bool = False     # Ertrag und Bewirtschaftung des Vorhabens statt nachhaltig
     ma026_fremde_kalkulatorisch: bool = False   # uebrige Tranchen ueber den ganzen Bemessungszeitraum kalkulatorisch
@@ -171,9 +173,13 @@ class Foerderung:
     vkb_satz: D
     entgelt_darlehen: D
     entgelt_zuschuss: D
-    tilgung_jahre: int
+    tilgung_jahre: int               # Rueckzahlung spaetestens so viele Jahre nach der Bezugsfertigkeit (Nr. 5.3.5)
     zinslos_jahre: int
     zins_danach: D
+    teilraten: tuple                 # Auszahlung in Teilraten: nach Baubeginn, Rohbau, Innenputz, Fertigstellung und Belegung
+    bank_mindesttilgung: D           # Mindesttilgung der vorrangigen Bankmittel (Nr. 5.3.6)
+    tilgungsfrist_monate: int        # Tilgungsbeginn spaetestens so viele Monate nach dem Monat nach der Foerderentscheidung
+    aufschub_max_monate: int         # laengster Aufschub des Tilgungsbeginns (Nr. 5.3.5)
 
 
 @dataclass
@@ -194,6 +200,7 @@ class Grobeingabe:
     enk_satz: D                         # E-11 (Voreinstellung KAT-01)
     markt_miete: D = NULL               # E-16: Neuvermietungsmiete; beim Neubau die Miete bei Bezug
     tilgungssatz: Optional[D] = None    # E-64; None = H-04
+    foerder_aufschub_monate: int = 0    # E-68: bewilligter Aufschub des Tilgungsbeginns des Foerderdarlehens
     # Ankauf
     kaufpreis: D = NULL                 # E-10
     angebotspreis: Optional[D] = None   # E-18
@@ -301,6 +308,7 @@ KENNUNG_VORGABE = {
     "anlaufleerstand": "H-28", "co2_preis": "H-29", "co2_steigerung": "H-29", "zuschlag_kg_uebrige": "H-30",
     "zuschlag_kg700": "H-30", "kosten_je_stellplatz": "H-30", "bereit_satz": "H-31", "bereit_frei": "H-31",
     "bemessungszeitraum": "H-32", "bewirtschaftung_mindest": "H-33", "anlaufleerstand_neubau": "H-34",
+    "bauabschnitt_rohbau": "H-37", "bauabschnitt_innenputz": "H-37",
     "leerstandskosten_je_qm": "H-36",
     "ma026_foerder_nachrang": "MA-026", "ma026_vertragszins": "MA-026", "ma026_ertrag_vorhaben": "MA-026",
     "ma026_fremde_kalkulatorisch": "MA-026",
@@ -310,14 +318,14 @@ KENNUNG_VORGABE = {
 # Eingaben mit Voreinstellung aus Vorgabe oder Katalog (der Auftrag traegt Wert und Herkunft, R-3.1) ...
 KENNUNG_EINGABE = {
     "enk_satz": "E-11", "zinsbindung_jahre": "E-46", "haltedauer": "E-48", "anpassungsdauer": "E-53",
-    "tilgungssatz": "E-64", "vorlauf_monate": "E-23", "kfw_zins": "E-38", "nachhaltige_miete": "E-65",
+    "tilgungssatz": "E-64", "foerder_aufschub_monate": "E-68", "vorlauf_monate": "E-23", "kfw_zins": "E-38", "nachhaltige_miete": "E-65",
     "im_kappungsgebiet": "E-05", "im_bremsgebiet": "E-05", "steuer.est_satz": "E-42",
     "uebernommen.anschluss_zins": "E-59",
 }
 # ... und Eingaben und Lesarten mit fester Voreinstellung: {Feld: (Kennung, Voreinstellung)}
 FESTE_VOREINSTELLUNG = {
     "festpreis": ("E-24", False), "vorvermietet": ("E-39", False), "steuer.verlust": ("E-44 (MA-016)", "vortrag"),
-    "steuer.kuerzung_verkauf": ("MA-030", False), "steuer.kuerzung_entfaellt_verkaufsjahr": ("MA-030", False),
+    "steuer.kuerzung_verkauf": ("MA-030", False), "steuer.uebergang_jahresende": ("E-69", False),
     "steuer.aufgabegewinn": ("MA-036", False), "uebernommen.foerderdarlehen": ("E-59", False),
 }
 ANSCHLUSSREGELN = ("rate", "tilgungssatz", "restlaufzeit")     # H-07
@@ -543,7 +551,15 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
             if ein.kfw_zins is not None:
                 b("E-38", "Zins des KfW-Darlehens", ein.kfw_zins, NULL, vg_grenze("zins_max"))
         if ein.foerderung is not None:
+            f = ein.foerderung
             b("E-30", "Bodenrichtwert", ein.bodenrichtwert, NULL, None, True)
+            b("E-68", "Aufschub der Tilgung des Foerderdarlehens", ein.foerder_aufschub_monate, 0, f.aufschub_max_monate)
+            if len(f.teilraten) != len(BAUABSCHNITTE) or sum(f.teilraten) != 1 or min(f.teilraten) < 0:
+                raise Meldung("M-20", "KAT-10 Teilraten der Foerderauszahlung: je Bauabschnitt ein Anteil, zusammen eins")
+            # NBANK-RL-MIETWOHNRAUM-2026 Nr. 5.3.6: Mindesttilgung der vorrangigen Bankmittel
+            if ein.tilgungssatz is not None and ein.tilgungssatz < f.bank_mindesttilgung:
+                raise Meldung("M-20", f"E-64 Tilgungssatz des Bankdarlehens: Die Foerderrichtlinie verlangt fuer die "
+                                      f"vorrangigen Bankmittel mindestens den Satz {f.bank_mindesttilgung} (KAT-10)")
         # R-14.4: die Haltedauer reicht bis zum Ende des ersten Jahres der Vollvermietung, auch im Stressfall
         if ein.haltedauer * p < (_vorlauf(ein, vg) + ein.bauzeit_monate + vg.stress.bauzeit_monate
                                  + _anlauf(ein, vg) + MONATE):
@@ -652,6 +668,11 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
     b("H-28", "Anlaufleerstand", vg.anlaufleerstand, 0)
     if vg.anlaufleerstand_neubau is not None:
         b("H-34", "Anlaufleerstand bei Erstvermietung", vg.anlaufleerstand_neubau, 0)
+    if ein.art == "neubau" and ein.foerderung is not None:
+        if vg.bauabschnitt_rohbau is None or vg.bauabschnitt_innenputz is None:
+            raise Meldung("M-20", "H-37 Bauabschnitte der Foerderauszahlung: Vorgabe fehlt")
+        b("H-37", "Anteil der Bauzeit bis zum Rohbau", vg.bauabschnitt_rohbau, NULL, EINS, True)
+        b("H-37", "Anteil der Bauzeit bis zum Innenputz", vg.bauabschnitt_innenputz, vg.bauabschnitt_rohbau, EINS)
     b("H-29", "CO2-Preis", vg.co2_preis, NULL)
     b("H-29", "Steigerung des CO2-Preises", vg.co2_steigerung, vg_grenze("steigerung_min"), vg_grenze("steigerung_max"))
     for name, wert in (("Zuschlag Kostengruppen 200, 500, 600", vg.zuschlag_kg_uebrige), ("Zuschlag Kostengruppe 700", vg.zuschlag_kg700),
@@ -865,11 +886,42 @@ def _perioden_auf(monate, p):
     return -(-monate * p // MONATE)
 
 
-def _tranche_foerder(f, betrag, auszahlung, einbehalt, tilgungsbeginn, p):
-    # MA-002: gleichbleibende Raten ueber die Tilgungsdauer ab dem Monat nach der Bauzeit; zinslos, danach MA-003
-    return Tranche("Foerderdarlehen", betrag, "raten", 0, laufzeit=f.tilgung_jahre * p, auszahlung=auszahlung,
+# R-11.3: Bauabschnitte, nach denen die Teilraten der Foerderung fliessen (NBANK-RL-MIETWOHNRAUM-2026 Nr. 5.5.3)
+BAUABSCHNITTE = ("Baubeginn", "Rohbau", "Innenputz", "Fertigstellung und Belegung")
+
+
+def _auf_ganze(x):
+    """Aufrunden auf die naechste ganze Zahl (Decimal teilt ganzzahlig zur Null hin, deshalb nicht ueber //)."""
+    ganz = int(x)
+    return ganz if ganz == x else ganz + 1
+
+
+def _foerder_termine(ein, vg, vorlauf, bauzeit, bauende):
+    """R-11.3, R-5.11 (NBANK-RL-MIETWOHNRAUM-2026 Nr. 5.3.5, 5.5.3): Monate der vier Teilraten mit ihrem
+    kumulierten Anteil, Periode der ersten Tilgung und Zahl der Tilgungsperioden des Foerderdarlehens.
+
+    Festlegung: Baubeginn ist der erste Monat der Bauzeit; Rohbau und Innenputz sind nach den Anteilen H-37 der
+    Bauzeit fertig, aufgerundet auf ganze Monate; die Teilrate steht im Monat danach bereit; die letzte Teilrate
+    im ersten Monat nach Bauzeit und Anlaufleerstand. Die Foerderentscheidung gilt als im Monat vor dem
+    Baubeginn bekanntgegeben."""
+    f = ein.foerderung
+    a = f.teilraten
+    m4 = bauende + _anlauf(ein, vg) + 1
+    stufen = [(vorlauf + 1, a[0]),
+              (vorlauf + _auf_ganze(vg.bauabschnitt_rohbau * bauzeit) + 1, a[0] + a[1]),
+              (vorlauf + _auf_ganze(vg.bauabschnitt_innenputz * bauzeit) + 1, a[0] + a[1] + a[2]),
+              (m4, EINS)]
+    beginn = min(m4 + 1, vorlauf + 1 + f.tilgungsfrist_monate) + ein.foerder_aufschub_monate
+    laufzeit = bauende + f.tilgung_jahre * MONATE - beginn + 1
+    return stufen, beginn, laufzeit
+
+
+def _tranche_foerder(f, betrag, auszahlung, einbehalt, tilgungsbeginn, laufzeit, bauende, p):
+    # MA-002: gleichbleibende Raten vom Tilgungsbeginn bis zum Ende der Rueckzahlungsfrist; zinslos bis zum Ablauf
+    # der zinslosen Jahre nach der Bezugsfertigkeit, danach MA-003
+    return Tranche("Foerderdarlehen", betrag, "raten", 0, laufzeit=laufzeit, auszahlung=auszahlung,
                    einbehalt=einbehalt, tilgungsbeginn=tilgungsbeginn,
-                   bindung=f.zinslos_jahre * p + tilgungsbeginn - 1, anschluss_zins=f.zins_danach,
+                   bindung=f.zinslos_jahre * p + bauende, anschluss_zins=f.zins_danach,
                    beitrag_satz=f.vkb_satz, bank=False, foerder=True)
 
 
@@ -933,6 +985,8 @@ def bemesse(ein, vg, kat, raster, rd, preis=None, miete_ansatz=None, zusage_pp=N
         return bemessungszins(zins, bindung, kalk(zins, anschluss, vorgabe), zeitraum, rd)
 
     zins_kalk, tilg_kalk = kalk(zins_bank, anschluss_bank, vg.kalk_zins), max(tilg, vg.mindesttilgung)
+    if neubau and ein.foerderung:                        # Nr. 5.3.6: Mindesttilgung der vorrangigen Bankmittel
+        tilg_kalk = max(tilg_kalk, ein.foerderung.bank_mindesttilgung)
     uebrige = im_raum = zuschuss = zuschuss_geb = fd = ek_min = e_d = e_z = kfw = NULL
     kd, ib, kfw_kond = {}, {}, None
     if ein.uebernommen and not neubau:
@@ -966,13 +1020,16 @@ def bemesse(ein, vg, kat, raster, rd, preis=None, miete_ansatz=None, zusage_pp=N
         if zuschuss_geb > zk_bau or zuschuss - zuschuss_geb > zk - zk_bau:
             raise Meldung("M-43", "Der Zuschuss uebersteigt die Kosten, auf die er entfaellt")
         uebrige += fd
-        if not vg.ma026_foerder_nachrang:                # MA-026: Foerderdarlehen belegt den Beleihungsraum
+        # Der Nachrang steht in der Richtlinie (Nr. 5.3.6, 11.5); Annahme ist nur, ob die Bank ihre Quote trotzdem
+        # ueber alle Darlehen rechnet (MA-026, voreingestellt: ja)
+        if not vg.ma026_foerder_nachrang:
             im_raum += fd
         zinslos_bis = f.zinslos_jahre * p + bauende * p // MONATE
         danach = f.zins_danach if f.zins_danach is not None else NULL
         ib["Foerderdarlehen"] = zins_b(NULL, zinslos_bis, danach, vg.kalk_zins_foerder)
+        _, _, laufzeit_fd = _foerder_termine(ein, vg, vorlauf, bauzeit, bauende)
         kd["Foerderdarlehen"] = bemessungskapitaldienst("raten", fd, ib["Foerderdarlehen"], vg.mindesttilgung, p, rd,
-                                                        laufzeit=f.tilgung_jahre * p, beitrag_basis=fd, beitrag_satz=f.vkb_satz)
+                                                        laufzeit=laufzeit_fd, beitrag_basis=fd, beitrag_satz=f.vkb_satz)
     kd_ue = sum(kd.values(), NULL)
     mittelbedarf = P + enk + baukosten + stau0 + e_d + e_z
     gesamtkosten = P + enk + baukosten                   # R-1.1: Gesamtkosten ohne Finanzierungskosten
@@ -1043,7 +1100,7 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     er = _ertragsreihen(ein, vg, kat, raster, rd, stress, bauende)
     null = lambda: [NULL] * (N + 1)
     miete, kost, erh, inv, zus = null(), null(), null(), null(), null()
-    zus_einb, afa, einl, pacht = null(), null(), null(), null()
+    zus_einb, afa, einl, pacht, zwischen = null(), null(), null(), null(), null()
     for u in range(1, N + 1):
         miete[u], kost[u], pacht[u] = er.einzahlung(u), er.kosten(u), er.erbbau(u)
     # ---- Investitionsauszahlungen
@@ -1084,19 +1141,33 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     rest_ek, rest_fd, rest_zs, rest_kfw, rest_bank = ek_soll, bm.foerderdarlehen, bm.zuschuss, bm.kfw, L
     uebern = d(ein.uebernommen["restschuld"]) if (ein.uebernommen and not neubau) else NULL
     foerder_gezogen = False
-    for m in range(0, bauende + 1):
-        bedarf = inv[m] + (erh[0] if m == 0 else NULL) - (uebern if m == 0 else NULL)
+    fm_gesamt = bm.foerderdarlehen + bm.zuschuss
+    stufen = fd_beginn = fd_laufzeit = None
+    abruf_ende = bauende
+    if neubau and ein.foerderung and fm_gesamt > 0:      # R-11.3: Teilraten der Foerderrichtlinie
+        stufen, fd_beginn, fd_laufzeit = _foerder_termine(ein, vg, vorlauf, bauzeit, bauende)
+        abruf_ende = stufen[-1][0]
+    luecke = fm_gezogen = NULL
+    for m in range(0, abruf_ende + 1):
+        bedarf = (inv[m] if m <= bauende else NULL) + (erh[0] if m == 0 else NULL) - (uebern if m == 0 else NULL)
         x = min(rest_ek, bedarf)
         if x > 0:
             einl[m] += x
             rest_ek -= x
             bedarf -= x
-        if bedarf > 0 and (rest_fd + rest_zs) > 0:
+        frei = rest_fd + rest_zs
+        if stufen is not None:                           # kumulierte Obergrenze der Teilraten
+            anteil = max([a for (ab, a) in stufen if ab <= m], default=NULL)
+            frei = min(frei, rd.geld(anteil * fm_gesamt) - fm_gezogen)
+        if (bedarf + luecke) > 0 and frei > 0:
             if not foerder_gezogen:
                 bedarf += bm.einbehalt_darlehen + bm.einbehalt_zuschuss
                 zus_einb[m] += bm.einbehalt_zuschuss
                 foerder_gezogen = True
-            y = min(rest_fd + rest_zs, bedarf)
+            # die Teilrate holt nach, was seit der letzten Obergrenze ungedeckt blieb; die letzte fliesst ganz
+            y = min(frei, bedarf + luecke)
+            if stufen is not None and m == abruf_ende:
+                y = rest_fd + rest_zs
             if y == rest_fd + rest_zs:
                 teil_fd, teil_zs = rest_fd, rest_zs
             else:
@@ -1111,7 +1182,10 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
             zus[m] += teil_zs
             rest_fd -= teil_fd
             rest_zs -= teil_zs
-            bedarf -= y
+            fm_gezogen += y
+            nachgeholt = max(NULL, y - bedarf)           # fuehrt die Zwischenfinanzierung zurueck
+            luecke = max(NULL, luecke - nachgeholt)
+            bedarf -= y - nachgeholt
         for rest_name, plan_aus in (("kfw", aus_kfw), ("bank", aus_bank)):
             rest = rest_kfw if rest_name == "kfw" else rest_bank
             if bedarf > 0 and rest > 0:
@@ -1122,23 +1196,29 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
                     rest_kfw -= y
                 else:
                     rest_bank -= y
-        if bedarf > 0:                                   # darf nicht vorkommen; die Probe P-04 meldet es
-            einl[m] += bedarf
+        if bedarf > 0:
+            if stufen is not None:                       # Luecke bis zur naechsten Teilrate (R-11.3)
+                luecke += bedarf
+            else:                                        # darf nicht vorkommen; die Probe P-04 meldet es
+                einl[m] += bedarf
+        zwischen[m] = luecke                             # Zwischenfinanzierung der zugesagten Foerdermittel
     # nicht abgerufene Mittel fliessen mit der letzten Bauperiode (R-11.3)
     if rest_bank > 0:
         aus_bank[bauende] = aus_bank.get(bauende, NULL) + rest_bank
     if rest_kfw > 0:
         aus_kfw[bauende] = aus_kfw.get(bauende, NULL) + rest_kfw
     if rest_fd > 0:
-        aus_fd[bauende] = aus_fd.get(bauende, NULL) + rest_fd
+        aus_fd[abruf_ende] = aus_fd.get(abruf_ende, NULL) + rest_fd
     if rest_zs > 0:
-        zus[bauende] += rest_zs
+        zus[abruf_ende] += rest_zs
     if rest_ek > 0:
         einl[bauende] += rest_ek
     if STOERUNG[0]:
         STOERUNG[0](locals())
     # ---- Tranchen
     tilg = ein.tilgungssatz if ein.tilgungssatz is not None else vg.mindesttilgung
+    if neubau and ein.foerderung:                        # Nr. 5.3.6: Mindesttilgung der vorrangigen Bankmittel
+        tilg = max(tilg, ein.foerderung.bank_mindesttilgung)
     kuendbar = kat.kuendigung_sperre + kat.kuendigung_frist      # BGB-489, in Monaten ab vollstaendigem Empfang
     zins_bank = ein.zins + st.zusage_pp
     anschluss_bank = zins_bank + vg.anschluss_aufschlag + st.anschlusszins_pp
@@ -1171,10 +1251,10 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
                           + ("die Frist ist zu verlaengern" if reicht else "auch die laengste Verlaengerung reicht nicht"),
                   letzter_abruf=letzter, abruffrist=k.abruffrist, verlaengerung_reicht=reicht)
     if ein.uebernommen and not neubau:
-        tranchen.append(_tranche_uebernommen(ein, vg, kat, p, st.anschlusszins_pp))
+        tranchen.append(_tranche_uebernommen(ein, vg, kat, p, st.anschlusszins_pp, zins_bank=zins_bank))
     if ein.foerderung and bm.foerderdarlehen > 0:
         tranchen.append(_tranche_foerder(ein.foerderung, bm.foerderdarlehen, aus_fd, bm.einbehalt_darlehen,
-                                         bauende + 1, p))
+                                         fd_beginn, fd_laufzeit, bauende, p))
     # ---- Abschreibungsplan (R-7.3): linear, Buchung am Ende jedes Planjahres, zeitanteilig ab Nutzungsbeginn
     steuer = replace(ein.steuer, haltedauer=ein.haltedauer)
     boden = bm.boden
@@ -1247,7 +1327,7 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
         start = min(aus_fd) if aus_fd else 0
         steuer_einbehalt = verteile(einbehalten, einbehalten, start, ein.foerderung.zinslos_jahre * p + bauende)
     pe = PlanEingabe(raster=raster, miete=miete, kosten=kost, erhaltung=erh, investition=inv, afa=afa,
-                     tranchen=tranchen, steuer=steuer, einlagen=einl, entnahmen=null(), h_kurz=vg.h_kurz,
+                     tranchen=tranchen, steuer=steuer, einlagen=einl, entnahmen=null(), kk_zusatz=zwischen, h_kurz=vg.h_kurz,
                      kk_zins=vg.kk_zins, a_lang=vg.a_lang, kk_linie=vg.kk_linie, zuschuss=zus,
                      zuschuss_einbehalt=zus_einb, verkauf=vk, vfe_satz=vg.vfe_satz, rundung=rd,
                      steuer_einbehalt=steuer_einbehalt, steuer_ertrag=steuer_ertrag,
@@ -1300,7 +1380,8 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
                                     bindung=bm.kfw_kond["bindung"])
     if ein.uebernommen and not neubau:
         ue = ein.uebernommen
-        anschluss = d(ue["anschluss_zins"]) if ue.get("anschluss_zins") is not None else ein.zins + vg.anschluss_aufschlag
+        anschluss = (d(ue["anschluss_zins"]) if ue.get("anschluss_zins") is not None
+                     else ein.zins + st.zusage_pp + vg.anschluss_aufschlag)
         soll["Uebernommenes Darlehen"] = dict(zins=d(ue["zins"]), anschluss_zins=anschluss + st.anschlusszins_pp,
                                               anschluss_regel=vg.anschluss_regel)
     if ein.foerderung:
@@ -1318,6 +1399,7 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     erg.fehlbetrag_verkauf = plan.zeilen[N]["nachschuss"]            # R-10.17: Verlust beim Verkauf
     erg.nachschuss_laufend = sum(spaeter, NULL) - erg.fehlbetrag_verkauf
     erg.eigenkapitalbedarf = sum(plan.einlagen_netto, NULL)          # R-11.6: Einlagen und alle Nachschuesse
+    erg.zwischenfinanzierung = max(zwischen)                         # R-11.3: hoechster Stand
     erg.nachschuss_je_jahr = [None] + [plan.jahressumme("nachschuss", j) for j in range(1, raster.n + 1)]
     erg.gesperrt = bool(bef)
     if bef:                                              # R-13.1: verletzte Probe sperrt das Ergebnis
@@ -1532,6 +1614,15 @@ def _blatt(erg, pe, rd):
                               vg.warnschwelle_faktorabstand))
     for name, wert, schwelle in erg.warnungen:
         erg.meldungen.append(dict(kennung="M-48", text=f"Warnschwelle ueberschritten: {name}", kennzahl=name, wert=wert, schwelle=schwelle))
+    # R-11.14 (NBANK-RL-MIETWOHNRAUM-2026 Nr. 4.1): die Miete deckt Finanzierung und Bewirtschaftung auf Dauer
+    if ein.foerderung is not None:
+        knapp = [(n_, w_) for n_, w_ in (("Deckung nach Bemessung", erg.deckung_bemessung),
+                                         ("kleinste Schuldendienstdeckung", erg.deckung_min))
+                 if w_ is not None and w_ < 1]
+        if knapp:
+            erg.meldungen.append(dict(kennung="M-50", text="Die Miete deckt Finanzierungs- und Bewirtschaftungskosten "
+                                      "nicht auf Dauer; das ist Voraussetzung der Foerderung: "
+                                      + ", ".join(n_ for n_, _ in knapp), werte=knapp))
     # R-11.15: Zusatzangaben, wenn der Ertrag kein Bankdarlehen traegt
     erg.ohne_bankdarlehen = None
     if bm.bank["meldung"] == "M-21":
@@ -1925,7 +2016,7 @@ PREISGROESSEN = ("preis", "bindend", "meldung", "faktor", "faktor_ist", "preis_j
 # R-3.1: Herkunft der Steuerwerte (Katalog, Eingabe des Anwenders, Lesart einer Modellannahme)
 HERKUNFT_STEUER = {
     "status": "E", "verlust": "E", "erweiterte_kuerzung": "E", "est_satz": "E", "anteil_natuerliche": "E",
-    "kuerzung_verkauf": "MA", "kuerzung_entfaellt_verkaufsjahr": "MA", "aufgabegewinn": "MA", "haltedauer": "E",
+    "kuerzung_verkauf": "MA", "uebergang_jahresende": "E", "aufgabegewinn": "MA", "haltedauer": "E",
     "satz": "E", "verkaufsgewinn_pflichtig": "E",
 }
 

@@ -63,6 +63,7 @@ class PlanEingabe:
     kk_zins: D                      # Kontokorrentzins, effektiv je Jahr
     a_lang: Optional[D] = None      # langfristiger Anlagezins der Unterlassensalternative (None = h_kurz)
     kk_linie: Optional[D] = None    # Kontokorrentlinie; None = unbegrenzt (Lehrbuchfaelle)
+    kk_zusatz: Optional[List[D]] = None     # R-11.3: Zwischenfinanzierung zugesagter Foerdermittel je Periode
     zuschuss: Optional[List[D]] = None          # Zuschuesse mit Geldfluss, brutto
     zuschuss_einbehalt: Optional[List[D]] = None
     verkauf: Optional[Verkauf] = None
@@ -223,9 +224,10 @@ def rechne_plan(e: PlanEingabe) -> Plan:
             guth_neu, kk_neu = netto, NULL
         else:
             guth_neu, kk_neu = NULL, -netto
-            if e.kk_linie is not None and kk_neu > e.kk_linie:
-                nachschuss = kk_neu - e.kk_linie
-                kk_neu = e.kk_linie
+            linie = None if e.kk_linie is None else e.kk_linie + (e.kk_zusatz[u] if e.kk_zusatz else NULL)
+            if linie is not None and kk_neu > linie:
+                nachschuss = kk_neu - linie
+                kk_neu = linie
         z["einlage"], z["entnahme"], z["nachschuss"] = einlage, entnahme, nachschuss
         z["anlage"] = guth_neu - guth                 # + Anlage, - Aufloesung
         z["kk_aufnahme"] = kk_neu - kk                # + Aufnahme, - Rueckfuehrung

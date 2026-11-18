@@ -41,8 +41,10 @@ class Steuerparameter:
     hebesatz: D = NULL                          # 4 = 400 %
     abrundung: D = NULL                         # Abrundung des Gewerbeertrags auf volle Betraege (GEWSTG-11)
     erweiterte_kuerzung: bool = False           # E-41
-    kuerzung_verkauf: bool = False              # MA-030, andere Lesart: die Kuerzung erfasst den Verkaufsgewinn
-    kuerzung_entfaellt_verkaufsjahr: bool = False   # MA-030, dritte Lesart: im Verkaufsjahr entfaellt die Kuerzung ganz
+    kuerzung_verkauf: bool = False              # MA-030, andere Lesart bei Uebergang zum Jahresende (E-69): die Kuerzung
+                                                # erfasst auch den Verkaufsgewinn
+    uebergang_jahresende: bool = False          # E-69: Besitz, Nutzen und Lasten gehen zum 31.12., 23:59 Uhr, ueber; nur dann
+                                                # bleibt die Kuerzung im Verkaufsjahr (BFH-III-R-1-23; R-7.8, MA-030)
     freibetrag: D = NULL                        # nur Personenunternehmen (GEWSTG-11)
     hinzu_anteil: D = NULL                      # GEWSTG-8: hinzugerechneter Anteil der Entgelte fuer Schulden
     hinzu_freibetrag: D = NULL                  # GEWSTG-8: Freibetrag der Hinzurechnung
@@ -80,8 +82,10 @@ class Steuer:
     # ------------------------------------------------------------- Grenzsaetze fuer Kennzahlen (R-7.14)
     def _kuerzung(self):
         p = self.par
-        if p.kuerzung_entfaellt_verkaufsjahr and self._jahr is not None and self._jahr == p.haltedauer:
-            return False                        # MA-030, dritte Lesart
+        # R-7.8 (BFH-III-R-1-23): Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, ausser der Uebergang liegt
+        # am Jahresende (E-69); nur dann stellt sich die Frage von MA-030 nach dem Verkaufsgewinn
+        if self._jahr is not None and self._jahr == p.haltedauer and not p.uebergang_jahresende:
+            return False
         return p.erweiterte_kuerzung and not self.alternative
 
     def _gew_voll(self):

@@ -29,7 +29,7 @@ GEBUNDEN = replace(A.ANKAUF, gebunden_anteil=D("0.4"), bindung_jahre=6, gebunden
 GEFOERDERT = replace(A.NEUBAU, foerderung=A.FOERDERUNG_B, haltedauer=38)
 # Begruendung fuer Lesarten und Eingaben, die ein Referenzfall bewusst von der Voreinstellung abweichend setzt (R-3.2)
 GRUND = {k: "Lesart des Referenzfalls" for k in ("steuer.verlust", "steuer.kuerzung_verkauf", "steuer.aufgabegewinn",
-                                                  "steuer.kuerzung_entfaellt_verkaufsjahr", "festpreis", "vorvermietet",
+                                                  "steuer.uebergang_jahresende", "festpreis", "vorvermietet",
                                                   "uebernommen.foerderdarlehen")}
 MIT_KFW = replace(A.NEUBAU, kfw_betrag=D(3000000), kfw_laufzeit=35, kfw_tilgungsfrei=1)
 
@@ -293,10 +293,10 @@ def rf12_neubau():
 def rf13_steuerstatus():
     k = fall("RF-13", "Grobkalkulation Ankauf je Steuerstatus (derselbe Fall, angenommener Katalogstand)")
     faelle = (("Koerperschaft", A.steuer(KOERPERSCHAFT)),
-              ("Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig)",
-               A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True)),
+              ("Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig)",   # seit Runde 2:
+               A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True)),     # im Verkaufsjahr entfaellt die Kuerzung ganz
               ("Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030",
-               A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_verkauf=True)),
+               A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_verkauf=True, uebergang_jahresende=True)),
               ("Koerperschaft, Verluste sofort verrechnet", A.steuer(KOERPERSCHAFT, verlust="sofort")),
               ("Koerperschaft ohne Gewerbesteuer (Verein, Stiftung)", A.steuer(KOERPERSCHAFT_OHNE_GEWST)),
               ("originaer gewerbliche Personengesellschaft, Hebesatz 400 %", A.steuer(GEWERBLICHE_PG)),

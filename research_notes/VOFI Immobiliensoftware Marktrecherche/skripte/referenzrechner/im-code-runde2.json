@@ -1,0 +1,50 @@
+[
+ [
+  "RF-11: Stressfall: Bankdarlehen",
+  "unveraendert aus dem Basisfall (1.226.609,99)",
+  "1.144.835,99, neu bemessen; Endwertdifferenz 216.856,20",
+  "R-11.8: Neubemessung mit dem Zinsanstieg bis zur Zusage (Sichtung 9); Sollwerte aus den Gegenrechnungen von Bank und Finanzmathematiker"
+ ],
+ [
+  "RF-12: Neubau Stressfall: Bankdarlehen",
+  "gleich dem Basisfall (4.007.142,85)",
+  "3.740.000,00",
+  "R-11.8 wie zuvor"
+ ],
+ [
+  "RF-16: sieben Fehlerbilder an der fertigen Ausgabe (Zins + 1 Euro, Vortrag + 1.000, Ergebnis + 500, Alternative + 100, Guthaben + 10, Index + 0,01)",
+  "je eine Probe meldet",
+  "entfallen; ersetzt durch zwoelf Fehlerbilder in der Rechnung (rf_runde2.rf16_runde2)",
+  "R-13.4: Fehlerbilder veraendern die Rechnung, nicht die Ausgabe (Sichtung 23; Controller 3, Grenzfaelle 9)"
+ ],
+ [
+  "RF-17: voreingestellte Lesart des Zuschusses",
+  "'sofort' hat die niedrigste Endwertdifferenz und Rendite: wahr",
+  "Voreinstellung 'verteilt'; sie ist die unguenstigere der beiden Einordnungen: wahr",
+  "R-7.19: Voreinstellung nach dem Kennzeichen E-41 (Sichtung 19)"
+ ],
+ [
+  "RF-17: Summe der verteilten Entgelte",
+  "65.393,64 (Darlehen und Zuschuss)",
+  "52.314,91 (Darlehen); Entgelt auf den Zuschuss 13.078,73 eigens",
+  "R-7.15: Das Entgelt auf den Zuschuss folgt der Lesart des Zuschusses (Sichtung 19)"
+ ],
+ [
+  "RF-18: weitere Kosten des Vermieters nach CO2KOSTAUFG-5A",
+  "Katalogwert 0,10 Euro je m2",
+  "Eingabe E-67: 132 Euro im Jahr",
+  "R-6.9: haelftige Teilung als Katalogwert, weitere Kosten als Eingabe (Sichtung 16; Fachexperte 2)"
+ ],
+ [
+  "RF-19: Richtung der Vorgabe H-07 ('Restlaufzeit bleibt' strenger, 'Rate bleibt' Lockerung); Lockerung ohne Begruendung",
+  "'strenger' und M-20",
+  "entfallen; ersetzt durch die Pruefungen der Liste mit Wirkung (rf_runde2.rf19_runde2)",
+  "R-3.2: keine feste Richtung mehr (Sichtung 1)"
+ ],
+ [
+  "RF-08, RF-20: fehlender Anschlusszins",
+  "ValueError mit dem Text 'M-24'",
+  "Meldung M-24",
+  "R-14.13: jede Meldung endet als Meldung, auch in Suchen und Tabelle (Sichtung 24; Grenzfaelle 4)"
+ ]
+]

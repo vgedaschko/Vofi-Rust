@@ -89,7 +89,9 @@ FOERDERUNG_B = Foerderung(
     darlehensquote=D("0.60"), zuschussquote=D("0.20"), eigenmittelquote=D("0.20"),
     bemessungsgrenze_je_qm=D("5460"), eingangsmiete=D("8.20"), steigerung=D("0.0615"),
     fest_jahre=3, schritt_jahre=3, bindung_jahre=35, vkb_satz=D("0.005"), entgelt_darlehen=D("0.01"),
-    entgelt_zuschuss=D("0.0075"), tilgung_jahre=42, zinslos_jahre=35, zins_danach=D("0.05"))
+    entgelt_zuschuss=D("0.0075"), tilgung_jahre=42, zinslos_jahre=35, zins_danach=D("0.05"),
+    teilraten=(D("0.30"), D("0.30"), D("0.30"), D("0.10")), bank_mindesttilgung=D("0.01"), tilgungsfrist_monate=24,
+    aufschub_max_monate=60)
 
 # Zulaessige Bereiche der Eingabepruefung (R-3.3, R-3.4, Spalte "zulaessig")
 grobkalkulation.GRENZEN.update(
@@ -117,7 +119,8 @@ VORGABEN = Vorgaben(
     bereit_satz=D("0.0025"), bereit_frei=6,
     anpassungsdauer=4, vorlauf=0,                                           # H-23, H-35
     leerstandskosten_je_qm=D(0),                                            # H-36: in den bezeichneten Faellen 30 Euro
-    warnschwelle_restwertanteil=D("0.95"), warnschwelle_faktorabstand=D(1))  # H-20
+    warnschwelle_restwertanteil=D("0.95"), warnschwelle_faktorabstand=D(1),
+    bauabschnitt_rohbau=D("0.5"), bauabschnitt_innenputz=D("0.75"))  # H-20
 
 # ------------------------------------------------------------------ Eingaben der Referenzobjekte
 # Referenzobjekt Ankauf: 20 Wohnungen, 1.320 m2, Baujahr 1990, Ist-Miete 8,50 Euro/m2 (Jahresmiete 134.640 Euro)
