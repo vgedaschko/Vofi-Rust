@@ -4,19 +4,19 @@ Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fach
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/quellenkataster/quellen.toml`; danach `python3 scripts/quellenkataster.py` ausführen. Jede Rechts-, Förder- oder Normangabe im Projekt verweist auf eine Kennung aus diesem Kataster.
 
-**Stand:** 211 Quellen · zuletzt am Original gelesen: 2026-11-18
+**Stand:** 214 Quellen · zuletzt am Original gelesen: 2026-11-18
 
 ## Überblick
 
 | Gruppe | Quellen | am Original gelesen | nur Sekundärquelle | nicht geprüft |
 |---|---|---|---|---|
-| Gesetze und Verordnungen | 114 | 91 | 5 | 18 |
+| Gesetze und Verordnungen | 117 | 93 | 5 | 19 |
 | Förderrichtlinien, Merkblätter und Produktinformationen | 37 | 31 | 0 | 6 |
 | Normen und Branchenrichtlinien | 12 | 0 | 6 | 6 |
 | Methoden- und Qualitätsstandards | 10 | 0 | 2 | 8 |
 | Fachliteratur und Rechenbeispiele | 23 | 2 | 13 | 8 |
 | Datenquellen | 15 | 3 | 5 | 7 |
-| **Gesamt** | **211** | **127** | **31** | **53** |
+| **Gesamt** | **214** | **129** | **31** | **54** |
 
 ## Handlungsbedarf
 
@@ -40,6 +40,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `HOAI-2021` | HOAI 2021 | nur Sekundärquelle |
 | `JSTG-2026` | JStG 2026 (§ 6f EStG-E) | nicht geprüft |
 | `MIETRECHT-II` | Mietrecht II (Vorhaben) | nicht geprüft |
+| `NI-ANBEST-P` | VV zu § 44 LHO mit ANBest-P (Niedersachsen) | nicht geprüft |
 | `NI-GREST-SATZ` | Grunderwerbsteuersatz Niedersachsen | nur Sekundärquelle |
 | `NI-MIETERSCHUTZVO` | Nds. Verordnung angespannte Wohnungsmärkte | nicht geprüft |
 | `NWOFG-3` | § 3 NWoFG | nicht geprüft |
@@ -114,7 +115,8 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 | Kennung | Quelle | Stand | Beleg | Verwendet für | Prüfturnus | Zugang |
 |---|---|---|---|---|---|---|
-| `AO-233A` | [§ 233a AO](https://www.gesetze-im-internet.de/ao_1977/__233a.html) – Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a) | nicht erfasst | am Original gelesen (2026-11-18) | Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung | vierteljährlich | frei |
+| `ABSCHLAGSV-1` | [§ 1 AbschlagsV](https://www.gesetze-im-internet.de/abschlagsv/__1.html) – Verordnung über Abschlagszahlungen bei Bauträgerverträgen: zulässige Abschlagszahlungsvereinbarungen | Fassung 28.04.2017 | am Original gelesen (2026-11-18) | Frei vereinbarte Ratenpläne beim Bauträgervertrag unter den Voraussetzungen des § 7 MaBV; Bindung der Abschlagszahlungen an § 3 Abs. 1 und 2 MaBV im Vertriebsplan | vierteljährlich | frei |
+| `AO-233A` | [§ 233a AO](https://www.gesetze-im-internet.de/ao_1977/__233a.html) – Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a) | Fassung 22.10.2026 | am Original gelesen (2026-11-18) | Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung | vierteljährlich | frei |
 | `AO-52` | [§ 52 AO](https://www.gesetze-im-internet.de/ao_1977/__52.html) – Gemeinnützige Zwecke (Abs. 2 Satz 1 Nr. 27: Wohngemeinnützigkeit) | Fassung 22.10.2026 | am Original gelesen (2026-11-18) | Steuerstatus gemeinnützig; Einkommensgrenze der Mieter (Fünf- bzw. Sechsfaches des Regelsatzes) bei Mietbeginn | vierteljährlich | frei |
 | `AO-53` | [§ 53 AO](https://www.gesetze-im-internet.de/ao_1977/__53.html) – Mildtätige Zwecke | Fassung 22.10.2026 | am Original gelesen (2026-11-17) | Personenkreis der Wohngemeinnützigkeit | vierteljährlich | frei |
 | `ASTG-1` | § 1 AStG – Nahestehende Personen (Abs. 2) · nicht erfasst | nicht erfasst | nicht geprüft | Konzernzugehörigkeit als Ausnahme von der Zinsschranke (§ 4h Abs. 2 Buchst. b EStG) | vierteljährlich | frei |
@@ -166,8 +168,9 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `ESTG-15` | [§ 15 EStG](https://www.gesetze-im-internet.de/estg/__15.html) – Einkünfte aus Gewerbebetrieb; gewerblich geprägte Personengesellschaft (Abs. 3 Nr. 2) | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Steuerstatus gewerblich geprägte Personengesellschaft; Steuerpflicht des Verkaufsgewinns | vierteljährlich | frei |
 | `ESTG-21` | [§ 21 EStG](https://www.gesetze-im-internet.de/estg/__21.html) – Einkünfte aus Vermietung und Verpachtung | Fassung 15.10.2026 | am Original gelesen (2026-11-17) | Verbilligte Vermietung: Grenzen 50 % und 66 % der ortsüblichen Miete | vierteljährlich | frei |
 | `ESTG-23` | [§ 23 EStG](https://www.gesetze-im-internet.de/estg/__23.html) – Private Veräußerungsgeschäfte | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Steuer auf den Veräußerungsgewinn bei Haltedauer bis zehn Jahre; Minderung der Anschaffungskosten um Abschreibungen | vierteljährlich | frei |
+| `ESTG-35` | [§ 35 EStG](https://www.gesetze-im-internet.de/estg/__35.html) – Ermäßigung der Einkommensteuer bei gewerblichen Einkünften (Anrechnung der Gewerbesteuer) | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Anrechnung der Gewerbesteuer auf die Einkommensteuer bei gewerblicher oder gewerblich geprägter Personengesellschaft und Einzelunternehmen; Steuer in Kurzform der Grobkalkulation (pauschal) und in der Grundform (nach Gesetz) | vierteljährlich | frei |
 | `ESTG-4H` | [§ 4h EStG](https://www.gesetze-im-internet.de/estg/__4h.html) – Betriebsausgabenabzug für Zinsaufwendungen (Zinsschranke) | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Zinsschranke in der Steuerrechnung der Kapitalgesellschaft; EBITDA- und Zinsvortrag | vierteljährlich | frei |
-| `ESTG-52` | [§ 52 EStG](https://www.gesetze-im-internet.de/estg/__52.html) – Anwendungsvorschriften | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Altes Fenster § 7b letztmals 2026 (Abs. 15a); Anwendungsbeginn 70 % beim Verlustvortrag (Abs. 18b) | vierteljährlich | frei |
+| `ESTG-52` | [§ 52 EStG](https://www.gesetze-im-internet.de/estg/__52.html) – Anwendungsvorschriften | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Altes Fenster § 7b letztmals 2026, bei abweichendem Wirtschaftsjahr letztmals für Wirtschaftsjahre, die vor dem 01.01.2027 enden (Abs. 15a); Anwendungsbeginn 70 % beim Verlustvortrag (Abs. 18b) | vierteljährlich | frei |
 | `ESTG-6` | [§ 6 EStG](https://www.gesetze-im-internet.de/estg/__6.html) – Bewertung; anschaffungsnahe Herstellungskosten (Abs. 1 Nr. 1a) | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | 15-%-Prüfung binnen drei Jahren nach Anschaffung | vierteljährlich | frei |
 | `ESTG-7` | [§ 7 EStG](https://www.gesetze-im-internet.de/estg/__7.html) – Absetzung für Abnutzung (Gebäude: Abs. 4, 5 und 5a) | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Abschreibung Wohngebäude linear 3/2/2,5 %; Degressive Abschreibung 5 % im Neubau; 3 % für Nichtwohngebäude im Betriebsvermögen; Zeitanteilige Abschreibung im Erstjahr | vierteljährlich | frei |
 | `ESTG-7B` | [§ 7b EStG](https://www.gesetze-im-internet.de/estg/__7b.html) – Sonderabschreibung für Mietwohnungsneubau | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Sonderabschreibung 4 × 5 %; Baukostenobergrenze als Ausschlussbedingung; Rückabwicklungsereignisse (Abs. 4); De-minimis-Prüfung bei Gewinneinkünften (Abs. 5) | vierteljährlich | frei |
@@ -196,12 +199,13 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `JSTG-2026` | JStG 2026 (§ 6f EStG-E) – Jahressteuergesetz 2026, Entwurf einer Regel zur Kaufpreisaufteilung · nicht erfasst | Entwurf; in der EStG-Fassung 15.10.2026 nicht enthalten | nicht geprüft | Kaufpreisaufteilung Grund und Gebäude (Entwurfsstand, je Kalkulation zuschaltbar) | vierteljährlich | frei |
 | `KSTG-23` | [§ 23 KStG](https://www.gesetze-im-internet.de/kstg_1977/__23.html) – Steuersatz | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | Körperschaftsteuersatz je Veranlagungszeitraum (15 % bis 2027, dann 14/13/12/11 %, ab 2032 10 %) | vierteljährlich | frei |
 | `KSTG-5` | [§ 5 KStG](https://www.gesetze-im-internet.de/kstg_1977/__5.html) – Befreiungen (Abs. 1 Nr. 10: Vermietungsgenossenschaften und -vereine) | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | Steuerstatus befreite Genossenschaft; Laufende 10-%-Prüfung (30 % bei Mieterstrom) | vierteljährlich | frei |
-| `KSTG-8` | [§ 8 KStG](https://www.gesetze-im-internet.de/kstg_1977/__8.html) – Ermittlung des Einkommens; alle Einkünfte der Kapitalgesellschaft sind gewerblich (Abs. 2) | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | De-minimis-Bindung der Sonderabschreibung für Kapitalgesellschaften | vierteljährlich | frei |
+| `KSTG-8` | [§ 8 KStG](https://www.gesetze-im-internet.de/kstg_1977/__8.html) – Ermittlung des Einkommens; alle Einkünfte der Kapitalgesellschaft sind gewerblich (Abs. 2) | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | De-minimis-Bindung der Sonderabschreibung für Kapitalgesellschaften und steuerpflichtige Genossenschaften | vierteljährlich | frei |
 | `KSTG-8A` | [§ 8a KStG](https://www.gesetze-im-internet.de/kstg_1977/__8a.html) – Betriebsausgabenabzug für Zinsaufwendungen bei Körperschaften | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | Zinsschranke bei der Kapitalgesellschaft (maßgebliches Einkommen; Gesellschafter-Fremdfinanzierung) | vierteljährlich | frei |
 | `KSTG-8C` | [§ 8c KStG](https://www.gesetze-im-internet.de/kstg_1977/__8c.html) – Verlustabzug bei Körperschaften (schädlicher Beteiligungserwerb) | Fassung 04.02.2026 | am Original gelesen (2026-11-17) | Untergang von Verlustvorträgen beim Anteilsverkauf (Exit über Share Deal) | vierteljährlich | frei |
 | `MABV-3` | [§ 3 MaBV](https://www.gesetze-im-internet.de/gewo_34cdv/__3.html) – Besondere Sicherungspflichten für Bauträger (Raten nach Baufortschritt) | Fassung 28.07.2026 | am Original gelesen (2026-11-18) | Bauträgerraten: höchstens sieben Teilbeträge aus 13 Vomhundertsätzen; Fälligkeitsvoraussetzungen im Vertriebsplan | vierteljährlich | frei |
 | `MABV-7` | [§ 7 MaBV](https://www.gesetze-im-internet.de/gewo_34cdv/__7.html) – Ausnahmevorschrift (Sicherheitsleistung, Verzicht) | Fassung 28.07.2026 | am Original gelesen (2026-11-18) | Bürgschaftsvariante statt Ratenplan; Verzicht unter Kaufleuten und öffentlichen Käufern (Abs. 2) für frei vereinbarte Ratenpläne | vierteljährlich | frei |
 | `MIETRECHT-II` | Mietrecht II (Vorhaben) – Gesetzgebungsvorhaben zu Indexmiete, Möblierungszuschlag und Kurzzeitmiete · nicht erfasst | Vorhaben; im BGB mit Fassung 23.07.2026 nicht enthalten | nicht geprüft | Mietpfad bei Indexmiete und möbliertem Wohnen (Entwurfsstand, je Kalkulation zuschaltbar) | vierteljährlich | frei |
+| `NI-ANBEST-P` | VV zu § 44 LHO mit ANBest-P (Niedersachsen) – Verwaltungsvorschriften zu § 44 der Niedersächsischen Landeshaushaltsordnung mit den ANBest-P als Anlage · nicht erfasst | nicht erfasst | nicht geprüft | Zuwendungsfähigkeit nicht abziehbarer Vorsteuer bei der NBank (klärt MA-021) | vierteljährlich | frei |
 | `NI-GREST-SATZ` | Grunderwerbsteuersatz Niedersachsen – Landesrechtlicher Grunderwerbsteuersatz Niedersachsen · nicht erfasst | nicht erfasst | nur Sekundärquelle | Erwerbsnebenkosten in Niedersachsen | vierteljährlich | frei |
 | `NI-MIETERSCHUTZVO` | Nds. Verordnung angespannte Wohnungsmärkte – Niedersächsische Verordnung zu Gebieten mit angespanntem Wohnungsmarkt (Mietpreisbremse, Kappungsgrenze) · Nds. GVBl. Nr. 121 vom 23.12.2024 | nicht erfasst | nicht geprüft | Gemeinden mit Mietpreisbremse (§ 556d BGB); Gemeinden mit 15-%-Kappungsgrenze (§ 558 Abs. 3 BGB); Härtefall § 5d CO2KostAufG | vierteljährlich | frei |
 | `NWOFG-3` | § 3 NWoFG – Niedersächsisches Wohnraumfördergesetz: Einkommensgrenzen (Abs. 2) · nicht erfasst | nicht erfasst | nicht geprüft | Einkommensgruppen A/B/C der NBank-Förderung | vierteljährlich | frei |
@@ -231,7 +235,8 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 Bemerkungen:
 
-- `AO-233A`: Gelesen Abs. 1 bis 2a bei der dritten Überarbeitung des Rechercheberichts. Fassungsdatum beim Lesen nicht festgehalten.
+- `ABSCHLAGSV-1`: Gelesen § 1 in Prüfrunde 4 (Jurist): Satz 2 lässt Abschlagszahlungen unter den Voraussetzungen des § 7 MaBV auch abweichend von § 3 Abs. 1 und 2 MaBV zu; § 650m Abs. 2 und 3 BGB findet Anwendung. Trägt den Satz „frei vereinbarte Ratenpläne möglich“ in Anhang B.4 des Rechercheberichts. Stand der Gesamtausgabe am 18.11.2026 am Portal nachgesehen.
+- `AO-233A`: Gelesen Abs. 1 bis 2a bei der dritten Überarbeitung des Rechercheberichts und Abs. 1 bis 8 in Prüfrunde 4 (Jurist). Die Einzelnorm nennt kein Änderungsdatum; der Stand folgt wie bei AO-52 der Gesamtausgabe der AO.
 - `AO-52`: Gelesen nur Abs. 2 Satz 1 Nr. 27. AEAO zu Nr. 27 („vergünstigt“, Mittelverwendung) nicht gelesen.
 - `ASTG-1`: Nur als Verweis in § 4h EStG gelesen; Einordnung durch den Steuerberater.
 - `BAFOEG-13`: Nur über die RL Junges Wohnen 2026 genannt.
@@ -267,8 +272,9 @@ Bemerkungen:
 - `ESTG-15`: Gelesen Abs. 3 in Prüfrunde 3 (Fachexperte). Eine GmbH & Co. KG ohne natürliche Person als Vollhafter erzielt gewerbliche Einkünfte; die Zehnjahresfrist des § 23 EStG gilt für sie nicht.
 - `ESTG-21`: Gelesen nur Abs. 2. Totalüberschussprognose zwischen 50 % und 66 % ist Verwaltungsauffassung, nicht geprüft.
 - `ESTG-23`: Drei-Objekt-Grenze (gewerblicher Grundstückshandel) ist Rechtsprechung, nicht geprüft.
+- `ESTG-35`: Gelesen Abs. 1 und 2 in Prüfrunde 4 (Jurist). Ermäßigung um das Vierfache des Gewerbesteuer-Messbetrags, beim Mitunternehmer des anteiligen; begrenzt auf den Ermäßigungshöchstbetrag (Abs. 1 Satz 1 und 2) und auf die tatsächlich zu zahlende Gewerbesteuer (Abs. 1 Satz 5). Der Ermäßigungshöchstbetrag hängt an den übrigen Einkünften des Gesellschafters; Prüfauftrag an den Steuerberater. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe.
 - `ESTG-4H`: Berichtigung Prüfrunde 2: abziehbar bis Zinsertrag plus verrechenbares EBITDA; dieses ist bereits 30 % des steuerlichen EBITDA. Ausnahmen Abs. 2 Buchst. b (kein Konzern) und c (Eigenkapitalvergleich) als Eingaben; BMF-Anwendungsschreiben (März 2025) nicht gelesen.
-- `ESTG-52`: Gelesen nur Abs. 15a und 18b.
+- `ESTG-52`: Gelesen nur Abs. 15a und 18b, zuletzt in Prüfrunde 4 (Jurist).
 - `ESTG-6`: Gelesen nur Abs. 1 Nr. 1a. Gilt für alle steuerpflichtigen Investoren, nicht nur für Privatpersonen. Ein § 6f (Kaufpreisaufteilung) existiert in der Fassung 15.10.2026 nicht (siehe JSTG-2026).
 - `ESTG-7`: Berichtigung Prüfrunde 2: degressive Abschreibung (Abs. 5a) nur bei Herstellung oder Anschaffung bis Ende des Fertigstellungsjahres, nicht beim Ankauf älterer Bestände; Herstellungsbeginn = Baubeginnsanzeige. Abschreibungsregeln an Vorhabensart und Nutzung binden, nicht an die Investorensicht.
 - `ESTG-7B`: Berichtigung Prüfrunde 2: 5.200 €/m² ist keine Deckelung, sondern schließt die Sonderabschreibung ganz aus; Rückabwicklung bei nachträglichen Kosten über der Grenze binnen drei Jahren, Nutzungsänderung oder steuerfreier Veräußerung binnen zehn Jahren. Beim Erwerb nur „neu“ bis Ende des Fertigstellungsjahres.
@@ -290,9 +296,10 @@ Bemerkungen:
 - `IMMOWERTV-ANLAGE-3`: Text enthält nur die Werte für 2021 und die Basiswerte; fortgeschriebene Werte siehe IMMOWERTV-WERTE. Eigentumswohnung 357 € und Gewerbe-Instandhaltung 100/50/30 % fehlen noch im Katalog.
 - `JSTG-2026`: Laufende Gesetzgebung; Stand nicht geprüft (Bundestag, BGBl. und BMF nicht abrufbar).
 - `KSTG-5`: Gilt nur für Genossenschaften und Vereine; die kommunale Wohnungs-GmbH ist in der Regel voll steuerpflichtig (Prüfrunde 2). Steuerstatus deshalb als eigenes Merkmal neben der Investorensicht.
-- `KSTG-8`: Gelesen Abs. 2 in Prüfrunde 3 (Jurist). Folge mit § 7b Abs. 5 EStG: Die De-minimis-Bindung der Sonderabschreibung gilt für jede Kapitalgesellschaft.
+- `KSTG-8`: Gelesen Abs. 2 in Prüfrunde 3 (Jurist) und Prüfrunde 4 (Fachexperte, Jurist). Abs. 2 erfasst die unbeschränkt Steuerpflichtigen nach § 1 Abs. 1 Nr. 1 bis 3 KStG. Folge mit § 7b Abs. 5 EStG: Die De-minimis-Bindung der Sonderabschreibung gilt für jede Kapitalgesellschaft und jede steuerpflichtige Genossenschaft, nicht aber für Vereine und Stiftungen mit Vermietungseinkünften.
 - `MABV-3`: Bei Wohnungs- und Teileigentum zusätzlich Begründung im Grundbuch (Abs. 1 Satz 1 Nr. 2) – fehlt noch im Bericht (Prüfrunde 2).
 - `MIETRECHT-II`: Stand des Verfahrens nicht geprüft.
+- `NI-ANBEST-P`: Nur über RL Mietwohnraum 2026 Nr. 1.4 und 12.3.1 genannt (ANBest-P als Anlage 2 zu VV Nr. 5.1 zu § 44 LHO). Von der Cloud-Umgebung aus nicht erreichbar (Jurist, Prüfrunde 4); Leseauftrag in TASKS.md.
 - `NI-GREST-SATZ`: 5,0 % nur nach Sekundärangabe; Landesgesetz, Fundstelle und Fassung am Original nachzuziehen.
 - `NI-MIETERSCHUTZVO`: Fundstelle stammt aus einer falsch verlinkten NBank-Datei (Notiz 07); Inhalt, Gemeindeliste und Geltungsdauer nicht gelesen.
 - `NWOFG-3`: Euro-Beträge weder hier noch in der DVO-NWoFG gelesen; belegt sind nur die Orientierungswerte des NBank-Rechners (NBANK-EINKOMMENSRECHNER). VV-NWoFG ebenfalls nicht geprüft.
@@ -350,7 +357,7 @@ Bemerkungen:
 | `NBANK-PI-OSTFRIESISCHE-INSELN` | [NBank PI Ostfriesische Inseln](https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Mietwohnraum-auf-den-Ostfriesischen-Inseln.pdf) – Produktinformation Mietwohnraum auf den Ostfriesischen Inseln | Stand 05.11.2026 | am Original gelesen (2026-11-17) | Sonderkonditionen Inseln (RL Nr. 8) | monatlich | frei |
 | `NBANK-PI-WOHNHEIMPLAETZE` | [NBank PI Wohnheimplätze](https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Wohnheimpl%C3%A4tze-f%C3%BCr-Studierende.pdf) – Produktinformation Wohnheimplätze für Studierende | Stand 05.11.2026 | am Original gelesen (2026-11-17) | Höchstbeträge je Platz, Zins, Gebühren, Eigenmittel 15 % | monatlich | frei |
 | `NBANK-RL-JUNGES-WOHNEN-2026` | [RL Junges Wohnen 2026](https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Richtlinie-F%C3%B6rderung-von-Wohnheimpl%C3%A4tzen-f%C3%BCr-Studierende-und-f%C3%BCr-Auszubildende-%28RL-Junges-Wohnen-2026%29.pdf) – Richtlinie über die Förderung von Wohnheimplätzen für Studierende und für Auszubildende | nicht erfasst | am Original gelesen (2026-11-17) | Förderung von Wohnheimplätzen: Darlehen und Zuschuss je Platz, Bindung 25 oder 40 Jahre | monatlich | frei |
-| `NBANK-RL-MIETWOHNRAUM-2026` | [RL Mietwohnraum 2026](https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Richtlinie-F%C3%B6rderung-von-Mietwohnraum-%28RL-Mietwohnraum-2026%29.pdf) – Richtlinie über die Gewährung von Zuwendungen zur Förderung von Mietwohnraum | RdErl. d. MW v. 25.06.2026, Nds. MBl. 2026 Nr. 319; in Kraft 01.07.2026 bis 31.12.2031 | am Original gelesen (2026-11-17) | Förderhöhe Darlehen und Zuschuss je Einkommensgruppe; Zuwendungsfähige Kosten und Bemessungsgrenze (Indexregel); Bindung 35 Jahre, Eingangsmiete, Mieterhöhung in der Bindung; Auszahlungsraten, Entgelte, Verwaltungskostenbeitrag; Renditeprüfung gegen 30-Jahres-Swapsatz plus 100 Basispunkte; Programme Bindungserwerb und Bindungsverlängerung | monatlich | frei |
+| `NBANK-RL-MIETWOHNRAUM-2026` | [RL Mietwohnraum 2026](https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Richtlinie-F%C3%B6rderung-von-Mietwohnraum-%28RL-Mietwohnraum-2026%29.pdf) – Richtlinie über die Gewährung von Zuwendungen zur Förderung von Mietwohnraum | RdErl. d. MW v. 25.06.2026, Nds. MBl. 2026 Nr. 319; in Kraft 01.07.2026 bis 31.12.2031 | am Original gelesen (2026-11-18) | Förderhöhe Darlehen und Zuschuss je Einkommensgruppe; Zuwendungsfähige Kosten und Bemessungsgrenze (Indexregel); Bindung 35 Jahre, Eingangsmiete, Mieterhöhung in der Bindung; Auszahlungsraten, Entgelte, Verwaltungskostenbeitrag; Renditeprüfung gegen 30-Jahres-Swapsatz plus 100 Basispunkte; Programme Bindungserwerb und Bindungsverlängerung | monatlich | frei |
 | `NBANK-VORDRUCK-1011` | [NBank Vordruck 1011](https://www.nbank.de/medien/nb-media/Downloads/Formulare-zur-Antragstellung/F%C3%B6rderantrag-Mietwohnungen-Vordruck-1011.pdf) – Förderantrag Mietwohnungen | Stand Juli 2026 | am Original gelesen (2026-11-17) | Antragssicht: Kosten nach DIN 276, Finanzierungsmittel, Mieterträge, Bewilligungsgrundlagen | monatlich | frei |
 | `NBANK-VORDRUCK-2012` | [NBank Vordruck 2012](https://www.nbank.de/medien/nb-media/Downloads/Formulare-zur-Antragstellung/Wirtschaftlichkeitsberechnung-Vordr.-2012.pdf) – Wirtschaftlichkeitsberechnung (zum Antrag auf Landesbürgschaft) | Fassung 05/15 | am Original gelesen (2026-11-17) | Wirtschaftlichkeitsberechnung nach II. BV als Ausgabeformat | monatlich | frei |
 | `NBANK-WFB-AENDERUNG-2025` | [WFB-Änderungserlass 2025](https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Wohnraumf%C3%B6rderbestimmungen-%28WFB%29-%28Rd.Erl.-v.-09.12.2025%29.pdf) – Wohnraumförderbestimmungen, Änderungserlass | RdErl. v. 09.12.2025, Nds. MBl. 2025 Nr. 597; außer Kraft mit Ablauf 30.06.2026 | am Original gelesen (2026-11-17) | Altkonditionen für fortgeltendes Modernisierungsdarlehen (Anträge bis 31.12.2026); Bestandsbindungen nach altem Recht | monatlich | frei |
@@ -377,7 +384,7 @@ Bemerkungen:
 - `NBANK-PI-MIETWOHNUNGEN-MFH`: Bemessungsgrenze wird zum 01.04. und 01.10. fortgeschrieben (siehe LSN-BAULEISTUNGSPREISE).
 - `NBANK-PI-MODERNISIERUNG`: Nur für Gebäude mit Fertigstellung vor dem 08.12.2004. Das alte Darlehensprogramm gilt für Anträge bis 31.12.2026 fort (Wahlrecht, RL Nr. 13.3).
 - `NBANK-RL-JUNGES-WOHNEN-2026`: Datum und Fundstelle des Erlasses nicht festgehalten. Mindestzahl zusammenhängender Plätze und Mieterhöhungsregeln nicht nachgeprüft.
-- `NBANK-RL-MIETWOHNRAUM-2026`: Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst.
+- `NBANK-RL-MIETWOHNRAUM-2026`: Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst. Zuletzt gelesen in Prüfrunde 4 (Jurist): Nr. 1.4, 1.5, 2.1, 5.3.1, 5.3.2.1 bis 5.3.2.4, 5.4.1 bis 5.4.8, 11.6, 11.7, 12.3 und 12.4.1; zur Umsatzsteuer enthält die Richtlinie keine Regel (einziger Treffer: Auftragswert „ohne Umsatzsteuer“ in Nr. 5.4.8), siehe NI-ANBEST-P.
 - `NBANK-VORDRUCK-2012`: Gehört zur Landesbürgschaft und ist auf den Programmseiten der Mietwohnraumförderung nicht verlinkt.
 - `NBANK-WFB-AENDERUNG-2025`: Nach dem 31.12.2026 nur noch für Altfälle relevant.
 
@@ -464,9 +471,9 @@ Bemerkungen:
 | `KRUSCHWITZ` | Kruschwitz, Investitionsrechnung – Investitionsrechnung (Endwertmodelle, vollständige Finanzplanung) · nicht erfasst | nicht erfasst | nicht geprüft | Allgemeine Theorie der Endwertmodelle | bei Neuausgabe | kostenpflichtig |
 | `NOELDEKE-2008` | [Nöldeke, CUREM 2008](https://www.curem.uzh.ch/static/abschlussarbeiten/2008/Noeldeke_Johannes_Masterthesis_2008.pdf) – Masterarbeit zu Risikoanalyse und Monte-Carlo-Simulation von Immobilieninvestitionen | Masterarbeit 2008 | nur Sekundärquelle | Gestuftes Vorgehen Sensitivität, Szenario, Simulation | bei Neuausgabe | frei |
 | `PETITJEAN-2009` | [Petitjean, CUREM 2009](https://www.curem.uzh.ch/static/abschlussarbeiten/2009/Petitjean_Marc_MT_2009.pdf) – Masterarbeit zur Risikoanalyse von Immobilieninvestitionen | Masterarbeit 2009 | nur Sekundärquelle | Schwächen von Sensitivitäts- und Szenarioanalyse | bei Neuausgabe | frei |
-| `ROPETER-1998` | [Ropeter, Investitionsanalyse für Gewerbeimmobilien](https://epub.uni-regensburg.de/6569/) – Investitionsanalyse für Gewerbeimmobilien | Ausgabe 1998 | nicht geprüft | Immobilien-VOFI für Gewerbe | bei Neuausgabe | frei |
-| `SCHULTE-IMMOBILIENOEKONOMIE-1` | Schulte (Hrsg.), Immobilienökonomie Bd. I – Immobilienökonomie, Band I; darin Schulte/Allendorf/Ropeter, Immobilieninvestition · nicht erfasst | nicht erfasst | nicht geprüft | Immobilien-VOFI-Tabelle; Vergleich VOFI und DCF; Fehlerkataloge und Musterrechnungen | bei Neuausgabe | kostenpflichtig |
-| `SCHULTE-ROPETER-1996` | Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte – Rentabilitätsanalyse für Immobilienprojekte, in: Handbuch Immobilien-Projektentwicklung · Handbuch Immobilien-Projektentwicklung, 1996 | Ausgabe 1996 | nicht geprüft | Immobilien-VOFI: Zeilenstruktur, unterjährige Zahlungen | bei Neuausgabe | kostenpflichtig |
+| `ROPETER-1998` | Ropeter, Investitionsanalyse für Gewerbeimmobilien – Investitionsanalyse für Gewerbeimmobilien · nicht erfasst; Schriften zur Immobilienökonomie Bd. 5 | Ausgabe 1998 | nicht geprüft | Immobilien-VOFI für Gewerbe | bei Neuausgabe | kostenpflichtig |
+| `SCHULTE-IMMOBILIENOEKONOMIE-1` | Schulte (Hrsg.), Immobilienökonomie Bd. I – Immobilienökonomie, Band I; darin Schulte/Allendorf/Ropeter, Immobilieninvestition · De Gruyter Oldenbourg, eBook ISBN 978-3-486-85454-1 | 5. Auflage 2016 | nicht geprüft | Immobilien-VOFI-Tabelle; Vergleich VOFI und DCF; Fehlerkataloge und Musterrechnungen | bei Neuausgabe | kostenpflichtig |
+| `SCHULTE-ROPETER-1996` | Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte – Rentabilitätsanalyse für Immobilienprojekte, in: Handbuch Immobilien-Projektentwicklung · Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte, in: Schulte (Hrsg.), Handbuch Immobilien-Projektentwicklung, Müller, Köln 1996, S. 165–221, ISBN 3-481-00986-0; Katalogeintrag: https://epub.uni-regensburg.de/6569/ | Ausgabe 1996 | nicht geprüft | Immobilien-VOFI: Zeilenstruktur, unterjährige Zahlungen | bei Neuausgabe | kostenpflichtig |
 | `WUESTEFELD-2000` | Wüstefeld, Risiko und Rendite von Immobilieninvestments – Risiko und Rendite von Immobilieninvestments · Frankfurt am Main 2000; TU Darmstadt, Publikation Nr. 9848 | Ausgabe 2000 | nicht geprüft | VOFI-Rendite und Monte-Carlo-Simulation (S. 146–147) | bei Neuausgabe | kostenpflichtig |
 
 Bemerkungen:
@@ -490,9 +497,9 @@ Bemerkungen:
 - `KRUSCHWITZ`: Nur genannt, nicht recherchiert (Notiz 03).
 - `NOELDEKE-2008`: Nur Auszüge; genauer Titel nicht erfasst.
 - `PETITJEAN-2009`: Nur Auszüge; genauer Titel nicht erfasst.
-- `ROPETER-1998`: Liegt laut Notiz 03 auf dem Publikationsserver der Universität Regensburg; nicht abgerufen. Zugang beim Abruf bestätigen.
-- `SCHULTE-IMMOBILIENOEKONOMIE-1`: Nicht eingesehen (Notizen 03 und 06).
-- `SCHULTE-ROPETER-1996`: Die Zeilenstruktur in Notiz 03 ist eine Rekonstruktion ohne Blick ins Original.
+- `ROPETER-1998`: Berichtigt am 18.11.2026: Die bisher eingetragene Adresse epub.uni-regensburg.de/6569/ gehört nicht zu diesem Werk, sondern ist der Katalogeintrag zu SCHULTE-ROPETER-1996; ein frei zugänglicher Volltext ist nicht bekannt. Original nicht eingesehen.
+- `SCHULTE-IMMOBILIENOEKONOMIE-1`: Nicht eingesehen (Notizen 03 und 06). Auflage, Verlag und ISBN stammen aus einer Websuche und sind nicht am Original geprüft.
+- `SCHULTE-ROPETER-1996`: Der Publikationsserver der Universität Regensburg führt nur den Katalogeintrag ohne Volltext (nachgesehen am 18.11.2026); Original nicht eingesehen. Die Zeilenstruktur in Notiz 03 ist eine Rekonstruktion ohne Blick ins Original.
 - `WUESTEFELD-2000`: Nur Literaturverweise gefunden.
 
 ## Datenquellen

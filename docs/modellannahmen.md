@@ -4,7 +4,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/modellannahmen/annahmen.toml`; danach `python3 scripts/modellannahmen.py` ausführen.
 
-**Stand:** 25 offene Annahmen, davon 5 mit hohem Gewicht · 0 erledigt
+**Stand:** 26 offene Annahmen, davon 5 mit hohem Gewicht · 0 erledigt
 
 ## Offene Annahmen
 
@@ -19,11 +19,12 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-005` | Finanzierungskosten als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-006` | Aufteilung bei teilgeförderten Vorhaben | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-007` | Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete | mittel | Kundenbericht | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
-| `MA-010` | Verlustverrechnung ab 2028 | mittel | Anwendung | ja | Steuerberater; Bundesgesetzblatt | mit der nächsten vierteljährlichen Rechtsprüfung |
+| `MA-010` | Verlustverrechnung ab 2028 | mittel | Anwendung | ja | Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater | mit der nächsten vierteljährlichen Rechtsprüfung |
 | `MA-017` | Restwert bei laufender Bindung | mittel | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
-| `MA-021` | Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
+| `MA-021` | Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | Projekt am Haushaltsrecht (ANBest-P zu § 44 LHO), dann NBank | sobald die ANBest-P gelesen sind, spätestens nach dem Gespräch mit der NBank |
 | `MA-022` | Leerstand beim Mieterwechsel und Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-023` | Kostenbasis der Baukostenobergrenze der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
+| `MA-026` | Rechengrundlage der Bankgrenze in der Grobkalkulation | mittel | Kundenbericht | ja | Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung) sind Vorgaben des Hauses | mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a |
 | `MA-003` | Zins des NBank-Darlehens ab dem 36. Jahr | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-008` | Modernisierungsumlage für den Heizungstausch bei Staffelmiete | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-009` | Teilung der Bio-Brennstoffkosten im Neubau | gering | nur intern | nein | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
@@ -44,9 +45,11 @@ Nach Klärungsweg:
 - **Darlehensvertrag im Einzelfall:** `MA-013`
 - **Fachliteratur (Endbericht im Volltext):** `MA-015`
 - **Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber:** `MA-012`
-- **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`, `MA-021`
+- **Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung) sind Vorgaben des Hauses:** `MA-026`
+- **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`
+- **Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater:** `MA-010`
+- **Projekt am Haushaltsrecht (ANBest-P zu § 44 LHO), dann NBank:** `MA-021`
 - **Steuerberater:** `MA-011`, `MA-022`, `MA-023`
-- **Steuerberater; Bundesgesetzblatt:** `MA-010`
 
 ## Einzelheiten
 
@@ -158,7 +161,7 @@ Nach Klärungsweg:
 - **Andere Lesart:** Es bleibt auch ab 2028 bei 70 %.
 - **Grundlage:** § 10d EStG in der geltenden Fassung; die Befristung bis 2027 ist nur aus zweiter Hand belegt. Angesetzt ist der ungünstigere Fall. Quellen: `ESTG-10D`.
 - **Wirkung (mittel):** Steuerzahlungen von Vorhaben mit Anlaufverlusten ab 2028.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater; Bundesgesetzblatt · **Wiedervorlage:** mit der nächsten vierteljährlichen Rechtsprüfung
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater · **Wiedervorlage:** mit der nächsten vierteljährlichen Rechtsprüfung
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
 
@@ -258,13 +261,13 @@ Nach Klärungsweg:
 
 - **Annahme:** Der Zinsvorteil eines zinsverbilligten Darlehens mindert die Umlage für den Heizungstausch in gleicher Weise wie bei der allgemeinen Modernisierungsumlage.
 - **Warum offen:** Die Vorschrift zum Heizungstausch spricht vom Abzug der in Anspruch genommenen Drittmittel; wie ein Zinsvorteil dabei anzusetzen ist, regelt sie nicht ausdrücklich.
-- **Andere Lesart:** Nur Zuschüsse werden abgezogen; der Zinsvorteil bleibt unberücksichtigt.
-- **Grundlage:** § 559e Abs. 1 in Verbindung mit § 559a BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-559E`, `BGB-559A`.
+- **Andere Lesart:** Strenger: Das Darlehen wird wie ein Zuschuss mit seinem Nennbetrag von den Kosten abgezogen; dafür spricht der Wortlaut, der den Abzug an den Kosten ansetzt. Günstiger für den Vermieter: Nur Zuschüsse werden abgezogen; der Zinsvorteil bleibt unberücksichtigt.
+- **Grundlage:** § 559e Abs. 1 in Verbindung mit § 559a BGB. Begründete Abweichung von der Vorsichtsregel: Angesetzt ist nicht die strengste Lesart (Nennbetrag), sondern der Zinsvorteil. Dafür spricht die Systematik: § 559e Abs. 1 nimmt für die Drittmittel auf § 559a Bezug, und dessen Absatz 2 erfasst Darlehen über den Zinsvorteil; ein Darlehen ist zurückzuzahlen. Der Unterschied wirkt selten, weil meist die Kappung bindet. Quellen: `BGB-559E`, `BGB-559A`.
 - **Wirkung (gering):** Mieterlös nach gefördertem Heizungstausch; gedeckelt auf 0,50 €/m² im Monat.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Kopplungen
-- **Bemerkung:** Aus Prüfrunde 3 (Jurist).
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist); Lesart „Nennbetrag“ und Einordnung als Abweichung von der Vorsichtsregel aus Prüfrunde 4 (Jurist).
 
 ### MA-020 · Umlage für den Heizungstausch in der NBank-Bindung
 
@@ -281,38 +284,38 @@ Nach Klärungsweg:
 ### MA-021 · Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank
 
 - **Annahme:** Kann der Bauherr die Vorsteuer nicht abziehen, zählt die Umsatzsteuer zu den zuwendungsfähigen Kosten.
-- **Warum offen:** Die gelesenen Unterlagen der NBank regeln die Behandlung der Umsatzsteuer nicht ausdrücklich.
+- **Warum offen:** Die Richtlinie regelt die Behandlung der Umsatzsteuer nicht ausdrücklich. Sie erklärt in Nummer 12.3.1 die Verwaltungsvorschriften zu § 44 LHO für anwendbar, zu denen die ANBest-P gehören; dort ist die Frage zu klären, gelesen sind sie noch nicht.
 - **Andere Lesart:** Zuwendungsfähig sind nur die Nettokosten; die Umsatzsteuer ist zusätzlich zu finanzieren.
-- **Grundlage:** Übliche Regel des Zuwendungsrechts, hier nicht am Text gelesen. Ausnahme von der Vorsichtsregel: Im Wohnungsbau ist die Umsatzsteuer echter Aufwand; die ungünstige Lesart würde jede geförderte Kalkulation um rund ein Sechstel der Förderung verfälschen. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`.
+- **Grundlage:** Übliche Regel des Zuwendungsrechts, hier nicht am Text gelesen: Nur die abziehbare Vorsteuer ist nicht zuwendungsfähig. Ausnahme von der Vorsichtsregel: Im Wohnungsbau ist die Umsatzsteuer echter Aufwand. Die ungünstige Lesart senkte die Förderung auf die Baukosten um bis zu einem Sechstel (19/119 der Bruttokosten), weniger, wenn die Bemessungsgrenze kappt; die umsatzsteuerfreien Grundstückskosten berührt sie nicht. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `NI-ANBEST-P`.
 - **Wirkung (mittel):** Höhe von Darlehen und Zuschuss; Finanzierungslücke.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Projekt am Haushaltsrecht (ANBest-P zu § 44 LHO), dann NBank · **Wiedervorlage:** sobald die ANBest-P gelesen sind, spätestens nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
-- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts.
+- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts; Größe der Wirkung und Klärungsweg nach Prüfrunde 4 (Finanzmathematiker, Jurist) berichtigt.
 
 ### MA-022 · Leerstand beim Mieterwechsel und Sonderabschreibung
 
-- **Annahme:** Ein Leerstand zwischen zwei Mietverhältnissen schadet der Sonderabschreibung nicht, solange die Vermietungsabsicht fortbesteht.
+- **Annahme:** Ein Leerstand zwischen zwei Mietverhältnissen schadet der Sonderabschreibung nicht, solange die Vermietungsabsicht fortbesteht. Schädlich bleiben Selbstnutzung, unentgeltliche Überlassung, vorübergehende Beherbergung und die Aufgabe der Vermietungsabsicht.
 - **Warum offen:** Das Gesetz verlangt, dass die Wohnung der entgeltlichen Überlassung zu Wohnzwecken dient; ob das einen Leerstand beim Mieterwechsel einschließt, ergibt sich aus der Verwaltungsauffassung, die nicht gelesen ist.
-- **Andere Lesart:** Jeder Leerstand im Bindungszeitraum löst die rückwirkende Versagung der Sonderabschreibung aus.
-- **Grundlage:** § 7b Abs. 1 und 4 EStG; Einschätzung des Juristen in Prüfrunde 3. Ausnahme von der Vorsichtsregel: Die ungünstige Lesart striche bei jedem Leerstandsstress die gesamte Sonderabschreibung und machte den Stressfall unbrauchbar. Quellen: `ESTG-7B`.
+- **Andere Lesart:** Jeder Leerstand im Nutzungszeitraum nach § 7b, dem Jahr der Anschaffung oder Herstellung und den neun folgenden Jahren, löst die rückwirkende Versagung der Sonderabschreibung aus.
+- **Grundlage:** § 7b Abs. 2 und 4 EStG: Das Gesetz stellt darauf ab, ob die Wohnung der entgeltlichen Überlassung zu Wohnzwecken dient, also auf ihre Zweckbestimmung (Einschätzung des Juristen am Wortlaut, Prüfrunden 3 und 4). Ausnahme von der Vorsichtsregel: Die ungünstige Lesart striche bei jedem Leerstandsstress die gesamte Sonderabschreibung und machte den Stressfall unbrauchbar. Quellen: `ESTG-7B`.
 - **Wirkung (mittel):** Steuerzahlungen im Neubau mit Sonderabschreibung; Ergebnis im Stressfall Leerstand.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
-- **Bemerkung:** Aus Prüfrunde 3 (Jurist) und der dritten Überarbeitung des Rechercheberichts.
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist) und der dritten Überarbeitung des Rechercheberichts; schädliche Nutzungen und Begriff „Nutzungszeitraum“ aus Prüfrunde 4 (Jurist).
 
 ### MA-023 · Kostenbasis der Baukostenobergrenze der Sonderabschreibung
 
-- **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird an derselben Kostensumme gemessen wie die Bemessungsgrenze der NBank.
-- **Warum offen:** Welche Kostengruppen in die Grenze des § 7b EStG einzurechnen sind, beantwortet das Gesetz nicht nach Kostengruppen.
-- **Andere Lesart:** Engere Kostensumme, etwa ohne Außenanlagen oder Baunebenkosten; die Grenze würde seltener überschritten.
-- **Grundlage:** § 7b Abs. 2 EStG. Angesetzt ist die weitere Kostensumme und damit der ungünstigere Fall. Quellen: `ESTG-7B`.
+- **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird an derselben Kostensumme gemessen wie die Förderung der NBank: bei Herstellung an den Kostengruppen 200 bis 700, beim Ersterwerb am Kaufpreis nebst Erwerbskosten, höchstens dem Marktwert.
+- **Warum offen:** Welche Kosten in die Grenze des § 7b EStG einzurechnen sind, beantwortet das Gesetz nicht nach Kostengruppen. Für die Anschaffung ist keine Kostensumme bestimmt; Kostengruppen gibt es beim Kauf vom Bauträger nicht.
+- **Andere Lesart:** Engere Kostensumme, etwa ohne Außenanlagen oder Baunebenkosten, beim Erwerb nur der Gebäudeanteil des Kaufpreises mit anteiligen Erwerbsnebenkosten; die Grenze würde seltener überschritten.
+- **Grundlage:** § 7b Abs. 2 EStG; Richtlinie Mietwohnraum 2026, Nummern 1.5, 5.3.2.1 und 5.3.2.4 (Bemessungsgrundlage der NBank, beim Ersterwerb Kaufpreis nebst Erwerbskosten, höchstens Marktwert). Angesetzt ist die weitere Kostensumme und damit der ungünstigere Fall. Quellen: `ESTG-7B`, `NBANK-RL-MIETWOHNRAUM-2026`.
 - **Wirkung (mittel):** Ob die Sonderabschreibung überhaupt gewährt wird; die Grenze ist eine Ausschlussgrenze.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
-- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts.
+- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts; Ersterwerb aus Prüfrunde 4 (Jurist).
 
 ### MA-024 · Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises
 
@@ -329,11 +332,23 @@ Nach Klärungsweg:
 ### MA-025 · Modernisierungsumlage für den Glasfaseranschluss
 
 - **Annahme:** Für den erstmaligen Glasfaseranschluss wird keine Modernisierungsumlage angesetzt.
-- **Warum offen:** Die Umlage ist an Bedingungen geknüpft (freie Anbieterwahl, kein Bereitstellungsentgelt als Betriebskosten), deren Einzelheiten nicht geprüft sind.
-- **Andere Lesart:** Umlage von 8 % der Kosten, wenn die Bedingungen erfüllt sind.
+- **Warum offen:** Der Wortlaut steht in Spannung: § 559 Abs. 1 Satz 1 BGB nennt die Maßnahmen nach § 555b Nr. 1, 3, 4, 5 und 6, nicht Nr. 4a; Satz 2 regelt aber, wann die Erhöhung im Fall der Nr. 4a zulässig ist, und setzt ihre Umlage damit voraus.
+- **Andere Lesart:** Nr. 4a ist umlagefähig, über Satz 2 oder weil der Anschluss den Gebrauchswert nach Nr. 4 erhöht: 8 % der Kosten, wenn der Mieter seinen Anbieter frei wählen kann und kein Bereitstellungsentgelt als Betriebskosten umgelegt wird oder wurde.
 - **Grundlage:** § 555b Nr. 4a und § 559 Abs. 1 Satz 2 BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-555B`, `BGB-559`.
 - **Wirkung (gering):** Mieterlös nach Glasfaserausbau.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
-- **Bemerkung:** Aus Prüfrunde 3 (Jurist).
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist); Grund und andere Lesart nach Prüfrunde 4 (Jurist) neu gefasst. Frage an den Anwalt: Ist Nr. 4a über § 559 Abs. 1 Satz 2 oder über Nr. 4 umlagefähig?
+
+### MA-026 · Rechengrundlage der Bankgrenze in der Grobkalkulation
+
+- **Annahme:** Die Bank gibt höchstens das Darlehen, dessen Schuldendienst die Mindestdeckung einhält, gerechnet aus dem Reinertrag im ersten Jahr der Vollvermietung gegen den Kapitaldienst aller Darlehen einschließlich des Förderdarlehens. Sie beleiht bis zur Beleihungsquote den Kaufpreis, beim Neubau die Gesamtkosten, nicht einen eigenen Beleihungswert.
+- **Warum offen:** Wie eine Bank Kapitaldienstfähigkeit und Beleihung im Einzelfall rechnet, ist nicht veröffentlicht und von Haus zu Haus verschieden: mit welchem Ertrag, ob mit dem Kapitaldienst eines Förderdarlehens und auf welchen Wert.
+- **Andere Lesart:** Die Bank rechnet die Mindestdeckung nur gegen ihr eigenes Darlehen; dann fällt das Bankdarlehen im geförderten Neubau höher aus. Oder sie setzt einen eigenen Wert an, etwa einen Beleihungswert unter dem Kaufpreis; dann fällt es niedriger aus.
+- **Grundlage:** Gegenrechnungen der Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Bei der Mindestdeckung ist der ungünstigere Fall angesetzt. Beim Wertansatz ist der Kaufpreis eine Vereinfachung, weil die Grobkalkulation keinen Beleihungswert kennt; er ist deshalb als „Wertansatz der Bank“ überschreibbar, und das Blatt zeigt, ob Beleihungsquote oder Mindestdeckung das Darlehen begrenzt.
+- **Wirkung (mittel):** Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation.
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung) sind Vorgaben des Hauses · **Wiedervorlage:** mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 2, Grobkalkulation
+- **Bemerkung:** Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Ob die Beleihungsquote im geförderten Neubau nur das Bankdarlehen oder die Summe aller Darlehen begrenzt, ist in der Fachspezifikation festzulegen.

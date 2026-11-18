@@ -710,6 +710,21 @@ zugang = "frei"
 bemerkung = "Drei-Objekt-Grenze (gewerblicher Grundstückshandel) ist Rechtsprechung, nicht geprüft."
 
 [[quelle]]
+id = "ESTG-35"
+gruppe = "gesetz"
+kurz = "§ 35 EStG"
+titel = "Ermäßigung der Einkommensteuer bei gewerblichen Einkünften (Anrechnung der Gewerbesteuer)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__35.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Anrechnung der Gewerbesteuer auf die Einkommensteuer bei gewerblicher oder gewerblich geprägter Personengesellschaft und Einzelunternehmen", "Steuer in Kurzform der Grobkalkulation (pauschal) und in der Grundform (nach Gesetz)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen Abs. 1 und 2 in Prüfrunde 4 (Jurist). Ermäßigung um das Vierfache des Gewerbesteuer-Messbetrags, beim Mitunternehmer des anteiligen; begrenzt auf den Ermäßigungshöchstbetrag (Abs. 1 Satz 1 und 2) und auf die tatsächlich zu zahlende Gewerbesteuer (Abs. 1 Satz 5). Der Ermäßigungshöchstbetrag hängt an den übrigen Einkünften des Gesellschafters; Prüfauftrag an den Steuerberater. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+
+[[quelle]]
 id = "ESTG-52"
 gruppe = "gesetz"
 kurz = "§ 52 EStG"
@@ -719,10 +734,10 @@ fundstelle = "https://www.gesetze-im-internet.de/estg/__52.html"
 stand = "Fassung 15.10.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Altes Fenster § 7b letztmals 2026 (Abs. 15a)", "Anwendungsbeginn 70 % beim Verlustvortrag (Abs. 18b)"]
+verwendet_fuer = ["Altes Fenster § 7b letztmals 2026, bei abweichendem Wirtschaftsjahr letztmals für Wirtschaftsjahre, die vor dem 01.01.2027 enden (Abs. 15a)", "Anwendungsbeginn 70 % beim Verlustvortrag (Abs. 18b)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen nur Abs. 15a und 18b."
+bemerkung = "Gelesen nur Abs. 15a und 18b, zuletzt in Prüfrunde 4 (Jurist)."
 
 [[quelle]]
 id = "ESTDV-82B"
@@ -1389,6 +1404,21 @@ zugang = "frei"
 bemerkung = ""
 
 [[quelle]]
+id = "ABSCHLAGSV-1"
+gruppe = "gesetz"
+kurz = "§ 1 AbschlagsV"
+titel = "Verordnung über Abschlagszahlungen bei Bauträgerverträgen: zulässige Abschlagszahlungsvereinbarungen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/abschlagsv/__1.html"
+stand = "Fassung 28.04.2017"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Frei vereinbarte Ratenpläne beim Bauträgervertrag unter den Voraussetzungen des § 7 MaBV", "Bindung der Abschlagszahlungen an § 3 Abs. 1 und 2 MaBV im Vertriebsplan"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen § 1 in Prüfrunde 4 (Jurist): Satz 2 lässt Abschlagszahlungen unter den Voraussetzungen des § 7 MaBV auch abweichend von § 3 Abs. 1 und 2 MaBV zu; § 650m Abs. 2 und 3 BGB findet Anwendung. Trägt den Satz „frei vereinbarte Ratenpläne möglich“ in Anhang B.4 des Rechercheberichts. Stand der Gesamtausgabe am 18.11.2026 am Portal nachgesehen."
+
+[[quelle]]
 id = "HOAI-2021"
 gruppe = "gesetz"
 kurz = "HOAI 2021"
@@ -1690,11 +1720,11 @@ herausgeber = "Land Niedersachsen (MW); Bewilligung NBank"
 fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Richtlinie-F%C3%B6rderung-von-Mietwohnraum-%28RL-Mietwohnraum-2026%29.pdf"
 stand = "RdErl. d. MW v. 25.06.2026, Nds. MBl. 2026 Nr. 319; in Kraft 01.07.2026 bis 31.12.2031"
 beleg = "original"
-gelesen_am = "2026-11-17"
+gelesen_am = "2026-11-18"
 verwendet_fuer = ["Förderhöhe Darlehen und Zuschuss je Einkommensgruppe", "Zuwendungsfähige Kosten und Bemessungsgrenze (Indexregel)", "Bindung 35 Jahre, Eingangsmiete, Mieterhöhung in der Bindung", "Auszahlungsraten, Entgelte, Verwaltungskostenbeitrag", "Renditeprüfung gegen 30-Jahres-Swapsatz plus 100 Basispunkte", "Programme Bindungserwerb und Bindungsverlängerung"]
 turnus = "monatlich"
 zugang = "frei"
-bemerkung = "Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst."
+bemerkung = "Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst. Zuletzt gelesen in Prüfrunde 4 (Jurist): Nr. 1.4, 1.5, 2.1, 5.3.1, 5.3.2.1 bis 5.3.2.4, 5.4.1 bis 5.4.8, 11.6, 11.7, 12.3 und 12.4.1; zur Umsatzsteuer enthält die Richtlinie keine Regel (einziger Treffer: Auftragswert „ohne Umsatzsteuer“ in Nr. 5.4.8), siehe NI-ANBEST-P."
 
 [[quelle]]
 id = "NBANK-PI-MIETWOHNUNGEN-MFH"
@@ -2618,14 +2648,14 @@ gruppe = "literatur"
 kurz = "Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte"
 titel = "Rentabilitätsanalyse für Immobilienprojekte, in: Handbuch Immobilien-Projektentwicklung"
 herausgeber = "Schulte, Ropeter"
-fundstelle = "Handbuch Immobilien-Projektentwicklung, 1996"
+fundstelle = "Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte, in: Schulte (Hrsg.), Handbuch Immobilien-Projektentwicklung, Müller, Köln 1996, S. 165–221, ISBN 3-481-00986-0; Katalogeintrag: https://epub.uni-regensburg.de/6569/"
 stand = "Ausgabe 1996"
 beleg = "ungeprueft"
 gelesen_am = ""
 verwendet_fuer = ["Immobilien-VOFI: Zeilenstruktur, unterjährige Zahlungen"]
 turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
-bemerkung = "Die Zeilenstruktur in Notiz 03 ist eine Rekonstruktion ohne Blick ins Original."
+bemerkung = "Der Publikationsserver der Universität Regensburg führt nur den Katalogeintrag ohne Volltext (nachgesehen am 18.11.2026); Original nicht eingesehen. Die Zeilenstruktur in Notiz 03 ist eine Rekonstruktion ohne Blick ins Original."
 
 [[quelle]]
 id = "ROPETER-1998"
@@ -2633,14 +2663,14 @@ gruppe = "literatur"
 kurz = "Ropeter, Investitionsanalyse für Gewerbeimmobilien"
 titel = "Investitionsanalyse für Gewerbeimmobilien"
 herausgeber = "Ropeter"
-fundstelle = "https://epub.uni-regensburg.de/6569/"
+fundstelle = "nicht erfasst; Schriften zur Immobilienökonomie Bd. 5"
 stand = "Ausgabe 1998"
 beleg = "ungeprueft"
 gelesen_am = ""
 verwendet_fuer = ["Immobilien-VOFI für Gewerbe"]
 turnus = "bei-neuausgabe"
-zugang = "frei"
-bemerkung = "Liegt laut Notiz 03 auf dem Publikationsserver der Universität Regensburg; nicht abgerufen. Zugang beim Abruf bestätigen."
+zugang = "kostenpflichtig"
+bemerkung = "Berichtigt am 18.11.2026: Die bisher eingetragene Adresse epub.uni-regensburg.de/6569/ gehört nicht zu diesem Werk, sondern ist der Katalogeintrag zu SCHULTE-ROPETER-1996; ein frei zugänglicher Volltext ist nicht bekannt. Original nicht eingesehen."
 
 [[quelle]]
 id = "SCHULTE-IMMOBILIENOEKONOMIE-1"
@@ -2648,14 +2678,14 @@ gruppe = "literatur"
 kurz = "Schulte (Hrsg.), Immobilienökonomie Bd. I"
 titel = "Immobilienökonomie, Band I; darin Schulte/Allendorf/Ropeter, Immobilieninvestition"
 herausgeber = "Schulte (Hrsg.)"
-fundstelle = "nicht erfasst"
-stand = "nicht erfasst"
+fundstelle = "De Gruyter Oldenbourg, eBook ISBN 978-3-486-85454-1"
+stand = "5. Auflage 2016"
 beleg = "ungeprueft"
 gelesen_am = ""
 verwendet_fuer = ["Immobilien-VOFI-Tabelle", "Vergleich VOFI und DCF", "Fehlerkataloge und Musterrechnungen"]
 turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
-bemerkung = "Nicht eingesehen (Notizen 03 und 06)."
+bemerkung = "Nicht eingesehen (Notizen 03 und 06). Auflage, Verlag und ISBN stammen aus einer Websuche und sind nicht am Original geprüft."
 
 [[quelle]]
 id = "KIRCHNER-IWU-2004"
@@ -3181,10 +3211,10 @@ fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__8.html"
 stand = "Fassung 04.02.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["De-minimis-Bindung der Sonderabschreibung für Kapitalgesellschaften"]
+verwendet_fuer = ["De-minimis-Bindung der Sonderabschreibung für Kapitalgesellschaften und steuerpflichtige Genossenschaften"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen Abs. 2 in Prüfrunde 3 (Jurist). Folge mit § 7b Abs. 5 EStG: Die De-minimis-Bindung der Sonderabschreibung gilt für jede Kapitalgesellschaft."
+bemerkung = "Gelesen Abs. 2 in Prüfrunde 3 (Jurist) und Prüfrunde 4 (Fachexperte, Jurist). Abs. 2 erfasst die unbeschränkt Steuerpflichtigen nach § 1 Abs. 1 Nr. 1 bis 3 KStG. Folge mit § 7b Abs. 5 EStG: Die De-minimis-Bindung der Sonderabschreibung gilt für jede Kapitalgesellschaft und jede steuerpflichtige Genossenschaft, nicht aber für Vereine und Stiftungen mit Vermietungseinkünften."
 
 [[quelle]]
 id = "AO-233A"
@@ -3193,13 +3223,13 @@ kurz = "§ 233a AO"
 titel = "Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a)"
 herausgeber = "Bund"
 fundstelle = "https://www.gesetze-im-internet.de/ao_1977/__233a.html"
-stand = "nicht erfasst"
+stand = "Fassung 22.10.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
 verwendet_fuer = ["Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen Abs. 1 bis 2a bei der dritten Überarbeitung des Rechercheberichts. Fassungsdatum beim Lesen nicht festgehalten."
+bemerkung = "Gelesen Abs. 1 bis 2a bei der dritten Überarbeitung des Rechercheberichts und Abs. 1 bis 8 in Prüfrunde 4 (Jurist). Die Einzelnorm nennt kein Änderungsdatum; der Stand folgt wie bei AO-52 der Gesamtausgabe der AO."
 
 [[quelle]]
 id = "TKG-72"
@@ -3215,3 +3245,18 @@ verwendet_fuer = ["Bedingung der Modernisierungsumlage für den Glasfaseranschlu
 turnus = "vierteljaehrlich"
 zugang = "frei"
 bemerkung = "Nur über den Wortlaut des § 559 Abs. 1 Satz 2 BGB zitiert, nicht gelesen. Adresse nach dem Muster des Portals gebildet und nicht abgerufen."
+
+[[quelle]]
+id = "NI-ANBEST-P"
+gruppe = "gesetz"
+kurz = "VV zu § 44 LHO mit ANBest-P (Niedersachsen)"
+titel = "Verwaltungsvorschriften zu § 44 der Niedersächsischen Landeshaushaltsordnung mit den ANBest-P als Anlage"
+herausgeber = "Land Niedersachsen"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Zuwendungsfähigkeit nicht abziehbarer Vorsteuer bei der NBank (klärt MA-021)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur über RL Mietwohnraum 2026 Nr. 1.4 und 12.3.1 genannt (ANBest-P als Anlage 2 zu VV Nr. 5.1 zu § 44 LHO). Von der Cloud-Umgebung aus nicht erreichbar (Jurist, Prüfrunde 4); Leseauftrag in TASKS.md."
