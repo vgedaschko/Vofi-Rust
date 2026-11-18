@@ -7,7 +7,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 ## Jetzt
 
 - [~] Recherchebericht: vierte Überarbeitung nach der Sichtung der Prüfrunde 4 läuft (31 Punkte), danach Prüfrunde 5 als gezielte Nachprüfung (letzte Runde)
-- [~] Prüfung der Steuerungsdokumente durch die Rolle Dokumentation läuft (`docs/pruefung/2026-11-18-steuerungsdokumente/`)
+- [ ] Prüfmodi erweitern, sobald die Überarbeitung des Berichts zurück ist: `modellannahmen.py --pruefen` gleicht Wirkorte in der Spezifikation ab, `quellenkataster.py --pruefen` die Quellenkennungen in den Steuerungsdokumenten; danach Nachprüfung durch die Rolle Dokumentation
 
 ## Als Nächstes
 
@@ -47,14 +47,15 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 - [ ] Gestaltungsreferenzen: Lücken schließen vor dem jeweiligen Entwurf – IBCS am Original, Gestaltungssysteme für datendichte Tabellen, Tornado- und Bandbreitendiagramm, Tilgungsplan, Ablauf „Projekt anlegen"
 - [ ] Phase 2: Design-Wettbewerbe für die drei prägenden Ansichten (`/designwettbewerb`), daraus das Gestaltungssystem
-- [ ] Geplante Aufgaben einrichten, sobald der Regel- und Förderkatalog steht: monatlich Förderkonditionen, vierteljährlich Rechtsstand
+- [ ] Geplante Aufgaben einrichten, sobald der Regel- und Förderkatalog steht (Phase 1): monatlich Förderkonditionen, vierteljährlich Rechtsstand; bis dahin Durchsicht an jedem Freigabepunkt
 - [ ] Projekteigene Skills bauen: `vofi-fachmodell`, `referenzfall-anlegen`, später `foerderprogramm-pflegen`, `steuer-regeln`
 - [ ] Phase 3: Einrichtungsskript der Cloud-Umgebung, Prüfkette auf dem Server, Hooks für die Oberfläche
-- [ ] Rust-Workspace aufsetzen, CI, SessionStart-Hook für Toolchain in Cloud-Sitzungen
+- [ ] Rust-Workspace aufsetzen, CI, SessionStart-Hook für Toolchain in Cloud-Sitzungen; dabei `CLAUDE.md` um Glossar, Vorzeichenkonvention, „Geld nie als Gleitkommazahl“ und Build- und Testbefehle ergänzen
 - [ ] Referenzfälle (Golden-Master) aus Lehrbuch-/Excel-VOFI als Tests
 
 ## Erledigt
 
+- [x] 2026-11-18 Steuerungsdokumente durch die Rolle Dokumentation geprüft (Note 7); zehn Befunde am Bestand bestätigt und behoben bis auf die Erweiterung der Prüfmodi
 - [x] 2026-11-18 Prüfrunde 4 zum Recherchebericht: Noten 9, 9, 8, 8, 8, 8; gesichtet (31 Punkte); Spezifikation, Entscheidungsprotokoll und Aufgabenliste nachgezogen
 - [x] 2026-11-18 Recherchebericht nach Prüfrunde 3 überarbeitet (30 Sichtungspunkte); 25 Modellannahmen, 211 Quellen
 - [x] 2026-11-18 Plugin `frontend-design` für das Projekt installiert (Eintrag in `.claude/settings.json`)

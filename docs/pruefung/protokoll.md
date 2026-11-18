@@ -1,6 +1,6 @@
 # Prüfprotokoll
 
-Eine Zeile je Prüfrunde; Details darunter. Maßstab und Format der Prüfer stehen in [`regeln.md`](regeln.md), Berichte und Sichtung je Runde im Ordner der Runde.
+Eine Zeile je Prüfrunde; Details darunter. Stand: Datum der letzten Zeile. Leser: Entwicklung vor jeder Prüfrunde. Maßstab und Format der Prüfer stehen in [`regeln.md`](regeln.md), Berichte und Sichtung je Runde im Ordner der Runde.
 
 | Datum | Prüfobjekt | Rollen | Befunde (kritisch / wichtig / Hinweis) | Ergebnis |
 |---|---|---|---|---|

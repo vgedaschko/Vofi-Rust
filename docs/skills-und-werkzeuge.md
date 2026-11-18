@@ -1,16 +1,15 @@
 # Skills und Werkzeuge für das VOFI-Projekt
 
-Stand 2026-11-17. Sortiert nach erwartetem Nutzen. Leitlinie: Was deterministisch geprüft werden kann, gehört in Hooks und CI; Skills sind für Fachwissen und wiederkehrende Abläufe.
+Übersicht der eingesetzten und geprüften Skills, Plugins, Prüferrollen und Hooks. Leser: Entwicklung, wenn ein Werkzeug gewählt oder eingerichtet wird. Stand 2026-11-18. Sortiert nach erwartetem Nutzen. Leitlinie: Was deterministisch geprüft werden kann, gehört in Hooks und CI; Skills sind für Fachwissen und wiederkehrende Abläufe.
 
 ## 1. Wirkt am zuverlässigsten: keine Skills, sondern feste Mechanik
 
-| Mechanik | Wofür | Wann einrichten |
+| Mechanik | Wofür | Stand |
 |---|---|---|
-| `CLAUDE.md` im neuen Repo (`/init`) | Glossar (VOFI-Begriffe), Vorzeichenkonvention, „Geld nie als f64 im Rechenkern", Build-/Testbefehle | Sobald das Repo existiert |
-| Hook nach Dateiänderung: `cargo fmt` + `cargo clippy` | Stil und typische Rust-Fehler sofort, ohne dass jemand daran denken muss | Mit dem Rust-Workspace |
-| Hook/CI: `cargo test` für den Rechenkern | Jede Formeländerung läuft gegen die Referenzfälle | Mit dem ersten Referenzfall |
-| „Anything else?"-Hook + `TASKS.md` | Offene Aufgaben über Sitzungen hinweg | Erledigt |
-| Setup-Skript der Cloud-Umgebung | Rust-Toolchain, `wasm32`-Target, `wasm-pack`, `sqlx-cli` in jeder Sitzung vorhanden | Mit dem Rust-Workspace |
+| `CLAUDE.md` | Arbeitsregeln, Pflichtlektüre, Qualitätsmaßstab | Eingerichtet. Glossar, Vorzeichenkonvention, „Geld nie als Gleitkommazahl“ und Build- und Testbefehle kommen mit dem Rust-Workspace hinzu (Aufgabe in `TASKS.md`) |
+| Hooks (Abschnitt 6) | Format nach jeder Änderung; `clippy` und Tests vor jedem Stopp; Gestaltungsprüfung; offene Aufgaben | Eingerichtet und mit Probeprojekten getestet; wirksam ab der ersten Rust- beziehungsweise Oberflächendatei |
+| Prüfkette auf dem Server | Dieselben Prüfungen bei jeder Zusammenführung, dazu Referenzfälle des Rechenkerns | Phase 3 |
+| Einrichtungsskript der Cloud-Umgebung | Rust-Werkzeuge, `wasm32`-Ziel und `wasm-bindgen-cli` in jeder Sitzung vorhanden (Bestandsaufnahme: Entwicklungsplan, Abschnitt 2a) | Phase 3 |
 
 ## 2. Vorhandene Skills, die hier direkt passen
 
@@ -64,11 +63,25 @@ Siebzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
 
 Die Prüfer lesen nur und berichten; eingearbeitet wird erst nach Gegenprüfung. Ergebnisse stehen in `docs/pruefung/protokoll.md`.
 
-## 7 Gestaltungsreferenzen
+## 6. Hooks (eingerichtet)
+
+| Hook | Auslöser | Wirkung |
+|---|---|---|
+| `anything-else.sh start` | Sitzungsstart | Zeigt Pflichtlektüre und offene Aufgaben; meldet fehlende Dateien der Pflichtlektüre und Dokumente, die in der Übersicht fehlen |
+| `anything-else.sh stop` | Vor jedem Stopp | Hält einmal auf, solange unter „Jetzt" in `TASKS.md` etwas offen ist |
+| `spezifikation-merker.sh` | Nach Änderung an Spezifikation oder Entwicklungsplan | Erinnert an Stand-Datum, Entscheidungsprotokoll und Folgeänderungen |
+| `gestaltung.sh merker` | Erste Änderung an einer Oberflächendatei je Sitzung | Erinnert an `frontend-design`, Vorbilder und Gestaltungsprüfung |
+| `gestaltung.sh stop` | Vor jedem Stopp, wenn sich Oberflächendateien geändert haben | Hält den Stopp einmal auf und nennt die fällige Gestaltungsprüfung; sie gilt als erledigt, wenn `gestaltung.sh bestanden` vermerkt ist |
+| `rust-format.sh` | Nach Änderung an einer Rust-Datei | Formatiert das Paket |
+| `rust-pruefung.sh` | Vor jedem Stopp, wenn sich Rust-Code geändert hat | `clippy` ohne Warnungen und alle Tests; hält bei Fehlern einmal auf |
+
+Alle Stopp-Hooks halten einen Stopp genau einmal auf und nennen, was fehlt; ein zweiter Stoppversuch geht durch, damit keine Endlosschleife entsteht. Die Pflicht selbst steht in `CLAUDE.md`. Dazu kommt der Hook der Cloud-Umgebung, der vor jedem Stopp nicht gesicherte Änderungen meldet. Noch nicht eingerichtet, weil sie vom Projektzuschnitt abhängen: Typprüfung und Lint der Oberfläche, die Prüfkette auf dem Server (Phase 3).
+
+## 7. Gestaltungsreferenzen
 
 | Quelle | Wofür | Stand 18.11.2026 |
 |---|---|---|
-| Mobbin (angebunden) | Bildschirme und Abläufe realer Anwendungen: Tabellen mit Zeitachse, Szenariowechsel, Versionen, Umschalter Monat/Jahr, Kennzahlenleisten | Probesuche erfolgreich. Stark bei allgemeinen Mustern aus Finanz- und Planungsanwendungen (Causal, Monarch, Fey, YNAB, Origin); für immobilienspezifische Fachsoftware fand die Probesuche nichts Brauchbares. Noch keine Sammlung angelegt |
+| Mobbin (angebunden) | Bildschirme und Abläufe realer Anwendungen: Tabellen mit Zeitachse, Szenariowechsel, Versionen, Umschalter Monat/Jahr, Kennzahlenleisten | Probesuche erfolgreich. Stark bei allgemeinen Mustern aus Finanz- und Planungsanwendungen (Causal, Monarch, Fey, YNAB, Origin); für immobilienspezifische Fachsoftware fand die Suche nichts Brauchbares. Sammlung „VOFI Referenzen“ mit 34 Vorbildern angelegt |
 | IBCS | Notation und Aufbau von Berichten und Diagrammen | Maßstab laut `CLAUDE.md`; Regelwerk noch nicht am Original gelesen (siehe Quellenkataster) |
 | Öffentliche Gestaltungssysteme für datendichte Fachanwendungen | Bausteine und Regeln für Tabellen, Formulare, Zustände, Barrierefreiheit | Auswahl in Phase 2 |
 | Produktseiten und Handbücher der Fachsoftware (ARGUS, Forbury, Causal) | Fachliche Bedienmuster: Mieterliste, Szenarien, Bandbreiteneingabe | In der Recherche ausgewertet |
@@ -90,17 +103,3 @@ Sammlung in Mobbin: „VOFI Referenzen" (privat). Ausgewertet in `docs/gestaltun
 | UXKIN (`no-ui-slop`), UI Design Review, ux-ui-audit | Community, nicht aktiviert | Überschneiden sich mit Mobbin, den `design:`-Skills und der Jury; nicht nötig |
 
 Vorgehen in Phase 2: je Kernansicht (Projektübersicht, Eingabe, Finanzplan-Tabelle, Szenariovergleich, Sensitivität, Förderung, Bericht) drei bis fünf Referenzen sammeln, das Muster benennen, dem der Entwurf folgt, und festhalten, was bewusst anders gemacht wird.
-
-## 6 Hooks (eingerichtet)
-
-| Hook | Auslöser | Wirkung |
-|---|---|---|
-| `anything-else.sh start` | Sitzungsstart | Zeigt Pflichtlektüre und offene Aufgaben; meldet fehlende Dateien der Pflichtlektüre und Dokumente, die in der Übersicht fehlen |
-| `anything-else.sh stop` | Vor jedem Stopp | Hält einmal auf, solange unter „Jetzt" in `TASKS.md` etwas offen ist |
-| `spezifikation-merker.sh` | Nach Änderung an Spezifikation oder Entwicklungsplan | Erinnert an Stand-Datum, Entscheidungsprotokoll und Folgeänderungen |
-| `gestaltung.sh merker` | Erste Änderung an einer Oberflächendatei je Sitzung | Erinnert an `frontend-design`, Vorbilder und Gestaltungsprüfung |
-| `gestaltung.sh stop` | Vor jedem Stopp, wenn sich Oberflächendateien geändert haben | Hält auf, bis die Gestaltungsprüfung gelaufen und mit `gestaltung.sh bestanden` vermerkt ist |
-| `rust-format.sh` | Nach Änderung an einer Rust-Datei | Formatiert das Paket |
-| `rust-pruefung.sh` | Vor jedem Stopp, wenn sich Rust-Code geändert hat | `clippy` ohne Warnungen und alle Tests; hält bei Fehlern einmal auf |
-
-Dazu kommt der Hook der Cloud-Umgebung, der vor jedem Stopp nicht gesicherte Änderungen meldet. Noch nicht eingerichtet, weil sie vom Projektzuschnitt abhängen: Typprüfung und Lint der Oberfläche, die Prüfkette auf dem Server (Phase 3).
