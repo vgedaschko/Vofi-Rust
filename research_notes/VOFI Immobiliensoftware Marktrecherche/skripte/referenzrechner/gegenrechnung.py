@@ -1,11 +1,22 @@
+#!/usr/bin/env python3
 """RF-15: Gegenrechnung ausgewaehlter eigener Faelle ohne die Module des Referenzrechners.
 
 Zweck: Die festgeschriebenen Werte der eigenen Faelle (erwartete_werte.json) sollen nicht nur sich selbst
 bestaetigen. Dieses Skript rechnet vier Faelle in gerader Linie nach, nur mit decimal und den Rechenregeln des
-Dokuments: (1) Testfall im Monatsraster nach Kapitel 2, (2) Unterlassensalternative mit zwei Zinssaetzen,
-(3) Anlaufverlust mit Verlustvortrag und mit sofortiger Verrechnung, (4) Basisfall der Grobkalkulation Ankauf.
-Es importiert aus dem Referenzrechner nichts ausser dem Pruefrahmen fuer die Ausgabe.
+Dokuments: (1) Testfall im Monatsraster nach Kapitel 2 und R-7.3, (2) Unterlassensalternative mit zwei
+Zinssaetzen, (3) Anlaufverlust mit Verlustvortrag und mit sofortiger Verrechnung, (4) Basisfall der
+Grobkalkulation Ankauf (Anhang A.3 des Dokuments). Es importiert kein Modul des Referenzrechners; die Sollwerte
+liest es selbst aus erwartete_werte.json. Eingaben stehen als Zahlen im Skript, weil es die Regeln nachrechnet
+und nicht den Auftrag aufloest.
+
+    python3 gegenrechnung.py        Rueckgabewert 0 nur, wenn alle Werte auf den Cent stimmen
+
+Grenze: Das Skript stammt vom Verfasser des Referenzrechners. Es schuetzt vor Programmierfehlern, nicht vor
+einer gemeinsamen falschen Lesart der Regeln; dafuer ist die Blindrechnung durch einen zweiten Bearbeiter
+vorgesehen (R-15.2).
 """
+import json
+import os
 from decimal import Decimal as D, getcontext, ROUND_HALF_UP, ROUND_FLOOR
 
 getcontext().prec = 60
@@ -25,10 +36,12 @@ def monatssatz(i):
 
 
 def testfall_monat():
-    """Testfall S1 im Monatsraster: Kontenzins effektiv 2 %, Darlehen nominal 4 % / 12, Steuer je Planjahr."""
+    """Testfall S1 im Monatsraster: Kontenzins effektiv 2 %, Darlehen nominal 4 % / 12, Abschreibung 17.600 Euro
+    und Steuer je Planjahr (R-7.3, R-2.7)."""
     h = monatssatz(D("0.02"))
     rest, guth = D(700000), D(0)
     rate = c(D(700000) * D("0.06") / 12)
+    steuer1 = guth1 = None
     for jahr in range(1, 6):
         miete = c(D(55000) * D("1.02") ** (jahr - 1) / 12)
         bmg = D(0)
@@ -38,8 +51,10 @@ def testfall_monat():
             rest -= rate - zins
             guth += miete - rate + hz
             bmg += miete - zins + hz
-        steuer = c(D("0.30") * (bmg - c(D(17600) / 12) * 12))
+        steuer = c(D("0.30") * (bmg - D(17600)))
         guth -= steuer
+        if jahr == 1:
+            steuer1, guth1 = steuer, guth
     endwert = guth + 1150000 - rest
     # Unterlassensalternative: 400.000 langfristig, Zinsen monatlich auf das Wiederanlagekonto, beide 2 %
     lang, kurz = D(400000), D(0)
@@ -50,7 +65,7 @@ def testfall_monat():
             kurz += z
             zj += z
         kurz -= c(D("0.30") * zj)
-    return endwert, lang + kurz, rest
+    return endwert, lang + kurz, rest, steuer1, guth1
 
 
 def alternative_zwei_saetze():
@@ -110,32 +125,44 @@ def steuer_koerperschaft(jahr, einkommen, zustand):
 
 
 def ankauf_basisfall():
-    """Grobkalkulation Ankauf, Basisfall (annahmen.py): Kaufpreis 2,4 Mio., zwoelf Jahre, Monatsraster."""
+    """Grobkalkulation Ankauf, Basisfall (Anhang A.3): Kaufpreis 2,4 Mio. Euro, zwoelf Jahre, Monatsraster."""
     n, flaeche = 12, D(1320)
-    # Mietpfad: Ist 8,50, Markt 9,20 (+2 % je Jahr), Anpassung ueber vier Jahre, Kappung 15 % in drei Jahren
     idx = [None, D(1)]
     for j in range(2, n + 2):
         idx.append(s12(idx[-1] * D("1.02")))
-    miete = {}
-    for j in range(1, n + 2):
-        markt = D("9.20") * idx[j]
-        m = D("8.50") + (markt - D("8.50")) * min(D(1), D(j - 1) / 4)
-        basis = miete[j - 3] if j - 3 >= 1 else D("8.50")
-        miete[j] = min(m, basis * D("1.15"))
-    soll = {j: c(flaeche * miete[j]) for j in miete}
-    ein = {j: c(soll[j] * D("0.98")) for j in miete}
+    # R-6.3: Bestandsmiete nach BGB-558. Ziel ist der Anpassungspfad zur Vergleichsmiete 9,20 Euro (+2 % je Jahr,
+    # Anpassung ueber vier Jahre); Wartefrist 15 Monate, Kappung 15 % gegen die Miete 36 Monate zuvor; im
+    # Planjahr 1 keine Erhoehung; Mietenhistorie unbekannt: letzte Erhoehung zum Stichtag, kein Kappungsspielraum
+    # gegen Mieten vor dem Stichtag (MA-037).
+    miete, laufend, letzte = {}, D("8.50"), 0
+    for m in range(1, 12 * (n + 1) + 1):
+        j = (m - 1) // 12 + 1
+        vergleich = D("9.20") * idx[j]
+        ziel = D("8.50") + (vergleich - D("8.50")) * min(j - 1, 4) / 4
+        if m >= 13 and ziel > laufend and m - 1 >= letzte + 15:
+            grenze = miete[m - 36] * D("1.15") if m - 36 >= 1 else D("8.50")
+            if min(ziel, grenze) > laufend:
+                laufend, letzte = min(ziel, grenze), m - 1
+        miete[m] = laufend
+    soll = {m: c(flaeche * miete[m]) for m in miete}                   # R-6.4
+    ein = {m: c(soll[m] * (1 - D("0.015") - D("0.005"))) for m in miete}   # Leerstand 1,5 %, Forderungsausfall 0,5 %
     idx_co2 = [None, D(1)]
     for j in range(2, n + 1):
         idx_co2.append(s12(idx_co2[-1] * D("1.05")))
-    kosten = {j: c((350 * 20 + 14 * flaeche + 2 * flaeche) * idx[j] / 12) + c(D("0.60") * flaeche * idx_co2[j] / 12)
-              for j in range(1, n + 1)}
-    reinertrag1 = 12 * (ein[1] - kosten[1])
-    # Bankdarlehen: kleinster Wert aus Beleihungsquote, Mindestdeckung, Restfinanzierung
-    preis, enk = D(2400000), D(240000)
-    tragbar = reinertrag1 / D("1.2")
-    b = (tragbar / D("0.06")).quantize(C, ROUND_FLOOR)
-    while 12 * c(b * D("0.06") / 12) > tragbar:
+    # R-6.8, R-6.9: Verwaltung 350 je Einheit, Instandhaltung 14 Euro (Gebaeudealter ab 32 Jahren), Betriebskosten
+    # 2 Euro; CO2: 30 kg x 40 % x 50 Euro je Tonne
+    kosten = {j: c((350 * 20 + 14 * flaeche + 2 * flaeche) * idx[j] / 12)
+              + c(D(30) * flaeche * D("0.4") * 50 * idx_co2[j] / 1000 / 12) for j in range(1, n + 1)}
+    reinertrag1 = sum(ein[m] for m in range(1, 13)) - 12 * kosten[1]
+    # R-5.12: nachhaltiger Ertrag (Ist-Miete unter der Vergleichsmiete; Bewirtschaftung und Ausfall ueber 15 %),
+    # kalkulatorischer Zins = Anschlusszins 5 %, Tilgung 2 %
+    roh = sum(soll[m] for m in range(1, 13))
+    abzug = max(12 * kosten[1] + roh - sum(ein[m] for m in range(1, 13)), c(D("0.15") * roh))
+    tragbar = (roh - abzug) / D("1.2")
+    b = (tragbar / D("0.07")).quantize(C, ROUND_FLOOR)
+    while 12 * c(b * D("0.07") / 12) > tragbar:
         b -= C
+    preis, enk = D(2400000), D(240000)
     darlehen = min(D("0.65") * preis, b, preis + enk)
     ek = preis + enk - darlehen
     # Finanzplan
@@ -144,12 +171,13 @@ def ankauf_basisfall():
     rate = c(darlehen * D("0.06") / 12)
     afa = c((preis + enk) * D("0.75") * D("0.02"))
     stau = c(D(120000) * D("1.03") ** 2)
+    assert stau / D("1.19") <= D("0.15") * (preis + enk) * D("0.75")      # R-6.16: keine Aktivierung
     zustand = dict(kst=D(0), gew=D(0))
     einlagen = {0: ek}
     for j in range(1, n + 1):
-        ergebnis, hz_jahr = D(0), D(0)
-        for m in range(1, 13):
-            u = (j - 1) * 12 + m
+        ergebnis, hz_jahr, entgelte = D(0), D(0), D(0)
+        for mm in range(1, 13):
+            u = (j - 1) * 12 + mm
             satz = D("0.04") if u <= 120 else D("0.05")
             if u == 121:
                 rate = c(rest * (D("0.05") + D("0.02")) / 12)
@@ -157,16 +185,19 @@ def ankauf_basisfall():
             hz = c(guth * h)
             rest -= rate - zins
             aus = stau if u == 24 else D(0)
-            ergebnis += ein[j] - kosten[j] - zins - aus
+            ergebnis += ein[u] - kosten[j] - zins - aus
+            entgelte += zins
             hz_jahr += hz
-            fluss = ein[j] - kosten[j] - rate + hz - aus
-            if m == 12:
+            fluss = ein[u] - kosten[j] - rate + hz - aus
+            if mm == 12:
                 gewinn = D(0)
                 if j == n:
-                    vk = c(18 * 12 * soll[n + 1])
+                    # R-8.1: Faktor auf die Jahresmiete zum Stand des Verkaufsstichtags nach strukturellem Leerstand
+                    vk = c(18 * (12 * soll[12 * n] * (1 - D("0.015"))))
                     vk_kosten = c(vk * D("0.015"))
                     gewinn = vk - vk_kosten - ((preis + enk) - n * afa)
                     fluss += vk - vk_kosten - rest
+                assert entgelte <= 200000                               # R-7.16: keine Hinzurechnung
                 fluss -= steuer_koerperschaft(2026 + j, ergebnis - afa + hz_jahr + gewinn, zustand)
             guth += fluss
             if guth < 0:                      # Kontokorrentlinie null: Nachschuss aus Eigenkapital
@@ -179,13 +210,13 @@ def ankauf_basisfall():
     lang += einlagen.get(0, D(0))
     for j in range(1, n + 1):
         zj = D(0)
-        for m in range(1, 13):
-            u = (j - 1) * 12 + m
+        for mm in range(1, 13):
+            u = (j - 1) * 12 + mm
             z = c(lang * h) + c(kurz * h)
             zj += z
             kurz += z
             lang += einlagen.get(u, D(0))
-            if m == 12:
+            if mm == 12:
                 kurz -= steuer_koerperschaft(2026 + j, zj, zustand)
     alt = lang + kurz
     # VOFI-Rendite: Einlagen mit dem Habenzins nach Steuern auf den Beginn abgezinst
@@ -197,34 +228,47 @@ def ankauf_basisfall():
     nenner = sum(v * w[u] for u, v in einlagen.items()) / w[0]
     rendite = (endwert / nenner) ** (D(1) / n) - 1
     return dict(darlehen=darlehen, eigenkapital=ek, endwert=endwert, alternative=alt, rendite=rendite,
-                nachschuss=sum(v for u, v in einlagen.items() if u > 0), reinertrag=reinertrag1)
+                nachschuss=sum(v for u, v in einlagen.items() if u > 0), reinertrag=reinertrag1, verkaufspreis=vk)
 
 
-def alle():
-    from rf_rahmen import fall, pruefe, pruefe_gleich, FEST
+def alle(ausgabe=print):
+    """Rechnet die vier Faelle und vergleicht mit den festgeschriebenen Werten. Rueckgabe: Liste von
+    (Kennung, Name, bestanden, Ist, Soll, Toleranz)."""
+    datei = os.path.join(os.path.dirname(os.path.abspath(__file__)), "erwartete_werte.json")
+    fest = json.load(open(datei, encoding="utf-8"))
+    k = "RF-15"
+    erg = []
 
-    def fest(schluessel):
-        return FEST.get(schluessel, "0")
+    def pruefe(name, ist, soll, toleranz="0"):
+        ok = soll is not None and abs(ist - D(str(soll))) <= D(toleranz)
+        erg.append((k, name, ok, ist, soll, D(toleranz)))
+        ausgabe(f"  {'ok ' if ok else 'ABW'} {name:<62} Ist {ist:>22.4f}  Soll {str(soll):>18}  Tol. {toleranz}")
 
-    k = fall("RF-15", "Gegenrechnung ohne die Module des Referenzrechners (gegenrechnung.py)")
-    ew, alt, rest = testfall_monat()
-    pruefe(k, "Testfall im Monatsraster: Endwert", ew, fest("RF-06|Monatsraster nach Kapitel 2 (Kontenzins effektiv, Rundung je Zahlung): Endwert"), "0")
-    pruefe(k, "Testfall im Monatsraster: Unterlassensalternative", alt, fest("RF-06|Monatsraster nach Kapitel 2: Endwert der Unterlassensalternative"), "0")
-    pruefe(k, "Testfall im Monatsraster: Abloesung", rest, fest("RF-06|Monatsraster nach Kapitel 2: Abloesung"), "0")
-    pruefe(k, "Unterlassensalternative mit zwei Zinssaetzen (3 % und 2 %)", alternative_zwei_saetze(), "443192.58")
+    ausgabe(f"\n{k}  Gegenrechnung ohne die Module des Referenzrechners (gegenrechnung.py)")
+    ew, alt, rest, steuer1, guth1 = testfall_monat()
+    pruefe("Testfall im Monatsraster: Endwert", ew, fest.get("RF-06|Monatsraster nach Kapitel 2 (Kontenzins effektiv, Rundung je Zahlung): Endwert"))
+    pruefe("Testfall im Monatsraster: Endwert wie in der Rechnung des Finanzmathematikers (Pruefrunde 1)", ew, "585918.65")
+    pruefe("Testfall im Monatsraster: Steuer im ersten Jahr", steuer1, "2933.48")
+    pruefe("Testfall im Monatsraster: Guthaben am Ende des ersten Jahres", guth1, "10185.23")
+    pruefe("Testfall im Monatsraster: Unterlassensalternative", alt, fest.get("RF-06|Monatsraster nach Kapitel 2: Endwert der Unterlassensalternative"))
+    pruefe("Testfall im Monatsraster: Abloesung", rest, fest.get("RF-06|Monatsraster nach Kapitel 2: Abloesung"))
+    pruefe("Unterlassensalternative mit zwei Zinssaetzen (3 % und 2 %)", alternative_zwei_saetze(), "443192.58", "0.005")
     for vortrag, name in ((True, "Vortrag im Vorhaben (Voreinstellung MA-016)"), (False, "sofortige Verrechnung (andere Lesart)")):
         ew, steuern, vv = anlaufverlust(vortrag)
-        pruefe(k, f"Anlaufverlust, {name}: Endwert", ew, fest(f"RF-10|Anlaufverlust, {name}: Endwert"), "0")
+        pruefe(f"Anlaufverlust, {name}: Endwert", ew, fest.get(f"RF-10|Anlaufverlust, {name}: Endwert"))
     e = ankauf_basisfall()
-    pruefe(k, "Ankauf Basisfall: Reinertrag im ersten Jahr", e["reinertrag"], fest("RF-11|Basisfall: Reinertrag im ersten Jahr"), "0")
-    pruefe(k, "Ankauf Basisfall: Bankdarlehen", e["darlehen"], fest("RF-11|Basisfall: Bankdarlehen"), "0")
-    pruefe(k, "Ankauf Basisfall: Nachschussbedarf", e["nachschuss"], fest("RF-11|Basisfall: Nachschussbedarf nach der Investitionsphase"), "0")
-    pruefe(k, "Ankauf Basisfall: Endwert", e["endwert"], fest("RF-11|Basisfall: Endwert"), "0")
-    pruefe(k, "Ankauf Basisfall: Endwert der Unterlassensalternative", e["alternative"], fest("RF-11|Basisfall: Endwert der Unterlassensalternative"), "0")
-    pruefe(k, "Ankauf Basisfall: VOFI-Rendite (%)", e["rendite"] * 100, fest("RF-11|Basisfall: VOFI-Rendite (%)"), "0.0005", 3)
+    pruefe("Ankauf Basisfall: Reinertrag im ersten Jahr", e["reinertrag"], fest.get("RF-11|Basisfall: Reinertrag im ersten Jahr"))
+    pruefe("Ankauf Basisfall: Bankdarlehen", e["darlehen"], fest.get("RF-11|Basisfall: Bankdarlehen"))
+    pruefe("Ankauf Basisfall: Verkaufspreis", e["verkaufspreis"], fest.get("RF-11|Basisfall: Verkaufspreis"))
+    pruefe("Ankauf Basisfall: laufender Nachschussbedarf", e["nachschuss"], fest.get("RF-11|Basisfall: laufender Nachschussbedarf nach der Investitionsphase"))
+    pruefe("Ankauf Basisfall: Endwert", e["endwert"], fest.get("RF-11|Basisfall: Endwert"))
+    pruefe("Ankauf Basisfall: Endwert der Unterlassensalternative", e["alternative"], fest.get("RF-11|Basisfall: Endwert der Unterlassensalternative"))
+    pruefe("Ankauf Basisfall: VOFI-Rendite (%)", e["rendite"] * 100, fest.get("RF-11|Basisfall: VOFI-Rendite (%)"), "0.0005")
+    return erg
 
 
 if __name__ == "__main__":
-    import rf_rahmen
-    alle()
-    raise SystemExit(rf_rahmen.zusammenfassung())
+    ergebnis = alle()
+    abw = [x for x in ergebnis if not x[2]]
+    print(f"\nGegenrechnung: {len(ergebnis)} Pruefungen; {len(ergebnis) - len(abw)} bestanden, {len(abw)} abweichend.")
+    raise SystemExit(0 if not abw else 1)

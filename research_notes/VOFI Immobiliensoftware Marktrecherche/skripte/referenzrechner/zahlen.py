@@ -50,9 +50,11 @@ def ab_cent(x):
     return x.quantize(CENT, ROUND_FLOOR)
 
 
-def ab_hundert(x):
-    """Abrunden auf volle 100 Euro (Gewerbeertrag, GEWSTG-11)."""
-    return (x / 100).to_integral_value(ROUND_FLOOR) * 100
+def abrunden_auf(x, schritt):
+    """Abrunden auf ein Vielfaches von 'schritt' (Gewerbeertrag, GEWSTG-11; der Schritt ist Katalogwert)."""
+    if not schritt:
+        return x
+    return (x / schritt).to_integral_value(ROUND_FLOOR) * schritt
 
 
 def kaufm(x, stellen="0.01"):
@@ -82,4 +84,4 @@ def de(x, nd=2):
 
 
 def proz(x, nd=3):
-    return "n. def." if x is None else de(x * 100, nd) + " %"
+    return "n. def." if x is None else de(d(x).scaleb(2), nd) + " %"

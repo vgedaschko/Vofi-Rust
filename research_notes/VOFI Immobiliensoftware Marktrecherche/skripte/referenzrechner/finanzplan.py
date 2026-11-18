@@ -1,5 +1,7 @@
 """Kapitel 4 und 9 der Fachspezifikation: Finanzplan der Investition und der Unterlassensalternative.
 
+Jede Zeile des Finanzplans hat eine stabile Zeilenkennung (R-4.1, ZEILEN).
+
 Rechenreihenfolge je Periode nach R-4.3 (Schritte 1 bis 10). Zinsen und Steuern einer Periode haengen
 nur von Bestaenden der Vorperiode und von Zahlungen der laufenden Periode ab; es gibt keinen Zirkelbezug.
 """
@@ -8,7 +10,25 @@ from decimal import Decimal as D
 from typing import List, Optional
 from zahlen import NULL, EINS, d, Rundung, periodensatz_konform
 from zeit import Raster
-from steuer import Steuer, Steuerparameter
+from steuer import Steuer, Steuerparameter, PRIVAT
+
+# R-4.1: stabile Zeilenkennungen (Schluessel des Referenzrechners -> Kennung, Bezeichnung)
+ZEILEN = {
+    "investition": ("Z-A1", "Investition"), "miete": ("Z-A2", "Miete"), "kosten": ("Z-A3", "Bewirtschaftung"),
+    "erhaltung": ("Z-A4", "Erhaltung"), "zuschuss": ("Z-A5", "Zuschuss"), "verkauf": ("Z-A6", "Verkauf"),
+    "foerder_rueck": ("Z-A7", "Rueckzahlung von Foerdermitteln"),
+    "einlage": ("Z-B1", "Einlage"), "entnahme": ("Z-B2", "Entnahme"), "nachschuss": ("Z-B3", "Nachschuss"),
+    "auszahlung": ("Z-B4", "Darlehen: Auszahlung"), "einbehalt": ("Z-B5", "Darlehen: einbehaltener Betrag"),
+    "zins": ("Z-B6", "Darlehen: Zins"), "tilgung": ("Z-B7", "Darlehen: Tilgung"),
+    "beitrag": ("Z-B8", "Darlehen: laufender Beitrag"), "bereit": ("Z-B9", "Darlehen: Bereitstellungszins"),
+    "abloesung": ("Z-B10", "Darlehen: Abloesung"), "vfe": ("Z-B11", "Vorfaelligkeit"),
+    "zuschuss_einbehalt": ("Z-B12", "einbehaltenes Entgelt auf Zuschuesse"),
+    "anlage": ("Z-B13", "Geldanlage: Anlage und Aufloesung"), "habenzins": ("Z-B14", "Geldanlage: Habenzins"),
+    "kk_aufnahme": ("Z-B15", "Kontokorrent: Aufnahme und Rueckfuehrung"), "kkzins": ("Z-B16", "Kontokorrent: Zins"),
+    "steuer": ("Z-B17", "Steuer"), "fin_saldo": ("Z-S", "Finanzierungssaldo"),
+    "guthaben": ("Z-C1", "Guthaben"), "kk": ("Z-C2", "Kontokorrent"), "restschuld": ("Z-C3", "Restschuld"),
+    "bestandssaldo": ("Z-C4", "Bestandssaldo"), "afa": ("Z-N1", "Abschreibung"), "e_op": ("Z-N2", "operatives Ergebnis"),
+}
 
 
 @dataclass
@@ -47,6 +67,15 @@ class PlanEingabe:
     zuschuss_einbehalt: Optional[List[D]] = None
     verkauf: Optional[Verkauf] = None
     vfe_satz: D = NULL              # Vorfaelligkeitssatz je Jahr Restbindung (R-5.16)
+    steuer_einbehalt: Optional[List[D]] = None  # steuerlich abziehbarer Teil der einbehaltenen Betraege je Periode
+                                                # (R-7.15: im Betriebsvermoegen ueber die Zinsbindung verteilt);
+                                                # None = im Jahr der Zahlung
+    steuer_ertrag: Optional[List[D]] = None     # steuerpflichtiger Ertrag aus einem Zuschuss (MA-031)
+    rueckzahlung_im_gewinn: bool = True         # R-7.4: die Rueckzahlung von Foerdermitteln mindert den Verkaufsgewinn
+    pacht: Optional[List[D]] = None             # Erbbauzins je Periode (in 'kosten' enthalten), fuer GEWSTG-8
+    anschaffung: Optional[D] = None             # aktivierte Kosten einschliesslich Boden nach Zuschussminderung;
+                                                # Grundlage der Abschreibungsprobe P-08 und der Steuerprobe P-15
+    afa_grundlage: Optional[D] = None           # Abschreibungsgrundlage (Gebaeude und aktivierte Massnahmen)
     rundung: Rundung = field(default_factory=Rundung)
 
 
@@ -81,7 +110,11 @@ def rechne_plan(e: PlanEingabe) -> Plan:
     satz_h = periodensatz_konform(e.h_kurz, p, rd)
     satz_kk = periodensatz_konform(e.kk_zins, p, rd)
     guth = kk = NULL
-    e_op_jahr = z_h_jahr = NULL
+    e_op_jahr = z_h_jahr = entgelte_jahr = pacht_jahr = NULL
+    st_einb = e.steuer_einbehalt
+    st_ertrag = e.steuer_ertrag or _null(N)
+    pacht = e.pacht or _null(N)
+    privat = e.steuer.status == PRIVAT
 
     for u in range(N + 1):
         letzte = u == N and N >= 1
@@ -103,8 +136,8 @@ def rechne_plan(e: PlanEingabe) -> Plan:
                 aus = tr.auszahlung.get(u, NULL)
                 einb = tr.einbehalt if (u == tr._erste_auszahlung and u in tr.auszahlung) else NULL
                 z["tranchen"][tr.name] = dict(auszahlung=aus, einbehalt=einb, zins=vorab, tilgung=NULL,
-                                              beitrag=beitr, tilgungszuschuss=NULL, abloesung=NULL,
-                                              rest_vor=tr.rest)
+                                              beitrag=beitr, tilgungszuschuss=NULL, abloesung=NULL, bereit=NULL,
+                                              satz=NULL if u == 0 else tr.zins_der_periode(u), rest_vor=tr.rest)
             else:
                 rest_vor = tr.rest
                 tz = tr.periode(u, p, rd, letzte=letzte)
@@ -113,35 +146,49 @@ def rechne_plan(e: PlanEingabe) -> Plan:
         # Schritt 3: Zinsen auf die Bestaende der Vorperiode
         z["habenzins"] = rd.geld(guth * satz_h) if u >= 1 else NULL
         z["kkzins"] = rd.geld(kk * satz_kk) if u >= 1 else NULL
+        z["satz_h"], z["satz_kk"] = satz_h, satz_kk
         # Schritt 4: Vorfaelligkeitsentschaedigung bei Abloesung in der Zinsbindung (R-5.16)
         z["vfe"] = NULL
         if letzte and e.vfe_satz:
             for tr in e.tranchen:
-                if tr.vfe_pflichtig and tr.bindung is not None and tr.bindung > N:
+                # Restbindung bis zum Ende der Zinsbindung, hoechstens bis zum fruehesten Kuendigungstermin
+                # (BGB-489); keine Entschaedigung fuer Foerderdarlehen
+                if not tr.foerder and tr.vfe_bis is not None and tr.vfe_bis > N:
                     basis = z["tranchen"][tr.name]["abloesung"] if tr.art != "frei" else tr.rest
-                    z["vfe"] += rd.geld(basis * e.vfe_satz * D(tr.bindung - N) / p)
+                    z["vfe"] += rd.geld(basis * e.vfe_satz * D(tr.vfe_bis - N) / p)
 
         def summe(k):
             return sum(t[k] for t in z["tranchen"].values())
 
         # Schritt 5: steuerliche Nebenrechnung; Zahlung am Ende des Planjahres (R-2.7)
         z["afa"] = e.afa[u]
-        sollzins, beitrag = summe("zins"), summe("beitrag")
+        sollzins, beitrag, bereit = summe("zins"), summe("beitrag"), summe("bereit")
         einbehalt = summe("einbehalt")
-        z["e_op"] = (z["miete"] - z["kosten"] - z["erhaltung"] - z["afa"] - sollzins - z["kkzins"]
-                     - beitrag - einbehalt - z["zuschuss_einbehalt"] - z["vfe"])
+        # R-7.15: einbehaltene Betraege steuerlich im Jahr der Zahlung oder verteilt; R-7.11: die Vorfaelligkeit
+        # der Privatperson gehoert zum Verkauf
+        z["einbehalt_steuer"] = (einbehalt + z["zuschuss_einbehalt"]) if st_einb is None else st_einb[u]
+        z["steuer_ertrag"] = st_ertrag[u]
+        vfe_op = NULL if privat else z["vfe"]
+        z["entgelte"] = sollzins + z["kkzins"] + beitrag + bereit + z["einbehalt_steuer"] + vfe_op
+        z["e_op"] = z["miete"] - z["kosten"] - z["erhaltung"] - z["afa"] - z["entgelte"] + z["steuer_ertrag"]
         e_op_jahr += z["e_op"]
         z_h_jahr += z["habenzins"]
+        entgelte_jahr += z["entgelte"]
+        pacht_jahr += pacht[u]
         z["steuer"] = NULL
         z["g_v"] = NULL
+        z["vfe_verkauf"] = z["vfe"] if privat else NULL
         if r.jahresende(u):
             if letzte and e.verkauf:
-                z["g_v"] = e.verkauf.erloes - e.verkauf.buchwert - e.verkauf.foerder_rueckzahlung
-            z["steuer"] = steuer.jahr(r.planjahr(u), e_op_jahr, z_h_jahr, z["g_v"])
-            e_op_jahr = z_h_jahr = NULL
+                z["g_v"] = e.verkauf.erloes - e.verkauf.buchwert
+                if e.rueckzahlung_im_gewinn:
+                    z["g_v"] -= e.verkauf.foerder_rueckzahlung
+            z["steuer"] = steuer.jahr(r.planjahr(u), e_op_jahr, z_h_jahr, z["g_v"], entgelte_jahr, pacht_jahr,
+                                      z["vfe_verkauf"])
+            e_op_jahr = z_h_jahr = entgelte_jahr = pacht_jahr = NULL
         # Schritt 6: vorlaeufiger Saldo ohne freie Tilgung und ohne Eigenkapitalbewegungen
         vorlaeufig = (z["originaer"] + summe("auszahlung") - einbehalt - z["zuschuss_einbehalt"]
-                      - sollzins - beitrag - summe("tilgung") - summe("abloesung") - z["vfe"]
+                      - sollzins - beitrag - bereit - summe("tilgung") - summe("abloesung") - z["vfe"]
                       + z["habenzins"] - z["kkzins"] - z["steuer"])
         # Schritt 7: freie Tilgung aus der verfuegbaren Liquiditaet (R-5.7)
         for tr in freie:
@@ -151,7 +198,7 @@ def rechne_plan(e: PlanEingabe) -> Plan:
             tz["rest_vor"] = rest_vor
             z["tranchen"][tr.name] = tz
             vorlaeufig -= tz["tilgung"] + tz["abloesung"]
-        for k in ("auszahlung", "einbehalt", "zins", "tilgung", "beitrag", "tilgungszuschuss", "abloesung"):
+        for k in ("auszahlung", "einbehalt", "zins", "tilgung", "beitrag", "tilgungszuschuss", "abloesung", "bereit"):
             z[k] = summe(k)
         # Schritt 8: Eigenkapital
         einlage, entnahme = e.einlagen[u], e.entnahmen[u]
@@ -177,6 +224,7 @@ def rechne_plan(e: PlanEingabe) -> Plan:
         for tr in e.tranchen:
             z["tranchen"][tr.name]["rest"] = tr.rest
         z["bestandssaldo"] = guth - kk - z["restschuld"]
+        z["guthaben_vor"], z["kk_vor"] = guth - z["anlage"], kk - z["kk_aufnahme"]
         # Saldierung der Eigenkapitalbewegungen je Periode (R-10.3)
         ek = einlage + nachschuss - entnahme
         plan.einlagen_netto.append(max(ek, NULL))
@@ -208,7 +256,8 @@ def rechne_alternative(e: PlanEingabe, einlagen, entnahmen) -> Alternative:
     r, rd = e.raster, e.rundung
     N, p = r.N, r.p
     alt = Alternative()
-    steuer = alt.steuer = Steuer(e.steuer, r, rd)
+    steuer = alt.steuer = Steuer(e.steuer, r, rd, alternative=True)
+    privat = e.steuer.status == PRIVAT      # R-9.5 (ESTG-20): Kontokorrentzinsen der Privatperson nicht abziehbar
     a_lang = e.h_kurz if e.a_lang is None else e.a_lang
     s_lang = periodensatz_konform(a_lang, p, rd)
     s_kurz = periodensatz_konform(e.h_kurz, p, rd)
@@ -224,7 +273,8 @@ def rechne_alternative(e: PlanEingabe, einlagen, entnahmen) -> Alternative:
         kkz_jahr += z["kkzins"]
         z["steuer"] = NULL
         if r.jahresende(u):
-            z["steuer"] = steuer.jahr(r.planjahr(u), -kkz_jahr, zinsen_jahr, NULL)
+            z["steuer"] = steuer.jahr(r.planjahr(u), NULL if privat else -kkz_jahr, zinsen_jahr, NULL,
+                                      NULL if privat else kkz_jahr)
             zinsen_jahr = kkz_jahr = NULL
         # Einlage: zuerst Kontokorrent zurueckfuehren, der Rest in die langfristige Anlage
         einl = einlagen[u]
@@ -240,6 +290,7 @@ def rechne_alternative(e: PlanEingabe, einlagen, entnahmen) -> Alternative:
             lang -= aus_lang
             kurz, kk = NULL, fehl - aus_lang
         z["lang"], z["kurz"], z["kk"] = lang, kurz, kk
+        z["satz_lang"], z["satz_kurz"], z["satz_kk"] = s_lang, s_kurz, s_kk
         alt.zeilen.append(z)
     alt.endwert = lang + kurz - kk
     return alt
@@ -249,8 +300,9 @@ def rechne_alternative(e: PlanEingabe, einlagen, entnahmen) -> Alternative:
 def verdichte(plan: Plan):
     """R-2.3: Jahresdarstellung. Zahlungen werden je Planjahr summiert, Bestaende sind der Stand am Jahresende."""
     r = plan.e.raster
-    fluss = ("miete", "kosten", "erhaltung", "investition", "zuschuss", "verkauf", "originaer", "auszahlung",
-             "zins", "tilgung", "beitrag", "abloesung", "vfe", "habenzins", "kkzins", "steuer", "afa",
+    fluss = ("miete", "kosten", "erhaltung", "investition", "zuschuss", "verkauf", "foerder_rueck", "originaer",
+             "auszahlung", "einbehalt", "zuschuss_einbehalt", "zins", "tilgung", "beitrag", "bereit",
+             "tilgungszuschuss", "abloesung", "vfe", "habenzins", "kkzins", "steuer", "afa", "e_op",
              "einlage", "entnahme", "nachschuss", "anlage", "kk_aufnahme", "fin_saldo")
     bestand = ("guthaben", "kk", "restschuld", "bestandssaldo")
     jahre = [dict(jahr=0, **{k: plan.zeilen[0][k] for k in fluss + bestand})]
@@ -281,7 +333,7 @@ def lehrbuchansicht(plan: Plan):
             direkte_zahlungen=z[t]["originaer"],
             eigenkapital=z[t]["einlage"] + z[t]["nachschuss"] - z[t]["entnahme"],
             kreditaufnahme=z[t]["auszahlung"] - z[t]["einbehalt"] - z[t]["zuschuss_einbehalt"],
-            zinsen_fk=-(z[t]["zins"] + z[t]["beitrag"] + z[t]["vfe"]),
+            zinsen_fk=-(z[t]["zins"] + z[t]["beitrag"] + z[t]["bereit"] + z[t]["vfe"]),
             tilgung=-(z[t]["tilgung"] + z[t]["abloesung"]),
             steuerzahlung=-z[t]["steuer"],
             rueckzahlung_reinvestition=v["guthaben"] if v else NULL,

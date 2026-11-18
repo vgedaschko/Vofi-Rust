@@ -899,10 +899,10 @@ fundstelle = "https://www.gesetze-im-internet.de/gewstg/__9.html"
 stand = "Fassung 29.06.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Erweiterte Kürzung mit Unschädlichkeitsgrenzen 20 % (Strom) und 5 % (sonstige Mieterleistungen)"]
+verwendet_fuer = ["Erweiterte Kürzung mit Unschädlichkeitsgrenzen 20 % (Strom) und 5 % (sonstige Mieterleistungen)", "Reichweite der erweiterten Kürzung in der Steuer in Kurzform: nur der Teil des Gewerbeertrags aus Verwaltung und Nutzung des eigenen Grundbesitzes (Fachspezifikation R-7.8, MA-030)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen nur Nr. 1. Bezugsgröße der Grenzen sind die Einnahmen aus der Gebrauchsüberlassung des Grundbesitzes."
+bemerkung = "Gelesen nur Nr. 1. Bezugsgröße der Grenzen sind die Einnahmen aus der Gebrauchsüberlassung des Grundbesitzes. Prüfrunde 1 der Fachspezifikation (Steuerberater, Satz 1 bis 6): Satz 2 kürzt auf Antrag um den Teil des Gewerbeertrags, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt, und nennt als Berechtigte Unternehmen, die ausschließlich eigenen Grundbesitz verwalten und nutzen; Zinserträge aus Kapitalvermögen sind nicht gekürzt. Ob der Gewinn aus dem Verkauf des Objekts zum gekürzten Teil gehört, sagt der Wortlaut nicht (MA-030, Frage an den Steuerberater). Satz 1 (einfache Kürzung) lautet in der gelesenen Fassung auf die im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens, nicht mehr auf einen Prozentsatz des Grundsteuerwerts (siehe GEWSTG-36)."
 
 [[quelle]]
 id = "GEWSTG-10A"
@@ -914,7 +914,7 @@ fundstelle = "https://www.gesetze-im-internet.de/gewstg/__10a.html"
 stand = "Fassung 29.06.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Gewerbesteuerlicher Verlustvortrag (Sockel 1 Mio. €, darüber 60 %)"]
+verwendet_fuer = ["Gewerbesteuerlicher Verlustvortrag (Sockel 1 Mio. €, darüber 60 %)", "Fehlbetrag der Personengesellschaft wird vorgetragen, auch bei sofortiger Verlustverrechnung der Einkommensteuer (Fachspezifikation R-7.6)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
 bemerkung = ""
@@ -962,7 +962,7 @@ gelesen_am = "2026-11-18"
 verwendet_fuer = ["Anwendungsbeginn Mindesthebesatz 280 % (Abs. 5b)", "Einfache Grundbesitzkürzung ab 2025 (Abs. 4b)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = ""
+bemerkung = "Notiz in der Überarbeitung nach Prüfrunde 1 der Fachspezifikation am Wortlaut geprüft: Abs. 4b Satz 1 bestimmt, dass § 9 Nr. 1 Satz 1 in der Fassung des Gesetzes vom 2. Dezember 2024 erstmals für den Erhebungszeitraum 2025 anzuwenden ist. Diese Fassung kürzt um die als Betriebsausgabe erfasste Grundsteuer (GEWSTG-9), nicht um einen Prozentsatz des Grundsteuerwerts. Der Verwendungszweck „einfache Grundbesitzkürzung ab 2025“ bleibt richtig; wer die einfache Kürzung rechnet, braucht dafür die Grundsteuer des Objekts. Die Steuer in Kurzform rechnet sie nicht."
 
 [[quelle]]
 id = "AO-52"
@@ -3351,3 +3351,137 @@ turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
 bemerkung = "Vom Auftraggeber als PDF bereitgestellt (52 Seiten), vollständig gelesen; Auswertung in Quellnotiz 11, Nachbau der Musterrechnungen in skripte/schulte_musterrechnung.py. Die Abschnitte 1 bis 3 des Kapitels und die Titelei liegen nicht vor. Die PDF liegt nicht im Repository. Nicht im Kapitel: Rechenregel der Amortisationsdauer, Abgrenzung der Sollzinsen der Gesamtkapitalrentabilität, Renditeformel bei mehreren Einlagen und Entnahmen."
 
+[[quelle]]
+id = "BGB-489"
+gruppe = "gesetz"
+kurz = "§ 489 BGB"
+titel = "Ordentliches Kündigungsrecht des Darlehensnehmers"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__489.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Obergrenze der Restbindung bei der Vorfälligkeitsentschädigung: Kündigungsrecht nach zehn Jahren ab vollständigem Empfang mit sechs Monaten Frist (Abs. 1 Nr. 2; Fachspezifikation R-5.16, Katalogwert KAT-13)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation von den Rollen Bank und Fachexperte (Abs. 1 Nr. 2). Wird nach dem Empfang eine neue Vereinbarung über Rückzahlung oder Sollzins getroffen, zählt die Frist ab dieser Vereinbarung; das Kündigungsrecht kann vertraglich nicht ausgeschlossen werden (Abs. 4, mit Ausnahme für Darlehen an Gebietskörperschaften). Stand wie bei den übrigen Einträgen zum BGB nach der Gesamtausgabe."
+
+[[quelle]]
+id = "BGB-490"
+gruppe = "gesetz"
+kurz = "§ 490 BGB"
+titel = "Außerordentliches Kündigungsrecht; Vorfälligkeitsentschädigung (Abs. 2)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__490.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Vorzeitige Kündigung eines grundpfandrechtlich gesicherten Festzinsdarlehens beim Verkauf und Ersatz des Schadens der Bank (Abs. 2; Fachspezifikation R-5.16, MA-033)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation von der Rolle Bank (Abs. 2). Das Gesetz nennt den Anspruch, nicht die Berechnung; die Zinsschadenrechnung ist Rechtsprechung und Bankpraxis und nicht geprüft. Das Werkzeug rechnet bis zur Vollkalkulation eine Pauschale (MA-033). Stand wie bei den übrigen Einträgen zum BGB nach der Gesamtausgabe."
+
+[[quelle]]
+id = "ESTG-5"
+gruppe = "gesetz"
+kurz = "§ 5 EStG"
+titel = "Gewinn bei Kaufleuten; Rechnungsabgrenzungsposten (Abs. 5)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__5.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Verteilung laufzeitbezogener Finanzierungsentgelte (Disagio, Bearbeitungsentgelt) im Betriebsvermögen über die Laufzeit (Fachspezifikation R-7.15, MA-032)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation vom Steuerberater (Abs. 5). Abs. 5 Satz 2 lässt den Ansatz bei Beträgen bis zur Grenze des § 6 Abs. 2 Satz 1 wahlweise entfallen; die Steuer in Kurzform nutzt das Wahlrecht nicht. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+
+[[quelle]]
+id = "ESTG-11"
+gruppe = "gesetz"
+kurz = "§ 11 EStG"
+titel = "Zufluss und Abfluss von Einnahmen und Ausgaben"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__11.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abzug von Finanzierungskosten der Privatperson im Jahr der Zahlung; marktübliches Disagio (Abs. 2; Fachspezifikation R-7.15, MA-032)", "Zufluss des Zuschusses bei der Privatperson (Fachspezifikation R-7.19, MA-031)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation vom Steuerberater (ganz). Abs. 2 Satz 3 verteilt Vorauszahlungen für eine Nutzungsüberlassung von mehr als fünf Jahren; Satz 4 nimmt ein marktübliches Damnum oder Disagio davon aus. Wann ein Disagio marktüblich ist, regelt die Verwaltung und ist nicht geprüft. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+
+[[quelle]]
+id = "ESTG-20"
+gruppe = "gesetz"
+kurz = "§ 20 EStG"
+titel = "Einkünfte aus Kapitalvermögen; Subsidiarität (Abs. 8), Sparer-Pauschbetrag und Ausschluss der Werbungskosten (Abs. 9)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__20.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Privatperson: Zinserträge der Geldanlage und der Unterlassensalternative als eigener Topf; Kontokorrentzinsen mindern die Steuer auf Zinserträge nicht (Fachspezifikation R-7.10, R-9.5)", "Betriebsvermögen: Zinserträge gehören zu den betrieblichen Einkünften (Abs. 8)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation vom Steuerberater (Abs. 8 und 9). Den Sparer-Pauschbetrag setzt die Steuer in Kurzform nicht an; das ist die vorsichtige Lesart. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+
+[[quelle]]
+id = "ESTG-32D"
+gruppe = "gesetz"
+kurz = "§ 32d EStG"
+titel = "Gesonderter Steuertarif für Einkünfte aus Kapitalvermögen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__32d.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Steuersatz auf Zinserträge der Privatperson (Katalogwert KAT-18; Fachspezifikation R-7.10, R-7.14)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation vom Steuerberater (Abs. 1). Der Satz gilt nur für Kapitalerträge, die nicht nach § 20 Abs. 8 zu anderen Einkünften gehören. Günstigerprüfung (Abs. 6) und Kirchensteuer rechnet die Steuer in Kurzform nicht. Zuschlag nach SOLZG-4. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+
+[[quelle]]
+id = "ESTG-51A"
+gruppe = "gesetz"
+kurz = "§ 51a EStG"
+titel = "Festsetzung und Erhebung von Zuschlagsteuern"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__51a.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Bemessung der Zuschlagsteuern ohne die Ermäßigung nach § 35 EStG (Abs. 2 Satz 3); Grenze der Vereinfachung, den Steuersatz E-42 einschließlich Zuschlagsteuern einzugeben (Fachspezifikation R-7.9)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation vom Steuerberater (Abs. 2 Satz 3). Folge für die Steuer in Kurzform: Die Anrechnung der Gewerbesteuer mindert die Einkommensteuer, nicht die Bemessung der Zuschlagsteuern; der eingegebene Satz einschließlich Zuschlagsteuern ist deshalb eine Näherung. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+
+[[quelle]]
+id = "GEWSTG-2"
+gruppe = "gesetz"
+kurz = "§ 2 GewStG"
+titel = "Steuergegenstand"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__2.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abgrenzung der Steuerstatus: Kapitalgesellschaften und Genossenschaften stets Gewerbebetrieb (Abs. 2); sonstige juristische Personen des privaten Rechts und nichtrechtsfähige Vereine nur mit wirtschaftlichem Geschäftsbetrieb (Abs. 3) – Steuerstatus „Körperschaft ohne Gewerbesteuer“ (Fachspezifikation R-7.1, R-7.17)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 1 der Fachspezifikation vom Steuerberater (Abs. 2 und 3). Ob die Vermietung eines Vereins oder einer Stiftung Vermögensverwaltung oder wirtschaftlicher Geschäftsbetrieb ist, entscheidet der Einzelfall; das Werkzeug übernimmt den Status als Eingabe. Stand wie bei den übrigen Einträgen zum GewStG nach der Gesamtausgabe."
+
+[[quelle]]
+id = "GEWSTG-3"
+gruppe = "gesetz"
+kurz = "§ 3 GewStG"
+titel = "Befreiungen (Nr. 15: Vermietungsgenossenschaften und -vereine)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__3.html"
+stand = "Fassung 29.06.2026"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Gewerbesteuerbefreiung der nach KSTG-5 befreiten Genossenschaften und Vereine (Steuerstatus „befreite Körperschaft“; Fachspezifikation R-7.12)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "In Prüfrunde 1 der Fachspezifikation hat der Steuerberater Nr. 15 aufgerufen, aber nicht ausgewertet; deshalb als nicht geprüft geführt. Bei der Überarbeitung am 2026-11-18 wurde der Wortlaut der Nr. 15 abgerufen: Die Befreiung knüpft an die Befreiung von der Körperschaftsteuer nach § 5 Abs. 1 Nr. 10 KStG an (soweit). Als gelesen wird die Norm mit der nächsten protokollierten Prüfung eingetragen. Stand wie bei den übrigen Einträgen zum GewStG nach der Gesamtausgabe."

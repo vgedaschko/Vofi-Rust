@@ -4,7 +4,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/modellannahmen/annahmen.toml`; danach `python3 scripts/modellannahmen.py` ausführen.
 
-**Stand:** 29 offene Annahmen, davon 6 mit hohem Gewicht · 0 erledigt
+**Stand:** 37 offene Annahmen, davon 8 mit hohem Gewicht · 0 erledigt
 
 ## Offene Annahmen
 
@@ -15,7 +15,9 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-012` | Rendite bei mehreren Einlagen und Entnahmen | hoch | Kundenbericht | nein | Fachliteratur: Ropeter (1998), S. 186 ff. (`ROPETER-1998`); fachliche Freigabe durch den Auftraggeber | mit der Fachspezifikation des Rechenkerns (Phase 1) |
 | `MA-014` | Streuungen und Korrelationen der Simulation | hoch | Kundenbericht | ja | Auftraggeber (eigene Erfahrungswerte); später Marktdaten | vor Stufe 2 (Simulation) |
 | `MA-016` | Verrechnung von Anlaufverlusten | hoch | Kundenbericht | ja | Anwender je Vorhaben; im Zweifel Steuerberater des Investors | mit der Fachspezifikation des Steuermoduls (Phase 1) |
-| `MA-026` | Rechengrundlage des Bankdarlehens | hoch | Kundenbericht | ja | Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses | mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a |
+| `MA-026` | Rechengrundlage des Bankdarlehens | hoch | Kundenbericht | ja | Hausbank (zehn Fragen in der Fachspezifikation des Rechenkerns, Kapitel 16); die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins) sind Vorgaben des Hauses | mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a |
+| `MA-030` | Gewerbesteuer auf den Verkaufsgewinn bei erweiterter Kürzung | hoch | Kundenbericht | ja | Steuerberater des Auftraggebers | mit der Antwort des Steuerberaters; spätestens vor dem Einsatz von Teilschritt 1a |
+| `MA-031` | Steuerliche Einordnung des NBank-Zuschusses | hoch | Kundenbericht | ja | Steuerberater des Auftraggebers; zur Praxis der Bewilligung die NBank | mit der Antwort des Steuerberaters; spätestens vor dem Förderteil (1c) |
 | `MA-002` | Tilgungsplan des NBank-Darlehens | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank; im Einzelfall der Bewilligungsbescheid |
 | `MA-005` | Finanzierungskosten als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-006` | Aufteilung bei teilgeförderten Vorhaben | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
@@ -25,6 +27,10 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-022` | Leerstand beim Mieterwechsel und Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-023` | Kostenbasis der Baukostenobergrenze der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-029` | Anknüpfung der De-minimis-Bindung der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
+| `MA-032` | Finanzierungskosten und Vorfälligkeit in der Steuer | mittel | Anwendung | ja | Steuerberater des Auftraggebers | mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation) |
+| `MA-033` | Vorfälligkeitsentschädigung als Pauschale | mittel | Anwendung | nein | Hausbank | nach dem Gespräch mit der Hausbank; Zinsschadenrechnung mit der Vollkalkulation (Teil 2 der Fachspezifikation) |
+| `MA-036` | Objektverkauf der GmbH & Co. KG: laufender Gewinn oder Aufgabegewinn | mittel | Anwendung | ja | Steuerberater des Auftraggebers | mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation) |
+| `MA-037` | Kappungsspielraum bei unbekannter Mietenhistorie | mittel | Anwendung | ja | Anwender je Vorhaben (Mieterliste des Verkäufers) | mit der Mieterliste der Vollkalkulation Ankauf Bestand (1b-1) |
 | `MA-003` | Zins des NBank-Darlehens ab dem 36. Jahr | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-008` | Modernisierungsumlage für den Heizungstausch bei Staffelmiete | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-009` | Teilung der Bio-Brennstoffkosten im Neubau | gering | nur intern | nein | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
@@ -39,10 +45,14 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-025` | Modernisierungsumlage für den Glasfaseranschluss | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-027` | Rechenregel der VOFI-Amortisationsdauer | gering | Anwendung | ja | Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
 | `MA-028` | Zuzurechnende Sollzinsen in der VOFI-Gesamtkapitalrentabilität | gering | Anwendung | nein | Fachliteratur: Grob, Einführung in die Investitionsrechnung, nach `SCHULTE-IMMOBILIENINVESTITION-2025` (S. 813) dort S. 140 f. | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
+| `MA-034` | Prolongation mit unverändertem Tilgungssatz | gering | Anwendung | ja | Hausbank | nach dem Gespräch mit der Hausbank |
+| `MA-035` | CO2-Einstufung aus der Effizienzklasse | gering | Anwendung | nein | Anwender je Vorhaben (Heizkostenabrechnung des Verkäufers) | mit der Vollkalkulation Ankauf Bestand (1b-1) |
 
 Nach Klärungsweg:
 
 - **Anwalt:** `MA-007`, `MA-008`, `MA-009`, `MA-018`, `MA-019`, `MA-024`, `MA-025`
+- **Anwender je Vorhaben (Heizkostenabrechnung des Verkäufers):** `MA-035`
+- **Anwender je Vorhaben (Mieterliste des Verkäufers):** `MA-037`
 - **Anwender je Vorhaben; im Zweifel Steuerberater des Investors:** `MA-016`
 - **Auftraggeber (eigene Erfahrungswerte); später Marktdaten:** `MA-014`
 - **Darlehensvertrag im Einzelfall:** `MA-013`
@@ -50,11 +60,14 @@ Nach Klärungsweg:
 - **Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt:** `MA-027`
 - **Fachliteratur: Grob, Einführung in die Investitionsrechnung, nach `SCHULTE-IMMOBILIENINVESTITION-2025` (S. 813) dort S. 140 f.:** `MA-028`
 - **Fachliteratur: Ropeter (1998), S. 186 ff. (`ROPETER-1998`); fachliche Freigabe durch den Auftraggeber:** `MA-012`
-- **Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses:** `MA-026`
+- **Hausbank:** `MA-033`, `MA-034`
+- **Hausbank (zehn Fragen in der Fachspezifikation des Rechenkerns, Kapitel 16); die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins) sind Vorgaben des Hauses:** `MA-026`
 - **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`
 - **NBank (nur noch Bestätigung):** `MA-021`
 - **Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater:** `MA-010`
 - **Steuerberater:** `MA-011`, `MA-022`, `MA-023`, `MA-029`
+- **Steuerberater des Auftraggebers:** `MA-030`, `MA-032`, `MA-036`
+- **Steuerberater des Auftraggebers; zur Praxis der Bewilligung die NBank:** `MA-031`
 
 ## Einzelheiten
 
@@ -72,14 +85,15 @@ Nach Klärungsweg:
 
 ### MA-002 · Tilgungsplan des NBank-Darlehens
 
-- **Annahme:** Das zinslose Darlehen wird in gleichbleibenden Jahresraten so getilgt, dass es nach 42 Jahren ab Vollauszahlung zurückgezahlt ist.
+- **Annahme:** Das zinslose Darlehen wird in gleichbleibenden Raten so getilgt, dass es nach 42 Jahren zurückgezahlt ist. Die Raten fallen im Takt des Rechenrasters an, im Monatsraster also monatlich; Tilgung, zinslose Zeit und Bindung zählen ab dem Monat nach der Bauzeit.
 - **Warum offen:** Die Richtlinie nennt nur die Höchstlaufzeit; den Tilgungsplan setzt die NBank im Einzelfall fest. Ein fester Tilgungssatz steht nicht mehr in der Richtlinie.
-- **Andere Lesart:** Fester Tilgungssatz mit Restschuld am Ende oder schnellere Tilgung nach Vorgabe der NBank.
+- **Andere Lesart:** Fester Tilgungssatz mit Restschuld am Ende oder schnellere Tilgung nach Vorgabe der NBank; Jahresraten statt Monatsraten; Beginn mit der Vollauszahlung statt mit der Bezugsfertigkeit.
 - **Grundlage:** Richtlinie Mietwohnraum 2026: Rückzahlung binnen 42 Jahren. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`.
-- **Wirkung (mittel):** Liquidität und Schuldendienstdeckung je Jahr; Endwert nur gering, weil das Darlehen 35 Jahre zinslos ist.
+- **Wirkung (mittel):** Liquidität und Schuldendienstdeckung je Jahr; Endwert nur gering, weil das Darlehen 35 Jahre zinslos ist. Monatsraten statt Jahresraten ändern den Kapitaldienst des Jahres nicht, senken aber den laufenden Beitrag leicht, weil die Restschuld früher fällt. Im geförderten Neubau des Referenzfalls beträgt der Kapitaldienst des Förderdarlehens 150.431,28 Euro im ersten Jahr der Vollvermietung; er entscheidet mit darüber, dass kein Bankdarlehen bleibt.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank; im Einzelfall der Bewilligungsbescheid
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Fachspezifikation Rechenkern, R-5.11, R-11.14
+- **Bemerkung:** Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18): Annahme auf Raten im Takt des Rasters umgestellt; der frühere Wortlaut nannte Jahresraten, der Kern rechnet im Monatsraster Monatsraten. Fragen an die NBank: Jahres- oder Monatsraten, Beginn mit Vollauszahlung oder Bezugsfertigkeit, Beginn der zinslosen Zeit.
 
 ### MA-003 · Zins des NBank-Darlehens ab dem 36. Jahr
 
@@ -228,15 +242,15 @@ Nach Klärungsweg:
 
 ### MA-016 · Verrechnung von Anlaufverlusten
 
-- **Annahme:** Steuerliche Verluste des Vorhabens werden im Vorhaben vorgetragen und erst mit dessen späteren Gewinnen verrechnet.
+- **Annahme:** Steuerliche Verluste des Vorhabens werden im Vorhaben vorgetragen und erst mit dessen späteren Gewinnen verrechnet. Das Modell nimmt damit an, dass der Investor im Verlustjahr keine anderen Gewinne derselben Steuerart im selben Steuersubjekt hat, mit denen er den Verlust verrechnen könnte.
 - **Warum offen:** Ob ein Verlust sofort mit anderen Einkünften des Investors verrechnet werden kann, hängt von dessen übriger steuerlicher Lage ab, die das Werkzeug nicht kennt.
-- **Andere Lesart:** Sofortige Verrechnung mit anderen Einkünften des Investors; die Steuerersparnis fließt dann im Verlustjahr zu.
-- **Grundlage:** Verlustabzug nach § 10d EStG. Angesetzt ist der ungünstigere Fall. Quellen: `ESTG-10D`.
+- **Andere Lesart:** Sofortige Verrechnung: Der Investor hat im selben Jahr genug andere Gewinne derselben Steuerart im selben Steuersubjekt (Körperschaft oder Organkreis, Betrieb, andere Einkünfte der Privatperson); die Steuerersparnis fließt im Verlustjahr zu. Das Vorhaben gilt dann als Teil eines größeren Steuersubjekts: Freibetrag und Abrundung der Gewerbesteuer und der Freibetrag der Hinzurechnung gelten als verbraucht. Bei der Personengesellschaft gilt die Lesart nur für die Einkommensteuer; ihr Fehlbetrag der Gewerbesteuer wird immer vorgetragen.
+- **Grundlage:** Verlustabzug nach § 10d EStG; Gewerbeverlust nach § 10a GewStG. Voreingestellt ist der Vortrag, weil das Werkzeug die übrige steuerliche Lage des Investors nicht kennt. Welche Lesart das Vorhaben günstiger rechnet, hängt vom Fall ab: Meist ist es die sofortige Verrechnung; im Ankauf des Referenzfalls ergibt sie 4,523 % gegen 4,527 % mit Vortrag, weil der Freibetrag der Hinzurechnung bei ihr als verbraucht gilt. Quellen: `ESTG-10D`, `GEWSTG-10A`.
 - **Wirkung (hoch):** Wert der beschleunigten Abschreibung und der Anlaufverluste im Neubau; Endwert und Rendite nach Steuern.
 - **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Anwender je Vorhaben; im Zweifel Steuerberater des Investors · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 1, Steuerstatus
-- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte). Wird als Merkmal je Vorhaben geführt.
+- **Verwendet in:** Spezifikation Kapitel 1, Steuerstatus; Fachspezifikation Rechenkern, R-7.5, R-7.6, Eingabe E-44
+- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte). Wird als Merkmal je Vorhaben geführt. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Steuerberater): Annahme über andere Gewinne ausdrücklich genannt; bei der Personengesellschaft keine sofortige Erstattung der Gewerbesteuer. Die Kurzform verrechnet Vorträge unbeschränkt; ein Vortrag über dem Sockelbetrag löst einen Hinweis aus (MA-010).
 
 ### MA-017 · Restwert bei laufender Bindung
 
@@ -348,15 +362,15 @@ Nach Klärungsweg:
 
 ### MA-026 · Rechengrundlage des Bankdarlehens
 
-- **Annahme:** Die Bank rechnet über alle Darlehen: Die Beleihungsquote begrenzt die Summe aller Darlehen gegen den Wertansatz, und die Mindestdeckung rechnet aus dem Reinertrag im ersten Jahr der Vollvermietung gegen den Kapitaldienst aller Darlehen einschließlich eines Förderdarlehens oder übernommenen Darlehens. Wertansatz ist der Kaufpreis, beim Neubau die Gesamtkosten, nicht ein eigener Beleihungswert.
+- **Annahme:** Offen ist an der Rechnung der Bank viererlei; voreingestellt ist jeweils die vorsichtige Lesart, außer beim Wertansatz. (1) Beleihungsraum: Das Förderdarlehen der Grobförderung und ein KfW-Darlehen belegen den Beleihungsraum der Bank; für ein übernommenes Darlehen ist der Rang Eingabe. (2) Kapitaldienst: Die Bank rechnet die Kapitaldienstfähigkeit kalkulatorisch, je Darlehen mit dem höheren Zins aus Vertragszins und kalkulatorischem Zins (Vorgabe des Hauses, voreingestellt der Anschlusszins) und mindestens der Mindesttilgung. (3) Ertrag: Sie setzt den nachhaltigen Reinertrag an, den kleineren Wert aus Miete und ortsüblicher Vergleichsmiete, mit Bewirtschaftungskosten mindestens nach dem Katalog. (4) Wertansatz ist der Kaufpreis, beim Neubau die Gesamtkosten, nicht ein eigener Beleihungswert. Keine Annahme, sondern Festlegung ist, dass die Mindestdeckung immer über den Kapitaldienst aller Darlehen rechnet.
 - **Warum offen:** Wie eine Bank Kapitaldienstfähigkeit und Beleihung im Einzelfall rechnet, ist nicht veröffentlicht und von Haus zu Haus verschieden: mit welchem Ertrag, ob vorrangige und geförderte Darlehen auf Quote und Deckung angerechnet werden und auf welchen Wert.
-- **Andere Lesart:** Die Bank rechnet Beleihungsquote und Mindestdeckung nur für ihr eigenes Darlehen; dann fällt das Bankdarlehen neben einem Förderdarlehen oder übernommenen Darlehen höher aus. Oder sie setzt einen eigenen Wert an, etwa einen Beleihungswert unter dem Kaufpreis; dann fällt es niedriger aus.
-- **Grundlage:** Gegenrechnungen der Prüfrunden 4 und 5 (Finanzmathematiker, Fachexperte, Praktiker). Bei Beleihungsquote und Mindestdeckung ist der ungünstigere Fall angesetzt; die andere Lesart ist umschaltbar. Begründete Ausnahme von der Vorsichtsregel beim Wertansatz: Voreingestellt ist der Kaufpreis, beim Neubau die Gesamtkosten, obwohl ein eigener Wert der Bank darunter liegen kann. Die Grobkalkulation kennt keinen Beleihungswert; die Ausnahme wirkt höchstens bis zum Darlehen nach Mindestdeckung, das aus dem Ertrag und nicht aus dem Gebot folgt. Der Wert ist als „Wertansatz der Bank“ überschreibbar, über dem Kaufpreis nur mit Begründung, und das Blatt zeigt, welche Grenze das Darlehen bestimmt.
-- **Wirkung (hoch):** Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation. Im geförderten Neubau und beim Ankauf gebundener Bestände entscheidet die Lesart über das Eigenkapital: im Beispiel des Berichts (Anhang D.4) über bis zu 1 Mio. Euro bei 10 Mio. Euro Gesamtkosten.
-- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses · **Wiedervorlage:** mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a
+- **Andere Lesart:** (1) Das Förderdarlehen steht im Nachrang und belegt den Beleihungsraum nicht. (2) Die Bank rechnet mit den Vertragskonditionen. (3) Sie setzt Ertrag und Bewirtschaftung des Vorhabens an. Alle drei sind umschaltbar und lassen das Bankdarlehen höher ausfallen. (4) Die Bank setzt einen Beleihungswert unter dem Kaufpreis an; dann fällt das Darlehen niedriger aus.
+- **Grundlage:** Gegenrechnungen der Prüfrunden 4 und 5 zum Recherchebericht und der Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Rolle Bank). Bewirtschaftungsansatz nach der Beleihungswertermittlungsverordnung. Begründete Ausnahme von der Vorsichtsregel beim Wertansatz: Voreingestellt ist der Kaufpreis, beim Neubau die Gesamtkosten ohne Bauzeitzinsen, obwohl ein eigener Wert der Bank darunter liegen kann. Die Grobkalkulation kennt keinen Beleihungswert; die Ausnahme wirkt höchstens bis zum Darlehen nach Mindestdeckung, das aus dem Ertrag und nicht aus dem Gebot folgt. Der Wert ist als „Wertansatz der Bank“ überschreibbar, über dem Kaufpreis nur mit Begründung, und das Blatt zeigt, welche Grenze das Darlehen bestimmt. Quellen: `BELWERTV-11`.
+- **Wirkung (hoch):** Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation. Ankauf des Referenzfalls: Bankdarlehen 1.226.609,99 Euro kalkulatorisch gegen 1.431.044,99 Euro mit Vertragskonditionen; höchster tragbarer Preis 2.317.235 Euro gegen 2.359.366 Euro. Bei einer Ist-Miete über der Vergleichsmiete 1.355.969,99 Euro gegen 1.560.000,00 Euro mit dem Ertrag des Vorhabens. Neubau mit KfW-Darlehen: tragbarer Grundstückspreis 924.244 Euro gegen 1.286.380 Euro mit Vertragskonditionen. Im geförderten Neubau des Referenzfalls bleibt in jeder Lesart des Beleihungsraums kein Bankdarlehen, weil die Deckung bindet.
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Hausbank (zehn Fragen in der Fachspezifikation des Rechenkerns, Kapitel 16); die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins) sind Vorgaben des Hauses · **Wiedervorlage:** mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 2, Grobkalkulation
-- **Bemerkung:** Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Prüfrunde 5: Bezug der Beleihungsquote auf die Summe aller Darlehen festgelegt, Gewicht von mittel auf hoch gesetzt, Wertansatz als Ausnahme von der Vorsichtsregel gekennzeichnet. Weitere Frage an die Hausbank: Rechnet sie den Reinertrag der Deckung mit eigenen Bewirtschaftungspauschalen statt mit den Kosten des Vorhabens?
+- **Verwendet in:** Spezifikation Kapitel 2, Grobkalkulation; Fachspezifikation Rechenkern, R-5.12, R-5.19, R-11.14, R-11.15
+- **Bemerkung:** Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Prüfrunde 5: Bezug der Beleihungsquote auf die Summe aller Darlehen festgelegt, Gewicht von mittel auf hoch gesetzt, Wertansatz als Ausnahme von der Vorsichtsregel gekennzeichnet. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Bank und Praktiker): neu geschnitten. Die Deckung über alle Darlehen ist jetzt Festlegung; der frühere Schalter verband Beleihungsraum und Deckung. Neu als vorsichtige Voreinstellung: kalkulatorischer Kapitaldienst und nachhaltiger Reinertrag; der Entwurf rechnete mit Vertragszins und dem Ertrag des Vorhabens.
 
 ### MA-027 · Rechenregel der VOFI-Amortisationsdauer
 
@@ -393,3 +407,99 @@ Nach Klärungsweg:
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Aus Prüfrunde 5 (Jurist, Befund 1; Sichtung, Punkt 12).
+
+### MA-030 · Gewerbesteuer auf den Verkaufsgewinn bei erweiterter Kürzung
+
+- **Annahme:** Bei gesetztem Kennzeichen „erweiterte Grundstückskürzung“ unterliegt der Gewinn aus dem Verkauf des Objekts der Gewerbesteuer. Gekürzt wird nur der laufende Ertrag aus Verwaltung und Nutzung des Grundbesitzes.
+- **Warum offen:** Das Gesetz kürzt um den Teil des Gewerbeertrags, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt. Ob der Gewinn aus dem Verkauf des Objekts dazu gehört, sagt der Wortlaut nicht; es hängt von Rechtsprechung und vom Einzelfall ab, etwa davon, ob der Verkauf Teil der Vermögensverwaltung ist.
+- **Andere Lesart:** Der Verkaufsgewinn gehört zum gekürzten Ertrag und bleibt gewerbesteuerfrei.
+- **Grundlage:** Wortlaut von § 9 Nr. 1 Satz 2 GewStG, gelesen vom Steuerberater in der Prüfrunde; Rechtsprechung zur Kürzung im Veräußerungsjahr nicht gelesen. Angesetzt ist der ungünstigere Fall. Keine Annahme, sondern am Wortlaut belegt ist, dass Zinserträge nicht gekürzt werden. Quellen: `GEWSTG-9`, `GEWSTG-7`.
+- **Wirkung (hoch):** Steuer im Verkaufsjahr, Endwert, Rendite und höchster tragbarer Preis bei Körperschaften und gewerblich geprägten Personengesellschaften mit Kennzeichen. Ankauf des Referenzfalls: Rendite 4,697 % gegen 5,161 % in der anderen Lesart; Steuer auf den Verkaufsgewinn 245.386,69 Euro gegen 105.456,69 Euro, also 139.930,00 Euro mehr.
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Steuerberater des Auftraggebers · **Wiedervorlage:** mit der Antwort des Steuerberaters; spätestens vor dem Einsatz von Teilschritt 1a
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 1, Steuerstatus; Spezifikation Kapitel 2, Grobkalkulation; Fachspezifikation Rechenkern, R-7.8, R-7.14, R-7.17
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 1). Der Entwurf hatte mit dem Kennzeichen den ganzen Gewerbeertrag freigestellt; das war eine nicht gekennzeichnete Ausnahme von der Vorsichtsregel.
+
+### MA-031 · Steuerliche Einordnung des NBank-Zuschusses
+
+- **Annahme:** Der Zuschuss der Wohnraumförderung ist im Jahr des Zuflusses steuerpflichtige Einnahme; Abschreibungsgrundlage und Boden bleiben ungemindert, eine Rückzahlung beim Verkauf mindert den Verkaufsgewinn.
+- **Warum offen:** Für Investitionszuschüsse lässt die Verwaltung im Betriebsvermögen ein Wahlrecht zwischen Einnahme und Minderung der Herstellungskosten zu; ein Zuschuss, der an eine langjährige Belegungs- und Mietbindung geknüpft ist, kann auch als Entgelt für die Bindung gelten und wäre dann über die Bindung zu verteilen. Welche Einordnung für den Zuschuss der NBank gilt, ist nicht geklärt.
+- **Andere Lesart:** Einnahme, verteilt über die Dauer der Bindung; oder Minderung der Herstellungskosten, wobei nur der Anteil des Zuschusses, der auf das Gebäude entfällt, die Abschreibungsgrundlage mindert. Beide Lesarten sind gebaut und umschaltbar.
+- **Grundlage:** Einschätzung des Steuerberaters in der Prüfrunde; die Verwaltungsanweisungen zu Zuschüssen sind nicht gelesen. Voreingestellt ist die Lesart mit der niedrigsten Endwertdifferenz und Rendite. Ihr Endwert ist der höchste der drei, weil die frühe Steuer als Nachschuss das eingesetzte Eigenkapital erhöht; der Endwert ist deshalb nicht der Maßstab. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `ESTG-11`, `ESTG-7`.
+- **Wirkung (hoch):** Steuer der Bauzeit und der Bindung, Eigenkapitalbedarf, Endwertdifferenz und Rendite im geförderten Neubau. Referenzfall mit 38 Jahren Haltedauer: Rendite 3,558 % bei sofortiger Einnahme gegen 3,973 % (verteilt) und 3,974 % (Minderung); Endwertdifferenz 5.305.318,55 Euro gegen 5.700.811,35 und 5.706.360,57 Euro; Eigenkapital der Investitionsphase 2.444.791,88 Euro gegen 2.121.717,82 Euro bei Verteilung. Mit 20 Jahren: 1,675 % gegen 2,137 %.
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Steuerberater des Auftraggebers; zur Praxis der Bewilligung die NBank · **Wiedervorlage:** mit der Antwort des Steuerberaters; spätestens vor dem Förderteil (1c)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Fachspezifikation Rechenkern, R-7.3, R-7.4, R-7.19, R-11.14
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 6; Grenzfälle, Befund 9). Der Entwurf minderte die Abschreibungsgrundlage um den ganzen Zuschuss, auch um den Anteil, der auf das Grundstück entfällt. Übersteigt der Zuschuss die Kosten, auf die er entfällt, rechnet der Kern nicht (Meldung).
+
+### MA-032 · Finanzierungskosten und Vorfälligkeit in der Steuer
+
+- **Annahme:** Die Entgelte der NBank auf Darlehen und Zuschuss gelten als laufzeitbezogen und werden im Betriebsvermögen über die Zinsbindung verteilt. Ein Disagio der Privatperson gilt als marktüblich und ist im Jahr der Zahlung abziehbar. Die Vorfälligkeitsentschädigung der Privatperson beim Verkauf gilt als Veräußerungskosten: Sie mindert nur einen steuerpflichtigen Verkaufsgewinn und nicht die Einkünfte aus Vermietung.
+- **Warum offen:** Belegt ist, dass laufzeitbezogene Entgelte im Betriebsvermögen abzugrenzen sind und dass die Privatperson Ausgaben im Jahr der Zahlung abzieht, ein marktübliches Disagio eingeschlossen. Offen ist, ob die Entgelte der NBank laufzeitbezogen sind, wann ein Disagio marktüblich ist und wie die Vorfälligkeitsentschädigung der Privatperson beim Verkauf einzuordnen ist; das hängt an Verwaltungsauffassung und Rechtsprechung, die nicht gelesen sind.
+- **Andere Lesart:** Entgelte der NBank sind im Jahr der Zahlung abziehbar (umschaltbar). Ein Disagio der Privatperson ist zu verteilen. Die Vorfälligkeitsentschädigung der Privatperson ist Werbungskosten aus Vermietung.
+- **Grundlage:** Rechnungsabgrenzung nach § 5 Abs. 5 EStG und Abflussprinzip nach § 11 Abs. 2 EStG, gelesen vom Steuerberater in der Prüfrunde; im Übrigen dessen Einschätzung. Angesetzt ist jeweils der ungünstigere Fall. Quellen: `ESTG-5`, `ESTG-11`, `ESTG-23`.
+- **Wirkung (mittel):** Zeitpunkt des Abzugs und damit Steuer der ersten Jahre und des Verkaufsjahres. Geförderter Neubau des Referenzfalls: Rendite 3,558 % mit Verteilung der Entgelte gegen 3,573 % bei Abzug im Jahr der Zahlung; Endwertdifferenz 5.305.318,55 Euro gegen 5.321.983,34 Euro. Bei der Privatperson mit steuerfreiem Verkauf mindert die Vorfälligkeitsentschädigung keine Steuer.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater des Auftraggebers · **Wiedervorlage:** mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Fachspezifikation Rechenkern, R-7.2, R-7.11, R-7.15
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 5). Der Entwurf zog alle Finanzierungskosten im Jahr der Zahlung ab. Umschaltbar ist die Lesart zu den Entgelten; die beiden Punkte zur Privatperson sind fest gebaut und werden mit der Antwort des Steuerberaters überprüft.
+
+### MA-033 · Vorfälligkeitsentschädigung als Pauschale
+
+- **Annahme:** Wird vor dem Ende der Zinsbindung verkauft, beträgt die Vorfälligkeitsentschädigung Restschuld mal Satz des Hauses mal Restbindung in Jahren. Die Restbindung endet spätestens mit dem gesetzlichen Kündigungsrecht des Darlehensnehmers; für Förderdarlehen fällt keine Entschädigung an.
+- **Warum offen:** Die Bank berechnet ihren Zinsschaden aus dem Vertragszins, dem Wiederanlagezins am Tag der Ablösung, ersparten Kosten und Sondertilgungsrechten. Das Zinsniveau beim Verkauf ist heute nicht bekannt.
+- **Andere Lesart:** Zinsschadenrechnung der Bank: Die Entschädigung kann null sein, wenn das Zinsniveau beim Verkauf über dem Vertragszins liegt, oder über der Pauschale, wenn es darunter liegt.
+- **Grundlage:** Anspruch der Bank nach § 490 Abs. 2 BGB und Kündigungsrecht nach zehn Jahren nach § 489 Abs. 1 Nr. 2 BGB, gelesen in der Prüfrunde (Bank, Fachexperte). Die Höhe der Pauschale ist Vorgabe des Hauses. Beim übernommenen Darlehen zählt die Frist des Kündigungsrechts ab dem Stichtag, weil das Datum des Empfangs keine Eingabe ist; das ist die längste Restbindung. Quellen: `BGB-489`, `BGB-490`.
+- **Wirkung (mittel):** Endwert und Rendite bei Verkauf vor dem Ende einer Zinsbindung; Haltedauertabelle und Stressfälle mit kurzer Haltedauer. Ankauf des Referenzfalls mit Verkauf nach einem Jahr: 108.146,07 Euro bei 1.201.623,01 Euro Restschuld. Bei 40 Jahren Zinsbindung begrenzt das Kündigungsrecht die Restbindung auf 114 Monate: 114.154,19 Euro statt einer Pauschale über 39 Jahre.
+- **Sichtbar:** Anwendung · **Umschaltbar:** nein · **Klärung durch:** Hausbank · **Wiedervorlage:** nach dem Gespräch mit der Hausbank; Zinsschadenrechnung mit der Vollkalkulation (Teil 2 der Fachspezifikation)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Fachspezifikation Rechenkern, R-5.16, Vorgabe H-18
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Bank, Befund 5; Fachexperte, Befund 3; Grenzfälle, Befund 5): Kappung am Kündigungsrecht ergänzt, Gewicht von gering auf mittel gesetzt. Nicht umschaltbar, weil die andere Lesart das Zinsniveau beim Verkauf als Eingabe braucht; der Satz ist als Vorgabe des Hauses veränderbar.
+
+### MA-034 · Prolongation mit unverändertem Tilgungssatz
+
+- **Annahme:** Nach dem Ende der Zinsbindung setzt die Bank die Rate neu aus der Restschuld, dem Anschlusszins und dem anfänglichen Tilgungssatz, mindestens der Mindesttilgung des Hauses.
+- **Warum offen:** Wie prolongiert wird, vereinbaren Bank und Darlehensnehmer erst am Ende der Zinsbindung.
+- **Andere Lesart:** Die bisherige Rate bleibt; oder die Restlaufzeit bleibt, und die Rate wird als Annuität über die verbleibende Laufzeit neu gerechnet. Beide sind als Vorgabe des Hauses wählbar.
+- **Grundlage:** Übliche Praxis nach Einschätzung der Prüfer. Begründete Ausnahme von der Vorsichtsregel: Die drei Regeln lassen sich nicht in eine feste Reihenfolge bringen. Der unveränderte Tilgungssatz ergibt die niedrigste Rate und damit die höchste Deckung nach der Zinsbindung, aber die niedrigste Endwertdifferenz. Für die Endwertdifferenz ist die Voreinstellung die vorsichtige Lesart, für die Deckung nicht; deshalb weist das Blatt die Deckung nach jeder Zinsbindung eigens aus.
+- **Wirkung (gering):** Rate, Restschuld und Deckung nach der Zinsbindung; Endwert nur gering. Ankauf des Referenzfalls, Endwertdifferenz und Deckung im Jahr 11: Tilgungssatz bleibt 753.701,96 Euro und 2,0853; Rate bleibt 754.107,08 Euro und 1,8358; Restlaufzeit bleibt 754.381,58 Euro und 1,7002.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Hausbank · **Wiedervorlage:** nach dem Gespräch mit der Hausbank
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Fachspezifikation Rechenkern, R-5.9, Vorgabe H-07
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Bank, Frage 9; Controller, Befund 10). Die Regel „Restlaufzeit bleibt“ rundet die Restlaufzeit auf ganze Perioden ab und fällt ohne Tilgung auf den unveränderten Tilgungssatz zurück (Meldung).
+
+### MA-035 · CO2-Einstufung aus der Effizienzklasse
+
+- **Annahme:** Ist der CO2-Ausstoß des Gebäudes nicht eingegeben, leitet der Katalog ihn aus Effizienzklasse und Energieträger ab und setzt den Ausstoß an der oberen Grenze der Klasse an.
+- **Warum offen:** Der Anteil des Vermieters an den CO2-Kosten richtet sich nach dem Ausstoß in Kilogramm CO2 je Quadratmeter und Jahr. Die Effizienzklasse des Energieausweises beruht auf dem Energiebedarf oder -verbrauch und nicht auf dem Ausstoß; die Umrechnung über den Energieträger ist eine Näherung.
+- **Andere Lesart:** Der tatsächliche Ausstoß aus der Heizkostenabrechnung; er ist als Eingabe vorgesehen und geht der Näherung vor.
+- **Grundlage:** Stufen nach der Anlage zum Kohlendioxidkostenaufteilungsgesetz. Angesetzt ist der ungünstigere Fall innerhalb der Klasse. Quellen: `CO2KOSTAUFG-5`, `CO2KOSTAUFG-ANLAGE`.
+- **Wirkung (gering):** Laufende Kosten des Vermieters im Bestand. Im Ankauf des Referenzfalls (30 kg je m², Vermieteranteil 40 %, 50 Euro je Tonne als Annahmen) 792 Euro im ersten Jahr bei 134.640 Euro Jahresmiete.
+- **Sichtbar:** Anwendung · **Umschaltbar:** nein · **Klärung durch:** Anwender je Vorhaben (Heizkostenabrechnung des Verkäufers) · **Wiedervorlage:** mit der Vollkalkulation Ankauf Bestand (1b-1)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Fachspezifikation Rechenkern, R-6.9, Eingabe E-34, Katalogwert KAT-09
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 6). Nicht umschaltbar: Die andere Lesart ist die Eingabe des Ausstoßes. Der CO2-Preis ist keine Modellannahme, sondern eine Vorgabe des Hauses.
+
+### MA-036 · Objektverkauf der GmbH & Co. KG: laufender Gewinn oder Aufgabegewinn
+
+- **Annahme:** Der Gewinn aus dem Verkauf des Objekts ist bei der Personengesellschaft laufender Gewinn und gehört in voller Höhe zum Gewerbeertrag; die Gewerbesteuer wird bei natürlichen Personen angerechnet.
+- **Warum offen:** Hält die Gesellschaft nur dieses Objekt, kann der Verkauf die Aufgabe des Betriebs sein. Der Aufgabegewinn gehört nur insoweit zum Gewerbeertrag, als er nicht auf natürliche Personen als unmittelbar beteiligte Gesellschafter entfällt. Welcher Fall vorliegt, hängt vom Einzelfall und von der Rechtsprechung ab.
+- **Andere Lesart:** Aufgabegewinn: Der Anteil des Verkaufsgewinns, der auf natürliche Personen entfällt, bleibt gewerbesteuerfrei. Umschaltbar.
+- **Grundlage:** Wortlaut von § 7 Satz 2 GewStG; Einordnung als Einschätzung des Steuerberaters in der Prüfrunde. Voreingestellt ist der laufende Gewinn: Bis zu einem Hebesatz in Höhe des Anrechnungsfaktors ist das wegen der Anrechnung nahezu neutral, darüber die ungünstigere Lesart. Tarifermäßigungen für Aufgabegewinne rechnet die Kurzform nicht. Quellen: `GEWSTG-7`, `ESTG-35`, `ESTG-15`.
+- **Wirkung (mittel):** Steuer im Verkaufsjahr bei Personengesellschaften mit natürlichen Personen als Gesellschaftern. Ankauf des Referenzfalls bei 440 % Hebesatz und 60 % natürlichen Personen: Rendite 3,324 % als laufender Gewinn gegen 3,487 % als Aufgabegewinn.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater des Auftraggebers · **Wiedervorlage:** mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 1, Steuerstatus; Fachspezifikation Rechenkern, R-7.18
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 8).
+
+### MA-037 · Kappungsspielraum bei unbekannter Mietenhistorie
+
+- **Annahme:** Ist die Mietenhistorie nicht eingegeben, gilt die letzte Mieterhöhung als zum Stichtag erfolgt und die Kappungsgrenze als ausgeschöpft: Die erste Erhöhung fällt frühestens nach der Wartefrist und frühestens einen Monat nach Ablauf des Kappungszeitraums ab dem Stichtag.
+- **Warum offen:** Wartefrist und Kappungsgrenze hängen davon ab, wann und um wie viel die Miete in den Jahren vor dem Ankauf erhöht wurde. Das Exposé nennt das in der Regel nicht; die Mieterliste liegt erst zur Vollkalkulation vor.
+- **Andere Lesart:** Die letzte Erhöhung liegt mindestens den Kappungszeitraum zurück: Die Wartefrist ist abgelaufen, und die Kappungsgrenze steht voll zur Verfügung. Umschaltbar; mit eingegebener Mietenhistorie entfällt die Annahme.
+- **Grundlage:** Wartefrist und Kappungsgrenze nach § 558 BGB, gelesen vom Fachexperten in der Prüfrunde; Werte je Gemeinde aus dem Katalog. Angesetzt ist der ungünstigere Fall. Quellen: `BGB-558`.
+- **Wirkung (mittel):** Mietpfad der ersten Jahre im Bestand, Reinertrag, Verkaufspreis und höchster tragbarer Preis. Ankauf des Referenzfalls: höchster tragbarer Preis 2.317.235 Euro gegen 2.322.775 Euro in der anderen Lesart; dort steigt die Miete schon im Monat 13 statt im Monat 37.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwender je Vorhaben (Mieterliste des Verkäufers) · **Wiedervorlage:** mit der Mieterliste der Vollkalkulation Ankauf Bestand (1b-1)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 2, Grobkalkulation; Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Fachspezifikation Rechenkern, R-6.3, Eingabe E-33
+- **Bemerkung:** Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 1; Praktiker, Befund 5). Der Entwurf führte die Miete linear zur Marktmiete und prüfte nur die Kappung gegen die Miete drei Jahre zuvor.

@@ -1,0 +1,7 @@
+[
+ ["RF-08: Anschluss, Regel 'Restlaufzeit bleibt': Rate ab Jahr 11", "104952", "104989", "R-5.9: rechnerische Restlaufzeit auf ganze Perioden abgerundet (18 statt 18,011 Jahre; Sichtung 24; Finanzmathematiker 6)"],
+ ["RF-09: Neubau, andere Lesart MA-026: Bankdarlehen", "1000000", "0 mit M-21", "R-5.12: Die Mindestdeckung rechnet immer ueber alle Darlehen; umschaltbar ist nur, ob das Foerderdarlehen den Beleihungsraum belegt (Sichtung 20; Bank 3)"],
+ ["RF-09: Ankauf mit uebernommenem Darlehen, andere Lesart: Grenze (b)", "1944444,44", "1527777,74", "wie zuvor: Grenze (b) immer ueber alle Darlehen; das Darlehen bleibt 1.200.000 nach (c)"],
+ ["RF-15: Testfall im Monatsraster, Endwert (Gegenrechnung)", "585918,72", "585918,65", "R-7.3: Abschreibung je Planjahr; die Gegenrechnung hatte dieselbe Abweichung wie der Referenzrechner (Sichtung 39)"],
+ ["RF-15: Ankauf Basisfall (Gegenrechnung): Bankdarlehen, Endwert, Rendite", "1431044,99 / 2374377,18 / 5,162 %", "1226609,99 / 2524305,59 / 4,527 %", "Gegenrechnung nach den geaenderten Regeln R-6.3, R-8.1 und R-5.12 neu aufgebaut (Sichtung 11, 12, 18)"]
+]

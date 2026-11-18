@@ -8,12 +8,13 @@ from zahlen import NULL, EINS, d, de, Rundung, kaufm, wurzel_rendite
 from zeit import Raster
 from darlehen import Tranche
 from finanzplan import PlanEingabe, Verkauf, rechne_plan, rechne_alternative, verdichte
-from kennzahlen import (werte_aus, vofi_rendite, schuldendienstdeckung, interner_zinsfuss, kapitalwert,
+from kennzahlen import (werte_aus, vofi_rendite, schuldendienstdeckung, kapitalwert,
                         gesamtkapitalrendite, sollzinsen_nach_steuern, amortisationsdauer, endwertueberschuss,
                         zaehler_nenner)
 from proben import pruefe_plan
 from rf_rahmen import (pruefe_fest, fall, pruefe, pruefe_proz, pruefe_reihe, pruefe_proben, pruefe_gleich, info, jahresplan,
                        lehrbuch_steuer)
+from rf_rahmen import izf as interner_zinsfuss
 
 REINERTRAG = [D(55000) * D("1.02") ** t for t in range(5)]
 
@@ -32,20 +33,22 @@ def s1(ek=400000, einlagen=None, entnahmen=None, rundung="keine", reinertrag=Non
 
 
 def s1_monat(h_eff, kk_eff, rundung):
-    """Testfall im Monatsraster: Miete, Rate, Zinsen monatlich; Steuer am Ende jedes Planjahres (R-2.7)."""
+    """Testfall im Monatsraster: Miete, Rate, Zinsen monatlich; Abschreibung (R-7.3) und Steuer (R-2.7) am Ende
+    jedes Planjahres."""
     r = Raster(p=12, n=5)
     N = r.N
     rd = Rundung(rundung)
     miete = [NULL] + [rd.geld(REINERTRAG[r.planjahr(u) - 1] / 12) for u in range(1, N + 1)]
     null = [NULL] * (N + 1)
-    afa = [NULL] + [rd.geld(D(17600) / 12)] * N
+    afa = [NULL] + [D(17600) if r.jahresende(u) else NULL for u in range(1, N + 1)]
     tr = Tranche("Bankdarlehen", 700000, "annuitaet_prozent", "0.04", tilgungssatz="0.02",
                  rundung="kaufm" if rundung == "cent" else "keine")
     e = PlanEingabe(raster=r, miete=miete, kosten=list(null), erhaltung=list(null),
                     investition=[D(1100000)] + [NULL] * N, afa=afa, tranchen=[tr],
                     steuer=lehrbuch_steuer("0.30", verkauf_pflichtig=False),
                     einlagen=[D(400000)] + [NULL] * N, entnahmen=list(null), h_kurz=h_eff, kk_zins=kk_eff,
-                    verkauf=Verkauf(preis_brutto=D(1150000), buchwert=D(1100000) - 5 * 17600), rundung=rd)
+                    verkauf=Verkauf(preis_brutto=D(1150000), buchwert=D(1100000) - 5 * 17600), rundung=rd,
+                    anschaffung=D(1100000), afa_grundlage=D(880000))
     plan = rechne_plan(e)
     alt = rechne_alternative(e, plan.einlagen_netto, plan.entnahmen_netto)
     return plan, alt, werte_aus(plan, alt)
@@ -96,7 +99,7 @@ def rf05_testfall():
     pruefe_gleich(k, "Amortisationsdauer, andere Lesart (Eigenkapital gedeckt)",
                   amortisationsdauer(verm, vergl, "eigenkapital", D(400000)), 2)
     # interner Zinsfuss der Eigenkapitalreihe
-    izf, wechsel = interner_zinsfuss([D(-400000), 0, 0, 0, 0, plan.endwert])
+    izf, wechsel, _ = interner_zinsfuss([D(-400000), 0, 0, 0, 0, plan.endwert])
     pruefe_proz(k, "interner Zinsfuss der Eigenkapitalreihe (= VOFI-Rendite bei einer Einlage)", izf[0], "7.876")
     # Plausibilitaetstest Hebelwirkung (R-15.5): Objektrendite ueber dem Kreditzins -> Rendite faellt mit dem Eigenkapital
     hebel = [s1(ek=ek, darlehen=1100000 - ek)[2]["rendite"] for ek in (300000, 400000, 500000, 600000)]
@@ -150,7 +153,7 @@ def rf06_varianten():
     pruefe_proz(k, "Nachschuss: Rendite nach R-10.5", kz["rendite"], "7.246")
     q = D("1.014")
     pruefe_proz(k, "Nachschuss, andere Lesart: Summe der Einlagen als Nenner", wurzel_rendite(plan.endwert / 450000, 5), "7.18", 2)
-    izf, _ = interner_zinsfuss([D(-400000), 0, D(-50000), 0, 0, plan.endwert])
+    izf, _, _ = interner_zinsfuss([D(-400000), 0, D(-50000), 0, 0, plan.endwert])
     pruefe_proz(k, "Nachschuss, andere Lesart: interner Zins der Eigenkapitalreihe", izf[0], "7.50", 2)
     pruefe_proz(k, "Nachschuss, andere Lesart: wie negative Entnahme aufgezinst",
                 wurzel_rendite((plan.endwert - 50000 * q ** 3) / 400000, 5), "7.88", 2)

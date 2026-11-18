@@ -3,7 +3,7 @@ from decimal import Decimal as D
 from zahlen import NULL, EINS, d, de, Rundung
 from zeit import Raster
 from darlehen import Tranche, bankdarlehen
-from steuer import (Steuer, KOERPERSCHAFT, GEWERBLICHE_PG, EINZELUNTERNEHMEN, PRIVAT, BEFREIT)
+from steuer import (Steuer, KOERPERSCHAFT, GEWERBLICHE_PG, GEPRAEGTE_PG, EINZELUNTERNEHMEN, PRIVAT, BEFREIT)
 from proben import pruefe_plan
 import annahmen as A
 from rf_rahmen import (pruefe_fest, fall, pruefe, pruefe_proz, pruefe_reihe, pruefe_proben, pruefe_gleich, info, jahresplan,
@@ -63,7 +63,8 @@ def rf08_darlehen():
     z = lauf(tr, 12, 12)
     pruefe(k, "Prozentannuitaet bei Zins null: Monatsrate", z[1]["tilgung"], "1166.67", "0")
     # Anschluss nach der Zinsbindung (R-5.9): 1.496.000 Euro, 4 % und 2 %, zehn Jahre Bindung, danach 6 %
-    for regel, soll in (("tilgungssatz", "90942"), ("rate", "89760"), ("restlaufzeit", "104952")):
+    # "Restlaufzeit bleibt": rechnerische Restlaufzeit 18,011 Jahre, abgerundet auf 18 Perioden (R-5.9)
+    for regel, soll in (("tilgungssatz", "90942"), ("rate", "89760"), ("restlaufzeit", "104989")):
         tr = Tranche("D", 1496000, "annuitaet_prozent", "0.04", tilgungssatz="0.02", bindung=10,
                      anschluss_zins="0.06", anschluss_regel=regel, rundung="keine")
         z = lauf(tr, 11, 1, KEINE)
@@ -75,9 +76,27 @@ def rf08_darlehen():
     except ValueError:
         gemeldet = True
     pruefe_gleich(k, "fehlender Anschlusszins wird gemeldet statt still fortgeschrieben", gemeldet, True)
+    pruefe(k, "Restlaufzeit einer Prozentannuitaet nach zehn Jahren (reell, vor dem Abrunden)",
+           Tranche.restlaufzeit(D("1136777.27"), D(89760), D("0.04")), "18.011", "0.0005", 3)
+    # R-5.9, R-14.1: Regel "Restlaufzeit bleibt" ohne Tilgung faellt auf "Tilgungssatz bleibt" zurueck (M-40)
+    tr = Tranche("D", 1000000, "annuitaet_prozent", "0.04", tilgungssatz=0, bindung=2, anschluss_zins="0.05",
+                 anschluss_regel="restlaufzeit")
+    z = lauf(tr, 3, 1)
+    pruefe(k, "Restlaufzeit bleibt bei Tilgung null: Rate ab Jahr 3 ist der Zins", z[3]["zins"] + z[3]["tilgung"], "50000", "0")
+    pruefe_gleich(k, "... Hinweis M-40", tr.hinweise, ["M-40"])
+    # R-5.11: Rate des uebernommenen Darlehens aus dem urspruenglichen Nennbetrag
+    tr = Tranche("D", 500000, "annuitaet_prozent", "0.005", tilgungssatz="0.02", rate_betrag=600000)
+    z = lauf(tr, 1, 12)
+    pruefe(k, "uebernommenes Darlehen, Nennbetrag 600.000, Restschuld 500.000: Monatsrate", z[1]["zins"] + z[1]["tilgung"], "1250.00", "0")
+    # R-5.18: Bereitstellungszins auf den nicht ausgezahlten Betrag nach der bereitstellungsfreien Zeit
+    tr = Tranche("D", 1200000, "annuitaet_prozent", "0.04", tilgungssatz="0.02", auszahlung={3: 400000, 6: 800000},
+                 tilgungsbeginn=7, bereit_satz="0.0025", bereit_frei=2)
+    z = lauf(tr, 7, 12)
+    pruefe_reihe(k, "Bereitstellungszins Monate 1 bis 7 (0,25 % je Monat, zwei Monate frei)", [x["bereit"] for x in z[1:8]],
+                 ["0", "0", "3000", "2000", "2000", "2000", "0"], "0")
     # Foerderdarlehen: zinslos, Entgelt einbehalten, Verwaltungskostenbeitrag, Tilgung ueber 42 Jahre (MA-002, MA-003)
     tr = Tranche("F", 2320000, "raten", 0, laufzeit=42, einbehalt=23200, beitrag_satz="0.005", bindung=35,
-                 anschluss_zins="0.05", bank=False, vfe_pflichtig=False)
+                 anschluss_zins="0.05", bank=False, foerder=True)
     z = lauf(tr, 36, 1)
     pruefe(k, "Foerderdarlehen 2,32 Mio.: einbehaltenes Entgelt bei Auszahlung", z[0]["einbehalt"], "23200", "0")
     pruefe(k, "Foerderdarlehen: Verwaltungskostenbeitrag Jahr 1", z[1]["beitrag"], "11600", "0")
@@ -112,7 +131,8 @@ def rf08_darlehen():
 
 def rf09_bankdarlehen():
     k = fall("RF-09", "Regel des Bankdarlehens R-5.12 (MA-026): drei bindende Grenzen, Null, andere Lesart")
-    kw = dict(mindestdeckung=D("1.2"), zins=D("0.04"), tilgungssatz=D("0.02"), p=1)
+    # kalkulatorischer Zins 4 % und kalkulatorische Tilgung 2 % als Annahme der Beispiele (Werte des Berichts D.4)
+    kw = dict(mindestdeckung=D("1.2"), zins_kalk=D("0.04"), tilgung_kalk=D("0.02"), p=1)
     # frei finanzierter Ankauf (Bericht D.4): Reinertrag 107.712
     b = bankdarlehen(D(2600000), D("0.65"), D(107712), mittelbedarf=D(2600000) * D("1.07"), **kw)
     pruefe(k, "Ankauf 2,6 Mio.: Grenze (a) Beleihungsquote", b["a"], "1690000", "0")
@@ -125,17 +145,19 @@ def rf09_bankdarlehen():
     pruefe_gleich(k, "Ankauf 2,2 Mio.: bindende Grenze", b["bindend"], ["a"])
     pruefe(k, "Knick: Preis, an dem (a) und (b) gleich sind", D(1496000) / D("0.65"), "2301538.46")
     # Ankauf mit uebernommenem Foerderdarlehen (Bericht D.4)
-    kw6 = dict(mindestdeckung=D("1.2"), zins=D("0.04"), tilgungssatz=D("0.02"), p=1)
+    kw6 = dict(kw)
     b = bankdarlehen(D(2000000), D("0.65"), D(140000), mittelbedarf=D(2200000), uebrige_darlehen=D(1000000),
                      kd_uebrige=D(25000), **kw6)
     pruefe(k, "Ankauf mit uebernommenem Darlehen 1,0 Mio.: Bankdarlehen", b["darlehen"], "300000", "0")
     pruefe_gleich(k, "... bindende Grenze", b["bindend"], ["a"])
     pruefe(k, "... Eigenkapital", b["eigenkapital"], "900000", "0")
     b = bankdarlehen(D(2000000), D("0.65"), D(140000), mittelbedarf=D(2200000), uebrige_darlehen=D(1000000),
-                     kd_uebrige=D(25000), nur_eigenes=True, **kw6)
-    pruefe(k, "... andere Lesart MA-026: Bankdarlehen", b["darlehen"], "1200000", "0")
-    pruefe_gleich(k, "... andere Lesart: bindende Grenze (Restfinanzierung)", b["bindend"], ["c"])
-    pruefe(k, "... andere Lesart: Eigenkapital", b["eigenkapital"], "0", "0")
+                     uebrige_im_beleihungsraum=NULL, kd_uebrige=D(25000), **kw6)
+    pruefe(k, "... Rang nach der Bank (Eingabe E-59): Grenze (a)", b["a"], "1300000", "0")
+    pruefe(k, "... Rang nach der Bank: Grenze (b) unveraendert ueber alle Darlehen", b["b"], "1527777.74", "0")
+    pruefe(k, "... Rang nach der Bank: Bankdarlehen", b["darlehen"], "1200000", "0")
+    pruefe_gleich(k, "... Rang nach der Bank: bindende Grenze (Restfinanzierung)", b["bindend"], ["c"])
+    pruefe(k, "... Rang nach der Bank: Eigenkapital", b["eigenkapital"], "0", "0")
     # gefoerderter Neubau (Bericht D.4): 10 Mio. Gesamtkosten, 9 Mio. zuwendungsfaehig, Gruppe B
     fd, zs, ekm = D(5400000), D(1800000), D(1800000)
     kd_fd = fd / 42 + fd * D("0.005")
@@ -156,10 +178,22 @@ def rf09_bankdarlehen():
     pruefe(k, "Neubau, Reinertrag 180.000: Bankdarlehen null", b["darlehen"], "0", "0")
     pruefe_gleich(k, "Neubau, Reinertrag 180.000: Meldung M-21", b["meldung"], "M-21")
     pruefe(k, "Neubau, Reinertrag 180.000: Eigenkapital", b["eigenkapital"], "2800000", "0")
-    b = bankdarlehen(D(10000000), D("0.60"), D(180000), nur_eigenes=True, **nb)
-    pruefe(k, "Neubau, andere Lesart MA-026: Bankdarlehen", b["darlehen"], "1000000", "0")
+    b = bankdarlehen(D(10000000), D("0.60"), D(180000), uebrige_im_beleihungsraum=NULL, **nb)
+    pruefe(k, "Neubau, Foerderdarlehen im Nachrang (andere Lesart MA-026): Grenze (a)", b["a"], "6000000", "0")
+    pruefe(k, "... Bankdarlehen bleibt null, weil die Deckung immer alle Darlehen rechnet", b["darlehen"], "0", "0")
+    pruefe_gleich(k, "... Meldung M-21", b["meldung"], "M-21")
+    b = bankdarlehen(D(10000000), D("0.60"), D(400000), uebrige_im_beleihungsraum=NULL, **nb)
+    pruefe(k, "Neubau, Foerderdarlehen im Nachrang, Reinertrag 400.000: Bankdarlehen", b["darlehen"], "1000000", "0")
+    pruefe_gleich(k, "... bindende Grenze (Restfinanzierung)", b["bindend"], ["c"])
+    # R-14.1: kalkulatorischer Zins und Tilgung null: (b) bindet nicht oder sperrt
+    kw0 = dict(mindestdeckung=D("1.2"), zins_kalk=NULL, tilgung_kalk=NULL, p=12)
+    b = bankdarlehen(D(2400000), D("0.65"), D(100000), mittelbedarf=D(2640000), **kw0)
+    pruefe_gleich(k, "Zins und Tilgung null: (b) unbegrenzt, es bindet (a)", (b["b"], b["bindend"], str(b["darlehen"])), (None, ["a"], "1560000.00"))
+    b = bankdarlehen(D(2400000), D("0.65"), D(10000), mittelbedarf=D(2640000), uebrige_darlehen=D(500000), kd_uebrige=D(12500), **kw0)
+    pruefe_gleich(k, "Zins und Tilgung null, Ertrag deckt die uebrigen Darlehen nicht: null mit M-21", (b["darlehen"] == 0, b["meldung"]), (True, "M-21"))
     # Rundung der Rate auf der sicheren Seite (Monatsraster)
     b = bankdarlehen(D(2600000), D("0.65"), D("107712.37"), D("1.2"), D("0.04"), D("0.02"), D(2782000), p=12)
+    pruefe(k, "Monatsraster: Bankdarlehen bei 107.712,37 Euro Reinertrag", b["darlehen"], "1496004.99", "0")
     kd = 12 * CENT.geld(b["darlehen"] * D("0.06") / 12)
     pruefe_gleich(k, "Monatsraster: gerundete Raten halten die Mindestdeckung ein", D("107712.37") / kd >= D("1.2"), True)
     info(f"Monatsraster: Darlehen {de(b['darlehen'])}, Kapitaldienst {de(kd)}, Deckung {de(D('107712.37') / kd, 6)}")
@@ -199,8 +233,8 @@ def rf10_steuer():
     s = st(GEWERBLICHE_PG, est_satz=D("0.08"))
     s.jahr(1, D(100000), NULL)
     pruefe(k, "Personengesellschaft, Einkommensteuer 8.000 begrenzt die Anrechnung", s.protokoll[-1]["anrechnung"], "8000", "0")
-    s = st(GEWERBLICHE_PG, erweiterte_kuerzung=True)
-    pruefe(k, "Personengesellschaft mit erweiterter Kuerzung: nur Einkommensteuer", s.jahr(1, D(100000), NULL), "42000", "0")
+    s = st(GEPRAEGTE_PG, erweiterte_kuerzung=True)
+    pruefe(k, "gewerblich gepraegte Personengesellschaft mit erweiterter Kuerzung, ohne Zinsen: nur Einkommensteuer", s.jahr(1, D(100000), NULL), "42000", "0")
     s = st(GEWERBLICHE_PG)
     s.jahr(1, D(20000), NULL)
     pruefe(k, "Personengesellschaft, Gewinn 20.000 unter dem Freibetrag: Gewerbesteuer", s.protokoll[-1]["gewerbesteuer"], "0", "0")

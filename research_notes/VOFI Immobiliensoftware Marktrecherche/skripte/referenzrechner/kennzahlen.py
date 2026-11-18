@@ -1,4 +1,4 @@
-"""Kapitel 10 der Fachspezifikation: Kennzahlen (R-10.1 bis R-10.19).
+"""Kapitel 10 der Fachspezifikation: Kennzahlen (R-10.1 bis R-10.23).
 
 Kennzahlen werden nicht gerundet (R-12.6); gerundet wird nur fuer die Darstellung.
 """
@@ -61,10 +61,46 @@ def gesamtkapitalrendite(Z, Dn, sollzinsen_nach_steuern, a0, n_jahre):
 
 def sollzinsen_nach_steuern(plan):
     """MA-028: einfache Summe der Sollzinsen aller Darlehen ohne Kontokorrent, je Jahr um den
-    Grenzsteuersatz auf operative Ertraege entlastet."""
+    Entlastungssatz s_FK der Sollzinsen entlastet (R-7.14)."""
     r = plan.e.raster
     st = Steuer(plan.e.steuer, r, plan.e.rundung)
-    return sum(plan.jahressumme("zins", j) * (EINS - st.grenzsatz_operativ(j)) for j in range(1, r.n + 1))
+    return sum(plan.jahressumme("zins", j) * (EINS - st.grenzsatz_sollzinsen(j)) for j in range(1, r.n + 1))
+
+
+def investitionsbarwert(plan, w, phase_ende):
+    """R-10.11: a_0 = Investitionsauszahlungen der Investitionsphase (Zeitpunkt 0 bis phase_ende), mit dem
+    Vergleichsfaktor auf den Stichtag abgezinst. Beim Ankauf ist das die Auszahlung zum Stichtag."""
+    return sum(plan.zeilen[u]["investition"] * w[u] for u in range(phase_ende + 1)) / w[0]
+
+
+def kapitaldienst(plan, perioden, je_tranche=False):
+    """R-10.14: Zins, planmaessige Tilgung und laufende Beitraege aller Darlehen einer Zeitspanne."""
+    kd = {tr.name: NULL for tr in plan.e.tranchen}
+    for u in perioden:
+        for tr in plan.e.tranchen:
+            t = plan.zeilen[u]["tranchen"][tr.name]
+            kd[tr.name] += t["zins"] + t["beitrag"] + (NULL if tr.art == "frei" else t["tilgung"])
+    return kd if je_tranche else sum(kd.values(), NULL)
+
+
+def zinsdeckung(plan, perioden):
+    """R-10.20: Reinertrag / (Zinsen + laufende Beitraege aller Darlehen)."""
+    re = sum(plan.zeilen[u]["miete"] - plan.zeilen[u]["kosten"] for u in perioden)
+    zi = sum(plan.zeilen[u]["zins"] + plan.zeilen[u]["beitrag"] for u in perioden)
+    return re / zi if zi > 0 else None
+
+
+def kapitaldienstreserve(reinertrag, kd, mindestdeckung):
+    """R-10.21: Reinertrag - Mindestdeckung x Kapitaldienst, in Euro."""
+    return reinertrag - mindestdeckung * kd
+
+
+def deckungsgrenzen(sollmiete, mieteinzahlung, kosten, kd):
+    """R-10.22: Anteil der heutigen Miete, bei dem die Deckung genau 1 ist, und Mietausfall (Anteil der
+    Sollmiete), bis zu dem sie mindestens 1 bleibt. None ohne Miete."""
+    if mieteinzahlung <= 0 or sollmiete <= 0:
+        return None, None
+    return (kosten + kd) / mieteinzahlung, EINS - (kosten + kd) / sollmiete
 
 
 def schuldendienstdeckung(plan, j=None, perioden=None):
@@ -72,24 +108,22 @@ def schuldendienstdeckung(plan, j=None, perioden=None):
     ohne Abloesung, Vorfaelligkeit, freie Tilgung und Kontokorrent)."""
     per = perioden if perioden is not None else plan.e.raster.perioden(j)
     re = sum(plan.zeilen[u]["miete"] - plan.zeilen[u]["kosten"] for u in per)
-    kd = NULL
-    for u in per:
-        for tr in plan.e.tranchen:
-            t = plan.zeilen[u]["tranchen"][tr.name]
-            kd += t["zins"] + t["beitrag"] + (NULL if tr.art == "frei" else t["tilgung"])
+    kd = kapitaldienst(plan, per)
     return (re / kd if kd > 0 else None), re, kd
 
 
-def interner_zinsfuss(reihe, p=1, unten=D("-0.99"), oben=D("10"), raster=2000):
+def interner_zinsfuss(reihe, unten, oben, raster, p=1):
     """R-10.18: alle internen Zinsfuesse einer Zahlungsreihe im Suchbereich (effektiv je Jahr).
 
-    Rueckgabe (loesungen, vorzeichenwechsel). Null Wechsel: keine Loesung. Mehr als ein Wechsel:
-    alle Loesungen im Bereich werden gemeldet; massgeblich bleibt die VOFI-Rendite.
+    Suchbereich und Rasterzahl sind Vorgaben (H-21). Rueckgabe (loesungen, vorzeichenwechsel, status).
+    Null Wechsel: keine Loesung. Wechsel ohne Fund: "Loesung ausserhalb des Suchbereichs". Mehr als ein
+    Wechsel: alle Loesungen im Bereich werden gemeldet; massgeblich bleibt die VOFI-Rendite.
     """
+    unten, oben = d(unten), d(oben)
     werte = [x for x in reihe if x != 0]
     wechsel = sum(1 for a, b in zip(werte, werte[1:]) if (a > 0) != (b > 0))
     if wechsel == 0:
-        return [], 0
+        return [], 0, "keine Loesung"
 
     def kw(rj):
         q = (EINS + rj) ** (EINS / D(p))
@@ -116,7 +150,11 @@ def interner_zinsfuss(reihe, p=1, unten=D("-0.99"), oben=D("10"), raster=2000):
         x0, f0 = x1, f1
     if f0 == 0:
         loesungen.append(x0)
-    return loesungen, wechsel
+    if not loesungen:
+        status = "Loesung ausserhalb des Suchbereichs"
+    else:
+        status = "eine Loesung" if len(loesungen) == 1 else f"{len(loesungen)} Loesungen"
+    return loesungen, wechsel, status
 
 
 def kapitalwert(reihe, zins_periode):
@@ -167,3 +205,23 @@ def werte_aus(plan, alt, zielrendite=None):
         k["abstand_zielrendite"] = None if r is None else r - zielrendite
         k["endwertueberschuss"] = endwertueberschuss(Z, Dn, zielrendite, n)
     return k
+
+
+def renditemeldungen(einlagen, entnahmen, kz):
+    """R-10.6, R-10.7: Meldungen zur Rendite als Liste (Kennung, Text).
+    M-27: Einlagen nach dem Stichtag treffen mit Entnahmen zusammen. M-28: keine Einlage. M-29: Zaehler nicht positiv."""
+    m = []
+    if any(x > 0 for x in einlagen[1:]) and any(x > 0 for x in entnahmen):
+        m.append(("M-27", "Einlagen nach dem Stichtag und Entnahmen treffen zusammen; die Rendite haengt von ihrem Zeitpunkt ab"))
+    if kz["rendite"] is None:
+        m.append(("M-28", "Rendite nicht definiert: keine Einlage"))
+    elif kz["zaehler"] <= 0:
+        m.append(("M-29", "Rendite -100 %: Zaehler nicht positiv"))
+    return m
+
+
+def meldung_izf(loesungen):
+    """R-10.18: Hinweis M-26, wenn der interne Zinsfuss mehrdeutig ist."""
+    if len(loesungen) > 1:
+        return ("M-26", "Interner Zinsfuss mehrdeutig; alle Loesungen sind genannt, massgeblich ist die VOFI-Rendite")
+    return None

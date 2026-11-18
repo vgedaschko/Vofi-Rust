@@ -1,200 +1,321 @@
 """Referenzfaelle RF-11 bis RF-14: Grobkalkulation 1a (Ankauf, Neubau, Steuerstatus) und Randfaelle.
 
 Eigene Faelle ohne veroeffentlichte Werte: Die Sollwerte sind in erwartete_werte.json festgeschrieben (R-15.2);
-der Basisfall des Ankaufs ist zusaetzlich in gegenrechnung.py unabhaengig nachgebaut.
+der Basisfall des Ankaufs ist zusaetzlich in gegenrechnung.py unabhaengig nachgebaut. Die Eingaben stehen in
+annahmen.py und im Anhang A der Fachspezifikation.
 """
 from decimal import Decimal as D
 from dataclasses import replace
 from zahlen import NULL, EINS, d, de, proz, Rundung
-from steuer import KOERPERSCHAFT, GEWERBLICHE_PG, EINZELUNTERNEHMEN, PRIVAT, BEFREIT
-from kennzahlen import interner_zinsfuss, schuldendienstdeckung
+from steuer import (KOERPERSCHAFT, KOERPERSCHAFT_OHNE_GEWST, GEPRAEGTE_PG, GEWERBLICHE_PG, EINZELUNTERNEHMEN, PRIVAT,
+                    BEFREIT)
+from kennzahlen import schuldendienstdeckung
 from grobkalkulation import (rechne_grob, tragbarer_preis, zielwertsuche, suche_eingabe, haltedauer_tabelle,
-                             vergleiche, Meldung)
+                             vergleiche, Meldung, kalkuliere)
 from finanzplan import verdichte
 import annahmen as A
 from rf_rahmen import (fall, pruefe, pruefe_fest, pruefe_proz, pruefe_reihe, pruefe_gleich, info, jahresplan,
-                       lehrbuch_steuer)
+                       lehrbuch_steuer, izf)
 from rf_testfall import s1
+
+VG, KAT, KATN = A.VORGABEN, A.KATALOG, A.KATALOG_NEUBAU
+
+# Varianten der Referenzobjekte (Anhang A)
+GEBUNDEN = replace(A.ANKAUF, gebunden_anteil=D("0.4"), bindung_jahre=6, gebundene_miete=D("6.80"),
+                   uebernommen=dict(restschuld=D(500000), nennbetrag=D(600000), zins=D("0.005"), tilgungssatz=D("0.02"),
+                                    bindung_jahre=8, anschluss_zins=D("0.03"), beitrag_satz=D(0),
+                                    foerderdarlehen=True, rang="vor"))
+GEFOERDERT = replace(A.NEUBAU, foerderung=A.FOERDERUNG_B, haltedauer=38)
+MIT_KFW = replace(A.NEUBAU, kfw_betrag=D(3000000))
+
+
+def proz_fest(k, name, wert, stellen=3):
+    pruefe_fest(k, name + " (%)", None if wert is None else wert * 100, stellen)
+
+
+def kennungen(e):
+    return sorted(m["kennung"] for m in e.meldungen)
 
 
 def blatt(k, name, e, kurz=False):
     """Schreibt die Groessen des verkuerzten Kennzahlenblatts fest (R-11.12)."""
     kz = e.kennzahlen
-    pruefe_gleich(k, f"{name}: alle Kontrollsummen bestanden", len(e.befunde), 0)
+    pruefe_gleich(k, f"{name}: alle Kontrollsummen bestanden", (e.gesperrt, len(e.befunde)), (False, 0))
     pruefe_fest(k, f"{name}: Bankdarlehen", e.darlehen)
     pruefe_fest(k, f"{name}: bindende Grenze des Darlehens", e.bemessung.bank["bindend"])
     pruefe_fest(k, f"{name}: Eigenkapital der Investitionsphase", e.eigenkapital_investitionsphase)
     pruefe_fest(k, f"{name}: Endwert", e.plan.endwert)
     pruefe_fest(k, f"{name}: Endwert der Unterlassensalternative", e.alt.endwert)
     pruefe_fest(k, f"{name}: Endwertdifferenz", kz["endwertdifferenz"])
-    pruefe_fest(k, f"{name}: VOFI-Rendite (%)", None if kz["rendite"] is None else kz["rendite"] * 100, 3)
+    proz_fest(k, f"{name}: VOFI-Rendite", kz["rendite"])
+    pruefe_fest(k, f"{name}: Meldungen", kennungen(e))
     if kurz:
         return
-    pruefe_fest(k, f"{name}: Vergleichsrendite (%)", kz["vergleichsrendite"] * 100, 3)
+    proz_fest(k, f"{name}: Vergleichsrendite", kz["vergleichsrendite"])
     pruefe_fest(k, f"{name}: Abstand zur Zielrendite (Prozentpunkte)", kz["abstand_zielrendite"] * 100, 3)
     pruefe_fest(k, f"{name}: Endwertueberschuss", kz["endwertueberschuss"])
-    pruefe_fest(k, f"{name}: Nachschussbedarf nach der Investitionsphase", e.nachschuss_spaeter)
+    pruefe_fest(k, f"{name}: laufender Nachschussbedarf nach der Investitionsphase", e.nachschuss_laufend)
+    pruefe_fest(k, f"{name}: Fehlbetrag beim Verkauf", e.fehlbetrag_verkauf)
     pruefe_fest(k, f"{name}: Schuldendienstdeckung im ersten Jahr der Vollvermietung", e.dscr_vj, 4)
-    pruefe_fest(k, f"{name}: Beleihungsauslauf (%)", e.beleihungsauslauf * 100, 2)
+    pruefe_fest(k, f"{name}: kleinste Schuldendienstdeckung", e.deckung_min, 4)
+    pruefe_fest(k, f"{name}: Planjahr der kleinsten Deckung", e.deckung_min_jahr)
+    pruefe_fest(k, f"{name}: Zinsdeckung im ersten Jahr der Vollvermietung", e.zinsdeckung_vj, 4)
+    pruefe_fest(k, f"{name}: Kapitaldienstreserve", e.kapitaldienstreserve)
+    proz_fest(k, f"{name}: Darlehen zu Kaufpreis oder Gesamtkosten", e.darlehen_zu_wert, 2)
+    proz_fest(k, f"{name}: Restschuld zum Wert am Ende der Zinsbindung", e.restschuld_zu_wert, 2)
     pruefe_fest(k, f"{name}: Einstiegsfaktor", e.einstiegsfaktor, 2)
     pruefe_fest(k, f"{name}: Ausstiegsfaktor", e.ausstiegsfaktor, 2)
-    pruefe_fest(k, f"{name}: Nettoanfangsrendite (%)", e.nettoanfangsrendite * 100, 2)
-    pruefe_fest(k, f"{name}: Restwertanteil am Endwert (%)", None if e.restwertanteil is None else e.restwertanteil * 100, 2)
-    pruefe_fest(k, f"{name}: Verkaufspreis brutto", e.verkauf.preis_brutto)
+    proz_fest(k, f"{name}: Nettoanfangsrendite", e.nettoanfangsrendite, 2)
+    proz_fest(k, f"{name}: Restwertanteil am Endwert", e.restwertanteil, 2)
+    pruefe_fest(k, f"{name}: Verkaufspreis", e.verkauf.preis_brutto)
+    proz_fest(k, f"{name}: VOFI-Gesamtkapitalrendite", e.gesamtkapitalrendite)
+    pruefe_fest(k, f"{name}: Modellannahmen, die gewirkt haben", e.modellannahmen)
+
+
+def preis(k, name, tp):
+    pruefe_fest(k, f"{name}: Preis", tp["preis"], 0)
+    pruefe_fest(k, f"{name}: bindende Grenze und Meldung", [tp["bindend"], tp["meldung"]])
+    if tp["preis"] is not None:
+        e = tp["ergebnis"]
+        pruefe_gleich(k, f"{name}: Preisprobe P-14", tp["p14"], True)
+        pruefe_fest(k, f"{name}: Grenze, die das Darlehen bestimmt", e.bemessung.bank["bindend"])
+        pruefe_fest(k, f"{name}: noetiges Eigenkapital", e.eigenkapital_investitionsphase)
+        pruefe_fest(k, f"{name}: Preis je m2 Wohnflaeche", tp["preis_je_qm"])
+        pruefe_fest(k, f"{name}: Abstand zum Angebotspreis", tp["abstand_angebot"])
 
 
 def rf11_ankauf():
     k = fall("RF-11", "Grobkalkulation Ankauf (Monatsraster, Koerperschaft; Vorgaben und Katalog als Annahme)")
-    e = rechne_grob(A.ANKAUF, A.VORGABEN)
+    e = rechne_grob(A.ANKAUF, VG, KAT)
     blatt(k, "Basisfall", e)
-    pruefe_fest(k, "Basisfall: Reinertrag im ersten Jahr", e.bemessung.reinertrag_vj)
-    pruefe_fest(k, "Basisfall: Miete je m2 und Monat, Jahre 1 bis 6", [str(x.quantize(D("0.0001"))) for x in e.miete_je_qm[1:7]])
+    bm = e.bemessung
+    pruefe_fest(k, "Basisfall: Reinertrag im ersten Jahr", bm.reinertrag_vj)
+    pruefe_fest(k, "Basisfall: nachhaltiger Reinertrag der Bank", bm.ertrag_nachhaltig)
+    pruefe_fest(k, "Basisfall: Grenzen (a), (b), (c)", [str(bm.bank[x]) for x in "abc"])
+    pruefe_fest(k, "Basisfall: Miete je m2 im ersten Monat der Jahre 1 bis 13",
+                [str(e.miete_je_qm[(j - 1) * 12 + 1].quantize(D("0.0001"))) for j in range(1, 14)])
+    wechsel = [m for m in range(2, 157) if e.miete_je_qm[m] != e.miete_je_qm[m - 1]]
+    pruefe_fest(k, "Basisfall: Monate, ab denen eine Mieterhoehung wirkt", wechsel)
+    pruefe_fest(k, "Basisfall: Miete je m2 nach jeder Erhoehung", [str(e.miete_je_qm[m].quantize(D("0.0001"))) for m in wechsel])
     j = verdichte(e.plan)
     pruefe_fest(k, "Basisfall: Jahresmiete Jahr 1 (Einzahlung nach Mietausfall)", j[1]["miete"])
     pruefe_fest(k, "Basisfall: Bewirtschaftung Jahr 1", j[1]["kosten"])
     pruefe_fest(k, "Basisfall: Investitionsstau, Zahlung in Jahr 2 (Preisstand 1,03^2)", j[2]["erhaltung"])
     pruefe_fest(k, "Basisfall: Steuer Jahre 1 bis 4", [str(x["steuer"]) for x in j[1:5]])
     pruefe_fest(k, "Basisfall: Rate ab Jahr 11 nach Anschlusszins (Jahressumme)", j[11]["zins"] + j[11]["tilgung"])
+    pruefe_fest(k, "Basisfall: Restschuld am Ende der Zinsbindung", e.plan.zeilen[120]["restschuld"])
+    pruefe_fest(k, "Basisfall: Abloesung beim Verkauf", e.plan.zeilen[144]["abloesung"])
+    pruefe_fest(k, "Basisfall: massgebliche Jahresmiete am Verkaufsstichtag", e.ertrag.jahresmiete(144))
+    pruefe_fest(k, "Basisfall: Verkaufsgewinn", e.plan.zeilen[144]["g_v"])
     pruefe_fest(k, "Basisfall: Steuer auf den Verkaufsgewinn", e.steuer_verkaufsgewinn)
+    pruefe_fest(k, "Basisfall: Schuldendienstdeckung je Planjahr",
+                [str(schuldendienstdeckung(e.plan, x)[0].quantize(D("0.001"))) for x in range(1, 13)])
+    pruefe_fest(k, "Basisfall: Deckung im ersten Jahr nach der Zinsbindung", str(e.deckung_nach_bindung["Bankdarlehen"][1].quantize(D("0.0001"))))
+    pruefe_fest(k, "Basisfall: Anteil der Miete und Mietausfall, bei denen die Deckung 1 ist (%)",
+                [str((x * 100).quantize(D("0.01"))) for x in (e.anteil_miete_deckung_eins, e.ausfall_deckung_eins)])
     info(f"Endwert {de(e.plan.endwert)}, Endwertdifferenz {de(e.kennzahlen['endwertdifferenz'])}, "
-         f"Rendite {proz(e.kennzahlen['rendite'])}, Darlehen {de(e.darlehen)} {e.bemessung.bank['bindend']}")
+         f"Rendite {proz(e.kennzahlen['rendite'])}, Darlehen {de(e.darlehen)} {bm.bank['bindend']}")
     # kombinierter Stressfall: Darlehen aus dem Basisfall (R-11.8)
-    es = rechne_grob(A.ANKAUF, A.VORGABEN, stress=True)
+    es = rechne_grob(A.ANKAUF, VG, KAT, stress=True)
     blatt(k, "kombinierter Stressfall", es)
     pruefe_gleich(k, "Stressfall: Bankdarlehen unveraendert aus dem Basisfall", es.darlehen == e.darlehen, True)
+    pruefe_fest(k, "Stressfall: Schuldendienstdeckung je Planjahr",
+                [str(schuldendienstdeckung(es.plan, x)[0].quantize(D("0.001"))) for x in range(1, 13)])
     # hoechster tragbarer Preis
-    tp = tragbarer_preis(A.ANKAUF, A.VORGABEN)
-    pruefe_fest(k, "hoechster tragbarer Kaufpreis (Basisfall)", tp["preis"], 0)
-    pruefe_gleich(k, "tragbarer Preis: bindende Grenze", tp["bindend"], "Rendite")
-    pruefe_fest(k, "tragbarer Preis: Grenze, die das Darlehen bestimmt", tp["ergebnis"].bemessung.bank["bindend"])
-    pruefe_fest(k, "tragbarer Preis: noetiges Eigenkapital", tp["ergebnis"].eigenkapital_investitionsphase)
-    ob = rechne_grob(A.ANKAUF, A.VORGABEN, preis=tp["preis"] + 1, mit_blatt=False)
-    pruefe_gleich(k, "Probe P-14: Rendite beim tragbaren Preis >= Ziel und einen Euro darueber < Ziel",
-                  tp["ergebnis"].kennzahlen["rendite"] >= A.VORGABEN.zielrendite > ob.kennzahlen["rendite"], True)
-    pruefe_gleich(k, "tragbarer Preis: genau eine Loesung im Suchbereich", tp["suche"]["status"], "eine Loesung")
-    tps = tragbarer_preis(A.ANKAUF, A.VORGABEN, stress=True)
-    pruefe_fest(k, "hoechster tragbarer Kaufpreis im kombinierten Stressfall", tps["preis"], 0)
-    pruefe_fest(k, "... Grenze, die das Darlehen bestimmt", tps["ergebnis"].bemessung.bank["bindend"])
-    pruefe_fest(k, "... Schuldendienstdeckung im Stressfall", tps["ergebnis"].dscr_vj, 4)
-    tpe = tragbarer_preis(replace(A.ANKAUF, verfuegbares_ek=D(900000)), A.VORGABEN)
-    pruefe_fest(k, "tragbarer Preis bei 900.000 Euro verfuegbarem Eigenkapital", tpe["preis"], 0)
-    pruefe_gleich(k, "... bindende Grenze", tpe["bindend"], "Eigenkapital")
-    # Monotonie am Knick zwischen Beleihungsquote und Mindestdeckung (R-11.5)
-    knick = int(e.bemessung.bank["b"] / A.VORGABEN.beleihungsquote)
-    r = [rechne_grob(A.ANKAUF, A.VORGABEN, preis=knick + dx, mit_blatt=False).kennzahlen["rendite"]
+    tp = tragbarer_preis(A.ANKAUF, VG, KAT)
+    preis(k, "tragbarer Kaufpreis, Basisfall", tp)
+    pruefe_fest(k, "tragbarer Kaufpreis, Basisfall: Faktor", tp["faktor"], 2)
+    pruefe_fest(k, "tragbarer Kaufpreis, Basisfall: Endwertueberschuss beim Preis", tp["ergebnis"].kennzahlen["endwertueberschuss"])
+    tps = tragbarer_preis(A.ANKAUF, VG, KAT, stress=True)
+    preis(k, "tragbarer Kaufpreis, Stressfall", tps)
+    pruefe_fest(k, "tragbarer Kaufpreis, Stressfall: kleinste Deckung", tps["ergebnis"].deckung_min, 4)
+    tpe = tragbarer_preis(replace(A.ANKAUF, verfuegbares_ek=D(1200000)), VG, KAT)
+    preis(k, "tragbarer Kaufpreis bei 1,2 Mio. Euro verfuegbarem Eigenkapital", tpe)
+    pruefe_fest(k, "... Eigenkapitalbedarf einschliesslich aller Nachschuesse", tpe["ergebnis"].eigenkapitalbedarf)
+    # Knick zwischen Beleihungsquote und Mindestdeckung (R-11.5)
+    knick = int(bm.bank["b"] / VG.beleihungsquote)
+    r = [rechne_grob(A.ANKAUF, VG, KAT, preis=knick + dx, mit_blatt=False).kennzahlen["rendite"]
          for dx in (-20000, -10000, 0, 10000, 20000)]
-    pruefe_gleich(k, f"Rendite faellt beiderseits des Knicks bei {knick} streng", all(b < a for a, b in zip(r, r[1:])), True)
-    info("Rendite um den Knick (je 10.000 Euro): " + " / ".join(proz(x, 4) for x in r))
-    info(f"Steigung links {de((r[2] - r[1]) * 10000, 4)}, rechts {de((r[3] - r[2]) * 10000, 4)} Basispunkte je 10.000 Euro")
+    pruefe_fest(k, "Knick b/beta: Preis", knick)
+    pruefe_gleich(k, "Rendite faellt beiderseits des Knicks", all(b < a for a, b in zip(r, r[1:])), True)
+    pruefe_fest(k, "Rendite um den Knick, je 10.000 Euro (%)", [str((x * 100).quantize(D("0.0001"))) for x in r])
     preise = range(1500000, 3600001, 100000)
-    rs = [rechne_grob(A.ANKAUF, A.VORGABEN, preis=x, mit_blatt=False).kennzahlen["rendite"] for x in preise]
-    pruefe_gleich(k, "Rendite faellt von 1,5 bis 3,6 Mio. Euro streng mit dem Preis", all(b < a for a, b in zip(rs, rs[1:])), True)
+    rs = [rechne_grob(A.ANKAUF, VG, KAT, preis=x, mit_blatt=False).kennzahlen["rendite"] for x in preise]
+    pruefe_gleich(k, "Rendite faellt von 1,5 bis 3,6 Mio. Euro in jedem Schritt von 100.000 Euro", all(b < a for a, b in zip(rs, rs[1:])), True)
     # Zielwertsuche auf gekennzeichnete Eingaben (R-11.9, R-11.10)
-    teuer = replace(A.ANKAUF, kaufpreis=D(2600000))
-    s = suche_eingabe(teuer, A.VORGABEN, "markt_miete", D("6.00"), D("20.00"), D("0.01"))
-    pruefe_gleich(k, "Zielwertsuche Marktmiete bei 2,6 Mio. Euro: Status", s["status"], "eine Loesung")
-    pruefe_fest(k, "Zielwertsuche: noetige Marktmiete", s["loesungen"][0]["wert"])
-    s = suche_eingabe(A.ANKAUF, A.VORGABEN, "stau_betrag", D(0), D(1000000), D(100))
-    pruefe_fest(k, "Zielwertsuche: tragbarer Investitionsstau beim Kaufpreis 2,4 Mio. Euro", s["loesungen"][0]["wert"])
-    s = suche_eingabe(A.ANKAUF, A.VORGABEN, "verkaufsfaktor", D(8), D(40), D("0.01"))
+    s = suche_eingabe(A.ANKAUF, VG, KAT, "vergleichsmiete", D("6.00"), D("20.00"), D("0.01"))
+    pruefe_gleich(k, "Zielwertsuche Vergleichsmiete bei 2,4 Mio. Euro: Status", s["status"], "eine Loesung")
+    pruefe_fest(k, "Zielwertsuche: noetige Vergleichsmiete", s["loesungen"][0]["wert"])
+    s = suche_eingabe(replace(A.ANKAUF, kaufpreis=D(2200000)), VG, KAT, "stau_betrag", D(0), D(1000000), D(100))
+    pruefe_fest(k, "Zielwertsuche: tragbarer Investitionsstau beim Kaufpreis 2,2 Mio. Euro", s["loesungen"][0]["wert"])
+    s = suche_eingabe(A.ANKAUF, VG, KAT, "verkaufsfaktor", D(8), D(40), D("0.01"))
     pruefe_fest(k, "Zielwertsuche: kritischer Verkaufsfaktor", s["loesungen"][0]["wert"])
-    s = suche_eingabe(teuer, A.VORGABEN, "markt_miete", D("6.00"), D("9.00"), D("0.01"))
-    pruefe_gleich(k, "Zielwertsuche ohne Loesung im Bereich", s["status"], "keine Loesung: Ziel im ganzen Bereich verfehlt")
-    s = zielwertsuche(lambda x: (x - 3) * (x - 7), 0, 10, D("0.01"))
+    s = suche_eingabe(A.ANKAUF, VG, KAT, "vergleichsmiete", D("6.00"), D("9.00"), D("0.01"))
+    pruefe_gleich(k, "Zielwertsuche ohne Loesung im Bereich", s["status"], "keine Loesung: Ziel an allen Rasterstellen verfehlt")
+    s = zielwertsuche(lambda x: (x - 3) * (x - 7), 0, 10, D("0.01"), VG.suchraster)
     pruefe_gleich(k, "Zielwertsuche auf eine nicht monotone Funktion: beide Loesungen gemeldet",
                   (s["status"], [str(l["wert"]) for l in s["loesungen"]]), ("2 Loesungen", ["3.00", "7.00"]))
     try:
-        suche_eingabe(A.ANKAUF, A.VORGABEN, "haltedauer", 1, 30, 1)
+        suche_eingabe(A.ANKAUF, VG, KAT, "haltedauer", 1, 30, 1)
         m = None
     except Meldung as x:
         m = x.kennung
     pruefe_gleich(k, "Zielwertsuche auf die Haltedauer ist nicht zugelassen", m, "M-30")
-    # Varianten des Darlehens: gelockerte Tilgung, andere Lesart, uebernommenes Darlehen, Wertansatz
-    gebunden = replace(A.ANKAUF, gebunden_anteil=D("0.4"), bindung_jahre=6, gebundene_miete=D("6.80"),
-                       geb_steigerung=D("0.0615"),
-                       uebernommen=dict(restschuld=D(500000), zins=D("0.005"), tilgungssatz=D("0.02"),
-                                        bindung_jahre=8, anschluss_zins=D("0.03")))
-    eg = rechne_grob(gebunden, A.VORGABEN)
+    # gebundener Bestand mit uebernommenem Darlehen
+    eg = rechne_grob(GEBUNDEN, VG, KAT)
     blatt(k, "Ankauf gebundener Bestand mit uebernommenem Darlehen", eg, kurz=True)
-    pruefe_fest(k, "gebundener Bestand: Miete je m2, Jahre 1 bis 10", [str(x.quantize(D("0.0001"))) for x in eg.miete_je_qm[1:11]])
-    pruefe_fest(k, "gebundener Bestand: Kapitaldienst des uebernommenen Darlehens im ersten Jahr", eg.bemessung.kd_uebrige)
-    eg2 = rechne_grob(gebunden, replace(A.VORGABEN, nur_eigenes_darlehen=True))
-    pruefe_fest(k, "gebundener Bestand, andere Lesart MA-026: Bankdarlehen", eg2.darlehen)
-    pruefe_gleich(k, "andere Lesart MA-026 ergibt das hoehere Darlehen", eg2.darlehen > eg.darlehen, True)
+    pruefe_fest(k, "gebundener Bestand: Miete je m2 im ersten Monat der Jahre 1 bis 12",
+                [str(eg.miete_je_qm[(j - 1) * 12 + 1].quantize(D("0.0001"))) for j in range(1, 13)])
+    pruefe_fest(k, "gebundener Bestand: kalkulatorischer Kapitaldienst des uebernommenen Darlehens", eg.bemessung.kd_uebrige)
+    pruefe_fest(k, "gebundener Bestand: tatsaechlicher Kapitaldienst des uebernommenen Darlehens im ersten Jahr",
+                eg.kd_je_darlehen["Uebernommenes Darlehen"])
+    pruefe_fest(k, "gebundener Bestand: Grenzen (a), (b), (c)", [str(eg.bemessung.bank[x]) for x in "abc"])
+    pruefe_fest(k, "gebundener Bestand: Deckung im ersten Jahr nach jeder Zinsbindung",
+                {n: [j_, str(x.quantize(D("0.0001")))] for n, (j_, x) in eg.deckung_nach_bindung.items()})
+    nach = replace(GEBUNDEN, uebernommen=dict(GEBUNDEN.uebernommen, rang="nach"))
+    eg2 = rechne_grob(nach, VG, KAT)
+    pruefe_fest(k, "gebundener Bestand, Rang des uebernommenen Darlehens nach der Bank: Bankdarlehen", eg2.darlehen)
+    pruefe_fest(k, "gebundener Bestand, Rang nach der Bank: bindende Grenze", eg2.bemessung.bank["bindend"])
+    eg3 = rechne_grob(GEBUNDEN, replace(VG, ma026_vertragszins=True), KAT)
+    pruefe_fest(k, "gebundener Bestand, andere Lesart MA-026 (Vertragskonditionen): Bankdarlehen", eg3.darlehen)
+    egs = rechne_grob(GEBUNDEN, VG, KAT, stress=True)
+    pruefe_fest(k, "gebundener Bestand im Stressfall: Zins des uebernommenen Darlehens im Jahr 9 (Anschluss mit Aufschlag)",
+                egs.plan.jahressumme("zins", 9) - sum(egs.plan.zeilen[u]["tranchen"]["Bankdarlehen"]["zins"] for u in range(97, 109)))
+    pruefe_fest(k, "gebundener Bestand im Stressfall: kleinste Deckung und Jahr", [str(egs.deckung_min.quantize(D("0.0001"))), egs.deckung_min_jahr])
     # Vergleich zweier Fassungen (R-11.11): frei und gebunden
     v = vergleiche(e, eg)
-    pruefe_fest(k, "Vergleich zweier Fassungen: Differenz der Endwertdifferenz (gebunden - frei)", v[1][3])
+    pruefe_fest(k, "Vergleich zweier Fassungen: Zahl der verglichenen Blattgroessen", len(v["zeilen"]))
+    pruefe_fest(k, "Vergleich zweier Fassungen: Differenz der Endwertdifferenz (gebunden - frei)", v["zeilen"][2][3])
+    pruefe_fest(k, "Vergleich zweier Fassungen: abweichende Werte des Auftrags", sorted(x[1] for x in v["abweichende_werte"]))
+    pruefe_gleich(k, "Vergleich zweier Fassungen: gleiche Kernversion", v["versionsgleich"], True)
     # Haltedauertabelle (R-11.13)
-    tab = haltedauer_tabelle(A.ANKAUF, A.VORGABEN, 8, 13)
+    tab = haltedauer_tabelle(A.ANKAUF, VG, KAT, 8, 13)
     pruefe_fest(k, "Haltedauertabelle 8 bis 13 Jahre: VOFI-Rendite (%)", [str((x[3] * 100).quantize(D("0.001"))) for x in tab])
 
 
 def rf12_neubau():
-    k = fall("RF-12", "Grobkalkulation Neubau in Grobform (frei finanziert und mit Grobfoerderung)")
-    n = rechne_grob(A.NEUBAU, A.VORGABEN_NEUBAU)
+    k = fall("RF-12", "Grobkalkulation Neubau in Grobform (frei finanziert, mit KfW-Darlehen, mit Grobfoerderung)")
+    n = rechne_grob(A.NEUBAU, VG, KATN)
     blatt(k, "Neubau frei finanziert", n)
     z = n.plan.zeilen
-    pruefe_fest(k, "Neubau: Baukosten", n.bemessung.baukosten)
-    pruefe_fest(k, "Neubau: Mittelbedarf ohne Bauzeitzinsen", n.bemessung.mittelbedarf)
+    bm = n.bemessung
+    pruefe_fest(k, "Neubau: Baukosten zum Preisstand des Stichtags", bm.baukosten_stichtag)
+    pruefe_fest(k, "Neubau: Baukosten mit Baupreissteigerung ueber die Bauzeit", bm.baukosten)
+    pruefe_fest(k, "Neubau: Monatsraten 1, 2 und 18", [str(z[u]["investition"]) for u in (1, 2, 18)])
+    pruefe_fest(k, "Neubau: Mittelbedarf ohne Bauzeitzinsen", bm.mittelbedarf)
+    pruefe_fest(k, "Neubau: Grenzen (a), (b), (c)", [str(bm.bank[x]) for x in "abc"])
+    pruefe_fest(k, "Neubau: Reinertrag im ersten Jahr der Vollvermietung", bm.reinertrag_vj)
     pruefe_fest(k, "Neubau: Bauzeitzinsen (Summe der Zinsen in der Bauzeit)", sum(x["zins"] for x in z[1:19]))
+    pruefe_fest(k, "Neubau: Bereitstellungszinsen", sum(x["bereit"] for x in z))
     pruefe_fest(k, "Neubau: Monat der ersten Auszahlung des Bankdarlehens", min(u for u in range(19) if z[u]["auszahlung"] > 0))
+    pruefe_fest(k, "Neubau: erster Monat mit Miete (nach dem Anlaufleerstand)", min(u for u in range(1, 60) if z[u]["miete"] > 0))
+    pruefe_fest(k, "Neubau: Rate des Bankdarlehens im Monat 19 (Zins, Tilgung)", [str(z[19]["zins"]), str(z[19]["tilgung"])])
     pruefe_fest(k, "Neubau: Abschreibung im Planjahr 2 (sechs Monate)", z[24]["afa"])
-    tp = tragbarer_preis(A.NEUBAU, A.VORGABEN_NEUBAU)
-    pruefe_fest(k, "Neubau: hoechster tragbarer Grundstueckspreis", tp["preis"], 0)
-    pruefe_fest(k, "Neubau: Meldung der Preissuche", tp["meldung"])
-    ns = rechne_grob(A.NEUBAU, A.VORGABEN_NEUBAU, stress=True)
+    wechsel = [m for m in range(23, 100) if n.miete_je_qm[m] != n.miete_je_qm[m - 1]]
+    pruefe_fest(k, "Neubau: Monate, ab denen eine Mieterhoehung wirkt (bis Monat 99)", wechsel)
+    tp = tragbarer_preis(A.NEUBAU, VG, KATN)
+    preis(k, "tragbarer Grundstueckspreis, frei finanziert", tp)
+    if tp["preis"] is not None:
+        pruefe_fest(k, "tragbarer Grundstueckspreis: je m2 Grundstueck", tp["preis_je_qm_grundstueck"])
+    ns = rechne_grob(A.NEUBAU, VG, KATN, stress=True)
     blatt(k, "Neubau kombinierter Stressfall", ns, kurz=True)
     pruefe_gleich(k, "Neubau Stressfall: Mehrkosten traegt das Eigenkapital",
                   ns.eigenkapital_investitionsphase > n.eigenkapital_investitionsphase and ns.darlehen == n.darlehen, True)
-    gef = replace(A.NEUBAU, foerderung=A.FOERDERUNG_B, haltedauer=20)
-    f = rechne_grob(gef, A.VORGABEN_NEUBAU)
-    blatt(k, "Neubau mit Grobfoerderung, Verkauf nach 20 Jahren", f)
+    pruefe_fest(k, "Neubau Stressfall: Baukosten", ns.baukosten)
+    # KfW-Darlehen als eigene Tranche (R-5.19)
+    kf = rechne_grob(MIT_KFW, VG, KATN)
+    blatt(k, "Neubau mit KfW-Darlehen", kf, kurz=True)
+    pruefe_fest(k, "KfW: Grenzen (a), (b), (c)", [str(kf.bemessung.bank[x]) for x in "abc"])
+    pruefe_fest(k, "KfW: kalkulatorischer Kapitaldienst", kf.bemessung.kd_uebrige)
+    pruefe_fest(k, "KfW: Monat der ersten Auszahlung, erster Tilgungsmonat",
+                [min(kf.plan.e.tranchen[1].auszahlung), min(u for u in range(1, 80) if kf.plan.zeilen[u]["tranchen"]["KfW-Darlehen"]["tilgung"] > 0)])
+    pruefe_fest(k, "KfW: Kapitaldienst je Darlehen im ersten Jahr der Vollvermietung", {a: str(b) for a, b in kf.kd_je_darlehen.items()})
+    tpk = tragbarer_preis(MIT_KFW, VG, KATN)
+    preis(k, "tragbarer Grundstueckspreis mit KfW-Darlehen", tpk)
+    kf2 = rechne_grob(MIT_KFW, replace(VG, ma026_vertragszins=True), KATN)
+    pruefe_fest(k, "KfW, andere Lesart MA-026 (Vertragskonditionen): Bankdarlehen", kf2.darlehen)
+    tpk2 = tragbarer_preis(MIT_KFW, replace(VG, ma026_vertragszins=True), KATN)
+    pruefe_fest(k, "KfW, andere Lesart MA-026: tragbarer Grundstueckspreis", tpk2["preis"], 0)
+    tpv = tragbarer_preis(A.NEUBAU, replace(VG, ma026_vertragszins=True), KATN)
+    pruefe_fest(k, "ohne KfW, andere Lesart MA-026: tragbarer Grundstueckspreis", tpv["preis"], 0)
+    # Stellplaetze (R-6.15)
+    sp = rechne_grob(replace(A.NEUBAU, stellplaetze=20, stellplatz_miete=D(60)), VG, KATN)
+    pruefe_fest(k, "Neubau mit 20 Stellplaetzen: Baukosten zum Preisstand des Stichtags", sp.bemessung.baukosten_stichtag)
+    pruefe_fest(k, "Neubau mit 20 Stellplaetzen: Sollmiete im ersten Vermietungsmonat", sp.ertrag.soll(22))
+    # Grobfoerderung (R-11.14), Haltedauer bis ein Jahr nach dem Bindungsende
+    f = rechne_grob(GEFOERDERT, VG, KATN)
+    blatt(k, "Neubau mit Grobfoerderung, Haltedauer 38 Jahre", f)
     bm = f.bemessung
     pruefe_fest(k, "Grobfoerderung: Foerderdarlehen", bm.foerderdarlehen)
     pruefe_fest(k, "Grobfoerderung: Zuschuss", bm.zuschuss)
+    pruefe_fest(k, "Grobfoerderung: Anteil des Zuschusses, der auf das Gebaeude entfaellt", bm.zuschuss_gebaeude)
     pruefe_fest(k, "Grobfoerderung: Mindesteigenkapital", bm.ek_min)
     pruefe_fest(k, "Grobfoerderung: einbehaltene Entgelte", bm.einbehalt_darlehen + bm.einbehalt_zuschuss)
+    pruefe_fest(k, "Grobfoerderung: Mittelbedarf", bm.mittelbedarf)
     pruefe_fest(k, "Grobfoerderung: Kapitaldienst des Foerderdarlehens im Jahr", bm.kd_uebrige)
-    pruefe_gleich(k, "Grobfoerderung: Meldung M-21 (Reinertrag deckt den Kapitaldienst des Foerderdarlehens nicht)", bm.bank["meldung"], "M-21")
-    pruefe_fest(k, "Grobfoerderung: Rueckzahlung des Zuschusses beim Verkauf (MA-017)", f.verkauf.foerder_rueckzahlung)
-    pruefe_fest(k, "Grobfoerderung: Abloesung des Foerderdarlehens beim Verkauf", f.plan.zeilen[240]["tranchen"]["Foerderdarlehen"]["abloesung"])
-    pruefe_fest(k, "Grobfoerderung: Miete je m2, Vermietungsjahre 1 bis 8", [str(x.quantize(D("0.0001"))) for x in f.miete_je_qm[1:9]])
-    f2 = rechne_grob(gef, replace(A.VORGABEN_NEUBAU, nur_eigenes_darlehen=True))
-    pruefe_fest(k, "Grobfoerderung, andere Lesart MA-026: Bankdarlehen", f2.darlehen)
-    pruefe_gleich(k, "... bindende Grenze ist die Restfinanzierung", f2.bemessung.bank["bindend"], ["c"])
-    pruefe_gleich(k, "... Kontrollsummen", len(f2.befunde), 0)
-    v = vergleiche(rechne_grob(replace(A.NEUBAU, haltedauer=20), A.VORGABEN_NEUBAU), f)
-    pruefe_fest(k, "Vergleich frei gegen gefoerdert (20 Jahre): Differenz der Endwertdifferenz", v[1][3])
+    pruefe_fest(k, "Grobfoerderung: nachhaltiger Reinertrag", bm.ertrag_nachhaltig)
+    pruefe_fest(k, "Grobfoerderung: Grenzen (a), (b), (c)", [str(bm.bank[x]) for x in "abc"])
+    o = f.ohne_bankdarlehen
+    pruefe_fest(k, "Grobfoerderung ohne Bankdarlehen: Deckung der uebrigen Darlehen", o["deckung_uebrige"], 4)
+    pruefe_fest(k, "... Kapitaldienstreserve", o["reserve"])
+    pruefe_fest(k, "... Reinertrag, bei dem die Restfinanzierung moeglich waere", o["reinertrag_noetig"])
+    pruefe_fest(k, "... Miete je m2, bei der die Restfinanzierung moeglich waere", o["miete_noetig"])
+    pruefe_fest(k, "... Eigenkapital ueber dem Mindesteigenkapital", o["eigenkapital_ueber_mindest"])
+    pruefe_fest(k, "... Nachschuesse je Planjahr 1 bis 12", [str(x) for x in f.nachschuss_je_jahr[1:13]])
+    pruefe_fest(k, "Grobfoerderung: Miete je m2 im Monat 22 und im ersten Monat der Bindungsjahre 4, 7 und 10",
+                [str(f.miete_je_qm[m].quantize(D("0.0001"))) for m in (22, 55, 91, 127)])
+    pruefe(k, "Grobfoerderung, 38 Jahre: Rueckzahlung des Zuschusses nach Bindungsende", f.verkauf.foerder_rueckzahlung, "0", "0")
+    f20 = rechne_grob(replace(GEFOERDERT, haltedauer=20), VG, KATN)
+    blatt(k, "Neubau mit Grobfoerderung, Verkauf nach 20 Jahren", f20, kurz=True)
+    pruefe_fest(k, "Grobfoerderung, 20 Jahre: Rueckzahlung des Zuschusses beim Verkauf (MA-017)", f20.verkauf.foerder_rueckzahlung)
+    pruefe_fest(k, "Grobfoerderung, 20 Jahre: Abloesung des Foerderdarlehens beim Verkauf", f20.plan.zeilen[240]["tranchen"]["Foerderdarlehen"]["abloesung"])
+    pruefe_fest(k, "Grobfoerderung, 20 Jahre: Verkaufspreis aus der gebundenen Miete", f20.verkauf.preis_brutto)
+    f2 = rechne_grob(GEFOERDERT, replace(VG, ma026_foerder_nachrang=True), KATN)
+    pruefe_fest(k, "Grobfoerderung, Foerderdarlehen im Nachrang (andere Lesart MA-026): Grenze (a) und Bankdarlehen",
+                [str(f2.bemessung.bank["a"]), str(f2.darlehen)])
+    v = vergleiche(rechne_grob(replace(A.NEUBAU, haltedauer=38), VG, KATN), f)
+    pruefe_fest(k, "Vergleich frei gegen gefoerdert (38 Jahre): Differenz der Endwertdifferenz", v["zeilen"][2][3])
+    tab = haltedauer_tabelle(GEFOERDERT, VG, KATN, 36, 39)
+    pruefe_fest(k, "Grobfoerderung, Haltedauertabelle 36 bis 39 Jahre: Rendite (%)", [str((x[3] * 100).quantize(D("0.001"))) for x in tab])
 
 
 def rf13_steuerstatus():
     k = fall("RF-13", "Grobkalkulation Ankauf je Steuerstatus (derselbe Fall, angenommener Katalogstand)")
     faelle = (("Koerperschaft", A.steuer(KOERPERSCHAFT)),
-              ("Koerperschaft mit erweiterter Kuerzung", A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True)),
+              ("Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig)",
+               A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True)),
+              ("Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030",
+               A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_verkauf=True)),
               ("Koerperschaft, Verluste sofort verrechnet", A.steuer(KOERPERSCHAFT, verlust="sofort")),
-              ("gewerbliche Personengesellschaft, Hebesatz 400 %", A.steuer(GEWERBLICHE_PG)),
-              ("gewerbliche Personengesellschaft, Hebesatz 440 %", A.steuer(GEWERBLICHE_PG, hebesatz=D("4.40"))),
-              ("gewerbliche Personengesellschaft, 440 %, natuerliche Personen 60 %",
+              ("Koerperschaft ohne Gewerbesteuer (Verein, Stiftung)", A.steuer(KOERPERSCHAFT_OHNE_GEWST)),
+              ("originaer gewerbliche Personengesellschaft, Hebesatz 400 %", A.steuer(GEWERBLICHE_PG)),
+              ("originaer gewerbliche Personengesellschaft, Hebesatz 440 %", A.steuer(GEWERBLICHE_PG, hebesatz=D("4.40"))),
+              ("originaer gewerbliche Personengesellschaft, 440 %, natuerliche Personen 60 %",
                A.steuer(GEWERBLICHE_PG, hebesatz=D("4.40"), anteil_natuerliche=D("0.6"))),
-              ("gewerbliche Personengesellschaft, 440 %, mit Kuerzung",
-               A.steuer(GEWERBLICHE_PG, hebesatz=D("4.40"), erweiterte_kuerzung=True)),
+              ("originaer gewerbliche Personengesellschaft, 440 %, Verluste sofort verrechnet",
+               A.steuer(GEWERBLICHE_PG, hebesatz=D("4.40"), verlust="sofort")),
+              ("gewerblich gepraegte Personengesellschaft, 440 %, mit Kuerzung",
+               A.steuer(GEPRAEGTE_PG, hebesatz=D("4.40"), erweiterte_kuerzung=True)),
+              ("gewerblich gepraegte Personengesellschaft, 440 %, 60 %, Objektverkauf als Aufgabegewinn (andere Lesart MA-036)",
+               A.steuer(GEPRAEGTE_PG, hebesatz=D("4.40"), anteil_natuerliche=D("0.6"), aufgabegewinn=True)),
               ("Einzelunternehmen mit Betriebsvermoegen, Hebesatz 440 %", A.steuer(EINZELUNTERNEHMEN, hebesatz=D("4.40"))),
               ("Privatperson, Verkauf nach 12 Jahren", A.steuer(PRIVAT)),
               ("befreite Koerperschaft", A.steuer(BEFREIT)))
     for name, st in faelle:
-        e = rechne_grob(replace(A.ANKAUF, steuer=st), A.VORGABEN)
+        e = rechne_grob(replace(A.ANKAUF, steuer=st), VG, KAT)
         kz = e.kennzahlen
-        pruefe_gleich(k, f"{name}: Kontrollsummen", len(e.befunde), 0)
+        pruefe_gleich(k, f"{name}: Kontrollsummen", (e.gesperrt, len(e.befunde)), (False, 0))
         pruefe_fest(k, f"{name}: Endwert", e.plan.endwert)
         pruefe_fest(k, f"{name}: Endwertdifferenz", kz["endwertdifferenz"])
-        pruefe_fest(k, f"{name}: VOFI-Rendite (%)", kz["rendite"] * 100, 3)
-        pruefe_fest(k, f"{name}: Vergleichsrendite (%)", kz["vergleichsrendite"] * 100, 3)
+        proz_fest(k, f"{name}: VOFI-Rendite", kz["rendite"])
+        proz_fest(k, f"{name}: Vergleichsrendite", kz["vergleichsrendite"])
         pruefe_fest(k, f"{name}: Summe der Steuerzahlungen", sum(e.plan.reihe("steuer")))
-    p10 = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(PRIVAT), haltedauer=10), A.VORGABEN)
-    p11 = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(PRIVAT), haltedauer=11), A.VORGABEN)
+        pruefe_fest(k, f"{name}: Steuer auf den Verkaufsgewinn", e.steuer_verkaufsgewinn)
+    p10 = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(PRIVAT), haltedauer=10), VG, KAT)
+    p11 = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(PRIVAT), haltedauer=11), VG, KAT)
     pruefe_fest(k, "Privatperson, Verkauf nach 10 Jahren: Steuer auf den Verkaufsgewinn", p10.steuer_verkaufsgewinn)
     pruefe(k, "Privatperson, Verkauf nach 11 Jahren: Steuer auf den Verkaufsgewinn", p11.steuer_verkaufsgewinn, "0", "0")
-    tab = haltedauer_tabelle(replace(A.ANKAUF, steuer=A.steuer(PRIVAT)), A.VORGABEN, 9, 12)
+    tab = haltedauer_tabelle(replace(A.ANKAUF, steuer=A.steuer(PRIVAT)), VG, KAT, 9, 12)
     pruefe_fest(k, "Privatperson, Haltedauertabelle 9 bis 12 Jahre: Rendite (%)", [str((x[3] * 100).quantize(D("0.001"))) for x in tab])
 
 
@@ -211,74 +332,73 @@ def rf14_randfaelle():
     pruefe_gleich(k, "Eigenkapital null: Status", kz["rendite_status"], "nicht definiert (kein Eigenkapital)")
     pruefe_fest(k, "Eigenkapital null: Endwert = Endwertdifferenz", plan.endwert)
     pruefe(k, "Eigenkapital null: Endwert der Unterlassensalternative", alt.endwert, "0", "0")
-    # R-14.3 negativer Endwert
+    # R-14.3 negativer Endwert (Kontokorrent unbegrenzt)
     plan, alt, kz = s1(verkauf=500000)
     pruefe_gleich(k, "negativer Endwert: Rendite -100 %", kz["rendite"], D(-1))
     pruefe_fest(k, "negativer Endwert: Endwert", plan.endwert)
     pruefe_gleich(k, "negativer Endwert: Kontrollsummen bestehen", len(__import__("proben").pruefe_plan(plan, alt)), 0)
-    # R-14.4 Haltedauer endet vor der Vollvermietung
-    try:
-        rechne_grob(replace(A.NEUBAU, haltedauer=2), A.VORGABEN_NEUBAU)
-        m = None
-    except Meldung as x:
-        m = x.kennung
-    pruefe_gleich(k, "Neubau, Haltedauer 2 Jahre bei 18 Monaten Bauzeit: Meldung", m, "M-23")
-    n3 = rechne_grob(replace(A.NEUBAU, haltedauer=3), A.VORGABEN_NEUBAU)
+    # R-14.4 Haltedauer endet vor der Vollvermietung (Bauzeit 18, Stressverlaengerung 3, Anlaufleerstand 3, dann 12 Monate)
+    for jahre, soll in ((2, "eingabe"), (3, "ergebnis")):
+        erg = kalkuliere(replace(A.NEUBAU, haltedauer=jahre), VG, KATN)
+        pruefe_gleich(k, f"Neubau, Haltedauer {jahre} Jahre: Status und Meldung M-23",
+                      (erg["status"], "M-23" in [m["kennung"] for m in erg["meldungen"]]), (soll, soll == "eingabe"))
+    n3 = rechne_grob(replace(A.NEUBAU, haltedauer=3), VG, KATN)
     pruefe_fest(k, "Neubau, Haltedauer 3 Jahre: Endwert", n3.plan.endwert)
     pruefe_gleich(k, "Neubau, Haltedauer 3 Jahre: Kontrollsummen", len(n3.befunde), 0)
     # R-14.5 Verkauf im ersten Jahr
-    e1 = rechne_grob(replace(A.ANKAUF, haltedauer=1, stau_betrag=NULL), A.VORGABEN)
+    e1 = rechne_grob(replace(A.ANKAUF, haltedauer=1, stau_betrag=NULL), VG, KAT)
     pruefe_fest(k, "Ankauf, Verkauf nach einem Jahr: Endwert", e1.plan.endwert)
-    pruefe_fest(k, "Ankauf, Verkauf nach einem Jahr: Rendite (%)", e1.kennzahlen["rendite"] * 100, 3)
+    proz_fest(k, "Ankauf, Verkauf nach einem Jahr: Rendite", e1.kennzahlen["rendite"])
     pruefe_fest(k, "Ankauf, Verkauf nach einem Jahr: Vorfaelligkeitsentschaedigung (neun Jahre Restbindung)", e1.plan.zeilen[12]["vfe"])
+    pruefe_fest(k, "Ankauf, Verkauf nach einem Jahr: Meldungen", kennungen(e1))
     pruefe_gleich(k, "Ankauf, Verkauf nach einem Jahr: Kontrollsummen", len(e1.befunde), 0)
     # R-14.6 Investitionsstau nach dem Verkauf: Abzug vom Verkaufserloes zum Preisstand des Stichtags
-    spaet = rechne_grob(replace(A.ANKAUF, haltedauer=10, stau_betrag=D(100000), stau_jahr=12), A.VORGABEN)
+    spaet = rechne_grob(replace(A.ANKAUF, haltedauer=10, stau_betrag=D(100000), stau_jahr=12), VG, KAT)
     pruefe(k, "Stau 100.000 geplant fuer Jahr 12, Verkauf in Jahr 10: Abzug", spaet.verkauf.stau_abzug, "134391.64", "0.01")
     pruefe_gleich(k, "... Kontrollsummen einschliesslich P-05 und P-06", len(spaet.befunde), 0)
     # R-14.7 Ueberfinanzierung
-    try:
-        rechne_grob(replace(A.ANKAUF, uebernommen=dict(restschuld=D(3000000), zins=D("0.01"), tilgungssatz=D("0.02"))), A.VORGABEN)
-        m = None
-    except Meldung as x:
-        m = x.kennung
-    pruefe_gleich(k, "uebernommenes Darlehen ueber dem Mittelbedarf: Meldung", m, "M-22")
-    # R-14.8 Mietausfall 100 %: kein Ertrag, Bankdarlehen null
-    leer = rechne_grob(A.ANKAUF, replace(A.VORGABEN, mietausfall=D(1)))
-    pruefe(k, "Mietausfall 100 %: Bankdarlehen", leer.darlehen, "0", "0")
-    pruefe_gleich(k, "Mietausfall 100 %: Schuldendienstdeckung nicht definiert (kein Kapitaldienst)", leer.dscr_vj, None)
-    pruefe_gleich(k, "Mietausfall 100 %: Kontrollsummen", len(leer.befunde), 0)
-    pruefe_fest(k, "Mietausfall 100 %: Nachschussbedarf", leer.nachschuss_spaeter)
+    erg = kalkuliere(replace(A.ANKAUF, uebernommen=dict(restschuld=D(3000000), zins=D("0.01"), tilgungssatz=D("0.02"))), VG, KAT)
+    pruefe_gleich(k, "uebernommenes Darlehen ueber dem Mittelbedarf: Meldung", erg["meldungen"][0]["kennung"], "M-22")
+    # R-14.8 Leerstand 100 %: kein Ertrag, Bankdarlehen null, Verkaufspreis null
+    leer = rechne_grob(A.ANKAUF, replace(VG, leerstand=D("0.995")), KAT)
+    pruefe(k, "Leerstand und Forderungsausfall 100 %: Bankdarlehen", leer.darlehen, "0", "0")
+    pruefe_gleich(k, "... Schuldendienstdeckung nicht definiert (kein Kapitaldienst)", leer.dscr_vj, None)
+    pruefe_gleich(k, "... Kontrollsummen", len(leer.befunde), 0)
+    pruefe_fest(k, "... Verkaufspreis (Faktor auf die Miete nach Leerstand)", leer.verkauf.preis_brutto)
+    pruefe_fest(k, "Leerstand und Forderungsausfall 100 %: laufender Nachschussbedarf", leer.nachschuss_laufend)
+    pruefe_fest(k, "... Meldungen", kennungen(leer))
     # R-14.9 kein tragbarer Preis / Preis ueber dem Suchbereich
-    tp = tragbarer_preis(replace(A.ANKAUF, stau_betrag=D(6000000), stau_jahr=0), A.VORGABEN)
+    tp = tragbarer_preis(replace(A.ANKAUF, stau_betrag=D(6000000), stau_jahr=0), VG, KAT)
     pruefe_gleich(k, "Stau 6 Mio. Euro zum Stichtag: kein tragbarer Preis", (tp["preis"], tp["meldung"]), (None, "M-32"))
-    tp = tragbarer_preis(A.ANKAUF, replace(A.VORGABEN, zielrendite=D("-0.5")))
+    proz_fest(k, "... Rendite beim kleinsten Preis (Angabe zu M-32)", tp["ergebnis_unten"].kennzahlen["rendite"])
+    tp = tragbarer_preis(A.ANKAUF, replace(VG, zielrendite=D("-0.5")), KAT)
     pruefe_gleich(k, "Zielrendite -50 %: Ziel im ganzen Suchbereich erreicht", (tp["preis"], tp["meldung"]), (None, "M-33"))
-    # R-14.10 interner Zinsfuss mehrdeutig und ohne Loesung
-    loes, wechsel = interner_zinsfuss([D(-1000), D(5000), D(-6000)])
-    pruefe_gleich(k, "interner Zinsfuss -1.000 / +5.000 / -6.000: zwei Vorzeichenwechsel", wechsel, 2)
+    # R-14.10 interner Zinsfuss mehrdeutig, ohne Loesung, ausserhalb des Suchbereichs
+    loes, wechsel, status = izf([D(-1000), D(5000), D(-6000)])
+    pruefe_gleich(k, "interner Zinsfuss -1.000 / +5.000 / -6.000: zwei Vorzeichenwechsel", (wechsel, status), (2, "2 Loesungen"))
     pruefe_reihe(k, "... beide Loesungen 100 % und 200 %", loes, ["1", "2"], "0.000001")
-    loes, wechsel = interner_zinsfuss([D(-1000), D(-50), D(-20)])
-    pruefe_gleich(k, "interner Zinsfuss ohne Vorzeichenwechsel: keine Loesung", (loes, wechsel), ([], 0))
-    # R-14.11 langer Zeitraum: 42 Jahre im Monatsraster, Abschreibung aufgebraucht, Zins ab dem 36. Jahr
-    lang = rechne_grob(replace(A.NEUBAU, foerderung=A.FOERDERUNG_B, haltedauer=42), A.VORGABEN_NEUBAU)
+    pruefe_gleich(k, "interner Zinsfuss ohne Vorzeichenwechsel: keine Loesung", izf([D(-1000), D(-50), D(-20)]), ([], 0, "keine Loesung"))
+    pruefe_gleich(k, "interner Zinsfuss -100 / +1.200: Loesung ausserhalb des Suchbereichs", izf([D(-100), D(1200)])[1:],
+                  (1, "Loesung ausserhalb des Suchbereichs"))
+    # R-14.11 langer Zeitraum: 42 Jahre im Monatsraster, Abschreibung aufgebraucht, Zins nach der zinslosen Zeit
+    lang = rechne_grob(replace(GEFOERDERT, haltedauer=42), VG, KATN)
     pruefe_gleich(k, "42 Jahre, 504 Perioden: Kontrollsummen", len(lang.befunde), 0)
     pruefe_fest(k, "42 Jahre: Endwert", lang.plan.endwert)
     pruefe_fest(k, "42 Jahre: Endwertdifferenz", lang.kennzahlen["endwertdifferenz"])
-    pruefe_fest(k, "42 Jahre: VOFI-Rendite (%)", lang.kennzahlen["rendite"] * 100, 3)
+    proz_fest(k, "42 Jahre: VOFI-Rendite", lang.kennzahlen["rendite"])
     afa = [lang.plan.zeilen[j * 12]["afa"] for j in range(1, 43)]
     pruefe_fest(k, "42 Jahre: letztes Jahr mit Abschreibung", max(j + 1 for j, x in enumerate(afa) if x > 0))
     pruefe(k, "42 Jahre: Rueckzahlung des Zuschusses nach Bindungsende", lang.verkauf.foerder_rueckzahlung, "0", "0")
     zj = [lang.plan.jahressumme("zins", j) for j in range(1, 43)]
     pruefe_fest(k, "42 Jahre: erstes Planjahr mit Zins auf das Foerderdarlehen", min(j + 1 for j, x in enumerate(zj) if x > 0))
     pruefe_fest(k, "42 Jahre: Abloesung des Foerderdarlehens am Ende", lang.plan.zeilen[504]["tranchen"]["Foerderdarlehen"]["abloesung"])
+    pruefe_fest(k, "42 Jahre: Instandhaltung steigt mit dem Gebaeudealter: Bewirtschaftung im Monat 19, 283 und 403 je Preisstand",
+                [str(lang.plan.zeilen[u]["kosten"]) for u in (19, 283, 403)])
     # R-14.12 Jahresmodus und Monatsraster desselben Ankaufs
-    ej = rechne_grob(A.ANKAUF, A.VORGABEN, p=1)
+    ej = rechne_grob(A.ANKAUF, VG, KAT, p=1)
     pruefe_fest(k, "Ankauf im Jahresmodus: Endwert", ej.plan.endwert)
+    proz_fest(k, "Ankauf im Jahresmodus: VOFI-Rendite", ej.kennzahlen["rendite"])
     pruefe_gleich(k, "Ankauf im Jahresmodus: Kontrollsummen", len(ej.befunde), 0)
-    em = rechne_grob(A.ANKAUF, A.VORGABEN)
-    info(f"Ankauf: Endwert Jahresmodus {de(ej.plan.endwert)}, Monatsraster {de(em.plan.endwert)}; "
-         f"Rendite {proz(ej.kennzahlen['rendite'])} gegen {proz(em.kennzahlen['rendite'])}")
 
 
 def alle():

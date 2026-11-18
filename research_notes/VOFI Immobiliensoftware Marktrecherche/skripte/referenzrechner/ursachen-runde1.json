@@ -1,0 +1,59 @@
+{
+ "umbenannt": [
+  ["Beleihungsauslauf \\(%\\)$", "Darlehen zu Kaufpreis oder Gesamtkosten (%)"],
+  ["Verkaufspreis brutto$", "Verkaufspreis"],
+  [": Nachschussbedarf nach der Investitionsphase$", ": laufender Nachschussbedarf nach der Investitionsphase"],
+  ["^RF-11\\|hoechster tragbarer Kaufpreis \\(Basisfall\\)$", "RF-11|tragbarer Kaufpreis, Basisfall: Preis"],
+  ["^RF-11\\|hoechster tragbarer Kaufpreis im kombinierten Stressfall$", "RF-11|tragbarer Kaufpreis, Stressfall: Preis"],
+  ["^RF-11\\|tragbarer Preis: (.*)$", "RF-11|tragbarer Kaufpreis, Basisfall: \\1"],
+  ["^RF-11\\|\\.\\.\\. Grenze, die das Darlehen bestimmt$", "RF-11|tragbarer Kaufpreis, Stressfall: Grenze, die das Darlehen bestimmt"],
+  ["^RF-11\\|gebundener Bestand: Kapitaldienst des uebernommenen Darlehens im ersten Jahr$", "RF-11|gebundener Bestand: tatsaechlicher Kapitaldienst des uebernommenen Darlehens im ersten Jahr"],
+  ["^RF-12\\|Neubau: Baukosten$", "RF-12|Neubau: Baukosten zum Preisstand des Stichtags"],
+  ["^RF-12\\|Neubau: hoechster tragbarer Grundstueckspreis$", "RF-12|tragbarer Grundstueckspreis, frei finanziert: Preis"],
+  ["^RF-12\\|Grobfoerderung: Rueckzahlung des Zuschusses beim Verkauf \\(MA-017\\)$", "RF-12|Grobfoerderung, 20 Jahre: Rueckzahlung des Zuschusses beim Verkauf (MA-017)"],
+  ["^RF-12\\|Grobfoerderung: Abloesung des Foerderdarlehens beim Verkauf$", "RF-12|Grobfoerderung, 20 Jahre: Abloesung des Foerderdarlehens beim Verkauf"],
+  ["^RF-12\\|Neubau mit Grobfoerderung, Verkauf nach 20 Jahren: Verkaufspreis$", "RF-12|Grobfoerderung, 20 Jahre: Verkaufspreis aus der gebundenen Miete"],
+  ["^RF-13\\|gewerbliche Personengesellschaft, 440 %, mit Kuerzung: ", "RF-13|gewerblich gepraegte Personengesellschaft, 440 %, mit Kuerzung: "],
+  ["^RF-13\\|gewerbliche Personengesellschaft, ", "RF-13|originaer gewerbliche Personengesellschaft, "],
+  ["^RF-13\\|Koerperschaft mit erweiterter Kuerzung: ", "RF-13|Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig): "],
+  ["^RF-14\\|Mietausfall 100 %: Nachschussbedarf$", "RF-14|Leerstand und Forderungsausfall 100 %: laufender Nachschussbedarf"]
+ ],
+ "ursachen": [
+  ["^RF-06\\|Monatsraster nach Kapitel 2", "R-7.3: Abschreibung im Monatsraster je Planjahr gebucht statt je Monat gerundet (Sichtung 39; Finanzmathematiker 1)"],
+  ["^RF-1[6-9]\\||^RF-20\\|", "neuer Referenzfall der Ueberarbeitung (Sichtung 1, 4, 9, 10; je nach Fall die Punkte 11 bis 39)"],
+
+  ["^RF-11\\|.*(Miete je m2|Monate, ab denen|nach jeder Erhoehung)", "R-6.3: Bestandsmiete nach BGB-558 mit Vergleichsmiete als Ziel, Wartefrist und Kappung, MA-037 (Sichtung 11); neue Darstellung je Monat"],
+  ["^RF-11\\|.*(gebundene[rn] Bestand|Vergleich zweier Fassungen).*", "wie Basisfall; dazu R-5.11: Rate des uebernommenen Darlehens aus dem urspruenglichen Nennbetrag, kalkulatorischer Kapitaldienst des uebernommenen Darlehens (R-5.12), Rang als Eingabe (Sichtung 2, 18, 20, 22, 24)"],
+  ["^RF-11\\|.*(Stressfall|Stress).*", "wie Basisfall; dazu R-11.8: Zinsanstieg bis zur Kreditzusage und Mehrkosten des Investitionsstaus im Stressfall (Sichtung 22)"],
+  ["^RF-11\\|.*tragbarer (Kaufpreis|Preis) bei.*Eigenkapital|^RF-11\\|\\.\\.\\. Eigenkapitalbedarf", "R-11.6: Eigenkapitalgrenze zaehlt Einlagen und alle Nachschuesse (Sichtung 23); Beispiel jetzt mit 1,2 Mio. Euro"],
+  ["^RF-11\\|.*(tragbarer|Knick|Rendite um den Knick|Zielwertsuche|Haltedauertabelle).*", "Folge von R-6.3 (Mietpfad, Sichtung 11), R-8.1 (Verkaufspreis, Sichtung 12) und R-5.12 (kalkulatorischer Kapitaldienst, Sichtung 18); Suche nach R-11.5 (Sichtung 25)"],
+  ["^RF-11\\|Basisfall: (Bankdarlehen|Eigenkapital der Investitionsphase|Schuldendienstdeckung im ersten|Rate ab Jahr 11|Darlehen zu Kaufpreis|Grenzen|nachhaltiger|Restschuld am Ende|Abloesung)", "R-5.12 (b): Kapitaldienstrechnung mit kalkulatorischem Zins (Anschlusszins) statt Vertragszins (Sichtung 18; Bank 1); Kennzahl R-10.15 umbenannt (Sichtung 16)"],
+  ["^RF-11\\|Basisfall: (Einstiegsfaktor|Verkaufspreis|massgebliche Jahresmiete)", "R-8.1, R-10.13: Faktor auf die Jahresmiete zum Stand des Stichtags nach strukturellem Leerstand statt Sollmiete des Folgejahres (Sichtung 12); dazu Mietpfad R-6.3"],
+  ["^RF-11\\|Basisfall: (kleinste|Planjahr der kleinsten|Zinsdeckung|Kapitaldienstreserve|Restschuld zum Wert|Schuldendienstdeckung je|Deckung im ersten Jahr nach|Anteil der Miete|Fehlbetrag|Meldungen|Modellannahmen|VOFI-Gesamtkapitalrendite)", "neue Groesse des Kennzahlenblatts (Sichtung 8, 16, 19, 27, 28)"],
+  ["^RF-11\\|Basisfall: ", "Folge von R-6.3 (Mietpfad nach BGB-558, Sichtung 11), R-8.1 (Verkaufspreis nach Leerstand zum Stand des Stichtags, Sichtung 12) und R-5.12 (kalkulatorischer Kapitaldienst, Sichtung 18)"],
+
+  ["^RF-12\\|.*(KfW).*", "neu: KfW-Darlehen als eigene Tranche der Grobkalkulation (R-5.19, Sichtung 17)"],
+  ["^RF-12\\|.*(Stellplaetzen).*", "neu: Stellplaetze im Neubau (R-6.15, Sichtung 15)"],
+  ["^RF-12\\|.*(Grobfoerderung|gefoerdert).*", "Neubau wie frei finanziert; dazu MA-031: Zuschuss als Einnahme im Jahr des Zuflusses (Sichtung 34), R-7.15: Entgelte verteilt (Sichtung 33), Voreinstellung der Haltedauer 38 Jahre (Sichtung 26), Angaben ohne Bankdarlehen (R-11.15)"],
+  ["^RF-12\\|Neubau: (Baukosten|Monatsraten|Mittelbedarf|Abschreibung)", "R-11.2: Baukosten ueber die Bauzeit mit der Baupreissteigerung fortgeschrieben; Kostenkennwert fuer die Kostengruppen 300 und 400 mit Zuschlaegen (Sichtung 15)"],
+  ["^RF-12\\|Neubau: (Bereitstellungszinsen|Bauzeitzinsen|Monat der ersten Auszahlung|Rate des Bankdarlehens|Grenzen)", "R-5.18: Bereitstellungszinsen (Sichtung 15); R-5.12: kalkulatorischer Kapitaldienst und Mindestansatz der Bewirtschaftung, dadurch kleineres Bankdarlehen (Sichtung 18)"],
+  ["^RF-12\\|", "Folge von R-11.2 (Baupreissteigerung), R-6.7 (Anlaufleerstand, Miete mit Wartefrist), R-6.8 (Instandhaltung nach Baualter), R-5.18 (Bereitstellungszinsen), R-5.12 (kalkulatorischer Kapitaldienst, Mindestansatz der Bewirtschaftung) und R-8.1 (Verkaufspreis) – Sichtung 12, 14, 15, 18; neue Groessen des Blatts nach Sichtung 8, 19, 27"],
+
+  ["^RF-13\\|.*Kuerzung.*", "wie RF-11; dazu R-7.8: die Kuerzung erfasst nur den Ertrag aus dem Grundbesitz, Zinsen bleiben gewerbesteuerpflichtig, Verkaufsgewinn nach MA-030 (Sichtung 29); Status geteilt (Sichtung 30)"],
+  ["^RF-13\\|.*(sofort).*", "wie RF-11; dazu R-7.16: Hinzurechnung bei sofortiger Verrechnung; R-7.6: Personengesellschaft traegt den Gewerbeverlust vor (Sichtung 32, 35)"],
+  ["^RF-13\\|.*(Aufgabegewinn|ohne Gewerbesteuer).*", "neu: weiterer Steuerstatus und MA-036 (Sichtung 36)"],
+  ["^RF-13\\|Privatperson.*", "wie RF-11; dazu R-7.11: Verkaufsgewinn mit Vermietungsverlust und Verlustvortrag verrechnet, Vorfaelligkeit als Veraeusserungskosten (Sichtung 33, 37); R-9.5: Kontokorrentzinsen der Alternative nicht abziehbar"],
+  ["^RF-13\\|.*Steuer auf den Verkaufsgewinn$", "neu ausgewiesen je Steuerstatus"],
+  ["^RF-13\\|", "wie RF-11 Basisfall: R-6.3 (Mietpfad), R-8.1 (Verkaufspreis), R-5.12 (kalkulatorischer Kapitaldienst) – Sichtung 11, 12, 18; Status der Personengesellschaft geteilt (Sichtung 30)"],
+
+  ["^RF-14\\|42 Jahre.*", "wie RF-12 mit Grobfoerderung: Baupreissteigerung, Anlaufleerstand, Instandhaltung nach Baualter, Zuschuss nach MA-031, Verkaufspreis nach R-8.1 (Sichtung 12, 14, 15, 34)"],
+  ["^RF-14\\|Neubau.*", "wie RF-12: Baupreissteigerung, Anlaufleerstand, Bereitstellungszinsen, kalkulatorischer Kapitaldienst (Sichtung 15, 18)"],
+  ["^RF-14\\|Ankauf, Verkauf nach einem Jahr.*", "wie RF-11; Vorfaelligkeit auf die kleinere Restschuld des kleineren Darlehens (R-5.12, Sichtung 18); Verkaufspreis nach R-8.1 (Sichtung 12)"],
+  ["^RF-14\\|.*(Leerstand und Forderungsausfall 100 %|Rendite beim kleinsten Preis).*", "R-8.1: Verkaufspreis auf die Miete nach Leerstand (Sichtung 12; Grenzfaelle 2); Angabe zu M-32 (Sichtung 9)"],
+  ["^RF-14\\|", "wie RF-11 Basisfall: R-6.3, R-8.1, R-5.12 (Sichtung 11, 12, 18)"],
+
+  ["^RF-11\\|Zielwertsuche: noetige Marktmiete$|^RF-11\\|gebundener Bestand, andere Lesart MA-026: Bankdarlehen$|^RF-12\\|Grobfoerderung, andere Lesart MA-026: Bankdarlehen$", "entfallen: Die Lesart 'nur das eigene Darlehen' gibt es nicht mehr (MA-026 neu geschnitten, Sichtung 20); Suchziel ist die Vergleichsmiete (Sichtung 11)"],
+  ["^RF-11\\|\\.\\.\\. Schuldendienstdeckung im Stressfall$|^RF-11\\|tragbarer Preis bei 900.000", "entfallen: ersetzt durch die kleinste Deckung (Sichtung 19) und das Beispiel mit 1,2 Mio. Euro (Sichtung 23)"],
+  ["^RF-12\\|Neubau mit Grobfoerderung, Verkauf nach 20 Jahren: |^RF-12\\|Grobfoerderung: Miete je m2, Vermietungsjahre|^RF-12\\|Neubau: Meldung der Preissuche|^RF-12\\|Vergleich frei gegen gefoerdert \\(20 Jahre\\)|^RF-11\\|.*Miete je m2", "entfallen: Das volle Blatt steht jetzt beim Fall mit 38 Jahren Haltedauer (Sichtung 26); Mieten werden je Monat ausgewiesen"]
+ ]
+}

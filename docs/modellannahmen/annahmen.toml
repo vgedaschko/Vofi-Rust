@@ -27,13 +27,13 @@ bemerkung = "Bis zur Klärung wird die Kennzahl als eigene Berechnung des Werkze
 [[annahme]]
 id = "MA-002"
 titel = "Tilgungsplan des NBank-Darlehens"
-annahme = "Das zinslose Darlehen wird in gleichbleibenden Jahresraten so getilgt, dass es nach 42 Jahren ab Vollauszahlung zurückgezahlt ist."
+annahme = "Das zinslose Darlehen wird in gleichbleibenden Raten so getilgt, dass es nach 42 Jahren zurückgezahlt ist. Die Raten fallen im Takt des Rechenrasters an, im Monatsraster also monatlich; Tilgung, zinslose Zeit und Bindung zählen ab dem Monat nach der Bauzeit."
 grund = "Die Richtlinie nennt nur die Höchstlaufzeit; den Tilgungsplan setzt die NBank im Einzelfall fest. Ein fester Tilgungssatz steht nicht mehr in der Richtlinie."
-alternative = "Fester Tilgungssatz mit Restschuld am Ende oder schnellere Tilgung nach Vorgabe der NBank."
+alternative = "Fester Tilgungssatz mit Restschuld am Ende oder schnellere Tilgung nach Vorgabe der NBank; Jahresraten statt Monatsraten; Beginn mit der Vollauszahlung statt mit der Bezugsfertigkeit."
 grundlage = "Richtlinie Mietwohnraum 2026: Rückzahlung binnen 42 Jahren."
 quellen = ["NBANK-RL-MIETWOHNRAUM-2026"]
 gewicht = "mittel"
-wirkung = "Liquidität und Schuldendienstdeckung je Jahr; Endwert nur gering, weil das Darlehen 35 Jahre zinslos ist."
+wirkung = "Liquidität und Schuldendienstdeckung je Jahr; Endwert nur gering, weil das Darlehen 35 Jahre zinslos ist. Monatsraten statt Jahresraten ändern den Kapitaldienst des Jahres nicht, senken aber den laufenden Beitrag leicht, weil die Restschuld früher fällt. Im geförderten Neubau des Referenzfalls beträgt der Kapitaldienst des Förderdarlehens 150.431,28 Euro im ersten Jahr der Vollvermietung; er entscheidet mit darüber, dass kein Bankdarlehen bleibt."
 sichtbar = "anwender"
 umschaltbar = true
 klaerung = "NBank"
@@ -41,8 +41,8 @@ wiedervorlage = "nach dem Gespräch mit der NBank; im Einzelfall der Bewilligung
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
-verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage"]
-bemerkung = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-5.11, R-11.14"]
+bemerkung = "Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18): Annahme auf Raten im Takt des Rasters umgestellt; der frühere Wortlaut nannte Jahresraten, der Kern rechnet im Monatsraster Monatsraten. Fragen an die NBank: Jahres- oder Monatsraten, Beginn mit Vollauszahlung oder Bezugsfertigkeit, Beginn der zinslosen Zeit."
 
 [[annahme]]
 id = "MA-003"
@@ -307,11 +307,11 @@ bemerkung = ""
 [[annahme]]
 id = "MA-016"
 titel = "Verrechnung von Anlaufverlusten"
-annahme = "Steuerliche Verluste des Vorhabens werden im Vorhaben vorgetragen und erst mit dessen späteren Gewinnen verrechnet."
+annahme = "Steuerliche Verluste des Vorhabens werden im Vorhaben vorgetragen und erst mit dessen späteren Gewinnen verrechnet. Das Modell nimmt damit an, dass der Investor im Verlustjahr keine anderen Gewinne derselben Steuerart im selben Steuersubjekt hat, mit denen er den Verlust verrechnen könnte."
 grund = "Ob ein Verlust sofort mit anderen Einkünften des Investors verrechnet werden kann, hängt von dessen übriger steuerlicher Lage ab, die das Werkzeug nicht kennt."
-alternative = "Sofortige Verrechnung mit anderen Einkünften des Investors; die Steuerersparnis fließt dann im Verlustjahr zu."
-grundlage = "Verlustabzug nach § 10d EStG. Angesetzt ist der ungünstigere Fall."
-quellen = ["ESTG-10D"]
+alternative = "Sofortige Verrechnung: Der Investor hat im selben Jahr genug andere Gewinne derselben Steuerart im selben Steuersubjekt (Körperschaft oder Organkreis, Betrieb, andere Einkünfte der Privatperson); die Steuerersparnis fließt im Verlustjahr zu. Das Vorhaben gilt dann als Teil eines größeren Steuersubjekts: Freibetrag und Abrundung der Gewerbesteuer und der Freibetrag der Hinzurechnung gelten als verbraucht. Bei der Personengesellschaft gilt die Lesart nur für die Einkommensteuer; ihr Fehlbetrag der Gewerbesteuer wird immer vorgetragen."
+grundlage = "Verlustabzug nach § 10d EStG; Gewerbeverlust nach § 10a GewStG. Voreingestellt ist der Vortrag, weil das Werkzeug die übrige steuerliche Lage des Investors nicht kennt. Welche Lesart das Vorhaben günstiger rechnet, hängt vom Fall ab: Meist ist es die sofortige Verrechnung; im Ankauf des Referenzfalls ergibt sie 4,523 % gegen 4,527 % mit Vortrag, weil der Freibetrag der Hinzurechnung bei ihr als verbraucht gilt."
+quellen = ["ESTG-10D", "GEWSTG-10A"]
 gewicht = "hoch"
 wirkung = "Wert der beschleunigten Abschreibung und der Anlaufverluste im Neubau; Endwert und Rendite nach Steuern."
 sichtbar = "kunde"
@@ -321,8 +321,8 @@ wiedervorlage = "mit der Fachspezifikation des Steuermoduls (Phase 1)"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
-verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus"]
-bemerkung = "Aus Prüfrunde 3 (Fachexperte). Wird als Merkmal je Vorhaben geführt."
+verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus", "Fachspezifikation Rechenkern, R-7.5, R-7.6, Eingabe E-44"]
+bemerkung = "Aus Prüfrunde 3 (Fachexperte). Wird als Merkmal je Vorhaben geführt. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Steuerberater): Annahme über andere Gewinne ausdrücklich genannt; bei der Personengesellschaft keine sofortige Erstattung der Gewerbesteuer. Die Kurzform verrechnet Vorträge unbeschränkt; ein Vortrag über dem Sockelbetrag löst einen Hinweis aus (MA-010)."
 
 [[annahme]]
 id = "MA-017"
@@ -507,22 +507,22 @@ bemerkung = "Aus Prüfrunde 3 (Jurist); Grund und andere Lesart nach Prüfrunde 
 [[annahme]]
 id = "MA-026"
 titel = "Rechengrundlage des Bankdarlehens"
-annahme = "Die Bank rechnet über alle Darlehen: Die Beleihungsquote begrenzt die Summe aller Darlehen gegen den Wertansatz, und die Mindestdeckung rechnet aus dem Reinertrag im ersten Jahr der Vollvermietung gegen den Kapitaldienst aller Darlehen einschließlich eines Förderdarlehens oder übernommenen Darlehens. Wertansatz ist der Kaufpreis, beim Neubau die Gesamtkosten, nicht ein eigener Beleihungswert."
+annahme = "Offen ist an der Rechnung der Bank viererlei; voreingestellt ist jeweils die vorsichtige Lesart, außer beim Wertansatz. (1) Beleihungsraum: Das Förderdarlehen der Grobförderung und ein KfW-Darlehen belegen den Beleihungsraum der Bank; für ein übernommenes Darlehen ist der Rang Eingabe. (2) Kapitaldienst: Die Bank rechnet die Kapitaldienstfähigkeit kalkulatorisch, je Darlehen mit dem höheren Zins aus Vertragszins und kalkulatorischem Zins (Vorgabe des Hauses, voreingestellt der Anschlusszins) und mindestens der Mindesttilgung. (3) Ertrag: Sie setzt den nachhaltigen Reinertrag an, den kleineren Wert aus Miete und ortsüblicher Vergleichsmiete, mit Bewirtschaftungskosten mindestens nach dem Katalog. (4) Wertansatz ist der Kaufpreis, beim Neubau die Gesamtkosten, nicht ein eigener Beleihungswert. Keine Annahme, sondern Festlegung ist, dass die Mindestdeckung immer über den Kapitaldienst aller Darlehen rechnet."
 grund = "Wie eine Bank Kapitaldienstfähigkeit und Beleihung im Einzelfall rechnet, ist nicht veröffentlicht und von Haus zu Haus verschieden: mit welchem Ertrag, ob vorrangige und geförderte Darlehen auf Quote und Deckung angerechnet werden und auf welchen Wert."
-alternative = "Die Bank rechnet Beleihungsquote und Mindestdeckung nur für ihr eigenes Darlehen; dann fällt das Bankdarlehen neben einem Förderdarlehen oder übernommenen Darlehen höher aus. Oder sie setzt einen eigenen Wert an, etwa einen Beleihungswert unter dem Kaufpreis; dann fällt es niedriger aus."
-grundlage = "Gegenrechnungen der Prüfrunden 4 und 5 (Finanzmathematiker, Fachexperte, Praktiker). Bei Beleihungsquote und Mindestdeckung ist der ungünstigere Fall angesetzt; die andere Lesart ist umschaltbar. Begründete Ausnahme von der Vorsichtsregel beim Wertansatz: Voreingestellt ist der Kaufpreis, beim Neubau die Gesamtkosten, obwohl ein eigener Wert der Bank darunter liegen kann. Die Grobkalkulation kennt keinen Beleihungswert; die Ausnahme wirkt höchstens bis zum Darlehen nach Mindestdeckung, das aus dem Ertrag und nicht aus dem Gebot folgt. Der Wert ist als „Wertansatz der Bank“ überschreibbar, über dem Kaufpreis nur mit Begründung, und das Blatt zeigt, welche Grenze das Darlehen bestimmt."
-quellen = []
+alternative = "(1) Das Förderdarlehen steht im Nachrang und belegt den Beleihungsraum nicht. (2) Die Bank rechnet mit den Vertragskonditionen. (3) Sie setzt Ertrag und Bewirtschaftung des Vorhabens an. Alle drei sind umschaltbar und lassen das Bankdarlehen höher ausfallen. (4) Die Bank setzt einen Beleihungswert unter dem Kaufpreis an; dann fällt das Darlehen niedriger aus."
+grundlage = "Gegenrechnungen der Prüfrunden 4 und 5 zum Recherchebericht und der Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Rolle Bank). Bewirtschaftungsansatz nach der Beleihungswertermittlungsverordnung. Begründete Ausnahme von der Vorsichtsregel beim Wertansatz: Voreingestellt ist der Kaufpreis, beim Neubau die Gesamtkosten ohne Bauzeitzinsen, obwohl ein eigener Wert der Bank darunter liegen kann. Die Grobkalkulation kennt keinen Beleihungswert; die Ausnahme wirkt höchstens bis zum Darlehen nach Mindestdeckung, das aus dem Ertrag und nicht aus dem Gebot folgt. Der Wert ist als „Wertansatz der Bank“ überschreibbar, über dem Kaufpreis nur mit Begründung, und das Blatt zeigt, welche Grenze das Darlehen bestimmt."
+quellen = ["BELWERTV-11"]
 gewicht = "hoch"
-wirkung = "Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation. Im geförderten Neubau und beim Ankauf gebundener Bestände entscheidet die Lesart über das Eigenkapital: im Beispiel des Berichts (Anhang D.4) über bis zu 1 Mio. Euro bei 10 Mio. Euro Gesamtkosten."
+wirkung = "Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation. Ankauf des Referenzfalls: Bankdarlehen 1.226.609,99 Euro kalkulatorisch gegen 1.431.044,99 Euro mit Vertragskonditionen; höchster tragbarer Preis 2.317.235 Euro gegen 2.359.366 Euro. Bei einer Ist-Miete über der Vergleichsmiete 1.355.969,99 Euro gegen 1.560.000,00 Euro mit dem Ertrag des Vorhabens. Neubau mit KfW-Darlehen: tragbarer Grundstückspreis 924.244 Euro gegen 1.286.380 Euro mit Vertragskonditionen. Im geförderten Neubau des Referenzfalls bleibt in jeder Lesart des Beleihungsraums kein Bankdarlehen, weil die Deckung bindet."
 sichtbar = "kunde"
 umschaltbar = true
-klaerung = "Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses"
+klaerung = "Hausbank (zehn Fragen in der Fachspezifikation des Rechenkerns, Kapitel 16); die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins) sind Vorgaben des Hauses"
 wiedervorlage = "mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
-verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation"]
-bemerkung = "Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Prüfrunde 5: Bezug der Beleihungsquote auf die Summe aller Darlehen festgelegt, Gewicht von mittel auf hoch gesetzt, Wertansatz als Ausnahme von der Vorsichtsregel gekennzeichnet. Weitere Frage an die Hausbank: Rechnet sie den Reinertrag der Deckung mit eigenen Bewirtschaftungspauschalen statt mit den Kosten des Vorhabens?"
+verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation", "Fachspezifikation Rechenkern, R-5.12, R-5.19, R-11.14, R-11.15"]
+bemerkung = "Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Prüfrunde 5: Bezug der Beleihungsquote auf die Summe aller Darlehen festgelegt, Gewicht von mittel auf hoch gesetzt, Wertansatz als Ausnahme von der Vorsichtsregel gekennzeichnet. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Bank und Praktiker): neu geschnitten. Die Deckung über alle Darlehen ist jetzt Festlegung; der frühere Schalter verband Beleihungsraum und Deckung. Neu als vorsichtige Voreinstellung: kalkulatorischer Kapitaldienst und nachhaltiger Reinertrag; der Entwurf rechnete mit Vertragszins und dem Ertrag des Vorhabens."
 
 [[annahme]]
 id = "MA-027"
@@ -583,3 +583,163 @@ gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage"]
 bemerkung = "Aus Prüfrunde 5 (Jurist, Befund 1; Sichtung, Punkt 12)."
+
+[[annahme]]
+id = "MA-030"
+titel = "Gewerbesteuer auf den Verkaufsgewinn bei erweiterter Kürzung"
+annahme = "Bei gesetztem Kennzeichen „erweiterte Grundstückskürzung“ unterliegt der Gewinn aus dem Verkauf des Objekts der Gewerbesteuer. Gekürzt wird nur der laufende Ertrag aus Verwaltung und Nutzung des Grundbesitzes."
+grund = "Das Gesetz kürzt um den Teil des Gewerbeertrags, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt. Ob der Gewinn aus dem Verkauf des Objekts dazu gehört, sagt der Wortlaut nicht; es hängt von Rechtsprechung und vom Einzelfall ab, etwa davon, ob der Verkauf Teil der Vermögensverwaltung ist."
+alternative = "Der Verkaufsgewinn gehört zum gekürzten Ertrag und bleibt gewerbesteuerfrei."
+grundlage = "Wortlaut von § 9 Nr. 1 Satz 2 GewStG, gelesen vom Steuerberater in der Prüfrunde; Rechtsprechung zur Kürzung im Veräußerungsjahr nicht gelesen. Angesetzt ist der ungünstigere Fall. Keine Annahme, sondern am Wortlaut belegt ist, dass Zinserträge nicht gekürzt werden."
+quellen = ["GEWSTG-9", "GEWSTG-7"]
+gewicht = "hoch"
+wirkung = "Steuer im Verkaufsjahr, Endwert, Rendite und höchster tragbarer Preis bei Körperschaften und gewerblich geprägten Personengesellschaften mit Kennzeichen. Ankauf des Referenzfalls: Rendite 4,697 % gegen 5,161 % in der anderen Lesart; Steuer auf den Verkaufsgewinn 245.386,69 Euro gegen 105.456,69 Euro, also 139.930,00 Euro mehr."
+sichtbar = "kunde"
+umschaltbar = true
+klaerung = "Steuerberater des Auftraggebers"
+wiedervorlage = "mit der Antwort des Steuerberaters; spätestens vor dem Einsatz von Teilschritt 1a"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus", "Spezifikation Kapitel 2, Grobkalkulation", "Fachspezifikation Rechenkern, R-7.8, R-7.14, R-7.17"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 1). Der Entwurf hatte mit dem Kennzeichen den ganzen Gewerbeertrag freigestellt; das war eine nicht gekennzeichnete Ausnahme von der Vorsichtsregel."
+
+[[annahme]]
+id = "MA-031"
+titel = "Steuerliche Einordnung des NBank-Zuschusses"
+annahme = "Der Zuschuss der Wohnraumförderung ist im Jahr des Zuflusses steuerpflichtige Einnahme; Abschreibungsgrundlage und Boden bleiben ungemindert, eine Rückzahlung beim Verkauf mindert den Verkaufsgewinn."
+grund = "Für Investitionszuschüsse lässt die Verwaltung im Betriebsvermögen ein Wahlrecht zwischen Einnahme und Minderung der Herstellungskosten zu; ein Zuschuss, der an eine langjährige Belegungs- und Mietbindung geknüpft ist, kann auch als Entgelt für die Bindung gelten und wäre dann über die Bindung zu verteilen. Welche Einordnung für den Zuschuss der NBank gilt, ist nicht geklärt."
+alternative = "Einnahme, verteilt über die Dauer der Bindung; oder Minderung der Herstellungskosten, wobei nur der Anteil des Zuschusses, der auf das Gebäude entfällt, die Abschreibungsgrundlage mindert. Beide Lesarten sind gebaut und umschaltbar."
+grundlage = "Einschätzung des Steuerberaters in der Prüfrunde; die Verwaltungsanweisungen zu Zuschüssen sind nicht gelesen. Voreingestellt ist die Lesart mit der niedrigsten Endwertdifferenz und Rendite. Ihr Endwert ist der höchste der drei, weil die frühe Steuer als Nachschuss das eingesetzte Eigenkapital erhöht; der Endwert ist deshalb nicht der Maßstab."
+quellen = ["NBANK-RL-MIETWOHNRAUM-2026", "ESTG-11", "ESTG-7"]
+gewicht = "hoch"
+wirkung = "Steuer der Bauzeit und der Bindung, Eigenkapitalbedarf, Endwertdifferenz und Rendite im geförderten Neubau. Referenzfall mit 38 Jahren Haltedauer: Rendite 3,558 % bei sofortiger Einnahme gegen 3,973 % (verteilt) und 3,974 % (Minderung); Endwertdifferenz 5.305.318,55 Euro gegen 5.700.811,35 und 5.706.360,57 Euro; Eigenkapital der Investitionsphase 2.444.791,88 Euro gegen 2.121.717,82 Euro bei Verteilung. Mit 20 Jahren: 1,675 % gegen 2,137 %."
+sichtbar = "kunde"
+umschaltbar = true
+klaerung = "Steuerberater des Auftraggebers; zur Praxis der Bewilligung die NBank"
+wiedervorlage = "mit der Antwort des Steuerberaters; spätestens vor dem Förderteil (1c)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-7.3, R-7.4, R-7.19, R-11.14"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 6; Grenzfälle, Befund 9). Der Entwurf minderte die Abschreibungsgrundlage um den ganzen Zuschuss, auch um den Anteil, der auf das Grundstück entfällt. Übersteigt der Zuschuss die Kosten, auf die er entfällt, rechnet der Kern nicht (Meldung)."
+
+[[annahme]]
+id = "MA-032"
+titel = "Finanzierungskosten und Vorfälligkeit in der Steuer"
+annahme = "Die Entgelte der NBank auf Darlehen und Zuschuss gelten als laufzeitbezogen und werden im Betriebsvermögen über die Zinsbindung verteilt. Ein Disagio der Privatperson gilt als marktüblich und ist im Jahr der Zahlung abziehbar. Die Vorfälligkeitsentschädigung der Privatperson beim Verkauf gilt als Veräußerungskosten: Sie mindert nur einen steuerpflichtigen Verkaufsgewinn und nicht die Einkünfte aus Vermietung."
+grund = "Belegt ist, dass laufzeitbezogene Entgelte im Betriebsvermögen abzugrenzen sind und dass die Privatperson Ausgaben im Jahr der Zahlung abzieht, ein marktübliches Disagio eingeschlossen. Offen ist, ob die Entgelte der NBank laufzeitbezogen sind, wann ein Disagio marktüblich ist und wie die Vorfälligkeitsentschädigung der Privatperson beim Verkauf einzuordnen ist; das hängt an Verwaltungsauffassung und Rechtsprechung, die nicht gelesen sind."
+alternative = "Entgelte der NBank sind im Jahr der Zahlung abziehbar (umschaltbar). Ein Disagio der Privatperson ist zu verteilen. Die Vorfälligkeitsentschädigung der Privatperson ist Werbungskosten aus Vermietung."
+grundlage = "Rechnungsabgrenzung nach § 5 Abs. 5 EStG und Abflussprinzip nach § 11 Abs. 2 EStG, gelesen vom Steuerberater in der Prüfrunde; im Übrigen dessen Einschätzung. Angesetzt ist jeweils der ungünstigere Fall."
+quellen = ["ESTG-5", "ESTG-11", "ESTG-23"]
+gewicht = "mittel"
+wirkung = "Zeitpunkt des Abzugs und damit Steuer der ersten Jahre und des Verkaufsjahres. Geförderter Neubau des Referenzfalls: Rendite 3,558 % mit Verteilung der Entgelte gegen 3,573 % bei Abzug im Jahr der Zahlung; Endwertdifferenz 5.305.318,55 Euro gegen 5.321.983,34 Euro. Bei der Privatperson mit steuerfreiem Verkauf mindert die Vorfälligkeitsentschädigung keine Steuer."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Steuerberater des Auftraggebers"
+wiedervorlage = "mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-7.2, R-7.11, R-7.15"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 5). Der Entwurf zog alle Finanzierungskosten im Jahr der Zahlung ab. Umschaltbar ist die Lesart zu den Entgelten; die beiden Punkte zur Privatperson sind fest gebaut und werden mit der Antwort des Steuerberaters überprüft."
+
+[[annahme]]
+id = "MA-033"
+titel = "Vorfälligkeitsentschädigung als Pauschale"
+annahme = "Wird vor dem Ende der Zinsbindung verkauft, beträgt die Vorfälligkeitsentschädigung Restschuld mal Satz des Hauses mal Restbindung in Jahren. Die Restbindung endet spätestens mit dem gesetzlichen Kündigungsrecht des Darlehensnehmers; für Förderdarlehen fällt keine Entschädigung an."
+grund = "Die Bank berechnet ihren Zinsschaden aus dem Vertragszins, dem Wiederanlagezins am Tag der Ablösung, ersparten Kosten und Sondertilgungsrechten. Das Zinsniveau beim Verkauf ist heute nicht bekannt."
+alternative = "Zinsschadenrechnung der Bank: Die Entschädigung kann null sein, wenn das Zinsniveau beim Verkauf über dem Vertragszins liegt, oder über der Pauschale, wenn es darunter liegt."
+grundlage = "Anspruch der Bank nach § 490 Abs. 2 BGB und Kündigungsrecht nach zehn Jahren nach § 489 Abs. 1 Nr. 2 BGB, gelesen in der Prüfrunde (Bank, Fachexperte). Die Höhe der Pauschale ist Vorgabe des Hauses. Beim übernommenen Darlehen zählt die Frist des Kündigungsrechts ab dem Stichtag, weil das Datum des Empfangs keine Eingabe ist; das ist die längste Restbindung."
+quellen = ["BGB-489", "BGB-490"]
+gewicht = "mittel"
+wirkung = "Endwert und Rendite bei Verkauf vor dem Ende einer Zinsbindung; Haltedauertabelle und Stressfälle mit kurzer Haltedauer. Ankauf des Referenzfalls mit Verkauf nach einem Jahr: 108.146,07 Euro bei 1.201.623,01 Euro Restschuld. Bei 40 Jahren Zinsbindung begrenzt das Kündigungsrecht die Restbindung auf 114 Monate: 114.154,19 Euro statt einer Pauschale über 39 Jahre."
+sichtbar = "anwender"
+umschaltbar = false
+klaerung = "Hausbank"
+wiedervorlage = "nach dem Gespräch mit der Hausbank; Zinsschadenrechnung mit der Vollkalkulation (Teil 2 der Fachspezifikation)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-5.16, Vorgabe H-18"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Bank, Befund 5; Fachexperte, Befund 3; Grenzfälle, Befund 5): Kappung am Kündigungsrecht ergänzt, Gewicht von gering auf mittel gesetzt. Nicht umschaltbar, weil die andere Lesart das Zinsniveau beim Verkauf als Eingabe braucht; der Satz ist als Vorgabe des Hauses veränderbar."
+
+[[annahme]]
+id = "MA-034"
+titel = "Prolongation mit unverändertem Tilgungssatz"
+annahme = "Nach dem Ende der Zinsbindung setzt die Bank die Rate neu aus der Restschuld, dem Anschlusszins und dem anfänglichen Tilgungssatz, mindestens der Mindesttilgung des Hauses."
+grund = "Wie prolongiert wird, vereinbaren Bank und Darlehensnehmer erst am Ende der Zinsbindung."
+alternative = "Die bisherige Rate bleibt; oder die Restlaufzeit bleibt, und die Rate wird als Annuität über die verbleibende Laufzeit neu gerechnet. Beide sind als Vorgabe des Hauses wählbar."
+grundlage = "Übliche Praxis nach Einschätzung der Prüfer. Begründete Ausnahme von der Vorsichtsregel: Die drei Regeln lassen sich nicht in eine feste Reihenfolge bringen. Der unveränderte Tilgungssatz ergibt die niedrigste Rate und damit die höchste Deckung nach der Zinsbindung, aber die niedrigste Endwertdifferenz. Für die Endwertdifferenz ist die Voreinstellung die vorsichtige Lesart, für die Deckung nicht; deshalb weist das Blatt die Deckung nach jeder Zinsbindung eigens aus."
+quellen = []
+gewicht = "gering"
+wirkung = "Rate, Restschuld und Deckung nach der Zinsbindung; Endwert nur gering. Ankauf des Referenzfalls, Endwertdifferenz und Deckung im Jahr 11: Tilgungssatz bleibt 753.701,96 Euro und 2,0853; Rate bleibt 754.107,08 Euro und 1,8358; Restlaufzeit bleibt 754.381,58 Euro und 1,7002."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Hausbank"
+wiedervorlage = "nach dem Gespräch mit der Hausbank"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-5.9, Vorgabe H-07"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Bank, Frage 9; Controller, Befund 10). Die Regel „Restlaufzeit bleibt“ rundet die Restlaufzeit auf ganze Perioden ab und fällt ohne Tilgung auf den unveränderten Tilgungssatz zurück (Meldung)."
+
+[[annahme]]
+id = "MA-035"
+titel = "CO2-Einstufung aus der Effizienzklasse"
+annahme = "Ist der CO2-Ausstoß des Gebäudes nicht eingegeben, leitet der Katalog ihn aus Effizienzklasse und Energieträger ab und setzt den Ausstoß an der oberen Grenze der Klasse an."
+grund = "Der Anteil des Vermieters an den CO2-Kosten richtet sich nach dem Ausstoß in Kilogramm CO2 je Quadratmeter und Jahr. Die Effizienzklasse des Energieausweises beruht auf dem Energiebedarf oder -verbrauch und nicht auf dem Ausstoß; die Umrechnung über den Energieträger ist eine Näherung."
+alternative = "Der tatsächliche Ausstoß aus der Heizkostenabrechnung; er ist als Eingabe vorgesehen und geht der Näherung vor."
+grundlage = "Stufen nach der Anlage zum Kohlendioxidkostenaufteilungsgesetz. Angesetzt ist der ungünstigere Fall innerhalb der Klasse."
+quellen = ["CO2KOSTAUFG-5", "CO2KOSTAUFG-ANLAGE"]
+gewicht = "gering"
+wirkung = "Laufende Kosten des Vermieters im Bestand. Im Ankauf des Referenzfalls (30 kg je m², Vermieteranteil 40 %, 50 Euro je Tonne als Annahmen) 792 Euro im ersten Jahr bei 134.640 Euro Jahresmiete."
+sichtbar = "anwender"
+umschaltbar = false
+klaerung = "Anwender je Vorhaben (Heizkostenabrechnung des Verkäufers)"
+wiedervorlage = "mit der Vollkalkulation Ankauf Bestand (1b-1)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-6.9, Eingabe E-34, Katalogwert KAT-09"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 6). Nicht umschaltbar: Die andere Lesart ist die Eingabe des Ausstoßes. Der CO2-Preis ist keine Modellannahme, sondern eine Vorgabe des Hauses."
+
+[[annahme]]
+id = "MA-036"
+titel = "Objektverkauf der GmbH & Co. KG: laufender Gewinn oder Aufgabegewinn"
+annahme = "Der Gewinn aus dem Verkauf des Objekts ist bei der Personengesellschaft laufender Gewinn und gehört in voller Höhe zum Gewerbeertrag; die Gewerbesteuer wird bei natürlichen Personen angerechnet."
+grund = "Hält die Gesellschaft nur dieses Objekt, kann der Verkauf die Aufgabe des Betriebs sein. Der Aufgabegewinn gehört nur insoweit zum Gewerbeertrag, als er nicht auf natürliche Personen als unmittelbar beteiligte Gesellschafter entfällt. Welcher Fall vorliegt, hängt vom Einzelfall und von der Rechtsprechung ab."
+alternative = "Aufgabegewinn: Der Anteil des Verkaufsgewinns, der auf natürliche Personen entfällt, bleibt gewerbesteuerfrei. Umschaltbar."
+grundlage = "Wortlaut von § 7 Satz 2 GewStG; Einordnung als Einschätzung des Steuerberaters in der Prüfrunde. Voreingestellt ist der laufende Gewinn: Bis zu einem Hebesatz in Höhe des Anrechnungsfaktors ist das wegen der Anrechnung nahezu neutral, darüber die ungünstigere Lesart. Tarifermäßigungen für Aufgabegewinne rechnet die Kurzform nicht."
+quellen = ["GEWSTG-7", "ESTG-35", "ESTG-15"]
+gewicht = "mittel"
+wirkung = "Steuer im Verkaufsjahr bei Personengesellschaften mit natürlichen Personen als Gesellschaftern. Ankauf des Referenzfalls bei 440 % Hebesatz und 60 % natürlichen Personen: Rendite 3,324 % als laufender Gewinn gegen 3,487 % als Aufgabegewinn."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Steuerberater des Auftraggebers"
+wiedervorlage = "mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus", "Fachspezifikation Rechenkern, R-7.18"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 8)."
+
+[[annahme]]
+id = "MA-037"
+titel = "Kappungsspielraum bei unbekannter Mietenhistorie"
+annahme = "Ist die Mietenhistorie nicht eingegeben, gilt die letzte Mieterhöhung als zum Stichtag erfolgt und die Kappungsgrenze als ausgeschöpft: Die erste Erhöhung fällt frühestens nach der Wartefrist und frühestens einen Monat nach Ablauf des Kappungszeitraums ab dem Stichtag."
+grund = "Wartefrist und Kappungsgrenze hängen davon ab, wann und um wie viel die Miete in den Jahren vor dem Ankauf erhöht wurde. Das Exposé nennt das in der Regel nicht; die Mieterliste liegt erst zur Vollkalkulation vor."
+alternative = "Die letzte Erhöhung liegt mindestens den Kappungszeitraum zurück: Die Wartefrist ist abgelaufen, und die Kappungsgrenze steht voll zur Verfügung. Umschaltbar; mit eingegebener Mietenhistorie entfällt die Annahme."
+grundlage = "Wartefrist und Kappungsgrenze nach § 558 BGB, gelesen vom Fachexperten in der Prüfrunde; Werte je Gemeinde aus dem Katalog. Angesetzt ist der ungünstigere Fall."
+quellen = ["BGB-558"]
+gewicht = "mittel"
+wirkung = "Mietpfad der ersten Jahre im Bestand, Reinertrag, Verkaufspreis und höchster tragbarer Preis. Ankauf des Referenzfalls: höchster tragbarer Preis 2.317.235 Euro gegen 2.322.775 Euro in der anderen Lesart; dort steigt die Miete schon im Monat 13 statt im Monat 37."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Anwender je Vorhaben (Mieterliste des Verkäufers)"
+wiedervorlage = "mit der Mieterliste der Vollkalkulation Ankauf Bestand (1b-1)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation", "Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-6.3, Eingabe E-33"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 1; Praktiker, Befund 5). Der Entwurf führte die Miete linear zur Marktmiete und prüfte nur die Kappung gegen die Miete drei Jahre zuvor."

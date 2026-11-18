@@ -2,19 +2,20 @@
 
 **Zweck:** Legt fest, wie der Rechenkern rechnet – so genau, dass ein Entwickler ohne Rückfrage implementieren und ein Finanzmathematiker jede Zahl nachrechnen kann. Teil 1 deckt den allgemeinen Kern (Zeit, Finanzplan, Darlehen, Steuer in Kurzform, Restwert, Unterlassensalternative, Kennzahlen, Rundung, Kontrollsummen) und die Grobkalkulation des Teilschritts 1a ab.
 **Leser:** Entwicklung, Fachautoren des Fachhandbuchs, Prüfer. Der Auftraggeber liest das Dokument nicht; was er entscheiden muss, steht in Kapitel 16 und geht von dort nach `TASKS.md`.
-**Stand:** 2026-11-18 · Entwurf zur Prüfrunde
+**Stand:** 2026-11-18 · überarbeitet nach Prüfrunde 1 (Sichtung in `docs/pruefung/2026-11-18-fachspezifikation-rechenkern/sichtung.md`)
 **Geltung:** Konkretisiert `docs/spezifikation.md`, Kapitel 3 (und die Zeilen „Kennzahlen“, „Zielrendite und Schwellen“ und „Grobkalkulation“ in Kapitel 2). Bei Widerspruch gilt die Spezifikation. Der Recherchebericht (`reports/VOFI Immobiliensoftware Marktrecherche.md`, Anhang A und D) ist abgenommen und wird nicht fortgeschrieben; für den Rechenkern löst ihn dieses Dokument ab.
 
 ## Wie dieses Dokument zu lesen ist
 
-- **Jede Regel hat eine Nummer** (`R-4.3`). Code und Tests verweisen auf diese Nummer. Eine Regel steht an genau einem Ort; andere Stellen verweisen.
-- **Jede Zahl kommt aus dem Referenzrechner** unter `research_notes/VOFI Immobiliensoftware Marktrecherche/skripte/referenzrechner/` (Python, nur Standardbibliothek). `python3 referenzfaelle.py` rechnet 15 Referenzfälle mit 529 Prüfungen und endet nur dann mit Rückgabewert 0, wenn alle in ihrer Toleranz liegen; `python3 beispielwerte.py` druckt die übrigen Beispielzahlen. Der Referenzrechner ist kein Produktcode, sondern der Beleg, dass die Regeln eindeutig und rechenbar sind.
-- **Rechts-, Förder- und Normangaben** stehen nur als Kennung des Quellenkatasters (`docs/quellenkataster.md`), zum Beispiel `GEWSTG-11`. Steuersätze, Fördersätze und Fristen sind Katalogwerte und in diesem Dokument nie Festwerte. Wo ein Beispiel einen Satz braucht, steht „Annahme“ dabei; die angenommenen Werte stehen gesammelt in `annahmen.py` des Referenzrechners.
-- **Modellannahmen** tragen ihre Kennung (`MA-012`) an jeder Stelle, an der sie wirken (`docs/modellannahmen.md`).
-- **Neue Festlegung** heißt: Spezifikation und Bericht lassen den Punkt offen, dieses Dokument entscheidet ihn. Jede neue Festlegung hat einen Satz Begründung und steht noch einmal in Kapitel 17.
+- **Jede Regel hat eine Nummer** (`R-4.3`). Code und Tests verweisen auf diese Nummer. Eine Regel steht an genau einem Ort; andere Stellen verweisen. Nummern bleiben stabil: Neue Regeln stehen am Ende ihres Kapitels, auch wenn sie sachlich früher gehören.
+- **Jede Zahl kommt aus dem Referenzrechner** unter `research_notes/VOFI Immobiliensoftware Marktrecherche/skripte/referenzrechner/` (Python, nur Standardbibliothek). `python3 referenzfaelle.py` rechnet 20 Referenzfälle mit 906 Prüfungen und endet nur dann mit Rückgabewert 0, wenn alle in ihrer Toleranz liegen; `python3 beispielwerte.py` druckt die übrigen Beispielzahlen. Der Referenzrechner ist kein Produktcode, sondern der Beleg, dass die Regeln eindeutig und rechenbar sind. Er setzt auch die Eingabeprüfung, alle Meldungen und die Sperre bei verletzter Probe um.
+- **Alle Eingaben der Referenzfälle stehen im Anhang A.** Jedes Beispiel nennt seinen Referenzfall; mit dem Anhang lässt es sich aus dem Text allein nachrechnen.
+- **Rechts-, Förder- und Normangaben** stehen nur als Kennung des Quellenkatasters (`docs/quellenkataster.md`), zum Beispiel `GEWSTG-11`. Steuersätze, Fördersätze, Schwellen und Fristen sind Katalogwerte und in diesem Dokument nie Festwerte. Wo ein Beispiel einen Wert braucht, steht „Annahme“ oder „Katalogstand“ dabei; die Werte stehen gesammelt in `annahmen.py` und im Anhang A.
+- **Modellannahmen** tragen ihre Kennung (`MA-012`) an jeder Stelle, an der sie wirken (`docs/modellannahmen.md`). Voreingestellt ist die Lesart, die das Vorhaben ungünstiger rechnet; gemessen wird das an Endwertdifferenz, Rendite und höchstem tragbarem Preis, nicht am Endwert allein, weil eine Lesart mit höheren Nachschüssen einen höheren Endwert bei schlechterer Rendite haben kann. Jede Ausnahme ist als Ausnahme bezeichnet und begründet.
+- **Neue Festlegung** heißt: Spezifikation und Bericht lassen den Punkt offen, dieses Dokument entscheidet ihn. Jede neue Festlegung hat einen Satz Begründung und steht noch einmal in Kapitel 17; dort ist auch vermerkt, welche Festlegungen die Überarbeitung nach Prüfrunde 1 geändert hat.
 - **Vorgaben des Hauses** (Zielrendite, Beleihungsquote und weitere) gibt der Auftraggeber frei. Alle Werte in den Beispielen sind Annahmen und keine Vorschläge.
 
-Kennungen in diesem Dokument: `R-` Regel · `E-` Eingabe des Anwenders · `H-` Vorgabe des Hauses · `KAT-` Katalogwert · `P-` Kontrollsumme oder Probe · `M-` Meldung · `RF-` Referenzfall · `NF-` neue Festlegung.
+Kennungen in diesem Dokument: `R-` Regel · `E-` Eingabe des Anwenders · `H-` Vorgabe des Hauses · `KAT-` Katalogwert · `P-` Kontrollsumme oder Probe · `M-` Meldung · `RF-` Referenzfall · `NF-` neue Festlegung · `Z-` Zeile des Finanzplans.
 
 ## 1 Begriffe und Schreibweise
 
@@ -34,11 +35,23 @@ Kennungen in diesem Dokument: `R-` Regel · `E-` Eingabe des Anwenders · `H-` V
 | Einlage, Entnahme, Nachschuss | – | Zahlung des Investors in das Vorhaben; Zahlung an den Investor; Einlage, die ein Fehlbetrag erzwingt (R-4.5) |
 | VOFI-Rendite | VOFI-Eigenkapitalrentabilität | jährliche Rate, mit der das Eigenkapital auf den Endwert wächst (R-10.5) |
 | Vergleichsrendite | VOFI-Rendite der Finanzinvestition | dieselbe Kennzahl für die Unterlassensalternative (R-10.8) |
+| Nettokaltmiete | – | Miete ohne Betriebskostenvorauszahlung. Alle Mieteingaben und Mietgrößen dieses Dokuments sind Nettokaltmieten |
+| Ist-Miete | – | vereinbarte Miete der am Stichtag vermieteten Fläche (E-15) |
+| ortsübliche Vergleichsmiete | – | Miete, bis zu der die Miete eines bestehenden Mietverhältnisses erhöht werden darf (`BGB-558`); Eingabe E-19, in der Regel aus dem Mietspiegel |
+| Marktmiete | – | Angebotsmiete bei Neuvermietung (E-16); beim Neubau die Miete bei Bezug |
+| Neuvermietungsmiete | – | Miete, zu der eine leere oder frei werdende Fläche vermietet wird: die Marktmiete, wo die Mietpreisbremse gilt höchstens die Vergleichsmiete mit dem zulässigen Aufschlag (`BGB-556D`, R-6.13) |
+| Sollmiete | – | vereinbarte Miete der vermieteten Flächen einer Periode zuzüglich sonstiger Erträge, vor Mietausfall (R-6.4); eine leere Fläche trägt keine Sollmiete |
+| struktureller Leerstand, Forderungsausfall | – | die beiden Teile des Mietausfalls (H-15, H-27); nur der Leerstand wirkt auf den Verkaufspreis (R-8.1) |
+| maßgebliche Jahresmiete | Jahresnettokaltmiete | zwölffache Sollmiete eines Monats nach strukturellem Leerstand, beim Erbbaurecht abzüglich des Erbbauzinses; Bezugsgröße von Einstiegs- und Ausstiegsfaktor (R-8.1, R-10.13) |
 | Reinertrag | Einnahmenüberschuss | Mieteinzahlungen nach Mietausfall abzüglich laufender Bewirtschaftung (R-6.12) |
+| nachhaltiger Reinertrag | – | Ertrag, den die Bank ihrer Kapitaldienstrechnung zugrunde legt (R-5.12) |
 | Restwert, Verkaufserlös | Veräußerungserlös | Erlös aus dem Verkauf am Ende der Haltedauer (Kapitel 8) |
+| Gesamtkosten | – | beim Neubau Grundstückspreis, Erwerbsnebenkosten und Baukosten der Kostengruppen 200 bis 700 einschließlich der Baupreissteigerung der Bauzeit; ohne Zinsen, Bereitstellungszinsen, Beiträge und einbehaltene Entgelte (R-11.2) |
 | Zielrendite | – | Vorgabe des Hauses für die VOFI-Rendite nach Steuern, effektiver Jahreszins |
 | Wertansatz | – | Wert, auf den die Bank ihre Beleihungsquote bezieht (R-5.12) |
+| Darlehen zu Kaufpreis | – | Summe aller Darlehen im Verhältnis zum Wertansatz, beim Neubau „Darlehen zu Gesamtkosten“ (R-10.15). „Beleihungsauslauf“ heißt die Kennzahl erst, wenn ein Beleihungswert der Bank eingegeben ist (Vollkalkulation) |
 | Kapitaldienst | – | Zins, planmäßige Tilgung und laufende Beiträge der Darlehen |
+| Kontokorrentlinie | – | Betrag, bis zu dem ein Fehlbetrag über den Kontokorrent läuft: ein Betrag ab null oder „unbegrenzt“ (H-11, R-4.5) |
 
 **R-1.2 Vorzeichen.** Im Finanzplan sind Zuflüsse des Vorhabens positiv und Abflüsse negativ. Eingaben und Zwischengrößen (Kosten, Zinsen, Tilgung, Steuer) werden als positive Beträge geführt und in der Summe mit ihrem Vorzeichen eingesetzt; eine negative Steuer ist eine Erstattung. Bestände (Guthaben, Kontokorrent, Restschuld) sind nie negativ. Der Bestandssaldo ist Guthaben − Kontokorrent − Summe der Restschulden.
 
@@ -58,16 +71,19 @@ Kennungen in diesem Dokument: `R-` Regel · `E-` Eingabe des Anwenders · `H-` V
 | Z, D | Zähler und Nenner der Renditeformel (R-10.5) |
 | r, r_U, z | VOFI-Rendite, Vergleichsrendite, Zielrendite |
 | L, W, β, μ, M | Bankdarlehen, Wertansatz, Beleihungsquote, Mindestdeckung, Mittelbedarf (R-5.12) |
+| Ü, Ü_B, KD_Ü | übrige Darlehen, davon im Beleihungsraum der Bank, kalkulatorischer Kapitaldienst der übrigen Darlehen (R-5.12) |
+| RE_n, i_k, τ_k | nachhaltiger Reinertrag, kalkulatorischer Zins und kalkulatorischer Tilgungssatz einer Tranche (R-5.12) |
+| EÜ, a_0, s_FK(j) | Endwertüberschuss (R-10.9), Investitionsauszahlung der Investitionsphase (R-10.11), Entlastungssatz der Sollzinsen (R-7.14) |
 
 ## 2 Zeit
 
 **R-2.1 Zeitachse.** Der Stichtag ist Zeitpunkt 0: beim Ankauf der Übergang von Nutzen und Lasten, beim Neubau der Erwerb des Grundstücks. Periode u reicht von Zeitpunkt u − 1 bis Zeitpunkt u. Zahlungen einer Periode stehen an ihrem Ende, also am Zeitpunkt u; Zahlungen zum Stichtag stehen am Zeitpunkt 0.
 
-**R-2.2 Raster.** Der Kern rechnet im Monatsraster (p = 12). Der Jahresmodus (p = 1) rechnet dieselben Regeln mit einer Periode je Jahr und dient dem Vergleich mit Lehrbuchfällen; er ist auf jeder Ausgabe als Jahresmodus bezeichnet. Beide Raster liefern für dasselbe Vorhaben verschiedene Ergebnisse, weil Zahlungen und Zinsen im Monatsraster früher fallen.
-*Beispiel (RF-06, RF-14):* Der Testfall endet im Jahresmodus mit 584.366,28 Euro und im Monatsraster mit 585.918,72 Euro. Der Ankauf aus RF-11 endet im Jahresmodus mit 2.364.073,31 Euro, im Monatsraster mit 2.374.377,18 Euro; die VOFI-Rendite beträgt 5,123 % gegen 5,162 %.
+**R-2.2 Raster.** Der Kern rechnet im Monatsraster (p = 12). Der Jahresmodus (p = 1) rechnet dieselben Regeln mit einer Periode je Jahr und dient dem Vergleich mit Lehrbuchfällen; er ist auf jeder Ausgabe als Jahresmodus bezeichnet. Mieten und ihre Erhöhungen werden in beiden Rastern je Monat geführt (R-6.3); im Jahresmodus ist die Sollmiete des Jahres die Summe der zwölf Monatswerte. Den Neubau rechnet die Grobkalkulation nur im Monatsraster. Beide Raster liefern für dasselbe Vorhaben verschiedene Ergebnisse, weil Zahlungen und Zinsen im Monatsraster früher fallen.
+*Beispiel (RF-06, RF-14):* Der Testfall endet im Jahresmodus mit 584.366,28 Euro und im Monatsraster mit 585.918,65 Euro. Der Ankauf aus RF-11 endet im Jahresmodus mit 2.514.395,05 Euro, im Monatsraster mit 2.524.305,59 Euro; die VOFI-Rendite beträgt 4,491 % gegen 4,527 %.
 
-**R-2.3 Verdichtung.** Die Jahresdarstellung des Monatsrasters summiert Zahlungen je Planjahr und zeigt Bestände zum Jahresende; der Stichtag ist eine eigene Spalte. Die Probe P-09 gilt für Zahlungen, nicht für Bestände.
-*Beispiel (Testfall im Monatsraster):* Monat 1 hat 4.583,33 Euro Miete, 2.333,33 Euro Zins und 1.166,67 Euro Tilgung. Das Jahr 1 zeigt 54.999,96 Euro Miete (zwölfmal 4.583,33), 27.740,46 Euro Zins, 14.259,54 Euro Tilgung, 118,75 Euro Habenzins, 2.933,46 Euro Steuer und zum Jahresende 10.185,25 Euro Guthaben und 685.740,46 Euro Restschuld.
+**R-2.3 Verdichtung.** Die Jahresdarstellung des Monatsrasters summiert Zahlungen je Planjahr und zeigt Bestände zum Jahresende; der Stichtag ist eine eigene Spalte. Die Probe P-09 prüft, dass jeder Bestand am Jahresende aus dem Bestand des Vorjahres und den Jahresflüssen folgt. Eine zweite Verdichtung nach Geschäftsjahr, für die Übergabe in die Unternehmensplanung, ist für Teil 2 vorgemerkt; das Monatsraster und die Zeilenkennungen (R-4.1) liefern alles dafür.
+*Beispiel (RF-06, Testfall im Monatsraster):* Monat 1 hat 4.583,33 Euro Miete, 2.333,33 Euro Zins und 1.166,67 Euro Tilgung. Das Jahr 1 zeigt 54.999,96 Euro Miete (zwölfmal 4.583,33; die vier Cent unter 55.000 Euro sind die Folge der Rundung je Monat), 27.740,46 Euro Zins, 14.259,54 Euro Tilgung, 118,75 Euro Habenzins, 17.600,00 Euro Abschreibung, 2.933,48 Euro Steuer und zum Jahresende 10.185,23 Euro Guthaben und 685.740,46 Euro Restschuld.
 
 **R-2.4 Planjahr und Haltedauer.** Ein Planjahr sind p Perioden ab dem Stichtag; Planjahr j umfasst die Perioden (j − 1) x p + 1 bis j x p. Die Haltedauer n ist eine ganze Zahl von Jahren; verkauft wird am Zeitpunkt N = p x n. **Neue Festlegung (NF-01):** Die Grobkalkulation kennt die Haltedauer nur in ganzen Jahren; das genügt für das indikative Gebot und macht die Haltedauertabelle (R-11.13) möglich. Unterjährige Stichtage und Rumpfjahre regelt Teil 2.
 
@@ -76,176 +92,210 @@ Kennungen in diesem Dokument: `R-` Regel · `E-` Eingabe des Anwenders · `H-` V
 | Zahlungsart | Zahlungszeitpunkt | Verzinsungstakt und Jahressatz | Basisperiode des Eingabewerts, Index | steuerliche Wirkung |
 |---|---|---|---|---|
 | Kaufpreis, Erwerbsnebenkosten, Grundstück | Zeitpunkt 0 | – | Betrag zum Stichtag | aktiviert; Abschreibung nach R-7.3 |
-| Baukosten (Neubau) | Ende jedes Monats der Bauzeit, gleichmäßig (R-11.3) | – | Preisstand des Stichtags; in 1a nicht indexiert | aktiviert |
-| Miete | Periodenende | – | Ankauf: Eingabewert gilt für Planjahr 1. Neubau: für das erste Vermietungsjahr. Index jährlich zu Jahresbeginn (R-6.1) | Planjahr der Zahlung |
+| Baukosten (Neubau) | Ende jedes Monats der Bauzeit, gleichmäßig (R-11.3) | – | Preisstand des Stichtags; jede Monatsrate mit der Baupreissteigerung auf ihren Monat fortgeschrieben (R-11.2) | aktiviert |
+| Miete, sonstige Erträge | Periodenende | – | Ankauf: Ist-Miete und Vergleichsmiete gelten für Planjahr 1. Neubau: für das erste Vermietungsjahr. Index jährlich zu Jahresbeginn (R-6.1); Erhöhungen im Bestand nach R-6.3 | Planjahr der Zahlung |
 | Bewirtschaftung, CO2-Kosten, Erbbauzins | Periodenende, je ein Zwölftel | – | Eingabewert gilt für Planjahr 1; Index jährlich nach Planjahr | Planjahr der Zahlung |
-| Investitionsstau | letzter Monat des Jahres k; k = 0 zum Stichtag | – | Preisstand des Stichtags; Preisstand des Jahres k ist (1 + Baupreissteigerung)^k (R-6.10) | Erhaltung: Planjahr der Zahlung; Modernisierung: aktiviert |
-| Darlehen: Zins, Tilgung, Beitrag | Periodenende | je Periode; nominaler Jahreszins geteilt durch p, auf die Restschuld der Vorperiode (R-5.2) | Zins der Zinsbindung, danach Anschlusszins (R-5.8) | Zins und Beitrag im Planjahr der Zahlung |
+| Investitionsstau | letzter Monat des Jahres k; k = 0 zum Stichtag | – | Preisstand des Stichtags; Preisstand des Jahres k ist (1 + Baupreissteigerung)^k (R-6.10) | Erhaltung: Planjahr der Zahlung; Modernisierung und anschaffungsnahe Herstellungskosten: aktiviert (R-6.16) |
+| Darlehen: Zins, Tilgung, Beitrag, Bereitstellungszins | Periodenende | je Periode; nominaler Jahreszins geteilt durch p, auf die Restschuld der Vorperiode (R-5.2) | Zins der Zinsbindung, danach Anschlusszins (R-5.8) | Planjahr der Zahlung |
+| einbehaltene Entgelte, Disagio | mit der ersten Auszahlung | – | Betrag | Betriebsvermögen: verteilt über die Zinsbindung; sonst Planjahr der Zahlung (R-7.15) |
 | Geldanlage, Kontokorrent | Zinsbuchung am Periodenende | je Periode; effektiver Jahreszins, konform umgerechnet (R-2.6), auf den Bestand der Vorperiode | – | Planjahr der Buchung |
 | Unterlassensalternative | wie Geldanlage | wie Geldanlage (R-9.6) | – | Planjahr der Buchung |
-| Zuschuss | mit dem Mittelabruf (R-11.3) | – | Betrag | mindert die Abschreibungsgrundlage (R-7.3) |
+| Zuschuss | mit dem Mittelabruf (R-11.3) | – | Betrag | nach `MA-031` (R-7.19) |
 | Steuer | letzter Monat des Planjahres (R-2.7) | – | Satz des Kalenderjahres nach R-2.8 | – |
-| Verkauf, Ablösung, Vorfälligkeit, Rückzahlung von Fördermitteln | Zeitpunkt N | – | Miete des Folgejahres (R-8.1) | letztes Planjahr |
+| Verkauf, Ablösung, Vorfälligkeit, Rückzahlung von Fördermitteln | Zeitpunkt N | – | Miete zum Stand des Verkaufsstichtags (R-8.1) | letztes Planjahr |
 
 **R-2.6 Nominale und effektive Jahressätze.** Darlehenszinsen sind nominale Jahressätze; der Periodenzins ist Restschuld x Jahreszins / p (R-5.3). Der Habenzins der Geldanlage, der Kontokorrentzins, die beiden Zinssätze der Unterlassensalternative und die Zielrendite sind effektive Jahressätze. Ein effektiver Jahressatz x wird konform umgerechnet: Periodensatz = (1 + x)^(1/p) − 1, auf zwölf Nachkommastellen gerundet (R-12.4). **Neue Festlegung (NF-03):** Die Spezifikation verlangt effektive Vergleichssätze; die konforme Umrechnung sorgt dafür, dass ein Guthaben im Monatsraster und im Jahresmodus denselben Jahresertrag bringt und die Unterlassensalternative vom Raster nicht abhängt. Darlehen folgen dem Vertrag und bleiben nominal; ihr Effektivzins wird ausgewiesen.
-*Beispiel:* Aus 2 % effektiv wird der Monatssatz 0,001651581302, aus 8 % 0,006434030110. Ein Darlehen über 700.000 Euro zu nominal 4 % trägt im ersten Monat 2.333,33 Euro Zins; sein Effektivzins bei monatlicher Zahlung ist 4,0742 %. Die Unterlassensalternative des Testfalls endet im Jahresmodus mit 428.795,06 Euro und im Monatsraster mit 428.794,92 Euro; die 14 Cent stammen aus der Rundung der 120 Zinsbuchungen. Der Bericht (Anhang A.6) rechnete die Konten im Monatsraster mit einem Zwölftel des Jahressatzes; so gerechnet endet der Testfall mit 585.937,57 Euro statt 585.918,72 Euro (RF-06 führt beide Werte).
+*Beispiel:* Aus 2 % effektiv wird der Monatssatz 0,001651581302, aus 8 % 0,006434030110. Ein Darlehen über 700.000 Euro zu nominal 4 % trägt im ersten Monat 2.333,33 Euro Zins; sein Effektivzins bei monatlicher Zahlung ist 4,0742 %. Die Unterlassensalternative des Testfalls endet im Jahresmodus mit 428.795,06 Euro und im Monatsraster mit 428.794,92 Euro; die 14 Cent stammen aus der Rundung der 120 Zinsbuchungen. Der Bericht (Anhang A.6) rechnete die Konten im Monatsraster mit einem Zwölftel des Jahressatzes und ohne Rundung; so gerechnet endet der Testfall mit 585.937,57 Euro statt 585.918,65 Euro (RF-06 führt beide Werte).
 
 **R-2.7 Steuermonat.** Das Steuerjahr ist das Planjahr. Die Steuer eines Planjahres wird in seinem letzten Monat berechnet und gezahlt; eine Erstattung fließt im selben Monat. Vorauszahlungen und Abschlusszahlungen gibt es in der Kurzform nicht. **Neue Festlegung (NF-04)**, zusammen mit R-2.8: Das entspricht der sofortigen Besteuerung des Lehrbuchs und hält die Kurzform einfach; Kalenderjahr, Vorauszahlungen und Zahlungsverzug regelt die Steuer in Grundform (Teil 2).
 
-**R-2.8 Kalenderjahr der Katalogsätze.** Planjahr j erhält die Sätze des Kalenderjahres Startjahr + j − 1; Startjahr ist das Kalenderjahr, in dem Planjahr 1 beginnt. Bei einem sinkenden Satz ist das die vorsichtige Zuordnung.
-*Beispiel (RF-10, Annahme: Sätze nach `KSTG-23` und `SOLZG-4` im Stand des Berichts, Hebesatz 400 %):* Startjahr 2027. Planjahr 1 rechnet mit dem Satz für 2027, Planjahr 6 mit dem für 2032; 100.000 Euro Ergebnis kosten 29.825 Euro in Planjahr 1 und 24.550 Euro in Planjahr 6.
+**R-2.8 Kalenderjahr der Katalogsätze.** Planjahr j erhält die Sätze des Kalenderjahres Startjahr + j − 1. Startjahr ist das Jahr des Stichtags E-02; der Kern kennt dafür keine Voreinstellung. Bei einem sinkenden Satz ist das die vorsichtige Zuordnung. Liegt der Stichtag spät im Jahr, trägt Planjahr 1 überwiegend Monate des Folgejahres und trotzdem den Satz des Startjahres; das Kalenderjahr als Steuerjahr regelt die Grundform (Teil 2).
+*Beispiel (RF-10, Katalogstand des Berichts nach `KSTG-23` und `SOLZG-4`, Hebesatz 400 % als Annahme):* Startjahr 2027. Planjahr 1 rechnet mit dem Satz für 2027, Planjahr 6 mit dem für 2032; 100.000 Euro Ergebnis kosten 29.825 Euro in Planjahr 1 und 24.550 Euro in Planjahr 6.
 
 **R-2.9 Basisperiode der Indexierung.** Ein Eingabewert, der indexiert wird, gilt für das erste Jahr seiner Reihe und nicht für das Jahr davor. Indexstand im Jahr j ist Index_j = runde12(Index_(j−1) x (1 + Steigerung)) mit Index_1 = 1 (R-6.1). **Neue Festlegung (NF-05)** für die Zuordnung der Tabelle in R-2.5 (laufende Größen Planjahr 1, Maßnahmen Preisstand des Stichtags, Neubaumiete erstes Vermietungsjahr).
 *Beispiel (RF-06):* Liest man den Reinertrag des Testfalls von 55.000 Euro als Wert des Vorjahres, steigt die Rendite von 7,876 % auf 8,028 % und der Endwert auf 588.484,91 Euro.
 
 ## 3 Eingaben
 
-**R-3.1 Aufgelöster Rechenauftrag.** Der Rechenkern erhält einen vollständig aufgelösten Auftrag aus drei Quellen: Eingaben des Anwenders (`E-`), Vorgaben des Hauses (`H-`) und Katalogwerte (`KAT-`). Er liest selbst keinen Katalog und enthält keinen Satz, keine Schwelle und keine Frist als Festwert (`FAST-STANDARD`, `ICAEW-FMC`). Jeder Wert des Auftrags trägt Herkunft, bei Katalogwerten Kennung der Quelle und Stand, bei Annahmen die Kennung der Modellannahme. Eingaben, Rechnung und Ausgabe sind getrennt: Der Kern verändert keine Eingabe und gibt mit jedem Ergebnis den Auftrag, den Regelstand, die Version des Kerns und die Liste der Modellannahmen zurück, die gewirkt haben.
+**R-3.1 Aufgelöster Rechenauftrag.** Der Rechenkern erhält einen vollständig aufgelösten Auftrag aus drei Quellen: Eingaben des Anwenders (`E-`), Vorgaben des Hauses (`H-`) und Katalogwerte (`KAT-`). Er liest selbst keinen Katalog und enthält keinen Satz, keine Schwelle, keine Frist, keinen Suchbereich und kein Startjahr als Festwert (`FAST-STANDARD`, `ICAEW-FMC`). Jeder Wert des Auftrags trägt Herkunft, bei Katalogwerten Kennung der Quelle und Stand, bei Annahmen die Kennung der Modellannahme. Eingaben, Rechnung und Ausgabe sind getrennt: Der Kern verändert keine Eingabe und gibt mit jedem Ergebnis den Auftrag, den Regelstand, die Version des Kerns, die Liste der Abweichungen von den Vorgaben des Hauses (R-3.2) und die Liste der Modellannahmen zurück, die gewirkt haben. Im Referenzrechner sind die drei Quellen drei getrennte Datenklassen; ein Test stellt sicher, dass die Kernmodule außer 0, 1, 2, 12 und wenigen technischen Konstanten (Rechenstellen, Cent, Kilogramm je Tonne) kein Zahlenliteral enthalten (RF-20).
 
-**R-3.2 Verschärfen und Lockern.** Vorgaben des Hauses sind im Vorhaben voreingestellt. Stresshöhen und Finanzierungsvorgaben (H-02 bis H-05, H-07) darf das Vorhaben nur verschärfen: niedrigere Beleihungsquote, höhere Mindestdeckung, höhere Tilgung, höherer Anschlussaufschlag, höhere Stresshöhen. Eine Lockerung, eine abweichende Zielrendite und ein Wertansatz der Bank über dem Kaufpreis, beim Neubau über den Gesamtkosten, brauchen eine Begründung als Text; der Kern rechnet damit und gibt die Meldung M-35 mit der Begründung für das Kennzahlenblatt zurück.
+**R-3.2 Vorgaben des Hauses im Vorhaben.** Vorgaben des Hauses sind im Vorhaben voreingestellt. Jede Vorgabe hat eine Richtung „strenger“ (Tabelle in R-3.4): die Richtung, in der der höchste tragbare Preis sinkt oder, wo die Vorgabe nicht auf den Preis wirkt, die Endwertdifferenz. In dieser Richtung darf das Vorhaben frei abweichen. Eine Abweichung in der anderen Richtung ist eine Lockerung und braucht eine Begründung als Text; ohne Begründung rechnet der Kern nicht (M-20). Dasselbe gilt für einen Wertansatz der Bank über dem Kaufpreis, beim Neubau über den Gesamtkosten. Jede Abweichung – strenger oder gelockert – steht mit Kennung, Wert des Hauses, Wert des Vorhabens und Begründung in der Liste „Abweichungen vom Hausstandard“ auf dem Kennzahlenblatt (M-35, R-11.12). Welche Rolle eine Lockerung eingeben oder freigeben darf, regelt die Rechteverwaltung, nicht der Kern. **Neue Festlegung (NF-39)** für die Ausdehnung auf alle Vorgaben und die Liste; sie ändert die Zeile „Zielrendite und Schwellen“ der Spezifikation.
+*Beispiel (RF-19):* Mietsteigerung 1,5 % statt 2 % und Beleihungsquote 60 % statt 65 %: beide strenger, ohne Begründung zulässig, in der Liste geführt. Mietsteigerung 2,5 % ohne Begründung: M-20; mit der Begründung „Mietspiegel 2026, Fortschreibung“: gerechnet, in der Liste als „gelockert“.
 
-**R-3.3 Eingaben des Anwenders.** Geld in Euro mit zwei Nachkommastellen, Sätze als Prozent mit bis zu vier Nachkommastellen, Flächen in Quadratmetern mit zwei Nachkommastellen.
+**R-3.3 Eingaben des Anwenders.** Geld in Euro mit zwei Nachkommastellen, Sätze als Prozent mit bis zu vier Nachkommastellen, Flächen in Quadratmetern mit zwei Nachkommastellen. Die Grenzen der Spalte „zulässig“ sind Teil des Auftrags (im Referenzrechner `GRENZEN`).
 
 | Kennung | Eingabe | Einheit | zulässig | Voreinstellung | gilt für |
 |---|---|---|---|---|---|
 | E-01 | Vorhabensart | Auswahl | Ankauf Bestand, Neubau zur Vermietung | – | beide |
-| E-02 | Stichtag | Monat, Jahr | ab dem laufenden Monat | Folgemonat | beide |
+| E-02 | Stichtag | Monat, Jahr | jeder Monat, auch zurückliegend (Nachkalkulation, Parallelrechnung) | Folgemonat (Vorschlag der Oberfläche bei Neuanlage) | beide |
+| E-03 | Land | Auswahl | Länder des Katalogs | – | beide |
+| E-04 | Gemeinde (amtlicher Gemeindeschlüssel) | Auswahl | Gemeinden des Landes | – | beide |
 | E-10 | Kaufpreis | Euro | > 0 | – | Ankauf |
-| E-11 | Erwerbsnebenkosten | % des Preises | 0 bis 20 | KAT-01 nach Land | beide |
-| E-12 | Bodenanteil | % | 0 bis 100 | – | Ankauf |
+| E-11 | Erwerbsnebenkosten | % des Preises | 0 bis 20 | KAT-01 nach E-03 | beide |
+| E-12 | Bodenanteil | % | 0 bis 100 | Bodenrichtwert x Grundstücksfläche / Kaufpreis, höchstens 100 %, wenn E-30 und E-21 angegeben sind; sonst Pflicht | Ankauf |
 | E-13 | Wohnfläche (`WOFLV-2`) | m² | > 0 | – | beide |
 | E-14 | Zahl der Einheiten | Anzahl | ≥ 1 | – | beide |
-| E-15 | Ist-Miete | Euro je m² und Monat | ≥ 0 | – | Ankauf |
-| E-16 | Marktmiete; beim Neubau die Miete bei Bezug | Euro je m² und Monat | > 0 | – | beide |
-| E-17 | Baujahr | Jahr | – | – | Ankauf |
+| E-15 | Ist-Miete der vermieteten Fläche, wahlweise als Jahresbetrag in Euro (wird durch zwölf und die vermietete Fläche geteilt) | Euro je m² und Monat | > 0, wenn Fläche vermietet ist | – | Ankauf |
+| E-16 | Marktmiete (Angebotsmiete bei Neuvermietung); beim Neubau die Miete bei Bezug | Euro je m² und Monat | > 0; beim Ankauf nur nötig mit leerer Fläche (E-31) oder Fluktuation (H-26) | – | beide |
+| E-17 | Baujahr | Jahr | ≤ Jahr des Stichtags | – | Ankauf |
+| E-18 | Angebotspreis | Euro | > 0 | leer | Ankauf, freiwillig |
+| E-19 | ortsübliche Vergleichsmiete (Mietspiegel) im Planjahr 1 | Euro je m² und Monat | > 0 | – | Ankauf |
 | E-20 | Grundstückspreis | Euro | > 0 | – | Neubau |
-| E-21 | Grundstücksfläche | m² | > 0 | – | Neubau |
+| E-21 | Grundstücksfläche | m² | > 0 | – | Neubau; Ankauf freiwillig |
 | E-22 | Brutto-Grundfläche (`DIN-277`) | m² | > 0 | – | Neubau |
-| E-25 | Kostenkennwert der Kostengruppen 200 bis 700 (`DIN-276`), brutto | Euro je m² Brutto-Grundfläche | > 0 | – | Neubau |
+| E-25 | Kostenkennwert der Kostengruppen 300 und 400 (`DIN-276`), brutto, Preisstand des Stichtags | Euro je m² Brutto-Grundfläche | > 0 | – | Neubau |
 | E-26 | Bauzeit | Monate | 1 bis 60 | – | Neubau |
+| E-27 | Stellplätze: Anzahl und Miete je Stellplatz | Anzahl; Euro je Monat | ≥ 0 | 0 | Neubau, freiwillig |
 | E-28 | Mietenstufe | Auswahl | nach Katalog | – | Neubau mit Grobförderung |
 | E-29 | Einkommensgruppe | Auswahl | nach Katalog | – | Neubau mit Grobförderung |
-| E-30 | Bodenrichtwert | Euro je m² | > 0, Pflicht bei Förderung | – | Neubau mit Grobförderung |
+| E-30 | Bodenrichtwert | Euro je m² | > 0, Pflicht bei Förderung | – | Neubau mit Grobförderung; Ankauf freiwillig |
+| E-31 | leerstehende Wohnfläche am Stichtag | m² | 0 bis E-13 | 0 | Ankauf |
+| E-32 | sonstige Erträge (Stellplätze und Ähnliches) im Planjahr 1 | Euro je Jahr | ≥ 0 | 0 | Ankauf |
+| E-33 | Mietenhistorie: Monate seit der letzten Mieterhöhung; Miete drei Jahre vor dem Stichtag | Monate; Euro je m² | ≥ 0; > 0 und ≤ E-15 | leer (dann `MA-037`) | Ankauf, freiwillig |
+| E-34 | CO2-Ausstoß des Gebäudes (aus der Heizkostenabrechnung) | kg je m² und Jahr | ≥ 0 | Ankauf: Näherung aus E-54 und E-55 (`MA-035`); Neubau: 0 | beide |
+| E-35 | KfW-Darlehen | Euro | 0 bis E-14 x Höchstbetrag je Einheit (KAT-15) | 0 | Neubau |
 | E-40 | Steuerstatus | Auswahl | R-7.1 | – | beide |
-| E-41 | Kennzeichen erweiterte Grundstückskürzung (`GEWSTG-9`) | ja, nein | nur Status mit Gewerbesteuer | nein | beide |
+| E-41 | Kennzeichen erweiterte Grundstückskürzung (`GEWSTG-9`) | ja, nein | nur Körperschaft und gewerblich geprägte Personengesellschaft (R-7.1) | nein | beide |
 | E-42 | Steuersatz des Investors einschließlich Zuschlagsteuern | % | 0 bis 60 | H-22 | Personen und Personengesellschaften |
-| E-43 | Anteil natürlicher Personen am Gewinn | % | 0 bis 100 | 100 | gewerbliche Personengesellschaft |
+| E-43 | Anteil natürlicher Personen am Gewinn | % | 0 bis 100 | 100 | Personengesellschaften mit Gewerbesteuer |
 | E-44 | Verlustverrechnung (`MA-016`) | Auswahl | Vortrag im Vorhaben, sofort | Vortrag | beide |
 | E-45 | Zins des Bankdarlehens, nominal | % je Jahr | 0 bis 20 | – | beide |
-| E-46 | Zinsbindung | Jahre | 1 bis 40 | KAT-02 | beide |
-| E-47 | Verkaufsfaktor (Restwertfaktor) | Vielfaches der Jahresmiete | > 0 | – | beide |
-| E-48 | Haltedauer | Jahre | 1 bis 42; beim Neubau mindestens Bauzeit plus ein Jahr (R-14.4) | H-19 | beide |
-| E-50 | Investitionsstau | Euro oder Euro je m² | ≥ 0 | 0 | Ankauf |
+| E-46 | Zinsbindung | Jahre | 1 bis 40 | H-24 | beide |
+| E-47 | Verkaufsfaktor (Restwertfaktor) | Vielfaches der maßgeblichen Jahresmiete | > 0 | – | beide |
+| E-48 | Haltedauer | Jahre | 1 bis 42; beim Neubau mindestens bis zum Ende des ersten Jahres der Vollvermietung, auch im Stressfall (R-14.4) | H-19 | beide |
+| E-50 | Investitionsstau, brutto | Euro oder Euro je m² | ≥ 0 | 0 | Ankauf |
 | E-51 | Jahr der Ausführung | Jahr 0 bis n, oder später | ≥ 0 | 1 | Ankauf |
 | E-52 | Kennzeichen Erhaltung oder Modernisierung | Auswahl | – | Erhaltung | Ankauf |
-| E-53 | Anpassungsdauer der Ist-Miete an die Marktmiete | Jahre | 0 bis 20 | H-23 | Ankauf |
-| E-54 | Effizienzklasse | Auswahl | nach Katalog | – | Ankauf |
+| E-53 | Anpassungsdauer der Ist-Miete an die Vergleichsmiete | Jahre | 0 bis 20 | H-23 | Ankauf |
+| E-54 | Effizienzklasse | Auswahl | nach Katalog | – | Ankauf, wenn E-34 fehlt |
 | E-55 | Energieträger | Auswahl | nach Katalog | – | Ankauf |
-| E-56 | gebundener Flächenanteil | % | 0 bis 100 | 0 | Ankauf |
+| E-56 | gebundener Anteil der vermieteten Fläche | % | 0 bis 100 | 0 | Ankauf |
 | E-57 | Bindungsende | Jahr | nach dem Stichtag | – | Ankauf, gebunden |
 | E-58 | gebundene Miete | Euro je m² und Monat | > 0 | Ist-Miete | Ankauf, gebunden |
-| E-59 | übernommenes Darlehen: Restschuld, Zins, Tilgungssatz, Ende der Zinsbindung | Euro, %, %, Jahr | Restschuld ≤ Mittelbedarf | – | Ankauf, gebunden |
+| E-59 | übernommenes Darlehen, neun Werte: Restschuld · ursprünglicher Nennbetrag · Zins · Tilgungssatz (bezogen auf den ursprünglichen Nennbetrag) · Ende der Zinsbindung · Anschlusszins · laufender Beitrag · Kennzeichen Förderdarlehen · Rang vor oder nach der Bank (Grundbuch, Abteilung III) | Euro, Euro, %, %, Jahr, %, %, ja/nein, Auswahl | Restschuld > 0 und ≤ Mittelbedarf; Nennbetrag ≥ Restschuld; Zins 0 bis 20; Tilgung ≥ 0 | Nennbetrag: Restschuld · Anschlusszins: E-45 + H-05 · Beitrag: 0 · Förderdarlehen: ja · Rang: vor der Bank | Ankauf |
 | E-60 | verfügbares Eigenkapital | Euro | ≥ 0 | leer | freiwillig |
-| E-61 | Wertansatz der Bank mit Begründung | Euro | > 0 | Kaufpreis; Neubau: Gesamtkosten ohne Bauzeitzinsen | freiwillig |
+| E-61 | Wertansatz der Bank; über dem Kaufpreis oder den Gesamtkosten mit Begründung | Euro | > 0 | Kaufpreis; Neubau: Gesamtkosten | freiwillig |
 | E-62 | Erbbauzins im ersten Jahr | Euro je Jahr | ≥ 0 | 0 | im Einzelfall |
 | E-63 | Steigerung des Erbbauzinses | % je Jahr | −5 bis 15 | H-13 | im Einzelfall |
 | E-64 | Tilgungssatz des Bankdarlehens | % je Jahr | ≥ H-04 | H-04 | beide |
 
-**R-3.4 Vorgaben des Hauses.** Werte je Investorensicht und Nutzungsart aus dem Katalog; der Auftraggeber gibt sie frei (`TASKS.md`).
+Die Voreinstellungen von E-59 sind die vorsichtigen: Ein Anschlusszins unter dem des Bankdarlehens, etwa aus einem Bewilligungsbescheid, überschreibt die Voreinstellung; der Rang „vor der Bank“ belegt den Beleihungsraum (R-5.12). Die Ist-Miete in der Form des Exposés (Jahresnettokaltmiete, Stellplatzerlöse getrennt, leere Einheiten) geht in E-15, E-32 und E-31 ein.
 
-| Kennung | Vorgabe | Einheit | zulässig |
-|---|---|---|---|
-| H-01 | Zielrendite nach Steuern, effektiv | % je Jahr | > −100 |
-| H-02 | Beleihungsquote | % des Wertansatzes | 0 bis 100 |
-| H-03 | Mindestdeckung des Schuldendienstes | Verhältnis | ≥ 1 |
-| H-04 | Mindesttilgung | % je Jahr | ≥ 0 |
-| H-05 | Anschlusszins als Aufschlag auf den heutigen Zins | Prozentpunkte | ≥ 0 |
-| H-06 | Stresshöhen, einzeln und kombiniert (R-11.8) | je Größe | ≥ 0 |
-| H-07 | Regel für die Rate nach der Zinsbindung (R-5.9) | Auswahl | drei Regeln |
-| H-08 | kurzfristiger Habenzins, effektiv | % je Jahr | ≥ 0 |
-| H-09 | langfristiger Anlagezins der Unterlassensalternative, effektiv | % je Jahr | ≥ 0; Voreinstellung gleich H-08 |
-| H-10 | Kontokorrentzins, effektiv | % je Jahr | ≥ H-08 |
-| H-11 | Kontokorrentlinie | Euro | ≥ 0; Voreinstellung 0 |
-| H-12 | Mietsteigerung | % je Jahr | −5 bis 15 |
-| H-13 | Kostensteigerung | % je Jahr | −5 bis 15 |
-| H-14 | Baupreissteigerung | % je Jahr | −5 bis 15 |
-| H-15 | Mietausfallquote | % der Sollmiete | 0 bis 100 |
-| H-16 | Verkaufskosten | % des Verkaufspreises | 0 bis 20 |
-| H-17 | Bewirtschaftung: Verwaltung je Einheit, Instandhaltung je m², nicht umlagefähige Betriebskosten je m² und Jahr | Euro | ≥ 0 |
-| H-18 | Vorfälligkeitssatz (R-5.16) | % der Restschuld je Jahr Restbindung | ≥ 0 |
-| H-19 | Voreinstellung der Haltedauer | Jahre | 1 bis 42 |
-| H-20 | Warnschwellen (Restwertanteil, Abstand der Faktoren) | je Kennzahl | – |
-| H-21 | Suchbereiche und Raster der Zielwertsuche (R-11.10) | je Eingabe | – |
-| H-22 | Voreinstellung des Steuersatzes der Personen; Satz auf Zinserträge | % | 0 bis 60 |
-| H-23 | Voreinstellung der Anpassungsdauer | Jahre | 0 bis 20 |
+**R-3.4 Vorgaben des Hauses.** Werte je Investorensicht und Nutzungsart aus dem Katalog; der Auftraggeber gibt sie frei (`TASKS.md`). Die Spalte „strenger heißt“ gilt für R-3.2; „Voreinstellung“ heißt: Die Vorgabe füllt eine Eingabe vor, und die Abweichung der Eingabe steht ohne Richtung in der Liste; „fest“ heißt: im Vorhaben nicht änderbar.
 
-Zu H-19: Das Lehrbuch empfiehlt einen Planungshorizont von zehn bis zwölf Jahren mit unterstelltem Verkauf, weil die Prognose mit der Entfernung ungenauer wird (`SCHULTE-IMMOBILIENINVESTITION-2025`). Zu H-17: Die Voreinstellungen stammen wahlweise aus `IIBV-26` und `IIBV-28` mit den Beträgen nach `IIBV-WERTE-2026`, aus `IMMOWERTV-ANLAGE-3` mit `IMMOWERTV-WERTE` oder sind eigene Werte des Hauses. Das Mietausfallwagnis dieser Regelwerke (`IIBV-29`) geht nicht als Kostenposition ein, sondern ist die Voreinstellung der Mietausfallquote H-15 (R-6.4).
+| Kennung | Vorgabe | Einheit | zulässig | strenger heißt |
+|---|---|---|---|---|
+| H-01 | Zielrendite nach Steuern, effektiv | % je Jahr | > −100 | höher |
+| H-02 | Beleihungsquote | % des Wertansatzes | 0 bis 100 | niedriger |
+| H-03 | Mindestdeckung des Schuldendienstes | Verhältnis | ≥ 1 | höher |
+| H-04 | Mindesttilgung, zugleich kalkulatorische Mindesttilgung jeder Tranche (R-5.12) | % je Jahr | ≥ 0 | höher |
+| H-05 | Anschlusszins als Aufschlag auf den heutigen Zins | Prozentpunkte | ≥ 0 | höher |
+| H-06 | Stresshöhen, einzeln und kombiniert (R-11.8) | je Größe | ≥ 0 | höher |
+| H-07 | Regel für die Rate nach der Zinsbindung (R-5.9, `MA-034`) | Auswahl | drei Regeln | „Restlaufzeit bleibt“; jeder andere Wechsel gilt als Lockerung, weil zwischen „Tilgungssatz bleibt“ und „Rate bleibt“ keine feste Rangfolge besteht |
+| H-08 | kurzfristiger Habenzins, effektiv | % je Jahr | ≥ 0 | niedriger |
+| H-09 | langfristiger Anlagezins der Unterlassensalternative, effektiv | % je Jahr | ≥ 0; Voreinstellung gleich H-08 | höher |
+| H-10 | Kontokorrentzins, effektiv | % je Jahr | ≥ H-08 | höher |
+| H-11 | Kontokorrentlinie | Euro oder „unbegrenzt“ | ≥ 0; Voreinstellung 0 | niedriger; „unbegrenzt“ ist die lockerste Linie |
+| H-12 | Mietsteigerung (Vergleichsmiete und Marktmiete) | % je Jahr | −5 bis 15 | niedriger |
+| H-13 | Kostensteigerung | % je Jahr | −5 bis 15 | höher |
+| H-14 | Baupreissteigerung | % je Jahr | −5 bis 15 | höher |
+| H-15 | struktureller Leerstand | % der Sollmiete | 0 bis 100, zusammen mit H-27 höchstens 100 | höher |
+| H-16 | Verkaufskosten | % des Verkaufspreises | 0 bis 20 | höher |
+| H-17 | Bewirtschaftung: Verwaltung je Einheit; Instandhaltung je m² als Staffel nach Gebäudealter; nicht umlagefähige Betriebskosten je m² und Jahr | Euro | ≥ 0 | höher; eine geänderte Staffel braucht immer eine Begründung |
+| H-18 | Vorfälligkeitssatz (R-5.16, `MA-033`) | % der Restschuld je Jahr Restbindung | ≥ 0 | höher |
+| H-19 | Voreinstellung der Haltedauer je Nutzungsart; im geförderten Bau das Planjahr des Bindungsendes zuzüglich eines Jahres (R-11.14) | Jahre | 1 bis 42 | Voreinstellung |
+| H-20 | Warnschwellen (Restwertanteil, Abstand der Faktoren) | je Kennzahl | – | fest |
+| H-21 | Suchparameter: Obergrenze der Preissuche als Vielfaches der maßgeblichen Jahresmiete, Rasterzahl, Fenster der Nachsuche (R-11.5); Suchbereich, Auflösung und Rasterzahl je suchbarer Eingabe (R-11.9); Suchbereich und Rasterzahl des internen Zinsfußes (R-10.18); Obergrenze der Mietsuche (R-11.15) | je Größe | – | fest |
+| H-22 | Voreinstellung des Steuersatzes der Personen (E-42) | % | 0 bis 60 | Voreinstellung |
+| H-23 | Voreinstellung der Anpassungsdauer (E-53) | Jahre | 0 bis 20 | Voreinstellung |
+| H-24 | Voreinstellung der Zinsbindung (E-46) | Jahre | 1 bis 40 | Voreinstellung |
+| H-25 | kalkulatorischer Zins der Kapitaldienstrechnung (R-5.12): „Anschlusszins der Tranche“ oder ein fester Satz | Auswahl oder % je Jahr | ≥ 0; Voreinstellung „Anschlusszins“ | höher |
+| H-26 | Fluktuation: Anteil der frei vermieteten Bestandsfläche, der je Jahr neu vermietet wird (R-6.14) | % je Jahr | 0 bis 100; Voreinstellung 0 | niedriger |
+| H-27 | Forderungsausfall | % der Sollmiete | 0 bis 100 | höher |
+| H-28 | Anlaufleerstand: Monate bis zur Vermietung leerer Flächen und bei Erstvermietung (R-6.7, R-6.13) | Monate | ≥ 0 | höher |
+| H-29 | CO2-Preis im Planjahr 1 und seine jährliche Steigerung (R-6.9) | Euro je Tonne; % je Jahr | ≥ 0 | höher |
+| H-30 | Neubau: Zuschläge für die Kostengruppen 200, 500 und 600 sowie für die Kostengruppe 700, je als Anteil der Kostengruppen 300 und 400; Herstellungskosten je Stellplatz (R-11.2) | %, %, Euro | ≥ 0 | höher |
+| H-31 | Bereitstellungszins und bereitstellungsfreie Zeit (R-5.18) | % je Monat; Monate | ≥ 0 | höherer Satz, kürzere freie Zeit |
 
-**R-3.5 Katalogwerte.**
+Zu H-19: Das Lehrbuch empfiehlt einen Planungshorizont von zehn bis zwölf Jahren mit unterstelltem Verkauf, weil die Prognose mit der Entfernung ungenauer wird (`SCHULTE-IMMOBILIENINVESTITION-2025`); für geförderte Vorhaben trägt das nicht (R-11.14). Zu H-17: Die Voreinstellungen stammen wahlweise aus `IIBV-26` und `IIBV-28` mit den Beträgen nach `IIBV-WERTE-2026`, aus `IMMOWERTV-ANLAGE-3` mit `IMMOWERTV-WERTE` oder sind eigene Werte des Hauses; die Staffel der Instandhaltung nach Gebäudealter folgt `IIBV-28`. Das Mietausfallwagnis dieser Regelwerke (`IIBV-29`) geht nicht als Kostenposition ein, sondern ist die Voreinstellung der Summe aus H-15 und H-27 (R-6.4). Hinter den 31 Kennungen stehen rund 60 freizugebende Einzelwerte; `TASKS.md` führt sie als Freigabeblatt.
+
+**R-3.5 Katalogwerte.** Jeder Katalogwert trägt Quelle, Stand und Gültigkeitszeitraum. Werte, die von Land oder Gemeinde abhängen, werden über E-03 und E-04 aufgelöst.
 
 | Kennung | Katalogwert | Quelle |
 |---|---|---|
 | KAT-01 | Erwerbsnebenkosten je Land: Grunderwerbsteuer, Notar und Grundbuch, Makler | `GRESTG-11`, `NI-GREST-SATZ`; übrige Länder offen (`TASKS.md`) |
-| KAT-02 | Voreinstellung der Zinsbindung | Vorgabe des Hauses |
+| KAT-02 | entfällt; die Voreinstellung der Zinsbindung ist die Vorgabe H-24 | – |
 | KAT-03 | Körperschaftsteuersatz je Kalenderjahr; Zuschlagsatz | `KSTG-23`, `SOLZG-4` |
 | KAT-04 | Gewerbesteuer: Messzahl, Abrundung des Gewerbeertrags, Freibetrag, Hebesatz der Gemeinde | `GEWSTG-11`, `GEWSTG-16` |
 | KAT-05 | Anrechnungsfaktor der Gewerbesteuer auf die Einkommensteuer | `ESTG-35` |
 | KAT-06 | Frist des privaten Verkaufs | `ESTG-23` |
 | KAT-07 | linearer Abschreibungssatz nach Baujahr oder Fertigstellung | `ESTG-7` |
-| KAT-08 | Kappungsgrenze und ihr Zeitraum je Gemeinde | `BGB-558`, `NI-MIETERSCHUTZVO` |
-| KAT-09 | CO2-Kosten des Vermieters je m² und Jahr nach Effizienzklasse und Energieträger, mit Steigerung | `CO2KOSTAUFG-5` bis `CO2KOSTAUFG-5D`, `CO2KOSTAUFG-ANLAGE` |
+| KAT-08 | Mieterhöhung im Bestand je Gemeinde: Wartefrist, Kappungsgrenze und Kappungszeitraum; Mietpreisbremse: Geltung und zulässiger Aufschlag auf die Vergleichsmiete | `BGB-558`, `BGB-556D`, `NI-MIETERSCHUTZVO`; übrige Länder offen (`TASKS.md`) |
+| KAT-09 | CO2-Kosten: Anteil des Vermieters nach der Stufe des Ausstoßes; Näherung des Ausstoßes aus Effizienzklasse und Energieträger (`MA-035`); weitere Kosten des Vermieters je m² und Jahr | `CO2KOSTAUFG-5` bis `CO2KOSTAUFG-5D`, `CO2KOSTAUFG-ANLAGE` |
 | KAT-10 | Grobförderung: Darlehens-, Zuschuss- und Eigenmittelquote nach Einkommensgruppe; Bemessungsgrenze; Eingangsmiete nach Mietenstufe; Steigerungsregel; Bindungsdauer; zinslose Zeit; Tilgungsdauer; Verwaltungskostenbeitrag; Entgelte | `NBANK-RL-MIETWOHNRAUM-2026`, `NBANK-PI-MIETWOHNUNGEN-MFH`; `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-021` |
-| KAT-11 | zulässige Steigerung gebundener Mieten bei übernommenen Bindungen | `NBANK-RL-MIETWOHNRAUM-2026` |
+| KAT-11 | übernommene Bindungen: zulässige Steigerung der gebundenen Miete, feste Jahre, Schrittjahre | `NBANK-RL-MIETWOHNRAUM-2026` |
+| KAT-12 | anschaffungsnahe Herstellungskosten: Schwelle und Zeitraum; Umsatzsteuersatz zum Herausrechnen | `ESTG-6`, `USTG-12` |
+| KAT-13 | ordentliches Kündigungsrecht des Darlehensnehmers: Frist ab vollständigem Empfang und Kündigungsfrist | `BGB-489` |
+| KAT-14 | Mindestansatz der Bewirtschaftungskosten in der Kapitaldienstrechnung, als Anteil des Rohertrags | `BELWERTV-11` |
+| KAT-15 | KfW-Neubaudarlehen: Höchstbetrag je Wohneinheit, Zins, Tilgungssatz, tilgungsfreie Anlaufjahre, Zinsbindung | `KFW-297-298-MERKBLATT`, `KFW-296-MERKBLATT`, `KFW-KONDITIONENANZEIGER` |
+| KAT-16 | Hinzurechnung: Anteil der Entgelte für Schulden, Freibetrag, Anteil der Pacht für Grundbesitz | `GEWSTG-8` |
+| KAT-17 | Sockelbetrag der beschränkten Verlustverrechnung (nur für den Hinweis M-45) | `ESTG-10D`, `GEWSTG-10A` |
+| KAT-18 | Steuersatz auf Kapitalerträge der Privatperson mit Zuschlag | `ESTG-32D`, `SOLZG-4` |
 
-**R-3.6 Zahl der Eingaben.** Gezählt nach der Regel des Berichts (Anhang D.1; ohne Vorgaben des Hauses, ohne freiwillige Eingaben):
+KAT-08 gilt in 1a mit dem Wert am Stichtag für die ganze Haltedauer. Läuft eine Landesverordnung innerhalb der Haltedauer aus, rechnet der Kern weiter mit der abgesenkten Kappungsgrenze; das ist die vorsichtige Lesart. Die Fortschreibung je Kalenderjahr regelt die Vollkalkulation.
 
-| Fall | Eingaben | Zahl |
+**R-3.6 Zahl der Eingaben.** Gezählt sind alle Felder der Maske ohne Vorgaben des Hauses und ohne freiwillige Eingaben; in Klammern die Zahl der Felder mit Voreinstellung, die der Bearbeiter nur ändert, wenn er es besser weiß.
+
+| Fall | Eingaben | Zahl (davon mit Voreinstellung) |
 |---|---|---|
-| Ankauf | E-10 bis E-17 (8), E-40, E-41 oder E-42, E-45 bis E-48 (6) | 14 |
-| Ankauf mit Pauschalen | dazu E-50 bis E-55 | 20 |
-| Ankauf gebundener Bestände | dazu E-56, E-57 und die vier Werte von E-59 | 26 |
-| Neubau | E-20 bis E-26, E-13, E-14, E-16 (8), dazu die sechs gemeinsamen | 14 |
-| Neubau mit Grobförderung | dazu E-28 bis E-30 | 17 |
-| gewerbliche Personengesellschaft, Einzelunternehmen mit Betriebsvermögen | je eine mehr (E-41 und E-42) | +1 |
+| Ankauf | E-03, E-04 (2); E-10 bis E-15, E-17, E-19 (8); E-40, E-41 oder E-42, E-45 bis E-48 (6) | 16 (4: E-11, E-41 oder E-42, E-46, E-48) |
+| Ankauf mit leerer Fläche | dazu E-31, E-16 | 18 |
+| Ankauf mit Pauschalen | dazu E-50 bis E-55; mit E-34 statt E-54 entfällt eine | 22 (3: E-51, E-52, E-53) |
+| Ankauf gebundener Bestände | dazu E-56, E-57, E-58 und die neun Werte von E-59 | 34 (dazu 6: E-58 und fünf Werte von E-59) |
+| Neubau | E-03, E-04 (2); E-11, E-13, E-14, E-16, E-20, E-21, E-22, E-25, E-26 (9); dazu die sechs gemeinsamen | 17 (4) |
+| Neubau mit KfW-Darlehen | dazu E-35 | 18 |
+| Neubau mit Grobförderung | dazu E-28 bis E-30 | 20 |
+| Personengesellschaft mit Gewerbesteuer | E-42 und E-43; die gewerblich geprägte dazu E-41 | +1 oder +2 |
 
-Die 26 Eingaben beim Ankauf gebundener Bestände beantworten die offene Frage aus Prüfrunde 5 (`TASKS.md`); der Bericht nennt für diesen Fall keine Zahl.
+Die Zählung ist gegenüber dem Entwurf (14, 20, 26, 14, 17) nachgezogen: Land und Gemeinde, die Vergleichsmiete und die fünf zusätzlichen Werte des übernommenen Darlehens sind hinzugekommen; E-11 zählt jetzt auch beim Neubau. Der Bericht nennt für den Ankauf gebundener Bestände keine Zahl; die offene Frage aus Prüfrunde 5 (`TASKS.md`) ist mit 34 beantwortet, davon 28 ohne Voreinstellung.
 
-**R-3.7 Eingabeprüfung.** Der Kern prüft den Auftrag vor der Rechnung gegen die zulässigen Bereiche. Eine Verletzung ist kein Programmfehler, sondern ein definiertes Ergebnis: Der Kern gibt eine Meldung mit Kennung und betroffener Eingabe zurück und keine Kennzahlen (Kapitel 14).
+**R-3.7 Eingabeprüfung.** Der Kern prüft den Auftrag vor der Rechnung gegen die zulässigen Bereiche aus R-3.3 und R-3.4, einschließlich der Abhängigkeiten zwischen Eingaben (Kennzeichen E-41 nur beim zulässigen Steuerstatus, Ist-Miete nur bei vermieteter Fläche, KfW-Darlehen bis zum Höchstbetrag, Lockerung nur mit Begründung). Eine Verletzung ist kein Programmfehler, sondern ein definiertes Ergebnis: Der Kern gibt eine Meldung mit Kennung, Kennung und Namen der betroffenen Eingabe und dem zulässigen Bereich zurück und keine Kennzahlen (Kapitel 14). Der Referenzrechner setzt die Prüfung um (`pruefe_eingaben`); RF-20 führt je Grenze einen Fall.
+*Beispiel (RF-20):* Zins des Bankdarlehens −0,5 %: „M-20: E-45 Zins des Bankdarlehens: Wert −0,005 außerhalb des zulässigen Bereichs (0 bis 0,20)“. Ist-Miete null bei vermieteter Fläche: M-20 mit dem Hinweis, leerstehende Fläche als E-31 einzugeben.
 
 ## 4 Aufbau des Finanzplans
 
-**R-4.1 Konten und Zeilen.** Der Finanzplan führt je Periode die Zeilen der Tabelle. Bestände stehen am Periodenende.
+**R-4.1 Konten und Zeilen.** Der Finanzplan führt je Periode die Zeilen der Tabelle. Bestände stehen am Periodenende. Jede Zeile hat eine stabile Zeilenkennung; Berichte, Exporte und eine spätere Kontenzuordnung beziehen sich auf sie. Darlehenszeilen gibt es je Tranche.
 
-| Block | Zeile | Inhalt |
-|---|---|---|
-| A originäre Zahlungen | Investition | Kaufpreis, Erwerbsnebenkosten, Grundstück, Baukosten, aktivierte Maßnahmen (−) |
-| | Miete | Mieteinzahlung nach Mietausfall (+) |
-| | Bewirtschaftung | laufende Kosten einschließlich CO2-Kosten und Erbbauzins (−) |
-| | Erhaltung | Maßnahmen mit Kennzeichen Erhaltung (−) |
-| | Zuschuss | Zuschüsse mit Geldfluss, brutto (+) |
-| | Verkauf | Verkaufspreis abzüglich Verkaufskosten und ausstehendem Investitionsstau (+), nur in N |
-| | Rückzahlung von Fördermitteln | (−), nur in N |
-| B derivative Zahlungen | Eigenkapital | Einlage (+), Entnahme (−), Nachschuss (+) |
-| | je Darlehen | Auszahlung (+), einbehaltener Betrag (−), Zins (−), Tilgung (−), laufender Beitrag (−), Ablösung (−) |
-| | Vorfälligkeit | (−), nur in N |
-| | einbehaltenes Entgelt auf Zuschüsse | (−) |
-| | Geldanlage | Anlage (−), Auflösung (+), Habenzins (+) |
-| | Kontokorrent | Aufnahme (+), Rückführung (−), Zins (−) |
-| | Steuer | Zahlung (−) oder Erstattung (+) |
-| Saldo | Finanzierungssaldo | Summe von A und B; in jeder Periode null (R-4.4) |
-| C Bestände | Guthaben, Kontokorrent, Restschuld je Darlehen, Bestandssaldo | Bestandssaldo = Guthaben − Kontokorrent − Summe der Restschulden |
-| Nebenrechnungen | Darlehenspläne, Abschreibungsplan, steuerliche Bemessung mit Verlustvortrag, Verkaufsrechnung, Unterlassensalternative | Kapitel 5, 7, 8, 9 |
+| Block | Kennung | Zeile | Inhalt |
+|---|---|---|---|
+| A originäre Zahlungen | Z-A1 | Investition | Kaufpreis, Erwerbsnebenkosten, Grundstück, Baukosten, aktivierte Maßnahmen (−) |
+| | Z-A2 | Miete | Mieteinzahlung nach Mietausfall (+) |
+| | Z-A3 | Bewirtschaftung | laufende Kosten einschließlich CO2-Kosten und Erbbauzins (−) |
+| | Z-A4 | Erhaltung | Maßnahmen mit Kennzeichen Erhaltung, soweit nicht aktiviert (−) |
+| | Z-A5 | Zuschuss | Zuschüsse mit Geldfluss, brutto (+) |
+| | Z-A6 | Verkauf | Verkaufspreis abzüglich Verkaufskosten und ausstehendem Investitionsstau (+), nur in N |
+| | Z-A7 | Rückzahlung von Fördermitteln | (−), nur in N |
+| B derivative Zahlungen | Z-B1 bis Z-B3 | Eigenkapital | Einlage (+), Entnahme (−), Nachschuss (+) |
+| | Z-B4 bis Z-B10 | je Darlehen | Auszahlung (+), einbehaltener Betrag (−), Zins (−), Tilgung (−), laufender Beitrag (−), Bereitstellungszins (−), Ablösung (−) |
+| | Z-B11 | Vorfälligkeit | (−), nur in N |
+| | Z-B12 | einbehaltenes Entgelt auf Zuschüsse | (−) |
+| | Z-B13, Z-B14 | Geldanlage | Anlage (−) und Auflösung (+); Habenzins (+) |
+| | Z-B15, Z-B16 | Kontokorrent | Aufnahme (+) und Rückführung (−); Zins (−) |
+| | Z-B17 | Steuer | Zahlung (−) oder Erstattung (+) |
+| Saldo | Z-S | Finanzierungssaldo | Summe von A und B; in jeder Periode null (R-4.4) |
+| C Bestände | Z-C1 bis Z-C4 | Guthaben, Kontokorrent, Restschuld je Darlehen, Bestandssaldo | Bestandssaldo = Guthaben − Kontokorrent − Summe der Restschulden |
+| Nebenrechnungen | Z-N1, Z-N2 | Abschreibung; operatives Ergebnis | dazu Darlehenspläne, Verlustvorträge, Verkaufsrechnung, Unterlassensalternative (Kapitel 5, 7, 8, 9) |
 
 **R-4.2 Kein Zirkelbezug.** Zinsen einer Periode hängen nur von Beständen am Ende der Vorperiode ab. Die Steuer hängt von Zahlungen und Zinsen der laufenden Periode ab, nicht vom Ausgleich. Der Ausgleich über Geldanlage und Kontokorrent wirkt erst auf die Zinsen der Folgeperiode. Damit lässt sich jede Periode in einem Durchgang rechnen (`SCHULTE-IMMOBILIENINVESTITION-2025`).
 
 **R-4.3 Rechenreihenfolge je Periode.** Für u = 0 … N, in dieser Reihenfolge:
 
 1. **Originäre Zahlungen** der Periode aus den Kapiteln 6 und 8 einstellen. In N kommen der Verkaufserlös nach R-8.5 und die Rückzahlung von Fördermitteln nach R-8.7 hinzu.
-2. **Darlehen** nach Kapitel 5: Auszahlung und einbehaltener Betrag; ab u = 1 Zins und laufender Beitrag auf die Restschuld der Vorperiode; planmäßige Tilgung. In N wird nach der planmäßigen Rate jede Restschuld abgelöst (R-8.6). Für ein Darlehen mit freier Tilgung werden hier nur Zins und Beitrag gerechnet.
+2. **Darlehen** nach Kapitel 5: Auszahlung und einbehaltener Betrag; ab u = 1 Zins und laufender Beitrag auf die Restschuld der Vorperiode, Bereitstellungszins auf den nicht ausgezahlten Betrag (R-5.18); planmäßige Tilgung. In N wird nach der planmäßigen Rate jede Restschuld abgelöst (R-8.6). Für ein Darlehen mit freier Tilgung werden hier nur Zins und Beitrag gerechnet.
 3. **Zinsen auf Bestände:** Habenzins = runde(Guthaben der Vorperiode x Periodensatz von h); Kontokorrentzins = runde(Kontokorrent der Vorperiode x Periodensatz von k). In u = 0 gibt es keine Zinsen.
 4. **Vorfälligkeit** in N nach R-5.16.
-5. **Steuerliche Nebenrechnung:** Das operative Ergebnis der Periode (R-7.2) und die Habenzinsen werden auf das Planjahr aufsummiert. Ist u das Ende eines Planjahres, wird die Jahressteuer nach Kapitel 7 berechnet und als Zahlung dieser Periode gebucht; in N gehört der Verkaufsgewinn dazu (R-7.4).
-6. **Vorläufiger Saldo** = originäre Zahlungen + Auszahlungen der Darlehen − einbehaltene Beträge − Zins − Beitrag − Tilgung − Ablösung − Vorfälligkeit + Habenzins − Kontokorrentzins − Steuer.
+5. **Steuerliche Nebenrechnung:** Das operative Ergebnis der Periode (R-7.2) und die Habenzinsen werden auf das Planjahr aufsummiert; Entgelte und Zuschüsse gehen mit dem Betrag ein, den R-7.15 und R-7.19 dem Planjahr zuordnen. Ist u das Ende eines Planjahres, wird die Jahressteuer nach Kapitel 7 berechnet und als Zahlung dieser Periode gebucht; in N gehört der Verkaufsgewinn dazu (R-7.4).
+6. **Vorläufiger Saldo** = originäre Zahlungen + Auszahlungen der Darlehen − einbehaltene Beträge − Zins − Beitrag − Bereitstellungszins − Tilgung − Ablösung − Vorfälligkeit + Habenzins − Kontokorrentzins − Steuer.
 7. **Freie Tilgung** (R-5.7): Tilgung = max(0, min(Restschuld, Guthaben − Kontokorrent der Vorperiode + vorläufiger Saldo + geplante Einlage − geplante Entnahme)). Der vorläufige Saldo sinkt um diese Tilgung.
 8. **Eigenkapital:** geplante Einlagen und Entnahmen der Periode. Saldo = vorläufiger Saldo + Einlage − Entnahme.
 9. **Ausgleich:** Netto = Guthaben − Kontokorrent der Vorperiode + Saldo. Ist Netto ≥ 0, ist das neue Guthaben Netto und der Kontokorrent null; sonst ist das Guthaben null und der Kontokorrent −Netto, höchstens die Linie (R-4.5). Anlage = Veränderung des Guthabens, Aufnahme = Veränderung des Kontokorrents.
@@ -266,8 +316,8 @@ In t = 0 stehen den 1.100.000 Euro Investition 400.000 Euro Eigenkapital und 700
 
 **R-4.4 Finanzierungssaldo null.** In jeder Periode gilt: Saldo + Nachschuss − Anlage + Aufnahme = 0 (P-01). Der Finanzplan kennt keinen offenen Rest.
 
-**R-4.5 Kontokorrentlinie und Nachschuss.** Übersteigt der Kontokorrent im Schritt 9 die Linie H-11, wird der übersteigende Betrag als Nachschuss gebucht: eine Einlage des Investors in derselben Periode. Der Nachschuss zählt als Einlage in der Renditeformel (R-10.3) und geht gespiegelt in die Unterlassensalternative ein (R-9.2). Ohne Linie (Lehrbuchfälle) ist der Kontokorrent unbegrenzt. **Neue Festlegung (NF-06):** Voreingestellt ist die Linie null, sodass jeder Fehlbetrag als Eigenkapitalbedarf sichtbar wird; ein Kontokorrent, den die Bank nicht zugesagt hat, würde den Eigenkapitalbedarf verdecken.
-*Beispiel (RF-11):* Im Ankauf fällt im Jahr 2 der Investitionsstau von 127.308,00 Euro an. Das Guthaben reicht nicht; der Finanzplan bucht im Monat 24 einen Nachschuss von 91.529,75 Euro. *Beispiel (RF-06):* Im Testfall mit 380.000 Euro Eigenkapital und unbegrenztem Kontokorrent stehen 20.000,00 Euro Kontokorrent in t = 0, 10.940,00 in t = 1 und 770,64 in t = 2; der Endwert ist 561.526,16 Euro.
+**R-4.5 Kontokorrentlinie und Nachschuss.** Die Kontokorrentlinie H-11 ist ein Betrag ab null oder der eigene Wert „unbegrenzt“. Übersteigt der Kontokorrent im Schritt 9 die Linie, wird der übersteigende Betrag als Nachschuss gebucht: eine Einlage des Investors in derselben Periode. Der Nachschuss zählt als Einlage in der Renditeformel (R-10.3) und geht gespiegelt in die Unterlassensalternative ein (R-9.2). Bei „unbegrenzt“ (Lehrbuchfälle) gibt es keinen Nachschuss. **Neue Festlegung (NF-06):** Voreingestellt ist die Linie null, sodass jeder Fehlbetrag als Eigenkapitalbedarf sichtbar wird; ein Kontokorrent, den die Bank nicht zugesagt hat, würde den Eigenkapitalbedarf verdecken. Mit der Linie null kann der Endwert nicht negativ werden: Ein Verlust beim Verkauf erscheint als Nachschuss in N und wird als „Fehlbetrag beim Verkauf“ eigens ausgewiesen (R-10.17, M-42).
+*Beispiel (RF-11):* Im Ankauf fällt im Jahr 2 der Investitionsstau von 127.308,00 Euro an. Das Guthaben reicht nicht; der Finanzplan bucht im Monat 24 einen Nachschuss von 72.484,81 Euro. *Beispiel (RF-06):* Im Testfall mit 380.000 Euro Eigenkapital und unbegrenztem Kontokorrent stehen 20.000,00 Euro Kontokorrent in t = 0, 10.940,00 in t = 1 und 770,64 in t = 2; der Endwert ist 561.526,16 Euro.
 
 **R-4.6 Endwert.** Der Endwert ist der Bestandssaldo am Zeitpunkt N. Nach der Ablösung sind alle Restschulden null (P-02); der Endwert ist dann Guthaben − Kontokorrent. Er kann negativ sein (R-14.3).
 
@@ -303,14 +353,14 @@ Der Referenzrechner trifft alle veröffentlichten Werte der Tabellen 3 bis 6 (RF
 
 ## 5 Darlehen
 
-**R-5.1 Tranche.** Jedes Darlehen ist eine Tranche mit eigenem Plan und eigener Restschuld. Merkmale: Nennbetrag; Tilgungsart (Prozentannuität, Laufzeitannuität, Ratentilgung, endfällig, freie Tilgung); nominaler Jahreszins; Tilgungssatz oder Laufzeit; Auszahlungsplan; einbehaltener Betrag; Beginn der Tilgung; Zinsbindung mit Anschlusszins und Anschlussregel; laufender Beitrag; Tilgungszuschuss; Rundungsart (`MA-013`); Kennzeichen „Bankdarlehen“ oder „übriges Darlehen“ für R-5.12. Die Grobkalkulation führt ein Bankdarlehen als Prozentannuität und höchstens zwei übrige Darlehen (übernommenes Darlehen, Förderdarlehen); der Kern selbst begrenzt die Zahl der Tranchen nicht.
+**R-5.1 Tranche.** Jedes Darlehen ist eine Tranche mit eigenem Plan und eigener Restschuld. Merkmale: Nennbetrag; Tilgungsart (Prozentannuität, Laufzeitannuität, Ratentilgung, endfällig, freie Tilgung); nominaler Jahreszins; Tilgungssatz oder Laufzeit; Bezugsbetrag der Rate (R-5.11); Auszahlungsplan; einbehaltener Betrag; Beginn der Tilgung; Zinsbindung mit Anschlusszins und Anschlussregel; laufender Beitrag; Bereitstellungszins (R-5.18); Tilgungszuschuss; Rundungsart (`MA-013`); Kennzeichen „Bankdarlehen“ oder „übriges Darlehen“; Kennzeichen „Förderdarlehen“ (R-5.16); Rang vor oder nach der Bank (R-5.12). Die Grobkalkulation führt ein Bankdarlehen als Prozentannuität und bis zu drei übrige Darlehen: ein übernommenes Darlehen (Ankauf), ein KfW-Darlehen (Neubau, R-5.19) und das Förderdarlehen der Grobförderung (Neubau); der Kern selbst begrenzt die Zahl der Tranchen nicht.
 
 **R-5.2 Zins.** Zins der Periode u = Restschuld am Ende von u − 1 x Jahreszins der Periode / p. Der Jahreszins ist nominal (R-2.6). Jede Periode zählt als ein p-tel Jahr; eine Zählung nach Kalendertagen gibt es in Teil 1 nicht.
 
 **R-5.3 Rechenfolge und Rundung je Rate (`MA-013`).** Zins = runde(Restschuld x Jahreszins / p): erst multiplizieren, zuletzt teilen, dann auf Cent runden (R-12.5). Die Rate einer Annuität wird einmal gerundet und bleibt fest; Tilgung = Rate − Zins, ohne weitere Rundung. Voreingestellt ist kaufmännische Rundung; je Darlehen umstellbar auf Abschneiden oder auf keine Rundung, damit die Restschuld mit dem Kontoauszug der Bank übereinstimmt.
 *Beispiel (RF-08):* 700.000 Euro zu 4 %, Monatsrate 3.500 Euro. Rate 1: Zins 2.333,33, Tilgung 1.166,67; Rate 2: Zins 2.329,44, Tilgung 1.170,56. Restschuld nach 120 Raten: 528.208,51 Euro bei kaufmännischer Rundung, 528.207,91 Euro bei Abschneiden, 528.208,56 Euro ohne Rundung.
 
-**R-5.4 Annuität.** Prozentannuität (deutsche Bankpraxis): Rate = runde(Nennbetrag x (i + τ) / p), fest über die Zinsbindung. Laufzeitannuität (Lehrbuch): Rate = runde(K x i_p x q^m / (q^m − 1)) mit i_p = i / p, q = 1 + i_p und m Tilgungsperioden; die Potenz wird mit voller Rechengenauigkeit gebildet. Bei i = 0 ist die Rate K / m. In jeder Periode gilt Tilgung = min(Restschuld, max(0, Rate − Zins)); die letzte Rate einer Laufzeitannuität tilgt den Rest.
+**R-5.4 Annuität.** Prozentannuität (deutsche Bankpraxis): Rate = runde(Bezugsbetrag x (i + τ) / p), fest über die Zinsbindung; Bezugsbetrag ist der Nennbetrag (Ausnahme R-5.11). Laufzeitannuität (Lehrbuch): Rate = runde(K x i_p x q^m / (q^m − 1)) mit i_p = i / p, q = 1 + i_p und m Tilgungsperioden, m eine ganze Zahl; die Potenz wird mit voller Rechengenauigkeit gebildet. Bei i = 0 ist die Rate runde(K / m). In jeder Periode gilt Tilgung = min(Restschuld, max(0, Rate − Zins)); die letzte Rate einer Laufzeitannuität tilgt den Rest und gleicht damit Rundungsreste aus.
 *Beispiel (RF-03, RF-04, RF-02):* 2.000 zu 7,5 % über fünf Jahre: Annuität 494; 21.869 zu 10 % über zehn Jahre: 3.559; 17.798,40 Euro zu 4 % über 25 Jahre: 1.139,31 Euro. Bei Zins null (R-14.1): 700.000 Euro über 20 Jahre, Rate 35.000,00 Euro.
 
 **R-5.5 Ratentilgung.** Tilgung je Periode = runde(Nennbetrag / m); die letzte Rate tilgt den Rest. Zins nach R-5.2.
@@ -322,141 +372,197 @@ Der Referenzrechner trifft alle veröffentlichten Werte der Tabellen 3 bis 6 (RF
 **R-5.7 Freie Tilgung.** Der ganze Überschuss der Periode tilgt (R-4.3, Schritt 7); der Rest wird in N abgelöst. Solange Restschuld besteht, bleibt das Guthaben null. Ein Finanzplan führt höchstens eine Tranche mit freier Tilgung. Die Tilgungsart stammt aus dem Lehrbuch und steht ab der Vollkalkulation zur Wahl; in der Grobkalkulation dient sie nur dem Referenzfall.
 *Beispiel (RF-04):* Bürogebäude, Kredit 21.869 zu 10 %: Tilgung 1.010 / 1.060 / 1.113 in den Jahren 1 bis 3, Kreditstand 20.859 / 19.799 / 18.686, Rückzahlung im zehnten Jahr 10.737, Endvermögen 31.567. Die freie Tilgung ist die beste der drei Kreditvarianten des Lehrbuchs (endfällig 30.179, Annuität 31.400).
 
-**R-5.8 Zinsbindung und Anschlusszins.** Die Zinsbindung zählt in Perioden ab dem Stichtag (**neue Festlegung NF-08**: früheres Ende ist die vorsichtige Lesart beim Neubau). Bis zu ihrem Ende gilt der vereinbarte Zins, danach der Anschlusszins. Für das Bankdarlehen ist der Anschlusszins der heutige Zins zuzüglich des Aufschlags H-05; für ein übriges Darlehen ist er Eingabe (E-59) oder Katalogwert (`MA-003` für das Förderdarlehen). Der heutige Zins wird nie still fortgeschrieben: Fehlt ein Anschlusszins, obwohl die Haltedauer über die Bindung hinausreicht, rechnet der Kern nicht und gibt M-24 zurück.
+**R-5.8 Zinsbindung und Anschlusszins.** Die Zinsbindung zählt in Perioden ab dem Stichtag (**neue Festlegung NF-08**: früheres Ende ist die vorsichtige Lesart beim Neubau). Bis zu ihrem Ende gilt der vereinbarte Zins, danach der Anschlusszins. Für das Bankdarlehen und das KfW-Darlehen ist der Anschlusszins der heutige Zins des Bankdarlehens zuzüglich des Aufschlags H-05. Für das übernommene Darlehen ist er der sechste Wert von E-59, voreingestellt ebenfalls E-45 + H-05; das ist die vorsichtige Voreinstellung, eine günstigere Kondition aus Vertrag oder Bescheid überschreibt sie. Für das Förderdarlehen der Grobförderung ist er Katalogwert (`MA-003`). Der heutige Zins wird nie still fortgeschrieben: Erhält der Kern eine Tranche ohne Anschlusszins, obwohl die Haltedauer über die Bindung hinausreicht, rechnet er nicht und gibt M-24 zurück. In der Grobkalkulation kann das wegen der Voreinstellungen nicht eintreten; die Meldung sichert die Vollkalkulation.
 
-**R-5.9 Rate nach der Zinsbindung.** In der ersten Periode nach der Bindung wird die Rate einer Prozentannuität neu gesetzt. **Neue Festlegung (NF-07):** Voreingestellt ist „Tilgungssatz bleibt“: neue Rate = runde(Restschuld am Bindungsende x (Anschlusszins + Tilgungssatz der Anschlussfinanzierung) / p); der Tilgungssatz der Anschlussfinanzierung ist der anfängliche, mindestens H-04. Das ist die übliche Prolongation. Die beiden anderen Regeln sind über H-07 wählbar: „Rate bleibt“ (die bisherige Rate, mindestens der neue Zins) und „Restlaufzeit bleibt“ (Laufzeitannuität über die rechnerische Restlaufzeit ln((i + τ) / τ) / ln(1 + i / p) Perioden abzüglich der vergangenen). Ratentilgung und endfällige Darlehen ändern nur den Zins.
-*Beispiel (RF-08, Jahresmodus, ungerundet):* 1.496.000 Euro zu 4 % und 2 %, Bindung zehn Jahre, danach 6 %. Rate ab Jahr 11: 90.942 Euro (Tilgungssatz bleibt), 89.760 Euro (Rate bleibt), 104.952 Euro (Restlaufzeit bleibt). Die Regel wirkt wenig auf den Endwert und stark auf die Schuldendienstdeckung. *Beispiel (RF-11):* Rate bis Monat 120: 7.155,22 Euro; Restschuld 1.079.843,92 Euro; Rate ab Monat 121 bei 5 % und 2 %: 6.299,09 Euro.
+**R-5.9 Rate nach der Zinsbindung (`MA-034`).** In der ersten Periode nach der Bindung wird die Rate einer Prozentannuität neu gesetzt. **Neue Festlegung (NF-07):** Voreingestellt ist „Tilgungssatz bleibt“: neue Rate = runde(Restschuld am Bindungsende x (Anschlusszins + Tilgungssatz der Anschlussfinanzierung) / p); der Tilgungssatz der Anschlussfinanzierung ist der anfängliche, mindestens H-04. Die beiden anderen Regeln sind über H-07 wählbar: „Rate bleibt“ (die bisherige Rate, mindestens der neue Zins) und „Restlaufzeit bleibt“: Laufzeitannuität zum Anschlusszins über m Perioden, m = die auf ganze Perioden abgerundete rechnerische Restlaufzeit, mindestens eine Periode. Die rechnerische Restlaufzeit ist die Zahl der Perioden, nach denen die bisherige Rate R die Restschuld S zum bisherigen Periodenzins i_p getilgt hätte: ln(R / (R − S x i_p)) / ln(1 + i_p), bei i_p = 0: S / R. Abrunden ergibt die höhere Rate und ist für die Deckung die vorsichtige Wahl. Enthält die bisherige Rate keine Tilgung (R ≤ runde(S x i_p)), ist die Restlaufzeit nicht definiert; dann rechnet der Kern „Tilgungssatz bleibt“ und gibt den Hinweis M-40 zurück. Ratentilgung und endfällige Darlehen ändern nur den Zins.
+Welche Regel die Bank anwendet, ist nicht veröffentlicht (`MA-034`). Die Voreinstellung ist für die Endwertdifferenz die ungünstigste der drei Regeln und für die Deckung nach dem Anschluss die günstigste; diese Ausnahme von der Vorsichtsregel ist im Verzeichnis begründet (übliche Prolongation; die Deckung im ersten Jahr nach jeder Zinsbindung steht auf dem Blatt, R-10.14).
+*Beispiel (RF-08, Jahresmodus, ungerundet):* 1.496.000 Euro zu 4 % und 2 %, Bindung zehn Jahre, danach 6 %; Restschuld 1.136.777,27 Euro, rechnerische Restlaufzeit 18,011 Jahre, abgerundet 18. Rate ab Jahr 11: 90.942 Euro (Tilgungssatz bleibt), 89.760 Euro (Rate bleibt), 104.989 Euro (Restlaufzeit bleibt). *Beispiel (RF-11, RF-19):* Rate bis Monat 120: 6.133,05 Euro; Restschuld 925.579,91 Euro; Rate ab Monat 121 bei 5 % und 2 %: 5.399,22 Euro. Endwertdifferenz und Deckung im Jahr 11 je Regel: 753.701,96 Euro und 2,0853 (Tilgungssatz bleibt), 754.107,08 Euro und 1,8358 (Rate bleibt), 754.381,58 Euro und 1,7002 (Restlaufzeit bleibt).
 
-**R-5.10 Auszahlung und Beginn der Tilgung.** Ein Darlehen wird nach seinem Auszahlungsplan ausgezahlt (R-11.3). Bis zum Beginn der Tilgung fallen nur Zins und Beitrag auf den ausgezahlten Betrag an; beim Neubau beginnt die Tilgung im Monat nach der Bauzeit. Die Rate der Prozentannuität bezieht sich auf den Nennbetrag.
-*Beispiel (RF-12):* Bankdarlehen 4.781.894,99 Euro, erste Auszahlung im Monat 7, Bauzeit 18 Monate. Zinsen der Bauzeit zusammen 83.180,59 Euro. Monat 19: Rate 23.909,47 Euro, davon Zins 15.939,65 und Tilgung 7.969,82.
+**R-5.10 Auszahlung und Beginn der Tilgung.** Ein Darlehen wird nach seinem Auszahlungsplan ausgezahlt (R-11.3). Bis zum Beginn der Tilgung fallen nur Zins und Beitrag auf den ausgezahlten Betrag an, dazu der Bereitstellungszins auf den nicht ausgezahlten (R-5.18); beim Neubau beginnt die Tilgung im Monat nach der Bauzeit, beim KfW-Darlehen nach den tilgungsfreien Anlaufjahren. Die Rate der Prozentannuität bezieht sich auf den Nennbetrag. Tilgungsfreie Anlaufjahre des Bankdarlehens sind für Teil 2 vorgemerkt; der Kern kann sie über den Beginn der Tilgung schon abbilden.
+*Beispiel (RF-12):* Bankdarlehen 4.007.142,85 Euro, erste Auszahlung im Monat 9 (104.786,77 Euro), Bauzeit 18 Monate. Zinsen der Bauzeit zusammen 54.961,41 Euro. Monat 19: Rate 20.035,71 Euro, davon Zins 13.357,14 und Tilgung 6.678,57.
 
-**R-5.11 Übrige Darlehen.** Ein übernommenes Darlehen gilt als am Stichtag in Höhe seiner Restschuld ausgezahlt; der Kaufpreis steht in voller Höhe als Investition. Es läuft als Prozentannuität mit seinem Zins, seinem Tilgungssatz und seiner eigenen Zinsbindung weiter. Das Förderdarlehen der Grobförderung läuft als Ratentilgung über die Tilgungsdauer des Katalogs ab dem Monat nach der Bauzeit (`MA-002`), zinslos für die zinslose Zeit ab demselben Monat und danach zum Zins nach `MA-003`, mit laufendem Beitrag (R-5.13) und einbehaltenem Entgelt (R-5.14). **Neue Festlegung (NF-11):** Raten und Beiträge übriger Darlehen fallen im Takt des Rasters an, im Monatsraster also monatlich mit einem Zwölftel; `MA-002` nennt Jahresraten. Bei einem zinslosen Darlehen ändert das nur die Liquidität innerhalb des Jahres.
-*Beispiel (RF-11):* Übernommenes Darlehen 500.000 Euro zu 0,5 % und 2 % Tilgung: Kapitaldienst im ersten Jahr 12.500,04 Euro. *Beispiel (RF-08, Jahresmodus; Werte nach Bericht Anhang C.1 als Annahme):* Förderdarlehen 2.320.000 Euro, Entgelt 1 % = 23.200,00 Euro einbehalten, Beitrag 0,5 % = 11.600,00 Euro im ersten Jahr, Rate 55.238,10 Euro; Restschuld nach 35 Jahren 386.666,50 Euro, ein Sechstel des Darlehens; Zins im 36. Jahr bei angenommenen 5 %: 19.333,33 Euro.
+**R-5.11 Übrige Darlehen.** Ein übernommenes Darlehen gilt als am Stichtag in Höhe seiner Restschuld ausgezahlt; der Kaufpreis steht in voller Höhe als Investition. Es läuft als Prozentannuität mit seinem Zins, seinem Tilgungssatz, seiner eigenen Zinsbindung und seinem laufenden Beitrag weiter. Die Rate bezieht sich auf den ursprünglichen Nennbetrag: Rate = runde(ursprünglicher Nennbetrag x (i + τ) / p). Ist der Nennbetrag nicht angegeben, gilt die Restschuld; dann fällt die Rate kleiner aus als im Vertrag, und der Bearbeiter gibt statt des vertraglichen Tilgungssatzes den auf die Restschuld bezogenen ein. Das Förderdarlehen der Grobförderung läuft als Ratentilgung über die Tilgungsdauer des Katalogs ab dem Monat nach der Bauzeit (`MA-002`), zinslos für die zinslose Zeit ab demselben Monat und danach zum Zins nach `MA-003`, mit laufendem Beitrag (R-5.13) und einbehaltenem Entgelt (R-5.14). **Neue Festlegung (NF-11):** Raten und Beiträge übriger Darlehen fallen im Takt des Rasters an, im Monatsraster also monatlich mit einem Zwölftel; `MA-002` nennt die Jahresrate als andere Lesart. Bei einem zinslosen Darlehen ändert das nur die Liquidität innerhalb des Jahres.
+*Beispiel (RF-11, RF-08):* Übernommenes Darlehen mit 500.000 Euro Restschuld, 600.000 Euro ursprünglichem Nennbetrag, 0,5 % Zins und 2 % Tilgung: Monatsrate 1.250,00 Euro, Kapitaldienst im ersten Jahr 15.000,00 Euro; aus der Restschuld gerechnet wären es 12.500,04 Euro. *Beispiel (RF-08, Jahresmodus; Werte nach Bericht Anhang C.1 als Annahme):* Förderdarlehen 2.320.000 Euro, Entgelt 1 % = 23.200,00 Euro einbehalten, Beitrag 0,5 % = 11.600,00 Euro im ersten Jahr, Rate 55.238,10 Euro; Restschuld nach 35 Jahren 386.666,50 Euro, ein Sechstel des Darlehens; Zins im 36. Jahr bei angenommenen 5 %: 19.333,33 Euro.
 
 **R-5.12 Höhe des Bankdarlehens (`MA-026`).** Das Bankdarlehen ist der kleinste von drei Werten und nie negativ:
 
     L = max(0; abrunden_Cent(min(A; B; C)))
 
-- **(a) Beleihungsquote:** A = β x W − Ü. W ist der Wertansatz: der Kaufpreis, beim Neubau die Gesamtkosten ohne Bauzeitzinsen (R-11.2), überschreibbar durch E-61. Ü ist die Summe der übrigen Darlehen.
-- **(b) Mindestdeckung:** B ist das größte Darlehen, mit dem der Reinertrag im ersten Jahr der Vollvermietung den Kapitaldienst aller Darlehen mit der Mindestdeckung deckt: RE_VJ ≥ μ x (KD_Ü + p x runde(B x (i + τ) / p)). Geschlossen: B = (RE_VJ / μ − KD_Ü) / (i + τ), auf Cent abgerundet und um einzelne Cent gesenkt, bis die Ungleichung mit der gerundeten Rate gilt. KD_Ü ist der Kapitaldienst der übrigen Darlehen in zwölf Monaten ab Tilgungsbeginn (Zins, Tilgung, Beitrag). Gerechnet wird mit dem heutigen Zins i und dem Tilgungssatz τ des Vorhabens (E-64).
-- **(c) Restfinanzierung:** C = M − Ü − Zuschüsse − Mindesteigenkapital. M ist der Mittelbedarf nach R-11.2. Ein Mindesteigenkapital gibt nur die Förderung vor (`MA-004`); sonst ist es null.
+- **(a) Beleihungsquote:** A = β x W − Ü_B. W ist der Wertansatz: der Kaufpreis, beim Neubau die Gesamtkosten (R-1.1), überschreibbar durch E-61. Ü_B ist die Summe der übrigen Darlehen, die den Beleihungsraum der Bank belegen. Das hängt am Rang: Für das übernommene Darlehen ist der Rang Eingabe aus dem Grundbuch (E-59, voreingestellt „vor der Bank“); das KfW-Darlehen belegt den Raum immer (vorsichtige Festlegung); für das Förderdarlehen der Grobförderung ist der Rang Annahme (`MA-026`), voreingestellt belegt es den Raum.
+- **(b) Mindestdeckung:** B ist das größte Darlehen, mit dem der nachhaltige Reinertrag den kalkulatorischen Kapitaldienst aller Darlehen mit der Mindestdeckung deckt: RE_n ≥ μ x (KD_Ü + p x runde(B x (i_k + τ_k) / p)). Die Deckung rechnet immer über alle Darlehen, gleich welchen Rangs, weil der Kapitaldienst aller Darlehen aus demselben Reinertrag fließt; das ist Festlegung und keine Lesart. Geschlossen: B = (RE_n / μ − KD_Ü) / (i_k + τ_k), auf Cent abgerundet und um einzelne Cent gesenkt, bis die Ungleichung mit der kaufmännisch gerundeten Rate gilt; die Bemessung rechnet stets mit kaufmännischer Rundung, auch wenn die Rundungsart des Darlehens umgestellt ist (`MA-013`).
+  - *Nachhaltiger Reinertrag RE_n:* Rohertrag_n = Summe über das erste Jahr der Vollvermietung aus Fläche x min(Miete; Vergleichsmiete) je Teilfläche, zuzüglich sonstiger Erträge. Abzug = max(Bewirtschaftung ohne Erbbauzins + Mietausfall auf den Rohertrag_n; runde(KAT-14 x Rohertrag_n)). RE_n = Rohertrag_n − Abzug − Erbbauzins. Eine Ist-Miete über der Vergleichsmiete und Bewirtschaftungskosten unter dem Mindestansatz der Bank erhöhen das Darlehen also nicht.
+  - *Kalkulatorischer Zins i_k je Tranche:* max(Vertragszins; H-25). H-25 ist voreingestellt der Anschlusszins der Tranche, beim Bankdarlehen also E-45 + H-05. *Kalkulatorische Tilgung τ_k:* max(Tilgungssatz der Tranche; H-04), ohne tilgungsfreie Anlaufjahre.
+  - *Kalkulatorischer Kapitaldienst KD_Ü der übrigen Darlehen:* je Darlehen der größere Wert aus dem vertraglichen Kapitaldienst der ersten zwölf Tilgungsmonate und p x runde(Schuld x (i_k + τ_k) / p) zuzüglich des laufenden Beitrags. Ausnahme: Ein Darlehen mit dem Kennzeichen „Förderdarlehen“, dessen Zinsbindung nicht vor der des Bankdarlehens endet, geht mit seinem vertraglichen Kapitaldienst ein; seine Konditionen stehen für diese Zeit fest (für die Zeit danach setzt `MA-003` schon den ungünstigsten Satz).
+  - *Kein Kapitaldienst:* Ist i_k + τ_k = 0, hat das Bankdarlehen keinen laufenden Kapitaldienst. Dann ist B unbegrenzt, wenn RE_n / μ ≥ KD_Ü, und es binden (a) oder (c); sonst ist B = 0.
+- **(c) Restfinanzierung:** C = M − Ü − Zuschüsse − Mindesteigenkapital. M ist der Mittelbedarf nach R-11.2, Ü die Summe aller übrigen Darlehen. Ein Mindesteigenkapital gibt nur die Förderung vor (`MA-004`); sonst ist es null.
 
-Das Eigenkapital ist der Ausgleichsposten: EK = M − Ü − Zuschüsse − L (P-04). Das Ergebnis nennt die bindende Grenze; bei Gleichstand alle gleichauf liegenden. Ist B ≤ 0, trägt der Reinertrag nach der Mindestdeckung kein Bankdarlehen, weil er schon für die übrigen Darlehen nicht reicht oder nicht positiv ist: L = 0 und Meldung M-21. Ist C < 0, übersteigen die übrigen Mittel den Bedarf: keine Rechnung, Meldung M-22 (R-14.7). Die andere Lesart von `MA-026` ist umschaltbar: Dann zählen Ü in (a) und KD_Ü in (b) nicht mit. **Neue Festlegung (NF-09)** sind die Rundung zur sicheren Seite und der Ansatz von heutigem Zins und Tilgungssatz in (b); eine Bank, die mit einem kalkulatorischen Zins rechnet, ergäbe ein kleineres Darlehen (Frage an die Hausbank, Kapitel 16).
+Das Eigenkapital ist der Ausgleichsposten: EK = M − Ü − Zuschüsse − L (P-04). Das Ergebnis nennt die bindende Grenze; bei Gleichstand alle gleichauf liegenden. Ist B ≤ 0, trägt der nachhaltige Reinertrag nach der Mindestdeckung kein Bankdarlehen: L = 0 und Meldung M-21 mit den Angaben nach R-11.15. Ist C < 0, übersteigen die übrigen Mittel den Bedarf: keine Rechnung, Meldung M-22 (R-14.7).
 
-*Beispiele (RF-09; Zins 4 %, Tilgung 2 %, Mindestdeckung 1,2 als Annahme; Werte des Berichts, Anhang D.4):*
+`MA-026` umfasst, was an der Rechnung der Bank offen ist, mit drei umschaltbaren Lesarten: (1) Das Förderdarlehen der Grobförderung steht im Nachrang und belegt den Beleihungsraum nicht (Ü_B ohne Förderdarlehen). (2) Die Bank rechnet die Kapitaldienstfähigkeit mit den Vertragskonditionen statt kalkulatorisch. (3) Die Bank setzt Ertrag und Bewirtschaftung des Vorhabens an statt des nachhaltigen Reinertrags. Dazu der Wertansatz: Voreingestellt ist der Kaufpreis und nicht ein niedrigerer Beleihungswert; diese Ausnahme von der Vorsichtsregel ist im Verzeichnis begründet. **Neue Festlegung (NF-09, geändert):** Die Rundung zur sicheren Seite bleibt; statt des heutigen Zinses gilt der kalkulatorische, statt des Ertrags des Vorhabens der nachhaltige. Der Entwurf hatte die günstigere Lesart voreingestellt.
+
+*Gegenüberstellung der Lesarten (RF-11, RF-19):* Kalkulatorisch (5 % und 2 %) gibt die Bank 1.226.609,99 Euro, mit den Vertragskonditionen (4 % und 2 %) 1.431.044,99 Euro, also 204.435,00 Euro mehr; der höchste tragbare Preis ist 2.317.235 Euro gegen 2.359.366 Euro. Mit einem festen kalkulatorischen Zins von 6 % (H-25) sind es 1.073.283,74 Euro. Bei einer Ist-Miete von 11,00 Euro über der Vergleichsmiete von 9,20 Euro (RF-18) ist der Reinertrag des Vorhabens 141.843,24 Euro, der nachhaltige 113.901,48 Euro; das Darlehen ist 1.355.969,99 Euro statt 1.560.000,00 Euro nach Lesart (3). Im Neubau (RF-12) machen Bewirtschaftung und Mietausfall des Vorhabens 41.567,25 Euro oder 10,5 % des Rohertrags von 396.000,00 Euro aus; angesetzt wird der Mindestansatz von 15 % (Katalogstand `BELWERTV-11`), RE_n = 336.600,00 Euro statt 354.432,75 Euro.
+
+*Beispiele der drei Grenzen (RF-09; kalkulatorischer Zins 4 %, kalkulatorische Tilgung 2 %, Mindestdeckung 1,2 als Annahme; Jahresmodus; Werte des Berichts, Anhang D.4):*
 
 | Fall | A | B | C | Bankdarlehen | bindet | Eigenkapital |
 |---|---|---|---|---|---|---|
-| Ankauf 2,6 Mio. Euro, Reinertrag 107.712 Euro, Quote 65 % | 1.690.000 | 1.496.000 | 2.782.000 | 1.496.000 | (b) | 1.286.000 |
+| Ankauf 2,6 Mio. Euro, Nebenkosten 7 %, nachhaltiger Reinertrag 107.712 Euro, Quote 65 % | 1.690.000 | 1.496.000 | 2.782.000 | 1.496.000 | (b) | 1.286.000 |
 | Ankauf 2,2 Mio. Euro, sonst gleich | 1.430.000 | 1.496.000 | 2.354.000 | 1.430.000 | (a) | 924.000 |
-| Ankauf 2,0 Mio. Euro, Nebenkosten 0,2 Mio., übernommenes Darlehen 1,0 Mio. | 300.000 | 1.527.778 | 1.200.000 | 300.000 | (a) | 900.000 |
-| derselbe Ankauf, andere Lesart von `MA-026` | 1.300.000 | 1.944.444 | 1.200.000 | 1.200.000 | (c) | 0 |
-| Neubau 10 Mio., Förderdarlehen 5,4 Mio., Zuschuss 1,8 Mio., Mindesteigenkapital 1,8 Mio., Quote 65 %, Reinertrag 400.000 | 1.100.000 | 2.962.698 | 1.000.000 | 1.000.000 | (c) | 1.800.000 |
-| derselbe Neubau, Quote 60 % | 600.000 | 2.962.698 | 1.000.000 | 600.000 | (a) | 2.200.000 |
+| Ankauf 2,0 Mio. Euro, Nebenkosten 0,2 Mio., nachhaltiger Reinertrag 140.000 Euro, übernommenes Darlehen 1,0 Mio. im Rang vor der Bank mit 25.000 Euro kalkulatorischem Kapitaldienst | 300.000 | 1.527.777,74 | 1.200.000 | 300.000 | (a) | 900.000 |
+| derselbe Ankauf, Rang nach der Bank (Eingabe E-59) | 1.300.000 | 1.527.777,74 | 1.200.000 | 1.200.000 | (c) | 0 |
+| Neubau 10 Mio., Förderdarlehen 5,4 Mio., Zuschuss 1,8 Mio., Mindesteigenkapital 1,8 Mio., Quote 65 %, Reinertrag 400.000 | 1.100.000 | 2.962.698,41 | 1.000.000 | 1.000.000 | (c) | 1.800.000 |
+| derselbe Neubau, Quote 60 % | 600.000 | 2.962.698,41 | 1.000.000 | 600.000 | (a) | 2.200.000 |
 | derselbe Neubau, Quote 65 %, Reinertrag 200.000 | 1.100.000 | 184.920,58 | 1.000.000 | 184.920,58 | (b) | 2.615.079,42 |
-| derselbe Neubau, Reinertrag 180.000 | 1.100.000 | negativ | 1.000.000 | 0 mit M-21 | (b) | 2.800.000 |
+| derselbe Neubau, Reinertrag 180.000 | 1.100.000 | −92.857,14 | 1.000.000 | 0 mit M-21 | (b) | 2.800.000 |
+| derselbe Neubau, Quote 60 %, Reinertrag 180.000, Förderdarlehen im Nachrang (Lesart 1) | 6.000.000 | −92.857,14 | 1.000.000 | 0 mit M-21 | (b) | 2.800.000 |
 
-Der Kapitaldienst des Förderdarlehens im Beispiel ist 155.571,43 Euro; erst über 186.685,71 Euro Reinertrag bleibt nach (b) etwas für die Bank. Die Grenzen (a) und (b) des ersten Beispiels treffen sich beim Kaufpreis 2.301.538,46 Euro (Knick, R-11.5). Im Monatsraster wirkt die Rundung der Rate: Bei 107.712,37 Euro Reinertrag ergibt die geschlossene Form 1.496.005,14 Euro; gewährt werden 1.496.004,99 Euro mit 89.760,24 Euro Kapitaldienst und einer Deckung von 1,200001.
+Der Kapitaldienst des Förderdarlehens im Beispiel ist 155.571,43 Euro; erst über 186.685,71 Euro Reinertrag bleibt nach (b) etwas für die Bank. Die letzte Zeile zeigt, warum die Deckung nicht umschaltbar ist: Der Nachrang öffnet den Beleihungsraum, aber nicht die Kapitaldienstfähigkeit. Die Grenzen (a) und (b) des ersten Beispiels treffen sich beim Kaufpreis 2.301.538,46 Euro (Knick, R-11.5). Im Monatsraster wirkt die Rundung der Rate: Bei 107.712,37 Euro Reinertrag ergibt die geschlossene Form 1.496.005,14 Euro; gewährt werden 1.496.004,99 Euro mit 89.760,24 Euro Kapitaldienst und einer Deckung von 1,200001. *Ohne Kapitaldienst (RF-09, RF-20):* Bei Zins und Tilgung null und 2,4 Mio. Euro Kaufpreis ist B unbegrenzt; es bindet (a) mit 1.560.000,00 Euro.
 
 **R-5.13 Laufende Beiträge.** Ein laufender Beitrag (Verwaltungskostenbeitrag) ist runde(Restschuld der Vorperiode x Beitragssatz / p). Er ist Finanzierungskosten: Er zählt zum Kapitaldienst (R-10.14), mindert das operative Ergebnis (R-7.2) und steht in der Bestandsprobe (P-03).
 
 **R-5.14 Einbehaltene Beträge.** Ein Disagio oder Bearbeitungsentgelt wird bei der ersten Auszahlung einbehalten: Die Restschuld steigt um die volle Auszahlung, der Geldzufluss ist um den einbehaltenen Betrag kleiner. Das Entgelt auf einen Zuschuss wird von dessen erster Auszahlung einbehalten; der Zuschuss steht brutto als originäre Zahlung, das Entgelt als eigener Abfluss. Einbehaltene Beträge gehören zur Mittelverwendung (R-11.2).
-*Beispiel (RF-08):* Disagio 3 % auf 700.000 Euro: Restschuld 700.000,00, Zufluss 679.000,00 Euro. *Beispiel (RF-12):* Förderdarlehen 5.124.000 Euro und Zuschuss 1.708.000 Euro: einbehalten 51.240,00 + 12.810,00 = 64.050,00 Euro.
+*Beispiel (RF-08):* Disagio 3 % auf 700.000 Euro: Restschuld 700.000,00, Zufluss 679.000,00 Euro. *Beispiel (RF-12; Entgeltsätze 1 % und 0,75 % als Annahme):* Förderdarlehen 5.231.491,40 Euro und Zuschuss 1.743.830,47 Euro: einbehalten 52.314,91 + 13.078,73 = 65.393,64 Euro.
 
 **R-5.15 Tilgungszuschuss.** Ein Tilgungszuschuss mindert die Restschuld ohne Geldfluss. Er steht nicht im Finanzierungssaldo, aber in der Kreditprobe (P-02) und in der Bestandsprobe (P-03). Die Grobkalkulation nutzt ihn nicht; der Kern führt ihn für die KfW-Darlehen des Teils 2.
 *Beispiel (RF-08):* Testfall mit 21.000 Euro Disagio, 35.000 Euro Tilgungszuschuss im dritten Jahr und 100.000 Euro Zuschuss: Alle Kontrollsummen schließen mit null.
 
-**R-5.16 Ablösung und Vorfälligkeit.** In N wird nach der planmäßigen Rate jede Restschuld abgelöst (R-8.6). Reicht die Zinsbindung eines Darlehens über N hinaus, fällt eine Vorfälligkeitsentschädigung an: runde(abgelöste Restschuld x H-18 x Restbindung in Jahren), als Finanzierungskosten in N. Für Förderdarlehen fällt keine an. **Neue Festlegung (NF-10):** Die Pauschale ersetzt in Teil 1 die Zinsschadenrechnung der Bank; sie ist eine Annahme über die Bankpraxis (Vorschlag einer Modellannahme, Kapitel 17). Der Kern gibt den Hinweis M-25 zurück, wenn die Bindung über die Haltedauer reicht.
-*Beispiel (RF-08; Satz 1 % je Jahr als Annahme):* Testfall mit zehn Jahren Zinsbindung, Verkauf nach fünf: 624.171,48 x 1 % x 5 = 31.208,57 Euro; Endwert 562.520,28 statt 584.366,28 Euro. *Beispiel (RF-14):* Ankauf mit Verkauf nach einem Jahr: 126.170,42 Euro bei neun Jahren Restbindung.
+**R-5.16 Ablösung und Vorfälligkeit (`MA-033`).** In N wird nach der planmäßigen Rate jede Restschuld abgelöst (R-8.6). Liegt N vor dem Ende der Restbindung eines Darlehens, fällt eine Vorfälligkeitsentschädigung an:
+
+    Restbindung = max(0; min(Ende der Zinsbindung; t_voll + Sperrfrist + Kündigungsfrist) − N)        in Perioden
+    Vorfälligkeit = runde(abgelöste Restschuld x H-18 x Restbindung / p)
+
+t_voll ist die Periode der letzten Auszahlung; Sperrfrist und Kündigungsfrist sind die Katalogwerte KAT-13 des ordentlichen Kündigungsrechts (`BGB-489`): Nach ihrem Ablauf kann der Darlehensnehmer kündigen, und es fällt keine Entschädigung mehr an. Für ein übernommenes Darlehen ist der Beginn der Zinsvereinbarung nicht bekannt; die Frist zählt ab dem Stichtag (längste Restbindung, vorsichtig). Für Darlehen mit dem Kennzeichen „Förderdarlehen“ fällt keine Entschädigung an. Die Entschädigung ist Finanzierungskosten in N; ihre Rechtsgrundlage beim Verkauf ist `BGB-490`. **Neue Festlegung (NF-10, geändert):** Die Pauschale ersetzt in Teil 1 die Zinsschadenrechnung der Bank (`MA-033`, Gewicht mittel): Der tatsächliche Zinsschaden hängt vom Zinsniveau beim Verkauf ab und kann null sein oder über der Pauschale liegen. Der Kern gibt den Hinweis M-25 nur zurück, wenn tatsächlich eine Entschädigung angesetzt ist.
+*Beispiel (RF-08; Satz 1 % je Jahr als Annahme, Jahresmodus):* Testfall mit zehn Jahren Zinsbindung, Verkauf nach fünf: 624.171,48 x 1 % x 5 = 31.208,57 Euro; Endwert 562.520,28 statt 584.366,28 Euro. *Beispiel (RF-14, RF-19; Katalogstand KAT-13: zehn Jahre und sechs Monate):* Ankauf mit zehn Jahren Bindung, Verkauf nach einem Jahr: 1.201.623,01 x 1 % x 9 = 108.146,07 Euro. Bindung 40 Jahre, Verkauf nach einem Jahr: Restbindung 126 − 12 = 114 Monate, 114.154,19 Euro; ohne die Begrenzung wären es 39 Jahre. Bindung 20 Jahre, Verkauf nach fünf: 66 Monate, 60.008,94 Euro. Bindung 15 Jahre, Verkauf nach zwölf: keine Entschädigung, kein M-25. Gebundener Bestand, Verkauf nach fünf Jahren: 33.080,71 Euro für das Bankdarlehen allein; ohne das Kennzeichen „Förderdarlehen“ am übernommenen Darlehen 46.182,48 Euro.
 
 **R-5.17 Kontokorrent.** Der Kontokorrent ist keine Tranche, sondern das Ausgleichskonto für Fehlbeträge (R-4.3, Schritt 9) mit effektivem Jahreszins H-10 (R-2.6) und der Linie H-11 (R-4.5). Er hat keinen Tilgungsplan: Jeder Überschuss führt ihn zurück, bevor Guthaben entsteht. Sein Zins mindert das operative Ergebnis und steht im Periodensaldo.
 *Beispiel (RF-06):* Ohne den Kontokorrentzins in Steuer und Saldo läge der Endwert der Variante mit 380.000 Euro Eigenkapital um 1.839,71 Euro zu hoch (Bericht, Abschnitt 3).
 
+**R-5.18 Bereitstellungszins.** Für das Bankdarlehen des Neubaus fällt auf den nicht ausgezahlten Teil ein Bereitstellungszins an: runde((Nennbetrag − Auszahlungen bis zum Ende der Vorperiode) x H-31 x 12 / p), vom ersten Monat nach der bereitstellungsfreien Zeit (ab dem Stichtag gezählt) bis zur vollständigen Auszahlung. Er ist Finanzierungskosten wie die Zinsen der Bauzeit: Das Eigenkapital trägt ihn als Nachschuss, er mindert das operative Ergebnis (R-7.2) und gehört nicht zum Kapitaldienst der Deckung. **Neue Festlegung (NF-40):** Satz und freie Zeit sind Vorgaben des Hauses, bis die Hausbank ihre Kondition nennt; ohne Ansatz wäre das nötige Eigenkapital zu niedrig, weil „Eigenkapital zuerst“ (NF-33) den Abruf des Darlehens gerade verzögert. Die Bereitstellungsprovision des KfW-Darlehens regelt Teil 2.
+*Beispiel (RF-12; 0,25 % je Monat, sechs Monate frei als Annahme):* Monate 7 bis 9: je 10.017,86 Euro auf 4.007.142,85 Euro; Monat 10: 9.755,89 Euro; Monat 18: 1.094,70 Euro; zusammen 78.993,23 Euro, mehr als die Zinsen der Bauzeit von 54.961,41 Euro.
+
+**R-5.19 KfW-Darlehen in der Grobkalkulation.** Im Neubau führt die Grobkalkulation ein KfW-Darlehen als eigene Tranche. Der Betrag ist E-35, höchstens Zahl der Einheiten x Höchstbetrag je Wohneinheit; Zins, Tilgungssatz, tilgungsfreie Anlaufjahre und Zinsbindung kommen aus KAT-15. Die Tranche läuft als Prozentannuität auf den Nennbetrag; die Tilgung beginnt nach den Anlaufjahren, gezählt ab dem Monat nach der Bauzeit; die Zinsbindung zählt ab dem Stichtag (NF-08); der Anschlusszins ist der des Bankdarlehens (R-5.8). Im Mittelabruf steht sie nach den Fördermitteln und vor dem Bankdarlehen (R-11.3). In R-5.12 zählt sie zu Ü und Ü_B und geht mit ihrem kalkulatorischen Kapitaldienst in KD_Ü ein. Vorfälligkeit nach R-5.16, Zinsstress nach R-11.8. **Neue Festlegung (NF-41):** Tilgungszuschuss, Bereitstellungsprovision und die Konditionen in voller Tiefe kommen mit Teil 2; ob die NBank ein KfW-Darlehen als Eigenmittelersatz anerkennt, bleibt `MA-004`. Die Festlegung ändert die Zeile „Grobkalkulation“ der Spezifikation.
+*Beispiel (RF-12; Höchstbetrag 100.000 Euro je Wohneinheit nach dem Katasterstand von `KFW-297-298-MERKBLATT`; Zins 2,5 %, Tilgung 2 %, ein tilgungsfreies Jahr, zehn Jahre Zinsbindung als Annahme):* 30 Einheiten, KfW-Darlehen 3.000.000 Euro. Kalkulatorischer Kapitaldienst 3.000.000 x (5 % + 2 %) = 210.000,00 Euro; B = (336.600,00 / 1,2 − 210.000,00) / 7 % = 1.007.142,85 Euro. Die Summe der Darlehen bleibt mit 4.007.142,85 Euro dieselbe wie ohne KfW, weil beide kalkulatorisch gleich gerechnet werden; der Vorteil liegt im Zins. Abruf: KfW ab Monat 9, Bank ab Monat 16; Zins des KfW-Darlehens im Monat 19: 6.250,00 Euro; erste Tilgung im Monat 31, Rate 11.250,00 Euro. Rendite 4,630 % statt 4,332 %; höchster tragbarer Grundstückspreis 924.244 Euro statt 702.767 Euro. Nach Lesart (2) von `MA-026` (Vertragskonditionen) gibt die Bank 2.425.000,00 Euro neben dem KfW-Darlehen, und der tragbare Grundstückspreis ist 1.286.380 Euro gegen 876.926 Euro ohne KfW: Dort lässt der niedrigere Kapitaldienst mehr Darlehen zu.
+
 ## 6 Erträge und laufende Auszahlungen der Grobkalkulation
 
-**R-6.1 Indexreihe.** Index_1 = 1; Index_j = runde12(Index_(j−1) x (1 + Steigerung)). Jede Größe hat ihre eigene Steigerung: Mieten H-12, Kosten H-13, Baupreise H-14, CO2-Kosten KAT-09, Erbbauzins E-63. Der Schritt fällt zu Beginn jedes Jahres der Reihe.
+**R-6.1 Indexreihe.** Index_1 = 1; Index_j = runde12(Index_(j−1) x (1 + Steigerung)). Jede Größe hat ihre eigene Steigerung: Mieten H-12, Kosten H-13, Baupreise H-14, CO2-Preis H-29, Erbbauzins E-63. Der Schritt fällt zu Beginn jedes Jahres der Reihe. Die Probe P-18 rechnet jede Reihe nach.
 
-**R-6.2 Marktmiete.** Marktmiete_j = E-16 x Index_j (Mieten), in Euro je Quadratmeter und Monat, ungerundet geführt.
+**R-6.2 Vergleichsmiete und Marktmiete.** Vergleichsmiete_j = E-19 x Index_j (Mieten); Marktmiete_j = E-16 x Index_j (Mieten); beide in Euro je Quadratmeter und Monat, ungerundet geführt. Die Vergleichsmiete ist das Ziel jeder Mieterhöhung im Bestand (`BGB-558`), die Marktmiete die Miete bei Neuvermietung (R-6.13). Wer als Vergleichsmiete eine Angebotsmiete einträgt, überzeichnet Reinertrag, Verkaufspreis und tragbaren Preis; das Eingabefeld E-19 nennt deshalb den Mietspiegel als Quelle. Mieten werden je Teilfläche geführt: frei vermieteter Bestand, gebundener Bestand, am Stichtag leere Fläche, neu vermietete Flächen (R-6.13, R-6.14); die Miete des Vorhabens je Quadratmeter ist ihr flächengewogenes Mittel.
 
-**R-6.3 Anpassungspfad.** Die Ist-Miete nähert sich der Marktmiete über die Anpassungsdauer d (E-53) linear und höchstens mit der Kappungsgrenze κ (KAT-08):
+**R-6.3 Miete im Bestand (`BGB-558`, `MA-037`).** Die Miete eines bestehenden Mietverhältnisses steigt nur in Schritten, frühestens nach der Wartefrist, höchstens bis zur Kappungsgrenze und nie über die ortsübliche Vergleichsmiete. Wartefrist w (Monate), Kappungsgrenze κ und Kappungszeitraum T (Monate) sind Katalogwerte der Gemeinde (KAT-08). Gerechnet wird je Monat m, auch im Jahresmodus:
 
-    Pfad_j  = Ist + (Marktmiete_j − Ist) x min(1; (j − 1) / d)        (bei d = 0: Marktmiete_j)
-    Miete_j = min(Pfad_j; Basis_j x (1 + κ)),   Basis_j = Miete_(j−3) für j > 3, sonst Ist
+    Ziel_m  = Ist + (Vergleichsmiete_j − Ist) x min(1; (j − 1) / d)        j = Planjahr des Monats m; im Planjahr 1 und bei
+                                                                          d = 0 ab dem Planjahr 2: Ziel = Vergleichsmiete_j
+    Eine Erhöhung wirkt ab dem Monat m, wenn m ≥ 13 und m − 1 ≥ t_letzte + w und
+    neu = min(Ziel_m; Miete_(m − T) x (1 + κ)) > Miete_(m − 1); dann Miete_m = neu und t_letzte = m − 1.
+    Sonst Miete_m = Miete_(m − 1); Miete_1 = Ist.
 
-Im Jahr 1 gilt die Ist-Miete, im Jahr d + 1 ist die Marktmiete erreicht, wenn die Kappung nicht bindet. Liegt die Ist-Miete über der Marktmiete, führt derselbe Pfad sie linear zurück; die Kappung wirkt nur nach oben. **Neue Festlegung (NF-12):** Der einfache Pfad ersetzt in 1a die Mieterliste; Wartefristen und Einzelmieten regelt die Vollkalkulation. Für die ersten drei Jahre ist die Miete vor dem Stichtag unbekannt; die Ist-Miete als Basis ist die vorsichtige Wahl.
-*Beispiel (RF-11; Mietsteigerung 2 %, Kappung 15 % in drei Jahren als Annahme):* Ist-Miete 8,50 Euro, Marktmiete 9,20 Euro, Anpassung über vier Jahre. Miete je Quadratmeter in den Jahren 1 bis 6: 8,5000 / 8,7210 / 9,0358 / 9,4473 / 9,9584 / 10,1575. Jahr 2: Marktmiete 9,384; Pfad 8,50 + 0,884 x 1/4 = 8,7210. Ab Jahr 5 gilt die Marktmiete.
+d ist die Anpassungsdauer E-53: Sie bestimmt, wie schnell der Vermieter den Abstand zur Vergleichsmiete schließt. t_letzte ist der Zeitpunkt der letzten Erhöhung (Monatsende; 0 ist der Stichtag). In der Formel des Ziels wird erst multipliziert und zuletzt geteilt (R-12.5). Im Planjahr 1 gilt für jedes d die Ist-Miete: Ein Erhöhungsverlangen des Erwerbers braucht Vorlauf, und der Reinertrag des ersten Jahres hängt damit nicht vom Mietpfad ab. Damit ist auch der Widerspruch des Entwurfs bei d = 0 aufgelöst.
 
-**R-6.4 Sollmiete, Mietausfall, Mieteinzahlung.** Sollmiete der Periode = runde(Wohnfläche x Miete_j x 12 / p). Mieteinzahlung = runde(Sollmiete x (1 − Mietausfallquote)). **Neue Festlegung (NF-13):** Der erwartete Mietausfall aus Leerstand und Forderungsverlust mindert den Erlös und ist keine Kostenposition; ein pauschales Mietausfallwagnis als Kosten wäre eine kalkulatorische Größe ohne Zahlung (`SCHULTE-IMMOBILIENINVESTITION-2025`). Fluktuation mit Leerstandsdauer regelt die Vollkalkulation.
-*Beispiel (RF-11; Mietausfall 2 % als Annahme):* 1.320 m² x 8,50 Euro = 11.220,00 Euro Sollmiete im Monat; Einzahlung 10.995,60 Euro; im Jahr 1 zusammen 131.947,20 Euro.
+*Mieten vor dem Stichtag.* Für m − T ≤ 0 braucht die Kappungsgrenze die Miete vor dem Stichtag. Ist die Mietenhistorie E-33 angegeben (a Monate seit der letzten Erhöhung, frühere Miete M_alt), gilt t_letzte = −a und als Miete des Monats k ≤ 0 die Ist-Miete für k > −a, sonst M_alt. Ist sie unbekannt, gilt `MA-037` in der vorsichtigen Lesart: Die letzte Erhöhung lag unmittelbar vor dem Stichtag (t_letzte = 0) und hat die Kappungsgrenze ausgeschöpft; gegen Mieten vor dem Stichtag besteht kein Spielraum. Die erste Erhöhung wirkt dann frühestens im Monat T + 1. Die andere Lesart ist umschaltbar: Die Miete ist seit dem Kappungszeitraum unverändert (t_letzte = −T, Miete vor dem Stichtag gleich der Ist-Miete).
 
-**R-6.5 Gebundene Miete.** Für den gebundenen Flächenanteil φ gilt die gebundene Miete: unverändert für die festen Jahre, danach je Schritt um höchstens die zulässige Steigerung σ erhöht, nie über der Marktmiete:
+*Ist-Miete über der Vergleichsmiete.* Dann führt das Ziel die Miete zu Beginn jedes Planjahres ab dem zweiten linear über d Jahre auf die Vergleichsmiete zurück; Wartefrist und Kappung gelten nur für Erhöhungen. Das Gesetz senkt keine Miete; die Rückführung ist die vorsichtige Annahme, dass eine Übermiete nicht hält. **Neue Festlegung (NF-12, geändert):** Der Pfad ersetzt in 1a die Mieterliste; Einzelmieten, Index- und Staffelmieten und die Modernisierungsumlage regelt die Vollkalkulation. Der Entwurf hatte die Marktmiete als Ziel, jährliche Erhöhungen und die Ist-Miete als Bezug der Kappung; das war günstiger als das Gesetz.
+
+*Beispiel (RF-11; Katalogstand `BGB-558`: Wartefrist 15 Monate, Kappungszeitraum 36 Monate; Kappungsgrenze 15 % als Annahme zur Gemeinde; Mietsteigerung 2 %):* Ist-Miete 8,50 Euro, Vergleichsmiete 9,20 Euro, Anpassung über vier Jahre, Mietenhistorie unbekannt. Erhöhungen wirken ab den Monaten 37, 52, 73, 88, 103, 118 und 133 auf 9,4473 / 9,7750 / 10,3607 / 10,5679 / 10,7793 / 10,9949 / 11,4390 Euro. Monat 37: Vergleichsmiete im Jahr 4 9,7631; Ziel 8,50 + 1,2631 x 3/4 = 9,4473; die Kappungsgrenze 8,50 x 1,15 = 9,7750 lässt es zu. Monat 52: Ziel 9,9584, die Kappung gegen die Miete des Monats 16 bindet bei 9,7750. Monat 67: Die Wartefrist ist abgelaufen, aber die Miete des Monats 31 lässt keinen Spielraum; erst im Monat 73 ist die Miete des Monats 37 der Bezug. Nach der anderen Lesart von `MA-037` (RF-18) wirken Erhöhungen ab den Monaten 13, 28, 43 und 58 auf 8,7210 / 9,0358 / 9,4473 / 9,9584 Euro; der höchste tragbare Preis ist dann 2.322.775 Euro statt 2.317.235 Euro. Mit bekannter Historie (letzte Erhöhung vor sechs Monaten von 7,50 Euro) wirkt die erste Erhöhung im Monat 13 bis zur Kappungsgrenze 7,50 x 1,15 = 8,6250 Euro. Bei d = 0 ist die Miete im Monat 12 die Ist-Miete und ab dem Monat 37 die Vergleichsmiete 9,7631 Euro. Bei einer Ist-Miete von 11,00 Euro ist die Miete zu Beginn der Jahre 1 bis 6: 11,0000 / 10,5960 / 10,2858 / 10,0723 / 9,9584 / 10,1575 Euro.
+
+**R-6.4 Sollmiete, Mietausfall, Mieteinzahlung.** Sollmiete der Periode = runde(Summe über die Monate der Periode aus der Summe über die Teilflächen von Fläche x Miete, zuzüglich der sonstigen Erträge des Monats nach R-6.15). Mieteinzahlung = runde(Sollmiete x (1 − H-15 − H-27)), nicht unter null. H-15 ist der strukturelle Leerstand, H-27 der Forderungsausfall; nur der Leerstand mindert auch den Verkaufspreis (R-8.1). **Neue Festlegung (NF-13):** Der erwartete Mietausfall mindert den Erlös und ist keine Kostenposition; ein pauschales Mietausfallwagnis als Kosten wäre eine kalkulatorische Größe ohne Zahlung (`SCHULTE-IMMOBILIENINVESTITION-2025`).
+*Beispiel (RF-11; Leerstand 1,5 %, Forderungsausfall 0,5 % als Annahme):* 1.320 m² x 8,50 Euro = 11.220,00 Euro Sollmiete im Monat; Einzahlung 10.995,60 Euro; im Jahr 1 zusammen 131.947,20 Euro.
+
+**R-6.5 Gebundene Miete.** Für den gebundenen Flächenanteil φ gilt die gebundene Miete: unverändert für die festen Jahre, danach je Schritt um höchstens die zulässige Steigerung σ erhöht, beim Ankauf nie über der Vergleichsmiete, beim Neubau nie über der Marktmiete:
 
     Stufe_j = 0 für j ≤ feste Jahre, sonst (j − feste Jahre − 1) div Schrittjahre + 1
-    gebundene Miete_j = min(Ausgangsmiete x (1 + σ)^Stufe_j; Marktmiete_j)
+    gebundene Miete_j = min(Ausgangsmiete x (1 + σ)^Stufe_j; Vergleichsmiete_j)
 
-Miete_j des Vorhabens = φ x gebundene Miete_j + (1 − φ) x freie Miete_j. Feste Jahre, Schrittjahre und σ sind Katalogwerte (KAT-10, KAT-11). Bei übernommenen Bindungen zählt der erste Schritt ab dem Stichtag, weil die letzte Erhöhung unbekannt ist (vorsichtige Lesart; Teil von **NF-14**).
-*Beispiel (RF-12; Werte nach Bericht Anhang C.1 als Annahme: drei Jahre fest, dann 6,15 % je drei Jahre):* Eingangsmiete 8,20 Euro: 8,2000 in den Vermietungsjahren 1 bis 3, 8,7043 in 4 bis 6, 9,2396 ab Jahr 7.
+j zählt die Jahre der Bindung, beim Neubau ab der Bezugsfertigkeit. Feste Jahre, Schrittjahre und σ sind Katalogwerte (KAT-10 für die Grobförderung, KAT-11 für übernommene Bindungen). Bei übernommenen Bindungen zählt der erste Schritt ab dem Stichtag, weil die letzte Erhöhung unbekannt ist (vorsichtige Lesart; Teil von **NF-14**).
+*Beispiel (RF-12; Werte nach Bericht Anhang C.1 als Annahme: drei Jahre fest, dann 6,15 % je drei Jahre):* Eingangsmiete 8,20 Euro: 8,2000 in den Bindungsjahren 1 bis 3, 8,7043 in 4 bis 6, 9,2396 in 7 bis 9, 9,8079 ab Jahr 10.
 
-**R-6.6 Miete nach dem Ende der Bindung.** Endet die Bindung nach dem Jahr b, gilt im Jahr b + 1 noch die letzte gebundene Miete; von dort führt der Anpassungspfad nach R-6.3 zur Marktmiete, mit der letzten gebundenen Miete als Ausgang (`BGB-558`). **Neue Festlegung (NF-14).**
-*Beispiel (RF-11):* 40 % der Fläche gebunden zu 6,80 Euro bis Ende Jahr 6, Rest wie oben. Miete des Vorhabens in den Jahren 1 bis 10: 7,8200 / 7,9526 / 8,1415 / 8,5557 / 8,8623 / 8,9818 / 9,1037 / 9,5630 / 9,7879 / 9,9173. Jahr 1: 0,4 x 6,80 + 0,6 x 8,50 = 7,82. Jahr 4: 0,4 x 7,2182 + 0,6 x 9,4473 = 8,5557.
+**R-6.6 Miete nach dem Ende der Bindung.** Endet die Bindung nach dem Jahr b, gilt im Jahr b + 1 noch die letzte gebundene Miete; danach steigt sie nach R-6.3 zur Vergleichsmiete, mit der letzten gebundenen Miete als Ausgang und dem Jahr b + 1 als Beginn der Anpassungsdauer. Die Wartefrist zählt ab dem letzten Schritt der gebundenen Miete, die Kappungsgrenze gegen die gebundene Miete des Monats m − T; liegt dieser Monat vor dem Stichtag, gilt `MA-037`. **Neue Festlegung (NF-14).**
+*Beispiel (RF-11, gebundener Bestand):* 40 % der vermieteten Fläche gebunden zu 6,80 Euro bis Ende Jahr 6 (Katalogwerte KAT-11 wie in R-6.5 als Annahme), Rest wie in R-6.3. Gebundene Miete 6,8000 in den Jahren 1 bis 3 und 7,2182 in den Jahren 4 bis 7; danach Erhöhungen ab den Monaten 85, 100, 121 und 136 auf 8,0556 / 8,3009 / 9,2640 / 9,5461 Euro. Miete des Vorhabens im ersten Monat der Jahre 1 bis 12: 7,8200 / 7,8200 / 7,8200 / 8,5557 / 8,5557 / 8,7523 / 9,1037 / 9,4387 / 9,5630 / 9,7879 / 10,3025 / 10,5690. Jahr 1: 0,4 x 6,80 + 0,6 x 8,50 = 7,82. Jahr 4: 0,4 x 7,2182 + 0,6 x 9,4473 = 8,5557.
 
-**R-6.7 Neubau.** Die Miete fließt ab dem Monat nach der Bauzeit in voller Höhe; eine Erstvermietungskurve regelt Teil 2. Vermietungsjahr v umfasst zwölf Monate ab Bezug; die eingegebene Miete gilt für v = 1 und steigt mit dem Mietindex. Mit Grobförderung gilt R-6.5 mit der Eingangsmiete des Katalogs für den geförderten Flächenanteil (voreingestellt die ganze Fläche); die Bindung beginnt mit der Bezugsfertigkeit.
+**R-6.7 Neubau.** Die Bewirtschaftung beginnt mit dem Bezug, dem Monat nach der Bauzeit. Die Miete fließt erst nach dem Anlaufleerstand H-28: Der erste Vermietungsmonat ist Bauzeit + H-28 + 1; bis dahin ist die ganze Fläche leer. Das erste Jahr der Vollvermietung sind die zwölf Monate ab dem ersten Vermietungsmonat. Die eingegebene Miete E-16 gilt für das erste Vermietungsjahr; die Vergleichsmiete des Neubaus ist E-16 x Mietindex je Vermietungsjahr, und die Miete folgt ihr nach R-6.3 mit der Wartefrist ab dem Mietbeginn und der Anfangsmiete als Bezug der Kappung. Die Mietpreisbremse gilt für die Erstvermietung nicht (`BGB-556F`). Mit Grobförderung gilt R-6.5 mit der Eingangsmiete des Katalogs für den geförderten Flächenanteil (voreingestellt die ganze Fläche); die Bindung beginnt mit der Bezugsfertigkeit. **Neue Festlegung (NF-42):** Der Anlaufleerstand ist in 1a eine Zahl von Monaten für die ganze Fläche; eine Vermietungskurve regelt Teil 2. Der Entwurf rechnete die volle Miete ab dem Monat nach der Bauzeit und jährliche Erhöhungen; beides war die günstige Lesart.
+*Beispiel (RF-12; Anlaufleerstand drei Monate als Annahme):* Bauzeit 18 Monate; Bewirtschaftung ab Monat 19 mit 2.762,50 Euro; erste Miete im Monat 22: Sollmiete 2.000 m² x 16,50 Euro = 33.000,00 Euro, Einzahlung 32.340,00 Euro. Erhöhungen wirken ab den Monaten 37, 52, 67, 82 und 97, also alle 15 Monate. Im Stressfall (Bauzeit plus drei Monate) fließt die erste Miete im Monat 25.
 
-**R-6.8 Bewirtschaftung.** Jahresbetrag_j = (Verwaltung je Einheit x Einheiten + Instandhaltung je m² x Wohnfläche + nicht umlagefähige Betriebskosten je m² x Wohnfläche) x Index_j (Kosten). Zahlung je Periode = runde(Jahresbetrag_j / p). j ist das Planjahr; die Eingabewerte haben den Preisstand des Planjahres 1. Beim Neubau beginnen die Zahlungen mit dem Bezug, zum Preisstand ihres Planjahres. Die Instandhaltungspauschale deckt die laufende Instandhaltung, nicht den Investitionsstau (R-6.10).
-*Beispiel (RF-11; 350 Euro je Einheit, 14 und 2 Euro je m² als Annahme):* 20 x 350 + 1.320 x 14 + 1.320 x 2 = 28.120 Euro im Jahr 1, im Monat 2.343,33 Euro.
+**R-6.8 Bewirtschaftung.** Jahresbetrag_j = (Verwaltung je Einheit x Einheiten + Instandhaltung je m² nach Gebäudealter x Wohnfläche + nicht umlagefähige Betriebskosten je m² x Wohnfläche + weitere Kosten des Vermieters je m² nach KAT-09 x Wohnfläche) x Index_j (Kosten). Zahlung je Periode = runde(Jahresbetrag_j / p). j ist das Planjahr; die Eingabewerte haben den Preisstand des Planjahres 1. Die Instandhaltung je m² folgt der Staffel H-17 nach dem Gebäudealter im Planjahr: beim Ankauf Kalenderjahr des Planjahres minus Baujahr E-17, beim Neubau die vollen Jahre seit dem Bezug; die Voreinstellung der Staffel folgt `IIBV-28`. Beim Neubau beginnen die Zahlungen mit dem Bezug, zum Preisstand ihres Planjahres. Die Instandhaltungspauschale deckt die laufende Instandhaltung, nicht den Investitionsstau (R-6.10).
+*Beispiel (RF-11; 350 Euro je Einheit, 2 Euro Betriebskosten je m²; Staffel 9 / 11,50 / 14 Euro je m² für ein Gebäudealter unter 22, ab 22 und ab 32 Jahren als Annahme):* Baujahr 1990, Alter im Planjahr 1 37 Jahre: 20 x 350 + 1.320 x 14 + 1.320 x 2 = 28.120 Euro im Jahr 1, im Monat 2.343,33 Euro. *Beispiel (RF-18):* Baujahr 1996: Im Planjahr 1 gilt die Stufe 11,50 Euro, ab dem Planjahr 2 die Stufe 14 Euro; Bewirtschaftung einschließlich CO2-Kosten im Monat 1 2.134,33 Euro, im Monat 13 2.459,50 Euro. *Beispiel (RF-14, Neubau über 42 Jahre):* 2.762,50 Euro im Monat 19, 4.927,81 Euro im Monat 283 (Stufe ab 22 Jahren), 6.807,90 Euro im Monat 403 (Stufe ab 32 Jahren).
 
-**R-6.9 CO2-Kosten.** Zahlung je Periode = runde(CO2-Kosten des Vermieters je m² x Wohnfläche x Index_j (CO2) / p). Der Wert je Quadratmeter und seine Steigerung kommen aufgelöst aus KAT-09; der Kern rechnet das Stufenmodell in 1a nicht selbst.
-*Beispiel (RF-11; 0,60 Euro je m² und Jahr, plus 5 % je Jahr als Annahme):* 792 Euro im Jahr 1, 66,00 Euro im Monat; Bewirtschaftung und CO2-Kosten zusammen 2.409,33 Euro im Monat und 28.911,96 Euro im Jahr 1.
+**R-6.9 CO2-Kosten (`MA-035`).** Zahlung je Periode = runde(Ausstoß x Wohnfläche x Vermieteranteil x CO2-Preis_j / 1.000 / p). Der Ausstoß in Kilogramm CO2 je Quadratmeter und Jahr ist die Eingabe E-34 aus der Heizkostenabrechnung; nach ihm bestimmt der Katalog die Stufe und den Anteil des Vermieters (KAT-09, `CO2KOSTAUFG-5`, `CO2KOSTAUFG-ANLAGE`). Fehlt E-34, leitet der Katalog den Ausstoß aus Effizienzklasse und Energieträger ab (E-54, E-55). Das ist eine Näherung, weil die Effizienzklasse auf dem Energiebedarf und nicht auf dem Ausstoß beruht (`MA-035`); voreingestellt ist der Ausstoß an der oberen Grenze der Klasse. Der CO2-Preis ist eine Prognose und deshalb Vorgabe des Hauses: CO2-Preis_j = H-29 x Index_j. Die weiteren Kosten des Vermieters nach `CO2KOSTAUFG-5A` stehen als Betrag je Quadratmeter in R-6.8. Beim Neubau ist E-34 voreingestellt null; die Sonderregeln nach `CO2KOSTAUFG-5B` bis `CO2KOSTAUFG-5D` regelt die Vollkalkulation.
+*Beispiel (RF-11; Ausstoß 30 kg je m² und Jahr, Vermieteranteil 40 %, CO2-Preis 50 Euro je Tonne mit 5 % Steigerung je Jahr als Annahme):* 30 x 1.320 x 40 % x 50 / 1.000 = 792 Euro im Jahr 1, 66,00 Euro im Monat; Bewirtschaftung und CO2-Kosten zusammen 2.409,33 Euro im Monat und 28.911,96 Euro im Jahr 1. Mit weiteren Vermieterkosten von 0,10 Euro je m² (RF-18): 2.420,33 Euro im Monat.
 
-**R-6.10 Investitionsstau.** Eine Maßnahme hat einen Betrag zum Preisstand des Stichtags (E-50), ein Jahr der Ausführung k (E-51) und das Kennzeichen Erhaltung oder Modernisierung (E-52). Zahlung = runde(Betrag x (1 + Baupreissteigerung)^k) im letzten Monat des Jahres k; für k = 0 zum Stichtag als Teil des Mittelbedarfs. Erhaltung mindert das operative Ergebnis im Jahr der Zahlung; Modernisierung wird aktiviert und ab dem Folgejahr mit dem Satz des Gebäudes abgeschrieben (R-7.3). Liegt k nach dem Verkauf, mindert die Maßnahme den Verkaufserlös (R-8.4). Eine Mietwirkung der Modernisierung gibt es in 1a nicht. **Neue Festlegung (NF-15).** Die Prüfung auf anschaffungsnahe Herstellungskosten (`ESTG-6`) gehört zur Steuer in Grundform; übersteigen Erhaltungsmaßnahmen der ersten drei Jahre 15 % der Gebäudeanschaffungskosten, gibt der Kern den Hinweis M-36 zurück.
+**R-6.10 Investitionsstau.** Eine Maßnahme hat einen Betrag zum Preisstand des Stichtags (E-50, brutto), ein Jahr der Ausführung k (E-51) und das Kennzeichen Erhaltung oder Modernisierung (E-52). Zahlung = runde(Betrag x (1 + Baupreissteigerung)^k) im letzten Monat des Jahres k; für k = 0 zum Stichtag als Teil des Mittelbedarfs. Erhaltung mindert das operative Ergebnis im Jahr der Zahlung, soweit R-6.16 sie nicht aktiviert; Modernisierung wird aktiviert und ab dem Folgejahr mit dem Satz des Gebäudes abgeschrieben (R-7.3). Liegt k nach dem Verkauf, mindert die Maßnahme den Verkaufserlös (R-8.4). Eine Mietwirkung der Modernisierung gibt es in 1a nicht. In 1a hat ein Vorhaben eine Maßnahme; mehrere Gewerke werden addiert. **Neue Festlegung (NF-15, geändert):** Die Prüfung auf anschaffungsnahe Herstellungskosten ist jetzt Rechenregel (R-6.16) und kein Hinweis mehr.
 *Beispiel (RF-11; Baupreissteigerung 3 % als Annahme):* 120.000 Euro, Jahr 2, Erhaltung: Zahlung 120.000 x 1,0609 = 127.308,00 Euro im Monat 24.
 
-**R-6.11 Erbbauzins.** Zahlung je Periode = runde(Erbbauzins im ersten Jahr x Index_j (Erbbauzins) / p), ab dem Stichtag, auch in der Bauzeit; sie zählt zur Bewirtschaftung. Was beim Erbbaurecht in Stufe 1 fehlt, nennt der Bericht (Anhang D.1).
+**R-6.11 Erbbauzins.** Zahlung je Periode = runde(Erbbauzins im ersten Jahr x Index_j (Erbbauzins) / p), ab dem Stichtag, auch in der Bauzeit; sie zählt zur Bewirtschaftung. Der Erbbauzins mindert die maßgebliche Jahresmiete und damit Einstiegsfaktor und Verkaufspreis (R-8.1), er wird in der Kapitaldienstrechnung der Bank eigens abgezogen (R-5.12) und zählt anteilig zur Hinzurechnung (R-7.16). Die Restlaufzeit des Erbbaurechts und was sonst in Stufe 1 fehlt, nennt der Bericht (Anhang D.1).
+*Beispiel (RF-18):* Erbbauzins 12.000 Euro im ersten Jahr, 2 % Steigerung: maßgebliche Jahresmiete am Verkaufsstichtag 163.556,12 Euro statt 178.476,56 Euro; Verkaufspreis 2.944.010,21 Euro statt 3.212.578,13 Euro; Einstiegsfaktor 19,90 statt 18,10.
 
-**R-6.12 Reinertrag.** Reinertrag einer Zeitspanne = Mieteinzahlungen − Bewirtschaftung nach R-6.8, R-6.9 und R-6.11. Maßnahmen nach R-6.10, Zinsen, Tilgung und Steuern gehören nicht dazu. Der Reinertrag im ersten Jahr der Vollvermietung (RE_VJ) ist beim Ankauf der des Planjahres 1, beim Neubau der der zwölf Monate nach der Bauzeit.
+**R-6.12 Reinertrag.** Reinertrag einer Zeitspanne = Mieteinzahlungen − Bewirtschaftung nach R-6.8, R-6.9 und R-6.11. Maßnahmen nach R-6.10, Zinsen, Tilgung und Steuern gehören nicht dazu. Der Reinertrag im ersten Jahr der Vollvermietung (RE_VJ) ist beim Ankauf der des Planjahres 1, beim Neubau der der zwölf Monate ab dem ersten Vermietungsmonat (R-6.7). Er ist der Ertrag des Vorhabens; die Bank rechnet mit dem nachhaltigen Reinertrag (R-5.12).
 *Beispiel (RF-11):* 131.947,20 − 28.911,96 = 103.035,24 Euro.
+
+**R-6.13 Leere Flächen und Neuvermietung.** Neuvermietungsmiete_m = Marktmiete_j; gilt in der Gemeinde die Mietpreisbremse (KAT-08, `BGB-556D`), höchstens Vergleichsmiete_j x (1 + zulässiger Aufschlag). Eine am Stichtag leere Fläche (E-31) bringt für die Monate des Anlaufleerstands H-28 keine Miete und wird danach zur Neuvermietungsmiete vermietet. Von da an ist sie ein bestehendes Mietverhältnis nach R-6.3: Ziel ist die Vergleichsmiete, die Wartefrist zählt ab dem Mietbeginn, die Kappungsgrenze gegen die Anfangsmiete, und die Miete sinkt nicht. Ist das ganze Objekt leer, entfällt die Ist-Miete E-15. Eine Ist-Miete von null bei vermieteter Fläche ist ein Eingabefehler (M-20), damit ein leeres Objekt nicht als Objekt ohne Miete über die ganze Haltedauer gerechnet wird. Die Ausnahmen von der Mietpreisbremse (`BGB-556E`, `BGB-556F`) wendet 1a beim Ankauf nicht an; das ist die vorsichtige Lesart. **Neue Festlegung (NF-43).**
+*Beispiel (RF-18; Mietpreisbremse mit 10 % Aufschlag und Anlaufleerstand drei Monate als Annahme; Marktmiete 10,50 Euro):* Objekt ganz leer: keine Miete in den Monaten 1 bis 3, ab Monat 4 min(10,50; 9,20 x 1,10) = 10,12 Euro; ohne Mietpreisbremse 10,50 Euro. Bankdarlehen 930.929,99 Euro, weil das erste Jahr nur neun Monatsmieten hat; höchster tragbarer Kaufpreis 2.290.699 Euro; der Einstiegsfaktor ist nicht definiert. 200 m² leer: Sollmiete 9.520,00 Euro im Monat 1 und 11.544,00 Euro im Monat 4.
+
+**R-6.14 Fluktuation.** Zu Beginn jedes Planjahres ab dem zweiten wechselt der Anteil H-26 der frei vermieteten Bestandsfläche, die noch nicht neu vermietet wurde, den Mieter. Die Fläche wird ohne Leerstand zur Neuvermietungsmiete des Jahres vermietet und läuft danach wie eine neu vermietete Fläche nach R-6.13. Gebundene und bereits neu vermietete Flächen wechseln in 1a nicht; der Leerstand beim Wechsel ist im strukturellen Leerstand H-15 enthalten. Voreingestellt ist H-26 = 0: Solange die Neuvermietungsmiete über der Bestandsmiete liegt, hebt jede Fluktuation die Miete, und null ist die vorsichtige Vorgabe. **Neue Festlegung (NF-44).**
+*Beispiel (RF-18; 5 % je Jahr):* Jahr 2: 95 % zu 8,50 Euro und 5 % zu 9,384 x 1,10 = 10,3224 Euro, im Mittel 8,5911 Euro. Miete des Vorhabens zu Beginn der Jahre 1 bis 6: 8,5000 / 8,5911 / 8,6875 / 9,6008 / 9,6654 / 9,9892 Euro; Endwert 2.563.369,40 Euro gegen 2.524.305,59 Euro ohne Fluktuation.
+
+**R-6.15 Sonstige Erträge und Stellplätze.** Sonstige Erträge gehören zur Sollmiete (R-6.4): Sie tragen Mietausfall und gehen in die maßgebliche Jahresmiete ein. Beim Ankauf: E-32 x Index_j (Mieten) / 12 je Monat ab dem Stichtag. Beim Neubau: Zahl der Stellplätze x Miete je Stellplatz (E-27), ab dem ersten Vermietungsmonat mit dem Mietindex je Vermietungsjahr; die Herstellungskosten je Stellplatz (H-30) gehören zu den Baukosten (R-11.2). Der Kostenkennwert E-25 gilt für die Brutto-Grundfläche ohne Garage, wenn Stellplätze eigens angesetzt sind. **Neue Festlegung (NF-45).**
+*Beispiel (RF-18):* 6.000 Euro sonstige Erträge im Jahr: Sollmiete im Monat 1 11.720,00 Euro. *Beispiel (RF-12; 20.000 Euro je Stellplatz als Annahme):* 20 Stellplätze zu 60 Euro im Monat: Baukosten zum Preisstand des Stichtags 7.940.000,00 Euro statt 7.540.000,00 Euro; Sollmiete im ersten Vermietungsmonat 34.200,00 Euro.
+
+**R-6.16 Anschaffungsnahe Herstellungskosten (`ESTG-6`).** Beim Ankauf prüft der Kern, ob die Maßnahmen der ersten Jahre zu den Herstellungskosten gehören. Schwelle und Zeitraum sind Katalogwerte (KAT-12):
+
+    Prüfgröße = Summe der Zahlungen aller Maßnahmen mit k ≤ Zeitraum, Erhaltung und Modernisierung zusammen, / (1 + Umsatzsteuersatz)
+    Schwelle  = Quote x Gebäudeanschaffungskosten,   Gebäudeanschaffungskosten = Kaufpreis + Erwerbsnebenkosten − Boden
+
+Übersteigt die Prüfgröße die Schwelle, werden die Erhaltungsmaßnahmen dieser Jahre aktiviert: Sie stehen in der Zeile Investition statt Erhaltung und werden wie eine Modernisierung ab dem Folgejahr abgeschrieben; der Kern gibt M-36 zurück. Die laufende Instandhaltung nach R-6.8 zählt nicht mit. Die Zahlung des Investitionsstaus ist brutto, die Schwelle wird netto gemessen. Die Regel gilt für jeden Steuerstatus. **Neue Festlegung (NF-46)**; sie ersetzt den Hinweis des Entwurfs.
+*Beispiel (RF-17; Katalogstand `ESTG-6`: 15 % in drei Jahren; Umsatzsteuersatz 19 % als Annahme zum Katalogstand `USTG-12`):* Schwelle 15 % x 1.980.000 = 297.000 Euro. 120.000 Euro im Jahr 2 (RF-11): 127.308,00 / 1,19 = 106.981,51 Euro, darunter. 320.000 Euro: Zahlung 339.488,00 Euro, netto 285.284,03 Euro, darunter; sofort abziehbar. 400.000 Euro: Zahlung 424.360,00 Euro, netto 356.605,04 Euro, darüber: aktiviert; Abschreibung im Jahr 3 39.600,00 + 8.487,20 = 48.087,20 Euro; M-36.
 
 ## 7 Steuer in Kurzform
 
 **R-7.1 Steuerstatus.** Die Kurzform rechnet je Planjahr eine Steuerzahlung nach dem Steuerstatus des Vorhabens (E-40):
 
-| Status | Regel | Quellen der Katalogwerte |
-|---|---|---|
-| voll steuerpflichtige Körperschaft | R-7.7, R-7.8 | `KSTG-23`, `SOLZG-4`, `GEWSTG-11`, `GEWSTG-16`, `GEWSTG-9` |
-| gewerbliche oder gewerblich geprägte Personengesellschaft (`ESTG-15`) | R-7.9 | dazu `ESTG-35` |
-| Einzelunternehmen mit Betriebsvermögen | R-7.9 mit Anteil 100 % | wie zuvor |
-| Privatperson, vermögensverwaltende Personengesellschaft | R-7.10, R-7.11 | `ESTG-23` |
-| befreite Körperschaft (`KSTG-5`) | R-7.12 | – |
-| Lehrbuch | R-7.13, nur Referenzfälle | – |
+| Status | Regel | Kennzeichen E-41 | Quellen der Katalogwerte |
+|---|---|---|---|
+| voll steuerpflichtige Körperschaft | R-7.7, R-7.8 | zulässig | `KSTG-23`, `SOLZG-4`, `GEWSTG-11`, `GEWSTG-16`, `GEWSTG-9` |
+| steuerpflichtige Körperschaft ohne Gewerbesteuer (Verein, Stiftung; `GEWSTG-2`) | R-7.17 | – | `KSTG-23`, `SOLZG-4` |
+| gewerblich geprägte Personengesellschaft (`ESTG-15`), typisch die GmbH & Co. KG | R-7.9, R-7.18 | zulässig | dazu `ESTG-35` |
+| originär gewerbliche Personengesellschaft | R-7.9, R-7.18 | nicht zulässig | wie zuvor |
+| Einzelunternehmen mit Betriebsvermögen | R-7.9 mit Anteil 100 % | nicht zulässig | wie zuvor |
+| Privatperson, vermögensverwaltende Personengesellschaft | R-7.10, R-7.11 | – | `ESTG-23`, `ESTG-32D` |
+| befreite Körperschaft (`KSTG-5`) | R-7.12 | – | – |
+| Lehrbuch | R-7.13, nur Referenzfälle | – | – |
 
-Die Kurzform ist eine benannte Vereinfachung gegenüber der Steuer in Grundform (Teil 2). Sie rechnet ohne Hinzurechnungen der Gewerbesteuer (`GEWSTG-8`), ohne Begrenzung der Verlustverrechnung (`ESTG-10D`, `GEWSTG-10A`, `MA-010`), ohne Zinsschranke, ohne Sonderabschreibung und mit dem Planjahr als Steuerjahr (R-2.7). Das Ergebnis führt den Hinweis, dass die Steuer in Kurzform gerechnet ist.
+Das Kennzeichen der erweiterten Grundstückskürzung ist nur zulässig, wo ein Unternehmen ausschließlich eigenen Grundbesitz verwalten kann und trotzdem der Gewerbesteuer unterliegt (`GEWSTG-9`): bei der Körperschaft und bei der gewerblich geprägten Personengesellschaft. Die originär gewerbliche Personengesellschaft und das Einzelunternehmen, dessen Immobilie im Betriebsvermögen eines laufenden Gewerbes liegt, erfüllen die Voraussetzung nicht; das Kennzeichen ist dort ein Eingabefehler (M-20). Ob die Voraussetzungen der Kürzung im Einzelfall vorliegen, prüft der Anwender; der Kern übernimmt das Kennzeichen ungeprüft. Der Entwurf ließ das Kennzeichen bei jedem Status mit Gewerbesteuer zu; das ist zurückgenommen (Spezifikation Kapitel 1 und 2, Entscheidungsprotokoll).
+
+Die Kurzform ist eine benannte Vereinfachung gegenüber der Steuer in Grundform (Teil 2). Sie rechnet ohne Begrenzung der Verlustverrechnung (`ESTG-10D`, `GEWSTG-10A`, `MA-010`), was das Vorhaben günstiger rechnet, sobald ein Vortrag über dem Sockelbetrag in einem Jahr verrechnet wird (Hinweis M-45); ohne Zinsschranke; ohne Sonderabschreibung und ohne Reinvestitionsrücklage, was vorsichtig ist; und mit dem Planjahr als Steuerjahr (R-2.7). Die Hinzurechnung rechnet sie (R-7.16). Sie setzt voraus: umsatzsteuerfreie Vermietung von Wohnraum mit Bruttokosten (`USTG-4`), Verkauf des Objekts und nicht von Anteilen, keinen gewerblichen Grundstückshandel der Privatperson; diese Voraussetzungen gehören an die Eingabe von Steuerstatus und Nutzungsart. Jedes Ergebnis trägt die Meldung M-37 mit festem Wortlaut, einmal und im Annahmenblatt:
+
+> „Die Steuer ist vereinfacht gerechnet: ohne Mindestbesteuerung, Zinsschranke, Sonderabschreibung und Reinvestitionsrücklage. Sie ersetzt keine steuerliche Prüfung des Einzelfalls.“ Bei gesetztem Kennzeichen E-41 nach dem ersten Satz ergänzt um: „; das Kennzeichen der erweiterten Kürzung ist ungeprüft übernommen“.
 
 **R-7.2 Bemessung.** Drei Größen je Planjahr:
 
-- **operatives Ergebnis** e_op = Mieteinzahlungen − Bewirtschaftung − Erhaltungsmaßnahmen − Abschreibung − Zinsen der Darlehen − Kontokorrentzinsen − laufende Beiträge − einbehaltene Beträge − Vorfälligkeit;
+- **operatives Ergebnis** e_op = Mieteinzahlungen − Bewirtschaftung − Erhaltungsmaßnahmen (soweit nicht aktiviert) − Abschreibung − Entgelte für Schulden + steuerpflichtiger Ertrag aus Zuschüssen (R-7.19). Entgelte für Schulden sind Zinsen der Darlehen, Kontokorrentzinsen, laufende Beiträge, Bereitstellungszinsen, der im Jahr abziehbare Teil der einbehaltenen Beträge (R-7.15) und die Vorfälligkeit; bei der Privatperson gehört die Vorfälligkeit zum Verkauf (R-7.11);
 - **Habenzinsen** z_h der Geldanlage;
 - **Verkaufsgewinn** g_v im letzten Planjahr (R-7.4).
 
-Zuschüsse sind kein Ertrag; sie mindern die Abschreibungsgrundlage (R-7.3). Die Gewerbesteuer ist keine Betriebsausgabe und mindert weder das Ergebnis noch ihre eigene Bemessung (`ESTG-4-5B`). **Neue Festlegung (NF-16):** Finanzierungskosten einschließlich der einbehaltenen Entgelte, eines Disagios, der Zinsen der Bauzeit und der Vorfälligkeit sind in der Kurzform im Jahr der Zahlung abziehbar; Zahlungen zum Stichtag zählen zum Planjahr 1. Ob sie zu verteilen oder zu aktivieren wären, klärt die Grundform (Vorschlag einer Modellannahme, Kapitel 17).
+Die Gewerbesteuer ist keine Betriebsausgabe und mindert weder das Ergebnis noch ihre eigene Bemessung (`ESTG-4-5B`). Zahlungen zum Stichtag zählen zum Planjahr 1. Die Probe P-15 stimmt die Summe der drei Größen über die Haltedauer mit den Zahlungen ab. **Neue Festlegung (NF-16, geändert):** Wann Finanzierungskosten abziehbar sind, regelt jetzt R-7.15 je Steuerstatus.
 
-**R-7.3 Abschreibung.** Linear mit dem Satz KAT-07, beim Ankauf nach dem Baujahr E-17. Abschreibungsgrundlage beim Ankauf: (Kaufpreis + Erwerbsnebenkosten) x (1 − Bodenanteil) − Zuschüsse; beim Neubau: Baukosten − Zuschüsse, das Grundstück mit seinen Nebenkosten ist Boden. Abschreibung des Planjahres j = runde(Grundlage x Satz x Nutzungsmonate im Planjahr / 12), höchstens der Rest der Grundlage; gebucht am Ende des Planjahres. Beim Ankauf läuft die Nutzung ab dem Stichtag, beim Neubau ab dem Monat nach der Bauzeit. Eine aktivierte Maßnahme (R-6.10) wird ab dem Jahr nach ihrer Zahlung mit demselben Satz abgeschrieben. **Neue Festlegung (NF-17);** dass Zuschüsse die Abschreibungsgrundlage mindern, folgt der Kopplung „Förderung wirkt auf die Abschreibung“ der Spezifikation (Kapitel 4) und ist als Modellannahme vorgeschlagen (Kapitel 17).
-*Beispiel (RF-11; 2 % als Annahme):* (2.400.000 + 240.000) x 75 % = 1.980.000 Euro Grundlage, 39.600,00 Euro je Jahr. *Beispiel (RF-12; 3 % als Annahme):* Baukosten 7.540.000 Euro, Bezug nach 18 Monaten: Planjahr 2 trägt sechs Monate, 113.100,00 Euro. *Beispiel (RF-14):* Über 42 Jahre endet die Abschreibung im Planjahr 35; danach ist die Grundlage aufgebraucht.
+**R-7.3 Abschreibung.** Linear mit dem Satz KAT-07, beim Ankauf nach dem Baujahr E-17. Abschreibungsgrundlage beim Ankauf sind die Gebäudeanschaffungskosten: Kaufpreis + Erwerbsnebenkosten − Boden, mit Boden = runde((Kaufpreis + Erwerbsnebenkosten) x Bodenanteil); beim Neubau die Baukosten einschließlich der Baupreissteigerung, das Grundstück mit seinen Nebenkosten ist Boden. Ein Zuschuss mindert die Grundlage nur in der Lesart „Minderung“ von `MA-031`, und dann nur mit dem Anteil, der auf das Gebäude entfällt (R-7.19). Abschreibung des Planjahres j = runde(Grundlage x Satz x Nutzungsmonate im Planjahr / 12), höchstens der Rest der Grundlage; gebucht wird einmal am Ende des Planjahres, auch im Monatsraster (P-19). Beim Ankauf läuft die Nutzung ab dem Stichtag, beim Neubau ab dem Monat nach der Bauzeit; dass der Monat der Fertigstellung nach dem Gesetz voll zählt, bleibt in der Kurzform außer Ansatz (vorsichtig und klein, Teil 2). Eine aktivierte Maßnahme (R-6.10, R-6.16) wird ab dem Jahr nach ihrer Zahlung mit demselben Satz abgeschrieben. **Neue Festlegung (NF-17, geändert):** Die Minderung der Grundlage durch Zuschüsse ist nicht mehr Voreinstellung.
+*Beispiel (RF-11; 2 % als Katalogstand `ESTG-7`):* (2.400.000 + 240.000) x 75 % = 1.980.000 Euro Grundlage, 39.600,00 Euro je Jahr. *Beispiel (RF-12; 3 %):* Baukosten 7.719.152,34 Euro, Bezug nach 18 Monaten: Planjahr 2 trägt sechs Monate, 115.787,29 Euro. *Beispiel (RF-06, RF-16):* Der Testfall im Monatsraster bucht 17.600,00 Euro am Ende jedes Planjahres. Die Buchung von 1.466,67 Euro je Monat ergäbe 17.600,04 Euro im Jahr und einen Endwert von 585.918,72 statt 585.918,65 Euro; die Proben P-08 und P-19 melden diesen Fehler. *Beispiel (RF-14):* Über 42 Jahre endet die Abschreibung im Planjahr 35; danach ist die Grundlage aufgebraucht.
 
-**R-7.4 Verkaufsgewinn.** g_v = gebuchter Verkaufserlös (R-8.5) − Restbuchwert − Rückzahlung von Fördermitteln. Restbuchwert = Boden + Abschreibungsgrundlage − Summe der Abschreibungen, je einschließlich aktivierter Maßnahmen (P-08). Ob g_v besteuert wird, regelt der Steuerstatus.
-*Beispiel (RF-11):* Erlös 3.276.829,52 Euro, Restbuchwert 2.640.000 − 12 x 39.600 = 2.164.800,00 Euro, Verkaufsgewinn 1.112.029,52 Euro. *Beispiel (RF-10):* Im Testfall ergäbe ein steuerpflichtiger Verkauf 138.000 Euro Gewinn, 41.400 Euro Steuer und einen Endwert von 542.966,28 Euro.
+**R-7.4 Verkaufsgewinn.** g_v = gebuchter Verkaufserlös (R-8.5) − Restbuchwert − Rückzahlung von Fördermitteln. In der Lesart „verteilt“ von `MA-031` mindert die Rückzahlung den Verkaufsgewinn nicht (R-7.19). Bei der Privatperson mindert zusätzlich die Vorfälligkeit den Verkaufsgewinn (R-7.11). Restbuchwert = Boden + Abschreibungsgrundlage − Summe der Abschreibungen, je einschließlich aktivierter Maßnahmen (P-08). Ob g_v besteuert wird, regelt der Steuerstatus.
+*Beispiel (RF-11):* Erlös 3.164.389,46 Euro, Restbuchwert 2.640.000 − 12 x 39.600 = 2.164.800,00 Euro, Verkaufsgewinn 999.589,46 Euro. *Beispiel (RF-10):* Im Testfall ergäbe ein steuerpflichtiger Verkauf 138.000 Euro Gewinn, 41.400 Euro Steuer und einen Endwert von 542.966,28 Euro.
 
-**R-7.5 Verlustvortrag (`MA-016`, Voreinstellung).** Ein negatives Jahresergebnis wird nicht erstattet, sondern erhöht den Verlustvortrag des Vorhabens; ein positives wird bis zur Höhe des Vortrags verrechnet, nur der Rest wird besteuert. Die Kurzform verrechnet Vorträge unbeschränkt und ohne Rücktrag. Einkommen- oder Körperschaftsteuer und Gewerbesteuer führen getrennte Vorträge. Ein Vortrag, der am Ende der Haltedauer übrig ist, verfällt für das Vorhaben. **Neue Festlegung (NF-18)** für die unbeschränkte Verrechnung.
-*Beispiel (RF-10, RF-15; Testfall mit 20.000 und 30.000 Euro Reinertrag in den ersten beiden Jahren, Steuersatz 30 % als Annahme):* Mit Vortrag fällt in keinem der fünf Jahre Steuer an, 4.254,31 Euro Vortrag bleiben ungenutzt, Endwert 533.745,69 Euro.
+**R-7.5 Verlustvortrag (`MA-016`, Voreinstellung).** Ein negatives Jahresergebnis wird nicht erstattet, sondern erhöht den Verlustvortrag des Vorhabens; ein positives wird bis zur Höhe des Vortrags verrechnet, nur der Rest wird besteuert. Die Kurzform verrechnet Vorträge unbeschränkt und ohne Rücktrag; übersteigt die Verrechnung eines Jahres den Sockelbetrag KAT-17, gibt der Kern den Hinweis M-45 zurück, weil die Grundform dort begrenzt. Einkommen- oder Körperschaftsteuer und Gewerbesteuer führen getrennte Vorträge; die Probe P-15 schreibt beide je Jahr fort. Ein Vortrag, der am Ende der Haltedauer übrig ist, verfällt für das Vorhaben. **Neue Festlegung (NF-18)** für die unbeschränkte Verrechnung.
+*Beispiel (RF-10, RF-15; Testfall mit 20.000 und 30.000 Euro Reinertrag in den ersten beiden Jahren, Steuersatz 30 % als Annahme):* Mit Vortrag fällt in keinem der fünf Jahre Steuer an, 4.254,31 Euro Vortrag bleiben ungenutzt, Endwert 533.745,69 Euro. *Beispiel (RF-11):* Der Investitionsstau im Jahr 2 lässt einen Vortrag von 111.298,64 Euro entstehen; die Jahre 2 bis 4 sind steuerfrei.
 
-**R-7.6 Sofortige Verrechnung (`MA-016`, andere Lesart).** Der Verlust mindert im selben Jahr die Steuer des Investors auf andere Einkünfte; die Steuer ist dann linear im Ergebnis und kann negativ sein. Das Vorhaben gilt als Teil eines größeren Steuersubjekts: Freibetrag und Abrundung des Gewerbeertrags gelten als verbraucht, und die Anrechnung nach R-7.9 wirkt mit ihrem Grenzsatz. **Neue Festlegung (NF-19).**
-*Beispiel (derselbe Fall):* Steuer −7.680,00 / −4.855,68 / 3.286,68 / 4.054,76 / 4.865,45 Euro, Endwert 537.232,83 Euro; die Lesart hebt den Endwert um 3.487,14 Euro. *Beispiel (RF-13):* Im Ankauf hebt sie die VOFI-Rendite von 5,162 % auf 5,260 %.
+**R-7.6 Sofortige Verrechnung (`MA-016`, andere Lesart).** Der Verlust mindert im selben Jahr die Steuer des Investors auf andere Einkünfte; die Steuer ist dann linear im Ergebnis und kann negativ sein. Die Lesart unterstellt, dass im selben Jahr genug andere Gewinne derselben Steuerart im selben Steuersubjekt anfallen: bei der Körperschaft in derselben Körperschaft oder ihrem Organkreis, beim Einzelunternehmen im selben Betrieb, bei der Privatperson als andere Einkünfte. Das Vorhaben gilt dann als Teil eines größeren Steuersubjekts: Freibetrag und Abrundung des Gewerbeertrags und der Freibetrag der Hinzurechnung gelten als verbraucht (**neue Festlegung NF-19**). Für die Personengesellschaft gilt das nur bei der Einkommensteuer. Die Gewerbesteuer ist eine Steuer der Gesellschaft; ihr Fehlbetrag mindert keine Gewerbesteuer der Gesellschafter und wird vorgetragen (`GEWSTG-10A`). Auch bei „sofort“ rechnet die Personengesellschaft die Gewerbesteuer deshalb nach R-7.8 mit Vortrag, Abrundung und Freibetrag; die Anrechnung ist dann min(Anteil x Anrechnungsfaktor x Messbetrag; Anteil x Gewerbesteuer).
+Welche Lesart das Vorhaben ungünstiger rechnet, hängt vom Fall ab: Bei hohen Anlaufverlusten ist der Vortrag ungünstiger; bei kleinen Verlusten kann „sofort“ ungünstiger sein, weil die Freibeträge als verbraucht gelten. Voreingestellt bleibt der Vortrag, weil er keine Annahme über das übrige Steuersubjekt braucht (`MA-016`).
+*Beispiel (Testfall mit Anlaufverlust wie in R-7.5):* Steuer −7.680,00 / −4.855,68 / 3.286,68 / 4.054,76 / 4.865,45 Euro, Endwert 537.232,83 Euro; die Lesart hebt den Endwert um 3.487,14 Euro. *Beispiel (RF-13):* Im Ankauf senkt sie die VOFI-Rendite der Körperschaft von 4,527 % auf 4,523 %, weil die Hinzurechnung ohne Freibetrag mehr kostet, als die frühere Verlustnutzung bringt. *Beispiel (RF-17; Steuersatz 42 %, Hebesatz 400 %):* Personengesellschaft mit 50.000 Euro Verlust: −21.000,00 Euro, nur Einkommensteuer; im Folgejahr mit 80.000 Euro Gewinn ist der Gewerbeertrag nach Vortrag 30.000 Euro, nach Freibetrag 5.500 Euro, die Gewerbesteuer 770,00 Euro und voll angerechnet: 33.600,00 Euro. Einzelunternehmen mit 50.000 Euro Verlust: −21.000,00 Euro, weil die lineare Gewerbesteuer und ihre Anrechnung sich ausgleichen.
 
 **R-7.7 Körperschaft.** Einkommen = e_op + z_h + g_v. Körperschaftsteuer mit Zuschlag = runde(Satz des Kalenderjahres x (1 + Zuschlagsatz) x Einkommen nach Verlustvortrag). Dazu die Gewerbesteuer nach R-7.8.
 *Beispiel (RF-10; Katalogstand des Berichts, Hebesatz 400 % als Annahme):* 100.000 Euro im Planjahr 2027: 15.825,00 Euro Körperschaftsteuer mit Zuschlag und 14.000,00 Euro Gewerbesteuer, zusammen 29.825,00 Euro; mit erweiterter Kürzung 15.825,00 Euro. Nach −50.000 Euro im ersten Jahr und +80.049 Euro im zweiten: 4.438,24 + 4.200,00 = 8.638,24 Euro.
 
-**R-7.8 Gewerbesteuer.** Gewerbeertrag = Gewinn nach gewerbesteuerlichem Verlustvortrag, auf volle 100 Euro abgerundet, bei Personenunternehmen um den Freibetrag gekürzt, nicht unter null (`GEWSTG-11`). Messbetrag = runde(Gewerbeertrag x Messzahl); Gewerbesteuer = runde(Messbetrag x Hebesatz). Ist das Kennzeichen „erweiterte Grundstückskürzung“ (E-41) gesetzt, ist die Gewerbesteuer null und die Anrechnung entfällt. **Neue Festlegung (NF-20):** In der Kurzform erfasst das Kennzeichen den ganzen Gewerbeertrag des Vorhabens einschließlich der Habenzinsen und des Verkaufsgewinns, nach dem Wortlaut des Berichts („mit dem die Gewerbesteuer entfällt“). Ob Zinsen und Verkaufsgewinn tatsächlich begünstigt sind, ist nicht am Original geklärt; das ist eine Ausnahme von der Vorsichtsregel und als Modellannahme vorgeschlagen (Kapitel 17). Im Ankauf aus RF-11 macht die Gewerbesteuer auf den Verkaufsgewinn 155.680 Euro aus.
+**R-7.8 Gewerbesteuer (`GEWSTG-9`, `MA-030`).** Gewerbeertrag = Gewinn (e_op + z_h + g_v) zuzüglich der Hinzurechnung (R-7.16), nach gewerbesteuerlichem Verlustvortrag, auf den Betrag KAT-04 abgerundet, bei Personenunternehmen um den Freibetrag gekürzt, nicht unter null (`GEWSTG-11`). Messbetrag = runde(Gewerbeertrag x Messzahl); Gewerbesteuer = runde(Messbetrag x Hebesatz). Ist das Kennzeichen „erweiterte Grundstückskürzung“ (E-41) gesetzt, wird nur der Teil des Gewerbeertrags gekürzt, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt: das operative Ergebnis e_op samt der darauf entfallenden Hinzurechnung, auch wenn es negativ ist. Die Habenzinsen bleiben gewerbesteuerpflichtig; das folgt aus dem Wortlaut und ist Regel, keine Annahme. Für den Verkaufsgewinn ist die Lage offen (`MA-030`, Gewicht hoch): Voreingestellt ist er gewerbesteuerpflichtig, die andere Lesart (von der Kürzung erfasst) ist umschaltbar. Gewerbeertrag mit Kennzeichen also: z_h + g_v, in der anderen Lesart z_h. **Neue Festlegung (NF-20, geändert):** Der Entwurf stellte mit dem Kennzeichen den ganzen Gewerbeertrag frei; das war eine unbegründete Ausnahme von der Vorsichtsregel. **Neue Festlegung (NF-47):** Die Hinzurechnung der Entgelte für die Finanzierung des Grundbesitzes gilt als Teil des gekürzten Ertrags.
+*Beispiel (RF-17; Katalogstand des Berichts, Hebesatz 400 %, Jahr 2027):* Körperschaft mit Kennzeichen, 100.000 Euro operatives Ergebnis und 10.000 Euro Zinsen: 17.407,50 Euro Körperschaftsteuer mit Zuschlag und 14 % von 10.000 = 1.400,00 Euro Gewerbesteuer. Dazu 500.000 Euro Verkaufsgewinn: 96.532,50 + 71.400,00 = 167.932,50 Euro; nach der anderen Lesart von `MA-030` 97.932,50 Euro. *Beispiel (RF-13):* Ankauf als Körperschaft: Rendite 4,527 % ohne Kennzeichen, 4,697 % mit Kennzeichen, 5,161 % nach der anderen Lesart; die Gewerbesteuer auf den Verkaufsgewinn macht 139.930,00 Euro aus.
 
-**R-7.9 Gewerbliche Personengesellschaft und Einzelunternehmen.** Gewinn = e_op + z_h + g_v. Einkommensteuer = runde(E-42 x Gewinn nach Verlustvortrag). Gewerbesteuer nach R-7.8 mit Freibetrag. Anrechnung (`ESTG-35`) = min(Anteil x Anrechnungsfaktor x Messbetrag; Anteil x Gewerbesteuer; Anteil x Einkommensteuer des Jahres); Steuer = Einkommensteuer + Gewerbesteuer − Anrechnung. Einen Vortrag der Anrechnung gibt es nicht. Der Anteil ist E-43, der Anteil natürlicher Personen am Gewinn; beim Einzelunternehmen ist er 100 %. **Neue Festlegung (NF-21):** Ein Anteil als Eingabe genügt in der Kurzform; der Steuersatz E-42 ist dann der gewogene Satz aller Gesellschafter.
+**R-7.9 Personengesellschaft mit Gewerbesteuer und Einzelunternehmen.** Gewinn = e_op + z_h + g_v. Einkommensteuer = runde(E-42 x Gewinn nach Verlustvortrag). Gewerbesteuer nach R-7.8 mit Freibetrag; bei der gewerblich geprägten Personengesellschaft mit gesetztem Kennzeichen auf den gekürzten Gewerbeertrag. Anrechnung (`ESTG-35`) = min(Anteil x Anrechnungsfaktor x Messbetrag; Anteil x Gewerbesteuer; Anteil x Einkommensteuer des Jahres); Steuer = Einkommensteuer + Gewerbesteuer − Anrechnung. Einen Vortrag der Anrechnung gibt es nicht. Der Anteil ist E-43, der Anteil natürlicher Personen am Gewinn; beim Einzelunternehmen ist er 100 %. Die Begrenzung auf die Einkommensteuer des Vorhabens nähert den gesetzlichen Höchstbetrag, der an den übrigen Einkünften des Gesellschafters hängt. E-42 schließt Zuschlagsteuern ein, obwohl die Anrechnung nur die Einkommensteuer mindert und für die Kirchensteuer nicht gilt (`ESTG-51A`); die Grundform trennt das. **Neue Festlegung (NF-21):** Ein Anteil als Eingabe genügt in der Kurzform; der Steuersatz E-42 ist dann der gewogene Satz aller Gesellschafter.
 *Beispiel (RF-10; Steuersatz 42 %, Katalogstand des Berichts als Annahme):* 100.000 Euro Gewinn: Gewerbeertrag 75.500 Euro, Messbetrag 2.642,50 Euro.
 
 | Hebesatz | Gewerbesteuer | Anrechnung | Steuer gesamt |
@@ -467,57 +573,95 @@ Zuschüsse sind kein Ertrag; sie mindern die Abschreibungsgrundlage (R-7.3). Die
 | 400 %, Anteil natürlicher Personen 50 % | 10.570,00 | 5.285,00 | 47.285,00 |
 | 400 %, Steuersatz 8 % | 10.570,00 | 8.000,00 | 10.570,00 |
 
-Bis zu einem Hebesatz von 400 % gleicht die Anrechnung die Gewerbesteuer aus; das Kennzeichen der Kürzung ändert dann nichts (RF-13: Endwert in beiden Fällen 2.125.644,23 Euro). Bei 440 % sinkt der Endwert auf 2.107.852,32 Euro, bei 60 % natürlichen Personen auf 2.036.713,03 Euro.
+Bis zu einem Hebesatz von 400 % gleicht die Anrechnung die Gewerbesteuer weitgehend aus. Im Ankauf (RF-13) ist die Rendite der originär gewerblichen Personengesellschaft 3,649 % bei 400 %, 3,585 % bei 440 % und 3,324 % bei 440 % und 60 % natürlichen Personen; die gewerblich geprägte Gesellschaft mit Kennzeichen kommt bei 440 % auf 3,597 %, das Einzelunternehmen bei 440 % auf 3,585 %.
 
-**R-7.10 Privatperson.** Zwei getrennte Töpfe: Steuer auf Vermietung = runde(E-42 x e_op nach Verlustvortrag); Steuer auf Zinsen = runde(Satz auf Zinserträge x z_h). Ein Vermietungsverlust mindert die Steuer auf Zinsen nicht. Der Satz auf Zinserträge ist H-22; seine gesetzliche Grundlage fehlt im Kataster (Kapitel 17). **Neue Festlegung (NF-22).**
-*Beispiel (RF-10; 42 % und 26,375 % als Annahme):* 30.000 Euro Vermietung und 1.000 Euro Zinsen: 12.600,00 + 263,75 = 12.863,75 Euro. Bei −10.000 Euro Vermietung und 500 Euro Zinsen: 131,88 Euro.
+**R-7.10 Privatperson.** Zwei getrennte Töpfe: Steuer auf Vermietung = runde(E-42 x e_op nach Verlustvortrag); Steuer auf Zinsen = runde(Satz auf Kapitalerträge x z_h). Ein Vermietungsverlust mindert die Steuer auf Zinsen nicht. Der Satz auf Kapitalerträge ist der Katalogwert KAT-18 (`ESTG-32D` mit `SOLZG-4`). Der Pauschbetrag für Kapitalerträge (`ESTG-20`) ist nicht angesetzt; das trifft Investition und Unterlassensalternative gleich. Nach derselben Norm sind tatsächliche Aufwendungen bei Kapitalerträgen nicht abziehbar; die Kontokorrentzinsen der Unterlassensalternative mindern deshalb bei der Privatperson keine Steuer (R-9.5). **Neue Festlegung (NF-22).**
+*Beispiel (RF-10; 42 % als Annahme, 26,375 % als Katalogstand ohne Kirchensteuer):* 30.000 Euro Vermietung und 1.000 Euro Zinsen: 12.600,00 + 263,75 = 12.863,75 Euro. Bei −10.000 Euro Vermietung und 500 Euro Zinsen: 131,88 Euro.
 
-**R-7.11 Privater Verkauf.** Der Verkaufsgewinn ist steuerpflichtig, wenn die Haltedauer n die Frist KAT-06 nicht überschreitet (`ESTG-23`); dann Steuer = runde(E-42 x g_v) für g_v > 0. Ein negativer Verkaufsgewinn bleibt unberücksichtigt (vorsichtige Lesart). Der Buchwert nach R-7.4 enthält die abgezogenen Abschreibungen.
-*Beispiel (RF-13; Frist zehn Jahre als Katalogstand):* Verkauf nach zehn Jahren: 380.346,24 Euro Steuer auf den Gewinn; nach elf Jahren keine. Die VOFI-Rendite je Haltedauer 9 bis 12 Jahre ist 3,997 / 4,133 / 5,982 / 5,949 %; der Sprung liegt zwischen Jahr 10 und 11.
+**R-7.11 Privater Verkauf (`MA-032`).** Der Verkaufsgewinn ist steuerpflichtig, wenn die Haltedauer n die Frist KAT-06 nicht überschreitet (`ESTG-23`). Die Vorfälligkeitsentschädigung beim Verkauf gehört bei der Privatperson zu den Veräußerungskosten und nicht zum operativen Ergebnis (`MA-032`, vorsichtige Lesart): g_v' = g_v − Vorfälligkeit. Ist der Verkauf steuerpflichtig und g_v' > 0, wird er mit dem Vermietungsergebnis desselben Jahres und dem Verlustvortrag aus Vermietung verrechnet (`ESTG-10D`): Steuer = runde(E-42 x (e_op + g_v') nach Verlustvortrag). Ein negatives g_v' bleibt unberücksichtigt (vorsichtige Lesart). Ist der Verkauf nicht steuerpflichtig, mindert auch die Vorfälligkeit keine Steuer. Der Buchwert nach R-7.4 enthält die abgezogenen Abschreibungen. Die Frist läuft nach den Vertragsdaten von Kauf und Verkauf, nicht nach dem Übergang von Nutzen und Lasten; die Rechnung in ganzen Jahren ist dafür vorsichtig genug, das Eingabefeld der Haltedauer nennt den Unterschied. Mit dem heutigen Katalogstand (Frist zehn Jahre, Kündigungsrecht nach R-5.16) fällt Vorfälligkeit nur bei einem steuerpflichtigen Verkauf an.
+*Beispiel (RF-17; 42 % als Annahme, Frist zehn Jahre als Katalogstand):* Verkauf nach zehn Jahren mit 20.000 Euro Vermietungsverlust, 200.000 Euro Verkaufsgewinn und 30.000 Euro Vorfälligkeit: 42 % von 150.000 = 63.000,00 Euro. Derselbe Verkauf nach elf Jahren: keine Steuer; der Vermietungsverlust wird vorgetragen. Ankauf mit Verkauf nach fünf Jahren: Vorfälligkeit 54.553,59 Euro, steuerlicher Verkaufsgewinn 207.510,06 Euro, Steuer des Verkaufsjahres 102.563,99 Euro. *Beispiel (RF-13):* Verkauf nach zehn Jahren: 334.954,62 Euro Steuer auf den Gewinn; nach elf Jahren keine. Die VOFI-Rendite je Haltedauer 9 bis 12 Jahre ist 3,365 / 3,528 / 4,882 / 5,141 %; der Sprung liegt zwischen Jahr 10 und 11.
 
-**R-7.12 Befreite Körperschaft.** Steuer null in jedem Jahr. Die Grenze nicht begünstigter Einnahmen (`KSTG-5`) prüft die Kurzform nicht.
+**R-7.12 Befreite Körperschaft.** Steuer null in jedem Jahr: Die Körperschaft ist von der Körperschaftsteuer befreit (`KSTG-5`) und damit von der Gewerbesteuer (`GEWSTG-3`; im Kataster noch nicht als gelesen geführt). Die Grenze nicht begünstigter Einnahmen (`KSTG-5`) prüft die Kurzform nicht. Der Verkaufserlös kann diese Grenze im Verkaufsjahr überschreiten und die Befreiung gefährden; was daraus folgt, ist nicht ausgewertet. Der Kern gibt deshalb bei diesem Status mit jedem Ergebnis den Hinweis M-44 zurück: Die Befreiung im Verkaufsjahr ist vom Steuerberater zu prüfen.
 
 **R-7.13 Lehrbuchsteuer.** Ein Satz auf e_op, z_h und, je nach Fall, g_v; wahlweise sofortige Verrechnung oder Vortrag; getrennter Satz auf Zinsen möglich. Nur für Referenzfälle im Jahresmodus.
 *Beispiel (RF-03):* Standardbeispiel mit 50 %: Steuer 70 / 82 / 94 / 106 / 744.
 
-**R-7.14 Grenzsteuersätze für Kennzahlen.** Der Vergleichsfaktor (R-10.4) und die Gesamtkapitalrendite (R-10.11) brauchen je Planjahr einen Satz:
+**R-7.14 Grenzsteuersätze für Kennzahlen.** Der Vergleichsfaktor (R-10.4) braucht je Planjahr den Satz auf Zinserträge s_Z, die Gesamtkapitalrendite (R-10.11) den Entlastungssatz der Sollzinsen s_FK; s_op ist der Satz auf operative Erträge.
 
-| Status | s_op(j) | s_Z(j) |
-|---|---|---|
-| Körperschaft | Körperschaftsteuersatz(j) x (1 + Zuschlag) + g | wie s_op |
-| gewerbliche Personengesellschaft, Einzelunternehmen | E-42 + g − Anteil x Messzahl x min(Anrechnungsfaktor; Hebesatz) | wie s_op |
-| Privatperson | E-42 | Satz auf Zinserträge |
-| befreit | 0 | 0 |
-| Lehrbuch | Satz | Satz auf Zinsen |
+| Status | s_op(j) | s_Z(j) | s_FK(j) |
+|---|---|---|---|
+| Körperschaft | Körperschaftsteuersatz(j) x (1 + Zuschlag) + g_op | Körperschaftsteuersatz(j) x (1 + Zuschlag) + g | s_op; bei sofortiger Verrechnung ohne Kennzeichen s_op − η x g |
+| Körperschaft ohne Gewerbesteuer | Körperschaftsteuersatz(j) x (1 + Zuschlag) | wie s_op | s_op |
+| Personengesellschaft mit Gewerbesteuer, Einzelunternehmen | E-42 + g_op − a_op | E-42 + g − a | s_op; beim Einzelunternehmen bei sofortiger Verrechnung s_op − η x (g − a) |
+| Privatperson | E-42 | Satz auf Kapitalerträge (KAT-18) | s_op |
+| befreit | 0 | 0 | 0 |
+| Lehrbuch | Satz | Satz auf Zinsen | Satz |
 
-mit g = Messzahl x Hebesatz, bei gesetztem Kennzeichen g = 0 und ohne Anrechnungsglied. Freibetrag, Abrundung und Verlustvortrag bleiben außer Betracht.
-*Beispiel (RF-13):* Körperschaft ohne Kürzung im Jahr 2027: 15,825 % + 14 % = 29,825 %; Personengesellschaft bei 400 %: 42 % + 14 % − 14 % = 42 %.
+mit g = Messzahl x Hebesatz, a = Anteil x Messzahl x min(Anrechnungsfaktor; Hebesatz) und η dem Anteil der Hinzurechnung (KAT-16). g_op und a_op sind g und a ohne Kennzeichen E-41 und null mit Kennzeichen: Die Kürzung nimmt die Gewerbesteuer vom operativen Ertrag, nicht von den Zinsen. Freibeträge, Abrundung und Verlustvortrag bleiben außer Betracht; im Vortragsmodus gilt der Freibetrag der Hinzurechnung als nicht ausgeschöpft.
+*Beispiel (RF-13, RF-17):* Körperschaft im Jahr 2027 ohne Kennzeichen: 15,825 % + 14 % = 29,825 %; mit Kennzeichen s_op = 15,825 % und s_Z = 29,825 %; bei sofortiger Verrechnung s_FK = 29,825 % − 25 % x 14 % = 26,325 %. Personengesellschaft bei 400 %: 42 % + 14 % − 14 % = 42 %.
+
+**R-7.15 Finanzierungskosten in der Steuer (`ESTG-5`, `ESTG-11`, `MA-032`).** Laufende Finanzierungskosten – Zinsen, Kontokorrentzinsen, laufende Beiträge, Bereitstellungszinsen, auch die der Bauzeit – mindern das operative Ergebnis im Jahr der Zahlung, bei jedem Steuerstatus. Einbehaltene Beträge (Disagio, laufzeitbezogene Entgelte, das Entgelt auf einen Zuschuss) werden im Betriebsvermögen – Körperschaften, Personengesellschaften mit Gewerbesteuer, Einzelunternehmen – linear über die Zinsbindung der Tranche verteilt:
+
+    abziehbar im Planjahr j = runde(Betrag x Monate der Zinsbindung im Planjahr j / Monate von der ersten Auszahlung bis zum Ende der Zinsbindung)
+
+Der nicht verteilte Rest wird im Verkaufsjahr abgezogen, weil das Darlehen dann abgelöst ist. Bei der Privatperson sind einbehaltene Beträge im Jahr der Zahlung abziehbar. Die Vorfälligkeit mindert im Betriebsvermögen das operative Ergebnis des Verkaufsjahres; bei der Privatperson gilt R-7.11. Offen und deshalb Modellannahme (`MA-032`, Gewicht mittel) ist dreierlei: ob die Entgelte der NBank laufzeitbezogen sind (voreingestellt: ja, also verteilt; die andere Lesart „im Jahr der Zahlung“ ist umschaltbar), ob ein Disagio der Privatperson marktüblich und damit sofort abziehbar ist, und ob die Vorfälligkeit der Privatperson Veräußerungskosten ist. **Neue Festlegung (NF-48)**; sie ersetzt den Sofortabzug des Entwurfs im Betriebsvermögen.
+*Beispiel (RF-17, geförderter Neubau als Körperschaft):* Einbehaltene Entgelte 65.393,64 Euro, erste Auszahlung im Monat 2, zinslose Zeit bis Monat 438: 436 Monate. Planjahr 1 mit zehn Monaten 1.499,85 Euro, Planjahre 2 und 3 je 1.799,82 Euro. Die Verteilung ist die ungünstigere Lesart: Rendite 3,558 % gegen 3,573 % beim Abzug im Jahr der Zahlung, Endwertdifferenz 5.305.318,55 Euro gegen 5.321.983,34 Euro.
+
+**R-7.16 Hinzurechnung (`GEWSTG-8`).** Hinzurechnung des Planjahres = η x max(0; Entgelte für Schulden + ρ x Erbbauzins − Freibetrag). η, ρ und der Freibetrag sind Katalogwerte (KAT-16); Entgelte für Schulden nach R-7.2. Die Hinzurechnung erhöht den Gewerbeertrag vor dem Verlustvortrag (R-7.8). Bei sofortiger Verrechnung gilt der Freibetrag als verbraucht (R-7.6), außer bei der Personengesellschaft, die ihre Gewerbesteuer selbst trägt. Mit gesetztem Kennzeichen E-41 entfällt die Hinzurechnung mit dem gekürzten Ertrag (NF-47). In der Unterlassensalternative zählen ihre Kontokorrentzinsen als Entgelte. **Neue Festlegung (NF-49):** Die Formelzeile ersetzt die Auslassung des Entwurfs; damit rechnen Vortrag und sofortige Verrechnung den Freibetrag nach derselben Logik.
+*Beispiel (RF-17; Katalogstand `GEWSTG-8`: ein Viertel, Freibetrag 200.000 Euro, die Hälfte der Pacht für Grundbesitz):* Körperschaft im Jahr 2027 mit 100.000 Euro Ergebnis, 300.000 Euro Entgelten und 40.000 Euro Erbbauzins: Hinzurechnung 25 % x (300.000 + 20.000 − 200.000) = 30.000 Euro; Steuer 15.825,00 + 14 % x 130.000 = 34.025,00 Euro. Bei sofortiger Verrechnung und 60.000 Euro Entgelten: Hinzurechnung 15.000 Euro, Steuer 31.925,00 Euro. Im Ankauf (RF-11) bleiben die Entgelte mit höchstens 48.609,62 Euro im Jahr unter dem Freibetrag.
+
+**R-7.17 Körperschaft ohne Gewerbesteuer.** Verein und Stiftung unterliegen der Gewerbesteuer nur mit einem wirtschaftlichen Geschäftsbetrieb (`GEWSTG-2`); die Vermietung ist Vermögensverwaltung. Körperschaftsteuer mit Zuschlag nach R-7.7 auf e_op + z_h + g_v, keine Gewerbesteuer, keine Hinzurechnung. Der Verkaufsgewinn ist in der Kurzform unabhängig von der Haltedauer steuerpflichtig; ob stattdessen die Frist des privaten Verkaufs gilt, klärt der Steuerberater (Kapitel 16), und die Grundform regelt es. Das ist die vorsichtige Fassung. **Neue Festlegung (NF-50).**
+*Beispiel (RF-17, RF-13):* 100.000 Euro im Jahr 2027: 15.825,00 Euro. Ankauf: Rendite 5,185 % gegen 4,527 % der voll steuerpflichtigen Körperschaft.
+
+**R-7.18 Objektverkauf der Personengesellschaft (`MA-036`).** Die Kurzform behandelt den Gewinn aus dem Verkauf des Objekts als laufenden Gewinn: Er gehört in voller Höhe zum Gewerbeertrag, mit Anrechnung nach R-7.9. Ist der Verkauf des einzigen Objekts dagegen die Aufgabe des Betriebs, gehört der Gewinn nur insoweit zum Gewerbeertrag, als er nicht auf natürliche Personen als unmittelbar beteiligte Gesellschafter entfällt (`GEWSTG-7`): Gewerbeertrag = e_op + z_h + (1 − Anteil) x g_v + Hinzurechnung. Welche Einordnung gilt, ist offen (`MA-036`, Gewicht mittel); voreingestellt ist der laufende Gewinn, die andere Lesart ist umschaltbar. Bis zu einem Hebesatz in Höhe des Anrechnungsfaktors ist die Voreinstellung nahezu neutral, darüber vorsichtig.
+*Beispiel (RF-17; Hebesatz 440 %, Anteil natürlicher Personen 60 %, Verkaufsgewinn 500.000 Euro):* laufender Gewinn 243.285,00 Euro Steuer, Aufgabegewinn 222.285,00 Euro. *Beispiel (RF-13):* Rendite 3,324 % gegen 3,487 %.
+
+**R-7.19 Zuschuss in der Steuer (`MA-031`).** Wie der Zuschuss der Grobförderung steuerlich einzuordnen ist, ist offen (Gewicht hoch). Drei Lesarten sind gebaut und umschaltbar:
+
+| Lesart | Wirkung |
+|---|---|
+| **Einnahme im Jahr des Zuflusses** (Voreinstellung) | Der Zuschuss erhöht das operative Ergebnis in der Periode, in der er fließt. Abschreibungsgrundlage und Boden bleiben ungemindert; die Rückzahlung mindert den Verkaufsgewinn |
+| Einnahme über die Bindung verteilt | Ertrag des Planjahres = runde(Zuschuss x Bindungsmonate im Planjahr / Bindungsmonate), ab der Bezugsfertigkeit. Im Verkaufsjahr wird der Rest bis Zuschuss − Rückzahlung vereinnahmt; die Rückzahlung mindert den Verkaufsgewinn dann nicht, weil sie genau den noch nicht vereinnahmten Teil betrifft |
+| Minderung der Herstellungskosten | Der Zuschuss wird nach den zuwendungsfähigen Kosten aufgeteilt: Gebäudeanteil = runde(Zuschuss x zuwendungsfähige Baukosten / zuwendungsfähige Kosten) mindert die Abschreibungsgrundlage, der Rest den Boden. Die Rückzahlung mindert den Verkaufsgewinn |
+
+Über die Haltedauer ist die Summe der Bemessungen in allen drei Lesarten gleich (P-15); sie unterscheiden sich im Zeitpunkt der Steuer. Voreingestellt ist die Lesart mit der niedrigsten Endwertdifferenz und Rendite. Ihr Endwert ist der höchste der drei, weil die Steuer auf den Zuschuss in der Bauzeit als Nachschuss das eingesetzte Eigenkapital erhöht; Maßstab ist deshalb nicht der Endwert. Übersteigt der Zuschuss oder einer seiner Anteile die Kosten, auf die er entfällt, rechnet der Kern nicht (M-43). **Neue Festlegung (NF-51);** sie ändert NF-17 und NF-38.
+*Beispiel (RF-17, RF-12; geförderter Neubau als Körperschaft):* Zuschuss 1.743.830,47 Euro, davon 1.543.830,47 Euro Gebäudeanteil; Zufluss 1.091.037,68 Euro im Planjahr 1 und 652.792,79 Euro im Planjahr 2; die Steuer dieser beiden Planjahre ist 323.074,06 und 156.396,63 Euro.
+
+| Lesart | Rendite, 38 Jahre | Endwertdifferenz, 38 Jahre | Eigenkapital der Investitionsphase | Endwert, 38 Jahre | Rendite, 20 Jahre |
+|---|---|---|---|---|---|
+| Einnahme im Jahr des Zuflusses | 3,558 % | 5.305.318,55 | 2.444.791,88 | 9.943.743,02 | 1,675 % |
+| verteilt über die Bindung | 3,973 % | 5.700.811,35 | 2.121.717,82 | 9.514.153,26 | 2,137 % |
+| Minderung der Herstellungskosten | 3,974 % | 5.706.360,57 | 2.121.717,82 | 9.519.702,48 | 2,137 % |
 
 ## 8 Restwert und Verkauf
 
-**R-8.1 Verkaufsfaktor.** Verkaufspreis = runde(Verkaufsfaktor x Jahressollmiete des Folgejahres). Die Jahressollmiete des Folgejahres ist die Summe der Sollmieten der zwölf Monate nach dem Verkaufsstichtag nach R-6.4, vor Mietausfall. Das Ergebnis ist der Kaufpreis des Käufers ohne dessen Erwerbsnebenkosten. **Neue Festlegung (NF-23)** für die Sollmiete vor Mietausfall als Bezug; die Spezifikation nennt die Jahresnettokaltmiete. In 1a ist der Faktor der einzige Maßstab.
-*Beispiel (RF-11):* Miete im Jahr 13: 11,6678 Euro je m², Sollmiete 15.401,53 Euro im Monat und 184.818,36 Euro im Jahr; Faktor 18: Verkaufspreis 3.326.730,48 Euro.
+**R-8.1 Verkaufsfaktor.** Verkaufspreis = runde(Verkaufsfaktor x maßgebliche Jahresmiete am Verkaufsstichtag), nicht unter null, mit
+
+    maßgebliche Jahresmiete (Monat m) = 12 x Sollmiete des Monats m x (1 − H-15) − 12 x Erbbauzins des Monats m
+
+und m dem letzten Monat der Haltedauer. Die Sollmiete des Monats folgt R-6.4, H-15 ist der strukturelle Leerstand, im Stressfall mit seinem Aufschlag. Das Ergebnis ist der Kaufpreis des Käufers ohne dessen Erwerbsnebenkosten. Der Einstiegsfaktor misst dieselbe Größe zum ersten Vermietungsmonat (R-10.13), sodass Einstieg und Ausstieg vergleichbar sind. **Neue Festlegung (NF-23, geändert):** Bezug ist die Miete zum Stand des Verkaufsstichtags nach strukturellem Leerstand, beim Erbbaurecht abzüglich des Erbbauzinses; die Spezifikation (Zeile „Restwert“) ist entsprechend gefasst. Der Entwurf rechnete mit der Sollmiete des Folgejahres vor Mietausfall und ohne Erbbauzins; alle drei Änderungen senken den Verkaufspreis. In 1a ist der Faktor der einzige Maßstab.
+*Beispiel (RF-11):* Miete im Monat 144 11,4390 Euro je m², Sollmiete 15.099,54 Euro; maßgebliche Jahresmiete 12 x 15.099,54 x 98,5 % = 178.476,56 Euro; Faktor 18: Verkaufspreis 3.212.578,13 Euro. *Beispiel (RF-18):* Bei 29,5 % strukturellem Leerstand ist der Verkaufspreis 2.299.357,95 Euro, die Endwertdifferenz −277.378,77 Euro und die Rendite 0,415 %. *Beispiel (RF-14):* Bei 99,5 % Leerstand und 0,5 % Forderungsausfall ist der Verkaufspreis 16.307,50 Euro und nicht der des voll vermieteten Objekts.
 
 **R-8.2 Nettoanfangsrendite.** Verkaufspreis = runde(Reinertrag des Folgejahres / Nettoanfangsrendite / (1 + Erwerbsnebenkosten des Käufers)). Der Reinertrag folgt R-6.12; das Ergebnis vor der Division durch (1 + Nebenkosten) ist der Kaufpreis einschließlich der Nebenkosten des Käufers. Der Maßstab steht ab der Vollkalkulation zur Wahl; das Eingabefeld weist die Bezugsbasis aus.
 *Beispiel (Bericht Anhang D.4):* 100.000 Euro Jahresmiete, 20 % nicht umlagefähige Kosten. Faktor 22,2: 2.220.000,00 Euro. Nettoanfangsrendite 4,5 %: 1.777.777,78 Euro einschließlich und bei 7 % Nebenkosten 1.661.474,56 Euro ohne Nebenkosten des Käufers.
 
 **R-8.3 Verkaufskosten.** Verkaufskosten = runde(Verkaufspreis x H-16).
-*Beispiel (RF-11; 1,5 % als Annahme):* 49.900,96 Euro.
+*Beispiel (RF-11; 1,5 % als Annahme):* 48.188,67 Euro.
 
 **R-8.4 Ausstehender Investitionsstau.** Eine Maßnahme, die am Verkaufsstichtag noch aussteht (k > n), mindert den Verkaufserlös um runde(Betrag x ausstehender Anteil x (1 + Baupreissteigerung)^n), also zum Preisstand des Stichtags und nicht des Planjahres. Was bis zum Stichtag ausgeführt ist, steht als Zahlung im Finanzplan (R-6.10). In 1a ist eine Maßnahme ganz ausgeführt oder ganz ausstehend; die Probe P-06 läuft in Anteilen.
 *Beispiel (RF-14, Bericht Anhang A Nr. 3):* 100.000 Euro, geplant für Jahr 12, Verkauf in Jahr 10, 3 %: Abzug 134.391,64 Euro, nicht 142.576,09 Euro. Würden 40 % in Jahr 9 ausgeführt, stünden 52.190,93 Euro im Finanzplan und 80.634,98 Euro im Abzug; die Anteile ergeben 100 %, die Eurobeträge keinen der beiden Preisstände.
 
 **R-8.5 Gebuchter Verkaufserlös.** Im Finanzplan steht in N: Verkaufserlös = Verkaufspreis − Verkaufskosten − ausstehender Investitionsstau (P-05). Ein Schuldenfeld hat der Restwert nicht: Der Erlös wird nie nach Schulden eingegeben oder gebucht.
-*Beispiel (RF-11):* 3.326.730,48 − 49.900,96 = 3.276.829,52 Euro. *Beispiel (RF-05):* Wird im Testfall der Erlös nach Schulden gebucht und die Restschuld zusätzlich abgelöst, fällt der Endwert auf −39.805,20 Euro; die Kreditprobe bemerkt nichts, die Restwertprobe meldet −624.171,48 Euro.
+*Beispiel (RF-11):* 3.212.578,13 − 48.188,67 = 3.164.389,46 Euro. *Beispiel (RF-05):* Wird im Testfall der Erlös nach Schulden gebucht und die Restschuld zusätzlich abgelöst, fällt der Endwert auf −39.805,20 Euro; die Kreditprobe bemerkt nichts, die Restwertprobe meldet −624.171,48 Euro.
 
 **R-8.6 Ablösung.** Jede Restschuld wird in N als Zahlung im Finanzplan abgelöst, nach der planmäßigen Rate und vor dem Ausgleich. Übernimmt der Käufer ein Darlehen, werden der Verkaufserlös in voller Höhe und die Restschuld als Ablösung gebucht.
-*Beispiel (RF-11):* Ablösung des Bankdarlehens 1.034.515,79 Euro im Monat 144.
+*Beispiel (RF-11):* Ablösung des Bankdarlehens 886.727,18 Euro im Monat 144.
 
-**R-8.7 Rückzahlung von Fördermitteln (`MA-017`).** Wird vor dem Ende der Bindung verkauft, ist der Zuschuss anteilig zurückzuzahlen: Rückzahlung = runde(Zuschuss x verbleibende Bindungsperioden / Bindungsperioden). Die Bindung beginnt mit der Bezugsfertigkeit. Die Rückzahlung ist eine Zahlung im Finanzplan in N, nie ein Abzug vom Verkaufserlös (P-07); sie mindert den Verkaufsgewinn (R-7.4).
-*Beispiel (RF-12; Bindung 35 Jahre als Katalogstand):* Zuschuss 1.708.000 Euro, Bezug nach 18 Monaten, Verkauf nach 240 Monaten: 198 von 420 Monaten verbleiben, Rückzahlung 805.200,00 Euro. Nach 42 Jahren (RF-14) ist sie null.
+**R-8.7 Rückzahlung von Fördermitteln (`MA-017`).** Wird vor dem Ende der Bindung verkauft, ist der Zuschuss anteilig zurückzuzahlen: Rückzahlung = runde(Zuschuss x verbleibende Bindungsperioden / Bindungsperioden); erst multiplizieren, zuletzt teilen (R-12.5). Die Bindung beginnt mit der Bezugsfertigkeit. Die Rückzahlung ist eine Zahlung im Finanzplan in N, nie ein Abzug vom Verkaufserlös (P-07); ihre steuerliche Wirkung regelt R-7.19.
+*Beispiel (RF-12; Bindung 35 Jahre als Katalogstand):* Zuschuss 1.743.830,47 Euro, Bezug nach 18 Monaten, Verkauf nach 240 Monaten: 198 von 420 Monaten verbleiben, Rückzahlung 822.091,51 Euro. Nach 38 Jahren ist sie null.
 
-**R-8.8 Restwert bei laufender Bindung (`MA-017`).** Läuft die Bindung am Verkaufsstichtag noch, folgt der Verkaufspreis aus der gebundenen Miete des Folgejahres (R-6.5), und das Förderdarlehen wird wie jedes Darlehen abgelöst. Die andere Lesart (der Käufer übernimmt Darlehen und Bindung) ist in Teil 1 nicht gebaut; sie kommt mit dem Bestandsteil der Förderung.
-*Beispiel (RF-12):* Verkauf nach 20 Jahren bei gebundener Miete: Verkaufspreis 6.757.038,72 Euro, Ablösung des Förderdarlehens 2.866.999,26 Euro.
+**R-8.8 Restwert bei laufender Bindung (`MA-017`).** Läuft die Bindung am Verkaufsstichtag noch, folgt der Verkaufspreis aus der gebundenen Miete zum Stand des Verkaufsstichtags (R-8.1), und das Förderdarlehen wird wie jedes Darlehen abgelöst. Die andere Lesart (der Käufer übernimmt Darlehen und Bindung) ist in Teil 1 nicht gebaut; sie kommt mit dem Bestandsteil der Förderung.
+*Beispiel (RF-12):* Verkauf nach 20 Jahren bei gebundener Miete: Verkaufspreis 6.655.683,14 Euro, Ablösung des Förderdarlehens 2.927.144,72 Euro.
 
 **R-8.9 Reihenfolge am Verkaufsstichtag.** In N laufen die Schritte der Periode wie in jeder anderen (R-4.3): laufende Zahlungen des letzten Monats, planmäßige Rate, dann Ablösung, Vorfälligkeit, Verkaufserlös, Rückzahlung, Steuer des letzten Planjahres einschließlich Verkaufsgewinn, Ausgleich. Der Endwert enthält damit alle Steuern.
 
@@ -547,8 +691,8 @@ Endwert 9.046 (genau 9.046,02), Vergleichsrendite 2,49 %.
 **R-9.4 Entnahmen und Fehlbeträge.** Entnahmen und Steuern werden zuerst vom Wiederanlagekonto bedient, dann durch Auflösung der langfristigen Anlage zum Nennwert, zuletzt über den Kontokorrent. **Neue Festlegung (NF-24):** Die Reihenfolge schont die höher verzinste Anlage am längsten und rechnet die Alternative damit eher zu gut als zu schlecht; für die Investition ist das die vorsichtige Wahl.
 *Beispiel (RF-07; Testfall mit a_L = 3 % und h = 2 %):* Eine Entnahme von 40.000 Euro im Jahr 4 übersteigt das Wiederanlagekonto (25.554,45 Euro am Ende von Jahr 3); der Rest kommt aus der langfristigen Anlage. Die Endwertdifferenz steigt dadurch von 141.173,70 auf 141.213,52 Euro, weil die Alternative den höheren Zins verliert.
 
-**R-9.5 Steuern.** Die Alternative wird mit demselben Steuerstatus und denselben Parametern besteuert wie die Investition, mit eigenem Verlustvortrag. Ihre Zinserträge sind Habenzinsen z_h, ihre Kontokorrentzinsen operativer Aufwand. Das gesetzte Kennzeichen der erweiterten Kürzung gilt auch für sie (NF-20); das rechnet die Alternative günstiger und die Investition vorsichtiger.
-*Beispiel (RF-11):* Körperschaft, zwölf Jahre, Einlagen 1.208.955,01 Euro zum Stichtag und 91.529,75 Euro im Monat 24: Endwert der Alternative 1.548.770,72 Euro, Vergleichsrendite 1,483 %.
+**R-9.5 Steuern.** Die Alternative wird mit demselben Steuerstatus und denselben Parametern besteuert wie die Investition, mit eigenem Verlustvortrag. Ihre Zinserträge sind Habenzinsen z_h, ihre Kontokorrentzinsen operativer Aufwand und Entgelte für Schulden (R-7.16); bei der Privatperson mindern die Kontokorrentzinsen keine Steuer (R-7.10, `ESTG-20`). Das Kennzeichen der erweiterten Kürzung wirkt für die Alternative nicht: Sie verwaltet nur Kapital, und ihre Zinserträge sind voll gewerbesteuerpflichtig (`GEWSTG-9`). Der Entwurf hatte die Alternative mit dem Kennzeichen gewerbesteuerfrei gerechnet (NF-20, geändert).
+*Beispiel (RF-11):* Körperschaft, zwölf Jahre, Einlagen 1.413.390,01 Euro zum Stichtag und 72.484,81 Euro im Monat 24: Endwert der Alternative 1.770.603,63 Euro, Vergleichsrendite 1,483 %. *Beispiel (RF-13):* Mit gesetztem Kennzeichen bleibt die Vergleichsrendite 1,483 %; bei der Körperschaft ohne Gewerbesteuer ist sie 1,763 %.
 
 **R-9.6 Takt und Rundung.** Die Alternative rechnet im selben Raster wie die Investition, mit konformen Periodensätzen (R-2.6) und Rundung je Zinsbuchung (R-12.3).
 
@@ -561,8 +705,8 @@ Kennzahlen werden mit voller Rechengenauigkeit gebildet und nur für die Darstel
 
 **R-10.1 Endwert.** EW nach R-4.6, EW_U nach R-9.7.
 
-**R-10.2 Endwertdifferenz.** ΔEW = EW − EW_U. Sie ist die führende Entscheidungsgröße: Das Vorhaben ist gegenüber der Unterlassensalternative vorteilhaft, wenn ΔEW > 0. Sind beide Zinssätze der Alternative gleich, fließen Einlagen in das Guthaben und werden Entnahmen aus ihm bedient, hängt ΔEW nicht davon ab, wann Einlagen und Entnahmen fallen (R-10.6, Eigenschaften 4 und 5).
-*Beispiel:* Testfall 155.571,23 Euro (RF-05); Ankauf 825.606,46 Euro (RF-11); Lehrbuch, Standardbeispiel 61,57 ohne und 50,53 mit Steuern (RF-03).
+**R-10.2 Endwertdifferenz.** ΔEW = EW − EW_U. Sie ist die führende Entscheidungsgröße: Das Vorhaben ist gegenüber der Unterlassensalternative vorteilhaft, wenn ΔEW > 0. Sind beide Zinssätze der Alternative gleich, fließen Einlagen in das Guthaben und werden Entnahmen aus ihm bedient, hängt ΔEW nicht davon ab, wann Einlagen und Entnahmen fallen (R-10.6, Eigenschaften 4 und 5). Der Endwert allein taugt nicht zum Vergleich zweier Fassungen mit verschiedenen Einlagen: Höhere Nachschüsse heben den Endwert auch dann, wenn sie das Vorhaben verschlechtern (R-7.19).
+*Beispiel:* Testfall 155.571,23 Euro (RF-05); Ankauf 753.701,96 Euro (RF-11); Lehrbuch, Standardbeispiel 61,57 ohne und 50,53 mit Steuern (RF-03).
 
 **R-10.3 Saldierung.** Einlagen, Nachschüsse und Entnahmen derselben Periode werden saldiert: s_u = Einlage + Nachschuss − Entnahme; e_u = max(s_u; 0), a_u = max(−s_u; 0). Im Monatsraster wird je Monat saldiert, im Jahresmodus je Jahr.
 *Beispiel (RF-06):* Nachschuss und Entnahme von je 50.000 Euro im Jahr 2 ändern weder Endwert noch Rendite (7,876 %); unsaldiert ergäbe dieselbe Zahlungsreihe 7,246 %.
@@ -587,11 +731,11 @@ Mit einer einzigen Einlage zum Stichtag und ohne Entnahmen ist das die Lehrbuchf
 **R-10.6 Eigenschaften und Grenzen der Renditeformel (`MA-012`).** Jede Eigenschaft ist im Referenzrechner an Zahlen geprüft (RF-06, RF-07).
 
 1. **Lehrbuch als Sonderfall.** Bei einer Einlage zum Stichtag gilt die Lehrbuchformel. Standardbeispiel: 5,08 % gegen 4,95 % der Finanzinvestition.
-2. **Gleiche Entscheidung wie die Endwertdifferenz.** r > r_U genau dann, wenn ΔEW > 0 – für jede Einlagen- und Entnahmenreihe, jeden Steuerstatus, beide Raster und beliebige zwei Zinssätze der Alternative. Der Grund: Rendite und Vergleichsrendite haben denselben Nenner und dieselben aufgezinsten Entnahmen im Zähler; ihre Zähler unterscheiden sich genau um ΔEW (P-11). Testfall mit a_L = 3 %: ΔEW 141.173,70 Euro, r 7,876 % gegen r_U 2,072 %; mit Nachschuss 140.108,93 Euro, 7,246 % gegen 2,044 %. Verlustfall (Verkauf zu 950.000 Euro, Nachschuss): ΔEW −44.428,77 Euro, r −0,547 % gegen r_U 1,400 %.
-3. **Entnahmen aus Guthaben ändern die Rendite nicht.** Eine Entnahme aus der Geldanlage senkt den Endwert um genau den Betrag, um den der Zähler sie aufzinst. Im Jahresmodus gilt das exakt (7,876 % mit und ohne Entnahmen). Im Monatsraster gilt es bis auf die Wirkung der jährlichen Steuerzahlung: Eine Entnahme von 10.000 Euro im Monat 30 ändert die Rendite des Testfalls um weniger als 0,001 Prozentpunkte und die Endwertdifferenz um 3 Cent.
+2. **Gleiche Entscheidung wie die Endwertdifferenz.** r > r_U genau dann, wenn ΔEW > 0 – für jeden Steuerstatus, beide Raster und beliebige zwei Zinssätze der Alternative, sofern Eigenkapital eingezahlt ist (D > 0) und mindestens einer der beiden Zähler Z und Z_U positiv ist. Der Grund: Rendite und Vergleichsrendite haben denselben Nenner und dieselben aufgezinsten Entnahmen im Zähler; ihre Zähler unterscheiden sich genau um ΔEW. Außerhalb dieses Bereichs gilt die Aussage nicht: Ohne Einlage ist die Rendite nicht definiert, die Endwertdifferenz aber schon (RF-14: 63.947,36 Euro); sind beide Zähler nicht positiv – erreichbar, wenn frühe Entnahmen die Einlagen übersteigen und die Alternative in den Kontokorrent gerät –, sind beide Renditen −100 % bei beliebiger Endwertdifferenz. Die Probe P-11 prüft die Stimmigkeit der Umsetzung in diesem Geltungsbereich; rechnerisch ist sie eine Identität. Testfall mit a_L = 3 %: ΔEW 141.173,70 Euro, r 7,876 % gegen r_U 2,072 %; mit Nachschuss 140.108,93 Euro, 7,246 % gegen 2,044 %. Verlustfall (Verkauf zu 950.000 Euro, Nachschuss): ΔEW −44.428,77 Euro, r −0,547 % gegen r_U 1,400 %.
+3. **Entnahmen aus Guthaben ändern die Rendite nicht.** Eine Entnahme aus der Geldanlage senkt den Endwert um genau den Betrag, um den der Zähler sie aufzinst. Im Jahresmodus gilt das exakt (7,876 % mit und ohne Entnahmen). Im Monatsraster gilt es bis auf die Wirkung der jährlichen Steuerzahlung: Eine Entnahme von 10.000 Euro im Monat 30 lässt die Rendite des Testfalls bei 7,9333 % und ändert die Endwertdifferenz um 2 Cent (157.123,71 statt 157.123,73 Euro).
 4. **Grenze: Entnahmen über Kontokorrent.** Muss eine Entnahme über den Kontokorrent finanziert werden, sinkt die Rendite, weil der Kontokorrent mehr kostet als der Vergleichsfaktor ansetzt: 8,123 % ohne und 8,089 % mit Entnahmen in der Variante mit 380.000 Euro Eigenkapital. Solange ein Verlustvortrag die Habenzinsen steuerfrei stellt, gilt Eigenschaft 3 ebenfalls nur näherungsweise: In einem Testfall mit Anlaufverlust ändert eine Entnahme von 5.000 Euro die Endwertdifferenz um 0,43 Euro; die Rendite bleibt bei 6,9327 %.
 5. **Grenze: zwei verschiedene Zinssätze der Alternative.** Die Endwertdifferenz ist nur bei gleichen Sätzen vom Zeitpunkt der Entnahmen unabhängig. Bei a_L = 3 % und h = 2 % hebt eine Entnahme, die in der Alternative langfristige Anlage auflöst, die Endwertdifferenz (R-9.4: von 141.173,70 auf 141.213,52 Euro).
-6. **Grenze: Die Rendite hängt vom Zeitpunkt später Einlagen ab.** Eine Einlage nach dem Stichtag verwässert die Rendite zum Vergleichsfaktor hin, und eine spätere Entnahme hebt das nicht auf. Im Jahresmodus: Nachschuss im Jahr 2 und Entnahme im Jahr 3 ergeben 7,246 % statt 7,876 %, bei unveränderter Endwertdifferenz. Im Monatsraster: Nachschuss und Entnahme von je 50.000 Euro im Monat 13 lassen die Rendite bei 7,933 %; fällt die Entnahme einen Monat später, sind es 7,291 %, elf Monate später ebenfalls 7,291 %. Die Endwertdifferenz bleibt bis auf Rundung gleich (157.123,80 gegen 157.123,77 Euro). Der Abstand zur Zielrendite kann damit durch einen Monat Verschiebung kippen; Jahresmodus und Monatsraster können für dasselbe Vorhaben verschiedene Renditen zeigen.
+6. **Grenze: Die Rendite hängt vom Zeitpunkt später Einlagen ab.** Eine Einlage nach dem Stichtag verwässert die Rendite zum Vergleichsfaktor hin, und eine spätere Entnahme hebt das nicht auf. Im Jahresmodus: Nachschuss im Jahr 2 und Entnahme im Jahr 3 ergeben 7,246 % statt 7,876 %, bei unveränderter Endwertdifferenz. Im Monatsraster: Nachschuss und Entnahme von je 50.000 Euro im Monat 13 lassen die Rendite bei 7,933 %; fällt die Entnahme einen Monat später, sind es 7,291 %, elf Monate später ebenfalls 7,291 %. Die Endwertdifferenz bleibt bis auf Rundung gleich (157.123,73 / 157.123,71 / 157.123,63 Euro). Der Abstand zur Zielrendite kann damit durch einen Monat Verschiebung kippen; Jahresmodus und Monatsraster können für dasselbe Vorhaben verschiedene Renditen zeigen.
 
 **Entscheidung zu Eigenschaft 6 (neue Festlegung NF-26):** Die Abhängigkeit wird hingenommen und nicht durch eine Verrechnung von Rückführungen gegen frühere Einlagen beseitigt. Gründe: Die Endwertdifferenz führt und ist davon nicht betroffen. Eine Formel dieser Bauart, die gegen beides unempfindlich ist, gibt es nicht (Prüfrunde 3, Finanzmathematiker). Die naheliegende Alternative, der Barwert der Netto-Eigenkapitalreihe als Nenner, glättet die Verschiebung (7,866 %), hebt aber die Rendite bei Entnahmen aus dem Guthaben auf 8,240 % und hat einen Nenner, der gegen null gehen kann. In der Grobkalkulation tritt der Fall nicht auf, weil sie keine geplanten Entnahmen kennt. Treffen in einer Rechnung Einlagen nach dem Stichtag und Entnahmen zusammen, gibt der Kern den Hinweis M-27 zurück.
 
@@ -601,10 +745,10 @@ Mit einer einzigen Einlage zum Stichtag und ohne Entnahmen ist das die Lehrbuchf
 *Beispiel (RF-07):* EW −10.000 Euro, aufgezinste Entnahmen 50.000 Euro, Eigenkapital 400.000 Euro, fünf Jahre: (40.000 / 400.000)^(1/5) − 1 = −36,9 %. *Beispiel (RF-14):* Testfall ohne Eigenkapital: Rendite nicht definiert, Endwert und Endwertdifferenz 63.947,36 Euro. Testfall mit Verkauf zu 500.000 Euro: Endwert −65.633,72 Euro, Rendite −100 %.
 
 **R-10.8 Vergleichsrendite und Abstand zur Zielrendite.** Vergleichsrendite r_U = (Z_U / D)^(1/n) − 1 mit Z_U = EW_U + Summe von a_u x w(u): dieselbe Formel, angewandt auf den Endwert der Unterlassensalternative. Bei gleichen Sätzen und einer Einlage ist r_U der kurzfristige Habenzins nach Steuern. Abstand zur Zielrendite = r − z in Prozentpunkten; z ist H-01, ein effektiver Jahreszins nach Steuern.
-*Beispiel (RF-11; Zielrendite 5 % als Annahme):* r = 5,162 %, r_U = 1,483 %, Abstand +0,162 Prozentpunkte; im kombinierten Stressfall 3,178 % und −1,822 Prozentpunkte.
+*Beispiel (RF-11; Zielrendite 5 % als Annahme, Kaufpreis 2,4 Mio. Euro):* r = 4,527 %, r_U = 1,483 %, Abstand −0,473 Prozentpunkte; im kombinierten Stressfall 2,362 % und −2,638 Prozentpunkte.
 
-**R-10.9 Endwertüberschuss.** EÜ = Z − D x (1 + z)^n: der Betrag in Euro zum Zeitpunkt N, um den der Zähler der Renditeformel den Wert übertrifft, den er bei genau der Zielrendite hätte. EÜ hat dasselbe Vorzeichen wie der Abstand zur Zielrendite und ist beim höchsten tragbaren Preis null, bis auf die Auflösung der Preissuche von einem Euro (in RF-11: 1,44 Euro). **Neue Festlegung (NF-27):** Der Bericht beschreibt die Größe als „Endwert zuzüglich der aufgezinsten Entnahmen, abzüglich der mit der Zielrendite aufgezinsten Einlagen“. Bei einer Einlage zum Stichtag ist das dasselbe. Bei späteren Einlagen wären zwei Lesarten möglich, die zur Rendite im Widerspruch stehen können; gewählt ist die Fassung, die mit Rendite und tragbarem Preis nie in Widerspruch gerät. EÜ teilt die Grenze aus R-10.6, Eigenschaft 6.
-*Beispiel (RF-07):* Testfall: 584.366,28 − 400.000 x 1,05^5 = 73.853,66 Euro. Mit Nachschuss im Jahr 2 und Entnahme im Jahr 3: 63.919,08 Euro. Die anderen Lesarten ergäben 68.101,94 Euro (jede Einlage ab ihrem Zeitpunkt mit der Zielrendite aufgezinst) und 71.817,14 Euro (Einlagen und Entnahmen mit der Zielrendite aufgezinst). *Beispiel (RF-11):* Ankauf 43.445,29 Euro, im Stressfall −444.360,24 Euro.
+**R-10.9 Endwertüberschuss.** EÜ = Z − D x (1 + z)^n: der Betrag in Euro zum Zeitpunkt N, um den der Zähler der Renditeformel den Wert übertrifft, den er bei genau der Zielrendite hätte. Bei eingezahltem Eigenkapital hat EÜ dasselbe Vorzeichen wie der Abstand zur Zielrendite; ohne Einlage ist EÜ = Z und bleibt definiert. Deshalb ist EÜ die Zielgröße der Preissuche und der Zielwertsuche (R-11.4, R-11.10). Beim höchsten tragbaren Preis ist EÜ null bis auf die Auflösung der Preissuche von einem Euro (in RF-11: 0,35 Euro). **Neue Festlegung (NF-27):** Der Bericht beschreibt die Größe als „Endwert zuzüglich der aufgezinsten Entnahmen, abzüglich der mit der Zielrendite aufgezinsten Einlagen“. Bei einer Einlage zum Stichtag ist das dasselbe. Bei späteren Einlagen wären zwei Lesarten möglich, die zur Rendite im Widerspruch stehen können; gewählt ist die Fassung, die mit Rendite und tragbarem Preis nie in Widerspruch gerät. EÜ teilt die Grenze aus R-10.6, Eigenschaft 6.
+*Beispiel (RF-07; Jahresmodus ohne Rundung, Zielrendite 5 % als Annahme):* Testfall: 584.366,28 − 400.000 x 1,05^5 = 73.853,66 Euro. Mit Nachschuss im Jahr 2 und Entnahme im Jahr 3: 63.919,08 Euro. Die anderen Lesarten ergäben 68.101,94 Euro (jede Einlage ab ihrem Zeitpunkt mit der Zielrendite aufgezinst) und 71.817,14 Euro (Einlagen und Entnahmen mit der Zielrendite aufgezinst). *Beispiel (RF-11):* Ankauf −140.507,34 Euro, im Stressfall −715.580,11 Euro; die Rendite liegt in beiden Fällen unter dem Ziel.
 
 **R-10.10 Laufzeit.** n in den Formeln ist N / p, die Haltedauer in Jahren.
 
@@ -613,92 +757,125 @@ Mit einer einzigen Einlage zum Stichtag und ohne Entnahmen ist das die Lehrbuchf
     g = ((Z − D + Z_S + a_0) / a_0)^(1/n) − 1
     k = ((Z_U − D + Z_S + a_0) / a_0)^(1/n) − 1
 
-a_0 ist die Anschaffungsauszahlung zum Stichtag, Z_S die Summe der Sollzinsen aller Darlehen ohne Kontokorrent, je Planjahr um den Grenzsteuersatz entlastet: Z_S = Summe über j von Zinsen_j x (1 − s_op(j)). Mit einer Einlage und einem Steuersatz ist das die Formel des Lexikons mit EW für Z und EK für D. g > k genau dann, wenn ΔEW > 0. Ohne Fremdkapital ist g = r. Ist a_0 ≤ 0, ist die Kennzahl nicht definiert; ist der Zähler ≤ 0, beträgt sie −100 %. Die Kennzahl steht ab der Vollkalkulation auf dem vollen Blatt. **Neue Festlegung (NF-28)** sind die Erweiterung auf Z und D, der Referenzzinsfuß aus dem Finanzplan der Alternative und die Entlastung je Jahr.
-*Beispiel (RF-05):* Z_S = 134.171,48 x 0,7 = 93.920,04 Euro; g = ((584.366,28 − 400.000 + 93.920,04 + 1.100.000) / 1.100.000)^(1/5) − 1 = 4,61 %; k = 2,14 %.
+a_0 ist die Investitionsauszahlung der Investitionsphase, auf den Stichtag abgezinst mit dem Vergleichsfaktor wie D: a_0 = Summe über u von 0 bis zum Ende der Bauzeit von Investition_u x w(u) / w(0). Beim Ankauf ist das die Auszahlung zum Stichtag, beim Neubau die ganze Investition und nicht nur das Grundstück. Z_S ist die Summe der Sollzinsen aller Darlehen ohne Kontokorrent, je Planjahr um den Entlastungssatz der Sollzinsen entlastet: Z_S = Summe über j von Zinsen_j x (1 − s_FK(j)) (R-7.14). Mit einer Einlage und einem Steuersatz ist das die Formel des Lexikons mit EW für Z und EK für D. g > k genau dann, wenn ΔEW > 0, im Geltungsbereich von R-10.6 Nr. 2. Ohne Fremdkapital und mit einer einzigen Einlage zum Stichtag in Höhe von a_0 ist g = r; mit Nachschüssen gilt das nicht. Ist a_0 ≤ 0, ist die Kennzahl nicht definiert; ist der Zähler ≤ 0, beträgt sie −100 %. Die Kennzahl steht ab der Vollkalkulation auf dem vollen Blatt. **Neue Festlegung (NF-28, geändert)** sind die Erweiterung auf Z und D, der Referenzzinsfuß aus dem Finanzplan der Alternative, die Entlastung je Jahr und a_0 als abgezinste Investition der Investitionsphase.
+*Beispiel (RF-05):* Z_S = 134.171,48 x 0,7 = 93.920,04 Euro; g = ((584.366,28 − 400.000 + 93.920,04 + 1.100.000) / 1.100.000)^(1/5) − 1 = 4,61 %; k = 2,14 %. *Beispiel (RF-11, RF-12):* Ankauf a_0 = 2.640.000,00 Euro, g = 3,672 %. Neubau a_0 = 8.929.843,91 Euro statt 1.296.000 Euro für das Grundstück allein, g = 3,549 %.
 
 **R-10.12 Amortisationsdauer (`MA-027`).** Voraussetzung ist ein Wertpfad: der Verkaufserlös nach R-8.5 bei gedachtem Verkauf am Ende jedes Jahres t. Vermögen_t = Guthaben_t − Kontokorrent_t + Verkaufserlös_t − Restschulden_t − Vorfälligkeit_t − Rückzahlung von Fördermitteln_t − Steuer auf den gedachten Verkauf_t. Vergleich_t ist der Bestand der Unterlassensalternative am Ende von t (R-9.3), mit denselben Einlagen und Entnahmen. Die Amortisationsdauer ist das kleinste t*, für das Vermögen_t ≥ Vergleich_t für alle t von t* bis n gilt; gibt es keines, lautet das Ergebnis „im Planungszeitraum nicht erreicht“. Die andere Lesart (erstes t mit Vermögen_t ≥ Summe der Einlagen) ist umschaltbar. Die Kennzahl steht ab der Vollkalkulation zur Verfügung, weil die Grobkalkulation keinen Wertpfad führt. **Neue Festlegung (NF-29)** ist die Spiegelung der Einlagen und Entnahmen in der Vergleichsgröße.
 *Beispiel (RF-05; Wertpfad der Nachrechnung: Verkaufserlös linear von 1,00 auf 1,15 Mio. Euro):* Vermögen bei gedachtem Verkauf in den Jahren 1 bis 3: 354.180,00 / 409.664,52 / 466.495,06 Euro; Alternative 405.600,00 / 411.278,40 / 417.036,30 Euro; Eigenkapital 400.000 Euro. Voreinstellung: drei Jahre; andere Lesart: zwei Jahre.
 
-**R-10.13 Anfangsrendite und Faktor.** Bezug ist das erste Jahr der Vollvermietung (`GIF-KENNZAHLENKATALOG`; im Kataster nur als Sekundärquelle belegt, Kapitel 17).
+**R-10.13 Anfangsrendite und Faktor.** Bezug ist das erste Jahr der Vollvermietung (`GIF-KENNZAHLENKATALOG`; im Kataster nur als Sekundärquelle belegt, Kapitel 17). Einstieg und Ausstieg messen dieselbe Größe, die maßgebliche Jahresmiete nach R-8.1:
 
-    Einstiegsfaktor      = Kaufpreis / Jahressollmiete            (Neubau: Gesamtkosten ohne Bauzeitzinsen)
-    Bruttoanfangsrendite = Jahressollmiete / Kaufpreis
-    Nettoanfangsrendite  = Reinertrag / (Kaufpreis + Erwerbsnebenkosten)   (Neubau: / Gesamtkosten)
-    Ausstiegsfaktor      = Verkaufspreis / Jahressollmiete des Folgejahres = E-47
+    Einstiegsfaktor      = Kaufpreis / maßgebliche Jahresmiete des ersten Vermietungsmonats        (Neubau: Gesamtkosten statt Kaufpreis)
+    Bruttoanfangsrendite = Kehrwert des Einstiegsfaktors
+    Nettoanfangsrendite  = Reinertrag des ersten Jahres der Vollvermietung / (Kaufpreis + Erwerbsnebenkosten)
+                           (Neubau: / Gesamtkosten, bezeichnet als „Anfangsrendite auf Gesamtkosten“)
+    Ausstiegsfaktor      = Verkaufspreis / maßgebliche Jahresmiete am Verkaufsstichtag = E-47, im Stressfall mit Abschlag
 
-Einstiegs- und Ausstiegsfaktor stehen nebeneinander auf dem Blatt; liegt der Ausstiegsfaktor über dem Einstiegsfaktor, greift die Warnschwelle H-20.
-*Beispiel (RF-11):* 2.400.000 / 134.640 = 17,83; Bruttoanfangsrendite 5,61 %; Nettoanfangsrendite 103.035,24 / 2.640.000 = 3,90 %; Ausstiegsfaktor 18,00.
+Ist die maßgebliche Jahresmiete des ersten Vermietungsmonats nicht positiv (leeres Objekt), sind Einstiegsfaktor und Bruttoanfangsrendite nicht definiert. Einstiegs- und Ausstiegsfaktor stehen nebeneinander auf dem Blatt; liegt der Ausstiegsfaktor über dem Einstiegsfaktor, greift die Warnschwelle H-20.
+*Beispiel (RF-11):* 2.400.000 / 132.620,40 = 18,10; Bruttoanfangsrendite 5,53 %; Nettoanfangsrendite 103.035,24 / 2.640.000 = 3,90 %; Ausstiegsfaktor 18,00. *Beispiel (RF-12):* Gesamtkosten 9.015.152,34 / 390.060,00 = 23,11; Ausstiegsfaktor 24,00.
 
-**R-10.14 Schuldendienstdeckung.** Deckung einer Zeitspanne = Reinertrag / Kapitaldienst. Kapitaldienst = Zinsen + planmäßige Tilgung + laufende Beiträge aller Darlehen. Nicht zum Kapitaldienst gehören Ablösung, Vorfälligkeit, freie Tilgung und der Kontokorrent. Ohne Kapitaldienst ist die Kennzahl nicht definiert und wird als „kein Kapitaldienst“ ausgewiesen. Auf dem Blatt der Grobkalkulation steht die Deckung im ersten Jahr der Vollvermietung; der Kern rechnet sie für jedes Planjahr. **Neue Festlegung (NF-30)** für die Abgrenzung.
-*Beispiel (RF-05):* Testfall 1,3095 / 1,3357 / 1,3624 / 1,3897 / 1,4175; mit der Ablösung im Nenner fiele sie im Verkaufsjahr auf 0,09. *Beispiel (RF-11):* Im Basisfall 1,200 im Jahr 1, steigend auf 1,582 im Jahr 10 und 1,833 nach dem Anschluss; im kombinierten Stressfall 1,147 im Jahr 1 und 1,442 im Jahr 11.
+**R-10.14 Schuldendienstdeckung.** Deckung einer Zeitspanne = Reinertrag / Kapitaldienst. Kapitaldienst = Zinsen + planmäßige Tilgung + laufende Beiträge aller Darlehen, mit den tatsächlichen und nicht den kalkulatorischen Konditionen. Nicht zum Kapitaldienst gehören Ablösung, Vorfälligkeit, Bereitstellungszinsen, freie Tilgung und der Kontokorrent. Ohne Kapitaldienst ist die Kennzahl nicht definiert und wird als „kein Kapitaldienst“ ausgewiesen. Der Kern rechnet die Deckung für jedes Planjahr. Auf dem Blatt stehen, im Basisfall und im Stressfall: die Deckung im ersten Jahr der Vollvermietung; die kleinste Deckung über die Haltedauer mit ihrem Planjahr, gezählt ab dem ersten Planjahr, das ganz in der Vermietung liegt (gemischte Planjahre der Bauzeit und des Anlaufleerstands zählen nicht); die Deckung im ersten Planjahr nach dem Ende jeder Zinsbindung innerhalb der Haltedauer. Fällt die kleinste Deckung unter die Mindestdeckung H-03, gibt der Kern M-38 zurück; fällt sie unter 1, M-39. **Neue Festlegung (NF-30, erweitert)** für die Abgrenzung und die Deckung über die Haltedauer; der Zinsstress wirkt erst nach der Zinsbindung, und die Deckung des ersten Jahres zeigt ihn nicht.
+*Beispiel (RF-05):* Testfall 1,3095 / 1,3357 / 1,3624 / 1,3897 / 1,4175; mit der Ablösung im Nenner fiele sie im Verkaufsjahr auf 0,09. *Beispiel (RF-11):* Im Basisfall 1,400 im Jahr 1 (das Darlehen ist mit 7 % bemessen und kostet 6 %), kleinste Deckung 1,3835 im Jahr 3, weil die Kosten steigen und die Miete bis zum Monat 36 unverändert bleibt; 1,812 im Jahr 10 und 2,0853 im Jahr 11 nach dem Anschluss. Im kombinierten Stressfall 1,2354 im Jahr 1, kleinste Deckung 1,2191 im Jahr 3, 1,581 im Jahr 11. *Beispiel (RF-19; Zins 3 %, Ist- gleich Vergleichsmiete 8,50 Euro, Mietsteigerung 0,5 %, Lesart 2 von `MA-026`):* im Basisfall 1,3210 und als kleinste Deckung 1,3054; im Stressfall 1,1480 im Jahr 1 und 1,0181 im Jahr 12 mit M-38. *Beispiel (RF-12, gefördert):* 1,0595 im ersten Jahr, kleinste Deckung 1,0594 im Planjahr 4, im Stressfall 1,0192; M-38.
 
-**R-10.15 Beleihungsauslauf.** Beleihungsauslauf = (Bankdarlehen + übrige Darlehen) / Wertansatz, zum Stichtag, beim Neubau zum Ende der Bauzeit.
-*Beispiel (RF-11):* 1.431.044,99 / 2.400.000 = 59,63 %; beim tragbaren Preis im Stressfall bindet die Quote und der Auslauf ist 65,00 %.
+**R-10.15 Darlehen zu Kaufpreis und Restschuld zum Wert.** Darlehen zu Kaufpreis = (Bankdarlehen + übrige Darlehen) / Wertansatz, zum Stichtag; beim Neubau „Darlehen zu Gesamtkosten“, zum Ende der Bauzeit. Die Kennzahl heißt nicht Beleihungsauslauf, solange der Kaufpreis und kein Beleihungswert im Nenner steht (R-1.1). Dazu, wenn die Zinsbindung des Bankdarlehens vor dem Verkauf endet: Restschuld zum Wert am Ende der Zinsbindung = Restschuld aller Darlehen am Ende der Zinsbindung / (Verkaufsfaktor x maßgebliche Jahresmiete dieses Monats); das ist der Wert nach R-8.1 zu diesem Zeitpunkt. **Neue Festlegung (NF-52).**
+*Beispiel (RF-11):* 1.226.609,99 / 2.400.000 = 51,11 %; Restschuld am Ende der Zinsbindung 925.579,91 Euro, 29,98 % des Werts, im Stressfall 35,22 %. *Beispiel (RF-12):* Darlehen zu Gesamtkosten 44,45 %.
 
 **R-10.16 Restwertanteil.** Restwertanteil = Restwertbeitrag / EW mit Restwertbeitrag = Verkaufserlös − Ablösung − Vorfälligkeit − Rückzahlung von Fördermitteln − Steuer auf den Verkaufsgewinn. Die Steuer auf den Verkaufsgewinn ist die Steuer des letzten Planjahres abzüglich der Steuer, die ohne Verkaufsgewinn anfiele. Bei EW ≤ 0 ist die Kennzahl nicht definiert. Sie kann über 100 % liegen, wenn der laufende Betrieb Geld gekostet hat. Die Warnschwelle ist H-20. **Neue Festlegung (NF-31).**
-*Beispiel (RF-05):* (1.150.000 − 624.171,48) / 584.366,28 = 89,98 %. *Beispiel (RF-11):* (3.276.829,52 − 1.034.515,79 − 272.999,11) / 2.374.377,18 = 82,94 %.
+*Beispiel (RF-05):* (1.150.000 − 624.171,48) / 584.366,28 = 89,98 %. *Beispiel (RF-11):* (3.164.389,46 − 886.727,18 − 245.400,68) / 2.524.305,59 = 80,51 %.
 
-**R-10.17 Eigenkapital und Nachschussbedarf.** Nötiges Eigenkapital = Summe der Einlagen der Investitionsphase (Zeitpunkt 0 bis Ende der Bauzeit) einschließlich der Nachschüsse für Zinsen und Beiträge der Bauzeit. Nachschussbedarf = Summe der Nachschüsse nach der Investitionsphase.
-*Beispiel (RF-11):* 1.208.955,01 Euro Eigenkapital, 91.529,75 Euro Nachschussbedarf. *Beispiel (RF-12):* 4.137.285,60 Euro, davon 83.180,59 Euro für Zinsen der Bauzeit.
+**R-10.17 Eigenkapital, Nachschussbedarf und Fehlbetrag beim Verkauf.** Nötiges Eigenkapital = Summe der Einlagen der Investitionsphase (Zeitpunkt 0 bis Ende der Bauzeit) einschließlich der Nachschüsse für Zinsen, Bereitstellungszinsen, Beiträge und Steuern der Bauzeit. Laufender Nachschussbedarf = Summe der Nachschüsse nach der Investitionsphase ohne den des Verkaufsmonats. Fehlbetrag beim Verkauf = Nachschuss in N: der Betrag, um den Verkaufserlös und Guthaben die Ablösung, die Vorfälligkeit, die Rückzahlung und die Steuer des letzten Jahres nicht decken. Er ist ein Verlust beim Verkauf und erscheint als solcher mit der Meldung M-42, nicht als laufender Nachschuss. Eigenkapitalbedarf insgesamt = Summe aller drei; er ist die Größe der Eigenkapitalgrenze (R-11.6). Der Kern gibt die Nachschüsse je Planjahr zurück.
+*Beispiel (RF-11):* 1.413.390,01 Euro Eigenkapital, 72.484,81 Euro laufender Nachschussbedarf, kein Fehlbetrag; insgesamt 1.485.874,82 Euro. *Beispiel (RF-12):* 5.141.964,13 Euro, davon 5.008.009,49 Euro als Ausgleichsposten der Bemessung und 133.954,64 Euro für Zinsen und Bereitstellungszinsen der Bauzeit; laufender Nachschussbedarf 68.394,63 Euro für die drei Monate des Anlaufleerstands. *Beispiel (RF-20; Verkaufsfaktor 4, Verkauf nach zwei Jahren, Lesart 2 von `MA-026`):* Fehlbetrag beim Verkauf 926.438,19 Euro, Endwert 0,00 Euro, Rendite −100 %, M-42.
 
-**R-10.18 Interner Zinsfuß.** Der interne Zinsfuß der Eigenkapitalreihe (−e_u, +a_u, in N zuzüglich EW) ist jeder effektive Jahressatz x mit Summe über u von Zahlung_u x (1 + x)^(−u/p) = 0. Der Kern zählt die Vorzeichenwechsel der Reihe. Kein Wechsel: keine Lösung. Ein Wechsel: genau eine Lösung. Mehr als ein Wechsel: Der Kern sucht alle Lösungen zwischen −99 % und +1.000 % auf einem Raster von 2.000 Schritten mit Bisektion an jedem Vorzeichenwechsel, meldet alle (M-26) und verweist auf die VOFI-Rendite. Der interne Zinsfuß ist eine Nebenangabe und nie Entscheidungsgröße.
-*Beispiel (RF-05):* Eigenkapitalreihe des Testfalls: 7,876 %, gleich der VOFI-Rendite. *Beispiel (RF-14, Lehrbuch):* −1.000 / +5.000 / −6.000: zwei Wechsel, Lösungen 100 % und 200 %.
+**R-10.18 Interner Zinsfuß.** Der interne Zinsfuß der Eigenkapitalreihe (−e_u, +a_u, in N zuzüglich EW) ist jeder effektive Jahressatz x mit Summe über u von Zahlung_u x (1 + x)^(−u/p) = 0. Der Kern zählt die Vorzeichenwechsel der Reihe und sucht im Suchbereich H-21 auf einem Raster mit Bisektion an jedem Vorzeichenwechsel der Zielfunktion. Ergebnis ist einer von vier Zuständen: „keine Lösung“ (kein Wechsel in der Reihe); „eine Lösung“; „k Lösungen“ mit allen Werten und dem Hinweis M-26 samt Verweis auf die VOFI-Rendite; „Lösung außerhalb des Suchbereichs“ (Wechsel in der Reihe, aber kein Fund im Bereich). Der interne Zinsfuß ist eine Nebenangabe und nie Entscheidungsgröße. Der Entwurf nannte Suchbereich und Rasterzahl als Festwerte; sie sind jetzt Vorgaben.
+*Beispiel (RF-05; Suchbereich −99 % bis +1.000 % mit 2.000 Schritten als Annahme):* Eigenkapitalreihe des Testfalls: 7,876 %, gleich der VOFI-Rendite. *Beispiel (RF-14):* −1.000 / +5.000 / −6.000: zwei Wechsel, Lösungen 100 % und 200 %. −100 / +1.200: ein Wechsel, Lösung 1.100 % außerhalb des Suchbereichs.
 
 **R-10.19 Kapitalwert.** Der Kapitalwert ist in Teil 1 keine Kennzahl des Blatts; er dient der Probe P-13 und dem Plausibilitätstest R-15.4.
 
+**R-10.20 Zinsdeckung.** Zinsdeckung einer Zeitspanne = Reinertrag / (Zinsen + laufende Beiträge aller Darlehen). Der Kern rechnet sie je Planjahr; auf dem Blatt steht das erste Jahr der Vollvermietung.
+*Beispiel (RF-11):* 103.035,24 / 48.609,62 = 2,1196.
+
+**R-10.21 Kapitaldienstreserve.** Kapitaldienstreserve = Reinertrag − H-03 x Kapitaldienst, in Euro, im ersten Jahr der Vollvermietung: der Betrag, um den der Reinertrag fallen darf, bevor die Mindestdeckung unterschritten ist.
+*Beispiel (RF-11):* 103.035,24 − 1,2 x 73.596,60 = 14.719,32 Euro. *Beispiel (RF-12, gefördert):* −21.113,95 Euro.
+
+**R-10.22 Deckungsgrenzen.** Für das erste Jahr der Vollvermietung: Mietanteil bei Deckung 1 = (Bewirtschaftung + Kapitaldienst) / Mieteinzahlung, der Anteil der heutigen Miete, bei dem der Reinertrag den Kapitaldienst gerade deckt. Mietausfall bei Deckung 1 = 1 − (Bewirtschaftung + Kapitaldienst) / Sollmiete, der Mietausfall als Anteil der Sollmiete, bis zu dem die Deckung mindestens 1 bleibt. Ohne Miete sind beide nicht definiert.
+*Beispiel (RF-11):* (28.911,96 + 73.596,60) / 131.947,20 = 77,69 %; 1 − 102.508,56 / 134.640,00 = 23,86 %.
+
+**R-10.23 Kapitaldienst je Darlehen.** Das Blatt nennt den Kapitaldienst je Tranche im ersten Jahr der Vollvermietung. **Neue Festlegung (NF-53)** für R-10.20 bis R-10.23: Die Bankvorlage kommt mit der Vollkalkulation; die Definitionen stehen im Kern, damit 1a und 1b dieselben Zahlen zeigen.
+*Beispiel (RF-12 mit KfW-Darlehen):* Bankdarlehen 60.428,52 Euro, KfW-Darlehen 90.000,00 Euro (Zins und die ersten drei Tilgungsraten). *Beispiel (RF-11, gebundener Bestand):* übernommenes Darlehen 15.000,00 Euro.
+
 ## 11 Grobkalkulation
 
-**R-11.1 Ablauf.** Eine Grobkalkulation läuft in dieser Reihenfolge: (1) Eingabeprüfung (R-3.7); (2) Ertragsreihen nach Kapitel 6; (3) Bemessung nach R-11.2 mit dem Bankdarlehen nach R-5.12; (4) Mittelabruf nach R-11.3; (5) Abschreibungsplan (R-7.3) und Verkauf (Kapitel 8); (6) Finanzplan (Kapitel 4) und Unterlassensalternative (Kapitel 9); (7) Kontrollsummen (Kapitel 13); (8) Kennzahlen (Kapitel 10) und Blatt (R-11.12). Dasselbe läuft für den kombinierten Stressfall (R-11.8). Der höchste tragbare Preis (R-11.4) wiederholt die Schritte 2 bis 8 für andere Preise.
+**R-11.1 Ablauf.** Eine Grobkalkulation läuft in dieser Reihenfolge: (1) Abweichungen von den Vorgaben des Hauses anwenden (R-3.2) und Eingabeprüfung (R-3.7); (2) Ertragsreihen nach Kapitel 6; (3) Bemessung nach R-11.2 mit dem Bankdarlehen nach R-5.12; (4) Mittelabruf nach R-11.3; (5) Abschreibungsplan (R-7.3), steuerliche Nebenreihen (R-7.15, R-7.19) und Verkauf (Kapitel 8); (6) Finanzplan (Kapitel 4) und Unterlassensalternative (Kapitel 9); (7) Kontrollsummen (Kapitel 13) – ist eine verletzt, endet der Lauf hier mit M-10 und ohne Kennzahlen; (8) Kennzahlen (Kapitel 10), Meldungen und Blatt (R-11.12). Dasselbe läuft für den kombinierten Stressfall (R-11.8). Der höchste tragbare Preis (R-11.4) wiederholt die Schritte 2 bis 7 für andere Preise.
 
-**R-11.2 Bemessung.** Vor dem Finanzplan stehen fest: Erwerbsnebenkosten = runde(Preis x E-11); Baukosten = runde(Brutto-Grundfläche x Kostenkennwert); Reinertrag im ersten Jahr der Vollvermietung (R-6.12); übrige Darlehen und ihr Kapitaldienst; Zuschüsse und Mindesteigenkapital (R-11.14); der Mittelbedarf M = Preis + Erwerbsnebenkosten + Baukosten + Investitionsstau zum Stichtag + einbehaltene Entgelte; der Wertansatz W. **Neue Festlegung (NF-32):** Beim Neubau enthalten Mittelbedarf und Wertansatz die Zinsen und Beiträge der Bauzeit nicht; diese trägt das Eigenkapital als Nachschuss im Monat ihrer Fälligkeit. Das vermeidet den Zirkelbezug zwischen Darlehenshöhe und Bauzeitzinsen und ist die vorsichtige Lesart; die Einstellung einer Eigenkapitalquote auf die Gesamtkosten einschließlich Bauzeitzinsen regelt Teil 2.
-*Beispiel (RF-11):* M = 2.400.000 + 240.000 = 2.640.000 Euro; A = 1.560.000, B = 1.431.044,99, C = 2.640.000; Bankdarlehen 1.431.044,99 Euro, es bindet (b); Eigenkapital 1.208.955,01 Euro.
+**R-11.2 Bemessung.** Vor dem Finanzplan stehen fest: Erwerbsnebenkosten = runde(Preis x E-11); beim Neubau die Baukosten:
 
-**R-11.3 Mittelabruf.** Der Bedarf jedes Monats der Investitionsphase wird in fester Reihenfolge gedeckt: zuerst das Eigenkapital bis zu seinem Betrag nach R-5.12, dann Förderdarlehen und Zuschuss im Verhältnis ihrer Beträge, zuletzt das Bankdarlehen. Beim ersten Abruf der Fördermittel erhöhen die einbehaltenen Entgelte den Bedarf. Beim Ankauf fällt der ganze Bedarf zum Stichtag an; ein übernommenes Darlehen gilt als zum Stichtag ausgezahlt. Beim Neubau fallen Grundstück und Nebenkosten zum Stichtag an und die Baukosten in gleichen Monatsraten über die Bauzeit; die letzte Rate nimmt den Rundungsrest. Zinsen und Beiträge der Bauzeit werden über den Ausgleich des Finanzplans zu Nachschüssen (R-4.5). **Neue Festlegung (NF-33):** „Eigenkapital zuerst“ ist die übliche Auflage der Banken; der gleichmäßige Mittelabfluss ist die Standardkurve der Grobkalkulation, die Kurve nach Bauablauf und die Auszahlung der Förderung nach Baufortschritt regelt Teil 2.
-*Beispiel (RF-12, Neubau frei finanziert):* Stichtag: 1.296.000,00 Euro aus Eigenkapital. Monate 1 bis 6: je 418.888,89 Euro aus Eigenkapital. Monat 7: 244.771,67 Euro Eigenkapital und 174.117,22 Euro Bankdarlehen. Monat 8: 418.888,89 Euro Bankdarlehen, dazu 580,39 Euro Zins als Nachschuss. Mittelherkunft der Investitionsphase: 4.137.285,60 Euro Eigenkapital und 4.781.894,99 Euro Bankdarlehen; Mittelverwendung: 8.836.000,00 Euro Investition und 83.180,59 Euro Finanzierungskosten (P-04).
+    BK_0   = runde(Brutto-Grundfläche x E-25 x (1 + Zuschlag Kostengruppen 200, 500, 600 + Zuschlag Kostengruppe 700))
+             + runde(Stellplätze x Herstellungskosten je Stellplatz)                    Preisstand des Stichtags
+    Rate_m = runde(BK_0 / Bauzeit x f_m),   f_m = runde12((1 + H-14)^(m / 12))          m = 1 … Bauzeit
+    Baukosten = Summe der Raten;   Gesamtkosten = Preis + Erwerbsnebenkosten + Baukosten
 
-**R-11.4 Höchster tragbarer Preis.** Gesucht ist der Kaufpreis, beim Neubau der Grundstückspreis, bei dem die VOFI-Rendite nach Steuern die Zielrendite erreicht:
+Dazu der Reinertrag im ersten Jahr der Vollvermietung (R-6.12) und der nachhaltige Reinertrag (R-5.12); die übrigen Darlehen mit ihrem kalkulatorischen Kapitaldienst; Zuschüsse und Mindesteigenkapital (R-11.14); der Mittelbedarf M = Preis + Erwerbsnebenkosten + Baukosten + Investitionsstau zum Stichtag + einbehaltene Entgelte; der Wertansatz W. **Neue Festlegung (NF-32):** Beim Neubau enthalten Mittelbedarf und Wertansatz die Zinsen, Bereitstellungszinsen und Beiträge der Bauzeit nicht; diese trägt das Eigenkapital als Nachschuss im Monat ihrer Fälligkeit. Das vermeidet den Zirkelbezug zwischen Darlehenshöhe und Bauzeitzinsen und ist die vorsichtige Lesart; die Einstellung einer Eigenkapitalquote auf die Gesamtkosten einschließlich Bauzeitzinsen regelt Teil 2. **Neue Festlegung (NF-54):** Der Kostenkennwert E-25 gilt für die Kostengruppen 300 und 400, für die Kennwerte veröffentlicht werden; die übrigen Kostengruppen kommen als Zuschläge aus den Vorgaben (H-30). Jede Monatsrate wird mit der Baupreissteigerung vom Stichtag auf ihren Monat fortgeschrieben. Der Entwurf nahm einen Kennwert für die Kostengruppen 200 bis 700 ohne Fortschreibung; wer dort den veröffentlichten Kennwert eintrug, unterschlug die übrigen Kostengruppen und die Preissteigerung der Bauzeit.
+*Beispiel (RF-11):* M = 2.400.000 + 240.000 = 2.640.000 Euro; A = 1.560.000,00, B = 1.226.609,99, C = 2.640.000,00; Bankdarlehen 1.226.609,99 Euro, es bindet (b); Eigenkapital 1.413.390,01 Euro. *Beispiel (RF-12; Kennwert 2.320 Euro je m², Zuschläge 5 % und 20 %, Baupreissteigerung 3 % als Annahme):* BK_0 = 2.600 x 2.320 x 1,25 = 7.540.000,00 Euro; Raten 419.921,98 Euro im Monat 1, 420.957,62 Euro im Monat 2, 437.879,56 Euro im Monat 18; Baukosten 7.719.152,34 Euro, 179.152,34 Euro oder 2,38 % über dem Preisstand des Stichtags; M = 1.200.000 + 96.000 + 7.719.152,34 = 9.015.152,34 Euro.
 
-    r(P) = z,   gerechnet mit L(P) nach R-5.12 und allen übrigen Eingaben unverändert
+**R-11.3 Mittelabruf.** Der Bedarf jedes Monats der Investitionsphase wird in fester Reihenfolge gedeckt: zuerst das Eigenkapital bis zu seinem Betrag als Ausgleichsposten nach R-5.12, dann Förderdarlehen und Zuschuss im Verhältnis ihrer Beträge, dann das KfW-Darlehen, zuletzt das Bankdarlehen. Beim ersten Abruf der Fördermittel erhöhen die einbehaltenen Entgelte den Bedarf. Beim Ankauf fällt der ganze Bedarf zum Stichtag an; ein übernommenes Darlehen gilt als zum Stichtag ausgezahlt. Beim Neubau fallen Grundstück und Nebenkosten zum Stichtag an und die Baukosten in den Monatsraten nach R-11.2. Zinsen, Bereitstellungszinsen, Beiträge und Steuern der Bauzeit werden über den Ausgleich des Finanzplans zu Nachschüssen (R-4.5). Im Stressfall trägt das Eigenkapital die Mehrkosten: Ausgleichsposten = Mittelbedarf des Stressfalls − Ü − Zuschüsse − L des Basisfalls. Die Probe P-04 prüft, dass die gebuchten Einlagen genau dieser Ausgleichsposten sind. **Neue Festlegung (NF-33):** „Eigenkapital zuerst“ ist die übliche Auflage der Banken; der gleichmäßige Mittelabfluss ist die Standardkurve der Grobkalkulation, die Kurve nach Bauablauf und die Auszahlung der Förderung nach Baufortschritt regelt Teil 2.
+*Beispiel (RF-12, Neubau frei finanziert):* Stichtag: 1.296.000,00 Euro aus Eigenkapital. Monate 1 bis 8: die Raten aus Eigenkapital. Monat 9: 323.492,21 Euro Eigenkapital und 104.786,77 Euro Bankdarlehen. Monat 10: 429.335,23 Euro Bankdarlehen, dazu 349,29 Euro Zins und 9.755,89 Euro Bereitstellungszins als Nachschuss. Mittelherkunft der Investitionsphase: 5.141.964,13 Euro Eigenkapital und 4.007.142,85 Euro Bankdarlehen; Mittelverwendung: 9.015.152,34 Euro Investition und 133.954,64 Euro Finanzierungskosten (P-04).
 
-Vom Preis hängen ab: Erwerbsnebenkosten, Mittelbedarf, Wertansatz, Bankdarlehen, Eigenkapital, Abschreibung und Buchwert; bei Förderung die zuwendungsfähigen Grundstückskosten. Mieten, Kosten und Verkaufspreis hängen nicht vom Preis ab. Der höchste tragbare Preis P* ist der größte Preis in vollen Euro mit r(P*) ≥ z.
+**R-11.4 Höchster tragbarer Preis.** Gesucht ist der Kaufpreis, beim Neubau der Grundstückspreis, bis zu dem die VOFI-Rendite nach Steuern die Zielrendite erreicht, gerechnet mit L(P) nach R-5.12 und allen übrigen Eingaben unverändert. Maßgeblich ist eine einzige Definition:
 
-**R-11.5 Lösungsverfahren, Eindeutigkeit, Knick.** Suchbereich ist 1 Euro bis H-21 x Jahressollmiete des ersten Jahres der Vollvermietung (Voreinstellung im Referenzrechner: das Hundertfache). Der Kern wertet r(P) − z an 41 gleichmäßig verteilten Stützstellen aus und verfeinert jeden Vorzeichenwechsel durch ganzzahlige Bisektion bis auf einen Euro (R-11.10). Ausgegeben wird der kleinste Preis, an dem das Vorzeichen von „erreicht“ nach „verfehlt“ wechselt; gibt es weitere Wechsel, meldet der Kern sie (M-34). Ist die Zielrendite schon bei einem Euro verfehlt, gibt es keinen tragbaren Preis (M-32); ist sie an der Obergrenze noch erreicht, meldet der Kern das (M-33). Preise, bei denen R-5.12 die Meldung M-22 ergibt, gelten als unterhalb des zulässigen Bereichs. **Neue Festlegung (NF-34):** Die ganzzahlige Suche liefert auf jedem Rechner denselben Preis.
-Die Rendite fällt mit dem Preis streng: Der Endwert fällt, und das Eigenkapital steigt. L(P) ist stetig und hat Knicke, wo die bindende Grenze wechselt; am Knick ist die Rendite stetig, und ihre Steigung ist auf beiden Seiten negativ (Prüfrunde 5, Finanzmathematiker). Der Kern verlässt sich darauf nicht, sondern sucht mit dem Raster.
-*Beispiel (RF-11):* P* = 2.425.585 Euro; dort ist r = 5,000 %, einen Euro darüber liegt r unter 5 % (P-14); es gibt genau einen Vorzeichenwechsel. Der Knick zwischen (a) und (b) liegt bei 1.431.044,99 / 0,65 = 2.201.607,68 Euro: Die Rendite beträgt 6,7042 / 6,6408 / 6,5775 / 6,4983 / 6,4199 % bei −20.000 / −10.000 / 0 / +10.000 / +20.000 Euro um den Knick; die Steigung ist −6,33 Basispunkte je 10.000 Euro links und −7,92 rechts. Zwischen 1,5 und 3,6 Mio. Euro fällt die Rendite in jedem Schritt von 100.000 Euro.
+    P* = der größte Preis in vollen Euro im Suchbereich, für den gilt: Das Ziel ist bei P* und bei jedem kleineren Preis des Suchbereichs erreicht.
 
-**R-11.6 Eigenkapital als zweite Grenze.** Ist das verfügbare Eigenkapital E-60 angegeben, ist P_EK der größte Preis in vollen Euro, bei dem das nötige Eigenkapital (R-10.17) E-60 nicht übersteigt; gesucht wird wie in R-11.5. Der höchste tragbare Preis ist dann min(P*; P_EK). Der Eigenkapitalbedarf steigt streng mit dem Preis; P_EK ist eindeutig.
-*Beispiel (RF-11):* Mit 900.000 Euro verfügbarem Eigenkapital ist P_EK = 2.000.000 Euro (2.200.000 Mittelbedarf, 1.300.000 Darlehen nach der Beleihungsquote); es bindet das Eigenkapital, nicht die Rendite.
+„Ziel erreicht“ heißt: Endwertüberschuss EÜ(P) ≥ 0 (R-10.9). EÜ hat dasselbe Vorzeichen wie r − z, sobald Eigenkapital eingezahlt ist, und ist auch ohne Einlage definiert. Vom Preis hängen ab: Erwerbsnebenkosten, Mittelbedarf, Wertansatz, Bankdarlehen, Eigenkapital, Boden, Abschreibung und Buchwert; bei Förderung die zuwendungsfähigen Grundstückskosten. Mieten, Kosten und Verkaufspreis hängen nicht vom Preis ab. Die Preisprobe P-14 prüft: Ziel bei P* erreicht und bei P* + 1 Euro verfehlt.
 
-**R-11.7 Ausgabe.** Zum höchsten tragbaren Preis weist das Blatt aus: den Preis; die bindende Grenze (Rendite oder Eigenkapital); das nötige Eigenkapital; welche der drei Grenzen aus R-5.12 das Darlehen bestimmt; die Schuldendienstdeckung; alles im Basisfall und im kombinierten Stressfall. Nebenangabe ist der Preis, bis zu dem die Beleihungsquote das Darlehen bestimmt (der Knick B / β); er ist keine Preisgrenze.
-*Beispiel (RF-11):* Basisfall 2.425.585 Euro, Rendite bindet, Darlehen 1.431.044,99 Euro nach (b), Eigenkapital 1.237.098,51 Euro. Stressfall 2.128.948 Euro, Rendite bindet, Darlehen nach (a), Deckung im Stressfall 1,1863.
+**R-11.5 Lösungsverfahren, Monotonie, Knick.** *Suchbereich.* Untergrenze U ist der kleinste zulässige Preis: 1 Euro oder, wenn dort die übrigen Mittel den Bedarf übersteigen (M-22), der kleinste Preis mit C ≥ 0, gefunden durch ganzzahlige Bisektion; C wächst mit dem Preis. Obergrenze O = runde(H-21 x maßgebliche Jahresmiete), mit der höheren der beiden Jahresmieten zum ersten Vermietungsmonat und zum Verkaufsstichtag. *Verfahren.* Der Kern wertet das Ziel an gleichmäßig verteilten Stützstellen von U bis O + 1 aus (Zahl nach H-21) und verfeinert den ersten Wechsel von „erreicht“ nach „verfehlt“ durch ganzzahlige Bisektion bis auf einen Euro. Dann die Nachsuche mit dem Fenster F (H-21): Jeder der F Preise unter der gefundenen Grenze muss das Ziel erreichen; verfehlt es einer, rückt die Grenze unter den kleinsten verfehlenden Preis, und die Nachsuche beginnt dort neu. Zuletzt prüft der Kern die F Preise über der Grenze. *Ergebnis.* P* mit der Zusicherung, dass die Definition aus R-11.4 für alle Stützstellen und alle Preise des Fensters gilt. Gibt es einen weiteren Wechsel an den Stützstellen oder erreicht im Fenster über der Grenze ein Preis das Ziel wieder, meldet der Kern die Nichtmonotonie (M-34). Ist das Ziel schon bei U verfehlt, gibt es keinen tragbaren Preis (M-32); das Blatt nennt die Rendite bei U. Ist es bis O + 1 an allen Stützstellen erreicht, meldet der Kern M-33; ein Preis genau an der Obergrenze wird also gefunden. Ist bei P* kein Eigenkapital eingesetzt (D = 0), gibt es keinen tragbaren Preis, weil die Rendite nicht definiert ist (M-41); P* steht dann als Nebenangabe „Preis, bis zu dem der Endwert ohne Eigenkapital nicht negativ ist“. Verletzt ein Suchschritt eine Kontrollsumme, endet die Suche mit M-10 und ohne Preis (R-13.1). Ohne Miete ist der Suchbereich leer (M-31). **Neue Festlegung (NF-34, geändert):** Die ganzzahlige Suche liefert auf jedem Rechner denselben Preis; R-11.4 und R-11.5 beschreiben jetzt dieselbe Größe.
+*Monotonie.* Die Rendite fällt mit dem Preis, weil der Endwert fällt und das Eigenkapital steigt – aber nicht streng. Der Gewerbeertrag wird auf den Betrag KAT-04 abgerundet; steigt mit dem Preis die Abschreibung, fällt der Gewerbeertrag gelegentlich unter eine Stufe, und die Gewerbesteuer sinkt in einem Schritt um Messzahl x Hebesatz x Stufe (im Beispiel 14 Euro). Das entspricht wenigen Euro Preis; Mehrfachwechsel innerhalb weniger Euro sind möglich und der Grund für die Nachsuche. L(P) ist stetig und hat Knicke, wo die bindende Grenze wechselt; am Knick ist die Rendite stetig, und ihre Steigung ist auf beiden Seiten negativ (Prüfrunde 5, Finanzmathematiker).
+*Beispiel (RF-11; Obergrenze das Hundertfache, 40 Rasterschritte, Fenster 20 Euro als Annahme):* U = 1 Euro, O = 17.847.656 Euro. P* = 2.317.235 Euro; dort ist r = 5,000001 %, einen Euro darüber 4,999995 % (P-14); der Endwertüberschuss bei P* ist 0,35 Euro. Der Knick zwischen (a) und (b) liegt bei 1.226.609,99 / 0,65 = 1.887.092 Euro: Die Rendite beträgt 8,3876 / 8,3164 / 8,2453 / 8,1492 / 8,0542 % bei −20.000 / −10.000 / 0 / +10.000 / +20.000 Euro um den Knick; die Steigung ist −7,11 Basispunkte je 10.000 Euro links und −9,61 rechts. Zwischen 1,5 und 3,6 Mio. Euro fällt die Rendite in jedem Schritt von 100.000 Euro. *Beispiel (RF-20):* Mit der Zielrendite 5,000253 % ist das Ziel bis 2.317.188 Euro erreicht, von 2.317.189 bis 2.317.192 Euro verfehlt, von 2.317.193 bis 2.317.196 Euro wieder erreicht und darüber verfehlt: P* = 2.317.188 Euro mit M-34. Übernommenes Darlehen von 2,0 Mio. Euro zu 6 % bei Verkaufsfaktor 4: U = 1.818.182 Euro, Ziel dort verfehlt, M-32. Vollfinanzierung ohne Eigenkapital: M-41, Nebenangabe 1.569.899 Euro. Obergrenze genau 2.317.235 Euro: P* = 2.317.235 Euro, kein M-33.
+
+**R-11.6 Eigenkapital als zweite Grenze.** Ist das verfügbare Eigenkapital E-60 angegeben, ist P_EK der größte Preis in vollen Euro, bis zu dem der Eigenkapitalbedarf insgesamt (R-10.17) E-60 für jeden kleineren Preis des Suchbereichs nicht übersteigt; gesucht wird wie in R-11.5. Der Eigenkapitalbedarf insgesamt ist die nominale Summe der Einlagen der Investitionsphase und aller Nachschüsse; die nominale Summe ist die vorsichtige Zählung. Der höchste tragbare Preis ist dann min(P*; P_EK). Reicht E-60 schon bei der Untergrenze nicht, gibt es keinen tragbaren Preis (M-46). **Neue Festlegung (NF-55):** Der Entwurf verglich E-60 nur mit dem Eigenkapital der Investitionsphase; eine Maßnahme im Jahr 1 zählte nicht, dieselbe Maßnahme zum Stichtag zählte. Jetzt führen beide Eingaben bis auf Preisstand und zwischenzeitliche Überschüsse zum selben Preis.
+*Beispiel (RF-11):* Mit 1,2 Mio. Euro verfügbarem Eigenkapital ist P_EK = 2.138.910 Euro (1.126.191,01 Euro zum Stichtag und 73.808,50 Euro Nachschuss, zusammen 1.199.999,51 Euro); es bindet das Eigenkapital, nicht die Rendite. *Beispiel (RF-19):* Maßnahme von 420.000 Euro und 1,2 Mio. Euro verfügbares Eigenkapital: 1.733.333 Euro, wenn sie zum Stichtag anfällt, 1.763.092 Euro im Jahr 1.
+
+**R-11.7 Ausgabe.** Zum höchsten tragbaren Preis weist das Blatt aus: den Preis; die bindende Grenze (Rendite oder Eigenkapital); das nötige Eigenkapital und den Eigenkapitalbedarf insgesamt; welche der drei Grenzen aus R-5.12 das Darlehen bestimmt; die Schuldendienstdeckung im ersten Jahr und die kleinste Deckung; alles im Basisfall und im kombinierten Stressfall. Dazu die Größen, mit denen ein Gebot verhandelt wird: beim Ankauf den Faktor (Preis / maßgebliche Jahresmiete des ersten Vermietungsmonats) und den Preis je Quadratmeter Wohnfläche, beim Neubau den Grundstückspreis je Quadratmeter Grundstück und je Quadratmeter Wohnfläche, und den Abstand zum Angebotspreis E-18. Nebenangabe ist der Preis, bis zu dem die Beleihungsquote das Darlehen bestimmt (der Knick B / β); er ist keine Preisgrenze.
+*Beispiel (RF-11):* Basisfall 2.317.235 Euro, Rendite bindet, Darlehen 1.226.609,99 Euro nach (b), nötiges Eigenkapital 1.322.348,51 Euro und insgesamt 1.395.253,65 Euro; Faktor 17,47; 1.755,48 Euro je m²; 282.765 Euro unter dem Angebotspreis von 2,6 Mio. Euro. Stressfall 1.978.674 Euro, Rendite bindet, Darlehen nach (b), Faktor 15,23, kleinste Deckung 1,2191. *Beispiel (RF-12):* Grundstück 702.767 Euro, 281,11 Euro je m² Grundstück und 351,38 Euro je m² Wohnfläche.
 
 **R-11.8 Kombinierter Stressfall.** Der kombinierte Stressfall ändert gleichzeitig die Größen der Tabelle um die ermäßigten Höhen H-06; eine Größe, die beim Vorhaben nicht wirkt, entfällt.
 
 | Größe | Änderung | wirkt bei |
 |---|---|---|
-| Anschlusszins | Aufschlag in Prozentpunkten | Haltedauer über der Zinsbindung |
-| Mietausfallquote | Aufschlag in Prozentpunkten | immer |
+| Anschlusszins | Aufschlag in Prozentpunkten | jeder Tranche, deren Zinsbindung vor dem Verkauf endet: Bankdarlehen, KfW-Darlehen, übernommenes Darlehen. Ausgenommen ist das Förderdarlehen der Grobförderung, für das `MA-003` schon den ungünstigsten Satz ansetzt |
+| Zins des Bankdarlehens (Zinsanstieg bis zur Kreditzusage) | Aufschlag in Prozentpunkten | immer |
+| struktureller Leerstand | Aufschlag in Prozentpunkten; wirkt auf Mieteinzahlung und Verkaufspreis, insgesamt höchstens 100 % | immer |
 | Mietsteigerung | Abschlag in Prozentpunkten | immer |
 | Instandhaltungskosten | Aufschlag in % | immer |
 | Verkaufsfaktor | Abschlag in % | immer |
+| Investitionsstau | Aufschlag in % | Ankauf mit Maßnahme |
 | Baukosten | Aufschlag in % | Neubau |
 | Bauzeit | Verlängerung in Monaten | Neubau |
 
-Das Bankdarlehen wird nicht neu bemessen: Es gilt das Darlehen, das R-5.12 beim selben Preis aus den Basisannahmen ergibt. Förderdarlehen und Zuschuss bleiben ebenfalls auf dem Stand des Basisfalls; Mehrkosten trägt das Eigenkapital. Ausgewiesen werden alle Kennzahlen des Blatts im Stressfall, darunter die Schuldendienstdeckung. Der tragbare Preis im Stressfall löst r_Stress(P) = z mit L_Basis(P). **Neue Festlegung (NF-35):** Die Bank bemisst ihr Darlehen heute aus den Basisannahmen; der Stress trifft das Vorhaben danach.
-*Beispiel (RF-11; Höhen als Annahme: Anschlusszins +1 Prozentpunkt, Mietausfall +2 Prozentpunkte, Mietsteigerung −0,5 Prozentpunkte, Instandhaltung +10 %, Verkaufsfaktor −10 %):* Endwert 1.900.792,30 statt 2.374.377,18 Euro, Endwertdifferenz 342.583,38 statt 825.606,46 Euro, Rendite 3,178 % statt 5,162 %, Deckung 1,1471 statt 1,2000, Bankdarlehen unverändert 1.431.044,99 Euro. *Beispiel (RF-12; dazu Baukosten +5 %, Bauzeit +3 Monate):* Eigenkapital 4.524.360,81 statt 4.137.285,60 Euro, Rendite 3,048 % statt 5,307 %.
+Das Bankdarlehen wird nicht neu bemessen: Es gilt das Darlehen, das R-5.12 beim selben Preis aus den Basisannahmen ergibt. Sein Zins steigt um den Aufschlag bis zur Kreditzusage, der Anschlusszins entsprechend. Förderdarlehen, KfW-Darlehen und Zuschuss bleiben ebenfalls auf dem Stand des Basisfalls; Mehrkosten trägt das Eigenkapital (R-11.3). Ausgewiesen werden alle Kennzahlen des Blatts im Stressfall. Der tragbare Preis im Stressfall sucht mit dem Ziel des Stressfalls und L_Basis(P). **Neue Festlegung (NF-35, erweitert):** Die Bank bemisst ihr Darlehen heute aus den Basisannahmen; der Stress trifft das Vorhaben danach. Neu sind der Zinsanstieg bis zur Zusage, die Mehrkosten des Investitionsstaus und der Anschlussstress auf jede Tranche.
+*Beispiel (RF-11; Höhen als Annahme: Anschlusszins +1 Prozentpunkt, Zins bis zur Zusage +0,5 Prozentpunkte, Leerstand +2 Prozentpunkte, Mietsteigerung −0,5 Prozentpunkte, Instandhaltung +10 %, Verkaufsfaktor −10 %, Investitionsstau +10 %):* Endwertdifferenz 196.967,13 statt 753.701,96 Euro, Rendite 2,362 % statt 4,527 %, Deckung im Jahr 1 1,2354 statt 1,4000, Bankdarlehen unverändert 1.226.609,99 Euro. Einzeln ändern die Größen die Endwertdifferenz um (RF-19): Anschlusszins −13.920,92, Zins bis zur Zusage −51.765,45, Leerstand −79.558,59, Mietsteigerung −161.319,43, Instandhaltung −20.422,72, Verkaufsfaktor −238.744,64, Investitionsstau −11.346,91 Euro. Im gebundenen Bestand zahlt das übernommene Darlehen im Jahr 9 15.772,22 Euro Zins zum gestressten Anschlusszins von 4 %. *Beispiel (RF-12; dazu Baukosten +5 %, Bauzeit +3 Monate):* Baukosten 8.135.353,14 Euro, Eigenkapital 5.597.473,18 statt 5.141.964,13 Euro, Rendite 2,176 % statt 4,332 %.
 
-**R-11.9 Zielwertsuche: zulässige Eingaben.** Die Zielwertsuche sucht den Wert einer Eingabe, bei dem die VOFI-Rendite die Zielrendite erreicht, wahlweise bei dem die Endwertdifferenz null ist. Zugelassen und so gekennzeichnet sind: Kaufpreis, Grundstückspreis, Marktmiete, Ist-Miete, Investitionsstau, Verkaufsfaktor, Zins des Bankdarlehens, Kostenkennwert. Nicht zugelassen sind Auswahlfelder (Steuerstatus, Verlustverrechnung), ganzzahlige Zeitgrößen (Haltedauer, Zinsbindung, Bauzeit) und alle Vorgaben des Hauses; der Kern gibt dafür M-30 zurück. **Neue Festlegung (NF-36).** Suchbereich, Auflösung und Rasterzahl je Eingabe sind H-21; Vorschlag der Auflösung: Preise 1 Euro, Mieten 0,01 Euro je m², Faktoren 0,01, Zinsen 0,001 Prozentpunkte, Investitionsstau 100 Euro.
+**R-11.9 Zielwertsuche: zulässige Eingaben.** Die Zielwertsuche sucht den Wert einer Eingabe, bei dem die VOFI-Rendite die Zielrendite erreicht, wahlweise bei dem die Endwertdifferenz null ist. Zugelassen und so gekennzeichnet sind: Kaufpreis, Grundstückspreis, Vergleichsmiete, Marktmiete, Ist-Miete, Investitionsstau, Verkaufsfaktor, Zins des Bankdarlehens, Kostenkennwert. Nicht zugelassen sind Auswahlfelder (Steuerstatus, Verlustverrechnung), ganzzahlige Zeitgrößen (Haltedauer, Zinsbindung, Bauzeit) und alle Vorgaben des Hauses; der Kern gibt dafür M-30 zurück. **Neue Festlegung (NF-36).** Suchbereich, Auflösung und Rasterzahl je Eingabe sind H-21; Vorschlag der Auflösung: Preise 1 Euro, Mieten 0,01 Euro je m², Faktoren 0,01, Zinsen 0,001 Prozentpunkte, Investitionsstau 100 Euro.
 
-**R-11.10 Zielwertsuche: Verfahren.** Gesucht wird auf dem Gitter der Auflösung im Bereich [u; o]. Der Kern wertet die Zielfunktion f an den Rasterstellen aus (f ≥ 0 heißt „Ziel erreicht“), verfeinert jeden Vorzeichenwechsel zwischen zwei Rasterstellen durch ganzzahlige Bisektion und gibt zu jedem Wechsel den letzten Gitterwert aus, bei dem das Ziel noch erreicht ist, mit der Richtung des Wechsels. Ergebnis: „eine Lösung“, „k Lösungen“ mit allen Werten, „keine Lösung: Ziel im ganzen Bereich erreicht“ oder „keine Lösung: Ziel im ganzen Bereich verfehlt“; dazu Bereich und Rasterweite. Zwei Lösungen, die näher beieinander liegen als die Rasterweite, findet das Verfahren nicht; die Ausgabe nennt deshalb die Rasterweite („Lösungen im Bereich [u; o] bei Rasterweite x“).
-*Beispiel (RF-11):* Nötige Marktmiete bei 2,6 Mio. Euro Kaufpreis: 9,96 Euro je m² (Bereich 6 bis 20 Euro). Tragbarer Investitionsstau bei 2,4 Mio. Euro: 147.600 Euro. Kritischer Verkaufsfaktor: 17,69. Bereich 6 bis 9 Euro: „keine Lösung: Ziel im ganzen Bereich verfehlt“. Für die nicht monotone Prüffunktion (x − 3) x (x − 7) meldet das Verfahren beide Lösungen, 3,00 und 7,00. Die Eingaben der Grobkalkulation wirken alle monoton; mehrere Lösungen treten in 1a nur über die Prüffunktion auf.
+**R-11.10 Zielwertsuche: Verfahren.** Gesucht wird auf dem Gitter der Auflösung im Bereich [u; o]. Zielfunktion f ist für das Ziel „Rendite“ der Endwertüberschuss (R-10.9), für das Ziel „Endwertdifferenz“ diese selbst; f ≥ 0 heißt „Ziel erreicht“. Damit gilt in der Preissuche und in der Zielwertsuche dasselbe Kriterium, auch ohne eingesetztes Eigenkapital. Der Kern wertet f an den Rasterstellen aus, verfeinert jeden Vorzeichenwechsel zwischen zwei Rasterstellen durch ganzzahlige Bisektion und gibt zu jedem Wechsel den letzten Gitterwert aus, bei dem das Ziel noch erreicht ist, mit der Richtung des Wechsels. Ergebnis: „eine Lösung“, „k Lösungen“ mit allen Werten, „keine Lösung: Ziel an allen Rasterstellen erreicht“ oder „keine Lösung: Ziel an allen Rasterstellen verfehlt“; dazu Bereich und Rasterweite. Zwei Lösungen, die näher beieinander liegen als die Rasterweite, findet das Verfahren nicht; deshalb spricht das Ergebnis von Rasterstellen und nicht vom ganzen Bereich. Endet der Lauf an einem Gitterwert mit einer Eingabemeldung, gilt das Ziel dort als verfehlt, und das Ergebnis nennt die Zahl dieser Werte. Eine verletzte Kontrollsumme beendet die Suche mit M-10. Die Eingaben der Grobkalkulation wirken monoton bis auf die Steuerstufen aus R-11.5.
+*Beispiel (RF-11):* Nötige Vergleichsmiete bei 2,4 Mio. Euro Kaufpreis: 9,60 Euro je m² (Bereich 6 bis 20 Euro). Tragbarer Investitionsstau bei 2,2 Mio. Euro: 246.500 Euro. Kritischer Verkaufsfaktor: 19,06. Bereich 6 bis 9 Euro: „keine Lösung: Ziel an allen Rasterstellen verfehlt“. Für die nicht monotone Prüffunktion (x − 3) x (x − 7) meldet das Verfahren beide Lösungen, 3,00 und 7,00. *Beispiel (RF-20):* Für (x − 3) x (x − 3,2) bei Rasterweite 0,25 lautet das Ergebnis „keine Lösung: Ziel an allen Rasterstellen erreicht“.
 
-**R-11.11 Vergleich zweier Fassungen.** Zwei Fassungen sind zwei vollständige Aufträge, die unabhängig voneinander gerechnet werden. Der Vergleich stellt je Kennzahl des Blatts Wert A, Wert B und die Differenz B − A nebeneinander; Renditen und Quoten in Prozentpunkten. Er setzt voraus, dass beide Fassungen alle Kontrollsummen bestehen und mit derselben Version des Kerns gerechnet sind; unterschiedliche Regelstände werden ausgewiesen.
-*Beispiel (RF-11):* Ankauf frei gegen denselben Ankauf mit 40 % gebundener Fläche und übernommenem Darlehen: Endwertdifferenz 825.606,46 gegen 601.639,51 Euro, Differenz −223.966,95 Euro. *Beispiel (RF-12):* Neubau frei finanziert gegen gefördert, je 20 Jahre: Differenz der Endwertdifferenz −5.249.273,41 Euro.
+**R-11.11 Vergleich zweier Fassungen und eingefrorener Stand.** Zwei Fassungen sind zwei vollständige Aufträge, die unabhängig voneinander gerechnet werden. Der Vergleich stellt für jede Größe des Blatts (R-11.12) Wert A, Wert B und die Differenz B − A nebeneinander, Renditen und Quoten in Prozentpunkten, und listet die Werte des Auftrags, die sich unterscheiden: Eingaben, Vorgaben, Katalogwerte, je mit Kennung, Wert A und Wert B. Er setzt voraus, dass beide Fassungen alle Kontrollsummen bestehen (sonst M-10). Ein eingefrorener Stand – etwa die im Gremium beschlossene Fassung – speichert den aufgelösten Auftrag (Eingaben, Vorgaben, Katalogstand), das Ergebnis, den Regelstand und die Version des Kerns unveränderlich. Ein Vergleich über Kernversionen ist zulässig und als solcher gekennzeichnet; die Wirkung der Version wird gesondert ausgewiesen, als derselbe Auftrag unter beiden Versionen gerechnet. **Neue Festlegung (NF-56).** Eine Abweichungsbrücke mit schrittweisem Austausch der Eingaben ist für Teil 2 vorgemerkt.
+*Beispiel (RF-11):* Ankauf frei gegen denselben Ankauf mit 40 % gebundener Fläche und übernommenem Darlehen: 22 Größen; Endwertdifferenz 753.701,96 gegen 581.756,83 Euro, Differenz −171.945,13 Euro; abweichende Werte: gebundener Flächenanteil, Bindungsende, gebundene Miete, übernommenes Darlehen. *Beispiel (RF-12):* Neubau frei finanziert gegen gefördert, je 38 Jahre: Differenz der Endwertdifferenz −11.086.819,70 Euro.
 
-**R-11.12 Verkürztes Kennzahlenblatt.** Das Blatt der Grobkalkulation zeigt im Basisfall und im kombinierten Stressfall: Endwertdifferenz (R-10.2); VOFI-Rendite, Vergleichsrendite, Abstand zur Zielrendite (R-10.5, R-10.8); Endwertüberschuss (R-10.9); Restwertanteil (R-10.16); Einstiegs- und Ausstiegsfaktor, Brutto- und Nettoanfangsrendite (R-10.13); Beleihungsauslauf (R-10.15); Schuldendienstdeckung im ersten Jahr der Vollvermietung (R-10.14); nötiges Eigenkapital und Nachschussbedarf (R-10.17); den höchsten tragbaren Preis mit bindender Grenze (R-11.7). Dazu: die Meldungen des Laufs; Abweichungen von den Vorgaben des Hauses mit Begründung (R-3.2); die Kennungen der Modellannahmen, die gewirkt haben; Standkennung, Regelstand und Version des Kerns. Das Blatt erscheint nur, wenn alle Kontrollsummen bestanden sind (R-13.1).
+**R-11.12 Verkürztes Kennzahlenblatt.** Das Blatt der Grobkalkulation zeigt im Basisfall und im kombinierten Stressfall:
 
-**R-11.13 Haltedauertabelle.** Statt einer Zielwertsuche auf die Haltedauer rechnet der Kern die Grobkalkulation für jede Haltedauer eines Bereichs und zeigt Endwert, Endwertdifferenz und Rendite je Jahr.
-*Beispiel (RF-11):* Haltedauer 8 bis 13 Jahre: 4,768 / 4,970 / 5,111 / 5,142 / 5,162 / 5,173 %. Bei der Privatperson springt die Rendite zwischen Jahr 10 und 11 (R-7.11).
+- Endwert, Endwert der Unterlassensalternative und Endwertdifferenz (R-10.1, R-10.2);
+- VOFI-Rendite, Vergleichsrendite, Abstand zur Zielrendite (R-10.5, R-10.8); Endwertüberschuss (R-10.9); Restwertanteil (R-10.16);
+- Einstiegs- und Ausstiegsfaktor, Brutto- und Nettoanfangsrendite (R-10.13);
+- Bankdarlehen mit bindender Grenze; Darlehen zu Kaufpreis und Restschuld zum Wert am Ende der Zinsbindung (R-10.15);
+- Schuldendienstdeckung im ersten Jahr der Vollvermietung, kleinste Deckung mit Planjahr, Deckung nach jeder Zinsbindung (R-10.14); Zinsdeckung, Kapitaldienstreserve, Deckungsgrenzen, Kapitaldienst je Darlehen (R-10.20 bis R-10.23);
+- nötiges Eigenkapital, laufender Nachschussbedarf, Fehlbetrag beim Verkauf, Nachschüsse je Planjahr (R-10.17);
+- den höchsten tragbaren Preis mit bindender Grenze und den Angaben nach R-11.7;
+- ohne Bankdarlehen die Angaben nach R-11.15.
+
+Dazu: die Meldungen des Laufs; die Liste „Abweichungen vom Hausstandard“ mit Begründungen (R-3.2); die Kennungen der Modellannahmen, die gewirkt haben; Standkennung, Regelstand und Version des Kerns. Das Blatt erscheint nur, wenn alle Kontrollsummen bestanden sind (R-13.1). Die Zwei-Wege-Tabelle „tragbarer Preis über Verkaufsfaktor und Miete“ kommt mit der Sensitivität der Vollkalkulation.
+
+**R-11.13 Haltedauertabelle.** Statt einer Zielwertsuche auf die Haltedauer rechnet der Kern die Grobkalkulation für jede Haltedauer eines Bereichs und zeigt Endwert, Endwertdifferenz und Rendite je Jahr; eine Zeile mit verletzter Kontrollsumme zeigt M-10 statt Zahlen.
+*Beispiel (RF-11):* Haltedauer 8 bis 13 Jahre: 3,953 / 4,203 / 4,383 / 4,276 / 4,527 / 4,577 %; die Delle im Jahr 11 folgt aus dem Anschlusszins nach zehn Jahren und dem Stand der Miete am Verkaufsstichtag. Bei der Privatperson springt die Rendite zwischen Jahr 10 und 11 (R-7.11).
 
 **R-11.14 Grobförderung im Neubau.** Die Grobförderung der NBank ist eine Näherung und im Ergebnis so gekennzeichnet. Aus den Katalogwerten KAT-10 und den Eingaben E-28 bis E-30:
 
@@ -709,8 +886,11 @@ Das Bankdarlehen wird nicht neu bemessen: Es gilt das Darlehen, das R-5.12 beim 
     Mindesteigenkapital  = runde(Eigenmittelquote x zuwendungsfähige Kosten)
     einbehaltene Entgelte = runde(Förderdarlehen x Entgeltsatz) + runde(Zuschuss x Entgeltsatz)
 
-Es gelten `MA-021` (Kosten einschließlich nicht abziehbarer Vorsteuer), `MA-005` (keine Finanzierungskosten), `MA-004` (Eigenmittel aus Eigenkapital), `MA-002` und `MA-003` (R-5.11), `MA-017` (R-8.7, R-8.8) und `MA-026` (R-5.12). Miete nach R-6.5 und R-6.7. **Neue Festlegung (NF-38):** Der Kostenkennwert E-25 umfasst die Kostengruppen 200 bis 700; Grundstückskosten sind Preis und Erwerbsnebenkosten; der Zuschuss mindert die Abschreibungsgrundlage des Gebäudes; zinslose Zeit, Tilgung und Bindung zählen ab dem Monat nach der Bauzeit.
-*Beispiel (RF-12; Werte nach Bericht Anhang C.1 für Einkommensgruppe B als Annahme, Bodenrichtwert 400 Euro je m²):* Baukosten 7.540.000 Euro unter der Bemessungsgrenze; Grundstück 1.296.000 Euro, begrenzt auf 2.500 m² x 400 Euro = 1.000.000 Euro; zuwendungsfähig 8.540.000 Euro. Förderdarlehen 5.124.000,00, Zuschuss 1.708.000,00, Mindesteigenkapital 1.708.000,00, Entgelte 64.050,00 Euro; Mittelbedarf 8.900.050,00 Euro. Reinertrag bei 8,20 Euro Eingangsmiete 149.080,50 Euro; Kapitaldienst des Förderdarlehens 147.340,45 Euro. Grenzen: A = 619.400,00, B negativ, C = 360.050,00; Bankdarlehen null mit Meldung M-21; Eigenkapital 2.084.407,23 Euro einschließlich 16.357,23 Euro Beiträge der Bauzeit; Deckung 1,0118. Verkauf nach 20 Jahren: Endwert 3.265.245,99 Euro, Endwertdifferenz 463.572,57 Euro, Rendite 2,273 %. Nach der anderen Lesart von `MA-026` gäbe die Bank die Restfinanzierung von 360.050,00 Euro.
+Es gelten `MA-021` (Kosten einschließlich nicht abziehbarer Vorsteuer), `MA-005` (keine Finanzierungskosten), `MA-004` (Eigenmittel aus Eigenkapital), `MA-002` und `MA-003` (R-5.11), `MA-017` (R-8.7, R-8.8), `MA-026` (R-5.12), `MA-031` (R-7.19) und `MA-032` (R-7.15). Miete nach R-6.5 und R-6.7. Die Voreinstellung der Haltedauer (H-19) ist im geförderten Bau das Planjahr, in dem die Bindung endet, zuzüglich eines Jahres: Mit den zehn bis zwölf Jahren des frei finanzierten Bestands zeigt ein geförderter Bau wegen der Rückzahlung des Zuschusses und des Verkaufs zur gebundenen Miete regelmäßig eine Rendite weit unter dem Ziel. Haltedauer und Zielrendite für geförderte Vorhaben gibt der Auftraggeber eigens frei (Kapitel 16). **Neue Festlegung (NF-38, geändert):** Grundstückskosten sind Preis und Erwerbsnebenkosten; zinslose Zeit, Tilgung und Bindung zählen ab dem Monat nach der Bauzeit; die Baukosten folgen R-11.2; die steuerliche Behandlung des Zuschusses folgt `MA-031` statt der Minderung der Abschreibungsgrundlage.
+*Beispiel (RF-12; Werte nach Bericht Anhang C.1 für Einkommensgruppe B als Annahme, Bodenrichtwert 400 Euro je m², Haltedauer 38 Jahre):* Baukosten 7.719.152,34 Euro unter der Bemessungsgrenze; Grundstück 1.296.000 Euro, begrenzt auf 2.500 m² x 400 Euro = 1.000.000 Euro; zuwendungsfähig 8.719.152,34 Euro. Förderdarlehen 5.231.491,40, Zuschuss 1.743.830,47, Mindesteigenkapital 1.743.830,47, Entgelte 65.393,64 Euro; Mittelbedarf 9.080.545,98 Euro. Rohertrag bei 8,20 Euro Eingangsmiete 196.800,00 Euro, nachhaltiger Reinertrag 159.216,75 Euro; Kapitaldienst des Förderdarlehens 150.431,28 Euro. Grenzen: A = 628.357,62, B = −253.580,79, C = 361.393,64; Bankdarlehen null mit Meldung M-21; Eigenkapital als Ausgleichsposten 2.105.224,11 Euro, in der Investitionsphase mit der Steuer auf den Zuschuss und den Beiträgen der Bauzeit 2.444.791,88 Euro; Deckung 1,0595. Endwert 9.943.743,02 Euro, Endwertdifferenz 5.305.318,55 Euro, Rendite 3,558 %; je Haltedauer 36 bis 39 Jahre 3,610 / 3,589 / 3,558 / 3,788 %. Bei Verkauf nach 20 Jahren: Rendite 1,675 %, Endwertdifferenz 129.107,95 Euro. Nach Lesart (1) von `MA-026` stiege A auf 5.859.849,02 Euro; das Bankdarlehen bliebe null, weil die Deckung bindet.
+
+**R-11.15 Ergebnis ohne Bankdarlehen.** Trägt der nachhaltige Reinertrag kein Bankdarlehen (M-21), zeigt das Blatt, wie weit es fehlt: die Deckung der übrigen Darlehen allein, RE_n / KD_Ü; die Kapitaldienstreserve RE_n − μ x KD_Ü in Euro; die Restfinanzierung C; den Reinertrag, bei dem sie möglich wäre, μ x (KD_Ü + p x runde(C x (i_k + τ_k) / p)); die Miete je Quadratmeter, bei der sie möglich wäre, als kleinste einheitliche Miete auf dem Gitter von einem Cent bis zur Obergrenze H-21, mit der B ≥ C gilt; das Eigenkapital über dem Mindesteigenkapital; die Nachschüsse je Planjahr (R-10.17). Das Ergebnis ist keine Eigenschaft des Objekts, sondern der Finanzierungsstruktur; die Angaben zeigen, ob eine Restfinanzierung in Reichweite liegt. **Neue Festlegung (NF-57).**
+*Beispiel (RF-12, gefördert):* Deckung der übrigen Darlehen 1,0584; Kapitaldienstreserve −21.300,79 Euro; Restfinanzierung 361.393,64 Euro; nötiger Reinertrag 210.874,61 Euro; nötige Miete 10,40 Euro je m² statt der Eingangsmiete von 8,20 Euro; Eigenkapital über dem Mindesteigenkapital 700.961,41 Euro; Nachschüsse 329.350,86 Euro im Planjahr 1 und 210.262,24 Euro im Planjahr 2, danach keine.
 
 ## 12 Rundung und Genauigkeit
 
@@ -722,17 +902,19 @@ Es gelten `MA-021` (Kosten einschließlich nicht abziehbarer Vorsteuer), `MA-005
 
 | Zahlungsart | Regel |
 |---|---|
-| Darlehen | Zins und Beitrag je Rate kaufmännisch; die Rate einer Annuität einmal kaufmännisch; je Darlehen umstellbar (`MA-013`, R-5.3) |
-| Darlehenshöhe nach R-5.12 | auf Cent abgerundet, zur sicheren Seite |
+| Darlehen | Zins, Beitrag und Bereitstellungszins je Rate kaufmännisch; die Rate einer Annuität einmal kaufmännisch, auch K / m bei Zins null; je Darlehen umstellbar (`MA-013`, R-5.3) |
+| Darlehenshöhe nach R-5.12 | auf Cent abgerundet, zur sicheren Seite; die kalkulatorische Rate der Grenze (b) wird immer kaufmännisch gerundet, gleich welche Rundung die Tranche trägt |
 | Geldanlage, Kontokorrent, Unterlassensalternative | je Zinsbuchung kaufmännisch |
 | Mieten, Bewirtschaftung, CO2-Kosten, Erbbauzins | je Zahlung kaufmännisch; der Index bleibt ungerundet im Sinn von R-12.4 |
-| Investition, Maßnahmen, Erwerbsnebenkosten, Baukosten | je Zahlung kaufmännisch; Monatsraten der Baukosten kaufmännisch, die letzte nimmt den Rest |
+| Erwerbsnebenkosten, Maßnahmen | je Zahlung kaufmännisch |
+| Baukosten | Preisstand des Stichtags kaufmännisch; jede Monatsrate kaufmännisch; die Baukosten sind die Summe der Raten (R-11.2) |
+| Bodenwert, Abschreibungsgrundlage | Boden = runde((Preis + Erwerbsnebenkosten) x Bodenanteil); die Grundlage ist die Differenz und wird nicht eigens gerundet (R-7.3) |
 | Abschreibung | je Planjahr kaufmännisch |
-| Steuer in Kurzform | je Steuerart und Planjahr kaufmännisch; Gewerbeertrag vorher auf volle 100 Euro abgerundet (`GEWSTG-11`) |
-| Verkaufspreis, Verkaufskosten, Abzüge, Rückzahlungen | je Betrag kaufmännisch |
+| Steuer in Kurzform | je Steuerart und Planjahr kaufmännisch; Gewerbeertrag vorher auf den Betrag KAT-04 abgerundet (`GEWSTG-11`) |
+| Verkaufspreis, Verkaufskosten, Abzüge, Rückzahlungen, Fördermittel und Entgelte | je Betrag kaufmännisch |
 | Preise der Preissuche | volle Euro (R-11.5) |
 
-*Beispiel (RF-05, RF-06):* Der Endwert des Testfalls bleibt mit Rundung je Zahlung bei 584.366,28 Euro (ungerundet 584.366,2816); das Guthaben im Jahr 4 ist 45.263,83 statt 45.263,84 Euro, die Endwertdifferenz 155.571,22 statt 155.571,23 Euro. In der Variante Nachschuss verschiebt die Rundung den Endwert auf 636.495,81 Euro. Diese Werte sind als Sollwerte der Tests festgeschrieben.
+*Beispiel (RF-05, RF-06; Jahresmodus):* Der Endwert des Testfalls bleibt mit Rundung je Zahlung bei 584.366,28 Euro (ungerundet 584.366,2816); das Guthaben im Jahr 4 ist 45.263,83 statt 45.263,84 Euro. In der Variante Nachschuss verschiebt die Rundung den Endwert von 636.495,82 auf 636.495,81 Euro. Diese Werte sind als Sollwerte der Tests festgeschrieben. *Beispiel (RF-11):* Beim tragbaren Preis von 2.317.235 Euro ist der Boden (2.317.235,00 + 231.723,50) x 25 % = 637.239,625, gerundet 637.239,63 Euro; die Abschreibungsgrundlage ist 1.911.718,87 Euro.
 
 **R-12.4 Sätze, Faktoren, Indexstände.** Abgeleitete Periodensätze (R-2.6), Vergleichsfaktoren (R-10.4) und Indexstände (R-6.1) werden kaufmännisch auf zwölf Nachkommastellen gerundet und dann als exakte Dezimalzahl verwendet. Wurzeln werden dafür mit mindestens 20 gültigen Nachkommastellen gebildet. Eingegebene Sätze werden nicht gerundet. **Neue Festlegung (NF-37):** Der Bericht verlangt, den Index ungerundet fortzuschreiben; zwölf Stellen ändern keinen Cent (bei 10 Mio. Euro weniger als ein Tausendstel Cent je Zahlung) und machen das Ergebnis auf jedem Rechner gleich.
 
@@ -740,104 +922,130 @@ Es gelten `MA-021` (Kosten einschließlich nicht abziehbarer Vorsteuer), `MA-005
 
 **R-12.6 Kennzahlen.** Renditen, Faktoren, Quoten und Deckungen werden nicht gerundet weitergerechnet. Potenzen und Wurzeln der Kennzahlen werden mit der vollen Rechengenauigkeit gebildet.
 
-**R-12.7 Darstellung.** Geldbeträge mit zwei Nachkommastellen oder in vollen Euro, Renditen mit zwei, in Prüfunterlagen mit drei Nachkommastellen, Faktoren und Deckungen mit zwei, jeweils kaufmännisch gerundet, im deutschen Zahlformat. Die Darstellung wirkt nie auf die Rechnung zurück.
+**R-12.7 Darstellung.** Geldbeträge mit zwei Nachkommastellen oder in vollen Euro, Renditen mit zwei, in Prüfunterlagen mit drei Nachkommastellen, Faktoren und Deckungen mit zwei, jeweils kaufmännisch gerundet, im deutschen Zahlformat. Die Darstellung wirkt nie auf die Rechnung zurück. Bericht und Export führen die Cent-Werte und runden nur im Zahlformat. Eine Summe wird aus den Cent-Werten gebildet und erst für die Anzeige gerundet; addieren die gerundeten Zeilen einer Spalte nicht zur gerundeten Summe, weist die Ausgabe den Unterschied einmal als „Rundungsdifferenz“ unter der Spalte aus und verteilt ihn nicht auf die Zeilen. **Neue Festlegung (NF-58).** Dass zwölf gerundete Monatsmieten nicht die Jahresmiete der Eingabe ergeben müssen (R-2.3), gehört als Satz in das Fachhandbuch.
+*Beispiel (RF-18):* Jahresmieten des Ankaufs in vollen Euro: Summe 1.850.876 Euro, Summe der gerundeten Jahreswerte 1.850.875 Euro, Rundungsdifferenz 1 Euro.
 
 ## 13 Kontrollsummen und Proben
 
-**R-13.1 Grundsatz.** Der Kern gibt Kennzahlen und Blatt nur zurück, wenn alle Kontrollsummen des Laufs bestanden sind. Sonst gibt er die Meldung M-10 mit der Liste der verletzten Proben zurück: Kennung, Periode oder Objekt, Abweichung. Eine verletzte Probe ist ein Fehler des Kerns oder des Auftrags, nie ein Ergebnis.
+**R-13.1 Grundsatz: Eine verletzte Probe sperrt das Ergebnis.** Der Kern gibt Kennzahlen und Blatt nur zurück, wenn alle Kontrollsummen des Laufs bestanden sind. Sonst gibt er den Status „gesperrt“ mit der Meldung M-10 und der Liste der verletzten Proben zurück – Kennung, Periode oder Objekt, Abweichung – und keine Kennzahl, auch nicht als Zwischenwert. Das gilt für jeden Lauf: die einzelne Kalkulation, den Stressfall, jeden Schritt der Preissuche und der Zielwertsuche, jede Zeile der Haltedauertabelle und beide Seiten eines Vergleichs. Schlägt eine Probe in einem Suchschritt an, endet die Suche mit M-10 und ohne Preis; die Haltedauertabelle zeigt in der betroffenen Zeile M-10 statt Zahlen; ein Vergleich mit einer gesperrten Fassung ist nicht möglich. Eine verletzte Probe ist ein Fehler des Kerns, nie ein Ergebnis und nie ein Eingabefehler; der Wortlaut der Meldung sagt das dem Bearbeiter (R-14.13).
+*Beispiel (RF-16):* Der Referenzrechner bucht in einem Testlauf absichtlich 100.000 Euro Einlage zu viel. P-04 meldet 100.000,00 Euro Abweichung; das Ergebnis ist gesperrt und trägt keine Kennzahlen; die Preissuche und die Zielwertsuche enden mit M-10; die Haltedauertabelle zeigt M-10 in beiden Zeilen; der Vergleich wird abgelehnt. Ohne die Störung ist derselbe Lauf nicht gesperrt.
 
-**R-13.2 Toleranz.** Im Rundungsmodus „Cent“ gelten P-01 bis P-10 und P-12 exakt, mit Abweichung null. Im Modus „keine“ gilt eine Rechentoleranz von 1E-30.
+**R-13.2 Toleranz und Rechenweg.** Im Rundungsmodus „Cent“ gelten alle Proben exakt, mit Abweichung null; im Modus „keine“ gilt eine Rechentoleranz von 1E-30. Jede Probe rechnet ihre Sollgröße mit derselben Rechenfolge und derselben Rundung wie die Regel, die sie prüft (R-12.5): erst multiplizieren, dann dividieren, zuletzt runden. Eine Probe, die anders rundet als die Regel, meldet einen Fehler, wo keiner ist.
+*Beispiel (RF-16):* Zuschuss 1.709.052,45 Euro, zwei von 420 Monaten Bindung offen: Rückzahlung nach R-8.7 runde(1.709.052,45 x 2 / 420) = 8.138,35 Euro. Die Probe des Entwurfs rechnete den Anteil vorab als Bruch und meldete einen Cent Abweichung; P-07 rechnet jetzt wie die Regel und meldet nichts.
 
 **R-13.3 Liste der Proben.**
 
 | Kennung | Probe | Formel |
 |---|---|---|
 | P-01 | Finanzierungssaldo | je Periode: Saldo + Nachschuss − Anlage + Aufnahme = 0 (R-4.4) |
-| P-02 | Kreditprobe | je Darlehen und Periode: Summe der Auszahlungen + kapitalisierte Zinsen − Tilgungen − Tilgungszuschüsse − Ablösung = Restschuld; nach der Ablösung ist jede Restschuld null. Einbehaltene Beträge mindern den Zufluss, nicht die Schuld; kapitalisierte Zinsen gibt es erst in Teil 2 |
-| P-03 | Bestandsprobe | je Periode: Veränderung des Bestandssaldos = originäre Zahlungen + Einlagen + Nachschüsse − Entnahmen − Finanzierungskosten + Habenzinsen − Steuer + Tilgungszuschüsse − einbehaltene Beträge; Finanzierungskosten sind Zinsen, Kontokorrentzinsen, Beiträge und Vorfälligkeit |
-| P-04 | Mittelherkunft gleich Mittelverwendung | über die Investitionsphase: Eigenkapital + Auszahlungen der Darlehen + Zuschüsse = Investition + Erhaltung zum Stichtag + einbehaltene Beträge + Finanzierungskosten abzüglich Habenzinsen + laufende Zahlungen der Bauzeit + Guthaben abzüglich Kontokorrent am Ende der Phase |
+| P-02 | Kreditprobe | je Darlehen und Periode: Summe der Auszahlungen − Tilgungen − Tilgungszuschüsse − Ablösung = Restschuld; nach der Ablösung ist jede Restschuld null. Einbehaltene Beträge mindern den Zufluss, nicht die Schuld; kapitalisierte Zinsen gibt es erst in Teil 2 |
+| P-03 | Bestandsprobe | je Periode: Veränderung des Bestandssaldos = originäre Zahlungen + Einlagen + Nachschüsse − Entnahmen − Finanzierungskosten + Habenzinsen − Steuer + Tilgungszuschüsse − einbehaltene Beträge; Finanzierungskosten sind Zinsen, Kontokorrentzinsen, Beiträge, Bereitstellungszinsen und Vorfälligkeit |
+| P-04 | Mittelprobe, drei Teile | (a) Eigenkapital als Ausgleichsposten: Die geplanten Einlagen der Investitionsphase ohne Nachschüsse sind genau M − Ü − Zuschüsse − L (R-5.12, R-11.3); im Stressfall mit dem Mittelbedarf des Stressfalls und L des Basisfalls. (b) Mittelherkunft gleich Mittelverwendung über die Investitionsphase: Einlagen und Nachschüsse + Auszahlungen der Darlehen + Zuschüsse = Investition + Erhaltung zum Stichtag + einbehaltene Beträge + Finanzierungskosten (Zinsen, Beiträge, Bereitstellungszinsen, Kontokorrentzinsen) abzüglich Habenzinsen + Bewirtschaftung und Erbbauzins abzüglich Mieteinzahlungen + Steuer + planmäßige Tilgung + Guthaben abzüglich Kontokorrent am Ende der Phase. (c) Beim Ankauf sind Guthaben und Kontokorrent zum Stichtag null |
 | P-05 | Restwertprobe | gebuchter Verkaufserlös = Preis aus dem Maßstab − Verkaufskosten − ausstehender Investitionsstau (R-8.5) |
 | P-06 | Investitionsstau | je Maßnahme: gezahlter Anteil + abgezogener Anteil = 100 % |
-| P-07 | Zuschussprobe | je Zuschuss: erhalten − zurückgezahlt = Betrag, der nach der Rückzahlungsregel verbleibt (R-8.7) |
-| P-08 | Abschreibungsprobe | Summe der Abschreibungen ≤ Abschreibungsgrundlage; Restbuchwert = Boden + Grundlage − Summe der Abschreibungen |
-| P-09 | Verdichtung | Summe der Periodenwerte = Jahreswert, für Zahlungen (R-2.3) |
+| P-07 | Zuschussprobe | je Zuschuss: erhalten − zurückgezahlt = Zuschuss − runde(Zuschuss x offene Monate / Monate der Bindung) (R-8.7) |
+| P-08 | Abschreibungsprobe, in jedem Lauf | Summe der Abschreibungen ≤ Abschreibungsgrundlage; Restbuchwert = Anschaffungs- und Herstellungskosten einschließlich aktivierter Maßnahmen − Summe der Abschreibungen |
+| P-09 | Verdichtung, zwei Teile | (a) Jahresbestandsprobe: Bestand am Ende des Planjahres = Bestand am Ende des Vorjahres + Bewegungen des Planjahres, für Guthaben, Kontokorrent, Restschuld und Bestandssaldo; die Bestände des Jahres stammen aus der letzten Periode, die Bewegungen aus den Jahressummen. (b) Summe der Jahreswerte = Summe der Periodenwerte, für jede Zahlungszeile (R-2.3) |
 | P-10 | Spiegelprobe | Einlagen und Entnahmen der Unterlassensalternative = saldierte Reihe der Investition, je Periode (R-9.2) |
-| P-11 | Renditeprobe | r > r_U genau dann, wenn ΔEW > 0, sofern mindestens einer der beiden Zähler positiv ist; sonst sind beide Renditen −100 % (R-10.6, R-10.7) |
+| P-11 | Renditeprobe | r > r_U genau dann, wenn ΔEW > 0, sofern D > 0 und mindestens einer der beiden Zähler positiv ist (R-10.6 Nr. 2). Rechnerisch eine Identität; die Probe sichert, dass Rendite und Vergleichsrendite mit denselben Faktoren und demselben Nenner gerechnet sind |
 | P-12 | Bankdarlehen | 0 ≤ L ≤ max(0; min(A; B; C)); Eigenkapital ≥ Mindesteigenkapital (R-5.12) |
 | P-13 | Kapitalwertprobe, nur Testmodus | abgezinste Endwertdifferenz = Kapitalwert der Zahlungsreihe nach Steuern ohne Zinsen. Gilt nur, wenn alle Zinssätze gleich sind, keine Gebühren anfallen, die Steuer im Entstehungsjahr gezahlt und Verluste sofort verrechnet werden und ein einziger Steuersatz gilt; abgezinst wird mit dem Zins nach Steuern |
-| P-14 | Preisprobe | r(P*) ≥ z und r(P* + 1 Euro) < z (R-11.4) |
+| P-14 | Preisprobe | Ziel bei P* erreicht und bei P* + 1 Euro verfehlt, für die bindende Grenze: Endwertüberschuss oder Eigenkapitalbedarf (R-11.4, R-11.6) |
+| P-15 | Steuerprobe, vier Teile | (a) je Verlusttopf und Planjahr: Anfangsbestand = Endbestand des Vorjahres; Endbestand = Anfangsbestand + Zugang − Verbrauch. (b) Steuer des Planjahres = Summe der Steuerarten − Anrechnung. (c) Die gebuchte Steuerzahlung im letzten Monat des Planjahres ist die Steuer des Protokolls. (d) Brücke vom Ergebnis zu den Zahlungen: Summe über die Haltedauer von e_op und z_h, zuzüglich g_v und abzüglich der Vorfälligkeit, die als Veräußerungskosten zählt, = Summe der originären Zahlungen − Finanzierungskosten − einbehaltene Beträge + Habenzinsen. Was über die Haltedauer versteuert wird, ist der Zahlungsüberschuss vor Steuern; Abschreibung, Verteilung der Entgelte und Lesart des Zuschusses verschieben nur zwischen den Jahren |
+| P-16 | Unterlassensalternative | je Periode: jede Zinsbuchung = runde(Bestand der Vorperiode x Periodensatz), neu gerechnet; Bestand = Bestand der Vorperiode + Einlage − Entnahme + Zinsen − Kontokorrentzins − Steuer; kein Bestand negativ; Endwert = Bestand in N (R-9.3 bis R-9.7) |
+| P-17 | Zinsprobe | je Tranche und Periode, unabhängig neu gerechnet: Zins = runde(Restschuld der Vorperiode x Satz der Periode / p), nach der Zinsbindung mit dem Anschlusszins; Beitrag ebenso; Habenzins und Kontokorrentzins = runde(Bestand der Vorperiode x Periodensatz). Bei umgestellter Rundung der Tranche mit deren Rundung |
+| P-18 | Indexprobe | je Indexreihe: Index_1 = 1; Index_j = runde12(Index_(j−1) x (1 + Steigerung)) (R-6.1) |
+| P-19 | Abschreibungstakt | Abschreibung steht nur in der letzten Periode eines Planjahres (R-7.3) |
 
-*Beispiele.* P-03 im Testfall, Jahr 1: −675.820,00 − (−700.000,00) = 24.180,00 = 55.000,00 − 28.000,00 + 0,00 − 2.820,00. P-05 erkennt die doppelt gezählte Restschuld (R-8.5). P-07 in RF-12: 1.708.000,00 − 805.200,00 = 902.800,00 Euro verbleiben. P-08 in RF-11: 660.000 + 1.980.000 − 475.200 = 2.164.800 Euro. P-13 (RF-06): Bei einheitlich 4 % sind Kapitalwert und abgezinste Endwertdifferenz je 110.371,99 Euro; im Testfall mit getrennten Sätzen stehen 190.202,20 gegen 145.124,09 Euro, und die Probe darf dort nicht laufen. Ohne die Glieder für Tilgungszuschuss und einbehaltene Beträge meldete P-03 bei richtig gerechneten Förderdarlehen Abweichungen (RF-08).
+*Beispiele.* P-03 im Testfall, Jahr 1: −675.820,00 − (−700.000,00) = 24.180,00 = 55.000,00 − 28.000,00 + 0,00 − 2.820,00. P-04 im Neubau (RF-12): 5.141.964,13 + 4.007.142,85 = 9.015.152,34 + 133.954,64 Euro, mit Guthaben null am Ende der Bauzeit; Teil (a): geplante Einlagen 5.008.009,49 Euro = 9.015.152,34 − 4.007.142,85. P-05 erkennt die doppelt gezählte Restschuld (R-8.5). P-07 in RF-12, Verkauf nach 20 Jahren: 1.743.830,47 − 822.091,51 = 921.738,96 Euro verbleiben. P-08 in RF-11: 660.000 + 1.980.000 − 475.200 = 2.164.800 Euro. P-13 (RF-06): Bei einheitlich 4 % sind Kapitalwert und abgezinste Endwertdifferenz je 110.371,99 Euro; im Testfall mit getrennten Sätzen stehen 190.202,20 gegen 145.124,09 Euro, und die Probe darf dort nicht laufen. Ohne die Glieder für Tilgungszuschuss und einbehaltene Beträge meldete P-03 bei richtig gerechneten Förderdarlehen Abweichungen (RF-08).
 
-**R-13.4 Verhalten bei Verletzung.** Der Kern rechnet den Lauf zu Ende, sammelt alle Verletzungen und gibt sie gemeinsam zurück. Die Oberfläche zeigt statt der Ergebnisse die Meldung mit der ersten verletzten Probe; die vollständige Liste geht in das Protokoll. In den Referenzfällen laufen die Proben in jedem gerechneten Finanzplan ohne Verletzung; das Fehlerbild zu P-05 ist ein eigener Test.
+**R-13.4 Was die Proben fangen und was nicht.** P-01 bis P-03, P-09 und P-16 prüfen die Buchführung: Jede Zahlung ist gebucht, kein Bestand entsteht aus dem Nichts. P-15, P-17, P-18 und P-19 rechnen Rechenregeln unabhängig nach: Steuer, Zins, Index, Takt der Abschreibung. P-04 und P-12 sichern die Bemessung. Keine Probe erkennt eine falsch verstandene Regel, die Kern und Probe gleich falsch rechnen, und keine erkennt einen falschen Katalogwert; dagegen stehen die Referenzfälle mit veröffentlichten Werten, die Gegenrechnung und die Blindrechnung (Kapitel 15). Zu jeder neuen Probe gibt es ein Fehlerbild, an dem sie anschlägt.
+*Beispiel (RF-16, Fehlerbilder):* Abschreibung je Monat statt je Planjahr – der Fehler des Entwurfs im Testfall des Monatsrasters, Endwert 585.918,72 statt 585.918,65 Euro: P-08, P-15 und P-19 melden. Zins um einen Euro falsch: P-17. Verlustvortrag falsch fortgeschrieben: P-15. Ergebnis ohne Zahlung: Brücke in P-15. Unterlassensalternative falsch gebucht: P-16. Bestand am Jahresende falsch: P-09. Index falsch: P-18.
+
+**R-13.5 Verhalten bei Verletzung.** Der Kern rechnet den Lauf zu Ende, sammelt alle Verletzungen und gibt sie gemeinsam zurück. Die Oberfläche zeigt statt der Ergebnisse die Meldung M-10; die vollständige Liste geht in das Protokoll. In den Referenzfällen laufen die Proben in jedem gerechneten Finanzplan ohne Verletzung, auch in den Lehrbuchfällen.
 
 ## 14 Randfälle und Meldungen
 
-Jeder Randfall hat ein definiertes Ergebnis: einen Wert, den Status „nicht definiert“ oder eine Meldung. Der Kern bricht nie mit einem Rechenfehler ab.
+Jeder Randfall hat ein definiertes Ergebnis: einen Wert, den Status „nicht definiert“ oder eine Meldung. Der Aufruf des Kerns endet nie mit einem Rechenfehler, sondern mit einem von drei Zuständen: „Ergebnis“ (mit Hinweisen), „Eingabe“ (eine Eingabemeldung, keine Rechnung) oder „gesperrt“ (M-10, R-13.1). Im Referenzrechner ist das für die Ränder dieses Kapitels geprüft (RF-14, RF-20).
 
-**R-14.1 Zinssatz null.** Bei i = 0 ist die Laufzeitannuität K / m (R-5.4) und die Prozentannuität Nennbetrag x τ / p; Zinsbuchungen sind null. Bei h = 0 und a_L = 0 ist der Endwert der Unterlassensalternative die Summe der Einlagen abzüglich der Entnahmen, die Vergleichsrendite null. Ein sehr kleiner Zins ist kein Randfall: Die Annuitätenformel wird in Dezimalrechnung ausgewertet und bleibt stabil.
-*Beispiel (RF-08, RF-14):* 700.000 Euro zinslos über 20 Jahre: Rate 35.000,00 Euro; als Prozentannuität mit 2 %: 1.166,67 Euro im Monat; zu 0,01 % über 20 Jahre: Rate 35.036,76 Euro, Restschuld am Ende null. Testfall mit allen Zinssätzen null: Endwert der Alternative 400.000,00 Euro, Vergleichsrendite 0,000 %, Endwert 676.755,55 Euro.
+**R-14.1 Zinssatz null, Tilgung null.** Bei i = 0 ist die Laufzeitannuität runde(K / m) (R-5.4) und die Prozentannuität runde(Nennbetrag x τ / p); Zinsbuchungen sind null. Bei h = 0 und a_L = 0 ist der Endwert der Unterlassensalternative die Summe der Einlagen abzüglich der Entnahmen, die Vergleichsrendite null. Sind kalkulatorischer Zins und kalkulatorische Tilgung beide null, begrenzt die Mindestdeckung das Bankdarlehen nicht (R-5.12): Es bindet (a) oder (c). Die Regel „Restlaufzeit bleibt“ fällt ohne Tilgung auf „Tilgungssatz bleibt“ zurück (M-40, R-5.9). Negative Zinssätze sind keine zulässige Eingabe (M-20). Ein sehr kleiner Zins ist kein Randfall: Die Annuitätenformel wird in Dezimalrechnung ausgewertet und bleibt stabil.
+*Beispiel (RF-08, RF-14, RF-20):* 700.000 Euro zinslos über 20 Jahre: Rate 35.000,00 Euro; als Prozentannuität mit 2 %: 1.166,67 Euro im Monat; zu 0,01 % über 20 Jahre: Rate 35.036,76 Euro, Restschuld am Ende null. Testfall mit allen Zinssätzen null: Endwert der Alternative 400.000,00 Euro, Vergleichsrendite 0,000 %, Endwert 676.755,55 Euro. Ankauf mit Zins, Tilgung, Mindesttilgung und Anschlussaufschlag null: Bankdarlehen 1.560.000,00 Euro nach (a), Endwert 2.570.143,76 Euro.
 
-**R-14.2 Eigenkapital null.** Ohne Einlage ist die Rendite nicht definiert (M-28); Endwert, Endwertdifferenz und alle übrigen Kennzahlen werden ausgewiesen. Der Endwert der Unterlassensalternative ist null. Das Lehrbuch nennt die Rendite in diesem Fall „unendlich“; das Werkzeug weist keine Zahl aus.
-*Beispiel (RF-14):* Testfall ohne Eigenkapital, Kontokorrent unbegrenzt: Endwert 63.947,36 Euro, Rendite nicht definiert.
+**R-14.2 Eigenkapital null.** Ohne Einlage ist die Rendite nicht definiert (M-28); Endwert, Endwertdifferenz und alle übrigen Kennzahlen werden ausgewiesen. Der Endwert der Unterlassensalternative ist null. Das Lehrbuch nennt die Rendite in diesem Fall „unendlich“; das Werkzeug weist keine Zahl aus. In der Preissuche gibt es ohne eingesetztes Eigenkapital keinen tragbaren Preis (M-41, R-11.5).
+*Beispiel (RF-14):* Testfall ohne Eigenkapital, Kontokorrent unbegrenzt: Endwert 63.947,36 Euro, Rendite nicht definiert. *Beispiel (RF-20; keine Erwerbsnebenkosten, Beleihungsquote 100 %, Mindestdeckung 1, Verkaufsfaktor 5, Lesart 2 von `MA-026`):* M-41 mit der Nebenangabe 1.569.899 Euro.
 
-**R-14.3 Negativer Endwert.** Der Endwert kann negativ sein; dann ist die Endwertdifferenz entsprechend negativ. Die Rendite folgt R-10.7: −100 %, wenn der Zähler nicht positiv ist. Der Restwertanteil ist nicht definiert. Alle Kontrollsummen gelten unverändert.
-*Beispiel (RF-14):* Testfall mit Verkauf zu 500.000 Euro: Endwert −65.633,72 Euro, Rendite −100 %.
+**R-14.3 Negativer Endwert und Verlust beim Verkauf.** Mit einer Kontokorrentlinie kann der Endwert negativ sein; dann ist die Endwertdifferenz entsprechend negativ, die Rendite folgt R-10.7 (−100 %, wenn der Zähler nicht positiv ist), der Restwertanteil ist nicht definiert. Mit der voreingestellten Linie null wird der Endwert nie negativ: Decken Verkaufserlös und Guthaben die Ablösung, die Vorfälligkeit, die Rückzahlung und die Steuer nicht, wird der Fehlbetrag Nachschuss im Verkaufsmonat. Das Blatt weist ihn als „Fehlbetrag beim Verkauf“ aus, getrennt vom laufenden Nachschussbedarf, mit der Meldung M-42 (R-10.17). Alle Kontrollsummen gelten unverändert.
+*Beispiel (RF-14):* Testfall mit Verkauf zu 500.000 Euro, Linie unbegrenzt: Endwert −65.633,72 Euro, Rendite −100 %. *Beispiel (RF-20):* Ankauf mit Verkaufsfaktor 4 nach zwei Jahren: Endwert 0,00 Euro, Fehlbetrag beim Verkauf 926.438,19 Euro, Meldungen M-25, M-29, M-38, M-42.
 
-**R-14.4 Haltedauer endet vor der Vollvermietung.** Beim Neubau muss die Haltedauer mindestens bis zum Ende des ersten Jahres der Vollvermietung reichen: N ≥ Bauzeit + p, im Stressfall mit der verlängerten Bauzeit. Sonst gibt es keinen Reinertrag für R-5.12 und keinen Verkauf eines vermieteten Objekts: Meldung M-23, keine Kennzahlen.
-*Beispiel (RF-14):* Bauzeit 18 Monate, Haltedauer 2 Jahre: M-23. Haltedauer 3 Jahre: gerechnet, Endwert 4.599.296,28 Euro.
+**R-14.4 Haltedauer endet vor der Vollvermietung.** Beim Neubau muss die Haltedauer mindestens bis zum Ende des ersten Jahres der Vollvermietung reichen: N ≥ Bauzeit + Anlaufleerstand + p, gerechnet mit der verlängerten Bauzeit des Stressfalls. Sonst gibt es keinen Reinertrag für R-5.12 und keinen Verkauf eines vermieteten Objekts: Meldung M-23, keine Rechnung. Die Prüfung läuft vor dem Basisfall, damit Basis- und Stressfall immer zusammen vorliegen.
+*Beispiel (RF-14, RF-20):* Bauzeit 18 Monate, Haltedauer 2 Jahre: M-23. Haltedauer 3 Jahre: gerechnet, Endwert 5.201.901,26 Euro. Bauzeit 60 Monate, Haltedauer 6 Jahre: M-23.
 
 **R-14.5 Verkauf im ersten Jahr.** n = 1 ist zulässig. Die Steuer des einzigen Planjahres enthält den Verkaufsgewinn; reicht die Zinsbindung über das Jahr, fällt Vorfälligkeit an (R-5.16).
-*Beispiel (RF-14):* Ankauf mit Verkauf nach einem Jahr: Endwert 938.499,02 Euro, Rendite −22,371 %, Vorfälligkeit 126.170,42 Euro.
+*Beispiel (RF-14):* Ankauf ohne Maßnahme mit Verkauf nach einem Jahr: Endwert 1.071.298,15 Euro, Rendite −24,204 %, Vorfälligkeit 108.146,07 Euro für neun Jahre Restbindung, Meldung M-25.
 
 **R-14.6 Maßnahme nach dem Verkauf.** Liegt das Jahr der Ausführung nach der Haltedauer, wird die Maßnahme nicht gezahlt, sondern vom Verkaufserlös abgezogen (R-8.4).
+*Beispiel (RF-14):* Maßnahme von 100.000 Euro im Jahr 12, Verkauf im Jahr 10: Abzug 134.391,64 Euro.
 
-**R-14.7 Überfinanzierung.** Übersteigen übrige Darlehen, Zuschüsse und Mindesteigenkapital den Mittelbedarf (C < 0 in R-5.12), rechnet der Kern nicht: Meldung M-22.
-*Beispiel (RF-14):* Übernommenes Darlehen 3,0 Mio. Euro bei 2,64 Mio. Euro Mittelbedarf: M-22.
+**R-14.7 Überfinanzierung.** Übersteigen übrige Darlehen, Zuschüsse und Mindesteigenkapital den Mittelbedarf (C < 0 in R-5.12), rechnet der Kern nicht: Meldung M-22. In der Preissuche beginnt der Suchbereich beim kleinsten Preis, für den das nicht gilt (R-11.5). Übersteigt ein Zuschuss die Kosten, auf die er entfällt, lautet die Meldung M-43 (R-7.19).
+*Beispiel (RF-14, RF-17, RF-20):* Übernommenes Darlehen 3,0 Mio. Euro bei 2,64 Mio. Euro Mittelbedarf: M-22. Zuschussquote 110 %: M-43. Übernommenes Darlehen 2,0 Mio. Euro: kleinster zulässiger Preis 1.818.182 Euro.
 
-**R-14.8 Kein Ertrag, kein Kapitaldienst.** Bei einer Mietausfallquote von 100 % ist der Reinertrag negativ; das Bankdarlehen ist null, es bindet (b), und der Kern meldet M-21. Die Schuldendienstdeckung ist ohne Kapitaldienst nicht definiert. Die laufenden Kosten werden zu Nachschüssen.
-*Beispiel (RF-14):* Ankauf mit 100 % Mietausfall: Bankdarlehen 0,00 Euro, Nachschussbedarf 514.035,60 Euro, alle Kontrollsummen bestanden.
+**R-14.8 Kein Ertrag, kein Kapitaldienst.** Zehren struktureller Leerstand und Forderungsausfall die Miete auf, ist der Reinertrag negativ; das Bankdarlehen ist null, es bindet (b), und der Kern meldet M-21. Die Schuldendienstdeckung ist ohne Kapitaldienst nicht definiert. Die laufenden Kosten werden zu Nachschüssen. Der Verkaufspreis folgt der Miete nach Leerstand (R-8.1) und ist entsprechend klein. Ein Objekt, das am Stichtag leer steht, ist kein Randfall dieser Art: Seine Flächen werden nach R-6.13 vermietet.
+*Beispiel (RF-14):* Ankauf mit 99,5 % Leerstand und 0,5 % Forderungsausfall: Bankdarlehen 0,00 Euro, Verkaufspreis 16.307,50 Euro, laufender Nachschussbedarf 514.035,60 Euro, alle Kontrollsummen bestanden. *Beispiel (RF-18):* Am Stichtag leeres Objekt: Miete 10,12 Euro je m² ab dem Monat 4, Bankdarlehen 930.929,99 Euro, Verkaufspreis 3.212.578,13 Euro.
 
-**R-14.9 Kein tragbarer Preis.** Erreicht die Rendite die Zielrendite bei keinem Preis des Suchbereichs: M-32. Erreicht sie sie im ganzen Suchbereich: M-33 mit der Obergrenze.
-*Beispiel (RF-14):* Investitionsstau von 6 Mio. Euro zum Stichtag: M-32. Zielrendite −50 %: M-33.
+**R-14.9 Kein tragbarer Preis.** Ist das Ziel schon beim kleinsten zulässigen Preis verfehlt: M-32 mit der Rendite bei diesem Preis. Ist es an allen Stützstellen bis über die Obergrenze erreicht: M-33 mit der Obergrenze. Ohne eingesetztes Eigenkapital: M-41. Reicht das verfügbare Eigenkapital für keinen Preis: M-46. Ohne Miete ist der Suchbereich leer: M-31.
+*Beispiel (RF-14, RF-19, RF-20):* Investitionsstau von 6 Mio. Euro zum Stichtag: M-32, Rendite beim kleinsten Preis −1,905 %. Zielrendite −50 %: M-33. Verfügbares Eigenkapital 100 Euro ohne Beleihung: M-46. Struktureller Leerstand 100 %: M-31.
 
-**R-14.10 Interner Zinsfuß.** Nach R-10.18: keine Lösung ohne Vorzeichenwechsel, alle Lösungen bei mehreren.
+**R-14.10 Interner Zinsfuß.** Nach R-10.18: „keine Lösung“ ohne Vorzeichenwechsel, alle Lösungen bei mehreren (M-26), „Lösung außerhalb des Suchbereichs“ bei einem Wechsel ohne Fund.
 
-**R-14.11 Langer Zeitraum.** Der Kern rechnet 42 Jahre im Monatsraster (504 Perioden). Ist die Abschreibungsgrundlage aufgebraucht, ist die Abschreibung null. Nach dem Ende der Bindung fällt keine Rückzahlung des Zuschusses an. Nach der zinslosen Zeit trägt das Förderdarlehen den Zins nach `MA-003`.
-*Beispiel (RF-14, geförderter Neubau über 42 Jahre):* letzte Abschreibung im Planjahr 35; erster Zins auf das Förderdarlehen im Planjahr 37 (zinslose Zeit 35 Jahre ab dem Monat nach der Bauzeit); Ablösung des Förderdarlehens am Ende 182.998,38 Euro; Rückzahlung des Zuschusses null; Endwert 13.486.156,44 Euro, Rendite 4,548 %; alle Kontrollsummen bestanden.
+**R-14.11 Langer Zeitraum.** Der Kern rechnet 42 Jahre im Monatsraster (504 Perioden). Ist die Abschreibungsgrundlage aufgebraucht, ist die Abschreibung null. Nach dem Ende der Bindung fällt keine Rückzahlung des Zuschusses an. Nach der zinslosen Zeit trägt das Förderdarlehen den Zins nach `MA-003`; fehlt dieser Satz, endet der Aufruf mit M-24. Die Instandhaltung steigt mit dem Gebäudealter (R-6.8).
+*Beispiel (RF-14, geförderter Neubau über 42 Jahre):* letzte Abschreibung im Planjahr 35; erster Zins auf das Förderdarlehen im Planjahr 37 (zinslose Zeit 35 Jahre ab dem Monat nach der Bauzeit); Ablösung des Förderdarlehens am Ende 186.840,56 Euro; Rückzahlung des Zuschusses null; Endwert 13.319.334,95 Euro, Rendite 3,935 %; Bewirtschaftung je Monat zum Preisstand 2.762,50 / 4.927,81 / 6.807,90 Euro in den Monaten 19, 283 und 403; alle Kontrollsummen bestanden.
 
-**R-14.12 Jahresmodus und Monatsraster.** Beide Raster sind für jedes Vorhaben rechenbar und liefern verschiedene Werte (R-2.2). Sollwerte der Tests gelten je Raster.
+**R-14.12 Jahresmodus und Monatsraster.** Beide Raster sind für den Ankauf rechenbar und liefern verschiedene Werte (R-2.2); Sollwerte der Tests gelten je Raster. Der Neubau wird nur im Monatsraster gerechnet, weil Bauzeit, Mittelabruf und Anlaufleerstand in Monaten laufen (sonst M-20).
+*Beispiel (RF-14):* Ankauf im Jahresmodus: Endwert 2.514.395,05 Euro und Rendite 4,491 % gegen 2.524.305,59 Euro und 4,527 % im Monatsraster.
 
-**R-14.13 Meldungen.**
+**R-14.13 Meldungen.** Jede Meldung sagt, was geschehen ist und was der Bearbeiter tun kann; sie nennt das Feld mit seiner Bezeichnung auf der Maske und nie ein Feld, das es dort nicht gibt. Die Tabelle legt Auslöser und Inhalt fest; den Wortlaut auf der Oberfläche formuliert die Gestaltung danach. Eingabemeldungen erscheinen am Feld, Hinweise auf dem Blatt an der Kennzahl, die sie betreffen, je einmal.
 
-| Kennung | Art | Auslöser | Folge |
-|---|---|---|---|
-| M-10 | Fehler | eine Kontrollsumme ist verletzt (R-13.1) | keine Ergebnisse |
-| M-20 | Eingabe | Wert außerhalb des zulässigen Bereichs (R-3.7) | keine Ergebnisse |
-| M-21 | Hinweis | Reinertrag trägt nach der Mindestdeckung kein Bankdarlehen (B ≤ 0), etwa weil er den Kapitaldienst der übrigen Darlehen nicht deckt; Bankdarlehen null (R-5.12) | Ergebnis mit Hinweis auf dem Blatt |
-| M-22 | Eingabe | übrige Darlehen, Zuschüsse und Mindesteigenkapital übersteigen den Mittelbedarf | keine Ergebnisse |
-| M-23 | Eingabe | Haltedauer endet vor dem Ende des ersten Jahres der Vollvermietung | keine Ergebnisse |
-| M-24 | Eingabe | Anschlusszins fehlt, obwohl die Haltedauer über die Zinsbindung reicht (R-5.8) | keine Ergebnisse |
-| M-25 | Hinweis | Zinsbindung reicht über die Haltedauer; Vorfälligkeit angesetzt (R-5.16) | Ergebnis mit Hinweis |
-| M-26 | Hinweis | interner Zinsfuß mehrdeutig; alle Lösungen genannt (R-10.18) | Ergebnis mit Hinweis |
-| M-27 | Hinweis | Einlagen nach dem Stichtag und Entnahmen treffen zusammen; die Rendite hängt von ihrem Zeitpunkt ab (R-10.6) | Ergebnis mit Hinweis |
-| M-28 | Status | Rendite nicht definiert: keine Einlage (R-10.7) | übrige Kennzahlen gültig |
-| M-29 | Status | Rendite −100 %: Zähler nicht positiv (R-10.7) | übrige Kennzahlen gültig |
-| M-30 | Eingabe | Zielwertsuche auf eine nicht zugelassene Eingabe (R-11.9) | keine Suche |
-| M-31 | Eingabe | Suchbereich leer | keine Suche |
-| M-32 | Ergebnis | kein tragbarer Preis: Ziel im ganzen Suchbereich verfehlt | Blatt ohne Preis |
-| M-33 | Ergebnis | Ziel im ganzen Suchbereich erreicht; Preis über der Obergrenze | Blatt ohne Preis |
-| M-34 | Hinweis | mehrere Lösungen der Preisgleichung; alle genannt (R-11.5) | Ergebnis mit Hinweis |
-| M-35 | Hinweis | Vorgabe des Hauses gelockert, abweichende Zielrendite oder Wertansatz über dem Kaufpreis; mit Begründung (R-3.2) | steht auf dem Blatt |
-| M-36 | Hinweis | Erhaltungsmaßnahmen der ersten drei Jahre über 15 % der Gebäudeanschaffungskosten; in der Kurzform nicht geprüft (R-6.10) | Ergebnis mit Hinweis |
+| Kennung | Art | Auslöser | Was das Blatt zeigt | Was der Bearbeiter tun kann |
+|---|---|---|---|---|
+| M-10 | Sperre | eine Kontrollsumme ist verletzt (R-13.1) | kein Ergebnis; „Die Rechnung ist in sich nicht stimmig und wird nicht angezeigt. Es liegt kein Eingabefehler vor.“ | nichts an der Eingabe; der Fall geht mit der Liste der Proben an die Entwicklung |
+| M-20 | Eingabe | ein Wert fehlt, liegt außerhalb des zulässigen Bereichs oder passt nicht zu einem anderen (R-3.7); eine Vorgabe ist ohne Begründung gelockert (R-3.2) | keine Rechnung; Feld, Wert und zulässiger Bereich | den Wert berichtigen oder die Begründung nachtragen |
+| M-21 | Hinweis | der nachhaltige Reinertrag trägt nach der Mindestdeckung kein Bankdarlehen (B ≤ 0); Bankdarlehen null (R-5.12) | Ergebnis mit den Angaben nach R-11.15 | Miete, Kosten und übrige Darlehen prüfen; die nötige Miete steht auf dem Blatt |
+| M-22 | Eingabe | übrige Darlehen, Zuschüsse und Mindesteigenkapital übersteigen den Mittelbedarf (R-14.7) | keine Rechnung; Mittelbedarf und Summe der übrigen Mittel | übernommenes Darlehen, KfW-Darlehen oder Preis prüfen |
+| M-23 | Eingabe | Haltedauer endet vor dem Ende des ersten Jahres der Vollvermietung, auch im Stressfall (R-14.4) | keine Rechnung; früheste zulässige Haltedauer | Haltedauer verlängern oder Bauzeit prüfen |
+| M-24 | Eingabe | ein Darlehen läuft über seine Zinsbindung, und der Anschlusszins fehlt (R-5.8) | keine Rechnung; Darlehen und Ende der Zinsbindung | Anschlusszins angeben |
+| M-25 | Hinweis | Verkauf vor dem Ende einer Zinsbindung; Vorfälligkeit angesetzt (R-5.16) | Ergebnis; Betrag der Vorfälligkeit | Haltedauer oder Zinsbindung prüfen |
+| M-26 | Hinweis | interner Zinsfuß mehrdeutig (R-10.18) | alle Lösungen; Verweis auf die VOFI-Rendite | keine Handlung nötig |
+| M-27 | Hinweis | Einlagen nach dem Stichtag und Entnahmen treffen zusammen (R-10.6) | Ergebnis; „Die Rendite hängt vom Zeitpunkt der Zahlungen ab; maßgeblich ist die Endwertdifferenz.“ | keine Handlung nötig |
+| M-28 | Status | Rendite nicht definiert: keine Einlage (R-10.7) | übrige Kennzahlen gültig | keine Handlung nötig |
+| M-29 | Status | Rendite −100 %: Zähler nicht positiv (R-10.7) | übrige Kennzahlen gültig | Annahmen zum Verkauf prüfen |
+| M-30 | Eingabe | Zielwertsuche auf eine nicht zugelassene Eingabe (R-11.9) | keine Suche; Liste der zugelassenen Eingaben | eine zugelassene Eingabe wählen |
+| M-31 | Eingabe | Suchbereich leer: keine Miete im Vorhaben oder Obergrenze nicht über der Untergrenze | keine Suche | Mietansatz oder Suchbereich prüfen |
+| M-32 | Ergebnis | kein tragbarer Preis: Ziel schon beim kleinsten zulässigen Preis verfehlt (R-11.5) | Blatt ohne Preis; Rendite beim kleinsten zulässigen Preis, damit der Abstand zum Ziel sichtbar ist | Annahmen prüfen; die Zielwertsuche auf Miete, Kostenkennwert oder Verkaufsfaktor zeigt, was zum Ziel fehlt (R-11.9) |
+| M-33 | Ergebnis | Ziel an allen Stützstellen bis über die Obergrenze erreicht | Blatt ohne Preis; Obergrenze | Mietansatz und Zielrendite prüfen |
+| M-34 | Hinweis | das Ziel wechselt in der Nähe des tragbaren Preises mehrfach (R-11.5) | Preis nach R-11.4; „In der Nähe dieses Preises wechselt das Ergebnis mehrfach; angegeben ist der Preis, bis zu dem das Ziel durchgehend erreicht ist.“ | keine Handlung nötig |
+| M-35 | Hinweis | Abweichung von einer Vorgabe des Hauses oder Wertansatz der Bank über dem Kaufpreis, je mit Begründung (R-3.2) | Liste „Abweichungen vom Hausstandard“ auf dem Blatt | – |
+| M-36 | Hinweis | Erhaltungsmaßnahmen der ersten Jahre übersteigen die Schwelle KAT-12; sie sind aktiviert (R-6.16) | Ergebnis; Summe der Maßnahmen und Schwelle | Umfang oder Jahr der Maßnahmen prüfen |
+| M-37 | Hinweis | jede Rechnung mit Steuer in Kurzform (R-7.1) | fester Wortlaut im Annahmenblatt, einmal | – |
+| M-38 | Hinweis | kleinste Schuldendienstdeckung über die Haltedauer unter der Mindestdeckung (R-10.14) | Ergebnis; Planjahr und Deckung, im Basis- oder Stressfall | Tilgung, Zinsbindung oder Darlehenshöhe prüfen |
+| M-39 | Hinweis | kleinste Schuldendienstdeckung unter 1 | Ergebnis; Planjahr und Deckung; „Der Reinertrag deckt den Kapitaldienst in diesem Jahr nicht.“ | wie M-38; der Fehlbetrag steht als Nachschuss im Blatt |
+| M-40 | Hinweis | Regel „Restlaufzeit bleibt“ bei einem Darlehen ohne Tilgung (R-5.9) | Ergebnis; gerechnet ist „Tilgungssatz bleibt“ | Regel oder Tilgung prüfen |
+| M-41 | Ergebnis | beim gefundenen Preis ist kein Eigenkapital eingesetzt (R-11.5) | Blatt ohne Preis; Nebenangabe „Preis, bis zu dem der Endwert ohne Eigenkapital nicht negativ ist“ | Beleihung und Mindesteigenkapital prüfen |
+| M-42 | Hinweis | Fehlbetrag beim Verkauf (R-10.17) | Ergebnis; „Der Verkauf deckt Darlehen, Steuer und Kosten nicht: Verlust beim Verkauf“ mit Betrag | Verkaufsfaktor, Haltedauer und Darlehen prüfen |
+| M-43 | Eingabe | ein Zuschuss übersteigt die Kosten, auf die er entfällt (R-7.19) | keine Rechnung | Förderangaben prüfen |
+| M-44 | Hinweis | befreite Körperschaft (R-7.12) | Ergebnis; „Ob die Befreiung im Jahr des Verkaufs erhalten bleibt, prüft der Steuerberater.“ | Steuerberater einbeziehen |
+| M-45 | Hinweis | ein Verlustvortrag über dem Sockelbetrag KAT-17 wird in einem Jahr verrechnet (R-7.5) | Ergebnis; „Die Mindestbesteuerung ist nicht gerechnet; die Steuer dieses Jahres kann höher ausfallen.“ | bei Gewicht die Vollkalkulation abwarten |
+| M-46 | Ergebnis | das verfügbare Eigenkapital reicht beim kleinsten zulässigen Preis nicht (R-11.6) | Blatt ohne Preis; Eigenkapitalbedarf beim kleinsten Preis | verfügbares Eigenkapital oder Vorhaben prüfen |
 
-Im Referenzrechner sind M-21, M-22, M-23, M-24, M-30, M-32, M-33 und M-34 gebaut und geprüft; die übrigen sind Vorgaben an den Kern.
+Der Referenzrechner trägt die Eingabeprüfung und alle Meldungen der Tabelle; jede ist in einem Referenzfall ausgelöst (RF-08, RF-12, RF-14, RF-16 bis RF-20). M-27 kann in der Grobkalkulation nicht auftreten, weil sie keine geplanten Entnahmen kennt; geprüft ist der Auslöser am Testfall.
+
+**R-14.14 Ränder der Eingabe.** Die Eingabeprüfung (R-3.7) läuft vor jeder Rechnung und fängt ab, was sonst zu einem Rechenfehler oder zu einem sinnlosen Ergebnis führte.
+*Beispiel (RF-20), jeweils M-20:* Bankzins −0,5 % und −2 %; Kaufpreis 0; Ist- und Vergleichsmiete 0 bei vermieteter Fläche; Verkaufsfaktor 0; Steuersatz 100 %; Bauzeit 0; Haltedauer 43 Jahre; Land fehlt; Mindestdeckung 0,9; KfW-Darlehen einen Euro über dem Höchstbetrag; Kennzeichen der erweiterten Kürzung beim Einzelunternehmen (RF-17). Gerechnet werden: Stichtag März 2019 (Nachkalkulation); Zuschuss von 80 % bei einem Grundstück von 5 Mio. Euro (Aufteilung auf Gebäude und Boden, R-7.19).
 
 ## 15 Referenzfälle
 
-**R-15.1 Grundsatz.** Jeder Referenzfall nennt Eingaben, erwartete Werte und Toleranz. Veröffentlichte Werte (Lehrbuch, IWU, Bericht) stehen als Sollwert im Code des Referenzrechners; verglichen wird mit der Genauigkeit der Quelle. Eigene Fälle stimmen im Rundungsmodus „Cent“ auf den Cent. Renditen stimmen auf die ausgewiesenen Nachkommastellen. Die Fälle werden als automatische Tests des Rechenkerns übernommen; der Kern in Rust muss dieselben Werte liefern.
+**R-15.1 Grundsatz.** Jeder Referenzfall nennt Eingaben, erwartete Werte und Toleranz. Die Eingaben stehen vollständig im Anhang A; jedes Beispiel dieses Dokuments ist aus dem Text und dem Anhang nachrechenbar. Veröffentlichte Werte (Lehrbuch, IWU, Bericht) stehen als Sollwert im Code des Referenzrechners; verglichen wird mit der Genauigkeit der Quelle. Eigene Fälle stimmen im Rundungsmodus „Cent“ auf den Cent. Renditen stimmen auf die ausgewiesenen Nachkommastellen. Die Fälle werden als automatische Tests des Rechenkerns übernommen; der Kern in Rust muss dieselben Werte liefern.
 
-**R-15.2 Festschreibung eigener Fälle.** Die Sollwerte der eigenen Fälle stehen in `erwartete_werte.json` (207 Werte, festgeschrieben am 2026-11-18 aus dem Referenzrechner). Sie ändern sich nur mit einer Regeländerung in diesem Dokument; `--festschreiben` schreibt sie neu. Damit sie nicht nur sich selbst bestätigen, rechnet `gegenrechnung.py` vier Fälle ohne die Module des Referenzrechners nach (RF-15) und trifft sie auf den Cent.
+**R-15.2 Festschreibung eigener Fälle.** Die Sollwerte der eigenen Fälle stehen in `erwartete_werte.json` (441 Werte, Stand 2026-11-18 nach Prüfrunde 1). Sie ändern sich nur mit einer Regeländerung in diesem Dokument. `--festschreiben` schreibt sie nur zusammen mit einem Differenzbericht: je geändertem Wert alter Wert, neuer Wert und die Regel, die ihn geändert hat. Fehlt für einen geänderten Wert die Ursache, bleibt die Festschreibung unverändert und der Lauf endet mit einem Fehler. Der Differenzbericht der Prüfrunde 1 ist `aenderungen-runde1.md` im Ordner des Referenzrechners; er führt auch die Sollwerte, die im Code stehen und sich geändert haben. Die veröffentlichten Werte (RF-01 bis RF-04, RF-05 im Jahresmodus) haben sich nicht geändert.
 
 **R-15.3 Liste.**
 
@@ -848,24 +1056,40 @@ Im Referenzrechner sind M-21, M-22, M-23, M-24, M-30, M-32, M-33 und M-34 gebaut
 | RF-03 | Schulte, Standardbeispiel, vier Finanzpläne (`SCHULTE-IMMOBILIENINVESTITION-2025`) | Finanzplan mit und ohne Steuern, Zwischenfinanzierung, Unterlassensalternative mit zwei Sätzen, Lehrbuchansicht | Endvermögen 10.250 / 10.188 / 9.097 / 9.046; Renditen 5,08 / 4,95 / 2,60 / 2,49 % | jeder veröffentlichte Wert nach Rundung; genaue Werte 0,01 |
 | RF-04 | Schulte, Fallbeispiel Bürogebäude | endfällig, Annuität, freie Tilgung, steuerpflichtiger Verkauf | Endvermögen 30.179 / 31.400 / 31.567; Finanzinvestition 30.445; Renditen 3,27 / 3,68 / 3,74 / 3,36 % | Immobilienpläne nach Rundung; Finanzinvestition eine Einheit |
 | RF-05 | Testfall (Bericht Anhang A.6) | Rechenreihenfolge, Kennzahlen, Rundung, Restwertprobe | Endwert 584.366,28; Endwertdifferenz 155.571,23; Rendite 7,876 %; Gesamtkapitalrendite 4,61 % gegen 2,14 %; Amortisation 3 Jahre | 0,01 Euro; mit Rundung exakt |
-| RF-06 | Varianten des Testfalls | Entnahmen, Kontokorrent, Nachschuss, Saldierung, Basisperiode, Monatsraster, Kapitalwertprobe | 558.656,41 / 561.526,16 / 636.495,82 / 585.086,02 Euro; Renditen 8,123 / 7,246 / 8,028 %; Monatsraster 585.918,72 Euro | 0,01 Euro; mit Rundung exakt |
+| RF-06 | Varianten des Testfalls | Entnahmen, Kontokorrent, Nachschuss, Saldierung, Basisperiode, Monatsraster, Kapitalwertprobe | 558.656,41 / 561.526,16 / 636.495,82 / 585.086,02 Euro; Renditen 8,123 / 7,246 / 8,028 %; Monatsraster 585.918,65 Euro | 0,01 Euro; mit Rundung exakt |
 | RF-07 | mehrere Einlagen und Entnahmen | Eigenschaften der Renditeformel, zwei Sätze, Endwertüberschuss, Monatsverschiebung | siehe R-10.6 und R-10.9 | 0,01 Euro; drei Nachkommastellen |
-| RF-08 | Darlehensarten | jede Tilgungsart, Rundung je Rate, Anschluss, Förderdarlehen, Disagio, Tilgungszuschuss, Vorfälligkeit | 528.208,51 / 528.207,91 / 528.208,56 Euro; Raten 90.942 / 89.760 / 104.952 Euro | exakt; Anschluss 1,50 Euro gegen die Gegenrechnung der Prüfrunde 5 |
-| RF-09 | Regel des Bankdarlehens | drei bindende Grenzen, Null mit Meldung, andere Lesart `MA-026` | Tabelle in R-5.12 | exakt |
+| RF-08 | Darlehensarten | jede Tilgungsart, Rundung je Rate, Anschluss mit drei Regeln, Rückfall M-40, Rate aus dem ursprünglichen Nennbetrag, Bereitstellungszins, Förderdarlehen, Disagio, Tilgungszuschuss, Vorfälligkeit | 528.208,51 / 528.207,91 / 528.208,56 Euro; Raten 90.942 / 89.760 / 104.989 Euro | exakt; Anschluss 1,50 Euro gegen die Gegenrechnung der Prüfrunde 5 |
+| RF-09 | Regel des Bankdarlehens | drei bindende Grenzen, Null mit Meldung, Rang, Zins und Tilgung null | Tabelle in R-5.12 | exakt |
 | RF-10 | Steuer in Kurzform je Steuerstatus | Sätze je Jahr, Kürzung, Freibetrag, Anrechnung, privater Verkauf, Verlustvortrag gegen sofort | Tabelle in R-7.9; 29.825 / 15.825 Euro | exakt |
-| RF-11 | Grobkalkulation Ankauf | ganzer Ablauf, Stressfall, tragbarer Preis, Zielwertsuche, gebundener Bestand, Vergleich, Haltedauertabelle | Endwert 2.374.377,18 Euro; Rendite 5,162 %; tragbarer Preis 2.425.585 und 2.128.948 Euro | exakt |
-| RF-12 | Grobkalkulation Neubau, frei und mit Grobförderung | Mittelabruf, Bauzeitzinsen, Förderdarlehen mit Entgelt und Beitrag, Zuschuss mit Rückzahlung | Endwert 8.956.483,75 Euro; tragbarer Grundstückspreis 1.393.742 Euro; gefördert 3.265.245,99 Euro | exakt |
-| RF-13 | Ankauf je Steuerstatus | derselbe Fall mit zehn Ausprägungen: Körperschaft ohne und mit Kürzung und mit sofortiger Verlustverrechnung; Personengesellschaft bei 400 % und 440 % Hebesatz, mit 60 % natürlichen Personen, mit Kürzung; Einzelunternehmen; Privatperson; befreit | Renditen 5,162 / 5,883 / 5,260 / 4,188 / 4,114 / 3,816 / 4,188 / 4,114 / 5,949 / 6,399 % | exakt |
+| RF-11 | Grobkalkulation Ankauf | ganzer Ablauf, Stressfall, tragbarer Preis mit beiden Grenzen, Zielwertsuche, gebundener Bestand mit übernommenem Darlehen, Vergleich, Haltedauertabelle | Endwert 2.524.305,59 Euro; Rendite 4,527 %; tragbarer Preis 2.317.235 und 1.978.674 Euro | exakt |
+| RF-12 | Grobkalkulation Neubau: frei finanziert, mit KfW-Darlehen, mit Grobförderung | Baukosten mit Zuschlägen und Fortschreibung, Mittelabruf, Bauzeit- und Bereitstellungszinsen, Anlaufleerstand, KfW-Tranche, Förderdarlehen mit Entgelt und Beitrag, Zuschuss mit Rückzahlung, Ergebnis ohne Bankdarlehen | Endwert 9.796.187,08 Euro; tragbarer Grundstückspreis 702.767 Euro, mit KfW-Darlehen 924.244 Euro; gefördert 9.943.743,02 Euro nach 38 Jahren | exakt |
+| RF-13 | Ankauf je Steuerstatus | derselbe Fall mit 14 Ausprägungen (R-7.9, R-7.17, R-7.18) | Renditen 4,527 / 4,697 / 5,161 / 4,523 / 5,185 / 3,649 / 3,585 / 3,324 / 3,659 / 3,597 / 3,487 / 3,585 / 5,141 / 5,661 % | exakt |
 | RF-14 | Randfälle | Kapitel 14 | siehe dort | exakt |
-| RF-15 | Gegenrechnung ohne die Module des Referenzrechners | Testfall im Monatsraster, Alternative mit zwei Sätzen, Anlaufverlust, Ankauf Basisfall | 585.918,72 / 443.192,58 / 533.745,69 und 537.232,83 / 2.374.377,18 Euro | exakt |
+| RF-15 | Gegenrechnung ohne die Module des Referenzrechners | Testfall im Monatsraster, Alternative mit zwei Sätzen, Anlaufverlust, Ankauf Basisfall mit Mietpfad, kalkulatorischem Darlehen und Verkauf | 585.918,65 / 443.192,58 / 533.745,69 und 537.232,83 / 1.226.609,99 / 2.524.305,59 Euro | exakt |
+| RF-16 | verletzte Probe sperrt das Ergebnis; Fehlerbilder | R-13.1 bis R-13.4 | Status „gesperrt“, M-10 in Lauf, Suche, Tabelle und Vergleich; je Fehlerbild die Probe, die meldet | exakt |
+| RF-17 | Steuerregeln der Überarbeitung | Kürzung und Zinsen, Hinzurechnung, Verluste der Personengesellschaft, Zuschuss in drei Lesarten, anschaffungsnahe Herstellungskosten, Finanzierungskosten, privater Verkauf | Beispiele in R-6.16, R-7.8, R-7.11, R-7.15, R-7.16, R-7.19 | exakt |
+| RF-18 | Miete im Bestand | Wartefrist, Kappung, `MA-037`, Mietenhistorie, leere Flächen, Fluktuation, sonstige Erträge, Erbbauzins, CO2-Kosten, Instandhaltung nach Alter, Verkaufspreis nach Leerstand, Darstellung | Beispiele in Kapitel 6 und R-8.1 | exakt |
+| RF-19 | Darlehen und Bankensicht | kalkulatorischer Kapitaldienst, Vorfälligkeit mit Kündigungsrecht, Eigenkapitalgrenze, Deckung über die Haltedauer, Einzelstress, Anschlussregeln, Abweichungen von Vorgaben | Beispiele in R-5.9, R-5.12, R-5.16, R-10.14, R-11.6, R-11.8 | exakt |
+| RF-20 | Ränder der Eingaben und der Suchen | Eingabeprüfung, Zins und Tilgung null, Preissuche an den Rändern, Nichtmonotonie, Verlust beim Verkauf, alle Meldungen, keine versteckten Konstanten | Kapitel 14; R-11.5 | exakt |
 
-Zu RF-02: Mit der Mietreihe aus den Annahmen des Berichts endet die Nachrechnung bei 153.031,71 Euro, 29 Cent unter dem veröffentlichten Wert; die größte Abweichung einer Zeile beträgt 0,61 Euro. Mit der veröffentlichten, auf Euro gerundeten Mietreihe sind es 153.028,94 Euro. Die Toleranz von 3,40 Euro der Spezifikation deckt beide Rechenwege; für den ersten genügte ein Euro (Vorschlag in Kapitel 17). Zu RF-04: Die Buchtabelle der Finanzinvestition ist in sich um eine Einheit unstimmig (Quellnotiz 11); gerechnet sind 30.444,24. Für die freie Tilgung gilt Tab. 11 des Lehrbuchs (31.567), nicht die Zusammenfassung in Tab. 15.
+Zu RF-02: Mit der Mietreihe aus den Annahmen des Berichts endet die Nachrechnung bei 153.031,71 Euro, 29 Cent unter dem veröffentlichten Wert; die größte Abweichung einer Zeile beträgt 0,61 Euro. Mit der veröffentlichten, auf Euro gerundeten Mietreihe sind es 153.028,94 Euro. Die Toleranz von 3,40 Euro der Spezifikation deckt beide Rechenwege; für den ersten genügte ein Euro (Vorschlag in Kapitel 17). Zu RF-04: Die Buchtabelle der Finanzinvestition ist in sich um eine Einheit unstimmig (Quellnotiz 11); gerechnet sind 30.444,24. Für die freie Tilgung gilt Tab. 11 des Lehrbuchs (31.567), nicht die Zusammenfassung in Tab. 15. Zu RF-20: Der letzte Punkt liest die Kernmodule des Referenzrechners und meldet jedes Zahlenliteral außer 0, 1, 2, 12 und den technischen Konstanten der Rechengenauigkeit; Sätze, Schwellen, Fristen und Suchgrenzen kommen nur aus dem Auftrag (R-3.1).
 
 **R-15.4 Plausibilitätstest Steuerparadoxon.** Im Standardbeispiel des Lehrbuchs ist der Kapitalwert vor Steuern negativ (−43) und nach Steuern positiv (+8). Der Test rechnet beide Werte mit der Kapitalwertfunktion des Kerns und prüft Vorzeichen und Betrag (RF-03). Er sichert, dass Abschreibung und Zinsabzug in der richtigen Richtung wirken.
 
 **R-15.5 Plausibilitätstest Hebelwirkung.** Liegt die Rendite des Objekts unter dem Kreditzins, steigt die VOFI-Rendite mit dem Eigenkapital (negativer Hebel); liegt sie darüber, fällt sie (positiver Hebel). Der Test prüft beide Richtungen. Standardbeispiel des Lehrbuchs, negativer Hebel: −0,83 / 1,72 / 3,14 / 4,04 / 4,67 / 5,08 / 5,21 / 5,31 % für 3.000 bis 10.000 Eigenkapital (RF-03). Testfall, positiver Hebel: 9,407 / 7,876 / 6,914 / 6,253 % für 300.000 bis 600.000 Euro Eigenkapital bei entsprechend kleinerem Darlehen (RF-05).
 
-**R-15.6 Noch fehlende Fälle.** Für Teil 2 vorgemerkt: KfW-Darlehen mit Tilgungszuschuss im Finanzplan des Neubaus, Auszahlung nach Baufortschritt mit Bereitstellungszinsen, Steuer in Grundform mit Sonderabschreibung, Mieterliste. Das zweite wohnungswirtschaftliche Beispiel bei Kirchner (48 Wohnungen, 50 Jahre) und der zweite Finanzplan des IWU (KfW 70) sind nicht ausgewertet (Quellnotiz 08).
+**R-15.6 Was unabhängig bestätigt ist.** Die festgeschriebenen Werte bestätigen zunächst nur, dass der Referenzrechner mit sich übereinstimmt. Darüber hinaus gilt:
+
+| Bestätigt durch | Umfang | Stand |
+|---|---|---|
+| veröffentlichte Werte | RF-01 bis RF-04; Testfall im Jahresmodus (drei frühere Gegenrechnungen) | unverändert nach der Überarbeitung |
+| Prüfrunde 1, Finanzmathematiker, Nachbau allein aus dem Text | Testfall in beiden Rastern (585.918,65 Euro im Monatsraster), Anschlussfinanzierung, Ankauf im Basis- und Stressfall mit tragbarem Preis | Testfall und Anschluss gelten weiter; der Ankauf ist auf dem Stand des Entwurfs bestätigt und hat sich mit den Regeln der Überarbeitung geändert |
+| Prüfrunde 1, Bank, eigene Rechnung | Bankdarlehen des Ankaufs mit kalkulatorischem Kapitaldienst: 1.226.609,99 Euro | trifft den neuen Wert |
+| `gegenrechnung.py` (RF-15), ohne die Module des Referenzrechners | Testfall im Monatsraster; Alternative mit zwei Sätzen; Anlaufverlust; Ankauf Basisfall mit neuem Mietpfad, kalkulatorischem Darlehen, Verkaufspreis, Endwert und Rendite | 16 Werte auf den Cent; schützt vor Programmfehlern, nicht vor einer falsch gelesenen Regel, weil sie vom selben Verfasser stammt |
+
+Offen und vor der Umsetzung in Rust nachzuholen: (1) Blindrechnung durch einen zweiten Bearbeiter, der nur dieses Dokument kennt, für den geförderten Neubau, die Personengesellschaft und die Privatperson im vollen Plan und die Preissuche; (2) Tabellenrechnung von RF-11 und RF-12 und Parallelrechnung von zwei bis drei echten Vorhaben gegen die bisherige Rechnung des Hauses – dafür braucht es Kalkulationen des Auftraggebers; (3) ein echter Tilgungsplan einer Bank gegen R-5.3 (`MA-013`).
+
+**R-15.7 Noch fehlende Fälle.** Für Teil 2 vorgemerkt: KfW-Darlehen mit Tilgungszuschuss, Auszahlung nach Baufortschritt, Steuer in Grundform mit Sonderabschreibung und Mindestbesteuerung, Mieterliste, Verdichtung nach Geschäftsjahr. Das zweite wohnungswirtschaftliche Beispiel bei Kirchner (48 Wohnungen, 50 Jahre) und der zweite Finanzplan des IWU (KfW 70) sind nicht ausgewertet (Quellnotiz 08).
 
 ## 16 Offene Punkte
 
@@ -873,99 +1097,152 @@ Zu RF-02: Mit der Mietreihe aus den Annahmen des Berichts endet die Nachrechnung
 
 | Thema | Inhalt | Teilschritt |
 |---|---|---|
-| Steuer in Grundform | Kalenderjahr, Vorauszahlungen, Abschreibungsplan je Gebäudeteil, Abschreibungswahl, Sonderabschreibung mit De-minimis-Prüfung (`MA-022`, `MA-023`, `MA-029`), Begrenzung der Verlustverrechnung (`MA-010`), Hinzurechnungen, anschaffungsnahe Herstellungskosten, Prüfungen der Befreiung | 1b |
-| Neubau | Kosten nach `DIN-276` mit Kostenständen, Mittelabfluss nach Bauablauf, Bauzeitzinsen mit Eigenkapitalquote auf die Gesamtkosten, Bereitstellungszinsen, kapitalisierte Zinsen, Erstvermietung, Liquiditätsplan | 1b-2 |
-| KfW | Neubaudarlehen mit Konditionen aus dem Katalog, Tilgungszuschuss, tilgungsfreie Anlaufjahre | 1b-2 |
+| Steuer in Grundform | Kalenderjahr, Vorauszahlungen, Abschreibungsplan je Gebäudeteil, Abschreibungswahl, Sonderabschreibung mit De-minimis-Prüfung (`MA-022`, `MA-023`, `MA-029`), Begrenzung der Verlustverrechnung (`MA-010`), Zinsschranke, Reinvestitionsrücklage, Prüfungen der Befreiung und der erweiterten Kürzung | 1b |
+| Neubau | Kosten nach `DIN-276` je Kostengruppe mit Kostenständen, Mittelabfluss nach Bauablauf, Bauzeitzinsen mit Eigenkapitalquote auf die Gesamtkosten, kapitalisierte Zinsen, Erstvermietung je Einheit, Liquiditätsplan | 1b-2 |
+| KfW | Konditionen in voller Tiefe, Tilgungszuschuss, Bereitstellungsprovision, mehrere Programme | 1b-2 |
 | NBank in voller Tiefe | Fördermodul, Auszahlung nach Baufortschritt, Entgeltaufrechnung, Renditeprüfung (`MA-001`), Teilförderung (`MA-006`), Antragssicht | 1c |
-| Mieterliste und Mietrecht | Miete je Einheit und Vertragsart, Wartefrist, Mietpreisbremse, Modernisierungsumlage, Leerstand mit Fluktuation | 1b-1 |
-| Darlehen in voller Tiefe | beliebig viele Tranchen, Zahlungsrhythmus je Tranche, Zinstage, Zinsschadenrechnung der Vorfälligkeit, Kreditkennzahlen je Periode | 1b |
-| Kennzahlen des vollen Blatts | Wertpfad, Amortisationsdauer, Gesamtkapitalrendite auf dem Blatt, Kapitalwert, Eigenkapitalvervielfacher, kritische Werte | 1b |
-| Risiko | Einzelstressfälle, Sensitivität, Tornado-Diagramm; Simulation mit Prozessdefinition | 1b; Stufe 2 |
+| Mieterliste und Mietrecht | Miete je Einheit und Vertragsart, Staffel- und Indexmiete, Modernisierungsumlage, Leerstand und Fluktuation je Einheit | 1b-1 |
+| Darlehen in voller Tiefe | beliebig viele Tranchen, Zahlungsrhythmus je Tranche, Zinstage, tilgungsfreie Anlaufjahre und Disagio des Bankdarlehens, Zinsschadenrechnung der Vorfälligkeit, Kreditkennzahlen je Periode als Bankvorlage | 1b |
+| Kennzahlen des vollen Blatts | Wertpfad, Amortisationsdauer, Gesamtkapitalrendite auf dem Blatt, Kapitalwert, Eigenkapitalvervielfacher, kritische Werte, Zwei-Wege-Tabelle des tragbaren Preises | 1b |
+| Risiko | Einzelstressfälle auf dem Blatt, Sensitivität, Tornado-Diagramm; Simulation mit Prozessdefinition | 1b; Stufe 2 |
 | Restwert | Nettoanfangsrendite und Ertragswert als Maßstab; Übernahme von Darlehen und Bindung durch den Käufer (`MA-017`) | 1b; 1c |
 | Entnahmen | geplante Ausschüttungen; danach die Entscheidung zu R-10.6, Eigenschaft 6, überprüfen. Kandidat, noch nicht untersucht: Entnahmen zuerst gegen noch nicht zurückgeführte Nachschüsse verrechnen | 1b |
+| Darstellung für Planung und Buchhaltung | Verdichtung nach Geschäftsjahr mit dem Beginnmonat als Vorgabe; Zuordnung der Zeilenkennungen (R-4.1) zu Konten; Abweichungsbrücke zwischen zwei Fassungen | 1b |
+| Katalog | Werte für KAT-01 und KAT-08 je Land und Gemeinde außerhalb Niedersachsens (Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen), am Landesrecht gelesen | vor 1a-Abnahme |
 
 ### Wer was klären kann
 
+Fragen an die Hausbank; die Voreinstellung nennt, womit der Kern bis zur Antwort rechnet.
+
+| Nr. | Frage | Voreinstellung des Kerns | Regel |
+|---|---|---|---|
+| 1 | Bezieht die Bank ihre Beleihungsgrenze auf alle Darlehen oder nur auf vorrangige und das eigene? Welchen Rang verlangt die NBank für ihr Darlehen? | Förderdarlehen und KfW-Darlehen belegen den Beleihungsraum; für übernommene Darlehen ist der Rang Eingabe | R-5.12, `MA-026` |
+| 2 | Auf welchen Wert bezieht sich die Quote: Kaufpreis oder Gesamtkosten, Marktwert oder Beleihungswert? Welcher Abstand des Beleihungswerts zum Kaufpreis ist bei Wohnanlagen üblich? | Kaufpreis, beim Neubau Gesamtkosten ohne Bauzeitzinsen; höherer Wertansatz nur mit Begründung | R-5.12, `MA-026` |
+| 3 | Rechnet die Kapitaldienstfähigkeit mit dem Vertragszins oder mit einem kalkulatorischen Zins und einer kalkulatorischen Tilgung, in welcher Höhe? Gilt das auch für übernommene Darlehen mit niedrigem Zins? | je Tranche der höhere aus Vertragszins und Anschlusszins; Tilgung mindestens H-04 | R-5.12, H-25 |
+| 4 | Welchen Ertrag setzt die Bank an: Vertragsmiete oder nachhaltige Miete? Mit eigenen Bewirtschaftungsansätzen? | der kleinere aus Miete und Vergleichsmiete; Bewirtschaftung mindestens KAT-14 | R-5.12 |
+| 5 | Über welchen Zeitraum und mit welcher Mindestdeckung prüft die Bank die Deckung; gibt es eine Auflage zur Zinsdeckung? | Bemessung im ersten Jahr der Vollvermietung mit H-03; Ausweis der kleinsten Deckung über die Haltedauer | R-10.14, R-10.20 |
+| 6 | Finanziert die Bank neben einem zinslosen NBank-Darlehen eine Restfinanzierung, wenn die Gesamtdeckung im ersten Jahr bei etwa 1,0 liegt? Bietet sie tilgungsfreie Anlaufjahre an? | kein Bankdarlehen (M-21) mit den Angaben nach R-11.15 | R-11.14, R-11.15 |
+| 7 | Welche Bereitstellungszinsen gelten (Satz, freie Zeit)? Zahlt die Bank nach Baufortschritt aus und verlangt sie Eigenkapital zuerst? | Satz und freie Zeit nach H-31; Eigenkapital zuerst | R-5.18, R-11.3 |
+| 8 | Wie berechnet die Bank die Vorfälligkeitsentschädigung, und welche Größenordnung je Jahr Restbindung ist üblich? | Pauschale H-18, Restbindung höchstens bis zum Kündigungsrecht | R-5.16, `MA-033` |
+| 9 | Wie wird nach der Zinsbindung prolongiert, und prüft die Bank die Kapitaldienstfähigkeit beim Anschluss neu? | Tilgungssatz bleibt; Anschlusszins heutiger Zins zuzüglich H-05 | R-5.9, `MA-034` |
+| 10 | Rechnet die Bank Disagio oder Bearbeitungsentgelt auf das eigene Darlehen? | keines in 1a | R-5.14 |
+
 | Frage | Wer | Regel |
 |---|---|---|
-| Werte der Vorgaben des Hauses H-01 bis H-23, darunter neu gegenüber der bisherigen Liste: Habenzins kurz und lang, Kontokorrentzins und -linie, Steigerungen, Mietausfallquote, Verkaufskosten, Bewirtschaftungspauschalen, Vorfälligkeitssatz, Voreinstellung der Haltedauer, Anpassungsdauer, Suchbereiche | Auftraggeber | R-3.4 |
-| Soll ein Fehlbetrag als Nachschuss aus Eigenkapital erscheinen (Linie null) oder rechnet das Haus mit einer Kontokorrentlinie? | Auftraggeber | R-4.5 |
-| Steht „gefördert oder frei finanziert“ am Anfang der Kalkulation? Davon hängt ab, ob R-11.14 in 1a bleibt | Auftraggeber | R-11.14 |
-| Begrenzt die Beleihungsquote alle Darlehen, rechnet die Deckung das Förderdarlehen mit, welcher Wertansatz gilt? Zusätzlich: Rechnet die Bank die Kapitaldienstfähigkeit mit dem Vertragszins oder mit einem kalkulatorischen Zins und einer kalkulatorischen Tilgung? Mit eigenen Bewirtschaftungspauschalen? | Hausbank | R-5.12, `MA-026` |
-| Wie berechnet die Bank die Vorfälligkeitsentschädigung; welche Prolongation ist üblich (Tilgungssatz, Rate, Restlaufzeit)? | Hausbank | R-5.16, R-5.9 |
 | Tilgungsplan des Förderdarlehens: Jahres- oder Monatsraten, Beginn mit Vollauszahlung oder Bezugsfertigkeit; ab wann zählt die zinslose Zeit? | NBank | R-5.11, `MA-002` |
 | Wird das Entgelt auf den Zuschuss gegen die erste Rate des Darlehens aufgerechnet? | NBank | R-5.14 |
 | Rückzahlung des Zuschusses beim Verkauf: zeitanteilig nach Monaten? Übernahme von Darlehen und Bindung durch den Käufer? | NBank | R-8.7, `MA-017` |
-| Mit der vorsichtigen Lesart von `MA-026` und der Tilgung nach `MA-002` bleibt im geförderten Neubau des Referenzfalls kein Bankdarlehen (R-11.14). Entspricht das der Praxis? | NBank, Hausbank | R-5.12 |
-| Erfasst die erweiterte Kürzung in der Praxis des Investors Habenzinsen und Verkaufsgewinn? Gewerbesteuer auf den Verkaufsgewinn je Steuerstatus | Steuerberater | R-7.8 |
-| Zuschüsse: Minderung der Abschreibungsgrundlage oder Ertrag? Behandlung der Rückzahlung | Steuerberater | R-7.3, R-7.4 |
-| Finanzierungskosten in der Kurzform sofort abziehbar (Entgelte, Disagio, Bauzeitzinsen, Vorfälligkeit)? | Steuerberater | R-7.2 |
-| Steuersatz auf Zinserträge je Steuerstatus; Besteuerung der Unterlassensalternative bei erweiterter Kürzung | Steuerberater | R-7.10, R-9.5 |
+| Im geförderten Neubau des Referenzfalls bleibt nach der vorsichtigen Lesart kein Bankdarlehen (R-11.14). Entspricht das der Praxis? | NBank, Hausbank | R-5.12 |
+| Unterliegt der Gewinn aus dem Verkauf des Objekts bei erweiterter Kürzung der Gewerbesteuer? | Steuerberater | R-7.8, `MA-030` |
+| Steuerliche Einordnung des NBank-Zuschusses: sofortige Einnahme, über die Bindung verteilt oder Minderung der Herstellungskosten? | Steuerberater | R-7.19, `MA-031` |
+| Vorfälligkeitsentschädigung der Privatperson beim Verkauf; Verteilung der Entgelte bei der Privatperson | Steuerberater | R-7.15, `MA-032` |
+| Objektverkauf der GmbH & Co. KG: laufender Gewinn oder begünstigter Aufgabegewinn? | Steuerberater | R-7.18, `MA-036` |
+| Verkauf in der befreiten Genossenschaft: Bleibt die Befreiung im Verkaufsjahr erhalten? | Steuerberater | R-7.12 |
+| Werte aller Vorgaben des Hauses H-01 bis H-31 – rund 60 Einzelwerte, darunter die neun Stresshöhen, die Staffel der Instandhaltung, Zuschläge und Suchbereiche; dazu als Freigabeblatt mit Einheit und Vorschlag | Auftraggeber | R-3.4 |
+| Soll ein Fehlbetrag als Nachschuss aus Eigenkapital erscheinen (Linie null) oder rechnet das Haus mit einer Kontokorrentlinie? | Auftraggeber | R-4.5 |
+| Haltedauer und Zielrendite im geförderten Bau: Gilt „Bindungsende plus ein Jahr“ als Voreinstellung, und welche Zielrendite gilt dort? | Auftraggeber | R-11.14 |
+| Steht „gefördert oder frei finanziert“ am Anfang der Kalkulation? Davon hängt ab, ob R-11.14 in 1a bleibt | Auftraggeber | R-11.14 |
+| Kalkulationen von zwei bis drei abgeschlossenen Vorhaben für die Parallelrechnung | Auftraggeber | R-15.6 |
 | Lösungsansatz für mehrere Einlagen und Entnahmen bei `ROPETER-1998`; Abgrenzung der Sollzinsen und Amortisationsregel bei `GROB-EINFUEHRUNG` | Fachliteratur | `MA-012`, `MA-027`, `MA-028` |
 
-## 17 Vorschlagsliste
+## 17 Festlegungen, Nachführung und Vorschläge
 
-Dieses Dokument ändert keine andere Datei. Die folgenden Punkte sind Vorschläge an die Projektsteuerung.
+Mit der Überarbeitung nach Prüfrunde 1 sind das Verzeichnis der Modellannahmen, das Quellenkataster und die betroffenen Zeilen der Spezifikation nachgeführt (Sichtung, Punkte 43 bis 45). Was darüber hinaus offen ist, steht hier als Vorschlag an die Projektsteuerung.
 
 ### Neue Festlegungen dieses Dokuments
 
-| Nr. | Regel | Festlegung |
-|---|---|---|
-| NF-01 | R-2.4 | Haltedauer in ganzen Jahren; Planjahr sind zwölf Monate ab dem Stichtag |
-| NF-02 | R-2.5 | alle laufenden Zahlungen am Periodenende, auch die Miete |
-| NF-03 | R-2.6 | Darlehenszins nominal; Konten, Unterlassensalternative und Zielrendite effektiv, konform umgerechnet |
-| NF-04 | R-2.7, R-2.8 | Steuerjahr ist das Planjahr, Zahlung im letzten Monat; Sätze des Kalenderjahres Startjahr + j − 1 |
-| NF-05 | R-2.9 | Basisperioden je Zahlungsart |
-| NF-06 | R-4.5 | Kontokorrentlinie als Vorgabe, Voreinstellung null; Fehlbetrag wird Nachschuss derselben Periode |
-| NF-07 | R-5.9 | nach der Zinsbindung bleibt der Tilgungssatz; zwei weitere Regeln wählbar |
-| NF-08 | R-5.8 | Zinsbindung zählt ab dem Stichtag |
-| NF-09 | R-5.12 | Mindestdeckung mit gerundeter Rate zur sicheren Seite; heutiger Zins und Tilgungssatz des Vorhabens |
-| NF-10 | R-5.16 | Vorfälligkeit pauschal aus Restschuld, Satz und Restbindung; nicht für Förderdarlehen |
-| NF-11 | R-5.11 | Raten übriger Darlehen im Takt des Rasters |
-| NF-12 | R-6.3 | linearer Anpassungspfad mit Kappung gegen die Miete drei Jahre zuvor |
-| NF-13 | R-6.4 | Mietausfall als Erlösminderung |
-| NF-14 | R-6.5, R-6.6 | gebundene Miete in Stufen, nie über der Marktmiete; danach Anpassungspfad |
-| NF-15 | R-6.10 | Investitionsstau: Zahlung im letzten Monat des Jahres zum Preisstand des Jahres; Erhaltung abziehbar, Modernisierung aktiviert |
-| NF-16 | R-7.2 | Finanzierungskosten in der Kurzform im Jahr der Zahlung abziehbar |
-| NF-17 | R-7.3 | Abschreibung je Planjahr, zeitanteilig; Zuschüsse mindern die Grundlage |
-| NF-18 | R-7.5 | Kurzform verrechnet Verlustvorträge unbeschränkt; getrennte Vorträge |
-| NF-19 | R-7.6 | sofortige Verrechnung ist linear; Freibetrag und Abrundung gelten als verbraucht |
-| NF-20 | R-7.8 | Kennzeichen der erweiterten Kürzung erfasst in der Kurzform den ganzen Gewerbeertrag |
-| NF-21 | R-7.9 | Anteil natürlicher Personen als Eingabe |
-| NF-22 | R-7.10, R-7.11 | Privatperson mit zwei Töpfen; negativer Verkaufsgewinn bleibt unberücksichtigt |
-| NF-23 | R-8.1 | Verkaufsfaktor bezieht sich auf die Sollmiete der zwölf Monate nach dem Stichtag |
-| NF-24 | R-9.4 | Reihenfolge der Entnahmen in der Unterlassensalternative |
-| NF-25 | R-10.4, R-10.5, R-10.8 | Vergleichsfaktor aus dem kurzfristigen Habenzins nach Steuern; Vergleichsrendite mit derselben Formel |
-| NF-26 | R-10.6 | Zeitpunktabhängigkeit der Rendite wird hingenommen |
-| NF-27 | R-10.9 | Endwertüberschuss = Z − D x (1 + z)^n |
-| NF-28 | R-10.11 | Gesamtkapitalrendite mit Z, D, Z_U und Entlastung je Jahr |
-| NF-29 | R-10.12 | Amortisationsdauer mit gespiegelter Vergleichsgröße |
-| NF-30 | R-10.14 | Abgrenzung von Reinertrag und Kapitaldienst |
-| NF-31 | R-10.16 | Restwertanteil aus dem Restwertbeitrag |
-| NF-32 | R-11.2 | Neubau: Mittelbedarf und Wertansatz ohne Bauzeitzinsen; diese trägt das Eigenkapital |
-| NF-33 | R-11.3 | Mittelabruf: Eigenkapital, dann Fördermittel im Verhältnis, dann Bankdarlehen; Baukosten gleichmäßig |
-| NF-34 | R-11.5 | Preis in vollen Euro, ganzzahlige Suche, Suchbereich |
-| NF-35 | R-11.8 | Stressfall mit Darlehen und Fördermitteln des Basisfalls beim selben Preis |
-| NF-36 | R-11.9 | Liste der suchbaren Eingaben mit Auflösung |
-| NF-37 | R-12.4 | zwölf Nachkommastellen für Sätze, Faktoren und Indexstände |
-| NF-38 | R-11.14 | Abgrenzungen der Grobförderung |
+Stand: „Entwurf“ heißt unverändert seit dem Entwurf; „geändert“ und „neu“ beziehen sich auf die Überarbeitung nach Prüfrunde 1.
+
+| Nr. | Regel | Festlegung | Stand |
+|---|---|---|---|
+| NF-01 | R-2.4 | Haltedauer in ganzen Jahren; Planjahr sind zwölf Monate ab dem Stichtag | Entwurf |
+| NF-02 | R-2.5 | alle laufenden Zahlungen am Periodenende, auch die Miete | Entwurf |
+| NF-03 | R-2.6 | Darlehenszins nominal; Konten, Unterlassensalternative und Zielrendite effektiv, konform umgerechnet | Entwurf |
+| NF-04 | R-2.7, R-2.8 | Steuerjahr ist das Planjahr, Zahlung im letzten Monat; Sätze des Kalenderjahres Startjahr + j − 1 | Entwurf |
+| NF-05 | R-2.9 | Basisperioden je Zahlungsart | Entwurf |
+| NF-06 | R-4.5 | Kontokorrentlinie als Vorgabe, Voreinstellung null; Fehlbetrag wird Nachschuss derselben Periode | Entwurf |
+| NF-07 | R-5.9 | nach der Zinsbindung bleibt der Tilgungssatz; zwei weitere Regeln wählbar; die Restlaufzeit wird auf ganze Perioden abgerundet, ohne Tilgung Rückfall mit M-40 | geändert (Ränder) |
+| NF-08 | R-5.8 | Zinsbindung zählt ab dem Stichtag | Entwurf |
+| NF-09 | R-5.12 | Mindestdeckung mit gerundeter Rate zur sicheren Seite; kalkulatorischer Zins und kalkulatorische Tilgung je Tranche; nachhaltiger Reinertrag; Deckung immer über alle Darlehen | geändert |
+| NF-10 | R-5.16 | Vorfälligkeit pauschal aus Restschuld, Satz und Restbindung; Restbindung höchstens bis zum Kündigungsrecht; nicht für Förderdarlehen | geändert |
+| NF-11 | R-5.11 | Raten übriger Darlehen im Takt des Rasters; Rate des übernommenen Darlehens aus dem ursprünglichen Nennbetrag | geändert (Nennbetrag) |
+| NF-12 | R-6.3 | Mietpfad je Monat zur Vergleichsmiete mit Wartefrist und Kappung; Planjahr 1 mit der Ist-Miete; Miete über der Vergleichsmiete bleibt stehen, bis die Vergleichsmiete sie einholt | geändert |
+| NF-13 | R-6.4 | Mietausfall als Erlösminderung; getrennt in strukturellen Leerstand und Forderungsausfall | geändert (Trennung) |
+| NF-14 | R-6.5, R-6.6 | gebundene Miete in Stufen aus dem Katalog; nach der Bindung Mietpfad nach R-6.3 | geändert (Katalogwerte, Anschluss an R-6.3) |
+| NF-15 | R-6.10 | Investitionsstau: Zahlung im letzten Monat des Jahres zum Preisstand des Jahres; Erhaltung abziehbar, Modernisierung aktiviert; Prüfung nach R-6.16 | geändert |
+| NF-16 | R-7.2 | Bemessung aus drei Größen; Finanzierungskosten nach R-7.15 | geändert |
+| NF-17 | R-7.3 | Abschreibung je Planjahr, zeitanteilig; Zuschüsse mindern die Grundlage nur in einer Lesart von `MA-031` | geändert |
+| NF-18 | R-7.5 | Kurzform verrechnet Verlustvorträge unbeschränkt; getrennte Vorträge; Hinweis M-45 | Entwurf, Hinweis neu |
+| NF-19 | R-7.6 | sofortige Verrechnung ist linear; Freibetrag und Abrundung gelten als verbraucht; bei der Personengesellschaft nur für die Einkommensteuer | geändert |
+| NF-20 | R-7.8, R-9.5 | Kennzeichen der erweiterten Kürzung kürzt nur den Ertrag aus dem Grundbesitz; Zinsen bleiben gewerbesteuerpflichtig, auch in der Alternative; Verkaufsgewinn nach `MA-030` | geändert |
+| NF-21 | R-7.9 | Anteil natürlicher Personen als Eingabe | Entwurf |
+| NF-22 | R-7.10, R-7.11 | Privatperson mit zwei Töpfen; steuerpflichtiger Verkaufsgewinn wird mit Vermietungsverlust und Vortrag verrechnet; negativer Verkaufsgewinn bleibt unberücksichtigt | geändert |
+| NF-23 | R-8.1 | Verkaufsfaktor bezieht sich auf die maßgebliche Jahresmiete zum Verkaufsstichtag: nach strukturellem Leerstand, abzüglich Erbbauzins | geändert |
+| NF-24 | R-9.4 | Reihenfolge der Entnahmen in der Unterlassensalternative | Entwurf |
+| NF-25 | R-10.4, R-10.5, R-10.8 | Vergleichsfaktor aus dem kurzfristigen Habenzins nach Steuern; Vergleichsrendite mit derselben Formel | Entwurf |
+| NF-26 | R-10.6 | Zeitpunktabhängigkeit der Rendite wird hingenommen | Entwurf |
+| NF-27 | R-10.9 | Endwertüberschuss = Z − D x (1 + z)^n; Zielgröße der Suchen | Entwurf, Verwendung neu |
+| NF-28 | R-10.11 | Gesamtkapitalrendite mit Z, D, Z_U und Entlastung je Jahr; a_0 ist die abgezinste Investition der Investitionsphase | geändert |
+| NF-29 | R-10.12 | Amortisationsdauer mit gespiegelter Vergleichsgröße | Entwurf |
+| NF-30 | R-10.14 | Abgrenzung von Reinertrag und Kapitaldienst; kleinste Deckung über die Haltedauer und Deckung nach jeder Zinsbindung; M-38, M-39 | erweitert |
+| NF-31 | R-10.16 | Restwertanteil aus dem Restwertbeitrag | Entwurf |
+| NF-32 | R-11.2 | Neubau: Mittelbedarf und Wertansatz ohne Bauzeit- und Bereitstellungszinsen; diese trägt das Eigenkapital | Entwurf |
+| NF-33 | R-11.3 | Mittelabruf: Eigenkapital, dann Fördermittel im Verhältnis, dann KfW-Darlehen, dann Bankdarlehen; Baukosten in Monatsraten | geändert (KfW, Raten) |
+| NF-34 | R-11.4, R-11.5 | tragbarer Preis ist der größte Preis, bis zu dem das Ziel für jeden kleineren erreicht ist; ganzzahlige Suche mit Nachsuche; Meldung bei Nichtmonotonie | geändert |
+| NF-35 | R-11.8 | Stressfall mit Darlehen und Fördermitteln des Basisfalls beim selben Preis; neun Größen; Anschlussstress auf jede Tranche | erweitert |
+| NF-36 | R-11.9 | Liste der suchbaren Eingaben mit Auflösung; Vergleichsmiete neu | geändert (Liste) |
+| NF-37 | R-12.4 | zwölf Nachkommastellen für Sätze, Faktoren und Indexstände | Entwurf |
+| NF-38 | R-11.14 | Abgrenzungen der Grobförderung; Voreinstellung der Haltedauer im geförderten Bau | geändert |
+| NF-39 | R-3.2 | jede Vorgabe des Hauses hat eine Richtung „strenger“; Lockerung nur mit Begründung; Liste der Abweichungen auf dem Blatt | neu |
+| NF-40 | R-5.18 | Bereitstellungszins auf den nicht ausgezahlten Betrag nach der freien Zeit | neu |
+| NF-41 | R-5.19 | KfW-Darlehen als eigene Tranche in der Grobkalkulation des Neubaus | neu |
+| NF-42 | R-6.7 | Anlaufleerstand bei Erstvermietung | neu |
+| NF-43 | R-6.13 | leere Flächen werden zur Neuvermietungsmiete vermietet, begrenzt durch die Mietpreisbremse | neu |
+| NF-44 | R-6.14 | Fluktuation als Vorgabe, voreingestellt null | neu |
+| NF-45 | R-6.15 | sonstige Erträge und Stellplätze | neu |
+| NF-46 | R-6.16 | anschaffungsnahe Herstellungskosten als Rechenregel | neu |
+| NF-47 | R-7.8 | die Hinzurechnung der Entgelte für die Finanzierung des Grundbesitzes gehört zum gekürzten Ertrag | neu |
+| NF-48 | R-7.15 | Finanzierungskosten steuerlich: im Betriebsvermögen verteilt, sonst bei Zahlung | neu |
+| NF-49 | R-7.16 | Hinzurechnung als Formelzeile | neu |
+| NF-50 | R-7.17 | steuerpflichtige Körperschaft ohne Gewerbesteuer | neu |
+| NF-51 | R-7.19 | Zuschuss steuerlich in drei Lesarten; voreingestellt die sofortige Einnahme | neu |
+| NF-52 | R-10.15 | „Darlehen zu Kaufpreis“ statt Beleihungsauslauf; Restschuld zum Wert am Ende der Zinsbindung | neu |
+| NF-53 | R-10.20 bis R-10.23 | Zinsdeckung, Kapitaldienstreserve, Deckungsgrenzen, Kapitaldienst je Darlehen | neu |
+| NF-54 | R-11.2 | Kostenkennwert für die Kostengruppen 300 und 400, Zuschläge für die übrigen, Fortschreibung je Monatsrate | neu |
+| NF-55 | R-11.6 | Eigenkapitalgrenze gegen Einlagen und alle Nachschüsse | neu |
+| NF-56 | R-11.11 | Vergleich über alle Blattgrößen mit abweichenden Werten; eingefrorener Stand mit Kernversion | neu |
+| NF-57 | R-11.15 | Angaben zum Ergebnis ohne Bankdarlehen | neu |
+| NF-58 | R-12.7 | Summen aus den Cent-Werten; Ausweis der Rundungsdifferenz bei Anzeige in vollen Euro | neu |
+
+### Setzungen der Überarbeitung, die über die Sichtung hinausgehen
+
+Die Sichtung gibt die Richtung vor; diese Einzelheiten musste die Überarbeitung selbst setzen. Sie sind in den Regeln begründet und hier gesammelt, damit die nächste Prüfrunde sie gezielt ansieht.
+
+1. **Maßstab der vorsichtigen Lesart ist die Endwertdifferenz, nicht der Endwert** (R-7.19, R-7.15, R-11.8). Die Sichtung nennt für den Zuschuss „die Lesart mit dem niedrigsten Endwert“. Die sofortige Einnahme hat den höchsten Endwert, weil die frühe Steuer als Nachschuss eingezahlt wird, aber die niedrigste Endwertdifferenz und Rendite; voreingestellt ist sie.
+2. **Verlustverrechnung (`MA-016`):** Die sofortige Verrechnung ist nicht in jedem Fall die günstigere Lesart. Im Ankauf ergibt sie 4,523 % gegen 4,527 % mit Vortrag, weil der Freibetrag der Hinzurechnung bei ihr als verbraucht gilt. Die Voreinstellung bleibt der Vortrag; die Begründung ist die Annahme über andere Gewinne, nicht die Richtung.
+3. **Miete:** Planjahr 1 trägt immer die Ist-Miete, die erste Erhöhung fällt frühestens in den Monat 13 (R-6.3). Im Neubau folgt die Miete nach dem Bezug demselben Pfad mit Wartefrist statt einer jährlichen Steigerung (R-6.7). Katalogwerte der Gemeinde (KAT-08) gelten mit dem Stand des Stichtags über die ganze Haltedauer.
+4. **Darlehen:** Das KfW-Darlehen belegt den Beleihungsraum der Bank immer (R-5.19). Beim übernommenen Darlehen zählt die Frist des Kündigungsrechts ab dem Stichtag, weil das Datum des vollständigen Empfangs keine Eingabe ist (R-5.16); das ist die vorsichtige Lesart. Ein Entgelt auf den Zuschuss wird steuerlich wie ein Darlehensentgelt behandelt (R-7.15).
+5. **Steuer:** Bei der Körperschaft ohne Gewerbesteuer ist der Verkaufsgewinn stets steuerpflichtig, und Entgelte werden wie im Betriebsvermögen verteilt (R-7.17).
+6. **Suche:** Zielgröße ist der Endwertüberschuss; das Fenster der Nachsuche ist eine Vorgabe (H-21). Der Leerstand des Stressfalls ist auf 100 % begrenzt. Die Prüfung der Haltedauer gegen die verlängerte Bauzeit läuft schon vor dem Basisfall (R-14.4).
+7. **KfW-Vorteil:** Mit dem kalkulatorischen Kapitaldienst hebt ein KfW-Darlehen von 3 Mio. Euro den tragbaren Grundstückspreis des Referenzfalls um 221.477 Euro (von 702.767 auf 924.244 Euro). Die 538.626 Euro des Prüfberichts entsprechen der Lesart mit Vertragskonditionen; dort sind es im Referenzfall 409.454 Euro (876.926 gegen 1.286.380 Euro).
 
 ### Widersprüche und Lücken in Spezifikation, Bericht und Verzeichnissen
 
 Gefolgt wurde in jedem Fall der Spezifikation.
 
-1. **Monatsraster des Testfalls.** Der Bericht (Anhang A.6) nennt 585.937,57 Euro und rechnet die Konten mit einem Zwölftel des Jahressatzes; die Spezifikation verlangt effektive Vergleichssätze. Nach R-2.6 sind es 585.918,72 Euro. RF-06 führt beide Werte.
+1. **Monatsraster des Testfalls.** Der Bericht (Anhang A.6) nennt 585.937,57 Euro und rechnet die Konten mit einem Zwölftel des Jahressatzes; die Spezifikation verlangt effektive Vergleichssätze. Nach R-2.6 und mit der Abschreibung am Ende jedes Planjahres (R-7.3) sind es 585.918,65 Euro. RF-06 führt beide Werte.
 2. **Vergleichszins der Rendite.** Der Bericht (Anhang A.3 Nr. 12) vergleicht mit q^(N/n) − 1 aus einem Zinssatz; die Spezifikation rechnet die Unterlassensalternative mit zwei Sätzen. Ersetzt durch die Vergleichsrendite (R-10.8).
 3. **Endwertüberschuss.** Die Beschreibung im Bericht (Abschnitt 3) lässt bei späteren Einlagen zwei Lesarten zu, die der Rendite widersprechen können (R-10.9: 68.101,94 und 71.817,14 gegen 63.919,08 Euro).
 4. **Endwertdifferenz und Zeitpunkt.** Spezifikation Kapitel 2, Zeile „Kennzahlen“, begründet die führende Rolle der Endwertdifferenz damit, dass sie nicht vom Monat der Einlagen und Entnahmen abhängt. Das gilt exakt nur bei gleichen Zinssätzen der Alternative und Entnahmen aus Guthaben (R-10.6, Eigenschaften 4 und 5).
-5. **Zwei oder drei Grenzen.** Spezifikation Kapitel 2, Zeile „Grobkalkulation“, nennt im zweiten Satz den „kleineren Wert“ aus zwei Grenzen und im vierten die Restfinanzierung als dritte. Gemeint ist der kleinste von drei Werten (R-5.12).
-6. **Jahresraten des Förderdarlehens.** `MA-002` nennt gleichbleibende Jahresraten; der Kern rechnet im Monatsraster Monatsraten (R-5.11). Der Kapitaldienst im Beispiel des Berichts (155.571 Euro auf 5,4 Mio. Euro) ist jährlich gerechnet; monatlich ist der Beitrag etwas kleiner.
-7. **Index ungerundet.** Der Bericht (Anhang A.2 Nr. 10) schreibt den Index ungerundet fort; R-12.4 rundet auf zwölf Stellen, damit das Ergebnis auf jedem Rechner gleich ist.
-8. **Deckung im Stressfall.** Das Blatt der Grobkalkulation zeigt die Deckung im ersten Jahr der Vollvermietung. Den erhöhten Anschlusszins des Stressfalls zeigt diese Zahl nicht, weil er erst nach der Zinsbindung wirkt. Vorschlag: im Stressfall zusätzlich die kleinste Deckung über die Haltedauer mit ihrem Jahr.
-9. **Zahl der Eingaben.** Der Bericht zählt den Ankauf gebundener Bestände nicht aus; es sind 26 (R-3.6).
-10. **Kennzahlen der gif.** `GIF-KENNZAHLENKATALOG` ist im Kataster nur als Sekundärquelle geführt; R-10.13 folgt der Spezifikation (Zeile „Restwert“) und der üblichen Fassung.
+5. **Index ungerundet.** Der Bericht (Anhang A.2 Nr. 10) schreibt den Index ungerundet fort; R-12.4 rundet auf zwölf Stellen, damit das Ergebnis auf jedem Rechner gleich ist.
+6. **Zahl der Eingaben.** Die Spezifikation nennt für die Grobkalkulation rund 15 und rund 20 Eingaben. Mit den Ergänzungen der Prüfrunde sind es 16 Felder beim Ankauf und 17 beim Neubau, davon je vier mit Voreinstellung (R-3.6). Der Bericht zählt den Ankauf gebundener Bestände nicht aus.
+7. **Kennzahlen der gif.** `GIF-KENNZAHLENKATALOG` ist im Kataster nur als Sekundärquelle geführt; R-10.13 folgt der Spezifikation (Zeile „Restwert“) und der üblichen Fassung.
+8. **Mietausfallquote.** Die Spezifikation und der Bericht sprechen von einer Mietausfallquote; dieses Dokument trennt strukturellen Leerstand (H-15, wirkt auch auf den Verkaufspreis) und Forderungsausfall (H-27).
+9. **Spezifikation Kapitel 3.** Die Zeilen „Kontrollsummen“, „Abnahmetests“, „Lehrbuchkennzahlen“ und „Unterlassensalternative“ nennen noch den Stand vor diesem Dokument (Vorschläge unten); sie lagen außerhalb des Auftrags dieser Überarbeitung.
 
-### Änderungen an `docs/spezifikation.md`
+### Nachführung in `docs/spezifikation.md`
+
+Geändert mit dieser Überarbeitung, je mit Zeile im Entscheidungsprotokoll: Kapitel 1 „Steuerstatus“ und „Regionaler Schwerpunkt“; Kapitel 2 „Kennzahlen“, „Zielrendite und Schwellen“, „Teilschritte der Stufe 1“ und „Grobkalkulation“; Kapitel 3 „Restwert“; Kapitel 4 „Regeln auf ungeklärter Grundlage“. Weiter offen als Vorschlag:
 
 | Stelle | Vorschlag |
 |---|---|
@@ -974,51 +1251,195 @@ Gefolgt wurde in jedem Fall der Spezifikation.
 | Kapitel 3, „Ausschüttungen und Nachschüsse“ | Formel fest nach R-10.3 bis R-10.9; „Vergleichssätze“ benennen: Habenzins, Anlagezins, Kontokorrentzins, Zielrendite effektiv; Darlehenszins nominal |
 | Kapitel 3, „Unterlassensalternative“ | Reihenfolge bei Entnahmen (R-9.4) und Steuerstatus der Alternative (R-9.5) ergänzen |
 | Kapitel 3, „Lehrbuchkennzahlen“ | Status „fest“ für Gesamtkapitalrendite und Amortisationsregel nach R-10.11 und R-10.12; Amortisationsdauer ab der Vollkalkulation |
-| Kapitel 3, „Kontrollsummen“ | Liste P-01 bis P-14 |
-| Kapitel 3, „Abnahmetests“ | Referenzfälle RF-01 bis RF-15; für IWU 2013 zusätzlich die Mietreihe aus den Annahmen mit einem Euro Toleranz |
-| Kapitel 2, „Kennzahlen“ | Begründung der Endwertdifferenz präzisieren (Punkt 4 oben) |
-| Kapitel 2, „Grobkalkulation“ | „kleinster von drei Werten“; Wertansatz und Mittelbedarf beim Neubau ohne Bauzeitzinsen; Stressfall mit dem Darlehen des Basisfalls beim selben Preis; Preis in vollen Euro |
-| Kapitel 2, „Zielrendite und Schwellen“ | Liste der Vorgaben des Hauses um H-08 bis H-23 ergänzen |
+| Kapitel 3, „Kontrollsummen“ | Liste P-01 bis P-19; Sperre nach R-13.1 |
+| Kapitel 3, „Abnahmetests“ | Referenzfälle RF-01 bis RF-20; für IWU 2013 zusätzlich die Mietreihe aus den Annahmen mit einem Euro Toleranz; Blindrechnung nach R-15.6 |
 
-Dazu: das Dokument in `docs/README.md` (Teil A) und in der Tabelle „Pflichtlektüre“ von `CLAUDE.md` eintragen; `skripte/LIESMICH.md` um den Ordner `referenzrechner/` ergänzen.
+Dazu: `skripte/LIESMICH.md` im Ordner der Recherche um den Ordner `referenzrechner/` ergänzen.
 
 ### Modellannahmen
 
+Eingetragen mit dieser Überarbeitung: `MA-030` bis `MA-037`; angepasst: `MA-002`, `MA-016`, `MA-026`. Die Kennungen stehen an den Regeln, in denen die Annahme wirkt.
+
+| Kennung | Annahme | Gewicht | Regel | Wirkung im Referenzfall |
+|---|---|---|---|---|
+| `MA-030` | Der Verkaufsgewinn unterliegt bei erweiterter Kürzung der Gewerbesteuer | hoch | R-7.8 | Ankauf: Rendite 4,697 % gegen 5,161 % in der anderen Lesart |
+| `MA-031` | Der Zuschuss ist bei Zufluss steuerpflichtige Einnahme | hoch | R-7.19 | geförderter Neubau: 3,558 % gegen 3,973 % (verteilt) und 3,974 % (Minderung) |
+| `MA-032` | Finanzierungskosten: im Betriebsvermögen verteilt; Vorfälligkeit abziehbar, bei der Privatperson Veräußerungskosten | mittel | R-7.15, R-7.11 | geförderter Neubau: 3,558 % gegen 3,573 % bei Sofortabzug |
+| `MA-033` | Vorfälligkeitsentschädigung als Pauschale | mittel | R-5.16 | Verkauf nach einem Jahr: 108.146,07 Euro |
+| `MA-034` | Prolongation mit unverändertem Tilgungssatz | gering | R-5.9 | Endwertdifferenz 753.701,96 Euro gegen 754.107,08 und 754.381,58 Euro; Deckung im Jahr 11 2,0853 gegen 1,8358 und 1,7002 |
+| `MA-035` | CO2-Ausstoß näherungsweise aus Effizienzklasse und Energieträger | gering | R-6.9 | wirkt nur, wenn der Ausstoß nicht eingegeben ist |
+| `MA-036` | Objektverkauf der GmbH & Co. KG ist laufender Gewinn | mittel | R-7.18 | 3,324 % gegen 3,487 % als Aufgabegewinn |
+| `MA-037` | Ohne Mietenhistorie gilt die letzte Erhöhung als zum Stichtag erfolgt und die Kappungsgrenze als ausgeschöpft | mittel | R-6.3 | tragbarer Preis 2.317.235 Euro gegen 2.322.775 Euro |
+
+Weiter offen als Vorschlag an das Verzeichnis:
+
 | Kennung | Vorschlag |
 |---|---|
-| `MA-012` | Annahme neu fassen nach R-10.3 bis R-10.8: Vergleichsfaktor ist der kurzfristige Habenzins nach Steuern; verglichen wird mit der Vergleichsrendite der Unterlassensalternative. Andere Lesarten mit den Zahlen aus R-10.6. Umschaltbar bleibt „nein“. Status offen bis `ROPETER-1998` gelesen ist; Wirkort zusätzlich: dieses Dokument, R-10.5 bis R-10.9 |
+| `MA-012` | Annahme neu fassen nach R-10.3 bis R-10.8: Vergleichsfaktor ist der kurzfristige Habenzins nach Steuern; verglichen wird mit der Vergleichsrendite der Unterlassensalternative. Andere Lesarten mit den Zahlen aus R-10.6. Status offen, bis `ROPETER-1998` gelesen ist |
 | `MA-013` | ergänzen: Rate einmal gerundet, Tilgung als Differenz (R-5.3) |
-| `MA-002` | ergänzen: Raten im Takt des Rasters; Tilgung und zinslose Zeit ab dem Monat nach der Bauzeit (R-5.11) |
-| `MA-016` | ergänzen: Fassung der anderen Lesart nach R-7.6; Wirkung im Ankauf 5,162 % gegen 5,260 % |
 | `MA-017` | ergänzen: zeitanteilige Rückzahlung nach Monaten (R-8.7); Übernahme durch den Käufer in Teil 1 nicht gebaut |
-| `MA-026` | ergänzen: Kapitaldienst in (b) mit heutigem Zins und Tilgungssatz; Frage nach kalkulatorischem Zins; Befund zum geförderten Neubau (R-11.14) |
 | `MA-027` | ergänzen: gespiegelte Vergleichsgröße; Kennzahl ab der Vollkalkulation |
-| `MA-028` | ergänzen: Erweiterung auf mehrere Einlagen und Entlastung je Jahr (R-10.11) |
-| neu | **Reichweite der erweiterten Kürzung in der Kurzform.** Annahme: Das Kennzeichen lässt die Gewerbesteuer auf den ganzen Gewerbeertrag des Vorhabens entfallen, auch auf Habenzinsen und Verkaufsgewinn. Andere Lesart: Zinsen und Verkaufsgewinn bleiben gewerbesteuerpflichtig. Ausnahme von der Vorsichtsregel, begründet mit dem Wortlaut des Berichts. Gewicht hoch (im Ankauf 155.680 Euro Gewerbesteuer auf den Verkaufsgewinn). Klärung: Steuerberater. Wirkt in R-7.8, R-7.14, R-9.5 |
-| neu | **Zuschüsse in der Steuer.** Annahme: Zuschüsse mindern die Abschreibungsgrundlage; eine Rückzahlung erhöht den Buchwert. Andere Lesart: sofort steuerpflichtiger Ertrag. Gewicht mittel. Klärung: Steuerberater. Wirkt in R-7.2 bis R-7.4 |
-| neu | **Finanzierungskosten in der Kurzform.** Annahme: Entgelte, Disagio, Zinsen der Bauzeit und Vorfälligkeit sind im Jahr der Zahlung abziehbar. Andere Lesart: Verteilung oder Aktivierung. Gewicht gering bis mittel. Klärung: Steuerberater. Wirkt in R-7.2 |
-| neu | **Vorfälligkeitsentschädigung.** Annahme: Pauschale aus Restschuld, Satz des Hauses und Restbindung. Andere Lesart: Zinsschadenrechnung der Bank. Gewicht gering. Klärung: Hausbank. Wirkt in R-5.16 |
-| neu | **Prolongation nach der Zinsbindung.** Annahme: Die Bank setzt die Rate aus der Restschuld mit Anschlusszins und unverändertem Tilgungssatz neu. Andere Lesarten: Rate bleibt; Restlaufzeit bleibt. Gewicht gering für den Endwert, mittel für die Deckung. Klärung: Hausbank. Wirkt in R-5.9 |
+| `MA-028` | ergänzen: Erweiterung auf mehrere Einlagen, Entlastung je Jahr und a_0 als abgezinste Investition der Investitionsphase (R-10.11) |
 
 ### Quellenkataster
 
-Lücken, die beim Ausformulieren aufgefallen sind; ohne Eintrag darf der Katalog die Werte nicht führen:
+Eingetragen mit dieser Überarbeitung: `BGB-489`, `BGB-490`, `ESTG-5`, `ESTG-11`, `ESTG-20`, `ESTG-32D`, `ESTG-51A`, `GEWSTG-2`, `GEWSTG-3`. Weiter offene Lücken; ohne Eintrag darf der Katalog die Werte nicht führen:
 
-- gesetzliche Grundlage des Steuersatzes auf Zinserträge der Privatperson (H-22, R-7.10);
 - Fälligkeit der Miete (R-2.5);
-- Darlehensrecht zur vorzeitigen Rückzahlung und Vorfälligkeitsentschädigung (R-5.16);
 - Regeln zur Angabe des Effektivzinses, falls das Werkzeug den Effektivzins eines Darlehens ausweist (R-2.6);
-- steuerliche Behandlung von Zuschüssen und von Finanzierungskosten (R-7.2, R-7.3);
+- Verwaltungsauffassung zur steuerlichen Behandlung von Zuschüssen (`MA-031`) und zur Vorfälligkeitsentschädigung der Privatperson (`MA-032`);
+- Landesrecht zu KAT-01 und KAT-08 außerhalb Niedersachsens;
 - `GIF-KENNZAHLENKATALOG` am Original (R-10.13);
 - `ROPETER-1998`, `GROB-EINFUEHRUNG` (`MA-012`, `MA-027`, `MA-028`).
 
 ### Punkte für `TASKS.md`
 
-- Vorgaben des Hauses: Liste H-01 bis H-23 statt der bisherigen sieben Werte (R-3.4) – wartet auf Nutzer.
-- Fachfrage: Fehlbeträge als Nachschuss aus Eigenkapital oder Kontokorrentlinie des Hauses (R-4.5) – wartet auf Nutzer.
-- Gespräch mit der Hausbank um drei Fragen ergänzen: kalkulatorischer Zins in der Kapitaldienstrechnung, Vorfälligkeit, Prolongation.
-- Gespräch mit der NBank um vier Fragen ergänzen (Tabelle in Kapitel 16), darunter der Befund, dass im Referenzfall kein Bankdarlehen bleibt.
-- Steuerberater: vier Fragen der Kurzform (Tabelle in Kapitel 16).
-- Erledigt mit diesem Dokument: die Punkte „Fachspezifikation: offene Punkte aus Prüfrunde 3“ (außer Prozessdefinition der Simulation, die zu Stufe 2 gehört), „Fachspezifikation Rechenkern (aus Quellnotiz 11)“, „Fachspezifikation Finanzierung (aus Prüfrunde 5)“; aus „Fachspezifikation Steuern“ sind die Rechenregeln der Kurzform gefasst, die Rechtsfragen stehen als vorgeschlagene Modellannahmen aus, die De-minimis-Bindung (`MA-029`) und das Zuschussentgelt in der Kreditprobe bleiben für Teil 2.
-- Prüfrunde zu diesem Dokument ansetzen (Finanzmathematiker, Fachexperte, Praktiker, Controller, Grenzfälle).
+- Vorgaben des Hauses: Freigabeblatt mit allen Einzelwerten zu H-01 bis H-31 (R-3.4) – wartet auf Nutzer.
+- Fachfragen an den Auftraggeber: Nachschuss oder Kontokorrentlinie (R-4.5); Haltedauer und Zielrendite im geförderten Bau (R-11.14); Kalkulationen für die Parallelrechnung (R-15.6) – wartet auf Nutzer.
+- Gespräch mit der Hausbank: zehn Fragen (Tabelle in Kapitel 16).
+- Gespräch mit der NBank: vier Fragen (Tabelle in Kapitel 16).
+- Steuerberater: fünf Fragen (Tabelle in Kapitel 16).
+- Landeswerte für KAT-01 und KAT-08 am Landesrecht lesen und ins Kataster eintragen.
+- Blindrechnung durch einen zweiten Bearbeiter (R-15.6) und Prüfrunde 2 zu diesem Dokument.
 - Teil 2 der Fachspezifikation beauftragen (Tabelle in Kapitel 16).
+
+## Anhang A: Eingaben der Referenzfälle
+
+Der Anhang nennt jede Eingabe, mit der ein Referenzfall gerechnet ist. Katalogwerte und Vorgaben des Hauses sind Annahmen der Beispiele und keine Aussage über geltendes Recht oder über die Werte des Auftraggebers; maßgeblich für Recht und Stand ist das Kataster. Im Referenzrechner stehen dieselben Werte in `annahmen.py` und in den Dateien der Fälle.
+
+### A.1 Lehrbuchfälle (RF-01 bis RF-04)
+
+Jahresmodus, ohne Rundung, Kontokorrentlinie unbegrenzt, alle Zahlungen am Jahresende.
+
+| Fall | Eingaben |
+|---|---|
+| RF-01 | Drei Jahre, keine Steuern. Habenzins 5 %, Kontokorrentzins 7,5 %. Projekt A: Anschaffung 1.100, Überschüsse 400 / 0 / 1.000, Eigenkapital 1.000; Variante mit Eigenkapital 900. Projekt B: Anschaffung 900, Überschüsse 600 / 450 / 0, Eigenkapital 1.000. Kein Darlehen, kein Verkauf |
+| RF-02 | 25 Jahre, keine Steuern. Investition 88.992 Euro; Zuschuss 25.143 Euro im Jahr 1. Eigenkapital 80 %, Darlehen 20 % als Laufzeitannuität zu 4 % über 25 Jahre. Habenzins 3 %, Kontokorrentzins 6 %. Zusätzliche Miete im Jahr t: (max(5,50 + Δm; 5,79 x 1,01^(t−1)) − 5,50 x 1,01^(t−1)) x 782 m² x 12 x 0,98 mit Δm = 0,11 x (88.992 − 25.143) / 12 / 782 (`MA-015`). Kein Verkauf |
+| RF-03 | Fünf Jahre. Anschaffung 10.000; Überschuss 540 je Jahr; Verkauf zu 10.000 im Jahr 5. Eigenkapital 8.000; Kredit 2.000 als Laufzeitannuität zu 7,5 % über fünf Jahre. Habenzins 4,5 %, Kontokorrentzins 9 %, langfristige Anlage der Alternative 5 %. Ohne Steuern; mit Steuern: Satz 50 %, Abschreibung 250 je Jahr, sofortige Verlustverrechnung, Verkaufsgewinn steuerpflichtig. Hebelwirkung: Eigenkapital 3.000 bis 10.000 in Schritten von 1.000, Kredit entsprechend, ohne Steuern |
+| RF-04 | Zehn Jahre, Beträge in Tausend Euro. Anschaffung 43.738; Überschuss 3.606 je Jahr; Verkauf zu 43.738. Eigenkapital 21.869; Kredit 21.869 zu 10 %: endfällig, als Laufzeitannuität über zehn Jahre oder mit freier Tilgung. Habenzins 5 %, Kontokorrentzins 11 %, langfristige Anlage der Alternative 7 %. Steuersatz 50 %, Abschreibung 600 je Jahr, Verkaufsgewinn steuerpflichtig |
+
+### A.2 Testfall (RF-05 bis RF-07; Bausteine in RF-08, RF-10, RF-14, RF-16)
+
+| Größe | Wert |
+|---|---|
+| Raster, Haltedauer | Jahresmodus, fünf Jahre; ohne Rundung, in den bezeichneten Fällen Rundungsmodus „Cent“ |
+| Investition | 1.100.000 Euro zum Stichtag; Abschreibungsgrundlage 880.000 Euro, Abschreibung 17.600 Euro je Jahr |
+| Reinertrag | 55.000 Euro im Jahr 1, danach 2 % mehr je Jahr; keine weiteren Kosten |
+| Eigenkapital | 400.000 Euro zum Stichtag |
+| Bankdarlehen | 700.000 Euro, Prozentannuität, Zins 4 %, Tilgung 2 %, keine Zinsbindung |
+| Konten | Habenzins 2 %, Kontokorrentzins 8 %, Linie unbegrenzt; langfristiger Anlagezins gleich dem Habenzins |
+| Steuer | Lehrbuchstatus: ein Satz von 30 % auf e_op und z_h, sofortige Verrechnung, Verkaufsgewinn nicht steuerpflichtig |
+| Verkauf | Erlös 1.150.000 Euro im Jahr 5 |
+
+Monatsraster: Miete je Monat runde(Reinertrag des Planjahres / 12); Rate, Zinsen und Konten monatlich; Abschreibung 17.600 Euro und Steuer am Ende jedes Planjahres. Abweichungen der Varianten:
+
+| Fall | Abweichung vom Testfall |
+|---|---|
+| RF-05 Hebel | Eigenkapital 300.000 / 400.000 / 500.000 / 600.000 Euro, Darlehen 1.100.000 Euro abzüglich Eigenkapital |
+| RF-06 | Entnahmen 5.000 Euro je Jahr · Eigenkapital 380.000 Euro, ohne und mit diesen Entnahmen · Nachschuss 50.000 Euro im Jahr 2 · dazu Entnahme 50.000 Euro im Jahr 2 oder im Jahr 3 · Reinertrag 55.000 x 1,02^t für t = 1 bis 5 (Miete als Vorjahreswert gelesen) · Monatsraster mit Kontenzins nominal / 12 und nach Kapitel 2 · Habenzins und Kontokorrentzins je 4 % (Kapitalwertprobe) |
+| RF-07 | langfristiger Anlagezins 3 % · dazu Nachschuss, Entnahmen 5.000 Euro je Jahr, Entnahme 40.000 Euro im Jahr 4 · Verkauf zu 950.000 Euro mit Nachschuss 50.000 Euro im Jahr 2 · Zielrendite 5 % · Monatsraster: Entnahme 10.000 Euro im Monat 30; Nachschuss 50.000 Euro im Monat 13 mit Entnahme im Monat 13, 14 oder 24 |
+| RF-08 | Disagio 21.000 Euro, Tilgungszuschuss 35.000 Euro im Jahr 3, Zuschuss 100.000 Euro zum Stichtag, Rundungsmodus „Cent“ · Zinsbindung zehn Jahre, Vorfälligkeitssatz 1 % |
+| RF-10 | Reinertrag 20.000 und 30.000 Euro in den Jahren 1 und 2, danach wie im Testfall; Verlustverrechnung „Vortrag“ und „sofort“ · Verkaufsgewinn steuerpflichtig |
+| RF-14 | alle Zinssätze null · Eigenkapital null · Verkauf zu 500.000 Euro |
+| Beispiel zu R-10.6 Nr. 4 (kein Referenzfall; gerechnet in `beispielwerte.py`) | Reinertrag 30.000 Euro im Jahr 1, Eigenkapital 420.000 Euro, Verlustvortrag, Entnahme 5.000 Euro im Jahr 1 |
+
+### A.3 Bausteine (RF-08 bis RF-10, RF-17)
+
+Die Bausteine rechnen einzelne Regeln ohne Finanzplan; ihre Eingaben stehen vollständig im Beispiel der Regel. Zur Übersicht:
+
+| Fall | Eingaben | Regel |
+|---|---|---|
+| RF-08 | 700.000 Euro, 4 % und 2 %, drei Rundungsarten · 600.000 Euro Ratentilgung, 3 %, 20 Jahre · 100.000 Euro Ratentilgung, 3 %, 7 Jahre · 500.000 Euro endfällig, 3,5 % · 700.000 Euro Laufzeitannuität über 20 Jahre zu 0 % und 0,01 % · 700.000 Euro Prozentannuität zu 0 % und 2 % · 1.496.000 Euro, 4 % und 2 %, Zinsbindung zehn Jahre, Anschlusszins 6 %, drei Regeln · 1.000.000 Euro, 4 %, ohne Tilgung, Zinsbindung zwei Jahre, Anschlusszins 5 %, „Restlaufzeit bleibt“ · 500.000 Euro Restschuld, Nennbetrag 600.000 Euro, 0,5 % und 2 % · 1.200.000 Euro, Auszahlung 400.000 Euro im Monat 3 und 800.000 Euro im Monat 6, Bereitstellungszins 0,25 % je Monat, zwei Monate frei · Förderdarlehen 2.320.000 Euro, zinslos, Ratentilgung über 42 Jahre, Entgelt 23.200 Euro, Beitrag 0,5 %, Zins nach 35 Jahren 5 % | R-5.3 bis R-5.11, R-5.14, R-5.18 |
+| RF-09 | Mindestdeckung 1,2, kalkulatorischer Zins 4 %, kalkulatorische Tilgung 2 %, Jahresraster. Ankauf: Wertansatz 2,6 und 2,2 Mio. Euro, Quote 65 %, nachhaltiger Reinertrag 107.712 Euro, Mittelbedarf 107 % des Preises. Übernommenes Darlehen: Wertansatz 2,0 Mio. Euro, Reinertrag 140.000 Euro, Mittelbedarf 2,2 Mio. Euro, Darlehen 1,0 Mio. Euro mit 25.000 Euro Kapitaldienst, Rang vor und nach der Bank. Neubau: Wertansatz und Mittelbedarf 10 Mio. Euro, Förderdarlehen 5,4 Mio. Euro mit Kapitaldienst 5.400.000 / 42 + 0,5 %, Zuschuss und Mindesteigenkapital je 1,8 Mio. Euro, Quote 65 % und 60 %, Reinertrag 400.000 / 200.000 / 180.000 Euro. Zins und Tilgung null: Wertansatz 2,4 Mio. Euro, Mittelbedarf 2,64 Mio. Euro, Reinertrag 100.000 Euro; mit übrigem Darlehen 500.000 Euro und Reinertrag 10.000 Euro. Monatsraster: Reinertrag 107.712,37 Euro, Mittelbedarf 2.782.000 Euro | R-5.12 |
+| RF-10 | Katalogstand nach A.4; Stichtag Januar 2027. Ergebnis 100.000 Euro in den Planjahren 1 und 6; −50.000 Euro, dann 80.049 Euro; Hebesatz 400 %, 280 %, 480 %; Anteil natürlicher Personen 50 %; Steuersatz 8 %; Gewinn 20.000 Euro; Privatperson: 30.000 Euro Vermietung und 1.000 Euro Zinsen; Verkaufsgewinn 200.000 Euro nach zehn und nach elf Jahren; −10.000 Euro Vermietung und 500 Euro Zinsen | R-7.5 bis R-7.12 |
+| RF-17 | Katalogstand nach A.4; Einzelwerte an den Beispielen von R-7.8, R-7.11, R-7.15, R-7.16; dazu Ankauf (A.5) mit Erhaltung von 320.000 und 400.000 Euro im Jahr 2, Privatperson mit Verkauf nach fünf Jahren ohne Maßnahme, geförderter Neubau (A.6) in drei Lesarten von `MA-031` mit 38 und 20 Jahren Haltedauer und mit Sofortabzug der Entgelte, Zuschussquote 110 % | R-6.16, R-7.8 bis R-7.19 |
+
+### A.4 Katalogstand und Vorgaben der Grobkalkulation (RF-11 bis RF-14, RF-16 bis RF-20)
+
+Katalogwerte, alle als Annahme der Beispiele:
+
+| Kennung | Wert |
+|---|---|
+| KAT-01 | Erwerbsnebenkosten als Eingabe der Fälle: 10 % beim Ankauf, 8 % beim Neubau |
+| KAT-03 | Körperschaftsteuer 15 % bis 2027, 14 % 2028, 13 % 2029, 12 % 2030, 11 % 2031, 10 % ab 2032; Zuschlag 5,5 % |
+| KAT-04 | Messzahl 3,5 %; Abrundung auf volle 100 Euro; Freibetrag 24.500 Euro für Personenunternehmen; Hebesatz 400 %, in bezeichneten Fällen 440 % |
+| KAT-05, KAT-06 | Anrechnungsfaktor 4; Frist des privaten Verkaufs zehn Jahre |
+| KAT-07 | Abschreibung 2 % beim Ankauf (Baujahr 1990), 3 % beim Neubau |
+| KAT-08 | Wartefrist 15 Monate; Kappungsgrenze 15 % in 36 Monaten; Mietpreisbremse gilt, Aufschlag 10 % |
+| KAT-09 | Vermieteranteil der CO2-Kosten 40 % bei 30 kg je m²; weitere Kosten des Vermieters 0 Euro |
+| KAT-10 | Grobförderung, Einkommensgruppe B: Darlehen 60 %, Zuschuss 20 %, Eigenmittel 20 % der zuwendungsfähigen Kosten; Bemessungsgrenze 5.460 Euro je m² Wohnfläche; Eingangsmiete 8,20 Euro; Steigerung 6,15 % alle drei Jahre nach drei festen Jahren; Bindung 35 Jahre; Verwaltungskostenbeitrag 0,5 %; Entgelt 1 % auf das Darlehen und 0,75 % auf den Zuschuss; Tilgung über 42 Jahre; zinslos 35 Jahre, danach 5 % |
+| KAT-11 | übernommene Bindung: Steigerung 6,15 % alle drei Jahre nach drei festen Jahren |
+| KAT-12 | Schwelle 15 % in drei Jahren; Umsatzsteuersatz 19 % |
+| KAT-13 | Kündigungsrecht nach 120 Monaten mit sechs Monaten Frist |
+| KAT-14 | Bewirtschaftung in der Kapitaldienstrechnung mindestens 15 % des Rohertrags |
+| KAT-15 | KfW-Darlehen: höchstens 100.000 Euro je Wohneinheit; Zins 2,5 %; Tilgung 2 %; ein tilgungsfreies Jahr; Zinsbindung zehn Jahre |
+| KAT-16 | Hinzurechnung: ein Viertel der Entgelte über dem Freibetrag von 200.000 Euro; Pacht zur Hälfte |
+| KAT-17, KAT-18 | Sockelbetrag 1 Mio. Euro; Satz auf Kapitalerträge 26,375 % |
+
+Vorgaben des Hauses, alle als Annahme der Beispiele:
+
+| Kennung | Wert |
+|---|---|
+| H-01 bis H-05 | Zielrendite 5 %; Beleihungsquote 65 %; Mindestdeckung 1,2; Mindesttilgung 2 %; Anschlussaufschlag 1 Prozentpunkt |
+| H-06 | Anschlusszins +1 Prozentpunkt; Zins bis zur Zusage +0,5 Prozentpunkte; Leerstand +2 Prozentpunkte; Mietsteigerung −0,5 Prozentpunkte; Instandhaltung +10 %; Verkaufsfaktor −10 %; Investitionsstau +10 %; Baukosten +5 %; Bauzeit +3 Monate |
+| H-07 bis H-11 | „Tilgungssatz bleibt“; Habenzins 2 %; langfristiger Anlagezins gleich dem Habenzins; Kontokorrentzins 8 %; Linie null |
+| H-12 bis H-16 | Mietsteigerung 2 %; Kostensteigerung 2 %; Baupreissteigerung 3 %; struktureller Leerstand 1,5 %; Verkaufskosten 1,5 % |
+| H-17 | Verwaltung 350 Euro je Einheit; Instandhaltung 9,00 Euro je m² bis zum Alter von 21 Jahren, 11,50 Euro ab 22 Jahren, 14,00 Euro ab 32 Jahren; Betriebskosten 2 Euro je m² |
+| H-18 | Vorfälligkeitssatz 1 % |
+| H-21 | Obergrenze der Preissuche das Hundertfache der Jahresmiete; 40 Rasterschritte; Fenster der Nachsuche 20 Euro; Obergrenze der Mietsuche 100 Euro je m²; interner Zinsfuß von −99 % bis +1.000 % mit 2.000 Schritten |
+| H-22 bis H-24 | Steuersatz der Personen 42 %; Anpassungsdauer vier Jahre; Zinsbindung zehn Jahre |
+| H-25 bis H-28 | kalkulatorischer Zins „Anschlusszins“; Fluktuation 0 %; Forderungsausfall 0,5 %; Anlaufleerstand drei Monate |
+| H-29 bis H-31 | CO2-Preis 50 Euro je Tonne, +5 % je Jahr; Zuschläge 5 % und 20 %; 20.000 Euro je Stellplatz; Bereitstellungszins 0,25 % je Monat nach sechs freien Monaten |
+
+### A.5 Referenzobjekt Ankauf (RF-11, RF-13, RF-14, RF-16 bis RF-20)
+
+| Kennung | Eingabe | Wert |
+|---|---|---|
+| E-01 bis E-04 | Vorhaben, Stichtag, Land, Gemeinde | Ankauf; Januar 2027; Niedersachsen; Beispielgemeinde |
+| E-10, E-11, E-18 | Kaufpreis, Erwerbsnebenkosten, Angebotspreis | 2.400.000 Euro; 10 %; 2.600.000 Euro |
+| E-12, E-17 | Bodenanteil, Baujahr | 25 %; 1990 |
+| E-13, E-14 | Wohnfläche, Einheiten | 1.320 m²; 20 |
+| E-15, E-19, E-16 | Ist-Miete, Vergleichsmiete, Marktmiete | 8,50 / 9,20 / 10,50 Euro je m² |
+| E-31 bis E-34 | leere Fläche, sonstige Erträge, Mietenhistorie, CO2-Ausstoß | 0 m²; 0 Euro; nicht angegeben; 30 kg je m² |
+| E-40, E-41, E-44 | Steuerstatus, Kennzeichen, Verlustverrechnung | Körperschaft; nein; Vortrag |
+| E-45, E-46, E-64 | Zins, Zinsbindung, Tilgung des Bankdarlehens | 4 %; zehn Jahre; 2 % |
+| E-47, E-48 | Verkaufsfaktor, Haltedauer | 18; zwölf Jahre |
+| E-50 bis E-52 | Investitionsstau | 120.000 Euro im Jahr 2, Erhaltung |
+| E-53 | Anpassungsdauer | vier Jahre |
+| übrige | gebundener Anteil, übernommenes Darlehen, verfügbares Eigenkapital, Wertansatz, Erbbauzins | keine |
+
+Gebundener Bestand (RF-11, RF-19): dazu 40 % der Fläche gebunden bis zum Ende des Jahres 6 zur Miete von 6,80 Euro; übernommenes Darlehen mit Restschuld 500.000 Euro, ursprünglichem Nennbetrag 600.000 Euro, Zins 0,5 %, Tilgung 2 %, Zinsbindung acht Jahre, Anschlusszins 3 %, ohne laufenden Beitrag, Kennzeichen Förderdarlehen, Rang vor der Bank.
+
+Abweichungen der einzelnen Fälle vom Referenzobjekt; nicht genannte Werte bleiben unverändert:
+
+| Fall | Abweichung |
+|---|---|
+| RF-11 | verfügbares Eigenkapital 1,2 Mio. Euro · Zielwertsuche auf die Vergleichsmiete (6 bis 20 Euro; 6 bis 9 Euro), auf den Investitionsstau bei 2,2 Mio. Euro Kaufpreis (0 bis 1 Mio. Euro), auf den Verkaufsfaktor · gebundener Bestand mit Rang nach der Bank und mit Lesart 2 von `MA-026` · Haltedauer 8 bis 13 Jahre · Jahresmodus |
+| RF-13 | Steuerstatus nach der Tabelle in R-7.9; Hebesatz 440 %, Anteil natürlicher Personen 60 %, Verlustverrechnung „sofort“, Kennzeichen und Lesarten von `MA-030` und `MA-036` wie bezeichnet; Privatperson mit Haltedauer 9 bis 12 Jahre |
+| RF-14 | Haltedauer ein Jahr ohne Maßnahme · Maßnahme 100.000 Euro im Jahr 12 bei Haltedauer zehn Jahre · übernommenes Darlehen 3,0 Mio. Euro zu 1 % und 2 % · struktureller Leerstand 99,5 % · Maßnahme 6 Mio. Euro zum Stichtag · Zielrendite −50 % |
+| RF-16 | geplante Einlage zum Stichtag um 100.000 Euro erhöht (Störung im Testlauf) |
+| RF-18 | andere Lesart von `MA-037` · Mietenhistorie: letzte Erhöhung vor sechs Monaten, Miete vor drei Jahren 7,50 Euro · Anpassungsdauer null · Ist-Miete 11,00 Euro, auch mit Lesart 3 von `MA-026` · ganze Fläche leer, auch ohne Mietpreisbremse · 200 m² leer · Fluktuation 5 % · sonstige Erträge 6.000 Euro · Erbbauzins 12.000 Euro mit 2 % Steigerung · weitere Kosten des Vermieters 0,10 Euro je m² · Baujahr 1996 · struktureller Leerstand 29,5 % |
+| RF-19 | Lesart 2 von `MA-026` · kalkulatorischer Zins 6 % · ohne Maßnahme: Haltedauer und Zinsbindung 1 / 40, 5 / 20, 12 / 15, 12 / 12 Jahre · gebundener Bestand mit Haltedauer fünf Jahre, mit und ohne Kennzeichen Förderdarlehen · Maßnahme 420.000 Euro zum Stichtag oder im Jahr 1 bei 1,2 Mio. Euro verfügbarem Eigenkapital · Maßnahme zum Stichtag, verfügbares Eigenkapital 100 Euro, Beleihungsquote 0 %, Zielrendite 1 % · Bankfall: Zins 3 %, Vergleichsmiete 8,50 Euro, keine Maßnahme, Mietsteigerung 0,5 %, Lesart 2 von `MA-026` · jede Stressgröße einzeln · drei Anschlussregeln · Abweichungen: Mietsteigerung 1,5 % und Beleihungsquote 60 % (strenger), Mietsteigerung 2,5 % ohne und mit Begründung, Wertansatz 2,6 Mio. Euro ohne und mit Begründung |
+| RF-20 | Zins und Tilgung des Bankdarlehens, Mindesttilgung und Anschlussaufschlag null · Tilgung und Mindesttilgung null mit „Restlaufzeit bleibt“ · Eingaben am Rand nach R-14.14 · Stichtag März 2019 · Verkaufsfaktor 4 mit übernommenem Darlehen von 2,0 Mio. Euro zu 6 % und 2 % · keine Erwerbsnebenkosten, Verkaufsfaktor 5, keine Maßnahme, Beleihungsquote 100 %, Mindestdeckung 1, Lesart 2 von `MA-026` · Obergrenze der Preissuche genau beim tragbaren Preis · Zielrendite 5,000253 % · Verkaufsfaktor 4, Haltedauer zwei Jahre, keine Maßnahme, Lesart 2 von `MA-026` · Bankfall aus RF-19 mit Anschlussaufschlag 4 Prozentpunkte · struktureller Leerstand 100 % ohne Forderungsausfall |
+
+### A.6 Referenzobjekt Neubau (RF-12, RF-14, RF-16, RF-17, RF-20)
+
+| Kennung | Eingabe | Wert |
+|---|---|---|
+| E-01 bis E-04 | Vorhaben, Stichtag, Land, Gemeinde | Neubau; Januar 2027; Niedersachsen; Beispielgemeinde |
+| E-20, E-11, E-21, E-30 | Grundstückspreis, Erwerbsnebenkosten, Grundstücksfläche, Bodenrichtwert | 1.200.000 Euro; 8 %; 2.500 m²; 400 Euro je m² |
+| E-13, E-14 | Wohnfläche, Einheiten | 2.000 m²; 30 |
+| E-22, E-25, E-26 | Brutto-Grundfläche, Kostenkennwert, Bauzeit | 2.600 m²; 2.320 Euro je m²; 18 Monate |
+| E-16 | Miete bei Bezug | 16,50 Euro je m² |
+| E-27, E-34, E-35 | Stellplätze, CO2-Ausstoß, KfW-Darlehen | keine; 0; 0 Euro |
+| E-40, E-41, E-44 | Steuerstatus, Kennzeichen, Verlustverrechnung | Körperschaft; nein; Vortrag |
+| E-45, E-46, E-64 | Zins, Zinsbindung, Tilgung des Bankdarlehens | 4 %; zehn Jahre; 2 % |
+| E-47, E-48 | Verkaufsfaktor, Haltedauer | 24; 15 Jahre |
+
+| Fall | Abweichung |
+|---|---|
+| RF-12 | KfW-Darlehen 3.000.000 Euro, auch mit Lesart 2 von `MA-026` · 20 Stellplätze zu 60 Euro Miete · Grobförderung nach KAT-10 mit Haltedauer 38 Jahre (E-28, E-29: Mietenstufe und Einkommensgruppe der Tabelle A.4), auch mit 20 Jahren, mit Lesart 1 von `MA-026` und mit Haltedauer 36 bis 39 Jahre · frei finanziert mit Haltedauer 38 Jahre (Vergleich) |
+| RF-14 | Haltedauer zwei und drei Jahre · gefördert mit Haltedauer 42 Jahre |
+| RF-16 | Brutto-Grundfläche 2.600,12 m², Kostenkennwert 2.901,89 Euro, Bauzeit 14 Monate, Haltedauer 36 Jahre, gefördert |
+| RF-17 | gefördert mit Lesart „verteilt“ und „Minderung“ von `MA-031`, je 38 und 20 Jahre · Zuschussquote 110 % ohne Darlehen · Sofortabzug der Entgelte (`MA-032`) |
+| RF-20 | Bauzeit 0 · KfW-Darlehen 3.000.001 Euro · Bauzeit 60 Monate mit Haltedauer sechs Jahre · gefördert: Grundstück 5 Mio. Euro, Bodenrichtwert 2.500 Euro, Zuschussquote 80 % ohne Darlehen, Lesart „Minderung“ · gefördert ohne Zins nach der zinslosen Zeit |

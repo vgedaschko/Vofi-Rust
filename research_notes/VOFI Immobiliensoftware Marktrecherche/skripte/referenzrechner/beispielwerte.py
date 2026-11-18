@@ -10,17 +10,24 @@ from decimal import Decimal as D
 from dataclasses import replace
 from zahlen import NULL, EINS, d, de, proz, Rundung, periodensatz_konform
 from finanzplan import lehrbuchansicht, verdichte
-from kennzahlen import vergleichsfaktoren, zaehler_nenner, schuldendienstdeckung
+from kennzahlen import schuldendienstdeckung, sollzinsen_nach_steuern
 from grobkalkulation import rechne_grob, tragbarer_preis
+from darlehen import Tranche, bankdarlehen
 import annahmen as A
-from rf_rahmen import jahresplan, lehrbuch_steuer
+from rf_rahmen import jahresplan, lehrbuch_steuer, FEST
 from rf_testfall import s1, s1_monat
 from rf_lehrbuch import _schulte_standard
+from rf_bausteine import lauf
+from rf_grob import VG, KAT, KATN, GEBUNDEN, GEFOERDERT, MIT_KFW
 import restwert
 
 
 def titel(t):
     print("\n== " + t)
+
+
+def q4(x):
+    return de(x, 4)
 
 
 if __name__ == "__main__":
@@ -37,15 +44,18 @@ if __name__ == "__main__":
               f"| Habenzins {de(z['habenzins'])} | e_op {de(z['e_op'])} | Steuer {de(z['steuer'])} | Anlage {de(z['anlage'])} "
               f"| Guthaben {de(z['guthaben'])} | Restschuld {de(z['restschuld'])} | Bestandssaldo {de(z['bestandssaldo'])}")
     print("  Alternative:", [de(alt.bestand(t)) for t in range(6)])
+    print("  Bemessung t1..t5:", [de(z["e_op"] + z["habenzins"]) for z in plan.zeilen[1:]])
+    pu, au, ku = s1()
+    print("  ungerundet: Endwert", de(pu.endwert, 4), "Guthaben t4", de(pu.zeilen[4]["guthaben"]),
+          "Sollzinsen nach Steuern", de(sollzinsen_nach_steuern(pu)), "| w(0), w(2):", de(ku["w"][0], 6), de(ku["w"][2], 6))
+    print("  Deckung t1..t5:", [de(schuldendienstdeckung(pu, j)[0], 4) for j in range(1, 6)])
 
     titel("R-2.3 Verdichtung, Testfall im Monatsraster, Jahr 1")
     pm, am, km = s1_monat(D("0.02"), D("0.08"), "cent")
     j = verdichte(pm)
-    for jj in j[:3]:
-        print("  Jahr", jj["jahr"], {k: de(jj[k]) for k in ("miete", "zins", "tilgung", "habenzins", "steuer", "guthaben", "restschuld")})
+    print("  Jahr 1", {k: de(j[1][k]) for k in ("miete", "zins", "tilgung", "habenzins", "afa", "steuer", "guthaben", "restschuld")})
     print("  Monat 1:", {k: de(pm.zeilen[1][k]) for k in ("miete", "zins", "tilgung", "habenzins", "guthaben", "restschuld")})
-    print("  Monat 2:", {k: de(pm.zeilen[2][k]) for k in ("miete", "zins", "tilgung", "habenzins", "guthaben", "restschuld")})
-    print("  Endwert", de(pm.endwert), "Rendite", proz(km["rendite"]), "Differenz", de(km["endwertdifferenz"]))
+    print("  Endwert", de(pm.endwert), "Alternative", de(am.endwert), "Rendite", proz(km["rendite"]), "Differenz", de(km["endwertdifferenz"]))
 
     titel("R-4.7 Lehrbuchansicht, Schulte Standardbeispiel mit Steuern (Tab. 5)")
     p5, a5, k5, tr = _schulte_standard(lehrbuch_steuer("0.5"), 250)
@@ -57,157 +67,162 @@ if __name__ == "__main__":
 
     titel("R-10.4/R-10.5 Vergleichsfaktoren, Zaehler und Nenner im Testfall mit Nachschuss")
     pn, an, kn = s1(einlagen={2: 50000})
-    print("  w:", [str(x) for x in kn["w"]])
-    print("  Zaehler", de(kn["zaehler"]), "Nenner", de(kn["nenner"]), "Zaehler Alternative", de(kn["zaehler_alternative"]),
-          "Rendite", proz(kn["rendite"]), "Vergleichsrendite", proz(kn["vergleichsrendite"]))
+    print("  Zaehler", de(kn["zaehler"]), "Nenner", de(kn["nenner"]), "Rendite", proz(kn["rendite"]), "Vergleichsrendite", proz(kn["vergleichsrendite"]))
     pe, ae, ke = s1(entnahmen={t: 5000 for t in range(1, 6)})
-    print("  Entnahmen: Zaehler", de(ke["zaehler"]), "Nenner", de(ke["nenner"]), "aufgezinste Entnahmen", de(ke["zaehler"] - pe.endwert))
+    print("  Entnahmen: Zaehler", de(ke["zaehler"]), "aufgezinste Entnahmen", de(ke["zaehler"] - pe.endwert))
+    re = [D(30000)] + [D(55000) * D("1.02") ** t for t in range(1, 5)]
+    pa, aa, ka = s1(ek=420000, reinertrag=re, steuer=lehrbuch_steuer("0.30", "vortrag", False))
+    pb, ab, kb = s1(ek=420000, reinertrag=re, steuer=lehrbuch_steuer("0.30", "vortrag", False), entnahmen={1: 5000})
+    print("  Verlustvortrag, ohne Entnahme: Rendite", proz(ka["rendite"], 4), "| mit Entnahme 5.000 in t1:", proz(kb["rendite"], 4),
+          "| Aenderung der Endwertdifferenz", de(ka["endwertdifferenz"] - kb["endwertdifferenz"]))
+    print("  sofortige Verrechnung minus Vortrag (RF-10):",
+          de(D(FEST["RF-10|Anlaufverlust, sofortige Verrechnung (andere Lesart): Endwert"])
+             - D(FEST["RF-10|Anlaufverlust, Vortrag im Vorhaben (Voreinstellung MA-016): Endwert"])))
+    plan, alt, kz = s1()
+    zz = plan.zeilen
+    for t in range(1, 4):
+        verm = zz[t]["guthaben"] + D(1000000) + D(150000) * t / 5 - zz[t]["restschuld"]
+        print(f"  R-10.12 Jahr {t}: Vermoegen {de(verm)} | Alternative {de(alt.bestand(t))}")
 
-    titel("R-6 Ankauf Basisfall: Mietpfad, Kosten, Stau")
-    e = rechne_grob(A.ANKAUF, A.VORGABEN)
-    print("  Miete je qm Jahre 1..13:", [de(x, 4) for x in e.miete_je_qm[1:14]])
+    titel("R-5 Darlehen: Einzelwerte")
+    tr = Tranche("D", 600000, "raten", "0.03", laufzeit=20)
+    zl = lauf(tr, 3, 1)
+    print("  Ratentilgung: Zins", [de(x["zins"]) for x in zl[1:]], "Tilgung", de(zl[1]["tilgung"]))
+    kw = dict(mindestdeckung=D("1.2"), zins_kalk=D("0.04"), tilgung_kalk=D("0.02"), p=1)
+    fd = D(5400000)
+    kd_fd = fd / 42 + fd * D("0.005")
+    nb = dict(mittelbedarf=D(10000000), uebrige_darlehen=fd, kd_uebrige=kd_fd, zuschuesse=D(1800000), ek_min=D(1800000), **kw)
+    ue = dict(mittelbedarf=D(2200000), uebrige_darlehen=D(1000000), kd_uebrige=D(25000), **kw)
+    for name, b_ in (
+            ("Ankauf 2,6 Mio.", bankdarlehen(D(2600000), D("0.65"), D(107712), mittelbedarf=D(2600000) * D("1.07"), **kw)),
+            ("Ankauf 2,2 Mio.", bankdarlehen(D(2200000), D("0.65"), D(107712), mittelbedarf=D(2200000) * D("1.07"), **kw)),
+            ("Ankauf uebernommen, Rang vor der Bank", bankdarlehen(D(2000000), D("0.65"), D(140000), **ue)),
+            ("Ankauf uebernommen, Rang nach der Bank", bankdarlehen(D(2000000), D("0.65"), D(140000), uebrige_im_beleihungsraum=NULL, **ue)),
+            ("Neubau 65 %", bankdarlehen(D(10000000), D("0.65"), D(400000), **nb)),
+            ("Neubau 60 %", bankdarlehen(D(10000000), D("0.60"), D(400000), **nb)),
+            ("Neubau Reinertrag 200.000", bankdarlehen(D(10000000), D("0.65"), D(200000), **nb)),
+            ("Neubau Reinertrag 180.000", bankdarlehen(D(10000000), D("0.65"), D(180000), **nb)),
+            ("Neubau 60 %, Foerderdarlehen im Nachrang, Reinertrag 180.000", bankdarlehen(D(10000000), D("0.60"), D(180000), uebrige_im_beleihungsraum=NULL, **nb))):
+        print(f"  {name}: A {de(b_['a'], 0)} | B {de(b_['b'])} | C {de(b_['c'], 0)} | Darlehen {de(b_['darlehen'])} "
+              f"| bindet {b_['bindend']} | Eigenkapital {de(b_['eigenkapital'])}")
+    print("  Monatsraster, geschlossene Form:", de(D("107712.37") / D("1.2") / D("0.06")))
+
+    titel("Kapitel 6 bis 11: Ankauf Basisfall (RF-11)")
+    e = rechne_grob(A.ANKAUF, VG, KAT)
     z = e.plan.zeilen
-    print("  Monat 1: Sollmiete", de(D(1320) * D("8.50")), "Einzahlung", de(z[1]["miete"]), "Kosten", de(z[1]["kosten"]))
-    print("  Monat 13: Einzahlung", de(z[13]["miete"]), "Kosten", de(z[13]["kosten"]))
+    er = e.ertrag
+    print("  Vergleichsmiete Jahr 4:", q4(er.vm(37)), "| Anpassungsziel Jahr 4:", q4(D("8.50") + (er.vm(37) - D("8.50")) * 3 / 4),
+          "| Kappungsgrenze 8,50 x 1,15:", q4(D("8.50") * D("1.15")), "| Vergleichsmiete Jahr 5, 7, 12:", q4(er.vm(49)), q4(er.vm(73)), q4(er.vm(133)))
+    print("  Monat 1: Sollmiete", de(er.soll(1)), "Einzahlung", de(z[1]["miete"]), "Kosten", de(z[1]["kosten"]),
+          "| Jahr 1: Verwaltung, Instandhaltung, Betriebskosten", de(D(350 * 20 + 14 * 1320 + 2 * 1320), 0), "CO2", de(D(30) * 1320 * D("0.4") * 50 / 1000, 0))
     jv = verdichte(e.plan)
-    for jj in jv:
+    for jj in jv[1:4] + jv[10:13]:
         print("  Jahr", jj["jahr"], {k: de(jj[k]) for k in ("miete", "kosten", "erhaltung", "zins", "tilgung", "steuer", "afa", "nachschuss", "guthaben", "restschuld")})
-    print("  Rate Monat 1:", de(z[1]["zins"] + z[1]["tilgung"]), "Rate Monat 121:", de(z[121]["zins"] + z[121]["tilgung"]),
-          "Restschuld Monat 120:", de(z[120]["restschuld"]), "Abloesung:", de(z[144]["abloesung"]))
-    print("  Verkauf: Preis", de(e.verkauf.preis_brutto), "Kosten", de(e.verkauf.kosten), "Erloes", de(e.verkauf.erloes),
-          "Buchwert", de(e.verkauf.buchwert), "Gewinn", de(z[144]["g_v"]), "Steuer Jahr 12", de(z[144]["steuer"]))
-    print("  Sollmiete Folgejahr:", de(e.verkauf.preis_brutto / 18))
-    print("  Steuerprotokoll Jahr 1, 2, 12:", [(p["jahr"], str(p["e_op"]), str(p["z_h"]), str(p["g_v"]), str(p["koerperschaftsteuer"]), str(p["gewerbesteuer"]), str(p["vv"]), str(p["vv_gew"])) for p in e.plan.steuer.protokoll if p["jahr"] in (1, 2, 3, 12)])
-    print("  Restwertbeitrag", de(e.restwertbeitrag), "Mittelherkunft", {k: de(v) for k, v in e.herkunft.items()}, "Verwendung", {k: de(v) for k, v in e.verwendung.items()})
+    print("  Rate Monat 1:", de(z[1]["zins"] + z[1]["tilgung"]), "(Zins", de(z[1]["zins"]), ") Rate Monat 121:", de(z[121]["zins"] + z[121]["tilgung"]),
+          "| Nachschuss Monat 24:", de(z[24]["nachschuss"]))
+    v = e.verkauf
+    print("  Verkauf: Sollmiete Monat 144", de(er.soll_monat(144)), "Jahresmiete", de(er.jahresmiete(144)), "Preis", de(v.preis_brutto),
+          "Kosten", de(v.kosten), "Erloes", de(v.erloes), "Buchwert", de(v.buchwert), "Gewinn", de(z[144]["g_v"]), "Steuer Jahr 12", de(z[144]["steuer"]))
+    p12 = e.plan.steuer.protokoll[-1]
+    print("  Steuer Jahr 12: Koerperschaftsteuer", de(p12["koerperschaftsteuer"]), "Gewerbesteuer", de(p12["gewerbesteuer"]),
+          "| Verlustvortrag Ende Jahr 2:", de(e.plan.steuer.protokoll[1]["vv"]), de(e.plan.steuer.protokoll[1]["vv_gew"]))
     k = e.kennzahlen
-    print("  Zaehler", de(k["zaehler"]), "Nenner", de(k["nenner"]), "w0", str(k["w"][0])[:16], "w24", str(k["w"][24])[:16])
-    print("  DSCR je Jahr:", [de(schuldendienstdeckung(e.plan, j)[0], 3) for j in range(1, 13)])
-    es = rechne_grob(A.ANKAUF, A.VORGABEN, stress=True)
-    print("  Stress DSCR je Jahr:", [de(schuldendienstdeckung(es.plan, j)[0], 3) for j in range(1, 13)])
+    print("  Zaehler", de(k["zaehler"]), "Nenner", de(k["nenner"]), "w0", de(k["w"][0], 6), "w24", de(k["w"][24], 6),
+          "| Jahresmiete Einstieg", de(e.jahresmiete_einstieg), "Bruttoanfangsrendite", proz(e.bruttoanfangsrendite, 2),
+          "| Restwertbeitrag", de(e.restwertbeitrag), "| a0", de(e.a0), "| Kapitaldienst Jahr 1", de(e.kd_vj))
+    print("  Mittelherkunft", {a: de(b) for a, b in e.herkunft.items()}, "Verwendung", {a: de(b) for a, b in e.verwendung.items()})
+    tp = tragbarer_preis(A.ANKAUF, VG, KAT)
+    print("  tragbarer Preis", tp["preis"], "Suchbereich", tp["unten"], tp["oben"], "| Rendite dort", proz(tp["ergebnis"].kennzahlen["rendite"], 6),
+          "| einen Euro darueber", proz(rechne_grob(A.ANKAUF, VG, KAT, preis=tp["preis"] + 1, mit_blatt=False).kennzahlen["rendite"], 6))
+    eg = rechne_grob(GEBUNDEN, VG, KAT)
+    print("  gebunden: gebundene Miete Monat 1, 37, 72:", [q4(eg.ertrag.pools[-1].miete[m]) for m in (1, 37, 72)],
+          "| Monatsrate uebernommenes Darlehen", de(eg.plan.zeilen[1]["tranchen"]["Uebernommenes Darlehen"]["zins"] + eg.plan.zeilen[1]["tranchen"]["Uebernommenes Darlehen"]["tilgung"]),
+          "| nachhaltiger Reinertrag", de(eg.bemessung.ertrag_nachhaltig), "| Mieterhoehungen der gebundenen Flaeche nach Bindungsende:",
+          [(m, q4(eg.ertrag.pools[-1].miete[m])) for m in range(73, 157) if eg.ertrag.pools[-1].miete[m] != eg.ertrag.pools[-1].miete[m - 1]])
 
-    titel("R-8.2 Nettoanfangsrendite als Massstab (Beispiel des Berichts D.4)")
+    titel("Kapitel 5, 6, 11: Neubau (RF-12)")
+    n = rechne_grob(A.NEUBAU, VG, KATN)
+    zn = n.plan.zeilen
+    for u in (0, 1, 2, 8, 9, 10, 18, 19, 21, 22):
+        print(f"  Monat {u}: Investition {de(zn[u]['investition'])} | Einlage {de(zn[u]['einlage'])} | Nachschuss {de(zn[u]['nachschuss'])} "
+              f"| Auszahlung {de(zn[u]['auszahlung'])} | Zins {de(zn[u]['zins'])} | Bereitstellung {de(zn[u]['bereit'])} | Tilgung {de(zn[u]['tilgung'])} | Miete {de(zn[u]['miete'])} | Kosten {de(zn[u]['kosten'])}")
+    print("  Herkunft", {a: de(b) for a, b in n.herkunft.items()})
+    print("  Verwendung", {a: de(b) for a, b in n.verwendung.items()})
+    print("  Eigenkapital als Ausgleichsposten", de(n.ek_soll), "| Rohertrag", de(sum(n.ertrag.nachhaltig(u) for u in range(22, 34))),
+          "| Bewirtschaftung und Ausfall im Vorhaben", de(sum(n.ertrag.bewirtschaftung(u) for u in range(22, 34)) + sum(n.ertrag.soll(u) - n.ertrag.einzahlung(u) for u in range(22, 34))),
+          "| Sollmiete Monat 22", de(n.ertrag.soll(22)), "| a0", de(n.a0), "Gesamtkapitalrendite", proz(n.gesamtkapitalrendite))
+    ns = rechne_grob(A.NEUBAU, VG, KATN, stress=True)
+    print("  Stressfall: Eigenkapital", de(ns.eigenkapital_investitionsphase), "Rendite", proz(ns.kennzahlen["rendite"]), "erster Monat mit Miete",
+          min(u for u in range(1, 60) if ns.plan.zeilen[u]["miete"] > 0))
+    kf = rechne_grob(MIT_KFW, VG, KATN)
+    zk = kf.plan.zeilen
+    print("  KfW: Auszahlungen", {m: de(x) for m, x in kf.plan.e.tranchen[1].auszahlung.items() if m in (9, 10, 15, 16, 17)},
+          "| Bank erste Auszahlung", min(kf.plan.e.tranchen[0].auszahlung), "| Zins Monat 19", de(zk[19]["tranchen"]["KfW-Darlehen"]["zins"]),
+          "| Rate Monat 31", de(zk[31]["tranchen"]["KfW-Darlehen"]["zins"] + zk[31]["tranchen"]["KfW-Darlehen"]["tilgung"]))
+    f = rechne_grob(GEFOERDERT, VG, KATN)
+    zf = f.plan.zeilen
+    bm = f.bemessung
+    print("  gefoerdert: zuwendungsfaehige Kosten", de(bm.zuschuss / D("0.2")), "| Mittelbedarf", de(bm.mittelbedarf), "| Eigenkapital als Ausgleichsposten", de(f.ek_soll),
+          "| Rohertrag", de(sum(f.ertrag.nachhaltig(u) for u in range(22, 34))), "| Reinertrag VJ", de(bm.reinertrag_vj),
+          "| Steuer Jahr 1, 2", de(f.plan.jahressumme("steuer", 1)), de(f.plan.jahressumme("steuer", 2)),
+          "| Zuschuss Zufluss Jahr 1, 2", de(f.plan.jahressumme("zuschuss", 1)), de(f.plan.jahressumme("zuschuss", 2)))
+    for u in (0, 1, 2, 3, 4, 18, 19):
+        t = zf[u]["tranchen"]["Foerderdarlehen"]
+        print(f"  Monat {u}: Investition {de(zf[u]['investition'])} | Einlage {de(zf[u]['einlage'])} | Nachschuss {de(zf[u]['nachschuss'])} | Zuschuss {de(zf[u]['zuschuss'])} "
+              f"| Einbehalt Z {de(zf[u]['zuschuss_einbehalt'])} | FD Auszahlung {de(t['auszahlung'])} Einbehalt {de(t['einbehalt'])} Beitrag {de(t['beitrag'])} Tilgung {de(t['tilgung'])}")
+    f20 = rechne_grob(replace(GEFOERDERT, haltedauer=20), VG, KATN)
+    print("  20 Jahre: verbleibender Zuschuss", de(f20.bemessung.zuschuss - f20.verkauf.foerder_rueckzahlung), "| Anteil 198/420")
+
+    titel("Abgeleitete Beispielzahlen (Rechenschritte der Beispiele, die kein Pruefwert sind)")
+    pk, ak, kk_ = s1(ek=380000)
+    print("  R-4.5 Kontokorrent t0..t2 bei 380.000 Eigenkapital:", [de(x) for x in pk.reihe("kk")[:3]])
+    print("  R-5.3 Rate 2 von 700.000 zu 4 %, Rate 3.500: Zins", de(rd.geld((D(700000) - D("1166.67")) * D("0.04") / 12)),
+          "Tilgung", de(D(3500) - rd.geld((D(700000) - D("1166.67")) * D("0.04") / 12)))
+    print("  R-5.4 IWU: Darlehen 20 % von 88.992:", de(D(88992) * D("0.2")))
+    print("  R-5.11 uebernommenes Darlehen, Rate aus der Restschuld gerechnet:", de(12 * rd.geld(D(500000) * D("0.025") / 12)),
+          "| aus dem Nennbetrag:", de(12 * rd.geld(D(600000) * D("0.025") / 12)))
+    print("  R-5.12 Unterschied der Lesarten:", de(D("1431044.99") - D("1226609.99")), "| Knick:", de(D("1226609.99") / D("0.65"), 0))
+    print("  R-6.3 Abstand zur Vergleichsmiete im Jahr 4:", q4(er.vm(37) - D("8.50")))
+    print("  R-6.8 Bewirtschaftung Jahr 1 / 12:", de(D(28120) / 12), "| R-6.9 CO2 je Monat:", de(D(792) / 12),
+          "| Baujahr 1996, Monat 1 und 13:", [de(rechne_grob(replace(A.ANKAUF, baujahr=1996), VG, KAT).plan.zeilen[m]["kosten"]) for m in (1, 13)])
+    print("  R-6.16 netto:", de(D("127308.00") / D("1.19")), de(D("339488.00") / D("1.19")), de(D("424360.00") / D("1.19")),
+          "| Schwelle", de(D("0.15") * 1980000, 0), "| Abschreibung der aktivierten Massnahme:", de(D("48087.20") - D("39600.00")))
+    print("  R-7.3 Abschreibung je Monat (Fehlerbild):", de(D(17600) / 12), "x 12 =", de(12 * rd.geld(D(17600) / 12)))
+    print("  R-7.8 Gewerbesteuer 14 % auf 10.000 und auf 510.000:", de(D("0.14") * 10000), de(D("0.14") * 510000),
+          "| Unterschied der Steuer auf den Verkaufsgewinn (MA-030):", de(D("245386.69") - D("105456.69")))
+    print("  R-7.9 Anrechnung bei 50 %:", de(D(10570) / 2), "| R-7.10:", de(D("0.42") * 30000), de(D("0.26375") * 1000),
+          "| R-7.14 s_FK:", proz(D("0.29825") - D("0.25") * D("0.14")))
+    print("  R-10.22:", de(D("28911.96") + D("73596.60")), "| Jahressollmiete", de(D(1320) * D("8.50") * 12),
+          "| R-10.17 Eigenkapitalbedarf insgesamt:", de(e.eigenkapitalbedarf))
+    print("  R-11.2 Fortschreibung der Baukosten:", de(n.bemessung.baukosten - n.bemessung.baukosten_stichtag),
+          proz((n.bemessung.baukosten - n.bemessung.baukosten_stichtag) / n.bemessung.baukosten_stichtag, 2),
+          "| Jahresmiete Einstieg Neubau", de(n.jahresmiete_einstieg))
+    print("  R-11.5 Steigung am Knick in Basispunkten je 10.000 Euro:", de((D("8.3164") - D("8.2453")) * 100), de((D("8.2453") - D("8.1492")) * 100))
+    te = tragbarer_preis(replace(A.ANKAUF, verfuegbares_ek=D(1200000)), VG, KAT)
+    ee = te["ergebnis"]
+    print("  R-11.6 Eigenkapitalgrenze: Preis", te["preis"], "Stichtag", de(ee.eigenkapital_investitionsphase), "Nachschuss",
+          de(ee.eigenkapitalbedarf - ee.eigenkapital_investitionsphase), "zusammen", de(ee.eigenkapitalbedarf))
+    et = tp["ergebnis"]
+    ts = tragbarer_preis(A.ANKAUF, VG, KAT, stress=True)
+    print("  R-11.7 beim tragbaren Preis: Eigenkapital", de(et.eigenkapital_investitionsphase), "insgesamt", de(et.eigenkapitalbedarf),
+          "Faktor", de(tp["faktor"], 2), "je m2", de(tp["preis_je_qm"]), "| Stressfall: Faktor", de(ts["faktor"], 2), "je m2", de(ts["preis_je_qm"]))
+    print("  R-11.14 zuwendungsfaehige Kosten:", de(bm.baukosten + D(2500) * D(400)))
+    print("  R-12.3 beim tragbaren Preis: Nebenkosten", de(et.bemessung.enk), "Boden ungerundet", de((et.bemessung.preis + et.bemessung.enk) * D("0.25"), 3),
+          "Boden", de(et.bemessung.boden), "Abschreibungsgrundlage", de(et.bemessung.preis + et.bemessung.enk - et.bemessung.boden))
+    print("  R-13.3 P-03 Testfall Jahr 1:", de(D("-675820.00") + D(700000)), "| P-07:", de(D("1743830.47") - D("822091.51")),
+          "| P-04 Neubau:", de(D("5141964.13") + D("4007142.85")), "=", de(D("9015152.34") + D("133954.64")))
+    print("  Kapitel 17 KfW-Vorteil:", 924244 - 702767, "| mit Vertragskonditionen:", 1286380 - 876926)
+    fs = rechne_grob(GEFOERDERT, replace(VG, ma032_entgelte_sofort=True), KATN)
+    print("  R-7.15 Entgelte verteilt: Rendite", proz(f.kennzahlen["rendite"], 3), "Endwertdifferenz", de(f.kennzahlen["endwertdifferenz"]),
+          "| im Jahr der Zahlung (andere Lesart MA-032): Rendite", proz(fs.kennzahlen["rendite"], 3), "Endwertdifferenz", de(fs.kennzahlen["endwertdifferenz"]))
+    zr = [x for x in lauf(Tranche("D", 100000, "raten", "0.03", laufzeit=7), 7, 12)]
+    print("  R-5.5 sieben Monatsraten auf 100.000:", [de(x["tilgung"]) for x in zr[1:]])
+    tr10 = Tranche("D", 1496000, "annuitaet_prozent", "0.04", tilgungssatz="0.02", rundung="keine")
+    lauf(tr10, 10, 1, Rundung("keine"))
+    print("  R-5.9 Restschuld nach zehn Jahren (1.496.000, 4 % und 2 %, ohne Rundung):", de(tr10.rest))
+    titel("R-8.2 Nettoanfangsrendite als Massstab (Beispiel des Berichts D.4), R-8.4")
     print("  Faktor 22,2 x 100.000:", de(restwert.preis_aus_faktor(D("22.2"), D(100000), rd)))
     print("  80.000 / 4,5 %:", de(D(80000) / D("0.045")), "| ohne 7 % Erwerbsnebenkosten:",
           de(restwert.preis_aus_nettoanfangsrendite(D("0.045"), D(80000), D("0.07"), rd)))
     print("  Stau 100.000, Verkauf Jahr 10, 3 %:", de(D(100000) * D("1.03") ** 10), "| Planjahr 12:", de(D(100000) * D("1.03") ** 12),
           "| 40 % in Jahr 9:", de(D(40000) * D("1.03") ** 9), "| 60 % am Stichtag:", de(D(60000) * D("1.03") ** 10))
-
-    titel("R-11 Neubau frei finanziert: Mittelabruf")
-    n = rechne_grob(A.NEUBAU, A.VORGABEN_NEUBAU)
-    zn = n.plan.zeilen
-    for u in (0, 1, 6, 7, 8, 18, 19, 20):
-        print(f"  Monat {u}: Investition {de(zn[u]['investition'])} | Einlage {de(zn[u]['einlage'])} | Nachschuss {de(zn[u]['nachschuss'])} "
-              f"| Auszahlung {de(zn[u]['auszahlung'])} | Zins {de(zn[u]['zins'])} | Tilgung {de(zn[u]['tilgung'])} | Miete {de(zn[u]['miete'])} | Restschuld {de(zn[u]['restschuld'])}")
-    print("  Herkunft", {k: de(v) for k, v in n.herkunft.items()}, "Verwendung", {k: de(v) for k, v in n.verwendung.items()})
-    print("  Reinertrag VJ", de(n.bemessung.reinertrag_vj), "a", de(n.bemessung.bank["a"]), "b", de(n.bemessung.bank["b"]), "c", de(n.bemessung.bank["c"]))
-    f = rechne_grob(replace(A.NEUBAU, foerderung=A.FOERDERUNG_B, haltedauer=20), A.VORGABEN_NEUBAU)
-    zf = f.plan.zeilen
-    bm = f.bemessung
-    print("  gefoerdert: a", de(bm.bank["a"]), "b", de(bm.bank["b"]), "c", de(bm.bank["c"]), "Reinertrag VJ", de(bm.reinertrag_vj), "Mittelbedarf", de(bm.mittelbedarf))
-    for u in (0, 1, 2, 5, 6, 18, 19):
-        t = zf[u]["tranchen"]["Foerderdarlehen"]
-        print(f"  Monat {u}: Investition {de(zf[u]['investition'])} | Einlage {de(zf[u]['einlage'])} | Nachschuss {de(zf[u]['nachschuss'])} | Zuschuss {de(zf[u]['zuschuss'])} "
-              f"| Einbehalt Z {de(zf[u]['zuschuss_einbehalt'])} | FD Auszahlung {de(t['auszahlung'])} Einbehalt {de(t['einbehalt'])} Beitrag {de(t['beitrag'])} Tilgung {de(t['tilgung'])} Rest {de(t['rest'])}")
-    print("  Herkunft", {k: de(v) for k, v in f.herkunft.items()}, "Verwendung", {k: de(v) for k, v in f.verwendung.items()})
-
-    titel("R-7.6, R-7.8, R-10.6, R-10.9, R-10.12: weitere Einzelwerte")
-    from rf_rahmen import FEST
-    print("  sofortige Verrechnung minus Vortrag (RF-10):",
-          de(D(FEST["RF-10|Anlaufverlust, sofortige Verrechnung (andere Lesart): Endwert"])
-             - D(FEST["RF-10|Anlaufverlust, Vortrag im Vorhaben (Voreinstellung MA-016): Endwert"])))
-    p12 = [p for p in e.plan.steuer.protokoll if p["jahr"] == 12][0]
-    laufend = ((p12["e_op"] + p12["z_h"]) / 100).to_integral_value(rounding="ROUND_FLOOR") * 100 * D("0.14")
-    print("  Gewerbesteuer Jahr 12:", de(p12["gewerbesteuer"]), "| ohne Verkaufsgewinn:", de(laufend),
-          "| auf den Verkaufsgewinn:", de(p12["gewerbesteuer"] - laufend))
-    tp = tragbarer_preis(A.ANKAUF, A.VORGABEN)
-    print("  Endwertueberschuss beim tragbaren Preis", tp["preis"], ":", de(tp["ergebnis"].kennzahlen["endwertueberschuss"]),
-          "| Knick b/beta:", de(e.bemessung.bank["b"] / A.VORGABEN.beleihungsquote))
-    # Amortisationsdauer: Vermoegen bei gedachtem Verkauf (Wertpfad linear 1,00 -> 1,15 Mio.) gegen Alternative
-    plan, alt, kz = s1()
-    zz = plan.zeilen
-    for t in range(1, 6):
-        verm = zz[t]["guthaben"] + D(1000000) + D(150000) * t / 5 - (zz[t]["restschuld"] if t < 5 else zz[5]["abloesung"])
-        print(f"  Jahr {t}: Vermoegen {de(verm if t < 5 else plan.endwert)} | Alternative {de(alt.bestand(t))}")
-    # Entnahme aus Guthaben bei laufendem Verlustvortrag (Grenze der Eigenschaft 3)
-    re = [D(30000)] + [D(55000) * D("1.02") ** t for t in range(1, 5)]
-    st = lehrbuch_steuer("0.30", "vortrag", False)
-    pa, aa, ka = s1(ek=420000, reinertrag=re, steuer=st)
-    pb, ab, kb = s1(ek=420000, reinertrag=re, steuer=lehrbuch_steuer("0.30", "vortrag", False), entnahmen={1: 5000})
-    print("  Verlustvortrag, ohne Entnahme: Rendite", proz(ka["rendite"], 4), "| mit Entnahme 5.000 in t1:", proz(kb["rendite"], 4),
-          "| Endwertdifferenz", de(ka["endwertdifferenz"]), "/", de(kb["endwertdifferenz"]))
-
-    titel("R-4.3 Testfall: Bemessung je Jahr (e_op + Habenzins), ungerundete Werte, Deckung")
-    from kennzahlen import sollzinsen_nach_steuern
-    pc, ac, kc = s1(rundung="cent")
-    print("  Bemessung t1..t5:", [de(z["e_op"] + z["habenzins"]) for z in pc.zeilen[1:]])
-    print("  Probe P-03 Jahr 1:", de(pc.zeilen[1]["bestandssaldo"] - pc.zeilen[0]["bestandssaldo"]))
-    pu, au, ku = s1()
-    print("  ungerundet: Endwert", de(pu.endwert, 4), "Guthaben t4", de(pu.zeilen[4]["guthaben"]),
-          "Sollzinsen nach Steuern", de(sollzinsen_nach_steuern(pu)))
-    print("  Deckung t1..t5:", [de(schuldendienstdeckung(pu, j)[0], 4) for j in range(1, 6)])
-    print("  w(0), w(2) gerundet:", de(ku["w"][0], 6), de(ku["w"][2], 6), "| Ankauf w(0), w(24):",
-          de(e.kennzahlen["w"][0], 6), de(e.kennzahlen["w"][24], 6))
-    pk, ak, kk_ = s1(ek=380000)
-    print("  Kontokorrent t0..t3 bei 380.000 Eigenkapital:", [de(z["kk"]) for z in pk.zeilen[:4]])
-    print("  Verlustvortrag-Fall: Aenderung der Endwertdifferenz durch die Entnahme:",
-          de(ka["endwertdifferenz"] - kb["endwertdifferenz"]))
-
-    titel("R-5 Darlehen: Einzelwerte")
-    from darlehen import Tranche, bankdarlehen
-    from rf_bausteine import lauf
-    tr = Tranche("D", 600000, "raten", "0.03", laufzeit=20)
-    zl = lauf(tr, 3, 1)
-    print("  Ratentilgung: Zins", [de(x["zins"]) for x in zl[1:]], "Tilgung", de(zl[1]["tilgung"]))
-    tr = Tranche("D", 100000, "raten", "0.03", laufzeit=7)
-    zl = lauf(tr, 7, 12)
-    print("  sieben Monatsraten:", de(zl[1]["tilgung"]), de(zl[7]["tilgung"]))
-    pf, af, kf = jahresplan(n=10, a0=43738, ueberschuss=3606, ek=21869, h="0.05", kk="0.11", steuer=lehrbuch_steuer("0.5"),
-                            verkauf=43738, afa=600, a_lang="0.07",
-                            tranchen=[Tranche("Kredit", 21869, "frei", "0.10", rundung="keine")])
-    print("  freie Tilgung: Tilgung t1..t3", [de(x, 0) for x in pf.reihe("tilgung")[1:4]],
-          "Kreditstand t1..t3", [de(x, 0) for x in pf.reihe("restschuld")[1:4]])
-    print("  Neubau Monat 19: Rate", de(zn[19]["zins"] + zn[19]["tilgung"]))
-    print("  IWU: Fremdkapital", de(D(88992) * D("0.2")), "Eigenkapital", de(D(88992) * D("0.8")))
-    kw = dict(mindestdeckung=D("1.2"), zins=D("0.04"), tilgungssatz=D("0.02"), p=1)
-    fd = D(5400000)
-    kd_fd = fd / 42 + fd * D("0.005")
-    nb = dict(mittelbedarf=D(10000000), uebrige_darlehen=fd, kd_uebrige=kd_fd, zuschuesse=D(1800000), ek_min=D(1800000), **kw)
-    for name, b_ in (
-            ("Ankauf 2,6 Mio.", bankdarlehen(D(2600000), D("0.65"), D(107712), mittelbedarf=D(2600000) * D("1.07"), **kw)),
-            ("Ankauf 2,2 Mio.", bankdarlehen(D(2200000), D("0.65"), D(107712), mittelbedarf=D(2200000) * D("1.07"), **kw)),
-            ("Ankauf uebernommen", bankdarlehen(D(2000000), D("0.65"), D(140000), mittelbedarf=D(2200000),
-                                                uebrige_darlehen=D(1000000), kd_uebrige=D(25000), **kw)),
-            ("... andere Lesart", bankdarlehen(D(2000000), D("0.65"), D(140000), mittelbedarf=D(2200000),
-                                               uebrige_darlehen=D(1000000), kd_uebrige=D(25000), nur_eigenes=True, **kw)),
-            ("Neubau 65 %", bankdarlehen(D(10000000), D("0.65"), D(400000), **nb)),
-            ("Neubau 60 %", bankdarlehen(D(10000000), D("0.60"), D(400000), **nb)),
-            ("Neubau Reinertrag 200.000", bankdarlehen(D(10000000), D("0.65"), D(200000), **nb)),
-            ("Neubau Reinertrag 180.000", bankdarlehen(D(10000000), D("0.65"), D(180000), **nb))):
-        print(f"  {name}: A {de(b_['a'], 0)} | B {de(b_['b'])} | C {de(b_['c'], 0)} | Darlehen {de(b_['darlehen'])} "
-              f"| bindet {b_['bindend']} | Eigenkapital {de(b_['eigenkapital'])}")
-    print("  Monatsraster, geschlossene Form:", de(D("107712.37") / D("1.2") / D("0.06")))
-
-    titel("R-6, R-7, R-8, R-10, R-11, R-13: Einzelwerte Ankauf und Foerderung")
-    markt2 = D("9.20") * D("1.02")
-    print("  Marktmiete Jahr 2:", de(markt2, 3), "| Abstand zur Ist-Miete:", de(markt2 - D("8.50"), 3),
-          "| gebundene Miete nach dem ersten Schritt:", de(D("6.80") * D("1.0615"), 4))
-    jahr1 = 350 * 20 + 14 * 1320 + 2 * 1320
-    print("  Bewirtschaftung Jahr 1:", de(D(jahr1), 0), "| im Monat:", de(D(jahr1) / 12), "| Baupreisindex Jahr 2:", de(D("1.03") ** 2, 4))
-    print("  Abschreibungsgrundlage:", de(D(2640000) * D("0.75"), 0), "| Boden:", de(D(2640000) * D("0.25"), 0),
-          "| Summe der Abschreibungen:", de(sum(z["afa"] for z in e.plan.zeilen), 0), "| A:", de(e.bemessung.bank["a"], 0))
-    print("  Sollmiete im Monat des Folgejahres:", de(e.verkauf.preis_brutto / 18 / 12),
-          "| Jahressollmiete Jahr 1:", de(e.sollmiete_vj, 0), "| Bruttoanfangsrendite:", proz(e.bruttoanfangsrendite, 2))
-    from steuer import Steuer, GEWERBLICHE_PG, PRIVAT
-    from zeit import Raster
-    r1 = Raster(1, 12, startjahr=2027)
-    st = Steuer(A.steuer(GEWERBLICHE_PG, anteil_natuerliche=D("0.5")), r1, rd)
-    st.jahr(1, D(100000), D(0))
-    pr = st.protokoll[-1]
-    print("  Personengesellschaft: Gewerbeertrag nach Freibetrag", de(D(100000) - A.FREIBETRAG, 0), "| Anrechnung bei 50 %:", de(pr["anrechnung"]))
-    st = Steuer(A.steuer(PRIVAT, haltedauer=10), r1, rd)
-    st.jahr(1, D(30000), D(1000))
-    pr = st.protokoll[-1]
-    print("  Privat: Vermietung", de(pr["vermietung"]), "| Zinsen", de(pr["kapital"]))
-    zk = min(f.bemessung.baukosten, A.FOERDERUNG_B.bemessungsgrenze_je_qm * 2000) + min(D(1296000), D(400) * 2500)
-    print("  zuwendungsfaehige Kosten:", de(zk, 0), "| verbleibender Zuschuss nach Rueckzahlung:",
-          de(f.bemessung.zuschuss - f.verkauf.foerder_rueckzahlung))

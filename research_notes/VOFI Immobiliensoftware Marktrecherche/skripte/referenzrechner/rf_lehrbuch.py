@@ -7,7 +7,8 @@ from decimal import Decimal as D
 from zahlen import NULL, EINS, d, de, kaufm
 from darlehen import Tranche
 from finanzplan import lehrbuchansicht
-from kennzahlen import interner_zinsfuss, kapitalwert
+from kennzahlen import kapitalwert
+from rf_rahmen import izf as interner_zinsfuss_bsp
 from rf_rahmen import (fall, pruefe, pruefe_proz, pruefe_reihe, pruefe_proben, pruefe_gleich, info, jahresplan,
                        lehrbuch_steuer)
 
@@ -82,7 +83,7 @@ def rf03_schulte_standard():
     reihe = [-a0] + [ue] * 4 + [ue + rn]
     pruefe(k, "Kalkulationszinsfuss (Mischzins, %)", kzf * 100, "5.5", "0.05", 1)
     pruefe(k, "Kapitalwert vor Steuern", kapitalwert(reihe, kzf), "-43", "0.5", 0)
-    izf, _ = interner_zinsfuss(reihe)
+    izf, _, _ = interner_zinsfuss_bsp(reihe)
     pruefe(k, "interner Zinsfuss vor Steuern (%)", izf[0] * 100, "5.4", "0.05", 1)
     s, afa = D("0.5"), D(250)
     ue_s, rn_s = ue - s * (ue - afa), rn - s * (rn - (a0 - afa * n))

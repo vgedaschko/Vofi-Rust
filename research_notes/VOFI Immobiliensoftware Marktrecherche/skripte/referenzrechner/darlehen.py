@@ -1,9 +1,9 @@
-"""Kapitel 5 der Fachspezifikation: Darlehen (R-5.1 bis R-5.16).
+"""Kapitel 5 der Fachspezifikation: Darlehen (R-5.1 bis R-5.19).
 
 Eine Tranche fuehrt ihren Plan Periode fuer Periode; der Finanzplan (finanzplan.py) ruft sie auf.
 Zinsen einer Periode haengen nur von der Restschuld der Vorperiode ab (R-4.2).
 """
-from decimal import Decimal as D
+from decimal import Decimal as D, ROUND_FLOOR
 from zahlen import NULL, EINS, d, ab_cent
 
 ARTEN = ("annuitaet_prozent", "annuitaet_laufzeit", "raten", "endfaellig", "frei")
@@ -11,34 +11,43 @@ ANSCHLUSSREGELN = ("tilgungssatz", "rate", "restlaufzeit")
 
 
 class Tranche:
-    """Eine Kredittranche (Bankdarlehen, Foerderdarlehen, uebernommenes Darlehen).
+    """Eine Kredittranche (Bankdarlehen, KfW-Darlehen, Foerderdarlehen, uebernommenes Darlehen).
 
     betrag            Nennbetrag (bei uebernommenem Darlehen die Restschuld am Stichtag)
     art               Tilgungsart, siehe ARTEN
     zins              nominaler Jahreszins waehrend der Zinsbindung (R-5.2)
     tilgungssatz      anfaenglicher Tilgungssatz je Jahr (nur annuitaet_prozent)
+    rate_betrag       Bezugsgroesse der Rate einer Prozentannuitaet (R-5.11: beim uebernommenen Darlehen der
+                      urspruengliche Nennbetrag); Voreinstellung der Nennbetrag
     laufzeit          Zahl der Tilgungsperioden (annuitaet_laufzeit, raten)
     auszahlung        {Periode: Betrag}; Voreinstellung alles in Periode 0
     einbehalt         bei der ersten Auszahlung einbehaltener Betrag (Disagio, Entgelt), R-5.14
     tilgungsbeginn    Periode der ersten Tilgung (Voreinstellung 1)
     bindung           Zahl der Perioden mit festem Zins ab Stichtag (None = bis zum Ende)
     anschluss_zins    nominaler Jahreszins nach der Bindung (R-5.8)
-    anschluss_regel   "tilgungssatz" (Voreinstellung), "rate" oder "restlaufzeit" (R-5.9)
+    anschluss_regel   "tilgungssatz" (Voreinstellung, MA-034), "rate" oder "restlaufzeit" (R-5.9)
     anschluss_tilgung Tilgungssatz der Anschlussfinanzierung (Voreinstellung: der anfaengliche)
     beitrag_satz      laufender Beitrag je Jahr auf die Restschuld (Verwaltungskostenbeitrag), R-5.13
     tilgungszuschuss  {Periode: Betrag} Minderung der Restschuld ohne Geldfluss, R-5.15
     rundung           "kaufm" (Voreinstellung), "ab" oder "keine" je Darlehen (MA-013)
     bank              True fuer das Bankdarlehen der Regel R-5.12, False fuer uebrige Darlehen
+    foerder           Kennzeichen Foerderdarlehen: keine Vorfaelligkeitsentschaedigung (R-5.16)
+    vfe_bis           Periode, bis zu der eine Vorfaelligkeitsentschaedigung anfaellt: das Ende der Zinsbindung,
+                      hoechstens der frueheste Kuendigungstermin (BGB-489); Voreinstellung die Zinsbindung
+    bereit_satz       Bereitstellungszins je Monat auf den nicht ausgezahlten Betrag (R-5.18)
+    bereit_frei       bereitstellungsfreie Monate ab dem Stichtag
     """
 
     def __init__(self, name, betrag, art, zins, tilgungssatz=None, laufzeit=None, auszahlung=None,
                  einbehalt=0, tilgungsbeginn=1, bindung=None, anschluss_zins=None,
                  anschluss_regel="tilgungssatz", anschluss_tilgung=None, beitrag_satz=0,
-                 tilgungszuschuss=None, rundung="kaufm", bank=True, vfe_pflichtig=True):
+                 tilgungszuschuss=None, rundung="kaufm", bank=True, foerder=False, rate_betrag=None,
+                 vfe_bis=None, bereit_satz=0, bereit_frei=0):
         assert art in ARTEN and anschluss_regel in ANSCHLUSSREGELN
         self.name, self.betrag, self.art = name, d(betrag), art
         self.zins = d(zins)
         self.tilgungssatz = None if tilgungssatz is None else d(tilgungssatz)
+        self.rate_betrag = self.betrag if rate_betrag is None else d(rate_betrag)
         self.laufzeit = laufzeit
         self.auszahlung = {int(k): d(v) for k, v in (auszahlung or {0: betrag}).items()}
         assert sum(self.auszahlung.values()) == self.betrag, "Auszahlungen muessen den Nennbetrag ergeben"
@@ -52,12 +61,16 @@ class Tranche:
         self.tilgungszuschuss = {int(k): d(v) for k, v in (tilgungszuschuss or {}).items()}
         self.rundung_art = rundung
         self.bank = bank
-        self.vfe_pflichtig = vfe_pflichtig      # R-5.16: Foerderdarlehen ohne Vorfaelligkeitsentschaedigung
+        self.foerder = foerder
+        self.vfe_bis = bindung if vfe_bis is None else vfe_bis
+        self.bereit_satz, self.bereit_frei = d(bereit_satz), bereit_frei
         # Zustand
         self.rest = NULL
         self.rate = None
         self.ausgezahlt = NULL
+        self.hinweise = []
         self._erste_auszahlung = min(self.auszahlung)
+        self._letzte_auszahlung = max(self.auszahlung)
 
     # ------------------------------------------------------------------ Hilfen
     def zins_der_periode(self, u):
@@ -80,12 +93,15 @@ class Tranche:
         return kapital * zins_periode * q / (q - EINS)
 
     @staticmethod
-    def laufzeit_prozentannuitaet(zins_periode, tilgung_periode):
-        """Rechnerische Gesamtlaufzeit einer Prozentannuitaet in Perioden (reelle Zahl), fuer R-5.9 'restlaufzeit':
-        n = ln((i + t) / t) / ln(1 + i); bei Zins null n = 1 / t."""
+    def restlaufzeit(restschuld, rate, zins_periode):
+        """R-5.9 'Restlaufzeit bleibt': Zahl der Perioden, nach denen die bisherige Rate die Restschuld zum
+        bisherigen Zins getilgt haette (reelle Zahl): m = ln(R / (R - S x i)) / ln(1 + i); bei Zins null S / R.
+        None, wenn die Rate keine Tilgung enthaelt."""
+        if rate <= restschuld * zins_periode:
+            return None
         if zins_periode == 0:
-            return EINS / tilgung_periode
-        return ((zins_periode + tilgung_periode) / tilgung_periode).ln() / (EINS + zins_periode).ln()
+            return restschuld / rate
+        return (rate / (rate - restschuld * zins_periode)).ln() / (EINS + zins_periode).ln()
 
     # ------------------------------------------------------------------ eine Periode
     def periode(self, u, p, rd, letzte=False, liquiditaet=None):
@@ -95,16 +111,19 @@ class Tranche:
         letzte=True: nach der planmaessigen Rate wird die Restschuld abgeloest (R-8.6).
         """
         z = dict(auszahlung=NULL, einbehalt=NULL, zins=NULL, tilgung=NULL, beitrag=NULL,
-                 tilgungszuschuss=NULL, abloesung=NULL)
+                 tilgungszuschuss=NULL, abloesung=NULL, bereit=NULL, satz=NULL)
         rest_vor = self.rest
         if u >= 1 and rest_vor > 0:
-            satz = self.zins_der_periode(u)
+            satz = z["satz"] = self.zins_der_periode(u)
             # R-5.3 / R-12.5: Kapital x Satz, Division zuletzt, dann Rundung
             z["zins"] = self._geld(rd, rest_vor * satz / p)
             if self.beitrag_satz:
                 z["beitrag"] = self._geld(rd, rest_vor * self.beitrag_satz / p)
             if u >= self.tilgungsbeginn:
                 z["tilgung"] = self._tilgung(u, p, rd, rest_vor, z["zins"], satz, liquiditaet)
+        # R-5.18: Bereitstellungszins auf den am Ende der Vorperiode nicht ausgezahlten Betrag
+        if self.bereit_satz and u >= 1 and u * 12 // p > self.bereit_frei and self.ausgezahlt < self.betrag:
+            z["bereit"] = self._geld(rd, (self.betrag - self.ausgezahlt) * self.bereit_satz * 12 / p)
         if u in self.auszahlung:
             z["auszahlung"] = self.auszahlung[u]
             if u == self._erste_auszahlung:
@@ -123,8 +142,7 @@ class Tranche:
         anschluss_start = self.bindung is not None and u == self.bindung + 1
         if self.art == "annuitaet_prozent":
             if self.rate is None:               # R-5.4: Rate aus dem Nennbetrag, einmal gerundet
-                self.rate = self._geld(rd, self.betrag * (self.zins + self.tilgungssatz) / p)
-                self._rate0, self._zins0 = self.rate, self.zins
+                self.rate = self._geld(rd, self.rate_betrag * (self.zins + self.tilgungssatz) / p)
             if anschluss_start:                 # R-5.9
                 self._neue_rate(p, rd, rest_vor, satz)
             return min(rest_vor, max(NULL, self.rate - zins))
@@ -153,58 +171,67 @@ class Tranche:
 
     def _neue_rate(self, p, rd, rest_vor, satz_neu):
         regel = self.anschluss_regel
+        t = self.anschluss_tilgung if self.anschluss_tilgung is not None else self.tilgungssatz
+        if regel == "restlaufzeit":
+            # R-5.9: Laufzeitannuitaet ueber die auf ganze Perioden abgerundete Restlaufzeit, mindestens eine
+            ohne_tilgung = self.rate <= self._geld(rd, rest_vor * self.zins / p)
+            m = None if ohne_tilgung else self.restlaufzeit(rest_vor, self.rate, self.zins / p)
+            if m is None:                       # Rate ohne Tilgung: Rueckfall auf "Tilgungssatz bleibt" (M-40)
+                self.hinweise.append("M-40")
+                regel = "tilgungssatz"
+            else:
+                perioden = max(1, int(m.to_integral_value(ROUND_FLOOR)))
+                self.rate = self._geld(rd, self.annuitaet(rest_vor, satz_neu / p, perioden))
+                return
         if regel == "rate":
             # Rate bleibt; sie deckt mindestens die Zinsen (keine negative Tilgung)
             self.rate = max(self.rate, self._geld(rd, rest_vor * satz_neu / p))
-        elif regel == "tilgungssatz":
-            t = self.anschluss_tilgung if self.anschluss_tilgung is not None else self.tilgungssatz
+        else:
             self.rate = self._geld(rd, rest_vor * (satz_neu + t) / p)
-        else:                                   # restlaufzeit: Volltilgung zum urspruenglichen Termin
-            gesamt = self.laufzeit_prozentannuitaet(self._zins0 / p, self.tilgungssatz / p)
-            rest_perioden = max(EINS, gesamt - D(self.bindung - self.tilgungsbeginn + 1))
-            ip = satz_neu / p
-            if ip == 0:
-                self.rate = self._geld(rd, rest_vor / rest_perioden)
-            else:
-                q = (EINS + ip) ** rest_perioden
-                self.rate = self._geld(rd, rest_vor * ip * q / (q - EINS))
 
 
-def kapitaldienst_prozentannuitaet(betrag, zins, tilgungssatz, p, rd):
-    """Kapitaldienst eines Jahres der Tilgungsphase: p x gerundete Rate (R-5.12 b)."""
-    return p * rd.geld(betrag * (zins + tilgungssatz) / p)
+def kapitaldienst_kalkulatorisch(schuld, zins, tilgungssatz, p, rd):
+    """R-5.12 (b): Kapitaldienst eines Jahres aus p kaufmaennisch gerundeten Raten auf die Schuld."""
+    return p * rd.geld(schuld * (zins + tilgungssatz) / p)
 
 
-def bankdarlehen(wertansatz, quote, reinertrag_vj, mindestdeckung, zins, tilgungssatz, mittelbedarf,
-                 uebrige_darlehen=NULL, kd_uebrige=NULL, zuschuesse=NULL, ek_min=NULL,
-                 nur_eigenes=False, p=12, rd=None):
-    """R-5.12: Hoehe des Bankdarlehens = kleinster Wert aus (a), (b), (c), nie negativ (MA-026).
+def bankdarlehen(wertansatz, quote, ertrag_nachhaltig, mindestdeckung, zins_kalk, tilgung_kalk, mittelbedarf,
+                 uebrige_darlehen=NULL, uebrige_im_beleihungsraum=None, kd_uebrige=NULL, zuschuesse=NULL,
+                 ek_min=NULL, p=12, rd=None):
+    """R-5.12: Hoehe des Bankdarlehens = kleinster Wert aus (a), (b), (c), nie negativ.
 
-    (a) Beleihungsquote x Wertansatz abzueglich der uebrigen Darlehen
-    (b) groesstes Darlehen, mit dem der Kapitaldienst aller Darlehen die Mindestdeckung im ersten
-        Jahr der Vollvermietung einhaelt
+    (a) Beleihungsquote x Wertansatz abzueglich der uebrigen Darlehen, die den Beleihungsraum belegen (MA-026)
+    (b) groesstes Darlehen, mit dem der nachhaltige Reinertrag den kalkulatorischen Kapitaldienst aller Darlehen
+        mit der Mindestdeckung deckt (Festlegung: immer alle Darlehen)
     (c) Restfinanzierung = Mittelbedarf - uebrige Darlehen - Zuschuesse - Mindesteigenkapital
-    nur_eigenes=True: andere Lesart von MA-026 (Quote und Deckung nur fuer das eigene Darlehen).
-    Rueckgabe: dict mit a, b, c, darlehen, eigenkapital, bindend (Liste), meldung.
+    Bei kalkulatorischem Zins plus Tilgung null ist (b) unbegrenzt, wenn der Ertrag die uebrigen Darlehen deckt.
+    Rueckgabe: dict mit a, b (None = unbegrenzt), c, darlehen, eigenkapital, bindend (Liste), meldung.
     """
     from zahlen import Rundung
     rd = rd or Rundung("cent")
-    a = quote * wertansatz - (NULL if nur_eigenes else uebrige_darlehen)
-    tragbar = reinertrag_vj / mindestdeckung - (NULL if nur_eigenes else kd_uebrige)
-    b = tragbar / (zins + tilgungssatz)
-    if b > 0:
-        # sichere Seite: groesster Centbetrag, dessen gerundete Raten die Deckung einhalten
-        b = ab_cent(b)
-        while b > 0 and kapitaldienst_prozentannuitaet(b, zins, tilgungssatz, p, rd) > tragbar:
-            b -= D("0.01")
-    c = mittelbedarf - uebrige_darlehen - zuschuesse - ek_min
-    kleinster = min(a, b, c)
-    darlehen = max(NULL, ab_cent(kleinster))
-    meldung = "M-21" if b <= 0 else None    # Reinertrag deckt den Kapitaldienst der uebrigen Darlehen nicht
-    grenzen = {"a": a, "b": b, "c": c}
-    if darlehen == 0:
-        bindend = [k for k, v in grenzen.items() if v <= 0]
+    im_raum = uebrige_darlehen if uebrige_im_beleihungsraum is None else uebrige_im_beleihungsraum
+    a = quote * wertansatz - im_raum
+    tragbar = ertrag_nachhaltig / mindestdeckung - kd_uebrige
+    satz = zins_kalk + tilgung_kalk
+    if satz == 0:
+        b = None if tragbar >= 0 else NULL      # R-14.1: kein Kapitaldienst; (b) bindet nicht oder sperrt
     else:
-        bindend = [k for k, v in grenzen.items() if ab_cent(v) == darlehen]
+        b = tragbar / satz
+        if b > 0:
+            # sichere Seite: groesster Centbetrag, dessen gerundete Raten die Deckung einhalten
+            b = ab_cent(b)
+            while b > 0 and kapitaldienst_kalkulatorisch(b, zins_kalk, tilgung_kalk, p, rd) > tragbar:
+                b -= D("0.01")
+    c = mittelbedarf - uebrige_darlehen - zuschuesse - ek_min
+    grenzen = {"a": a, "c": c}
+    if b is not None:
+        grenzen["b"] = b
+    darlehen = max(NULL, ab_cent(min(grenzen.values())))
+    meldung = "M-21" if (b is not None and b <= 0) else None
+    if darlehen == 0:
+        bindend = sorted(k for k, v in grenzen.items() if v <= 0)
+    else:
+        bindend = sorted(k for k, v in grenzen.items() if ab_cent(v) == darlehen)
     ek = mittelbedarf - uebrige_darlehen - zuschuesse - darlehen
-    return dict(a=a, b=b, c=c, darlehen=darlehen, eigenkapital=ek, bindend=bindend, meldung=meldung)
+    return dict(a=a, b=b, c=c, darlehen=darlehen, eigenkapital=ek, bindend=bindend, meldung=meldung,
+                tragbar=tragbar, satz=satz)
