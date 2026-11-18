@@ -18,9 +18,13 @@ def vergleichsfaktoren(e):
     r, rd = e.raster, e.rundung
     st = Steuer(e.steuer, r, rd)
     f = [EINS] * (r.N + 1)
+    je_jahr = {}                # der Faktor haengt nur vom Planjahr ab; die Wurzel wird je Planjahr einmal gezogen
     for u in range(1, r.N + 1):
-        k = e.h_kurz * (EINS - st.grenzsatz_zinsen(r.planjahr(u)))
-        f[u] = rd.satz((EINS + k) ** (EINS / D(r.p))) if r.p > 1 else EINS + k
+        j = r.planjahr(u)
+        if j not in je_jahr:
+            k = e.h_kurz * (EINS - st.grenzsatz_zinsen(j))
+            je_jahr[j] = rd.satz((EINS + k) ** (EINS / D(r.p))) if r.p > 1 else EINS + k
+        f[u] = je_jahr[j]
     w = [EINS] * (r.N + 1)
     for t in range(r.N - 1, -1, -1):
         w[t] = w[t + 1] * f[t + 1]

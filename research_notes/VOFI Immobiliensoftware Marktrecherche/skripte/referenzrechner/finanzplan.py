@@ -8,9 +8,9 @@ nur von Bestaenden der Vorperiode und von Zahlungen der laufenden Periode ab; es
 from dataclasses import dataclass, field
 from decimal import Decimal as D
 from typing import List, Optional
-from zahlen import NULL, EINS, d, Rundung, periodensatz_konform
+from zahlen import NULL, EINS, d, Rundung, periodensatz_konform, FEHLER
 from zeit import Raster
-from steuer import Steuer, Steuerparameter, PRIVAT
+from steuer import Steuer, Steuerparameter, PRIVAT, UEBERSCHUSS
 
 # R-4.1: stabile Zeilenkennungen (Schluessel des Referenzrechners -> Kennung, Bezeichnung)
 ZEILEN = {
@@ -72,6 +72,11 @@ class PlanEingabe:
                                                 # None = im Jahr der Zahlung
     steuer_ertrag: Optional[List[D]] = None     # steuerpflichtiger Ertrag aus einem Zuschuss (MA-031)
     rueckzahlung_im_gewinn: bool = True         # R-7.4: die Rueckzahlung von Foerdermitteln mindert den Verkaufsgewinn
+                                                # (nur Lesart "Minderung" von MA-031)
+    rueckzahlung_laufend: bool = False          # R-7.19: die Rueckzahlung mindert das operative Ergebnis des
+                                                # Verkaufsjahres (Lesart "sofortige Einnahme")
+    steuer_zuschuss_entgelt: Optional[List[D]] = None   # R-7.19: abziehbarer Teil des Entgelts auf den Zuschuss je
+                                                # Periode; None = im Jahr der Zahlung. Kein Entgelt fuer Schulden
     pacht: Optional[List[D]] = None             # Erbbauzins je Periode (in 'kosten' enthalten), fuer GEWSTG-8
     anschaffung: Optional[D] = None             # aktivierte Kosten einschliesslich Boden nach Zuschussminderung;
                                                 # Grundlage der Abschreibungsprobe P-08 und der Steuerprobe P-15
@@ -114,7 +119,8 @@ def rechne_plan(e: PlanEingabe) -> Plan:
     st_einb = e.steuer_einbehalt
     st_ertrag = e.steuer_ertrag or _null(N)
     pacht = e.pacht or _null(N)
-    privat = e.steuer.status == PRIVAT
+    privat = e.steuer.status in UEBERSCHUSS      # R-7.11, R-7.17: die Vorfaelligkeit gehoert zum Verkauf
+    st_zus = e.steuer_zuschuss_entgelt
 
     for u in range(N + 1):
         letzte = u == N and N >= 1
@@ -166,11 +172,18 @@ def rechne_plan(e: PlanEingabe) -> Plan:
         einbehalt = summe("einbehalt")
         # R-7.15: einbehaltene Betraege steuerlich im Jahr der Zahlung oder verteilt; R-7.11: die Vorfaelligkeit
         # der Privatperson gehoert zum Verkauf
-        z["einbehalt_steuer"] = (einbehalt + z["zuschuss_einbehalt"]) if st_einb is None else st_einb[u]
+        z["einbehalt_steuer"] = einbehalt if st_einb is None else st_einb[u]
+        # R-7.19: das Entgelt auf einen Zuschuss folgt der Lesart des Zuschusses und ist kein Entgelt fuer Schulden
+        z["zuschuss_entgelt_steuer"] = z["zuschuss_einbehalt"] if st_zus is None else st_zus[u]
         z["steuer_ertrag"] = st_ertrag[u]
         vfe_op = NULL if privat else z["vfe"]
         z["entgelte"] = sollzins + z["kkzins"] + beitrag + bereit + z["einbehalt_steuer"] + vfe_op
-        z["e_op"] = z["miete"] - z["kosten"] - z["erhaltung"] - z["afa"] - z["entgelte"] + z["steuer_ertrag"]
+        z["e_op"] = (z["miete"] - z["kosten"] - z["erhaltung"] - z["afa"] - z["entgelte"] + z["steuer_ertrag"]
+                     - z["zuschuss_entgelt_steuer"])
+        if letzte and e.verkauf and e.rueckzahlung_laufend:
+            z["e_op"] -= e.verkauf.foerder_rueckzahlung
+        if "afa_doppelt" in FEHLER:             # Fehlerbild RF-16: Abschreibung zweimal abgezogen
+            z["e_op"] -= z["afa"]
         e_op_jahr += z["e_op"]
         z_h_jahr += z["habenzins"]
         entgelte_jahr += z["entgelte"]
@@ -259,6 +272,8 @@ def rechne_alternative(e: PlanEingabe, einlagen, entnahmen) -> Alternative:
     steuer = alt.steuer = Steuer(e.steuer, r, rd, alternative=True)
     privat = e.steuer.status == PRIVAT      # R-9.5 (ESTG-20): Kontokorrentzinsen der Privatperson nicht abziehbar
     a_lang = e.h_kurz if e.a_lang is None else e.a_lang
+    if "alternative_zins" in FEHLER:            # Fehlerbild RF-16: Anlagezins mit dem Kontokorrentzins verwechselt
+        a_lang = e.kk_zins
     s_lang = periodensatz_konform(a_lang, p, rd)
     s_kurz = periodensatz_konform(e.h_kurz, p, rd)
     s_kk = periodensatz_konform(e.kk_zins, p, rd)
@@ -282,6 +297,8 @@ def rechne_alternative(e: PlanEingabe, einlagen, entnahmen) -> Alternative:
         kk -= tilg_kk
         lang += einl - tilg_kk
         netto = kurz - kk + z["zins_lang"] + z["zins_kurz"] - z["kkzins"] - z["steuer"] - entnahmen[u]
+        if "alternative_ohne_steuerabzug" in FEHLER:    # Fehlerbild RF-16: Steuer gerechnet, aber nicht gebucht
+            netto += z["steuer"]
         if netto >= 0:
             kurz, kk = netto, NULL
         else:
@@ -311,7 +328,7 @@ def verdichte(plan: Plan):
         for k in fluss:
             zeile[k] = plan.jahressumme(k, j)
         for k in bestand:
-            zeile[k] = plan.zeilen[j * r.p][k]
+            zeile[k] = plan.zeilen[j * r.p - (1 if "verdichtung_bestand" in FEHLER else 0)][k]   # Fehlerbild RF-16
         jahre.append(zeile)
     return jahre
 

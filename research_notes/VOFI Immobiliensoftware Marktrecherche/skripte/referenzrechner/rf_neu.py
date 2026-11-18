@@ -20,7 +20,7 @@ from proben import pruefe_plan, pruefe_alternative, pruefe_index
 from kennzahlen import schuldendienstdeckung, renditemeldungen, meldung_izf
 import grobkalkulation
 from grobkalkulation import (rechne_grob, tragbarer_preis, zielwertsuche, suche_eingabe, haltedauer_tabelle, vergleiche,
-                             Meldung, kalkuliere, darstellung, vorgaben_im_vorhaben)
+                             Meldung, kalkuliere, darstellung)
 import annahmen as A
 from rf_rahmen import fall, pruefe, pruefe_fest, pruefe_gleich, pruefe_reihe, info, lehrbuch_steuer, izf
 from rf_bausteine import lauf
@@ -85,23 +85,8 @@ def rf16_sperre():
     pruefe_gleich(k, "Fehlerbild Abschreibung je Monat statt je Planjahr: P-08 und P-19 melden", proben_von(pruefe_plan(falsch)), ["P-08", "P-15", "P-19"])
     pruefe(k, "... Endwert mit dem Fehler (frueherer Sollwert)", falsch.endwert, "585918.72", "0")
     e = rechne_grob(A.ANKAUF, VG, KAT)
-    e.plan.zeilen[5]["tranchen"]["Bankdarlehen"]["zins"] += D("1.00")
-    pruefe_gleich(k, "Fehlerbild Zins um einen Euro falsch: Zinsprobe P-17 meldet", "P-17" in proben_von(pruefe_plan(e.plan)), True)
-    e = rechne_grob(A.ANKAUF, VG, KAT)
-    e.plan.steuer.protokoll[3]["vv"] += D(1000)
-    pruefe_gleich(k, "Fehlerbild Verlustvortrag falsch fortgeschrieben: Steuerprobe P-15 meldet", proben_von(pruefe_plan(e.plan)), ["P-15"])
-    e = rechne_grob(A.ANKAUF, VG, KAT)
-    e.plan.zeilen[30]["e_op"] += D(500)
-    pruefe_gleich(k, "Fehlerbild Ergebnis ohne Zahlung: Bruecke der Steuerprobe P-15 meldet", proben_von(pruefe_plan(e.plan)), ["P-15"])
-    e = rechne_grob(A.ANKAUF, VG, KAT)
-    e.alt.zeilen[40]["kurz"] += D(100)
-    pruefe_gleich(k, "Fehlerbild Unterlassensalternative falsch gebucht: P-16 meldet", proben_von(pruefe_alternative(e.alt, CENT)), ["P-16"])
-    e = rechne_grob(A.ANKAUF, VG, KAT)
-    e.plan.zeilen[24]["guthaben"] += D(10)
-    pruefe_gleich(k, "Fehlerbild Bestand am Jahresende falsch: Jahresbestandsprobe P-09 meldet", "P-09" in proben_von(pruefe_plan(e.plan)), True)
     idx, steig = e.ertrag.indexreihen["Mieten"]
     pruefe_gleich(k, "Indexprobe P-18: richtige Reihe", pruefe_index({"Mieten": (idx, steig)}, CENT), [])
-    pruefe_gleich(k, "Fehlerbild Index falsch: P-18 meldet", proben_von(pruefe_index({"Mieten": (idx[:3] + [idx[3] + D("0.01")] + idx[4:], steig)}, CENT)), ["P-18"])
 
 
 def rf17_steuer():
@@ -182,18 +167,23 @@ def rf17_steuer():
             pruefe_fest(k, f"Zuschuss '{lesart}', {jahre} Jahre: Endwert, Endwertdifferenz, Summe der Steuern, Eigenkapital der Investitionsphase",
                         [str(e.plan.endwert), str(e.kennzahlen["endwertdifferenz"]), str(sum(e.plan.reihe("steuer"))), str(e.eigenkapital_investitionsphase)])
             proz_fest(k, f"Zuschuss '{lesart}', {jahre} Jahre: VOFI-Rendite", e.kennzahlen["rendite"])
-    for jahre in (38, 20):
-        pruefe_gleich(k, f"voreingestellte Lesart 'sofort' hat die niedrigste Endwertdifferenz und Rendite ({jahre} Jahre)",
-                      werte[("sofort", jahre)] == min(werte[(l, jahre)] for l in ("sofort", "verteilt", "minderung")), True)
+    vor = rechne_grob(GEFOERDERT, VG, KATN)
+    pruefe_gleich(k, "Voreinstellung ohne Kennzeichen E-41: 'verteilt' (Gegenleistung fuer die Bindung)",
+                  (vor.zuschuss_lesart, vor.kennzahlen["endwertdifferenz"] == werte[("verteilt", 38)][0]), ("verteilt", True))
+    pruefe_gleich(k, "... sie ist die unguenstigere der beiden Einordnungen (verteilt gegen Minderung), 38 und 20 Jahre",
+                  [werte[("verteilt", j)] <= werte[("minderung", j)] for j in (38, 20)], [True, True])
     pruefe_gleich(k, "Zuschuss ueber den Kosten, auf die er entfaellt: Meldung M-43",
                   kalkuliere(replace(GEFOERDERT, foerderung=replace(A.FOERDERUNG_B, zuschussquote=D("1.1"), darlehensquote=NULL, eigenmittelquote=NULL)),
                              VG, KATN)["meldungen"][0]["kennung"], "M-43")
     # R-7.15 einbehaltene Entgelte: verteilt (Betriebsvermoegen) gegen Jahr der Zahlung
     e_v = rechne_grob(GEFOERDERT, VG, KATN)
     e_s = rechne_grob(GEFOERDERT, replace(VG, ma032_entgelte_sofort=True), KATN)
-    pruefe_fest(k, "einbehaltene Entgelte 65.393,64: abgezogen im Planjahr 1, 2 und 3 (verteilt ueber die zinslose Zeit)",
+    pruefe_fest(k, "einbehaltenes Entgelt des Foerderdarlehens 52.314,91: abgezogen im Planjahr 1, 2 und 3 (verteilt ueber die zinslose Zeit)",
                 [str(e_v.plan.jahressumme("einbehalt_steuer", j)) for j in (1, 2, 3)])
-    pruefe(k, "... Summe der verteilten Betraege", sum(e_v.plan.reihe("einbehalt_steuer")), str(e_v.bemessung.einbehalt_darlehen + e_v.bemessung.einbehalt_zuschuss), "0")
+    pruefe(k, "... Summe der verteilten Betraege", sum(e_v.plan.reihe("einbehalt_steuer")), str(e_v.bemessung.einbehalt_darlehen), "0")
+    pruefe_fest(k, "Entgelt auf den Zuschuss 13.078,73, Lesart 'verteilt': abgezogen im Planjahr 1, 2 und 3 (ueber die Bindung)",
+                [str(e_v.plan.jahressumme("zuschuss_entgelt_steuer", j)) for j in (1, 2, 3)])
+    pruefe(k, "... Summe ueber die Haltedauer", sum(e_v.plan.reihe("zuschuss_entgelt_steuer")), str(e_v.bemessung.einbehalt_zuschuss), "0")
     pruefe_fest(k, "... Endwert verteilt gegen Abzug im Jahr der Zahlung (andere Lesart MA-032)", [str(e_v.plan.endwert), str(e_s.plan.endwert)])
     # R-7.11 im Finanzplan: Privatperson, Vorfaelligkeit als Veraeusserungskosten
     for jahre, bindung in ((5, 10),):
@@ -265,7 +255,7 @@ def rf18_miete():
            str(18 * 12 * erb.ertrag.erbbau_monat(144)), "0.01")
     # CO2-Kosten (R-6.9) und Instandhaltung nach Baualter (R-6.8)
     pruefe(k, "CO2-Kosten des Vermieters im Jahr 1: 30 kg x 1.320 m2 x 40 % x 50 Euro je Tonne", D(30) * 1320 * D("0.4") * 50 / 1000, "792", "0")
-    c5 = rechne_grob(A.ANKAUF, VG, replace(KAT, co2_kosten_5a_je_qm=D("0.10")))
+    c5 = rechne_grob(replace(A.ANKAUF, weitere_vermieterkosten=D("132")), VG, KAT)
     pruefe(k, "weitere Vermieterkosten 0,10 Euro je m2 (CO2KOSTAUFG-5A): Bewirtschaftung im Monat 1", c5.plan.zeilen[1]["kosten"], "2420.33", "0")
     alt = rechne_grob(replace(A.ANKAUF, baujahr=1996), VG, KAT)
     pruefe_reihe(k, "Baujahr 1996: Bewirtschaftung im Monat 1 (Stufe 11,50 Euro) und im Monat 13 (Stufe 14 Euro, Index 1,02)",
@@ -344,18 +334,7 @@ def rf19_bank():
         e = rechne_grob(A.ANKAUF, replace(VG, anschluss_regel=regel), KAT)
         regeln[regel] = [str(e.plan.endwert), str(e.deckung_nach_bindung["Bankdarlehen"][1].quantize(D("0.0001"))), str(e.kennzahlen["endwertdifferenz"])]
     pruefe_fest(k, "Anschlussregeln: Endwert, Deckung im Jahr 11, Endwertdifferenz", regeln)
-    # Vorgaben im Vorhaben (R-3.2)
-    e = rechne_grob(replace(A.ANKAUF, abweichungen={"mietsteigerung": (D("0.015"), None), "beleihungsquote": (D("0.60"), None)}), VG, KAT)
-    pruefe_fest(k, "strengere Vorgaben im Vorhaben: Liste (Kennung, Art) und Meldungen",
-                [[a["kennung"], a["art"]] for a in e.abweichungen] + kennungen(e))
-    pruefe_gleich(k, "Lockerung ohne Begruendung: Eingabemeldung",
-                  kalkuliere(replace(A.ANKAUF, abweichungen={"mietsteigerung": (D("0.025"), None)}), VG, KAT)["meldungen"][0]["kennung"], "M-20")
-    e = rechne_grob(replace(A.ANKAUF, abweichungen={"mietsteigerung": (D("0.025"), "Mietspiegel 2026, Fortschreibung")}), VG, KAT)
-    pruefe_fest(k, "Lockerung mit Begruendung: Liste und Meldungen", [[a["kennung"], a["art"], a["begruendung"]] for a in e.abweichungen] + kennungen(e))
-    _, liste = vorgaben_im_vorhaben(VG, {"anschluss_regel": ("restlaufzeit", None)})
-    pruefe_gleich(k, "H-07: 'Restlaufzeit bleibt' gilt als strenger als 'Tilgungssatz bleibt'", liste[0]["art"], "strenger")
-    pruefe_gleich(k, "H-07: 'Rate bleibt' ohne Begruendung ist eine Lockerung",
-                  meldung_von(lambda: vorgaben_im_vorhaben(VG, {"anschluss_regel": ("rate", None)})), "M-20")
+    # Vorgaben im Vorhaben (R-3.2): siehe rf_runde2.rf19_runde2
     pruefe_gleich(k, "Wertansatz der Bank ueber dem Kaufpreis ohne Begruendung: Eingabemeldung",
                   kalkuliere(replace(A.ANKAUF, wertansatz_bank=D(2600000)), VG, KAT)["meldungen"][0]["kennung"], "M-20")
     e = rechne_grob(replace(A.ANKAUF, wertansatz_bank=D(2600000), wertansatz_begruendung="Gutachten vom Stichtag"), VG, KAT)
@@ -440,8 +419,8 @@ def rf20_raender():
     try:
         lauf(tr, 3, 1)
         m24 = None
-    except ValueError as x:
-        m24 = str(x)[:4]
+    except Meldung as x:
+        m24 = x.kennung
     pruefe_gleich(k, "Darlehen ohne Anschlusszins, Laufzeit ueber die Zinsbindung: M-24", m24, "M-24")
     pruefe_gleich(k, "Grobfoerderung ohne Zins nach der zinslosen Zeit, Haltedauer 38 Jahre: Eingabemeldung M-24",
                   status(replace(GEFOERDERT, foerderung=replace(A.FOERDERUNG_B, zins_danach=None)), VG, KATN), ["eingabe", "M-24"])

@@ -87,6 +87,16 @@ def schreibe_fest(basis_datei, ursachen_datei, bericht_datei, im_code=()):
                 umbenannt[neu_k] = k
                 break
 
+    # R-15.2: Ein Muster, das einen ganzen Fall erfasst, ist unzulaessig: Es gaebe auch einer unbeabsichtigten
+    # Aenderung dieses Falls eine Ursache. Geprueft wird mit einem Wertnamen, den es nicht gibt.
+    faelle = sorted({k.split("|", 1)[0] for k in set(alt) | set(NEU)})
+    sammel = [muster for muster, _ in ursachen if any(re.search(muster, f"{f_}|\x00kein solcher Wert") for f_ in faelle)]
+    if sammel:
+        print(f"\nNICHT festgeschrieben: {len(sammel)} Sammelmuster in {os.path.basename(ursachen_datei)} (R-15.2):")
+        for muster in sammel[:20]:
+            print("   ", muster)
+        return False
+
     def ursache(schluessel):
         for muster, text in ursachen:
             if re.search(muster, schluessel):

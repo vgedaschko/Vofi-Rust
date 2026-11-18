@@ -10,6 +10,21 @@ CENT = D("0.01")
 STELLEN12 = D("1E-12")
 
 
+TOLERANZ_OHNE_RUNDUNG = D("1E-12")   # R-13.2: Toleranz der Proben im Rundungsmodus "keine", in Euro
+
+# Fehlerbilder fuer RF-16 (R-13.4): Namen absichtlich eingebauter Rechenfehler. Im Normalbetrieb leer. Jeder Name
+# veraendert die Rechnung an genau einer Stelle; die zugehoerige Probe muss den Fehler melden.
+FEHLER = set()
+
+
+class Meldung(Exception):
+    """Definiertes Ergebnis statt Fehler (Kapitel 14): Kennung und Klartext."""
+
+    def __init__(self, kennung, text, angaben=None):
+        super().__init__(f"{kennung}: {text}")
+        self.kennung, self.text, self.angaben = kennung, text, angaben or {}
+
+
 def d(x):
     """Wandelt Eingaben exakt in Decimal (nie ueber float)."""
     if isinstance(x, D):

@@ -5,7 +5,7 @@ erst die Sollmiete der Periode (R-6.4). Wartefrist, Kappungsgrenze und Kappungsz
 (KAT-08, BGB-558); in diesem Modul steht keiner davon als Festwert.
 """
 from decimal import Decimal as D
-from zahlen import NULL, EINS, d
+from zahlen import NULL, EINS, d, FEHLER
 
 
 def indexreihe(jahre, steigerung, rd):
@@ -13,7 +13,10 @@ def indexreihe(jahre, steigerung, rd):
     Fortschreibung Index_j = Index_(j-1) x (1 + Steigerung), auf zwoelf Nachkommastellen (R-12.4)."""
     idx = [None, EINS]
     for j in range(2, jahre + 1):
-        idx.append(rd.satz(idx[-1] * (EINS + steigerung)))
+        if "index_potenz" in FEHLER:    # Fehlerbild RF-16: Potenz ohne Rundung je Schritt
+            idx.append((EINS + steigerung) ** (j - 1))
+        else:
+            idx.append(rd.satz(idx[-1] * (EINS + steigerung)))
     return idx
 
 
@@ -24,17 +27,27 @@ def jahr_von(m):
     return (m - 1) // MONATE + 1
 
 
-def erhoehungspfad(start, ziel, erste, letzter, kat, t_letzte, kappe_vorher, frei_ab, senken=False):
+class Mietrecht:
+    """KAT-08 fuer ein Vorhaben aufgeloest (R-6.18): Wartefrist und Kappungszeitraum in Monaten; Kappungsgrenze und
+    Geltung der Mietpreisbremse je Monat (sie koennen mit dem Ende einer Gebietsverordnung wechseln, MA-039)."""
+
+    def __init__(self, wartefrist, kappung_monate, kappung, bremse, bremse_aufschlag):
+        self.wartefrist, self.kappung_monate = wartefrist, kappung_monate
+        self.kappung, self.bremse, self.bremse_aufschlag = kappung, bremse, bremse_aufschlag
+
+
+def erhoehungspfad(start, ziel, erste, letzter, kat, t_letzte, bezug_vorher, frei_ab, senken=False):
     """R-6.3: Miete eines bestehenden Mietverhaeltnisses je Monat (BGB-558).
 
     start         Miete je Quadratmeter im Monat 'erste'
     ziel          Funktion Monat -> Zielmiete (Anpassungspfad zur ortsueblichen Vergleichsmiete)
-    kat           Katalogwerte: wartefrist (Monate), kappung (Anteil), kappung_monate (Zeitraum)
+    kat           Mietrecht: wartefrist (Monate), kappung(m) (Anteil im Monat der Erhoehung), kappung_monate
     t_letzte      Zeitpunkt der letzten Erhoehung (Monatsende; 0 = Stichtag, negativ = davor)
-    kappe_vorher  Funktion Monat k < erste -> hoechste zulaessige Miete, wenn die Miete des Monats k die
-                  Bezugsmiete der Kappungsgrenze ist (aus der Mietenhistorie oder nach MA-037)
+    bezug_vorher  Funktion Monat k < erste -> Bezugsmiete der Kappungsgrenze (aus der Mietenhistorie oder nach
+                  MA-037); None = die Kappungsgrenze ist ausgeschoepft, keine Erhoehung
     frei_ab       erster Monat, in dem sich die Miete aendern darf
-    senken        True: liegt die Zielmiete unter der Miete, folgt die Miete ihr (nur Bestand am Stichtag)
+    senken        True: liegt die Zielmiete unter der Miete, folgt die Miete ihr ohne Wartefrist und Kappung, und
+                  t_letzte bleibt unveraendert (Bestand am Stichtag, MA-038)
     Eine Erhoehung wirkt ab dem Monat m, wenn seit der letzten mindestens die Wartefrist vergangen ist
     (m - 1 >= t_letzte + Wartefrist) und die Kappungsgrenze gegen die Miete des Monats m - Kappungszeitraum
     Spielraum laesst. Rueckgabe: {Monat: Miete} fuer erste..letzter.
@@ -48,8 +61,8 @@ def erhoehungspfad(start, ziel, erste, letzter, kat, t_letzte, kappe_vorher, fre
                     miete = z
             elif z > miete and m - 1 >= t_letzte + kat.wartefrist:
                 k = m - kat.kappung_monate
-                grenze = pfad[k] * (EINS + kat.kappung) if k >= erste else kappe_vorher(k)
-                neu = min(z, grenze)
+                bezug = pfad[k] if k >= erste else bezug_vorher(k)
+                neu = miete if bezug is None else min(z, bezug * (EINS + kat.kappung(m)))
                 if neu > miete:
                     miete, t_letzte = neu, m - 1
         pfad[m] = miete
@@ -81,12 +94,13 @@ class Pool:
         self.name, self.flaeche, self.miete = name, flaeche, miete
 
 
-def mieten_ankauf(M, ein, kat, vg_fluktuation, anlauf, steigerung, dauer, rd, vorsicht_ma037=True):
+def mieten_ankauf(M, ein, kat, vg_fluktuation, anlauf, steigerung, dauer, rd, vorsicht_ma037=True, rueckfuehrung=True):
     """R-6.2 bis R-6.6, R-6.13, R-6.14: Pools eines Ankaufs fuer die Monate 1..M.
 
     ein: Eingaben (wohnflaeche, leere_flaeche, ist_miete, vergleichsmiete, markt_miete, gebunden_anteil,
-    bindung_jahre, gebundene_miete, mietenhistorie). Rueckgabe: (pools, vergleich), vergleich = Funktion Monat ->
-    ortsuebliche Vergleichsmiete.
+    bindung_jahre, gebundene_miete, mietenhistorie); kat: Mietrecht mit den Staffelwerten uebernommener Bindungen.
+    rueckfuehrung: MA-038, eine Miete ueber dem Ziel wird zurueckgefuehrt (Voreinstellung) oder bleibt stehen.
+    Rueckgabe: (pools, vergleich, vergleich), vergleich = Funktion Monat -> ortsuebliche Vergleichsmiete.
     """
     jahre = jahr_von(M)
     idx = indexreihe(jahre, steigerung, rd)
@@ -94,11 +108,11 @@ def mieten_ankauf(M, ein, kat, vg_fluktuation, anlauf, steigerung, dauer, rd, vo
 
     def neuvermietung(m):               # R-6.13: Neuvermietungsmiete, begrenzt durch die Mietpreisbremse (BGB-556D)
         markt = ein.markt_miete * idx[jahr_von(m)]
-        return min(markt, vm(m) * (EINS + kat.bremse_aufschlag)) if kat.mietpreisbremse else markt
+        return min(markt, vm(m) * (EINS + kat.bremse_aufschlag)) if kat.bremse(m) else markt
 
     def kohorte(name, flaeche, erste):  # neu vermietete Flaeche: Anfangsmiete, danach BGB-558 zur Vergleichsmiete
         start = neuvermietung(erste)
-        pfad = erhoehungspfad(start, vm, erste, M, kat, erste - 1, lambda k: start * (EINS + kat.kappung), erste)
+        pfad = erhoehungspfad(start, vm, erste, M, kat, erste - 1, lambda k: start, erste)
         return Pool(name, flaeche, pfad)
 
     vermietet = ein.wohnflaeche - ein.leere_flaeche
@@ -109,15 +123,16 @@ def mieten_ankauf(M, ein, kat, vg_fluktuation, anlauf, steigerung, dauer, rd, vo
     if hist is not None:                # (Monate seit der letzten Erhoehung, Miete drei Jahre vor dem Stichtag)
         seit, alt = hist
         t_letzte = -seit
-        kappe = lambda k: (ist if k >= -seit + 1 else alt) * (EINS + kat.kappung)
+        kappe = lambda k: ist if k >= -seit + 1 else alt
     elif vorsicht_ma037:                # letzte Erhoehung unmittelbar vor dem Stichtag, Kappungsgrenze ausgeschoepft
-        t_letzte, kappe = 0, (lambda k: ist)
+        t_letzte, kappe = 0, (lambda k: None)
     else:                               # andere Lesart: seit dem Kappungszeitraum unveraendert
-        t_letzte, kappe = -kat.kappung_monate, (lambda k: ist * (EINS + kat.kappung))
+        t_letzte, kappe = -kat.kappung_monate, (lambda k: ist)
     # ---- freie Bestandsflaeche mit Fluktuation (R-6.14)
     frei = vermietet * (EINS - ein.gebunden_anteil)
     if frei > 0:
-        pfad = erhoehungspfad(ist, anpassungsziel(ist, vm, 1, dauer), 1, M, kat, t_letzte, kappe, MONATE + 1, senken=True)
+        pfad = erhoehungspfad(ist, anpassungsziel(ist, vm, 1, dauer), 1, M, kat, t_letzte, kappe, MONATE + 1,
+                              senken=rueckfuehrung)
         rest = frei
         flaechen = {}
         for j in range(1, jahre + 1):
@@ -145,24 +160,29 @@ def mieten_ankauf(M, ein, kat, vg_fluktuation, anlauf, steigerung, dauer, rd, vo
             # Bezugsmiete der Kappung: gebundene Miete des Plans; vor dem Stichtag gilt MA-037
             def kappe_g(k, _p=dict(pfad)):
                 if k >= 1:
-                    return _p[k] * (EINS + kat.kappung)
-                return g0 if (hist is None and vorsicht_ma037) else g0 * (EINS + kat.kappung)
-            nach = erhoehungspfad(letzte, ziel, ende + 1, M, kat, t_stufe, kappe_g, ende + MONATE + 1, senken=True)
+                    return _p[k]
+                return None if (hist is None and vorsicht_ma037) else g0
+            nach = erhoehungspfad(letzte, ziel, ende + 1, M, kat, t_stufe, kappe_g, ende + MONATE + 1,
+                                  senken=rueckfuehrung)
             pfad.update(nach)
         pools.append(Pool("Bestand gebunden", geb, pfad))
     # ---- leerstehende Flaeche: nach dem Anlaufleerstand zur Neuvermietungsmiete (R-6.13)
     if ein.leere_flaeche > 0 and anlauf + 1 <= M:
         pools.append(kohorte("Leerstand am Stichtag", ein.leere_flaeche, anlauf + 1))
-    return pools, vm
+    return pools, vm, vm
 
 
 def mieten_neubau(M, ein, kat, erste, bezug, steigerung, dauer, rd, foerderung=None):
     """R-6.7: Pools eines Neubaus. erste = erster Vermietungsmonat (nach Bauzeit und Anlaufleerstand),
     bezug = Monat der Bezugsfertigkeit. Die eingegebene Miete gilt fuer das erste Vermietungsjahr; die
-    Vergleichsmiete des Neubaus ist die eingegebene Miete mit dem Mietindex je Vermietungsjahr."""
+    Vergleichsmiete des Neubaus ist die eingegebene Miete mit dem Mietindex je Vermietungsjahr. Die frei
+    finanzierte Flaeche folgt ihr ohne Anpassungsdauer (d = 0); 'dauer' gilt nach dem Ende einer Bindung (H-23).
+    Rueckgabe: (pools, vergleich, nachhaltig); nachhaltig = Funktion Monat -> nachhaltige Miete der Bank (E-65)."""
     jahre = jahr_von(M) + 1
     idx = indexreihe(jahre, steigerung, rd)
     vm = lambda m: ein.markt_miete * idx[(m - erste) // MONATE + 1] if m >= erste else ein.markt_miete
+    basis_n = ein.markt_miete if ein.nachhaltige_miete is None else ein.nachhaltige_miete
+    vm_n = lambda m: basis_n * idx[(m - erste) // MONATE + 1] if m >= erste else basis_n
     pools = []
     geb_anteil = NULL
     if foerderung is not None:
@@ -179,15 +199,15 @@ def mieten_neubau(M, ein, kat, erste, bezug, steigerung, dauer, rd, foerderung=N
             letzte = pfad[ende]
             ziel = anpassungsziel(letzte, vm, jahr_von(ende) + 1, dauer)
             def kappe_g(k, _p=dict(pfad)):
-                return _p[max(k, erste)] * (EINS + kat.kappung)
+                return _p[max(k, erste)]
             pfad.update(erhoehungspfad(letzte, ziel, ende + 1, M, kat, t_stufe, kappe_g, ende + MONATE + 1))
         pools.append(Pool("gefoerdert gebunden", ein.wohnflaeche * geb_anteil, pfad))
     frei = ein.wohnflaeche * (EINS - geb_anteil)
     if frei > 0:
         start = ein.markt_miete
-        pfad = erhoehungspfad(start, vm, erste, M, kat, erste - 1, lambda k: start * (EINS + kat.kappung), erste)
+        pfad = erhoehungspfad(start, vm, erste, M, kat, erste - 1, lambda k: start, erste)
         pools.append(Pool("Neubau frei", frei, pfad))
-    return pools, vm
+    return pools, vm, vm_n
 
 
 def monatswerte(pools, vm, M):

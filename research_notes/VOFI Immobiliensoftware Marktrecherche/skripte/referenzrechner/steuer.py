@@ -8,7 +8,7 @@ Katalogwerte oder Eingaben; in diesem Modul steht kein Satz als Festwert.
 from dataclasses import dataclass
 from decimal import Decimal as D
 from typing import Callable, Optional
-from zahlen import NULL, EINS, d, abrunden_auf
+from zahlen import NULL, EINS, d, abrunden_auf, FEHLER
 
 KOERPERSCHAFT = "koerperschaft"                 # voll steuerpflichtige Koerperschaft
 KOERPERSCHAFT_OHNE_GEWST = "koerperschaft_ohne_gewerbesteuer"   # Verein, Stiftung (GEWSTG-2)
@@ -22,7 +22,10 @@ LEHRBUCH = "lehrbuch"                           # ein pauschaler Satz; nur Refer
 PERSONENGESELLSCHAFT = (GEPRAEGTE_PG, GEWERBLICHE_PG)
 PERSONENUNTERNEHMEN = (GEPRAEGTE_PG, GEWERBLICHE_PG, EINZELUNTERNEHMEN)
 MIT_KENNZEICHEN = (KOERPERSCHAFT, GEPRAEGTE_PG)     # R-7.1: nur hier ist das Kennzeichen E-41 zulaessig
-BETRIEBSVERMOEGEN = (KOERPERSCHAFT, KOERPERSCHAFT_OHNE_GEWST, GEPRAEGTE_PG, GEWERBLICHE_PG, EINZELUNTERNEHMEN)
+BETRIEBSVERMOEGEN = (KOERPERSCHAFT, GEPRAEGTE_PG, GEWERBLICHE_PG, EINZELUNTERNEHMEN)
+# R-7.11, R-7.17: Ueberschusseinkuenfte nach dem Zahlungsprinzip (ESTG-11) mit der Frist des privaten Verkaufs
+# (ESTG-23): Privatperson; Verein und Stiftung (KSTG-8, KSTG-1: nicht kraft Rechtsform gewerblich)
+UEBERSCHUSS = (PRIVAT, KOERPERSCHAFT_OHNE_GEWST)
 
 
 @dataclass
@@ -39,6 +42,7 @@ class Steuerparameter:
     abrundung: D = NULL                         # Abrundung des Gewerbeertrags auf volle Betraege (GEWSTG-11)
     erweiterte_kuerzung: bool = False           # E-41
     kuerzung_verkauf: bool = False              # MA-030, andere Lesart: die Kuerzung erfasst den Verkaufsgewinn
+    kuerzung_entfaellt_verkaufsjahr: bool = False   # MA-030, dritte Lesart: im Verkaufsjahr entfaellt die Kuerzung ganz
     freibetrag: D = NULL                        # nur Personenunternehmen (GEWSTG-11)
     hinzu_anteil: D = NULL                      # GEWSTG-8: hinzugerechneter Anteil der Entgelte fuer Schulden
     hinzu_freibetrag: D = NULL                  # GEWSTG-8: Freibetrag der Hinzurechnung
@@ -71,10 +75,14 @@ class Steuer:
         self.vv_gew = NULL      # Verlustvortrag Gewerbesteuer (GEWSTG-10A)
         self.protokoll = []
         self.hinweise = set()
+        self._jahr = None
 
     # ------------------------------------------------------------- Grenzsaetze fuer Kennzahlen (R-7.14)
     def _kuerzung(self):
-        return self.par.erweiterte_kuerzung and not self.alternative
+        p = self.par
+        if p.kuerzung_entfaellt_verkaufsjahr and self._jahr is not None and self._jahr == p.haltedauer:
+            return False                        # MA-030, dritte Lesart
+        return p.erweiterte_kuerzung and not self.alternative
 
     def _gew_voll(self):
         return self.par.messzahl * self.par.hebesatz
@@ -124,6 +132,8 @@ class Steuer:
         vv = getattr(self, topf)
         zugang = max(-ergebnis, NULL)
         genutzt = min(vv, max(ergebnis, NULL))
+        if "vortrag_nicht_verbraucht" in FEHLER:    # Fehlerbild RF-16
+            genutzt = NULL
         setattr(self, topf, vv + zugang - genutzt)
         teile[topf + "_anfang"], teile[topf + "_zugang"], teile[topf + "_genutzt"] = vv, zugang, genutzt
         sockel = self.par.sockel_verlust
@@ -147,6 +157,7 @@ class Steuer:
             hinzu = p.hinzu_anteil * max(NULL, entgelte + p.hinzu_pacht * pacht - frei)
             ertrag = e_op + z_h + g_gew + hinzu
         teile["hinzurechnung"] = hinzu
+        teile["gewerbeertrag"] = ertrag         # nach Hinzurechnung und Kuerzung, vor dem Verlustvortrag (GEWSTG-10A)
         return ertrag
 
     # ------------------------------------------------------------- Jahressteuer
@@ -157,7 +168,9 @@ class Steuer:
         vfe_verkauf: Vorfaelligkeitsentschaedigung der Privatperson (Veraeusserungskosten, R-7.11).
         """
         p, g = self.par, self.rd.geld
-        teile = dict(jahr=j, e_op=e_op, z_h=z_h, g_v=g_v, vv_anfang=self.vv, vv_zugang=NULL, vv_genutzt=NULL,
+        self._jahr = j
+        teile = dict(jahr=j, e_op=e_op, z_h=z_h, g_v=g_v, entgelte=entgelte, pacht=pacht, vfe_verkauf=vfe_verkauf,
+                     vv_anfang=self.vv, vv_zugang=NULL, vv_genutzt=NULL,
                      vv_gew_anfang=self.vv_gew, vv_gew_zugang=NULL, vv_gew_genutzt=NULL, arten={}, anrechnung=NULL)
         arten = teile["arten"]
         sofort = p.verlust == "sofort"
@@ -174,9 +187,18 @@ class Steuer:
                 steuer = p.satz * self._nach_vortrag(basis, "vv", teile) + sz * z_h
             arten["lehrbuch"] = g(steuer)
         elif p.status in (KOERPERSCHAFT, KOERPERSCHAFT_OHNE_GEWST):
-            kst = p.kst_satz(self.raster.kalenderjahr(j)) * (EINS + p.soli_satz)
+            kj = self.raster.kalenderjahr(j) + (1 if "steuerjahr_falsch" in FEHLER else 0)   # Fehlerbild RF-16
+            kst = p.kst_satz(kj) * (EINS + p.soli_satz)
             einkommen = e_op + z_h + g_v
-            mit_gew = p.status == KOERPERSCHAFT
+            mit_gew = p.status == KOERPERSCHAFT and not (self.alternative and "alternative_ohne_gewerbesteuer" in FEHLER)
+            if p.status == KOERPERSCHAFT_OHNE_GEWST:
+                # R-7.17 (KSTG-8, KSTG-1): Einkuenfte aus Vermietung und Kapital; der Verkauf ist nur innerhalb der
+                # Frist des privaten Verkaufs steuerpflichtig (ESTG-23), die Vorfaelligkeit gehoert zum Verkauf
+                pflichtig = p.haltedauer <= p.frist_privatverkauf
+                gewinn = g_v - vfe_verkauf
+                zusatz = gewinn if (pflichtig and gewinn > 0) else NULL
+                einkommen = e_op + z_h + zusatz
+                teile.update(verkauf_pflichtig=pflichtig, verkaufsgewinn_steuerlich=zusatz)
             ertrag = self._gewerbeertrag(e_op, z_h, g_v, entgelte, pacht, sofort, teile) if mit_gew else NULL
             if sofort:                          # R-7.6: lineare Steuer, Erstattung bei Verlust
                 arten["koerperschaftsteuer"] = g(kst * einkommen)

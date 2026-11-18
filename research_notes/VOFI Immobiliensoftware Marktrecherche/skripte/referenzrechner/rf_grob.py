@@ -24,9 +24,14 @@ VG, KAT, KATN = A.VORGABEN, A.KATALOG, A.KATALOG_NEUBAU
 GEBUNDEN = replace(A.ANKAUF, gebunden_anteil=D("0.4"), bindung_jahre=6, gebundene_miete=D("6.80"),
                    uebernommen=dict(restschuld=D(500000), nennbetrag=D(600000), zins=D("0.005"), tilgungssatz=D("0.02"),
                                     bindung_jahre=8, anschluss_zins=D("0.03"), beitrag_satz=D(0),
-                                    foerderdarlehen=True, rang="vor"))
+                                    foerderdarlehen=True, rang="vor"),
+                   begruendungen={"uebernommen.foerderdarlehen": "Bewilligungsbescheid liegt vor (Annahme)"})
 GEFOERDERT = replace(A.NEUBAU, foerderung=A.FOERDERUNG_B, haltedauer=38)
-MIT_KFW = replace(A.NEUBAU, kfw_betrag=D(3000000))
+# Begruendung fuer Lesarten und Eingaben, die ein Referenzfall bewusst von der Voreinstellung abweichend setzt (R-3.2)
+GRUND = {k: "Lesart des Referenzfalls" for k in ("steuer.verlust", "steuer.kuerzung_verkauf", "steuer.aufgabegewinn",
+                                                  "steuer.kuerzung_entfaellt_verkaufsjahr", "festpreis", "vorvermietet",
+                                                  "uebernommen.foerderdarlehen")}
+MIT_KFW = replace(A.NEUBAU, kfw_betrag=D(3000000), kfw_laufzeit=35, kfw_tilgungsfrei=1)
 
 
 def proz_fest(k, name, wert, stellen=3):
@@ -118,7 +123,12 @@ def rf11_ankauf():
     # kombinierter Stressfall: Darlehen aus dem Basisfall (R-11.8)
     es = rechne_grob(A.ANKAUF, VG, KAT, stress=True)
     blatt(k, "kombinierter Stressfall", es)
-    pruefe_gleich(k, "Stressfall: Bankdarlehen unveraendert aus dem Basisfall", es.darlehen == e.darlehen, True)
+    pruefe_gleich(k, "Stressfall: Bankdarlehen mit dem Zinsanstieg bis zur Zusage neu bemessen, sonst aus dem Basisfall (R-11.8)",
+                  (es.darlehen < e.darlehen, es.darlehen_basis == e.darlehen), (True, True))
+    pruefe(k, "Stressfall: Bankdarlehen bei 4,5 % Zins und 5,5 % kalkulatorisch (Gegenrechnung Bank und Finanzmathematiker)",
+           es.darlehen, "1144835.99", "0")
+    pruefe(k, "Stressfall: Endwertdifferenz mit neu bemessenem Darlehen (Gegenrechnung Finanzmathematiker)",
+           es.kennzahlen["endwertdifferenz"], "216856.20", "0")
     pruefe_fest(k, "Stressfall: Schuldendienstdeckung je Planjahr",
                 [str(schuldendienstdeckung(es.plan, x)[0].quantize(D("0.001"))) for x in range(1, 13)])
     # hoechster tragbarer Preis
@@ -220,7 +230,8 @@ def rf12_neubau():
     ns = rechne_grob(A.NEUBAU, VG, KATN, stress=True)
     blatt(k, "Neubau kombinierter Stressfall", ns, kurz=True)
     pruefe_gleich(k, "Neubau Stressfall: Mehrkosten traegt das Eigenkapital",
-                  ns.eigenkapital_investitionsphase > n.eigenkapital_investitionsphase and ns.darlehen == n.darlehen, True)
+                  ns.eigenkapital_investitionsphase > n.eigenkapital_investitionsphase and ns.darlehen <= n.darlehen, True)
+    pruefe(k, "Neubau Stressfall: Bankdarlehen neu bemessen mit 5,5 % und 2 %: 280.500 / 7,5 %", ns.darlehen, "3740000.00", "0")
     pruefe_fest(k, "Neubau Stressfall: Baukosten", ns.baukosten)
     # KfW-Darlehen als eigene Tranche (R-5.19)
     kf = rechne_grob(MIT_KFW, VG, KATN)
@@ -302,7 +313,7 @@ def rf13_steuerstatus():
               ("Privatperson, Verkauf nach 12 Jahren", A.steuer(PRIVAT)),
               ("befreite Koerperschaft", A.steuer(BEFREIT)))
     for name, st in faelle:
-        e = rechne_grob(replace(A.ANKAUF, steuer=st), VG, KAT)
+        e = rechne_grob(replace(A.ANKAUF, steuer=st, begruendungen=GRUND), VG, KAT)
         kz = e.kennzahlen
         pruefe_gleich(k, f"{name}: Kontrollsummen", (e.gesperrt, len(e.befunde)), (False, 0))
         pruefe_fest(k, f"{name}: Endwert", e.plan.endwert)

@@ -18,6 +18,7 @@ import rf_testfall
 import rf_bausteine
 import rf_grob
 import rf_neu
+import rf_runde2
 import gegenrechnung
 
 
@@ -36,6 +37,7 @@ if __name__ == "__main__":
     rf_bausteine.alle()
     rf_grob.alle()
     rf_neu.alle()
+    rf_runde2.alle()
     if fest:
         import json
         im_code = json.load(open(_argument("--im-code"), encoding="utf-8")) if _argument("--im-code") else ()

@@ -55,22 +55,33 @@ def steuer(status, **kw):
 
 
 # ------------------------------------------------------------------ Katalogwerte: uebrige
-KFW = KfwKonditionen(hoechstbetrag_je_einheit=D("100000"),      # KFW-297-298-MERKBLATT (Kataster, gelesen 2026-11-17)
-                     zins=D("0.025"), tilgungssatz=D("0.02"), tilgungsfrei_jahre=1, zinsbindung_jahre=10)   # Annahmen
+# KAT-15 nach KFW-297-298-MERKBLATT (am Original gelesen 2026-11-18, Pruefrunde 2): Hoechstbetraege je Wohneinheit ohne
+# und mit Qualitaetssiegel, Laufzeitvarianten mit tilgungsfreien Anlaufjahren, Bereitstellungsprovision ab dem
+# 13. Monat nach der Zusage, Abruffrist mit Verlaengerung. Zins und Zinsbindung sind Annahmen des Beispiels
+# (KFW-KONDITIONENANZEIGER nicht gelesen). Die endfaellige Variante fuehrt 1a nicht.
+KFW = KfwKonditionen(hoechstbetrag_je_einheit=D("100000"), hoechstbetrag_qng=D("150000"), zins=D("0.025"),
+                     varianten=[(10, 1, 2), (25, 1, 3), (35, 1, 5)], zinsbindung_jahre=10,
+                     bereit_satz=D("0.0015"), bereit_frei=12, abruffrist=12, abruf_verlaengerung=24)
 
 KATALOG = Katalog(
     afa_satz=D("0.02"),                                 # KAT-07 (ESTG-7): Baujahr 1925 bis 2022
     wartefrist=15, kappung=D("0.15"), kappung_monate=36,    # KAT-08 (BGB-558); 15 % als Annahme zur Gemeinde
     mietpreisbremse=True, bremse_aufschlag=D("0.10"),   # KAT-08 (BGB-556D): Annahme zur Gemeinde und zum Aufschlag
     co2_vermieteranteil=D("0.40"),                      # KAT-09 (CO2KOSTAUFG-ANLAGE): Annahme zur Stufe bei 30 kg
-    co2_kosten_5a_je_qm=D("0"),                         # KAT-09 (CO2KOSTAUFG-5A): Annahme
+    co2_5a_anteil=D("0.5"), co2_5a_ab_jahr=2028,        # KAT-09 (CO2KOSTAUFG-5A): haelftige Teilung ab dem genannten Jahr
     geb_steigerung=D("0.0615"), geb_fest_jahre=3, geb_schritt_jahre=3,      # KAT-11: Werte nach Bericht C.1 (Annahme)
     ahk_quote=D("0.15"), ahk_jahre=3,                   # KAT-12 (ESTG-6)
     ust_satz=D("0.19"),                                 # KAT-12 (USTG-12): Annahme zum Katalogstand
     kuendigung_sperre=120, kuendigung_frist=6,          # KAT-13 (BGB-489)
     bewirtschaftung_mindest=D("0.15"),                  # KAT-14 (BELWERTV-11)
-    kfw=KFW)
-KATALOG_NEUBAU = replace(KATALOG, afa_satz=D("0.03"))   # KAT-07 (ESTG-7): Fertigstellung nach 2022
+    kfw=KFW,
+    land="Niedersachsen", gemeinde="Beispielgemeinde (Annahme)",    # Land und Gemeinde, fuer die aufgeloest ist
+    enk_satz=D("0.10"),                                 # KAT-01: Annahme der Beispiele (Voreinstellung von E-11)
+    kappung_gesetzlich=D("0.20"),                       # KAT-08 (BGB-558): Kappungsgrenze ohne Gebietsverordnung
+    kappung_ende_jahr=2029, bremse_ende_jahr=2029)      # KAT-08: Geltungsende der Verordnungen (BGB-556D; Annahme
+                                                        # zur Gemeinde fuer die Kappungsverordnung)
+KATALOG_NEUBAU = replace(KATALOG, afa_satz=D("0.03"),   # KAT-07 (ESTG-7): Fertigstellung nach 2022
+                         enk_satz=D("0.08"))
 
 # Grobfoerderung (KAT-10): Werte nach Bericht Anhang C.1 fuer Einkommensgruppe B und Mietenstufe IV bis VII
 # (NBANK-RL-MIETWOHNRAUM-2026; MA-002, MA-003, MA-004); Annahme des Beispiels: Zins nach der zinslosen Zeit 5 %
@@ -83,7 +94,7 @@ FOERDERUNG_B = Foerderung(
 # Zulaessige Bereiche der Eingabepruefung (R-3.3, R-3.4, Spalte "zulaessig")
 grobkalkulation.GRENZEN.update(
     enk_max=D("0.20"), zins_max=D("0.20"), bindung_max=40, haltedauer_max=42, steigerung_min=D("-0.05"),
-    steigerung_max=D("0.15"), steuersatz_max=D("0.60"), bauzeit_max=60, anpassung_max=20)
+    steigerung_max=D("0.15"), steuersatz_max=D("0.60"), bauzeit_max=60, anpassung_max=20, vorlauf_max=60)
 
 # ------------------------------------------------------------------ Vorgaben des Hauses (alle Werte Annahmen)
 STRESS = Stress(anschlusszins_pp=D("0.01"), zusage_pp=D("0.005"), leerstand_pp=D("0.02"),
@@ -103,7 +114,10 @@ VORGABEN = Vorgaben(
     kalk_zins=None, fluktuation=D(0), forderungsausfall=D("0.005"), anlaufleerstand=3,
     co2_preis=D("50"), co2_steigerung=D("0.05"),
     zuschlag_kg_uebrige=D("0.05"), zuschlag_kg700=D("0.20"), kosten_je_stellplatz=D("20000"),
-    bereit_satz=D("0.0025"), bereit_frei=6)
+    bereit_satz=D("0.0025"), bereit_frei=6,
+    anpassungsdauer=4, vorlauf=0,                                           # H-23, H-35
+    leerstandskosten_je_qm=D(0),                                            # H-36: in den bezeichneten Faellen 30 Euro
+    warnschwelle_restwertanteil=D("0.95"), warnschwelle_faktorabstand=D(1))  # H-20
 
 # ------------------------------------------------------------------ Eingaben der Referenzobjekte
 # Referenzobjekt Ankauf: 20 Wohnungen, 1.320 m2, Baujahr 1990, Ist-Miete 8,50 Euro/m2 (Jahresmiete 134.640 Euro)

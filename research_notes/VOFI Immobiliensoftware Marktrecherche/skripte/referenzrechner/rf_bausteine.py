@@ -1,6 +1,6 @@
 """Referenzfaelle RF-08 bis RF-10: Darlehensarten, Regel des Bankdarlehens, Steuer in Kurzform."""
 from decimal import Decimal as D
-from zahlen import NULL, EINS, d, de, Rundung
+from zahlen import Meldung, NULL, EINS, d, de, Rundung
 from zeit import Raster
 from darlehen import Tranche, bankdarlehen
 from steuer import (Steuer, KOERPERSCHAFT, GEWERBLICHE_PG, GEPRAEGTE_PG, EINZELUNTERNEHMEN, PRIVAT, BEFREIT)
@@ -73,7 +73,7 @@ def rf08_darlehen():
     try:
         lauf(tr, 11, 1, KEINE)
         gemeldet = False
-    except ValueError:
+    except Meldung:
         gemeldet = True
     pruefe_gleich(k, "fehlender Anschlusszins wird gemeldet statt still fortgeschrieben", gemeldet, True)
     pruefe(k, "Restlaufzeit einer Prozentannuitaet nach zehn Jahren (reell, vor dem Abrunden)",
