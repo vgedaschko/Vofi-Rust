@@ -12,7 +12,14 @@ Baut die Rechnungen des Kapitels aus den Eingangsdaten nach und vergleicht mit d
 Gerechnet wird mit voller Genauigkeit (decimal); verglichen wird der kaufmännisch gerundete
 Wert, weil das Buch ganze Geldeinheiten und Renditen mit zwei Nachkommastellen ausweist.
 Die Buchwerte stehen unten als Prüfpunkte (Auswahl je Tabelle, keine Abschrift der Tabellen).
-Kein Produktcode. Aufruf: python3 schulte_musterrechnung.py
+Kein Produktcode. Aufruf: python3 schulte_musterrechnung.py (Rückgabewert 1, solange Prüfungen abweichen).
+
+Stand 2026-11-18: 50 von 53 Prüfungen treffen die Buchwerte. Die drei Abweichungen liegen alle in
+der Finanzinvestition des Fallbeispiels (Tab. 13/14) und betragen je eine Einheit (Tausend Euro):
+Steuerzahlung t_2, vier Werte der Reinvestition und das Endvermögen (30.444 statt 30.445); die
+Rendite stimmt. Vermutung: Die Tabelle ist mit einem nicht gerundeten Zinsertrag gerechnet und in
+sich um eine Einheit unstimmig; Abschnitt C zeigt, dass kein Zinsertrag zwischen 1.530,50 und
+1.531,50 alle veröffentlichten Zellen zugleich trifft. Nichts ist angepasst.
 """
 from decimal import Decimal as D, ROUND_HALF_UP, getcontext
 
@@ -99,7 +106,7 @@ def interner_zins(ue, rn, a0, n):
 
 
 # ---------------------------------------------------------------- Vergleich mit den Buchwerten
-ERGEBNIS = {"ok": 0, "abw": 0}
+ERGEBNIS = {"ok": 0, "abw": 0, "max": D(0)}
 ABWEICHUNGEN = []
 
 
@@ -110,6 +117,8 @@ def pruefe(name, buch, wert, stellen="1", seite=""):
     ERGEBNIS["ok" if ok else "abw"] += 1
     if not ok:
         ABWEICHUNGEN.append((name, buch, ger, seite))
+        if stellen == "1":
+            ERGEBNIS["max"] = max(ERGEBNIS["max"], abs(ger - D(str(buch))))
     print(f"  {'ok ' if ok else 'ABW'} {name:<58} Buch {str(buch):>9}  Skript {str(ger):>9}  (genau {wert:.4f})  {seite}")
 
 
@@ -121,6 +130,7 @@ def pruefe_reihe(name, buch, werte, seite=""):
     ERGEBNIS["ok" if ok else "abw"] += 1
     if not ok:
         ABWEICHUNGEN.append((name, buch, [str(g) for g in ger], seite))
+        ERGEBNIS["max"] = max([ERGEBNIS["max"]] + [abs(b - g) for _, b, g in diff])
     print(f"  {'ok ' if ok else 'ABW'} {name:<58} {len(soll)} Werte" + ("" if ok else f"; abweichend (t, Buch, Skript): {diff}") + f"  {seite}")
 
 
@@ -240,8 +250,26 @@ if __name__ == "__main__":
     pruefe("Endvermögen", 30445, fg["endwert"], seite="S. 828, 830")
     pruefe("EK-Rendite in %", "3.36", prozent(fg["rendite"]), "0.01", "S. 829, 830")
 
+    # Ursachensuche zu Tab. 13/14: Gibt es einen Zinsertrag, der gerundet 1.531 ergibt und alle
+    # veröffentlichten Zellen (Steuer, Reinvestition, Endvermögen) zugleich trifft?
+    buch_st = [765, 784, 804, 824, 845, 866, 888, 910, 933, 956]
+    buch_re = [765, 1550, 2354, 3179, 4024, 4890, 5777, 6687, 7620]
+    treffer = []
+    for hundertstel in range(153050, 153150):
+        u = D(hundertstel) / 100
+        x = vofi(n10, ekg, u, ekg, ekg, NULL, "ohne", NULL, D("0.05"), NULL, D("0.5"), NULL)
+        fehler = (sum(runden(a) != b for a, b in zip(x["steuer"][1:], buch_st))
+                  + sum(runden(a) != b for a, b in zip(x["kurz"][1:10], buch_re)) + (runden(x["endwert"]) != 30445))
+        treffer.append((fehler, u))
+    kleinste = min(t[0] for t in treffer)
+    beste = [u for fehl, u in treffer if fehl == kleinste]
+    print(f"      Ursachensuche: Zinsertrag 1.530,50 bis 1.531,49 in Schritten von 0,01; kleinste Zahl abweichender "
+          f"Zellen {kleinste} (bei {beste[0]} bis {beste[-1]}); mit 7 % auf 21.869 = {D('0.07') * ekg} sind es "
+          f"{[fehl for fehl, u in treffer if u == D('1530.83')][0]}.")
+
     # ============================================================ Zusammenfassung
-    print(f"\nVergleich mit den Buchwerten: {ERGEBNIS['ok']} Prüfungen bestanden, {ERGEBNIS['abw']} abweichend.")
+    print(f"\nVergleich mit den Buchwerten: {ERGEBNIS['ok']} Prüfungen bestanden, {ERGEBNIS['abw']} abweichend; "
+          f"größte Abweichung eines Betrags: {ERGEBNIS['max']} Einheit(en).")
     for name, buch, wert, seite in ABWEICHUNGEN:
         print(f"  ABWEICHUNG {name}: Buch {buch}, Skript {wert} {seite}")
 
@@ -270,11 +298,13 @@ if __name__ == "__main__":
         c = kapitalwert(ue - st * (ue - afa), rn - st * (rn - (a0 - afa * n)), a0, (EINS - st) * kzf, n)
         zeile.append(f"{proz} %: {c:.1f}")
     print("   " + "; ".join(zeile))
-    print(" Abb. 12 (S. 815), VOFI-Rendite ohne Steuern je Eigenkapitaleinsatz (Buch nur als Diagramm):")
-    zeile = []
-    for kap in range(2500, 10001, 500):
-        x = vofi(n, a0, ue, rn, D(kap), a0 - D(kap), "annuitaet" if kap < 10000 else "ohne", i_s_lang,
-                 i_haben_kurz, i_soll_kurz, NULL, NULL)
-        zeile.append(f"{kap}: {prozent(x['rendite']):.2f} %")
-    print("   " + "; ".join(zeile))
+    print(" Abb. 12 (S. 815), VOFI-Rendite ohne Steuern je Eigenkapitaleinsatz (Buch nur als Diagramm; abgelesen etwa")
+    print("   -4,6 % bei 2.500, -1,9 % bei 3.000, -0,1 % bei 3.500). Zwischenfinanzierung 9 % wie Tab. 3 und zum Vergleich 10 %:")
+    for satz in (i_soll_kurz, D("0.10")):
+        zeile = []
+        for kap in range(2500, 10001, 500):
+            x = vofi(n, a0, ue, rn, D(kap), a0 - D(kap), "annuitaet" if kap < 10000 else "ohne", i_s_lang,
+                     i_haben_kurz, satz, NULL, NULL)
+            zeile.append(f"{kap}: {prozent(x['rendite']):.2f}")
+        print(f"   {prozent(satz):.0f} %: " + "; ".join(zeile))
     raise SystemExit(1 if ERGEBNIS["abw"] else 0)
