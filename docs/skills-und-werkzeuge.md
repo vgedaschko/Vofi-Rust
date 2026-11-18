@@ -53,13 +53,13 @@ Reihenfolge: `vofi-fachmodell` und `referenzfall-anlegen` zuerst (entstehen aus 
 
 ## 5. Prüfer (eingerichtet)
 
-Fünfzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
+Sechzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
 
 | Gruppe | Rollen |
 |---|---|
 | Fachlich | Fachexperte Immobilien · Finanzmathematiker · Steuerberater · Jurist · Fördermittelberater |
 | Nutzer und Entscheider | Praktiker · unbedarfter Endnutzer · Controller · Investor · Bank |
-| Qualität | KI-Einheitsbrei/Design · Grenzfälle · Software-Architekt · Revision und Datenschutz |
+| Qualität | KI-Einheitsbrei/Design · Grenzfälle · Software-Architekt · Revision und Datenschutz · Dokumentation |
 | Brücke | Der Lotse (auf Zuruf und an Meilensteinen) |
 
 Die Prüfer lesen nur und berichten; eingearbeitet wird erst nach Gegenprüfung. Ergebnisse stehen in `docs/pruefung/protokoll.md`.

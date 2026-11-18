@@ -8,11 +8,14 @@ Diese Dateien steuern das Projekt. Sie sind verbindlich, nicht Hintergrundmateri
 
 | Datei | Inhalt | Lesen | Pflegen |
 |---|---|---|---|
+| `docs/README.md` | Dokumentationsübersicht: welches Dokument wofür gilt, Grundsätze der Pflege (ein Thema, ein Ort; im selben Arbeitsgang; nichts auf Vorrat) | Bevor ein Dokument angelegt, geteilt oder verschoben wird | Wenn ein Dokument entsteht, entfällt oder seinen Zweck ändert |
 | `docs/spezifikation.md` | Was gebaut wird und warum; geltender Stand mit Status je Festlegung | Vor jeder inhaltlichen Arbeit | Bei jeder geänderten oder neuen Festlegung – vor der Umsetzung |
 | `docs/entwicklungsplan.md` | Phasen, Freigabepunkte, Bestandsaufnahme der Grundlagen, Prüfplan | Zu Sitzungsbeginn: In welcher Phase sind wir, was ist dran, welche Prüfung ist fällig? | Wenn eine Phase endet oder sich die Reihenfolge ändert |
 | `TASKS.md` | Offene Arbeit, auch die Punkte, die beim Auftraggeber liegen | Zu Sitzungsbeginn und vor jedem Stopp (der Hook erinnert daran) | Laufend |
 | `docs/entscheidungen.md` | Entscheidungsprotokoll: was wann warum geändert wurde | Bevor eine frühere Festlegung angefasst wird | Bei jeder Entscheidung oder Änderung |
 | `docs/pruefung/regeln.md` und `docs/pruefung/protokoll.md` | Maßstab und Format der Prüfer; was wann mit welchem Ergebnis geprüft wurde | Vor jeder Prüfrunde | Nach jeder Prüfrunde |
+
+Die Anwendungsdokumentation (Fachhandbuch, Benutzerhandbuch, Architektur, Betrieb, Änderungshistorie) entsteht mit der Anwendung unter `docs/anwendung/`; eine Änderung an der Anwendung ist erst fertig, wenn ihre Dokumentation nachgezogen ist.
 
 Nachschlagen bei Bedarf: `reports/` und `research_notes/` (Recherchebericht, Quellnotizen, Referenzrechnungen), `docs/skills-und-werkzeuge.md` (Skills, Plugins, Hooks), `docs/pruefung/<Datum>-<Thema>/` (Prüfberichte und Sichtung je Runde).
 

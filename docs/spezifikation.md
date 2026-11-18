@@ -1,6 +1,6 @@
 # Spezifikation – VOFI-Immobilienkalkulation
 
-Das maßgebliche Entwicklungsdokument. Es beschreibt, was gebaut wird und warum, und wird laufend fortgeschrieben. Wer am Projekt arbeitet, liest es zuerst; was hier steht, gilt, bis es hier geändert wird.
+Das maßgebliche Entwicklungsdokument. Es beschreibt, was gebaut wird und warum, und wird laufend fortgeschrieben. Wer am Projekt arbeitet, liest es zuerst; was hier steht, gilt, bis es hier geändert wird. Wie es zu den übrigen Dokumenten steht, zeigt die Übersicht in `docs/README.md`.
 
 **Stand:** 2026-11-18 · Konzeptphase, noch kein Code
 
@@ -10,6 +10,7 @@ Das maßgebliche Entwicklungsdokument. Es beschreibt, was gebaut wird und warum,
 - **Jede Festlegung trägt einen Status:** **fest** (entschieden, Änderung nur mit Protokolleintrag) · **vorläufig** (Arbeitsstand, wird im jeweiligen Kapitel ausgearbeitet) · **offen** (noch zu klären, mit Zuständigkeit).
 - **Prüfbefunde fließen ein, wenn sie tragen.** Nach jeder Prüfrunde wird geprüft, ob ein übernommener Befund eine Festlegung berührt; dann wird sie hier angepasst.
 - **Annahmen dürfen fallen.** Eine frühere Festlegung zu ändern ist kein Fehler, solange Grund und Datum im Protokoll stehen und die betroffenen Kapitel nachgezogen sind.
+- **Soll, nicht Ist.** Sobald ein Teil gebaut und abgenommen ist, beschreibt ihn die Anwendungsdokumentation; hier bleibt ein Verweis.
 - **Kein Wunschzettel.** Hier steht nur, was beschlossen oder als Arbeitsstand gewollt ist. Ideen ohne Entscheidung gehören in `TASKS.md`.
 
 ## 1 Zweck und Rahmen

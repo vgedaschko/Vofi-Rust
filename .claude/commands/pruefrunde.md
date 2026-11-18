@@ -16,6 +16,7 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
    | Kundenbericht, Export | endnutzer, investor, bank, jurist, slop |
    | Rechencode | finanzmathematiker, grenzfaelle, architekt |
    | Anmeldung, Rechte, Kundenzugang | revision, architekt, jurist |
+   | Dokumentation als Ganzes (an Freigabepunkten) | dokumentation |
 
    Auf Zuruf und an Meilensteinen zusätzlich: **lotse** – der Blick von der Brücke. Er hält eine Rede statt einer Befundliste; verwertbar ist sein Schlusssatz.
 

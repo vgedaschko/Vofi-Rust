@@ -24,10 +24,11 @@ Parallel beim Auftraggeber, spätestens bis zur Bauentscheidung: Gespräch mit d
 | Bereich | Vorhanden | Fehlt | Fällig |
 |---|---|---|---|
 | Steuerung | Spezifikation mit Status je Festlegung, Entscheidungsprotokoll, Aufgabenliste mit Erinnerungs-Hook, dieser Plan | – | – |
+| Dokumentation | Übersicht mit Pflegegrundsätzen (`docs/README.md`); Projektdokumentation vollständig | Anwendungsdokumentation (Fachhandbuch, Katalog, Benutzerhandbuch, Architektur, Betrieb, Änderungshistorie) | je Dokument ab Phase 1 bis 4, siehe Übersicht |
 | Recherche | Bericht (in Überarbeitung), neun Quellnotizen, am Original geprüfte Rechts- und Förderangaben, drei nachgerechnete Referenzfälle mit Skripten | Lehrbuchdefinitionen (Grob; Schulte/Ropeter) am Original | Phase 1 |
 | Fachspezifikation | Leitlinien in Spezifikation Kapitel 3 und 4 | Vollständige Rechenkern-Spezifikation; Katalog-Datenmodell; Anforderungen Stufe 1 | Phase 1 |
 | Architektur und Gestaltung | Grundsatzentscheidungen in Spezifikation Kapitel 5 und 6 | Architekturentwurf; Gestaltungssystem; Datenschutzkonzept | Phase 2 |
-| Prüfung | 15 Prüferrollen, Ablauf `/pruefrunde`, gemeinsame Regeln, Protokoll | – | – |
+| Prüfung | 16 Prüferrollen, Ablauf `/pruefrunde`, gemeinsame Regeln, Protokoll | – | – |
 | Skills | Eingebaut: `/code-review`, `/security-review`, `/simplify`, Tabellen-, PDF-, Diagramm- und Gestaltungs-Skills, Recherche | Projekt-Skills `vofi-fachmodell`, `referenzfall-anlegen`, `foerderprogramm-pflegen`, `steuer-regeln`; Plugins „Engineering" und „Product Management" sind vorgeschlagen, aber nicht aktiviert (nützlich, nicht notwendig) | Projekt-Skills mit Phase 1 und 3 |
 | Entwicklungsumgebung | Rust 1.97 mit `clippy`, `rustfmt` und WebAssembly-Ziel; Node 22 mit `pnpm`; PostgreSQL-Client; Cloud-Umgebung mit freigegebenen Quellen (KfW, NBank, BAFA, Gesetze) | Einrichtungsskript für Zusatzwerkzeuge (`wasm-pack`, `cargo-nextest`, `cargo-deny`, `sqlx-cli`); Rust-Arbeitsbereich; Oberflächenprojekt | Phase 3 |
 | Automatische Prüfkette | – | Hooks für Format, Lint und Tests; Prüfkette bei jeder Änderung auf dem Server; Abhängigkeitsprüfung | Phase 3 |
@@ -48,6 +49,7 @@ Bewertung: Für Phase 0 und 1 ist alles Nötige da. Die technischen Werkzeuge de
 | Jede Änderung an Anmeldung, Rechten, Kundenzugang, Datenhaltung | Sicherheit, Datenschutz, Nachweisbarkeit | `/security-review`; Rollen Revision und Jurist | ab Phase 3 |
 | Jede Oberfläche vor Freigabe | Bedienung, Verständlichkeit, Barrierefreiheit, Gestaltung | Rollen Praktiker, Endnutzer, Einheitsbrei-Prüfer; Skills `design:design-critique`, `design:accessibility-review`, `dataviz` | ab Phase 2 |
 | Jeder Freigabepunkt | Gesamtbild und Zielkonflikte; Abgleich Spezifikation gegen Ergebnis | Volle Runde einschließlich Lotse, Jurist, Revision, Controller | ab Phase 1 |
+| Jeder Freigabepunkt und nach größeren Änderungen | Dokumentation als Ganzes: aktuell, widerspruchsfrei, auffindbar, ohne Dopplungen; Anwendungsdokumentation gegen tatsächliches Verhalten | Rolle Dokumentation gegen `docs/README.md` | aktiv |
 | Abnahme einer Stufe | Stimmen die Ergebnisse mit echten Fällen? | Parallelrechnung gegen Excel-Kalkulationen des Auftraggebers; Rolle Grenzfälle | ab Phase 4 |
 | Wöchentlich | Sicherheitslücken und Lizenzen der eingesetzten Bibliotheken | `cargo-deny`, `cargo-audit`, `pnpm audit` als geplanter Lauf der Prüfkette | ab Phase 3 |
 | Monatlich | Förderkonditionen und Zinsen gegen KfW, BAFA, NBank | Geplante Aufgabe mit Rolle Fördermittelberater und Skill `pdf` | einrichtbar, sobald der Katalog steht (Phase 1) |

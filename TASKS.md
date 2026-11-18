@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Recherchebericht wird nach Prüfrunde 1 überarbeitet (Auftrag: `docs/pruefung/2026-11-17-recherchebericht/sichtung.md`); danach Folgerunden bis mindestens 9 von 10, dann Protokoll
+- [~] Prüfrunde 2 zum überarbeiteten Recherchebericht läuft (sechs Rollen); danach sichten, einarbeiten, weitere Runden bis mindestens 9 von 10, dann Protokoll
 
 ## Als Nächstes
 
@@ -34,6 +34,8 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Dokumentationsübersicht mit Pflegegrundsätzen (`docs/README.md`), Rolle Dokumentation als 16. Prüfer
+- [x] 2026-11-18 Recherchebericht nach Prüfrunde 1 überarbeitet
 - [x] 2026-11-18 Entwicklungsplan mit Phasen, Bestandsaufnahme und Prüfplan → `docs/entwicklungsplan.md`
 - [x] 2026-11-18 Lebende Spezifikation `docs/spezifikation.md` angelegt; `docs/entscheidungen.md` ist jetzt das Entscheidungsprotokoll
 - [x] 2026-11-17 Prüfrunde 1 zum Recherchebericht: sechs Prüfer plus Lotse, Befunde nachgeprüft und gesichtet
