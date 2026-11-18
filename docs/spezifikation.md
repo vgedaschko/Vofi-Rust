@@ -133,6 +133,6 @@ Manches lässt sich vor dem Bau nicht klären: eine Bank legt ihre Rechenweise n
 
 1. Gespräch mit der NBank über die Rechenweise der Renditeprüfung.
 2. Drei bis fünf Gespräche mit Anwendern oder Kunden.
-3. Mengengerüst für die Wirtschaftlichkeitsrechnung (Projekte pro Jahr, heutiger Zeitaufwand, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau).
+3. Mengengerüst für die Wirtschaftlichkeitsrechnung (Projekte pro Jahr, heutiger Zeitaufwand, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau; für das Beratungsgeschäft Mandate pro Jahr und Honorare).
 4. Benennung der Verantwortung für die Pflege des Regel- und Förderkatalogs.
 5. Durchsicht der Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`): Ist die jeweils vorsichtige Voreinstellung fachlich richtig gewählt?
