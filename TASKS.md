@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Fachspezifikation des Rechenkerns: erste Überarbeitung nach Prüfrunde 1 läuft (45 Sichtungspunkte; Dokument, Referenzrechner, Verzeichnisse, Spezifikation); danach Blindrechnung der noch unbestätigten Referenzfälle durch einen zweiten Bearbeiter und Prüfrunde 2 mit denselben sieben Rollen
+- [~] Fachspezifikation des Rechenkerns: Prüfrunde 2 mit denselben sieben Rollen und Blindrechnung der Referenzfälle durch einen zweiten Bearbeiter laufen → `docs/pruefung/2026-11-18-fachspezifikation-rechenkern-runde2/`
 
 ## Als Nächstes
 
@@ -34,7 +34,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 - [ ] **Vor den Herstellervorführungen und Anwendergesprächen freigeben:** Maßstäbe der Vorprüfung (Wortlaut: Spezifikation Kapitel 2, Zeile „Entscheidungspunkte"). Vorschlag: (1) Deckt ein vorgeführtes Produkt den Bedarf, wird nur noch Kauf gegen Excel-Ausbau verglichen; (2) Bedarf allgemein – die Mehrheit der Befragten würde die Grobkalkulation statt Excel nutzen, sonst Abbruch; (3) Bedarf, der nur den Eigenbau trägt – die Mehrheit braucht mindestens eines von Änderungsprotokoll, Arbeit mehrerer Personen an einem Projekt, Berichten und Zugang für Kunden, sonst Umsteuern auf Kauf oder Excel-Ausbau; (4) Mindestfallzahl – die Zeitersparnis über zehn Jahre deckt mindestens die Lizenzkosten des günstigsten vorgeführten Produkts über dieselben zehn Jahre, sonst Abbruch; ohne Katalogverantwortung Abbruch. Dazu von Ihnen: Stundensatz und der Anteil der Zeit, den Sie als Ersparnis ansetzen
 - [ ] **Mit dem Auftrag der Vorstudie freigeben, vor der Bauentscheidung:** Kalkulationszins, Zeitraum (Vorschlag zehn Jahre), ungünstiger Fall (Vorschlag: Entwicklungsaufwand plus 50 %, Einführung beim Kauf und Excel-Ausbau plus 30 %, Nutzen minus 50 %), Schwellen für den Bau (Aufwand eines Teilschritts mehr als 50 % über der Schätzung; Nutzungsgrad unter der Hälfte der Kalkulationen, gezählt über die ersten sechs Monate; Bank oder Gremium verlangen für mehr als eine von drei Vorlagen zusätzlich die Excel-Rechnung)
-- [ ] Vorgaben des Hauses (fällig mit der Fachspezifikation, spätestens vor dem Einsatz der Grobkalkulation): Zielrendite, Höhe der Stressfälle, Beleihungsquote, Mindestdeckung des Schuldendienstes, Mindesttilgung, Anschlusszins, Warnschwellen
+- [ ] Vorgaben des Hauses (fällig nach Abnahme der Fachspezifikation, spätestens vor dem Einsatz der Grobkalkulation): rund 60 Einzelwerte in 31 Gruppen, vollständig in `docs/fachspezifikation-rechenkern.md`, Kapitel 3 (H-01 bis H-31) – unter anderem Zielrendite, Stresshöhen, Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins, Anschlusszins, Habenzinsen, Leerstand und Forderungsausfall, Steigerungsraten, Zuschläge der Kostengruppen, CO2-Preis, Warnschwellen. Ich bereite dafür ein Freigabeblatt mit Vorschlagswerten vor
 - [ ] Vorführungen bei den drei VOFI-Anbietern anfordern (Prüfliste kommt aus Anhang D des Berichts)
 - [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
 - [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
@@ -67,8 +67,9 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Fachspezifikation des Rechenkerns nach Prüfrunde 1 überarbeitet: 167 Regeln, 19 Proben, 20 Referenzfälle mit 906 Prüfungen, alle bestanden; 37 Modellannahmen, 229 Quellen
 - [x] 2026-11-18 Prüfrunde 1 zur Fachspezifikation des Rechenkerns: Noten 8, 7, 7, 7, 7, 7, 7; gesichtet (45 Punkte)
-- [x] 2026-11-18 Fachspezifikation des Rechenkerns, Teil 1, als Entwurf: 148 Regeln, 14 Proben, 38 neue Festlegungen; Referenzrechner mit 15 Fällen und 529 Prüfungen, alle bestanden; in Dokumentationsübersicht und Pflichtlektüre aufgenommen
+- [x] 2026-11-18 Fachspezifikation des Rechenkerns, Teil 1, als Entwurf mit Referenzrechner; in Dokumentationsübersicht und Pflichtlektüre aufgenommen
 - [x] 2026-11-18 Reihenfolge der Stufe 1 entschieden (Auftraggeber): nach der Grobkalkulation zuerst der Neubau in voller Tiefe, dann NBank-Förderung, danach Ankauf Bestand
 - [x] 2026-11-18 Regionaler Schwerpunkt geklärt (Auftraggeber): Niedersachsen, Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen; Förderung überwiegend KfW und NBank – Spezifikation und Entscheidungsprotokoll nachgezogen
 - [x] 2026-11-18 Lehrbuchkapitel „Immobilieninvestition" (Schulte et al., S. 787–838, vom Auftraggeber bereitgestellt) ausgewertet: Zeilenaufbau am Original belegt, zwei Musterrechnungen nachgebaut (50 von 53 Buchwerten getroffen, drei um je eine Einheit abweichend) → Quellnotiz 11
