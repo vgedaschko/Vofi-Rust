@@ -42,6 +42,24 @@
   "R-3.2: keine feste Richtung mehr (Sichtung 1)"
  ],
  [
+  "RF-17: Koerperschaft mit Kennzeichen, 100.000 Ergebnis, 10.000 Zinsen, 500.000 Verkaufsgewinn im Verkaufsjahr",
+  "167.932,50 (Voreinstellung); dritte Lesart 181.932,50",
+  "181.932,50 (Voreinstellung); 167.932,50 mit Uebergang zum Jahresende (E-69)",
+  "R-7.8: Wegfall der erweiterten Kuerzung im Verkaufsjahr ist Regel (BFH-III-R-1-23; Nachtrag vom 18.11.2026)"
+ ],
+ [
+  "RF-12: Foerderdarlehen, kalkulatorischer Kapitaldienst (in dieser Runde neu, Zwischenstand)",
+  "150.716,76 (504 Raten)",
+  "151.713,24 (500 Raten)",
+  "R-5.11: Tilgungsbeginn nach der Richtlinie (NBANK-RL-MIETWOHNRAUM-2026, Ergaenzung vom 18.11.2026)"
+ ],
+ [
+  "RF-20: Anschlusszins 7 % nach Lesart 2 von MA-026: Meldungen",
+  "M-37, M-39",
+  "M-35, M-37, M-39",
+  "R-3.2: Die Lesart 2 von MA-026 steht als Abweichung in der Liste (M-35) (Sichtung 1)"
+ ],
+ [
   "RF-08, RF-20: fehlender Anschlusszins",
   "ValueError mit dem Text 'M-24'",
   "Meldung M-24",

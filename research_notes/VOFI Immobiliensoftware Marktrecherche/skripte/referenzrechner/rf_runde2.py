@@ -113,6 +113,15 @@ def rf12_runde2():
     pruefe_fest(k, "KfW: kleinste Deckung nach der unguenstigsten Anschlussregel; Darlehen zu Gesamtkosten (%); Restschuld und neue Rate nach der Zinsbindung",
                 [q(kf.deckung_min_anschluss[0]), kf.deckung_min_anschluss[1], kf.deckung_min_anschluss[2], q(kf.darlehen_zu_wert * 100, "0.01"),
                  str(zk[120]["tranchen"]["KfW-Darlehen"]["rest"]), str(zk[121]["tranchen"]["KfW-Darlehen"]["rate"])])
+    # R-5.16 (KFW-297-298-MERKBLATT): das KfW-Darlehen ist nur gegen Vorfaelligkeitsentschaedigung abloesbar
+    k8 = rechne_grob(replace(MIT_KFW, haltedauer=8), VG, KATN, _begruendung=False)
+    z8 = k8.plan.zeilen[96]["tranchen"]
+    soll8 = [CENT.geld(z8[n_]["abloesung"] * VG.vfe_satz * 24 / 12) for n_ in ("Bankdarlehen", "KfW-Darlehen")]
+    pruefe(k, "KfW, Verkauf nach 8 Jahren bei 10 Jahren Zinsbindung: Vorfaelligkeit = 1 % x 2 Jahre auf die abgeloeste Restschuld von Bank- und KfW-Darlehen",
+           k8.plan.zeilen[96]["vfe"], str(sum(soll8)), "0")
+    pruefe_fest(k, "... Vorfaelligkeit des Bankdarlehens und des KfW-Darlehens", [str(x_) for x_ in soll8])
+    f20 = rechne_grob(replace(GEFOERDERT, haltedauer=20), VG, KATN, _begruendung=False)
+    pruefe_gleich(k, "Foerderdarlehen der NBank, Verkauf nach 20 Jahren in der zinslosen Zeit: keine Vorfaelligkeit", str(f20.plan.zeilen[240]["vfe"]), "0")
     for lz, tf in ((35, 5), (25, 3), (10, 2)):
         e = rechne_grob(replace(MIT_KFW, kfw_laufzeit=lz, kfw_tilgungsfrei=tf), VG, KATN)
         t = [x for x in e.plan.e.tranchen if x.name == "KfW-Darlehen"][0]
@@ -307,8 +316,9 @@ def rf17_runde2():
     def st(status_, alternative=False, **kw):
         return Steuer(A.steuer(status_, **kw), r, CENT, alternative=alternative)
 
-    # R-7.8 in gesetzlicher Reihenfolge: Kuerzung vor dem Verlustvortrag (GEWSTG-9, GEWSTG-10A)
-    s = st(KOERPERSCHAFT, erweiterte_kuerzung=True)
+    # R-7.8 in gesetzlicher Reihenfolge: Kuerzung vor dem Verlustvortrag (GEWSTG-9, GEWSTG-10A); Jahr 2 ist das
+    # Verkaufsjahr mit Uebergang zum Jahresende (E-69)
+    s = st(KOERPERSCHAFT, erweiterte_kuerzung=True, uebergang_jahresende=True, haltedauer=2)
     pruefe(k, "Kennzeichen, Anlaufverlust 50.000: keine Steuer", s.jahr(1, D(-50000), NULL), "0", "0")
     pruefe(k, "... der gekuerzte Verlust bildet keinen gewerbesteuerlichen Vortrag", s.vv_gew, "0", "0")
     pruefe(k, "... Folgejahr 2028 mit 100.000 Ergebnis, 10.000 Zinsen, 500.000 Verkaufsgewinn: 14,77 % von 560.000 + 14 % von 510.000",
@@ -489,9 +499,9 @@ def rf19_runde2():
     reihe = {}
     for bindung in (8, 9, 10, 12):
         x = rechne_grob(replace(GEBUNDEN, uebernommen=dict(GEBUNDEN.uebernommen, bindung_jahre=bindung)), VG, KAT)
-        reihe[bindung] = [str(x.bemessung.bemessungszins["Uebernommenes Darlehen"]), str(x.bemessung.kd_uebrige), str(x.darlehen)]
+        reihe[str(bindung)] = [str(x.bemessung.bemessungszins["Uebernommenes Darlehen"]), str(x.bemessung.kd_uebrige), str(x.darlehen)]
     pruefe_fest(k, "Zinsbindung des uebernommenen Darlehens 8, 9, 10, 12 Jahre: Bemessungszins, Kapitaldienst, Bankdarlehen (keine Klippe)", reihe)
-    pruefe(k, "Zinsbindung 12 Jahre: Kapitaldienst 15.000, Bankdarlehen (Gegenrechnung Bank)", D(reihe[12][2]), "886660.00", "0")
+    pruefe(k, "Zinsbindung 12 Jahre: Kapitaldienst 15.000, Bankdarlehen (Gegenrechnung Bank)", D(reihe["12"][2]), "886660.00", "0")
     ohne_k = rechne_grob(replace(GEBUNDEN, uebernommen=dict(GEBUNDEN.uebernommen, foerderdarlehen=None)), VG, KAT)
     mit_k = rechne_grob(GEBUNDEN, VG, KAT)
     pruefe_gleich(k, "Kennzeichen Foerderdarlehen nicht angegeben: wie 'nein'; das Kennzeichen aendert die Bemessung nicht mehr",

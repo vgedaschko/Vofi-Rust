@@ -443,7 +443,7 @@ def rf20_raender():
     e = rechne_grob(replace(A.ANKAUF, zins=D("0.03"), ist_miete=D("8.50"), vergleichsmiete=D("8.50"), stau_betrag=NULL),
                     replace(VG, mietsteigerung=D("0.005"), ma026_vertragszins=True, anschluss_aufschlag=D("0.04")), KAT)
     pruefe_gleich(k, "Anschlusszins 7 % nach Lesart 2 von MA-026: kleinste Deckung unter 1, Planjahr, Meldung M-39",
-                  [str(e.deckung_min.quantize(D("0.0001"))), e.deckung_min_jahr, kennungen(e)], ["0.9522", 12, ["M-37", "M-39"]])
+                  [str(e.deckung_min.quantize(D("0.0001"))), e.deckung_min_jahr, kennungen(e)], ["0.9522", 12, ["M-35", "M-37", "M-39"]])
     # R-3.1: keine Zahlenliterale in den Kernmodulen ausser technischen Konstanten
     # erlaubt: 0, 1, 2 (Halbieren), 12 (Monate je Jahr), 3 (Nachkommastellen der Darstellung), 60 (Rechenstellen),
     # 80 (Bisektionsschritte), 1000 (Kilogramm je Tonne), Cent, zwoelf Rechenstellen, Rechentoleranz

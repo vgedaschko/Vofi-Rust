@@ -460,10 +460,10 @@ fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/__5a.html"
 stand = "Fassung 23.07.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Nicht umlagefähige Vermieterkosten: Gasnetzentgelte und CO2-Kosten ab 2028, Bio-Brennstoff ab 2029 (höchstens 30 %)"]
+verwendet_fuer = ["Hälftige Teilung der CO2-Kosten zwischen Vermieter und Mieter bei Heizungen nach § 43 Abs. 1 GModG ab 2028, abweichend vom Stufenmodell (Fachspezifikation R-6.9, KAT-09, Eingabe E-66)", "Nicht umlagefähige Vermieterkosten: Gasnetzentgelte ab 2028, Pflichtanteil des Brennstoffs ab 2029, höchstens 30 % (Eingabe E-67)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Abs. 4: zwölf Monate Aufschub bei Heizungsausfall."
+bemerkung = "Abs. 4: zwölf Monate Aufschub bei Heizungsausfall. Prüfrunde 2 der Fachspezifikation (Fachexperte, Abs. 1 bis 4, 2026-11-18): Abs. 3 Nr. 2 teilt die CO2-Kosten hälftig, „in Abweichung von § 5 Absatz 2“; der frühere Eintrag nannte nur „CO2-Kosten ab 2028“ ohne die Teilung."
 
 [[quelle]]
 id = "CO2KOSTAUFG-5B"
@@ -899,10 +899,10 @@ fundstelle = "https://www.gesetze-im-internet.de/gewstg/__9.html"
 stand = "Fassung 29.06.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Erweiterte Kürzung mit Unschädlichkeitsgrenzen 20 % (Strom) und 5 % (sonstige Mieterleistungen)", "Reichweite der erweiterten Kürzung in der Steuer in Kurzform: nur der Teil des Gewerbeertrags aus Verwaltung und Nutzung des eigenen Grundbesitzes (Fachspezifikation R-7.8, MA-030)"]
+verwendet_fuer = ["Erweiterte Kürzung mit Unschädlichkeitsgrenzen 20 % (Strom) und 5 % (sonstige Mieterleistungen)", "Reichweite der erweiterten Kürzung in der Steuer in Kurzform: nur der Teil des Gewerbeertrags aus Verwaltung und Nutzung des eigenen Grundbesitzes (Fachspezifikation R-7.8, MA-030)", "Reihenfolge: gekürzt wird die Summe aus Gewinn und Hinzurechnungen; Kürzung vor dem Verlustabzug (R-7.8, NF-47)", "Einfache Kürzung: in der Kurzform nicht gerechnet (R-7.8)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen nur Nr. 1. Bezugsgröße der Grenzen sind die Einnahmen aus der Gebrauchsüberlassung des Grundbesitzes. Prüfrunde 1 der Fachspezifikation (Steuerberater, Satz 1 bis 6): Satz 2 kürzt auf Antrag um den Teil des Gewerbeertrags, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt, und nennt als Berechtigte Unternehmen, die ausschließlich eigenen Grundbesitz verwalten und nutzen; Zinserträge aus Kapitalvermögen sind nicht gekürzt. Ob der Gewinn aus dem Verkauf des Objekts zum gekürzten Teil gehört, sagt der Wortlaut nicht (MA-030, Frage an den Steuerberater). Satz 1 (einfache Kürzung) lautet in der gelesenen Fassung auf die im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens, nicht mehr auf einen Prozentsatz des Grundsteuerwerts (siehe GEWSTG-36)."
+bemerkung = "Gelesen nur Nr. 1. Bezugsgröße der Grenzen sind die Einnahmen aus der Gebrauchsüberlassung des Grundbesitzes. Prüfrunde 1 der Fachspezifikation (Steuerberater, Satz 1 bis 6): Satz 2 kürzt auf Antrag um den Teil des Gewerbeertrags, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt, und nennt als Berechtigte Unternehmen, die ausschließlich eigenen Grundbesitz verwalten und nutzen; Zinserträge aus Kapitalvermögen sind nicht gekürzt. Ob der Gewinn aus dem Verkauf des Objekts zum gekürzten Teil gehört, sagt der Wortlaut nicht (MA-030, Frage an den Steuerberater). Satz 1 (einfache Kürzung) lautet in der gelesenen Fassung auf die im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens, nicht mehr auf einen Prozentsatz des Grundsteuerwerts (siehe GEWSTG-36). Prüfrunde 2 der Fachspezifikation (Steuerberater, Einleitungssatz und Nr. 1 Satz 1 bis 6, 2026-11-18): „Die Summe des Gewinns und der Hinzurechnungen wird gekürzt um …“. Zum Wegfall der erweiterten Kürzung im Verkaufsjahr siehe BFH-III-R-1-23."
 
 [[quelle]]
 id = "GEWSTG-10A"
@@ -1751,10 +1751,10 @@ fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlag
 stand = "RdErl. d. MW v. 25.06.2026, Nds. MBl. 2026 Nr. 319; in Kraft 01.07.2026 bis 31.12.2031"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Förderhöhe Darlehen und Zuschuss je Einkommensgruppe", "Zuwendungsfähige Kosten und Bemessungsgrenze (Indexregel)", "Bindung 35 Jahre, Eingangsmiete, Mieterhöhung in der Bindung", "Auszahlungsraten, Entgelte, Verwaltungskostenbeitrag", "Renditeprüfung gegen 30-Jahres-Swapsatz plus 100 Basispunkte", "Programme Bindungserwerb und Bindungsverlängerung"]
+verwendet_fuer = ["Förderhöhe Darlehen und Zuschuss je Einkommensgruppe", "Zuwendungsfähige Kosten und Bemessungsgrenze (Indexregel)", "Bindung 35 Jahre, Eingangsmiete, Mieterhöhung in der Bindung", "Auszahlungsraten, Entgelte, Verwaltungskostenbeitrag", "Renditeprüfung gegen 30-Jahres-Swapsatz plus 100 Basispunkte", "Programme Bindungserwerb und Bindungsverlängerung", "Rang des Förderdarlehens nach den erststelligen Kapitalmarktmitteln; Mindesttilgung der vorrangigen Bankmittel (Fachspezifikation R-5.12)", "Teilraten der Auszahlung nach Baufortschritt, Darlehen und Zuschuss anteilig, Eigenmittel vorrangig (R-11.3)", "Beginn und Ende der Tilgung, Aufschub, zinslose Zeit und Zins danach (R-5.11)", "Deckung von Finanzierungs- und Bewirtschaftungskosten als Voraussetzung (R-11.14, Meldung M-50)", "Rückzahlung des Zuschusses und Nachwirkung der Bindung bei vorzeitiger Ablösung (R-8.7, R-8.8)"]
 turnus = "monatlich"
 zugang = "frei"
-bemerkung = "Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst. Zuletzt gelesen in Prüfrunde 4 (Jurist): Nr. 1.4, 1.5, 2.1, 5.3.1, 5.3.2.1 bis 5.3.2.4, 5.4.1 bis 5.4.8, 11.6, 11.7, 12.3 und 12.4.1; zur Umsatzsteuer enthält die Richtlinie keine Regel (einziger Treffer: Auftragswert „ohne Umsatzsteuer“ in Nr. 5.4.8), siehe NI-ANBEST-P."
+bemerkung = "Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst. Zuletzt gelesen in Prüfrunde 4 (Jurist): Nr. 1.4, 1.5, 2.1, 5.3.1, 5.3.2.1 bis 5.3.2.4, 5.4.1 bis 5.4.8, 11.6, 11.7, 12.3 und 12.4.1; zur Umsatzsteuer enthält die Richtlinie keine Regel (einziger Treffer: Auftragswert „ohne Umsatzsteuer“ in Nr. 5.4.8), siehe NI-ANBEST-P. Am 2026-11-18 gegen die Fragenliste gelesen (Quellnotiz 12): Nr. 1.5, 2, 3, 4, 5.2.4 bis 5.5.9, 11.3 bis 11.11, 12.2 bis 12.7 und 13; nicht gelesen: 5.1, 5.2.1 bis 5.2.3, 6 bis 10 im Einzelnen, Anlagen. Aus der Richtlinie beantwortet sind danach Rang (5.3.6, 11.5), Mindesttilgung der Bankmittel (5.3.6), Teilraten und vorrangiger Einsatz der Eigenmittel (5.5.3 bis 5.5.6, 12.4.1), Tilgungsbeginn, Rückzahlungsfrist und Aufschub (5.3.5), zinslose Zeit und Zins danach (5.3.4), Eigenmittel (5.2.6), Herstellungskosten nach Kostengruppen (1.5), Bodenrichtwert (5.3.2.3), Rückzahlung bei Ablösung (5.4.6) und die Deckung als Voraussetzung (4.1). Für das Gespräch mit der NBank bleiben: Rechenblatt und Annahmen der Renditeprüfung, Form der Raten, Voraussetzungen des Eigenmittelersatzes, Schlüssel bei Teilförderung, Übernahme durch einen Käufer."
 
 [[quelle]]
 id = "NBANK-PI-MIETWOHNUNGEN-MFH"
@@ -2039,11 +2039,11 @@ herausgeber = "KfW"
 fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000005051_M_297_298.pdf"
 stand = "Merkblatt 07/2026, gültig ab 30.07.2026"
 beleg = "original"
-gelesen_am = "2026-11-17"
-verwendet_fuer = ["Neubaukredit 100.000 € bzw. 150.000 € mit QNG je Wohneinheit", "Stufe Effizienzhaus 55 (befristet)", "Kumulierungsausschlüsse und Sperrfristen"]
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Neubaukredit 100.000 € bzw. 150.000 € mit QNG je Wohneinheit (Fachspezifikation R-5.19, KAT-15)", "Laufzeitvarianten mit tilgungsfreien Anlaufjahren; danach Annuität in Monatsraten über die Restlaufzeit (R-5.19)", "Bereitstellungsprovision 0,15 % je Monat ab dem 13. Monat nach der Zusage; Abruffrist 12 Monate mit Verlängerung um bis zu 24 Monate (R-5.19, Meldung M-49)", "Außerplanmäßige Tilgung nur vollständig und nur gegen Vorfälligkeitsentschädigung (R-5.16, MA-033)", "Prolongationsangebot zum Ende der Zinsbindung ohne Zinsverbilligung aus Bundesmitteln (R-5.8, MA-034)", "Stufe Effizienzhaus 55 (befristet)", "Kumulierungsausschlüsse und Sperrfristen"]
 turnus = "monatlich"
 zugang = "frei"
-bemerkung = "EH55-Stufe bis Mittelausschöpfung, längstens 31.12.2026 (KFW-PM-2026-06-19); Ausschöpfung der 800 Mio. € nicht veröffentlicht."
+bemerkung = "EH55-Stufe bis Mittelausschöpfung, längstens 31.12.2026 (KFW-PM-2026-06-19); Ausschöpfung der 800 Mio. € nicht veröffentlicht. Prüfrunde 2 der Fachspezifikation (Fachexperte, Seiten 4 bis 6, 2026-11-18): Laufzeitvarianten, Tilgungsform, Höchstbeträge, Bereitstellungsprovision, Abruffrist und Vorfälligkeit gelesen; Abschnitte „Tilgung“ und „Zinssatz“ am 2026-11-18 erneut nachgeprüft (Quellnotiz 13). Nicht im Merkblatt: die Zinssätze (KFW-KONDITIONENANZEIGER, nicht gelesen) und ob Laufzeit und Anlaufjahre ab der Zusage oder ab dem Abruf zählen (MA-040)."
 
 [[quelle]]
 id = "KFW-296-MERKBLATT"
@@ -3479,9 +3479,99 @@ titel = "Befreiungen (Nr. 15: Vermietungsgenossenschaften und -vereine)"
 herausgeber = "Bund"
 fundstelle = "https://www.gesetze-im-internet.de/gewstg/__3.html"
 stand = "Fassung 29.06.2026"
-beleg = "ungeprueft"
-gelesen_am = ""
+beleg = "original"
+gelesen_am = "2026-11-18"
 verwendet_fuer = ["Gewerbesteuerbefreiung der nach KSTG-5 befreiten Genossenschaften und Vereine (Steuerstatus „befreite Körperschaft“; Fachspezifikation R-7.12)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "In Prüfrunde 1 der Fachspezifikation hat der Steuerberater Nr. 15 aufgerufen, aber nicht ausgewertet; deshalb als nicht geprüft geführt. Bei der Überarbeitung am 2026-11-18 wurde der Wortlaut der Nr. 15 abgerufen: Die Befreiung knüpft an die Befreiung von der Körperschaftsteuer nach § 5 Abs. 1 Nr. 10 KStG an (soweit). Als gelesen wird die Norm mit der nächsten protokollierten Prüfung eingetragen. Stand wie bei den übrigen Einträgen zum GewStG nach der Gesamtausgabe."
+bemerkung = "Prüfrunde 2 der Fachspezifikation (Steuerberater, Nr. 15, 2026-11-18): Die Befreiung gilt, „soweit sie von der Körperschaftsteuer befreit sind“; sie knüpft an § 5 Abs. 1 Nr. 10 KStG an. Entfällt die Befreiung von der Körperschaftsteuer im Verkaufsjahr, entfällt auch die Gewerbesteuerbefreiung (Hinweis M-44). In Prüfrunde 1 war die Norm aufgerufen, aber nicht ausgewertet. Stand wie bei den übrigen Einträgen zum GewStG nach der Gesamtausgabe."
+
+[[quelle]]
+id = "BGB-558B"
+gruppe = "gesetz"
+kurz = "§ 558b BGB"
+titel = "Zustimmung zur Mieterhöhung; die erhöhte Miete wird ab dem dritten Kalendermonat nach Zugang des Verlangens geschuldet"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__558b.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Begründung, dass Planjahr 1 die Ist-Miete trägt und die erste Erhöhung frühestens im Monat 13 wirkt (Fachspezifikation R-6.3)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 2 der Fachspezifikation (Fachexperte, Abs. 1). Fassungsangabe wie die übrigen Einträge zum BGB, nicht gesondert geprüft."
+
+[[quelle]]
+id = "BGB-566"
+gruppe = "gesetz"
+kurz = "§ 566 BGB"
+titel = "Kauf bricht nicht Miete: Eintritt des Erwerbers in das Mietverhältnis mit dem Eigentum"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__566.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Begründung, dass der Erwerber erst mit dem Eigentum Mieterhöhungen verlangen kann (Fachspezifikation R-6.3)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 2 der Fachspezifikation (Fachexperte, Abs. 1). Fassungsangabe wie die übrigen Einträge zum BGB, nicht gesondert geprüft."
+
+[[quelle]]
+id = "ESTG-15A"
+gruppe = "gesetz"
+kurz = "§ 15a EStG"
+titel = "Verluste bei beschränkter Haftung: kein Ausgleich, soweit ein negatives Kapitalkonto entsteht oder sich erhöht"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__15a.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Grenze der sofortigen Verlustverrechnung bei Kommanditisten; in der Kurzform nicht geprüft (Fachspezifikation R-7.6, MA-016)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 2 der Fachspezifikation (Steuerberater, Abs. 1 Satz 1). Gerechnet wird die Regel erst in der Steuer in Grundform."
+
+[[quelle]]
+id = "KSTG-1"
+gruppe = "gesetz"
+kurz = "§ 1 KStG"
+titel = "Unbeschränkte Steuerpflicht: Kapitalgesellschaften, Genossenschaften, Vereine, Stiftungen und weitere Körperschaften"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__1.html"
+stand = "Fassung 04.02.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abgrenzung des Steuerstatus „Verein und Stiftung“: körperschaftsteuerpflichtig, aber nicht kraft Rechtsform gewerblich (Fachspezifikation R-7.1, R-7.17; mit KSTG-8)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 2 der Fachspezifikation (Steuerberater, Abs. 1 Nr. 1 bis 6, Abs. 2). § 8 Abs. 2 KStG erfasst nur die Steuerpflichtigen nach Abs. 1 Nr. 1 bis 3; Vereine und Stiftungen (Nr. 4 und 5) haben deshalb Einkünfte nach ihrer Art. Ob ihre Vermietung Vermögensverwaltung ist, ist MA-041."
+
+[[quelle]]
+id = "KSTG-24"
+gruppe = "gesetz"
+kurz = "§ 24 KStG"
+titel = "Freibetrag für bestimmte Körperschaften"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__24.html"
+stand = "Fassung 04.02.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Freibetrag von Verein und Stiftung; in der Kurzform nicht gerechnet (Fachspezifikation R-7.17)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 2 der Fachspezifikation (Steuerberater, Satz 1 und 2): 5.000 Euro. Die Kurzform lässt ihn vorsichtig weg und sagt das an der Regel."
+
+[[quelle]]
+id = "BFH-III-R-1-23"
+gruppe = "gesetz"
+kurz = "BFH III R 1/23"
+titel = "BFH, Urteil vom 17.10.2024: keine erweiterte Kürzung bei Veräußerung des gesamten Grundbesitzes im Laufe des Erhebungszeitraums"
+herausgeber = "Bundesfinanzhof"
+fundstelle = "bundesfinanzhof.de, Entscheidung STRE202510006; ECLI:DE:BFH:2024:U.171024.IIIR1.23.0"
+stand = "Urteil vom 17.10.2024"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Wegfall der erweiterten Kürzung im ganzen Verkaufsjahr, wenn der Grundbesitz vor dem 31.12., 23:59 Uhr, übergeht; Ausnahme nur für den Übergang zum Jahresende (Fachspezifikation R-7.8, Eingabe E-69, MA-030)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Rechtsprechung, in der Gruppe der Gesetze geführt. Am 2026-11-18 von der Projektleitung am Original gelesen (ganz; Quellnotiz 13, Leitsatz und Gründe II.1.a bis c, II.3) und für die Überarbeitung nach Prüfrunde 2 der Fachspezifikation übernommen: Die erweiterte Kürzung wird nicht zeitanteilig gewährt. Ob der Verkaufsgewinn bei einem Übergang zum Jahresende zum gekürzten Ertrag gehört, entscheidet das Urteil nicht (MA-030; BFH I R 89/03 nicht am Original gelesen). Eintrag von der Überarbeitung angelegt; Angaben nach Quellnotiz 13, Abschnitt (c)."

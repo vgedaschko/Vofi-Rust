@@ -182,6 +182,10 @@
    "R-5.11: Tilgung des Foerderdarlehens ab dem Monat nach der letzten Teilrate bis 42 Jahre nach Bezugsfertigkeit: 500 statt 504 Raten, hoeherer Kapitaldienst zu Bemessungskonditionen (NBANK-RL-MIETWOHNRAUM-2026, Ergaenzung vom 18.11.2026); R-5.12: Bemessungszins je Tranche"
   ],
   [
+   "^RF\\-12\\|\\.\\.\\.\\ Vorfaelligkeit\\ des\\ Bankdarlehens\\ und\\ des\\ KfW\\-Darlehens$",
+   "neuer Wert zu R-5.16: Vorfaelligkeit auch fuer das KfW-Darlehen (KFW-297-298-MERKBLATT; Nachtrag vom 18.11.2026)"
+  ],
+  [
    "^RF\\-12\\|Aufschub\\ der\\ Tilgung\\ um\\ 60\\ Monate\\ \\(E\\-68\\):\\ Tilgungsbeginn,\\ Zahl\\ der\\ Raten,\\ Rate,\\ Rendite\\ \\(%\\)$",
    "neuer Wert zu R-5.11, R-11.3, R-11.14: Teilraten, Zwischenfinanzierung, Tilgungsbeginn, Aufschub E-68, Bauabschnitte H-37, M-50 (NBANK-RL-MIETWOHNRAUM-2026, Ergaenzung vom 18.11.2026)"
   ],
@@ -494,8 +498,28 @@
    "neuer Wert: Endwert der Unterlassensalternative je Auspraegung des Steuerfalls (Sichtung 28; Blindrechnung 8)"
   ],
   [
-   "^RF\\-13\\|Koerperschaft\\ mit\\ Kuerzung,\\ dritte\\ Lesart\\ MA\\-030\\ \\(Kuerzung\\ entfaellt\\ im\\ Verkaufsjahr\\):\\ Endwert,\\ Rendite\\ \\(%\\),\\ Abstand\\ zur\\ Voreinstellung$",
-   "neuer Wert zu R-7.8: dritte Lesart von MA-030 (Sichtung 21; Steuerberater 6)"
+   "^RF\\-13\\|Koerperschaft\\ mit\\ Kuerzung,\\ Uebergang\\ zum\\ Jahresende\\ \\(E\\-69;\\ laufender\\ Ertrag\\ gekuerzt,\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ Endwert,\\ Rendite\\ \\(%\\),\\ Abstand\\ zur\\ Voreinstellung$",
+   "neuer Wert zu R-7.8: Uebergang zum Jahresende (E-69) nach BFH-III-R-1-23; Wert der bisherigen Voreinstellung"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung\\ \\(MA\\-030:\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ Endwert$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung\\ \\(MA\\-030:\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ Endwertdifferenz$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung\\ \\(MA\\-030:\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ Steuer\\ auf\\ den\\ Verkaufsgewinn$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung\\ \\(MA\\-030:\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ Summe\\ der\\ Steuerzahlungen$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung\\ \\(MA\\-030:\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ VOFI\\-Rendite\\ \\(%\\)$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
   ],
   [
    "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung:\\ Endwert\\ der\\ Unterlassensalternative$",
@@ -544,6 +568,26 @@
   [
    "^RF\\-13\\|befreite\\ Koerperschaft:\\ Endwert\\ der\\ Unterlassensalternative$",
    "neuer Wert: Endwert der Unterlassensalternative je Auspraegung des Steuerfalls (Sichtung 28; Blindrechnung 8)"
+  ],
+  [
+   "^RF\\-13\\|gewerblich\\ gepraegte\\ Personengesellschaft,\\ 440\\ %,\\ mit\\ Kuerzung:\\ Endwert$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|gewerblich\\ gepraegte\\ Personengesellschaft,\\ 440\\ %,\\ mit\\ Kuerzung:\\ Endwertdifferenz$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|gewerblich\\ gepraegte\\ Personengesellschaft,\\ 440\\ %,\\ mit\\ Kuerzung:\\ Steuer\\ auf\\ den\\ Verkaufsgewinn$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|gewerblich\\ gepraegte\\ Personengesellschaft,\\ 440\\ %,\\ mit\\ Kuerzung:\\ Summe\\ der\\ Steuerzahlungen$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
+  ],
+  [
+   "^RF\\-13\\|gewerblich\\ gepraegte\\ Personengesellschaft,\\ 440\\ %,\\ mit\\ Kuerzung:\\ VOFI\\-Rendite\\ \\(%\\)$",
+   "R-7.8: Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, auch fuer den laufenden Ertrag (BFH-III-R-1-23; Nachtrag des Koordinators vom 18.11.2026 nach Quellnotiz 13); die bisherige Voreinstellung gilt nur noch mit Uebergang zum Jahresende (E-69)"
   ],
   [
    "^RF\\-13\\|originaer\\ gewerbliche\\ Personengesellschaft,\\ Hebesatz\\ 440\\ %:\\ Endwert\\ der\\ Unterlassensalternative$",
