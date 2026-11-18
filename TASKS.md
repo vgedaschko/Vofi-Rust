@@ -6,10 +6,11 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Zweite Überarbeitung des Rechercheberichts läuft (Auftrag: `docs/pruefung/2026-11-18-recherchebericht-runde2/sichtung.md`); danach Prüfrunde 3
+- [~] Prüfrunde 3 zum Recherchebericht läuft (sechs Rollen); danach sichten und, falls nötig, weitere Runde
 
 ## Als Nächstes
 
+- [ ] Recherche zu den fünf bisher nicht untersuchten Anbietern (Reasult, PROBIS und weitere) bis zur Vorprüfung
 - [ ] Quellenkataster: als Nächstes am Original lesen – KfW-Merkblatt 459 (Heizungsförderung für Vermieter), niedersächsisches Landesrecht (Mietpreisbremse und Kappungsgrenze, Grunderwerbsteuersatz, Einkommensgrenzen NWoFG), amtliche Fassung BEG EM, De-minimis-Verordnung, gif-Kennzahlen; künftig geltende Fassungen am Bundesgesetzblatt (Verlustvortrag ab 2028)
 - [ ] Quellenkataster: Lizenzen klären für DIN 276/277, MF-GIF, BKI-Kennwerte und die KfW-Zinsdatei (16 Einträge)
 - [ ] Vorstudie Wirtschaftlichkeit: Eigenbau gegen Kauf und Excel-Ausbau, mit Mengengerüst des Auftraggebers und Aufwandsschätzung nach dem Architekturentwurf
@@ -42,6 +43,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Recherchebericht nach Prüfrunde 2 überarbeitet (30 Sichtungspunkte)
 - [x] 2026-11-18 Konvention für Modellannahmen (Spezifikation Kapitel 8) und Verzeichnis mit 15 offenen Annahmen
 - [x] 2026-11-18 Normen- und Quellenkataster angelegt und befüllt: 207 Quellen, davon 124 am Original gelesen
 - [x] 2026-11-18 Prüfrunde 2 zum Recherchebericht: Noten 7, 7, 7, 8, 8, 8; gesichtet; Spezifikation und Plan nachgezogen
