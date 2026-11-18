@@ -6,6 +6,8 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
+- [~] Fachspezifikation des Rechenkerns, Teil 1 (allgemeiner Kern und Grobkalkulation) wird geschrieben, mit Referenzrechner für alle Referenzfälle → `docs/fachspezifikation-rechenkern.md`; danach Prüfrunde (Finanzmathematiker, Fachexperte, Praktiker, Controller, Grenzfälle) und Eintrag in Dokumentationsübersicht und Pflichtlektüre
+
 ## Als Nächstes
 
 - [ ] Nach dem NBank-Gespräch: Antworten mit Datum und Gesprächspartner im Verzeichnis der Modellannahmen nachtragen (Status, Voreinstellung), Spezifikation und Katalogvorgaben nachziehen
