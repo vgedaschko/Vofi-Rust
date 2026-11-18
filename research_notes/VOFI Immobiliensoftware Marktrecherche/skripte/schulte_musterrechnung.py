@@ -291,6 +291,13 @@ if __name__ == "__main__":
         print(f"   {name:<8} Endwert {x['endwert']:.6f}  Rendite {prozent(x['rendite']):.6f} %")
     print(" Kontrollsumme Finanzierungssaldo: Summe der Periodensalden t_0 bis t_(n-1) je Plan:",
           [str(runden(sum(x["saldo"][:-1]), "0.01")) for x in (v, f, vs, fs, e, an, fr, fg)])
+    # Probe des Nachbaus: Bei einheitlichem Zins (Kredit, Wiederanlage, Alternative je 5,5 %) und ohne
+    # Steuern muss die abgezinste Differenz der Endvermögen dem Kapitalwert von S. 802 entsprechen.
+    einheit = dict(n=n, a0=a0, ue=ue, rn=rn, ek=ek, kredit=fk, kreditart="annuitaet", i_kredit=kzf,
+                   i_haben_kurz=kzf, i_soll_kurz=kzf, s=NULL, afa=NULL)
+    diff = vofi(**einheit)["endwert"] - finanzinvestition(n, ek, kzf, kzf, NULL)["endwert"]
+    print(f" Probe einheitlicher Zins 5,5 %: abgezinste Differenz der Endvermögen {diff / (EINS + kzf) ** n:.4f}; "
+          f"Kapitalwert {kapitalwert(ue, rn, a0, kzf, n):.4f}")
     print(" Abb. 11 (S. 809), Kapitalwert nach Steuern je Steuersatz (Buch: -43 bei 0 %, 0 bei 100 %):")
     zeile = []
     for proz in (0, 20, 40, 50, 60, 70, 80, 100):
