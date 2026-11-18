@@ -6,6 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
+- [~] Gestaltungsreferenzen werden gesammelt (Mobbin-Sammlung „VOFI Referenzen", `docs/gestaltungsreferenzen.md`)
 - [~] Prüfrunde 3 zum Recherchebericht läuft (sechs Rollen); danach sichten und, falls nötig, weitere Runde
 
 ## Als Nächstes
@@ -34,7 +35,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Später
 
-- [ ] Phase 2: Gestaltungsreferenzen je Kernansicht sammeln (Mobbin, Gestaltungssysteme, IBCS) und Muster benennen
+- [ ] Phase 2: Design-Wettbewerbe für die drei prägenden Ansichten (`/designwettbewerb`), daraus das Gestaltungssystem
 - [ ] Geplante Aufgaben einrichten, sobald der Regel- und Förderkatalog steht: monatlich Förderkonditionen, vierteljährlich Rechtsstand
 - [ ] Projekteigene Skills bauen: `vofi-fachmodell`, `referenzfall-anlegen`, später `foerderprogramm-pflegen`, `steuer-regeln`
 - [ ] Phase 3: Einrichtungsskript der Cloud-Umgebung, Prüfkette auf dem Server, Hooks für die Oberfläche
@@ -43,6 +44,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Ablauf für den Design-Wettbewerb (`/designwettbewerb`) eingerichtet; Mobbin-Sammlung angelegt
 - [x] 2026-11-18 Recherchebericht nach Prüfrunde 2 überarbeitet (30 Sichtungspunkte)
 - [x] 2026-11-18 Konvention für Modellannahmen (Spezifikation Kapitel 8) und Verzeichnis mit 15 offenen Annahmen
 - [x] 2026-11-18 Normen- und Quellenkataster angelegt und befüllt: 207 Quellen, davon 124 am Original gelesen
