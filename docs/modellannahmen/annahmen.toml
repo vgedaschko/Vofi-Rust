@@ -82,7 +82,7 @@ status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 4, Fördermodul"]
-bemerkung = ""
+bemerkung = "Nummer 11.5 der Richtlinie spricht von „als Ersatz der Eigenmittel anerkannten Fremdmitteln“; das stützt die andere Lesart. Die vorsichtige Voreinstellung bleibt bis zum Gespräch mit der NBank."
 
 [[annahme]]
 id = "MA-005"
@@ -402,4 +402,104 @@ status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 4, Fördermodul"]
+bemerkung = "Aus Prüfrunde 3 (Jurist)."
+
+[[annahme]]
+id = "MA-021"
+titel = "Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank"
+annahme = "Kann der Bauherr die Vorsteuer nicht abziehen, zählt die Umsatzsteuer zu den zuwendungsfähigen Kosten."
+grund = "Die gelesenen Unterlagen der NBank regeln die Behandlung der Umsatzsteuer nicht ausdrücklich."
+alternative = "Zuwendungsfähig sind nur die Nettokosten; die Umsatzsteuer ist zusätzlich zu finanzieren."
+grundlage = "Übliche Regel des Zuwendungsrechts, hier nicht am Text gelesen. Ausnahme von der Vorsichtsregel: Im Wohnungsbau ist die Umsatzsteuer echter Aufwand; die ungünstige Lesart würde jede geförderte Kalkulation um rund ein Sechstel der Förderung verfälschen."
+quellen = ["NBANK-RL-MIETWOHNRAUM-2026"]
+gewicht = "mittel"
+wirkung = "Höhe von Darlehen und Zuschuss; Finanzierungslücke."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "NBank"
+wiedervorlage = "nach dem Gespräch mit der NBank"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
+bemerkung = "Aus der dritten Überarbeitung des Rechercheberichts."
+
+[[annahme]]
+id = "MA-022"
+titel = "Leerstand beim Mieterwechsel und Sonderabschreibung"
+annahme = "Ein Leerstand zwischen zwei Mietverhältnissen schadet der Sonderabschreibung nicht, solange die Vermietungsabsicht fortbesteht."
+grund = "Das Gesetz verlangt, dass die Wohnung der entgeltlichen Überlassung zu Wohnzwecken dient; ob das einen Leerstand beim Mieterwechsel einschließt, ergibt sich aus der Verwaltungsauffassung, die nicht gelesen ist."
+alternative = "Jeder Leerstand im Bindungszeitraum löst die rückwirkende Versagung der Sonderabschreibung aus."
+grundlage = "§ 7b Abs. 1 und 4 EStG; Einschätzung des Juristen in Prüfrunde 3. Ausnahme von der Vorsichtsregel: Die ungünstige Lesart striche bei jedem Leerstandsstress die gesamte Sonderabschreibung und machte den Stressfall unbrauchbar."
+quellen = ["ESTG-7B"]
+gewicht = "mittel"
+wirkung = "Steuerzahlungen im Neubau mit Sonderabschreibung; Ergebnis im Stressfall Leerstand."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Steuerberater"
+wiedervorlage = "mit der Fachspezifikation des Steuermoduls (Phase 1)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
+bemerkung = "Aus Prüfrunde 3 (Jurist) und der dritten Überarbeitung des Rechercheberichts."
+
+[[annahme]]
+id = "MA-023"
+titel = "Kostenbasis der Baukostenobergrenze der Sonderabschreibung"
+annahme = "Die Baukostenobergrenze der Sonderabschreibung wird an derselben Kostensumme gemessen wie die Bemessungsgrenze der NBank."
+grund = "Welche Kostengruppen in die Grenze des § 7b EStG einzurechnen sind, beantwortet das Gesetz nicht nach Kostengruppen."
+alternative = "Engere Kostensumme, etwa ohne Außenanlagen oder Baunebenkosten; die Grenze würde seltener überschritten."
+grundlage = "§ 7b Abs. 2 EStG. Angesetzt ist die weitere Kostensumme und damit der ungünstigere Fall."
+quellen = ["ESTG-7B"]
+gewicht = "mittel"
+wirkung = "Ob die Sonderabschreibung überhaupt gewährt wird; die Grenze ist eine Ausschlussgrenze."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Steuerberater"
+wiedervorlage = "mit der Fachspezifikation des Steuermoduls (Phase 1)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
+bemerkung = "Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts."
+
+[[annahme]]
+id = "MA-024"
+titel = "Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises"
+annahme = "Für jede im Betrachtungszeitraum eingebaute Wärmepumpe ist der Nachweis der Jahresarbeitszahl erforderlich; ohne ihn wird nur die Hälfte der Kosten umgelegt."
+grund = "Für welche Einbauzeitpunkte und Mietverhältnisse die Vorschrift gilt, ist am Übergangsrecht nicht geprüft."
+alternative = "Die Vorschrift gilt nur für bestimmte Zeiträume; außerhalb ist die volle Umlage ohne Nachweis möglich."
+grundlage = "§ 559f BGB. Angesetzt ist der für den Vermieter ungünstigere Fall."
+quellen = ["BGB-559F"]
+gewicht = "gering"
+wirkung = "Mieterlös nach Einbau einer Wärmepumpe."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Anwalt"
+wiedervorlage = "mit der Rechtsprüfung vor dem Kundeneinsatz"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
+bemerkung = "Aus der dritten Überarbeitung des Rechercheberichts."
+
+[[annahme]]
+id = "MA-025"
+titel = "Modernisierungsumlage für den Glasfaseranschluss"
+annahme = "Für den erstmaligen Glasfaseranschluss wird keine Modernisierungsumlage angesetzt."
+grund = "Die Umlage ist an Bedingungen geknüpft (freie Anbieterwahl, kein Bereitstellungsentgelt als Betriebskosten), deren Einzelheiten nicht geprüft sind."
+alternative = "Umlage von 8 % der Kosten, wenn die Bedingungen erfüllt sind."
+grundlage = "§ 555b Nr. 4a und § 559 Abs. 1 Satz 2 BGB. Angesetzt ist der für den Vermieter ungünstigere Fall."
+quellen = ["BGB-555B", "BGB-559"]
+gewicht = "gering"
+wirkung = "Mieterlös nach Glasfaserausbau."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Anwalt"
+wiedervorlage = "mit der Rechtsprüfung vor dem Kundeneinsatz"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
 bemerkung = "Aus Prüfrunde 3 (Jurist)."

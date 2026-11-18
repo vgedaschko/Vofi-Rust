@@ -4,19 +4,19 @@ Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fach
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/quellenkataster/quellen.toml`; danach `python3 scripts/quellenkataster.py` ausführen. Jede Rechts-, Förder- oder Normangabe im Projekt verweist auf eine Kennung aus diesem Kataster.
 
-**Stand:** 210 Quellen · zuletzt am Original gelesen: 2026-11-18
+**Stand:** 211 Quellen · zuletzt am Original gelesen: 2026-11-18
 
 ## Überblick
 
 | Gruppe | Quellen | am Original gelesen | nur Sekundärquelle | nicht geprüft |
 |---|---|---|---|---|
-| Gesetze und Verordnungen | 113 | 90 | 5 | 18 |
+| Gesetze und Verordnungen | 114 | 91 | 5 | 18 |
 | Förderrichtlinien, Merkblätter und Produktinformationen | 37 | 31 | 0 | 6 |
 | Normen und Branchenrichtlinien | 12 | 0 | 6 | 6 |
 | Methoden- und Qualitätsstandards | 10 | 0 | 2 | 8 |
 | Fachliteratur und Rechenbeispiele | 23 | 2 | 13 | 8 |
 | Datenquellen | 15 | 3 | 5 | 7 |
-| **Gesamt** | **210** | **126** | **31** | **53** |
+| **Gesamt** | **211** | **127** | **31** | **53** |
 
 ## Handlungsbedarf
 
@@ -24,7 +24,6 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 | Kennung | Quelle | Was fehlt |
 |---|---|---|
-| `AO-233A` | § 233a AO | nicht geprüft |
 | `ASTG-1` | § 1 AStG | nicht geprüft |
 | `BAFOEG-13` | § 13 BAföG | nicht geprüft |
 | `BEHG` | BEHG | nur Sekundärquelle |
@@ -45,6 +44,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `NI-MIETERSCHUTZVO` | Nds. Verordnung angespannte Wohnungsmärkte | nicht geprüft |
 | `NWOFG-3` | § 3 NWoFG | nicht geprüft |
 | `SGB12-28` | § 28 SGB XII | nicht geprüft |
+| `TKG-72` | § 72 TKG | nicht geprüft |
 | `USTAE-9-2` | UStAE Abschn. 9.2 | nicht geprüft |
 | `WSCHV-1995` | WSchV 1995 | nicht geprüft |
 | `BEG-FAQ` | BEG-FAQ | nicht geprüft |
@@ -114,7 +114,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 | Kennung | Quelle | Stand | Beleg | Verwendet für | Prüfturnus | Zugang |
 |---|---|---|---|---|---|---|
-| `AO-233A` | [§ 233a AO](https://www.gesetze-im-internet.de/ao_1977/__233a.html) – Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a) | nicht erfasst | nicht geprüft | Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung | vierteljährlich | frei |
+| `AO-233A` | [§ 233a AO](https://www.gesetze-im-internet.de/ao_1977/__233a.html) – Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a) | nicht erfasst | am Original gelesen (2026-11-18) | Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung | vierteljährlich | frei |
 | `AO-52` | [§ 52 AO](https://www.gesetze-im-internet.de/ao_1977/__52.html) – Gemeinnützige Zwecke (Abs. 2 Satz 1 Nr. 27: Wohngemeinnützigkeit) | Fassung 22.10.2026 | am Original gelesen (2026-11-18) | Steuerstatus gemeinnützig; Einkommensgrenze der Mieter (Fünf- bzw. Sechsfaches des Regelsatzes) bei Mietbeginn | vierteljährlich | frei |
 | `AO-53` | [§ 53 AO](https://www.gesetze-im-internet.de/ao_1977/__53.html) – Mildtätige Zwecke | Fassung 22.10.2026 | am Original gelesen (2026-11-17) | Personenkreis der Wohngemeinnützigkeit | vierteljährlich | frei |
 | `ASTG-1` | § 1 AStG – Nahestehende Personen (Abs. 2) · nicht erfasst | nicht erfasst | nicht geprüft | Konzernzugehörigkeit als Ausnahme von der Zinsschranke (§ 4h Abs. 2 Buchst. b EStG) | vierteljährlich | frei |
@@ -216,6 +216,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `STBERG-5` | [§ 5 StBerG](https://www.gesetze-im-internet.de/stberg/__5.html) – Verbot der unbefugten Hilfeleistung in Steuersachen | nicht erfasst | am Original gelesen (2026-11-18) | Rechtsfolgen bei Überschreiten der Beratungsgrenze | vierteljährlich | frei |
 | `STBERG-6` | [§ 6 StBerG](https://www.gesetze-im-internet.de/stberg/__6.html) – Ausnahmen vom Verbot der unbefugten Hilfeleistung | nicht erfasst | am Original gelesen (2026-11-18) | Abgrenzung der Beratungsgrenze (nur Buchführung und unentgeltliche Hilfe) | vierteljährlich | frei |
 | `STGB-264` | [§ 264 StGB](https://www.gesetze-im-internet.de/stgb/__264.html) – Subventionsbetrug | nicht erfasst | am Original gelesen (2026-11-18) | Antragssicht nur aus freigegebenem Arbeitsstand; Sorgfaltsmaßstab für Zahlen in Förderanträgen | vierteljährlich | frei |
+| `TKG-72` | [§ 72 TKG](https://www.gesetze-im-internet.de/tkg_2021/__72.html) – Glasfaserbereitstellungsentgelt | nicht erfasst | nicht geprüft | Bedingung der Modernisierungsumlage für den Glasfaseranschluss | vierteljährlich | frei |
 | `URHG-5` | [§ 5 UrhG](https://www.gesetze-im-internet.de/urhg/__5.html) – Amtliche Werke | nicht erfasst | am Original gelesen (2026-11-18) | Nutzungsrechte: Gesetze frei, private Normen (DIN) geschützt | vierteljährlich | frei |
 | `URHG-87B` | [§ 87b UrhG](https://www.gesetze-im-internet.de/urhg/__87b.html) – Rechte des Datenbankherstellers | nicht erfasst | am Original gelesen (2026-11-18) | Automatisierter Abruf der KfW-Zinsdaten nur mit Zustimmung | vierteljährlich | frei |
 | `USTAE-9-2` | UStAE Abschn. 9.2 – Umsatzsteuer-Anwendungserlass: Einschränkung des Verzichts auf Steuerbefreiungen · nicht erfasst | nicht erfasst | nicht geprüft | Bagatellgrenze bei der Umsatzsteueroption; Stellplätze als Nebenleistung | vierteljährlich | frei |
@@ -230,7 +231,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 Bemerkungen:
 
-- `AO-233A`: In Prüfrunde 3 vom Juristen genannt, nicht am Text gelesen. Adresse nach dem Muster des Portals gebildet.
+- `AO-233A`: Gelesen Abs. 1 bis 2a bei der dritten Überarbeitung des Rechercheberichts. Fassungsdatum beim Lesen nicht festgehalten.
 - `AO-52`: Gelesen nur Abs. 2 Satz 1 Nr. 27. AEAO zu Nr. 27 („vergünstigt“, Mittelverwendung) nicht gelesen.
 - `ASTG-1`: Nur als Verweis in § 4h EStG gelesen; Einordnung durch den Steuerberater.
 - `BAFOEG-13`: Nur über die RL Junges Wohnen 2026 genannt.
@@ -303,6 +304,7 @@ Bemerkungen:
 - `STBERG-5`: Fassungsdatum nicht festgehalten.
 - `STBERG-6`: Für entgeltliche Beratung nicht einschlägig. Fassungsdatum nicht festgehalten.
 - `STGB-264`: Gelesen Abs. 1, 5, 8, 9. Schon Leichtfertigkeit strafbar (Abs. 5); ob Wohnraumförderung eine Subvention nach Abs. 8 ist, klärt der Anwalt. Fassungsdatum nicht festgehalten.
+- `TKG-72`: Nur über den Wortlaut des § 559 Abs. 1 Satz 2 BGB zitiert, nicht gelesen. Adresse nach dem Muster des Portals gebildet und nicht abgerufen.
 - `URHG-5`: Fassungsdatum nicht festgehalten.
 - `URHG-87B`: Fassungsdatum nicht festgehalten.
 - `USTAE-9-2`: Abs. 3 nach Kenntnis des Juristen Grundlage einer 5-%-Grenze; nicht abgerufen.

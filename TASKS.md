@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Dritte Überarbeitung des Rechercheberichts läuft (Auftrag: `docs/pruefung/2026-11-18-recherchebericht-runde3/sichtung.md`); danach Prüfrunde 4 mit Investor, Praktiker, Fachexperte, Einheitsbrei-Prüfer
+- [~] Prüfrunde 4 zum Recherchebericht läuft (Investor, Praktiker, Fachexperte, Einheitsbrei-Prüfer; Finanzmathematiker und Jurist prüfen nur die Änderungen)
 
 ## Als Nächstes
 
@@ -22,9 +22,9 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Wartet auf Nutzer
 
-- [ ] Vorgaben des Hauses: Kalkulationszins, Zielrendite, Höhe der Stressfälle, Schwelle für „Bedarf bestätigt" in den Anwendergesprächen
+- [ ] Vorgaben des Hauses: Kalkulationszins, Zielrendite, Höhe der Stressfälle, Beleihungsquote, Mindestdeckung des Schuldendienstes, Warnschwellen, Schwelle für „Bedarf bestätigt" in den Anwendergesprächen
 - [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
-- [ ] Durchsicht der fünf Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016): Ist die vorsichtige Voreinstellung fachlich richtig gewählt?
+- [ ] Durchsicht der fünf Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016) und der zwei Ausnahmen von der Vorsichtsregel (MA-021, MA-022)
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
 - [ ] Im NBank-Gespräch zusätzlich klären: Aufteilung bei teilgeförderten Vorhaben; Zuwendungsfähigkeit von Finanzierungskosten
@@ -47,6 +47,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Recherchebericht nach Prüfrunde 3 überarbeitet (30 Sichtungspunkte); 25 Modellannahmen, 211 Quellen
 - [x] 2026-11-18 Plugin `frontend-design` für das Projekt installiert (Eintrag in `.claude/settings.json`)
 - [x] 2026-11-18 Gestaltungsreferenzen: 34 Vorbilder in der Mobbin-Sammlung, ausgewertet in `docs/gestaltungsreferenzen.md`
 - [x] 2026-11-18 Gestaltung abgesichert: `frontend-design` als Pflicht, Hook für die Gestaltungsprüfung, Rolle Gestaltung

@@ -4,7 +4,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/modellannahmen/annahmen.toml`; danach `python3 scripts/modellannahmen.py` ausführen.
 
-**Stand:** 20 offene Annahmen, davon 5 mit hohem Gewicht · 0 erledigt
+**Stand:** 25 offene Annahmen, davon 5 mit hohem Gewicht · 0 erledigt
 
 ## Offene Annahmen
 
@@ -21,6 +21,9 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-007` | Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete | mittel | Kundenbericht | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-010` | Verlustverrechnung ab 2028 | mittel | Anwendung | ja | Steuerberater; Bundesgesetzblatt | mit der nächsten vierteljährlichen Rechtsprüfung |
 | `MA-017` | Restwert bei laufender Bindung | mittel | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
+| `MA-021` | Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
+| `MA-022` | Leerstand beim Mieterwechsel und Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
+| `MA-023` | Kostenbasis der Baukostenobergrenze der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-003` | Zins des NBank-Darlehens ab dem 36. Jahr | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-008` | Modernisierungsumlage für den Heizungstausch bei Staffelmiete | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-009` | Teilung der Bio-Brennstoffkosten im Neubau | gering | nur intern | nein | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
@@ -30,17 +33,19 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-018` | Ersatz eines Gaskessels als energetische Modernisierung | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-019` | Zinsverbilligte Darlehen bei der Umlage für den Heizungstausch | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-020` | Umlage für den Heizungstausch in der NBank-Bindung | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
+| `MA-024` | Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
+| `MA-025` | Modernisierungsumlage für den Glasfaseranschluss | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 
 Nach Klärungsweg:
 
-- **Anwalt:** `MA-007`, `MA-008`, `MA-009`, `MA-018`, `MA-019`
+- **Anwalt:** `MA-007`, `MA-008`, `MA-009`, `MA-018`, `MA-019`, `MA-024`, `MA-025`
 - **Anwender je Vorhaben; im Zweifel Steuerberater des Investors:** `MA-016`
 - **Auftraggeber (eigene Erfahrungswerte); später Marktdaten:** `MA-014`
 - **Darlehensvertrag im Einzelfall:** `MA-013`
 - **Fachliteratur (Endbericht im Volltext):** `MA-015`
 - **Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber:** `MA-012`
-- **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`
-- **Steuerberater:** `MA-011`
+- **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`, `MA-021`
+- **Steuerberater:** `MA-011`, `MA-022`, `MA-023`
 - **Steuerberater; Bundesgesetzblatt:** `MA-010`
 
 ## Einzelheiten
@@ -89,6 +94,7 @@ Nach Klärungsweg:
 - **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Bemerkung:** Nummer 11.5 der Richtlinie spricht von „als Ersatz der Eigenmittel anerkannten Fremdmitteln“; das stützt die andere Lesart. Die vorsichtige Voreinstellung bleibt bis zum Gespräch mit der NBank.
 
 ### MA-005 · Finanzierungskosten als zuwendungsfähige Kosten der NBank
 
@@ -270,4 +276,64 @@ Nach Klärungsweg:
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist).
+
+### MA-021 · Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank
+
+- **Annahme:** Kann der Bauherr die Vorsteuer nicht abziehen, zählt die Umsatzsteuer zu den zuwendungsfähigen Kosten.
+- **Warum offen:** Die gelesenen Unterlagen der NBank regeln die Behandlung der Umsatzsteuer nicht ausdrücklich.
+- **Andere Lesart:** Zuwendungsfähig sind nur die Nettokosten; die Umsatzsteuer ist zusätzlich zu finanzieren.
+- **Grundlage:** Übliche Regel des Zuwendungsrechts, hier nicht am Text gelesen. Ausnahme von der Vorsichtsregel: Im Wohnungsbau ist die Umsatzsteuer echter Aufwand; die ungünstige Lesart würde jede geförderte Kalkulation um rund ein Sechstel der Förderung verfälschen. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`.
+- **Wirkung (mittel):** Höhe von Darlehen und Zuschuss; Finanzierungslücke.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts.
+
+### MA-022 · Leerstand beim Mieterwechsel und Sonderabschreibung
+
+- **Annahme:** Ein Leerstand zwischen zwei Mietverhältnissen schadet der Sonderabschreibung nicht, solange die Vermietungsabsicht fortbesteht.
+- **Warum offen:** Das Gesetz verlangt, dass die Wohnung der entgeltlichen Überlassung zu Wohnzwecken dient; ob das einen Leerstand beim Mieterwechsel einschließt, ergibt sich aus der Verwaltungsauffassung, die nicht gelesen ist.
+- **Andere Lesart:** Jeder Leerstand im Bindungszeitraum löst die rückwirkende Versagung der Sonderabschreibung aus.
+- **Grundlage:** § 7b Abs. 1 und 4 EStG; Einschätzung des Juristen in Prüfrunde 3. Ausnahme von der Vorsichtsregel: Die ungünstige Lesart striche bei jedem Leerstandsstress die gesamte Sonderabschreibung und machte den Stressfall unbrauchbar. Quellen: `ESTG-7B`.
+- **Wirkung (mittel):** Steuerzahlungen im Neubau mit Sonderabschreibung; Ergebnis im Stressfall Leerstand.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist) und der dritten Überarbeitung des Rechercheberichts.
+
+### MA-023 · Kostenbasis der Baukostenobergrenze der Sonderabschreibung
+
+- **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird an derselben Kostensumme gemessen wie die Bemessungsgrenze der NBank.
+- **Warum offen:** Welche Kostengruppen in die Grenze des § 7b EStG einzurechnen sind, beantwortet das Gesetz nicht nach Kostengruppen.
+- **Andere Lesart:** Engere Kostensumme, etwa ohne Außenanlagen oder Baunebenkosten; die Grenze würde seltener überschritten.
+- **Grundlage:** § 7b Abs. 2 EStG. Angesetzt ist die weitere Kostensumme und damit der ungünstigere Fall. Quellen: `ESTG-7B`.
+- **Wirkung (mittel):** Ob die Sonderabschreibung überhaupt gewährt wird; die Grenze ist eine Ausschlussgrenze.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts.
+
+### MA-024 · Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises
+
+- **Annahme:** Für jede im Betrachtungszeitraum eingebaute Wärmepumpe ist der Nachweis der Jahresarbeitszahl erforderlich; ohne ihn wird nur die Hälfte der Kosten umgelegt.
+- **Warum offen:** Für welche Einbauzeitpunkte und Mietverhältnisse die Vorschrift gilt, ist am Übergangsrecht nicht geprüft.
+- **Andere Lesart:** Die Vorschrift gilt nur für bestimmte Zeiträume; außerhalb ist die volle Umlage ohne Nachweis möglich.
+- **Grundlage:** § 559f BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-559F`.
+- **Wirkung (gering):** Mieterlös nach Einbau einer Wärmepumpe.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts.
+
+### MA-025 · Modernisierungsumlage für den Glasfaseranschluss
+
+- **Annahme:** Für den erstmaligen Glasfaseranschluss wird keine Modernisierungsumlage angesetzt.
+- **Warum offen:** Die Umlage ist an Bedingungen geknüpft (freie Anbieterwahl, kein Bereitstellungsentgelt als Betriebskosten), deren Einzelheiten nicht geprüft sind.
+- **Andere Lesart:** Umlage von 8 % der Kosten, wenn die Bedingungen erfüllt sind.
+- **Grundlage:** § 555b Nr. 4a und § 559 Abs. 1 Satz 2 BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-555B`, `BGB-559`.
+- **Wirkung (gering):** Mieterlös nach Glasfaserausbau.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
 - **Bemerkung:** Aus Prüfrunde 3 (Jurist).

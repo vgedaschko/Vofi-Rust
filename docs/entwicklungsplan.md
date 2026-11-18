@@ -27,7 +27,7 @@ Die Fachspezifikation (Phase 1) läuft parallel zur Vorprüfung, weil sie in jed
 | Steuerung | Spezifikation mit Status je Festlegung, Entscheidungsprotokoll, Aufgabenliste mit Erinnerungs-Hook, dieser Plan | – | – |
 | Dokumentation | Übersicht mit Pflegegrundsätzen (`docs/README.md`); Projektdokumentation vollständig | Anwendungsdokumentation (Fachhandbuch, Katalog, Benutzerhandbuch, Architektur, Betrieb, Änderungshistorie) | je Dokument ab Phase 1 bis 4, siehe Übersicht |
 | Quellen | Normen- und Quellenkataster mit Erzeuger und Prüfmodus | Lesen der noch nicht am Original geprüften Quellen; Lizenzen für Normen und Kennwerte | laufend; Lizenzen vor Phase 3 |
-| Modellannahmen | Konvention (Spezifikation Kapitel 8) und Verzeichnis mit 15 offenen Annahmen, Erzeuger mit Prüfmodus | Klärung über NBank, Anwalt, Steuerberater, Fachliteratur; Kennzeichnung in Katalog, Code und Tests | Kennzeichnung ab Phase 1 und 3; Klärung laufend |
+| Modellannahmen | Konvention (Spezifikation Kapitel 8) und Verzeichnis mit 25 offenen Annahmen, Erzeuger mit Prüfmodus | Klärung über NBank, Anwalt, Steuerberater, Fachliteratur; Kennzeichnung in Katalog, Code und Tests | Kennzeichnung ab Phase 1 und 3; Klärung laufend |
 | Recherche | Bericht (in Überarbeitung), neun Quellnotizen, am Original geprüfte Rechts- und Förderangaben, drei nachgerechnete Referenzfälle mit Skripten | Lehrbuchdefinitionen (Grob; Schulte/Ropeter) am Original | Phase 1 |
 | Fachspezifikation | Leitlinien in Spezifikation Kapitel 3 und 4 | Vollständige Rechenkern-Spezifikation; Katalog-Datenmodell; Anforderungen Stufe 1 | Phase 1 |
 | Architektur und Gestaltung | Grundsatzentscheidungen in Spezifikation Kapitel 5 und 6 | Architekturentwurf; Gestaltungssystem; Datenschutzkonzept | Phase 2 |

@@ -3194,9 +3194,24 @@ titel = "Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a)
 herausgeber = "Bund"
 fundstelle = "https://www.gesetze-im-internet.de/ao_1977/__233a.html"
 stand = "nicht erfasst"
-beleg = "ungeprueft"
-gelesen_am = ""
+beleg = "original"
+gelesen_am = "2026-11-18"
 verwendet_fuer = ["Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "In Prüfrunde 3 vom Juristen genannt, nicht am Text gelesen. Adresse nach dem Muster des Portals gebildet."
+bemerkung = "Gelesen Abs. 1 bis 2a bei der dritten Überarbeitung des Rechercheberichts. Fassungsdatum beim Lesen nicht festgehalten."
+
+[[quelle]]
+id = "TKG-72"
+gruppe = "gesetz"
+kurz = "§ 72 TKG"
+titel = "Glasfaserbereitstellungsentgelt"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/tkg_2021/__72.html"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Bedingung der Modernisierungsumlage für den Glasfaseranschluss"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur über den Wortlaut des § 559 Abs. 1 Satz 2 BGB zitiert, nicht gelesen. Adresse nach dem Muster des Portals gebildet und nicht abgerufen."
