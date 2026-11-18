@@ -65,6 +65,8 @@ Vor der ersten Zeile Produktcode noch zu tun (Phase 3, je rund ein Arbeitsgang):
 
 Betriebsrisiko: Die Cloud-Umgebung wurde am 17./18.11.2026 zweimal neu gestartet; dabei gehen laufende Hintergrundarbeiten und nachinstallierte Werkzeuge verloren. Gegenmaßnahmen: früh und abschnittsweise speichern, Zwischenstände auf dem Arbeitszweig sichern, Werkzeuge über das Einrichtungsskript statt von Hand installieren.
 
+Netzzugang: Seit dem 18.11.2026 ist der Netzzugang der Cloud-Umgebung uneingeschränkt (Einstellung des Auftraggebers). Nicht erreichbar bleiben Seiten, die selbst abweisen: die amtlichen Steuerhandbücher des BMF (Captcha), die Landesserver von Bremen und Schleswig-Holstein, `landesrecht-hamburg.de` und die Entscheidungsdatenbank des BGH. Zugangssperren werden nicht umgangen; gelesen wird dann auf anderem rechtmäßigem Weg und mit der passenden Belegstufe im Quellenkataster vermerkt (Quellnotizen 13 bis 15).
+
 Die Umgebung ist damit nicht der Engpass. Was den Programmierstart bestimmt, sind die Ergebnisse der Phasen 1 und 2: die Fachspezifikation des Rechenkerns und der Architekturentwurf.
 
 ## 3 Prüfplan

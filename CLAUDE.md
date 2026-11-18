@@ -34,7 +34,8 @@ Gehört ein Dokument neu zu denen, ohne die man nicht richtig arbeiten kann, kom
 ## Quellen
 
 - Keine Rechts-, Förder- oder Normangabe ohne Eintrag im Normen- und Quellenkataster. Neue Quelle: erst ins Kataster, dann verwenden.
-- Als „am Original gelesen" gilt nur, was in dieser oder einer protokollierten Prüfung tatsächlich am Originaltext gelesen wurde; das Datum wird im Kataster nachgetragen. Zahlen und Paragrafen aus dem Gedächtnis sind keine Quelle.
+- Bevor eine Frage an Dritte geht (Förderbank, Hausbank, Steuerberater, Anwalt) oder eine Modellannahme gesetzt wird, wird sie am Text der einschlägigen Quelle gegengelesen; gefragt wird nur, wozu die Quelle schweigt.
+- Als „am Original gelesen" gilt nur, was in dieser oder einer protokollierten Prüfung tatsächlich am Originaltext gelesen wurde; das Datum wird im Kataster nachgetragen. Zahlen und Paragrafen aus dem Gedächtnis sind keine Quelle. Ist die amtliche Stelle nicht erreichbar (etwa wegen eines Captchas; Zugangssperren werden nicht umgangen), zählt der vollständige wörtliche Abdruck bei einem Fachverlag oder in einer Volltextsammlung als eigene Belegstufe „Wortlaut in Verlagswiedergabe“, nicht als Original; eine Zusammenfassung bleibt Sekundärquelle.
 - Spezifikation, Katalog, Code und Tests nennen die Kennung (zum Beispiel `BGB-559`), nicht Fundstelle und Stand – die stehen nur im Kataster.
 
 ## Modellannahmen
