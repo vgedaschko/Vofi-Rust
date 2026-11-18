@@ -4,7 +4,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/modellannahmen/annahmen.toml`; danach `python3 scripts/modellannahmen.py` ausführen.
 
-**Stand:** 15 offene Annahmen, davon 4 mit hohem Gewicht · 0 erledigt
+**Stand:** 20 offene Annahmen, davon 5 mit hohem Gewicht · 0 erledigt
 
 ## Offene Annahmen
 
@@ -14,26 +14,32 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-004` | KfW-Darlehen als Ersatz für Eigenmittel bei der NBank | hoch | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-012` | Rendite bei mehreren Einlagen und Entnahmen | hoch | Kundenbericht | nein | Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber | mit der Fachspezifikation des Rechenkerns (Phase 1) |
 | `MA-014` | Streuungen und Korrelationen der Simulation | hoch | Kundenbericht | ja | Auftraggeber (eigene Erfahrungswerte); später Marktdaten | vor Stufe 2 (Simulation) |
+| `MA-016` | Verrechnung von Anlaufverlusten | hoch | Kundenbericht | ja | Anwender je Vorhaben; im Zweifel Steuerberater des Investors | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-002` | Tilgungsplan des NBank-Darlehens | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank; im Einzelfall der Bewilligungsbescheid |
 | `MA-005` | Finanzierungskosten als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-006` | Aufteilung bei teilgeförderten Vorhaben | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-007` | Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete | mittel | Kundenbericht | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
-| `MA-010` | Verlustverrechnung ab 2028 | mittel | Anwendung | nein | Steuerberater; Bundesgesetzblatt | mit der nächsten vierteljährlichen Rechtsprüfung |
+| `MA-010` | Verlustverrechnung ab 2028 | mittel | Anwendung | ja | Steuerberater; Bundesgesetzblatt | mit der nächsten vierteljährlichen Rechtsprüfung |
+| `MA-017` | Restwert bei laufender Bindung | mittel | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-003` | Zins des NBank-Darlehens ab dem 36. Jahr | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-008` | Modernisierungsumlage für den Heizungstausch bei Staffelmiete | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-009` | Teilung der Bio-Brennstoffkosten im Neubau | gering | nur intern | nein | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-011` | Bagatellgrenze bei der Umsatzsteueroption | gering | Anwendung | ja | Steuerberater | vor Stufe 3 (Gewerbe) |
 | `MA-013` | Rundung in Darlehensplänen | gering | nur intern | ja | Darlehensvertrag im Einzelfall | bei der ersten Parallelrechnung mit echten Darlehen (Abnahme Stufe 1) |
 | `MA-015` | Modernisierungsumlage im Referenzfall IWU 2013 | gering | nur intern | nein | Fachliteratur (Endbericht im Volltext) | beim Anlegen des Abnahmetests (Phase 3) |
+| `MA-018` | Ersatz eines Gaskessels als energetische Modernisierung | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
+| `MA-019` | Zinsverbilligte Darlehen bei der Umlage für den Heizungstausch | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
+| `MA-020` | Umlage für den Heizungstausch in der NBank-Bindung | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 
 Nach Klärungsweg:
 
-- **Anwalt:** `MA-007`, `MA-008`, `MA-009`
+- **Anwalt:** `MA-007`, `MA-008`, `MA-009`, `MA-018`, `MA-019`
+- **Anwender je Vorhaben; im Zweifel Steuerberater des Investors:** `MA-016`
 - **Auftraggeber (eigene Erfahrungswerte); später Marktdaten:** `MA-014`
 - **Darlehensvertrag im Einzelfall:** `MA-013`
 - **Fachliteratur (Endbericht im Volltext):** `MA-015`
 - **Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber:** `MA-012`
-- **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`
+- **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`
 - **Steuerberater:** `MA-011`
 - **Steuerberater; Bundesgesetzblatt:** `MA-010`
 
@@ -146,7 +152,7 @@ Nach Klärungsweg:
 - **Andere Lesart:** Es bleibt auch ab 2028 bei 70 %.
 - **Grundlage:** § 10d EStG in der geltenden Fassung; die Befristung bis 2027 ist nur aus zweiter Hand belegt. Angesetzt ist der ungünstigere Fall. Quellen: `ESTG-10D`.
 - **Wirkung (mittel):** Steuerzahlungen von Vorhaben mit Anlaufverlusten ab 2028.
-- **Sichtbar:** Anwendung · **Umschaltbar:** nein · **Klärung durch:** Steuerberater; Bundesgesetzblatt · **Wiedervorlage:** mit der nächsten vierteljährlichen Rechtsprüfung
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater; Bundesgesetzblatt · **Wiedervorlage:** mit der nächsten vierteljährlichen Rechtsprüfung
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
 
@@ -205,3 +211,63 @@ Nach Klärungsweg:
 - **Sichtbar:** nur intern · **Umschaltbar:** nein · **Klärung durch:** Fachliteratur (Endbericht im Volltext) · **Wiedervorlage:** beim Anlegen des Abnahmetests (Phase 3)
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 3, Abnahmetests
+
+### MA-016 · Verrechnung von Anlaufverlusten
+
+- **Annahme:** Steuerliche Verluste des Vorhabens werden im Vorhaben vorgetragen und erst mit dessen späteren Gewinnen verrechnet.
+- **Warum offen:** Ob ein Verlust sofort mit anderen Einkünften des Investors verrechnet werden kann, hängt von dessen übriger steuerlicher Lage ab, die das Werkzeug nicht kennt.
+- **Andere Lesart:** Sofortige Verrechnung mit anderen Einkünften des Investors; die Steuerersparnis fließt dann im Verlustjahr zu.
+- **Grundlage:** Verlustabzug nach § 10d EStG. Angesetzt ist der ungünstigere Fall. Quellen: `ESTG-10D`.
+- **Wirkung (hoch):** Wert der beschleunigten Abschreibung und der Anlaufverluste im Neubau; Endwert und Rendite nach Steuern.
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Anwender je Vorhaben; im Zweifel Steuerberater des Investors · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 1, Steuerstatus
+- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte). Wird als Merkmal je Vorhaben geführt.
+
+### MA-017 · Restwert bei laufender Bindung
+
+- **Annahme:** Endet der Betrachtungszeitraum vor dem Ende der Bindung, wird der Verkaufswert aus der gebundenen Miete abgeleitet und das zinslose Förderdarlehen beim Verkauf abgelöst; ein anteilig zurückzuzahlender Zuschuss wird angesetzt.
+- **Warum offen:** Ob ein Käufer Darlehen und Bindung übernehmen kann und zu welchen Bedingungen, ist mit der NBank nicht geklärt.
+- **Andere Lesart:** Der Käufer übernimmt Darlehen und Bindung; der Vorteil des zinslosen Darlehens geht dann in den Kaufpreis ein.
+- **Grundlage:** Richtlinie Mietwohnraum 2026: Bindung läuft bei vorzeitiger Rückzahlung fort, Zuschuss anteilig zurückzuzahlen. Angesetzt ist der ungünstigere Fall. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`.
+- **Wirkung (mittel):** Restwert und Endwert geförderter Vorhaben mit Verkauf vor Bindungsende.
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte, Jurist).
+
+### MA-018 · Ersatz eines Gaskessels als energetische Modernisierung
+
+- **Annahme:** Der Ersatz eines Gaskessels durch einen neuen Gas- oder Ölkessel gilt nicht als energetische Modernisierung; ohne Förderfähigkeit wird keine Modernisierungsumlage angesetzt.
+- **Warum offen:** Ob der bloße Kesseltausch Endenergie nachhaltig einspart und damit die allgemeine Umlage eröffnet, ist eine Auslegungsfrage des Einzelfalls.
+- **Andere Lesart:** Der Tausch gilt als energetische Modernisierung; dann ist die allgemeine Umlage von 8 % möglich.
+- **Grundlage:** § 555b Nr. 1 und § 559 BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-555B`, `BGB-559`.
+- **Wirkung (gering):** Mieterlös nach Kesseltausch ohne Förderung.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist).
+
+### MA-019 · Zinsverbilligte Darlehen bei der Umlage für den Heizungstausch
+
+- **Annahme:** Der Zinsvorteil eines zinsverbilligten Darlehens mindert die Umlage für den Heizungstausch in gleicher Weise wie bei der allgemeinen Modernisierungsumlage.
+- **Warum offen:** Die Vorschrift zum Heizungstausch spricht vom Abzug der in Anspruch genommenen Drittmittel; wie ein Zinsvorteil dabei anzusetzen ist, regelt sie nicht ausdrücklich.
+- **Andere Lesart:** Nur Zuschüsse werden abgezogen; der Zinsvorteil bleibt unberücksichtigt.
+- **Grundlage:** § 559e Abs. 1 in Verbindung mit § 559a BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-559E`, `BGB-559A`.
+- **Wirkung (gering):** Mieterlös nach gefördertem Heizungstausch; gedeckelt auf 0,50 €/m² im Monat.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Kopplungen
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist).
+
+### MA-020 · Umlage für den Heizungstausch in der NBank-Bindung
+
+- **Annahme:** Während der Mietbindung der NBank wird keine Umlage für den Heizungstausch angesetzt.
+- **Warum offen:** Die Richtlinie lässt Mieterhöhungen in der Bindung nach bestimmten Vorschriften zu und nennt die neue Umlage für den Heizungstausch dabei nicht.
+- **Andere Lesart:** Die Umlage ist auch in der Bindung zulässig, soweit die Höchstmiete eingehalten wird.
+- **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 5.4.5. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `BGB-559E`.
+- **Wirkung (gering):** Mieterlös gebundener Wohnungen nach Heizungstausch.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist).

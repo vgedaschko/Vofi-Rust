@@ -3155,3 +3155,48 @@ verwendet_fuer = ["Plausibilisierung der Baukosten gegen Kennwert-Bandbreiten"]
 turnus = "jaehrlich"
 zugang = "lizenz-klaeren"
 bemerkung = "Kennwerte selbst kostenpflichtig und nicht ermittelt; Einbau nur mit Lizenz, die Kundenberichte abdeckt."
+
+[[quelle]]
+id = "ESTG-15"
+gruppe = "gesetz"
+kurz = "§ 15 EStG"
+titel = "Einkünfte aus Gewerbebetrieb; gewerblich geprägte Personengesellschaft (Abs. 3 Nr. 2)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__15.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Steuerstatus gewerblich geprägte Personengesellschaft", "Steuerpflicht des Verkaufsgewinns"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen Abs. 3 in Prüfrunde 3 (Fachexperte). Eine GmbH & Co. KG ohne natürliche Person als Vollhafter erzielt gewerbliche Einkünfte; die Zehnjahresfrist des § 23 EStG gilt für sie nicht."
+
+[[quelle]]
+id = "KSTG-8"
+gruppe = "gesetz"
+kurz = "§ 8 KStG"
+titel = "Ermittlung des Einkommens; alle Einkünfte der Kapitalgesellschaft sind gewerblich (Abs. 2)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__8.html"
+stand = "Fassung 04.02.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["De-minimis-Bindung der Sonderabschreibung für Kapitalgesellschaften"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen Abs. 2 in Prüfrunde 3 (Jurist). Folge mit § 7b Abs. 5 EStG: Die De-minimis-Bindung der Sonderabschreibung gilt für jede Kapitalgesellschaft."
+
+[[quelle]]
+id = "AO-233A"
+gruppe = "gesetz"
+kurz = "§ 233a AO"
+titel = "Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ao_1977/__233a.html"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "In Prüfrunde 3 vom Juristen genannt, nicht am Text gelesen. Adresse nach dem Muster des Portals gebildet."

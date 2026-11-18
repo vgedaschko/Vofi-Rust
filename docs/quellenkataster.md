@@ -4,19 +4,19 @@ Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fach
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/quellenkataster/quellen.toml`; danach `python3 scripts/quellenkataster.py` ausführen. Jede Rechts-, Förder- oder Normangabe im Projekt verweist auf eine Kennung aus diesem Kataster.
 
-**Stand:** 207 Quellen · zuletzt am Original gelesen: 2026-11-18
+**Stand:** 210 Quellen · zuletzt am Original gelesen: 2026-11-18
 
 ## Überblick
 
 | Gruppe | Quellen | am Original gelesen | nur Sekundärquelle | nicht geprüft |
 |---|---|---|---|---|
-| Gesetze und Verordnungen | 110 | 88 | 5 | 17 |
+| Gesetze und Verordnungen | 113 | 90 | 5 | 18 |
 | Förderrichtlinien, Merkblätter und Produktinformationen | 37 | 31 | 0 | 6 |
 | Normen und Branchenrichtlinien | 12 | 0 | 6 | 6 |
 | Methoden- und Qualitätsstandards | 10 | 0 | 2 | 8 |
 | Fachliteratur und Rechenbeispiele | 23 | 2 | 13 | 8 |
 | Datenquellen | 15 | 3 | 5 | 7 |
-| **Gesamt** | **207** | **124** | **31** | **52** |
+| **Gesamt** | **210** | **126** | **31** | **53** |
 
 ## Handlungsbedarf
 
@@ -24,6 +24,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 | Kennung | Quelle | Was fehlt |
 |---|---|---|
+| `AO-233A` | § 233a AO | nicht geprüft |
 | `ASTG-1` | § 1 AStG | nicht geprüft |
 | `BAFOEG-13` | § 13 BAföG | nicht geprüft |
 | `BEHG` | BEHG | nur Sekundärquelle |
@@ -113,6 +114,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 | Kennung | Quelle | Stand | Beleg | Verwendet für | Prüfturnus | Zugang |
 |---|---|---|---|---|---|---|
+| `AO-233A` | [§ 233a AO](https://www.gesetze-im-internet.de/ao_1977/__233a.html) – Verzinsung von Steuernachforderungen; rückwirkendes Ereignis (Abs. 2a) | nicht erfasst | nicht geprüft | Nachzahlungszinsen bei Rückabwicklung der Sonderabschreibung | vierteljährlich | frei |
 | `AO-52` | [§ 52 AO](https://www.gesetze-im-internet.de/ao_1977/__52.html) – Gemeinnützige Zwecke (Abs. 2 Satz 1 Nr. 27: Wohngemeinnützigkeit) | Fassung 22.10.2026 | am Original gelesen (2026-11-18) | Steuerstatus gemeinnützig; Einkommensgrenze der Mieter (Fünf- bzw. Sechsfaches des Regelsatzes) bei Mietbeginn | vierteljährlich | frei |
 | `AO-53` | [§ 53 AO](https://www.gesetze-im-internet.de/ao_1977/__53.html) – Mildtätige Zwecke | Fassung 22.10.2026 | am Original gelesen (2026-11-17) | Personenkreis der Wohngemeinnützigkeit | vierteljährlich | frei |
 | `ASTG-1` | § 1 AStG – Nahestehende Personen (Abs. 2) · nicht erfasst | nicht erfasst | nicht geprüft | Konzernzugehörigkeit als Ausnahme von der Zinsschranke (§ 4h Abs. 2 Buchst. b EStG) | vierteljährlich | frei |
@@ -161,6 +163,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `ERBBAURG-9A` | § 9a ErbbauRG – Wertsicherung des Erbbauzinses bei Wohnzwecken · nicht erfasst | nicht erfasst | nicht geprüft | Erbbauzinsanpassung im vollen Erbbaurechtsmodell (Stufe 3) | vierteljährlich | frei |
 | `ESTDV-82B` | [§ 82b EStDV](https://www.gesetze-im-internet.de/estdv_1955/__82b.html) – Verteilung größeren Erhaltungsaufwands bei Wohngebäuden | Fassung 19.12.2025 | am Original gelesen (2026-11-17) | Verteilung von Erhaltungsaufwand auf zwei bis fünf Jahre (Privatvermögen) | vierteljährlich | frei |
 | `ESTG-10D` | [§ 10d EStG](https://www.gesetze-im-internet.de/estg/__10d.html) – Verlustabzug | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Verlustrücktrag und Verlustvortrag (Sockel 1 Mio. €, darüber 70 %) | vierteljährlich | frei |
+| `ESTG-15` | [§ 15 EStG](https://www.gesetze-im-internet.de/estg/__15.html) – Einkünfte aus Gewerbebetrieb; gewerblich geprägte Personengesellschaft (Abs. 3 Nr. 2) | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Steuerstatus gewerblich geprägte Personengesellschaft; Steuerpflicht des Verkaufsgewinns | vierteljährlich | frei |
 | `ESTG-21` | [§ 21 EStG](https://www.gesetze-im-internet.de/estg/__21.html) – Einkünfte aus Vermietung und Verpachtung | Fassung 15.10.2026 | am Original gelesen (2026-11-17) | Verbilligte Vermietung: Grenzen 50 % und 66 % der ortsüblichen Miete | vierteljährlich | frei |
 | `ESTG-23` | [§ 23 EStG](https://www.gesetze-im-internet.de/estg/__23.html) – Private Veräußerungsgeschäfte | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Steuer auf den Veräußerungsgewinn bei Haltedauer bis zehn Jahre; Minderung der Anschaffungskosten um Abschreibungen | vierteljährlich | frei |
 | `ESTG-4H` | [§ 4h EStG](https://www.gesetze-im-internet.de/estg/__4h.html) – Betriebsausgabenabzug für Zinsaufwendungen (Zinsschranke) | Fassung 15.10.2026 | am Original gelesen (2026-11-18) | Zinsschranke in der Steuerrechnung der Kapitalgesellschaft; EBITDA- und Zinsvortrag | vierteljährlich | frei |
@@ -193,6 +196,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `JSTG-2026` | JStG 2026 (§ 6f EStG-E) – Jahressteuergesetz 2026, Entwurf einer Regel zur Kaufpreisaufteilung · nicht erfasst | Entwurf; in der EStG-Fassung 15.10.2026 nicht enthalten | nicht geprüft | Kaufpreisaufteilung Grund und Gebäude (Entwurfsstand, je Kalkulation zuschaltbar) | vierteljährlich | frei |
 | `KSTG-23` | [§ 23 KStG](https://www.gesetze-im-internet.de/kstg_1977/__23.html) – Steuersatz | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | Körperschaftsteuersatz je Veranlagungszeitraum (15 % bis 2027, dann 14/13/12/11 %, ab 2032 10 %) | vierteljährlich | frei |
 | `KSTG-5` | [§ 5 KStG](https://www.gesetze-im-internet.de/kstg_1977/__5.html) – Befreiungen (Abs. 1 Nr. 10: Vermietungsgenossenschaften und -vereine) | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | Steuerstatus befreite Genossenschaft; Laufende 10-%-Prüfung (30 % bei Mieterstrom) | vierteljährlich | frei |
+| `KSTG-8` | [§ 8 KStG](https://www.gesetze-im-internet.de/kstg_1977/__8.html) – Ermittlung des Einkommens; alle Einkünfte der Kapitalgesellschaft sind gewerblich (Abs. 2) | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | De-minimis-Bindung der Sonderabschreibung für Kapitalgesellschaften | vierteljährlich | frei |
 | `KSTG-8A` | [§ 8a KStG](https://www.gesetze-im-internet.de/kstg_1977/__8a.html) – Betriebsausgabenabzug für Zinsaufwendungen bei Körperschaften | Fassung 04.02.2026 | am Original gelesen (2026-11-18) | Zinsschranke bei der Kapitalgesellschaft (maßgebliches Einkommen; Gesellschafter-Fremdfinanzierung) | vierteljährlich | frei |
 | `KSTG-8C` | [§ 8c KStG](https://www.gesetze-im-internet.de/kstg_1977/__8c.html) – Verlustabzug bei Körperschaften (schädlicher Beteiligungserwerb) | Fassung 04.02.2026 | am Original gelesen (2026-11-17) | Untergang von Verlustvorträgen beim Anteilsverkauf (Exit über Share Deal) | vierteljährlich | frei |
 | `MABV-3` | [§ 3 MaBV](https://www.gesetze-im-internet.de/gewo_34cdv/__3.html) – Besondere Sicherungspflichten für Bauträger (Raten nach Baufortschritt) | Fassung 28.07.2026 | am Original gelesen (2026-11-18) | Bauträgerraten: höchstens sieben Teilbeträge aus 13 Vomhundertsätzen; Fälligkeitsvoraussetzungen im Vertriebsplan | vierteljährlich | frei |
@@ -226,6 +230,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 
 Bemerkungen:
 
+- `AO-233A`: In Prüfrunde 3 vom Juristen genannt, nicht am Text gelesen. Adresse nach dem Muster des Portals gebildet.
 - `AO-52`: Gelesen nur Abs. 2 Satz 1 Nr. 27. AEAO zu Nr. 27 („vergünstigt“, Mittelverwendung) nicht gelesen.
 - `ASTG-1`: Nur als Verweis in § 4h EStG gelesen; Einordnung durch den Steuerberater.
 - `BAFOEG-13`: Nur über die RL Junges Wohnen 2026 genannt.
@@ -258,6 +263,7 @@ Bemerkungen:
 - `EGBGB-ART-229`: Eine Volltextsuche am 17.11.2026 fand keine Übergangsvorschrift zu §§ 559e, 559f; §§ 35 und 49 nicht gelesen (Jurist, Runde 2).
 - `ERBBAURG-9A`: Nur vom Fachexperten (Runde 2) genannt; zum Erbbaurecht wurde nichts recherchiert.
 - `ESTG-10D`: Der geltende Text zeigt 70 % ohne Enddatum. Eine Rückkehr auf 60 % ab 2028 kann bereits verkündet sein, weil gesetze-im-internet.de keine künftig geltenden Fassungen zeigt – am BGBl. prüfen (siehe BGBL-2024-I-108).
+- `ESTG-15`: Gelesen Abs. 3 in Prüfrunde 3 (Fachexperte). Eine GmbH & Co. KG ohne natürliche Person als Vollhafter erzielt gewerbliche Einkünfte; die Zehnjahresfrist des § 23 EStG gilt für sie nicht.
 - `ESTG-21`: Gelesen nur Abs. 2. Totalüberschussprognose zwischen 50 % und 66 % ist Verwaltungsauffassung, nicht geprüft.
 - `ESTG-23`: Drei-Objekt-Grenze (gewerblicher Grundstückshandel) ist Rechtsprechung, nicht geprüft.
 - `ESTG-4H`: Berichtigung Prüfrunde 2: abziehbar bis Zinsertrag plus verrechenbares EBITDA; dieses ist bereits 30 % des steuerlichen EBITDA. Ausnahmen Abs. 2 Buchst. b (kein Konzern) und c (Eigenkapitalvergleich) als Eingaben; BMF-Anwendungsschreiben (März 2025) nicht gelesen.
@@ -283,6 +289,7 @@ Bemerkungen:
 - `IMMOWERTV-ANLAGE-3`: Text enthält nur die Werte für 2021 und die Basiswerte; fortgeschriebene Werte siehe IMMOWERTV-WERTE. Eigentumswohnung 357 € und Gewerbe-Instandhaltung 100/50/30 % fehlen noch im Katalog.
 - `JSTG-2026`: Laufende Gesetzgebung; Stand nicht geprüft (Bundestag, BGBl. und BMF nicht abrufbar).
 - `KSTG-5`: Gilt nur für Genossenschaften und Vereine; die kommunale Wohnungs-GmbH ist in der Regel voll steuerpflichtig (Prüfrunde 2). Steuerstatus deshalb als eigenes Merkmal neben der Investorensicht.
+- `KSTG-8`: Gelesen Abs. 2 in Prüfrunde 3 (Jurist). Folge mit § 7b Abs. 5 EStG: Die De-minimis-Bindung der Sonderabschreibung gilt für jede Kapitalgesellschaft.
 - `MABV-3`: Bei Wohnungs- und Teileigentum zusätzlich Begründung im Grundbuch (Abs. 1 Satz 1 Nr. 2) – fehlt noch im Bericht (Prüfrunde 2).
 - `MIETRECHT-II`: Stand des Verfahrens nicht geprüft.
 - `NI-GREST-SATZ`: 5,0 % nur nach Sekundärangabe; Landesgesetz, Fundstelle und Fassung am Original nachzuziehen.
