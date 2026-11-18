@@ -12,6 +12,7 @@ Eine Zeile je Prüfrunde; Details darunter. Stand: Datum der letzten Zeile. Lese
 | 2026-11-18 | Steuerungsdokumente (Spezifikation, Plan, Entscheidungsprotokoll, Arbeitsregeln, Hooks, Rollen) | Dokumentation | 0 / 7 / 3 | Note 7; Befunde behoben · [Sichtung](2026-11-18-steuerungsdokumente/sichtung.md) |
 | 2026-11-18 | Steuerungsdokumente, Nachprüfung | Dokumentation | 0 / 4 / 3 | Note 8; Befunde behoben, nicht erneut nachgeprüft · [Sichtung](2026-11-18-steuerungsdokumente/sichtung.md) |
 | 2026-11-18 | Fachspezifikation des Rechenkerns, Teil 1, Entwurf mit Referenzrechner | Finanzmathematiker, Fachexperte, Praktiker, Steuerberater, Bank, Controller, Grenzfälle | 7 / 43 / 20 | Noten 7 bis 8; erste Überarbeitung · [Runde 1](2026-11-18-fachspezifikation-rechenkern/sichtung.md) |
+| 2026-11-18 | Fachspezifikation des Rechenkerns, Teil 1, nach erster Überarbeitung | dieselben sieben; dazu Blindrechnung der Referenzfälle | 2 / 35 / 30 | Noten durchgehend 8; Blindrechnung: rund 340 Sollwerte allein aus dem Text getroffen, sieben Lücken der Eindeutigkeit; zweite Überarbeitung · [Runde 2](2026-11-18-fachspezifikation-rechenkern-runde2/sichtung.md) |
 
 ## Noten je Rolle (Recherchebericht)
 

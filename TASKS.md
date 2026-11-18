@@ -6,14 +6,14 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Fachspezifikation des Rechenkerns: Prüfrunde 2 mit denselben sieben Rollen und Blindrechnung der Referenzfälle durch einen zweiten Bearbeiter laufen → `docs/pruefung/2026-11-18-fachspezifikation-rechenkern-runde2/`
+- [~] Fachspezifikation des Rechenkerns: zweite Überarbeitung nach Prüfrunde 2 läuft (32 Sichtungspunkte); danach Nachziehen der Blindrechnung durch einen zweiten Bearbeiter und Prüfrunde 3
 
 ## Als Nächstes
 
 - [ ] Nach dem NBank-Gespräch: Antworten mit Datum und Gesprächspartner im Verzeichnis der Modellannahmen nachtragen (Status, Voreinstellung), Spezifikation und Katalogvorgaben nachziehen
 - [ ] Fachspezifikation: offene Punkte aus Prüfrunde 3 klären – Renditeformel bei Einlagen und Entnahmen in verschiedenen Perioden, Reihenfolge der Rechenschritte bei der Rundung, nominal/effektiv je Zahlungsart, Buchung von Barzuschüssen, Prozessdefinition der Simulation
 - [ ] Recherche zu den fünf bisher nicht untersuchten Anbietern (Reasult, PROBIS und weitere) bis zur Vorprüfung
-- [ ] Quellenkataster und Katalog für die vier weiteren Länder (Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen): Grunderwerbsteuersätze, Verordnungen zu Mietpreisbremse und Kappungsgrenze am Original lesen und eintragen; dafür werden Landesrechtsportale gebraucht, die die Cloud-Umgebung bisher nicht erreicht
+- [ ] **Hält den Einsatz in vier von fünf Ländern auf:** Quellenkataster und Katalog für die vier weiteren Länder (Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen): Grunderwerbsteuersätze, Verordnungen zu Mietpreisbremse und Kappungsgrenze am Original lesen und eintragen; dafür werden Landesrechtsportale gebraucht, die die Cloud-Umgebung bisher nicht erreicht
 - [ ] Zuschnitt nachziehen (Fachspezifikation, Kapitel 2): KfW-Neubaudarlehen 297/298 und 296 in Teilschritt 1b-2 statt 1c; Prüfen, was von den KfW-Programmen für den Bestand schon in 1b-1 gebraucht wird
 - [ ] Quellenkataster: als Nächstes am Original lesen – KfW-Merkblatt 459 (Heizungsförderung für Vermieter), niedersächsisches Landesrecht (Mietpreisbremse und Kappungsgrenze, Grunderwerbsteuersatz, Einkommensgrenzen NWoFG), amtliche Fassung BEG EM, De-minimis-Verordnung, gif-Kennzahlen; künftig geltende Fassungen am Bundesgesetzblatt (Verlustvortrag ab 2028)
 - [ ] Quellenkataster: Mindestkapitalisierungszinssätze der BaFin am Original nachziehen
@@ -43,7 +43,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Fragen an Ihren Steuerberater (fünf Punkte): Gewerbesteuer auf den Verkaufsgewinn bei erweiterter Kürzung; steuerliche Einordnung des NBank-Zuschusses; Vorfälligkeitsentschädigung bei der Privatperson; Objektverkauf einer GmbH & Co. KG; Verkauf in der befreiten Genossenschaft – Leitfaden: https://claude.ai/artifact/Ui9nDDDYgHkpSa16V6wFVS (Antworten dort in die letzte Spalte)
 - [ ] Zwei bis drei abgeschlossene eigene Kalkulationen (Excel) für die Parallelrechnung bereitstellen, hier im Gespräch, nicht im Repository; dazu, wenn greifbar, ein echter Tilgungsplan Ihrer Bank
 - [ ] Entscheiden: Soll ein Fehlbetrag in der Kalkulation als Nachschuss aus Eigenkapital erscheinen (Voreinstellung) oder über eine Kontokorrentlinie laufen? Und: Haltedauer im geförderten Neubau – Vorschlag Bindungsende plus ein Jahr
-- [ ] Durchsicht der sechs Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016, MA-026) und der begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-022, MA-023 beim Erwerb, Wertansatz in MA-026)
+- [ ] Durchsicht der Modellannahmen mit hohem Gewicht (aktuelle Liste in `docs/modellannahmen.md`; Stand heute MA-001, MA-004, MA-012, MA-014, MA-016, MA-026, MA-030, MA-031) und der begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-022, MA-023 beim Erwerb, Wertansatz in MA-026)
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
 - [ ] Vertretung für die Katalogverantwortung benennen
@@ -67,6 +67,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Prüfrunde 2 zur Fachspezifikation: sieben Rollen bei 8 von 10; Blindrechnung trifft rund 340 Sollwerte allein aus dem Text; gesichtet (32 Punkte)
 - [x] 2026-11-18 Fachspezifikation des Rechenkerns nach Prüfrunde 1 überarbeitet: 167 Regeln, 19 Proben, 20 Referenzfälle mit 906 Prüfungen, alle bestanden; 37 Modellannahmen, 229 Quellen
 - [x] 2026-11-18 Prüfrunde 1 zur Fachspezifikation des Rechenkerns: Noten 8, 7, 7, 7, 7, 7, 7; gesichtet (45 Punkte)
 - [x] 2026-11-18 Fachspezifikation des Rechenkerns, Teil 1, als Entwurf mit Referenzrechner; in Dokumentationsübersicht und Pflichtlektüre aufgenommen
