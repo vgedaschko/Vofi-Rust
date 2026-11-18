@@ -2,6 +2,15 @@
 
 Webanwendung zur Immobilien-Investitionsrechnung nach der VOFI-Methode (Vollständiger Finanzplan) mit Fördermodulen, Sensitivitäts- und Monte-Carlo-Analyse, Dashboard und Mehrbenutzerbetrieb. Stand: Konzeptphase, noch kein Code.
 
+## Spezifikation ist der Pfad
+
+`docs/spezifikation.md` ist das maßgebliche Entwicklungsdokument und wird laufend fortgeschrieben.
+
+- Vor jeder inhaltlichen Arbeit lesen. Was dort als **fest** steht, gilt.
+- Soll etwas anders gebaut werden, zuerst die Spezifikation ändern und die Änderung in `docs/entscheidungen.md` begründen, dann umsetzen. Frühere Festlegungen dürfen fallen – aber nachvollziehbar.
+- Nach jeder Prüfrunde und nach jeder Antwort des Auftraggebers prüfen, ob eine Festlegung berührt ist, und sie nachziehen.
+- Merkst du während der Arbeit, dass du von der Spezifikation abweichst oder sie eine Frage offenlässt: anhalten, Spezifikation klären, dann weiter.
+
 ## Zusammenarbeit
 
 - Der Auftraggeber ist Betriebswirt, kein Programmierer. Technische Entscheidungen selbst treffen und kurz in Geschäftssprache begründen (Kosten, Risiko, Nutzen) – nicht als Auswahlfrage zurückgeben.
@@ -16,7 +25,7 @@ Strikt an Branchenstandards und anerkannten Best Practices ausrichten und im Zwe
 
 | Bereich | Maßstab |
 |---|---|
-| Fachlogik | Lehrbuch-VOFI (Grob; Schulte/Ropeter), gif-Richtlinien, DIN 276/277, WoFlV, II. BV, ImmoWertV, aktuelle Gesetzes- und Förderlage mit Quelle und Stand |
+| Fachlogik | Lehrbuch-VOFI (Grob; Schulte/Ropeter), gif-Richtlinien, DIN 276/277, WoFlV, II. BV, ImmoWertV, aktuelle Gesetzes- und Förderlage mit Quelle und Stand. Fachliteratur bei Bedarf am Original beschaffen (rechtmäßige Quellen: frei zugängliche Fassungen, Verlags- oder Bibliothekszugang, vom Auftraggeber bereitgestellte Exemplare; notfalls über dessen Rechner) |
 | Finanzmodell | FAST Standard und ICAEW Financial Modelling Code: Eingaben, Rechnung und Ausgabe getrennt, keine versteckten Konstanten, Kontrollsummen |
 | Berichte und Diagramme | IBCS (einheitliche Notation, Aussage im Titel, keine Dekoration), Typografie und Raster auf Geschäftsberichtsniveau |
 | Oberfläche | WCAG 2.2 AA, durchgängiges Gestaltungssystem, deutsche Zahl- und Datumsformate, fachlich präzise Texte |
@@ -27,11 +36,11 @@ Wo ein Ergebnis den Maßstab noch nicht erreicht, das dem Auftraggeber offen sag
 
 ### Auftreten nach außen
 
-Alles, was Nutzer oder Kunden sehen (Oberfläche, Berichte, Exporte), tritt auf wie das Produkt eines professionellen Hauses:
+Alles, was Nutzer oder Kunden sehen (Oberfläche, Kundenberichte, Exporte), tritt auf wie das Produkt eines professionellen Hauses. Für interne Entwicklungsunterlagen (Recherchen, Spezifikation, Prüfprotokolle, Berichte an den Auftraggeber) gilt das nicht: Dort werden Prüfungen, Einschränkungen und Unsicherheiten offen benannt.
 
 - Keine Hinweisflut. Interne Einschränkungen, Unsicherheiten und Entstehungsdetails bleiben hinter den Kulissen (Protokoll, `TASKS.md`, Entwicklerdokumentation).
 - Ein Hinweis erscheint nur, wenn er fachlich, technisch oder rechtlich Gewicht hat – etwa Stand-Datum einer Förderkondition, eine Annahme, die das Ergebnis trägt, eine Rechengrenze, eine rechtlich gebotene Abgrenzung. Dann einmal, an der Stelle, an der er gebraucht wird, in einem Satz.
-- Dasselbe gilt für Dokumente an den Auftraggeber: Ergebnis zuerst, Belegqualität gebündelt und knapp, keine wiederholten Vorbehalte.
+- Auch interne Dokumente bleiben lesbar: Ergebnis zuerst, Belegqualität gebündelt statt als wiederholte Vorbehalte.
 
 ### Gestaltung und Bedienung
 
@@ -53,7 +62,8 @@ Alles, was Nutzer oder Kunden sehen (Oberfläche, Berichte, Exporte), tritt auf 
 ## Orientierung
 
 - `TASKS.md` – offene Arbeit; wird vom Hook `.claude/hooks/anything-else.sh` bei Sitzungsstart und vor jedem Stopp gelesen. Aktuell halten.
-- `docs/entscheidungen.md` – festgelegte Rahmenbedingungen.
+- `docs/spezifikation.md` – was gebaut wird und warum; geltender Stand.
+- `docs/entscheidungen.md` – Entscheidungsprotokoll: wie der Stand zustande kam.
 - `docs/skills-und-werkzeuge.md` – empfohlene Skills, Plugins und Hooks.
 - `docs/pruefung/protokoll.md` – was wann von wem geprüft wurde.
 - `reports/`, `research_notes/` – Rechercheergebnisse und ihre Quellnotizen.

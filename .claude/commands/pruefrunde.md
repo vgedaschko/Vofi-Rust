@@ -25,7 +25,7 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
 
 3. **Befunde sichten – nicht ungeprüft übernehmen.** Doppelte zusammenführen. Jeden Befund mit Schweregrad „kritisch" oder „wichtig" selbst an der Fundstelle nachprüfen: Prüfer irren sich auch. Dann entscheiden: übernehmen · ablehnen (mit Grund) · Rückfrage an den Auftraggeber (nur fachlich/betriebswirtschaftlich).
 
-4. **Einarbeiten.** Übernommene Befunde direkt im Prüfobjekt beheben; was nicht sofort geht, als Aufgabe in `TASKS.md`.
+4. **Einarbeiten.** Übernommene Befunde direkt im Prüfobjekt beheben; was nicht sofort geht, als Aufgabe in `TASKS.md`. Berührt ein Befund eine Festlegung, zuerst `docs/spezifikation.md` anpassen und die Änderung in `docs/entscheidungen.md` eintragen.
 
 5. **Protokollieren** in `docs/pruefung/protokoll.md`: Datum, Prüfobjekt, eingesetzte Rollen, Note je Rolle, Zahl der Befunde je Schweregrad, was übernommen und was mit welchem Grund abgelehnt wurde. Widersprechen sich zwei Rollen, den Zielkonflikt benennen statt ihn stillschweigend zu entscheiden.
 

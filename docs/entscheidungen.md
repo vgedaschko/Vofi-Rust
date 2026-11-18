@@ -1,20 +1,19 @@
-# VOFI-Projekt – festgelegte Rahmenbedingungen
+# Entscheidungsprotokoll
 
-Stand 2026-11-17, aus dem Fragenkatalog mit dem Auftraggeber.
+Chronologisch: was wann entschieden oder geändert wurde, warum und auf wessen Veranlassung. Der geltende Stand steht in `docs/spezifikation.md`; hier steht, wie er zustande kam. Neue Einträge oben.
 
-| Thema | Entscheidung |
-|---|---|
-| Nutzerkreis | Internes Werkzeug **und** Beratung für Kunden (Berichte, ggf. Lesezugang) – kein SaaS-Verkauf |
-| Vorhabensarten | Ankauf Bestand · Neubau zur Vermietung · Sanierung im Bestand · Entwicklung mit Verkauf |
-| Nutzungsarten | Frei finanziertes Wohnen · geförderter Wohnungsbau · Gewerbe/Mixed-Use · Sonderimmobilien |
-| Steuersichten | Kapitalgesellschaft · Privatperson/Personengesellschaft · steuerbefreit/kommunal |
-| Mehrbenutzer | Echte Co-Editierung (gleichzeitiges Bearbeiten, Präsenz), Projektzuweisung an Mitarbeiter |
-| Technik | Rust für Rechenkern und Server; Oberfläche in TypeScript, Rechenkern zusätzlich als WebAssembly im Browser |
-| Fachliche Referenz | Keine eigene Excel-Vorlage; Lehrbuch-Standard (Grob, Schulte/Ropeter) und Branchenrichtlinien (gif) |
-| Fördermodule | KfW, NBank und weitere – als konfigurierbare Daten, nicht fest verdrahtet |
-| Repository | `vgedaschko/Vofi-Rust`; die älteren Repos `VoFi` und `NBank` sind überholt und werden nicht herangezogen |
-| Zusammenarbeit | Auftraggeber ist Betriebswirt, kein Programmierer: technische Entscheidungen trifft Claude und begründet sie in Geschäftssprache (Kosten, Risiko, Nutzen); Rückfragen nur zu fachlichen und betriebswirtschaftlichen Themen |
-| Qualitätsanspruch | 9 von 10 in Code, Gestaltung und Funktionsumfang; strikt an Branchenstandards und Best Practices ausgerichtet (Einzelheiten in `CLAUDE.md`) |
-| Auftreten nach außen | Keine Hinweisflut; Interna bleiben intern; Hinweise nur bei fachlicher, technischer oder rechtlicher Bedeutung |
-| Gestaltung | An bewährten Vorbildern ausrichten; gepflegte Bibliotheken nutzen statt neu bauen |
-| Agenten | Standard: neuestes Opus; Fable nur für komplexe oder folgenreiche Aufgaben |
+| Datum | Entscheidung | Grund | Auslöser | Ersetzt |
+|---|---|---|---|---|
+| 2026-11-18 | Lebende Spezifikation `docs/spezifikation.md` ist das maßgebliche Entwicklungsdokument; Änderungen erst dort, dann in der Umsetzung | Nicht vom Pfad abkommen; Prüfbefunde und geänderte Annahmen nachvollziehbar einarbeiten | Auftraggeber | Bisherige Tabelle „festgelegte Rahmenbedingungen" in dieser Datei |
+| 2026-11-18 | Die Regel „Interna bleiben intern" gilt für Produkt, Kundenberichte und Exporte, nicht für interne Entwicklungsunterlagen | Interne Unterlagen sollen Prüfungen und Einschränkungen offen benennen | Auftraggeber | Weite Auslegung vom 17.11. |
+| 2026-11-18 | Fachliteratur wird bei Bedarf beschafft (rechtmäßige Quellen; notfalls über den Rechner des Auftraggebers) | Lehrbuchdefinitionen am Original statt aus Sekundärquellen | Auftraggeber | – |
+| 2026-11-18 | Der Arbeitsablauf von der Grobkalkulation bis zur Gremien-, Bank- und Förderantragsunterlage ist Maßstab für den Zuschnitt der Stufen; eine Vorhabensart kommt erst in eine Stufe, wenn sie dort vollständig rechenbar ist | Sonst bleibt Excel für Vorprüfung, Antrag und Bestandsankauf im Einsatz | Prüfrunde 1 (Praktiker, Fachexperte) | Stufenplan der ersten Berichtsfassung |
+| 2026-11-18 | Vor jeder Stufe Freigabe durch den Auftraggeber mit benannten Abbruchkriterien; Wirtschaftlichkeitsrechnung des Vorhabens als eigene Vorstudie | Der Bericht belegt den Bedarf, nicht die Wirtschaftlichkeit des Eigenbaus | Prüfrunde 1 (Investor, Lotse) | – |
+| 2026-11-17 | Zusammenarbeit: gleichzeitiges Bearbeiten mit sofortiger Verteilung je Feld, Präsenzanzeige und Änderungsprotokoll; kein Zusammenführen offline bearbeiteter Kopien | Änderungsprotokoll fällt als Nebenprodukt an; Bausteine der aufwändigeren Variante unreif; Konflikte bei Zahlenfeldern selten | Technikrecherche; Entscheidung Claude | Vorgabe „echte Co-Editierung wie Google Sheets" vom selben Tag |
+| 2026-11-17 | Agenten laufen mit dem neuesten Opus; Fable nur für komplexe oder folgenreiche Aufgaben | Kosten und Tempo | Auftraggeber | – |
+| 2026-11-17 | Gestaltung an bewährten Vorbildern ausrichten; gepflegte Bibliotheken statt Eigenbau | Qualität und Aufwand | Auftraggeber | – |
+| 2026-11-17 | Qualitätsanspruch 9 von 10, strikt an Branchenstandards ausgerichtet | – | Auftraggeber | – |
+| 2026-11-17 | Technische Entscheidungen trifft Claude und begründet sie in Geschäftssprache; Rückfragen nur fachlich und betriebswirtschaftlich | Auftraggeber ist Betriebswirt, kein Programmierer | Auftraggeber | – |
+| 2026-11-17 | Eigenes Repository `vgedaschko/Vofi-Rust`; die Repositories `VoFi` und `NBank` werden nicht herangezogen | Vorarbeiten überholt | Auftraggeber | – |
+| 2026-11-17 | Rust für Rechenkern und Server; Oberfläche in TypeScript, Rechenkern zusätzlich als WebAssembly im Browser | Eine Rechenlogik an zwei Orten; ausgereifte Oberflächenbausteine | Auftraggeber, Empfehlung Claude | – |
+| 2026-11-17 | Nutzerkreis intern und Beratung; vier Vorhabensarten, vier Nutzungsarten, drei Investorensichten; Fördermodule als konfigurierbare Daten; fachliche Grundlage Lehrbuch-Standard | – | Auftraggeber (Fragenkatalog) | – |

@@ -11,14 +11,16 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 ## Als Nächstes
 
 - [ ] Vorstudie Wirtschaftlichkeit: Eigenbau gegen Kauf und Excel-Ausbau, mit Mengengerüst des Auftraggebers und Aufwandsschätzung nach dem Architekturentwurf
-- [ ] Anforderungsdokument / Feature-Scope (MVP vs. später) aus Recherche + Antworten ableiten
-- [ ] Architekturentwurf (Rechenkern, API, Datenmodell, Mehrbenutzer/Rechte, Frontend)
-- [ ] Fachliches Rechenmodell spezifizieren (VOFI-Tabellenstruktur, Kennzahlen, Steuern, Fördermittel)
+- [ ] Spezifikation Kapitel 2 (Funktionsumfang, Stufen) aus dem überarbeiteten Bericht füllen
+- [ ] Spezifikation Kapitel 5 zum Architekturentwurf ausbauen (Datenmodell, Schnittstellen, Rechte, Oberfläche)
+- [ ] Spezifikation Kapitel 3 zur vollständigen Fachspezifikation des Rechenkerns ausbauen (Tabellenaufbau, Formeln, Konventionen, Testfälle)
+- [ ] Fachliteratur beschaffen: Grob (VOFI-Gesamtkapitalrendite, Amortisationsdauer), Schulte/Ropeter (Immobilien-VOFI)
 
 ## Wartet auf Nutzer
 
 - [ ] Gespräch mit der NBank: Rechenweise der Renditeprüfung (Überkompensation) erfragen
 - [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
+- [ ] Verantwortung für die Pflege des Regel- und Förderkatalogs im Unternehmen benennen
 - [ ] Mengengerüst für die Wirtschaftlichkeitsrechnung: Projekte pro Jahr, Zeitaufwand je Kalkulation heute, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau
 
 
@@ -31,6 +33,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Lebende Spezifikation `docs/spezifikation.md` angelegt; `docs/entscheidungen.md` ist jetzt das Entscheidungsprotokoll
 - [x] 2026-11-17 Prüfrunde 1 zum Recherchebericht: sechs Prüfer plus Lotse, Befunde nachgeprüft und gesichtet
 - [x] 2026-11-17 Prüfer eingerichtet: 14 Rollen (inkl. Jurist) in `.claude/agents/`, Ablauf `/pruefrunde`, Regeln und Protokoll in `docs/pruefung/`
 - [x] 2026-11-17 Geklärt: Arbeitsstand liegt auf `main` von `Vofi-Rust`; die älteren Repos `VoFi` und `NBank` werden nicht weiterverwendet
