@@ -69,7 +69,7 @@ Strikt an Branchenstandards und anerkannten Best Practices ausrichten und im Zwe
 
 | Bereich | Maßstab |
 |---|---|
-| Fachlogik | Lehrbuch-VOFI (Grob; Schulte/Ropeter), gif-Richtlinien, DIN 276/277, WoFlV, II. BV, ImmoWertV, aktuelle Gesetzes- und Förderlage mit Quelle und Stand. Fachliteratur bei Bedarf am Original beschaffen (rechtmäßige Quellen: frei zugängliche Fassungen, Verlags- oder Bibliothekszugang, vom Auftraggeber bereitgestellte Exemplare; notfalls über dessen Rechner) |
+| Fachlogik | Lehrbuch-VOFI (Grob; Schulte/Ropeter), gif-Richtlinien, DIN 276/277, WoFlV, II. BV, ImmoWertV, aktuelle Gesetzes- und Förderlage mit Quelle und Stand. Offene Lehrbuchfragen zuerst über frei zugängliche, seriöse Quellen klären (Verordnungstexte, amtliche Statistik, Fachlexika, Hochschulschriften); Fachliteratur nur bei verbleibender Lücke und nur aus rechtmäßigen Quellen, nie im öffentlichen Repository ablegen |
 | Finanzmodell | FAST Standard und ICAEW Financial Modelling Code: Eingaben, Rechnung und Ausgabe getrennt, keine versteckten Konstanten, Kontrollsummen |
 | Berichte und Diagramme | IBCS (einheitliche Notation, Aussage im Titel, keine Dekoration), Typografie und Raster auf Geschäftsberichtsniveau |
 | Oberfläche | WCAG 2.2 AA, durchgängiges Gestaltungssystem, deutsche Zahl- und Datumsformate, fachlich präzise Texte |

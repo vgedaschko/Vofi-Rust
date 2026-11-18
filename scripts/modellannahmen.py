@@ -67,7 +67,8 @@ def verweise():
     try:
         dateien = subprocess.run(["git", "-C", str(WURZEL), "ls-files", "-co", "--exclude-standard"], capture_output=True, text=True, check=True).stdout.splitlines()
     except (OSError, subprocess.CalledProcessError):
-        return {}
+        # Ohne git-Arbeitskopie: alle Dateien unterhalb der Wurzel durchsuchen, statt still nichts zu prüfen.
+        dateien = [str(p.relative_to(WURZEL)) for p in WURZEL.rglob("*") if p.is_file() and ".git" not in p.parts and "node_modules" not in p.parts and "target" not in p.parts]
     fund = {}
     for name in dateien:
         if name.startswith(("docs/modellannahmen", "scripts/modellannahmen.py", "docs/pruefung/", "research_notes/", "reports/")):

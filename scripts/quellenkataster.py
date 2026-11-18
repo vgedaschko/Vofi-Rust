@@ -94,21 +94,20 @@ def pruefen(quellen):
 def verweise_pruefen(bekannt):
     """Quellenkennungen, die Steuerungsdokumente in Backticks nennen, müssen im Kataster stehen.
 
-    Geprüft wird jede Kennung, deren erster Teil (zum Beispiel ESTG, BGB, NBANK) im Kataster
-    vorkommt; so fällt eine fehlende Vorschrift eines bekannten Gesetzes auf, ohne dass andere
-    Kürzel in Backticks (Programmnamen, Modellannahmen) stören. Code und Tests kommen hinzu,
-    sobald es sie gibt.
+    Geprüft wird jede Kennung in Backticks nach dem Muster GROSS-TEIL (zum Beispiel `ESTG-35`),
+    ausgenommen Modellannahmen (MA-000). Angaben ohne Backticks und Stellen, an denen eine
+    Kennung ganz fehlt, findet diese Prüfung nicht. Code und Tests kommen hinzu, sobald es sie gibt.
     """
     fehler = []
-    vorsilben = {k.split("-")[0] for k in bekannt if k}
     for name in VERWEISENDE:
         pfad = WURZEL / name
         if not pfad.is_file():
             continue
         for k in sorted(set(VERWEIS.findall(pfad.read_text(encoding="utf-8")))):
-            if k.split("-")[0] in vorsilben and k not in bekannt and not re.fullmatch(r"MA-\d{3}", k):
-                fehler.append(f"{k}: wird in {name} genannt, steht aber nicht im Kataster")
+            if k not in bekannt and not re.fullmatch(r"MA-\d{3}", k):
+                fehler.append(f"{name}: nennt die Quelle {k}, die nicht im Kataster steht")
     return fehler
+
 
 
 def zelle(text):
@@ -168,7 +167,7 @@ def main():
     quellen = laden()
     fehler = pruefen(quellen)
     if fehler:
-        print("Quellenkataster: Fehler in quellen.toml\n  " + "\n  ".join(fehler), file=sys.stderr)
+        print("Quellenkataster: Fehler\n  " + "\n  ".join(fehler), file=sys.stderr)
         return 1
     text = erzeugen(quellen)
     if "--pruefen" in sys.argv:

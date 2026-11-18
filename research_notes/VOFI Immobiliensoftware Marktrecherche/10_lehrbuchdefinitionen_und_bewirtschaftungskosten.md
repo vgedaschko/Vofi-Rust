@@ -10,7 +10,7 @@ Anlass: Der Auftraggeber will die Lehrbuchfragen nicht über den Kauf der Büche
 |---|---|---|
 | VOFI-Eigenkapitalrentabilität | Geklärt: der Zinsfuß, der das in t = 0 vorhandene Eigenkapital unter Berücksichtigung von Zinseszinsen, Finanzierungskonditionen und Steuerzahlungen auf den Endwert anwachsen lässt. Das ist die Formel, die der Bericht in Anhang A bereits verwendet | Wortlaut des Gabler Banklexikons aus dem Suchauszug; Seite selbst nicht abrufbar |
 | VOFI-Amortisationsdauer (Pay-off-Periode) | Begriff geklärt, Rechenregel nicht: „Amortisationsdauer unter Berücksichtigung von Finanzierungskonditionen und steuerlichen Konsequenzen". Zwei Lesarten der Rechenregel stehen nebeneinander (unten) | Suchauszug Gabler Banklexikon; Dr. Klein am Original gelesen |
-| VOFI-Gesamtkapitalrentabilität | Nicht geklärt. Bekannt sind nur die Bestandteile der Formel: Endwert der Investition nach Steuern, Eigenkapital, Anschaffungsauszahlung, Zinsen auf die Anschaffungsauszahlung, Steuermultiplikator; verglichen wird mit einem Zins, der die durchschnittlichen Kapitalkosten des im Investitionszeitpunkt eingesetzten Gesamtkapitals ausdrückt. Die Formel selbst ist im Lexikon ein Bild und im Suchauszug nicht lesbar | Suchauszug; reicht nicht zum Bauen |
+| VOFI-Gesamtkapitalrentabilität | Geklärt: Formel und Referenzzinsfuß liegen als Bildschirmfoto des Lexikoneintrags vor (unten). Offen ist nur die Abgrenzung der zuzurechnenden Sollzinsen (`MA-028`) | Bildschirmfoto des Auftraggebers vom Stichwort 62372, gelesen am 18.11.2026 |
 | ImmoWertV, Modellansätze 2026 und 2027 | Aus dem Preisindex nachgerechnet (unten) | Verordnung und Preisindex am Original gelesen; Rechnung mit Skript |
 | II. BV, Beträge ab 01.01.2026 | Die Sekundärangabe (372,46 Euro je Wohnung) lässt sich aus der heutigen Indexreihe nicht nachrechnen; es bleibt bei der Sekundärquelle | Verordnung am Original gelesen; Beträge nur sekundär |
 
@@ -25,7 +25,21 @@ Anlass: Der Auftraggeber will die Lehrbuchfragen nicht über den Kauf der Büche
 
 Folge für das Projekt: Die Amortisationsdauer ist eine Modellannahme (Vorschlag `MA-027`), solange Grobs Rechenregel nicht am Original vorliegt. Voreinstellung nach der Vorsichtsregel ist die Lesart, die später amortisiert: Lesart 2, ohne Ansatz eines Restwerts vor dem geplanten Verkauf. Beide Lesarten lassen sich aus dem Finanzplan ohne zusätzliche Eingaben rechnen.
 
-**Gesamtkapitalrentabilität.** Bleibt nach Spezifikation Kapitel 3 unausgewiesen, bis die Formel gelesen ist. Dafür genügt ein Bildschirmfoto des Lexikoneintrags 62372 oder die entsprechende Seite des Lehrbuchs; ein Buchkauf ist dafür nicht nötig.
+**Gesamtkapitalrentabilität.** Der Auftraggeber hat den Lexikoneintrag (Gabler Banklexikon, Stichwort „VOFI-Gesamtkapitalrentabilität", Definition 62372) am 18.11.2026 als Bildschirmfoto bereitgestellt. Wortlaut: „Rentabilitätskennzahl, welche angibt, mit welcher Rate das Anfangskapital auf das Kapital am Ende des mehrjährigen Betrachtungszeitraums anwächst."
+
+Kennzahl nach Steuern:
+
+    g_GK = [ (EW − EK + Z_S × (1 − s) + a_0) / a_0 ]^(1/n) − 1
+
+Referenzzinsfuß, mit dem sie zu vergleichen ist („der die durchschnittlichen Kapitalkosten des im Investitionszeitpunkt eingesetzten Gesamtkapitals zum Ausdruck bringt"):
+
+    k = [ ( (1 + i_O × (1 − s))^n × EK − EK + Z_S × (1 − s) + a_0 ) / a_0 ]^(1/n) − 1
+
+mit EW = Endwert der Investition nach Steuern, EK = Eigenkapital, a_0 = Anschaffungsauszahlung, Z_S = der Anschaffungsauszahlung zuzurechnende Sollzinsen, s = Steuermultiplikator, i_O = Opportunitätskostensatz, n = Betrachtungszeitraum. Im Bild des Referenzzinsfußes ist der Wurzelexponent nicht zu erkennen; nach dem Aufbau ist es wie bei der Kennzahl die n-te Wurzel.
+
+Lesart: Das Endkapital aller Kapitalgeber ist die Anschaffungsauszahlung zuzüglich des Zuwachses beim Eigenkapital (EW − EK) und der Zinsen der Fremdkapitalgeber nach Steuerentlastung. Der Referenzzinsfuß ersetzt den Endwert durch den Endwert der Unterlassensalternative; die Investition ist vorteilhaft, wenn g_GK über k liegt, also genau dann, wenn EW über dem Endwert der Unterlassensalternative liegt. Die Kennzahl führt damit zu derselben Entscheidung wie die Endwertdifferenz.
+
+Nicht aus dem Eintrag zu entnehmen: wie Z_S abgegrenzt ist – ob als einfache Summe der Sollzinsen über den Zeitraum, ob einschließlich der Zinsen auf einen Kontokorrentkredit und wie bei mehreren Tranchen und Sondertilgungen. Das ist Modellannahme `MA-028`; voreingestellt ist die einfache Summe der Sollzinsen aller Darlehen, die die Anschaffungsauszahlung finanzieren, ohne Kontokorrent.
 
 ## Bewirtschaftungskosten
 
@@ -54,5 +68,5 @@ Die Sekundärquelle (`IIBV-WERTE-2026`) nennt 372,46 Euro je Wohnung, also den F
 - `IMMOWERTV-WERTE`: Werte 2026 und 2027 als eigene Rechnung mit Verweis auf diese Notiz; Beleg bleibt „sekundär", bis eine Veröffentlichung eines Gutachterausschusses gelesen ist.
 - `IIBV-WERTE-2026`: Bemerkung berichtigen – aus der heutigen Indexreihe nicht nachrechenbar, Abweichung 1,5 %.
 - `IIBV-26`, `IIBV-28`, `IIBV-29`, `IMMOWERTV-ANLAGE-3`: Lesedatum 2026-11-18.
-- Neu: Verbraucherpreisindex von Destatis (Tabellenseite, monatlich); Gabler Banklexikon, Stichwörter 62370 bis 62372 (Beleg „sekundär", Suchauszug); Beitrag Dr. Klein (Beleg „original").
-- `GROB-EINFUEHRUNG`: Bemerkung – Eigenkapitalrentabilität über das Banklexikon bestätigt; Gesamtkapitalrentabilität und Rechenregel der Amortisationsdauer weiter offen.
+- Verbraucherpreisindex von Destatis (Tabellenseite, monatlich); Gabler Banklexikon, Stichwörter 62370 und 62371 (Beleg „sekundär", Suchauszug), Stichwort 62372 als eigener Eintrag (Beleg „original", Bildschirmfoto); Beitrag Dr. Klein (Beleg „original").
+- `GROB-EINFUEHRUNG`: Bemerkung – Eigenkapital- und Gesamtkapitalrentabilität über das Banklexikon belegt; offen bleiben die Rechenregel der Amortisationsdauer (`MA-027`) und die Abgrenzung der Sollzinsen (`MA-028`).

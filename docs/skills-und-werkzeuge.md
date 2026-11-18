@@ -45,7 +45,7 @@ Hier steckt der größte Hebel, weil kein allgemeiner Skill das Fachwissen mitbr
 |---|---|---|
 | `vofi-fachmodell` | Aufbau der VOFI-Tabelle, Rechenreihenfolge, Definition jeder Kennzahl mit Quelle, Vorzeichen- und Rundungsregeln | Jede Änderung am Rechenkern |
 | `foerderprogramm-pflegen` | Ablauf: Merkblatt lesen → Programm als Konfigurationsdatei erfassen → Stand-Datum und Quelle eintragen → Testfall anlegen | „Programm X hinzufügen/aktualisieren" |
-| `steuer-regeln` | Regeln je Investorentyp mit Paragraf und Gültigkeitszeitraum; Checkliste bei Gesetzesänderung | Arbeit am Steuermodul |
+| `steuer-regeln` | Regeln je Steuerstatus mit Paragraf und Gültigkeitszeitraum; Checkliste bei Gesetzesänderung | Arbeit am Steuermodul |
 | `referenzfall-anlegen` | Wie ein Lehrbuch- oder Praxisfall zum automatischen Test wird (Eingaben, erwartete Tabelle, Toleranzen, Invarianten wie Finanzierungssaldo = 0) | Neue Formel, neuer Fehlerfall |
 
 Reihenfolge: `vofi-fachmodell` und `referenzfall-anlegen` zuerst (entstehen aus dem Fachkonzept), `foerderprogramm-pflegen` mit dem Fördermodul, `steuer-regeln` mit dem Steuermodul.
