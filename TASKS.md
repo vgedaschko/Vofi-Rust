@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Schlussredaktion des Rechercheberichts nach Prüfrunde 5 läuft (24 Sichtungspunkte); danach Gegenlesen, Prüfskripte, Übernahme nach `main`
+- [~] Auswertung des Lehrbuchkapitels „Immobilieninvestition" (Schulte et al., S. 787–838) läuft: Quellnotiz 11 und Nachbau der Musterrechnung als Referenzfall
 
 ## Als Nächstes
 
@@ -30,14 +30,14 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Wartet auf Nutzer
 
-- [ ] **Vor den Anwendergesprächen freigeben:** Maßstäbe der Vorprüfung (Wortlaut: Spezifikation Kapitel 2, Zeile „Entscheidungspunkte"). Vorschlag: (1) Deckt ein vorgeführtes Produkt den Bedarf, wird nur noch Kauf gegen Excel-Ausbau verglichen; (2) Bedarf allgemein – die Mehrheit der Befragten würde die Grobkalkulation statt Excel nutzen, sonst Abbruch; (3) Bedarf, der nur den Eigenbau trägt – die Mehrheit braucht mindestens eines von Änderungsprotokoll, Arbeit mehrerer Personen an einem Projekt, Berichten und Zugang für Kunden, sonst Umsteuern auf Kauf oder Excel-Ausbau; (4) Mindestfallzahl – die Zeitersparnis über zehn Jahre deckt mindestens die Lizenzkosten des günstigsten vorgeführten Produkts über dieselben zehn Jahre, sonst Abbruch; ohne Katalogverantwortung Abbruch. Dazu von Ihnen: Stundensatz und der Anteil der Zeit, den Sie als Ersparnis ansetzen
+- [ ] **Vor den Herstellervorführungen und Anwendergesprächen freigeben:** Maßstäbe der Vorprüfung (Wortlaut: Spezifikation Kapitel 2, Zeile „Entscheidungspunkte"). Vorschlag: (1) Deckt ein vorgeführtes Produkt den Bedarf, wird nur noch Kauf gegen Excel-Ausbau verglichen; (2) Bedarf allgemein – die Mehrheit der Befragten würde die Grobkalkulation statt Excel nutzen, sonst Abbruch; (3) Bedarf, der nur den Eigenbau trägt – die Mehrheit braucht mindestens eines von Änderungsprotokoll, Arbeit mehrerer Personen an einem Projekt, Berichten und Zugang für Kunden, sonst Umsteuern auf Kauf oder Excel-Ausbau; (4) Mindestfallzahl – die Zeitersparnis über zehn Jahre deckt mindestens die Lizenzkosten des günstigsten vorgeführten Produkts über dieselben zehn Jahre, sonst Abbruch; ohne Katalogverantwortung Abbruch. Dazu von Ihnen: Stundensatz und der Anteil der Zeit, den Sie als Ersparnis ansetzen
 - [ ] **Mit dem Auftrag der Vorstudie freigeben, vor der Bauentscheidung:** Kalkulationszins, Zeitraum (Vorschlag zehn Jahre), ungünstiger Fall (Vorschlag: Entwicklungsaufwand plus 50 %, Einführung beim Kauf und Excel-Ausbau plus 30 %, Nutzen minus 50 %), Schwellen für den Bau (Aufwand eines Teilschritts mehr als 50 % über der Schätzung; Nutzungsgrad unter der Hälfte der Kalkulationen, gezählt über die ersten sechs Monate; Bank oder Gremium verlangen für mehr als eine von drei Vorlagen zusätzlich die Excel-Rechnung)
 - [ ] Vorgaben des Hauses (fällig mit der Fachspezifikation, spätestens vor dem Einsatz der Grobkalkulation): Zielrendite, Höhe der Stressfälle, Beleihungsquote, Mindestdeckung des Schuldendienstes, Mindesttilgung, Anschlusszins, Warnschwellen
 - [ ] Vorführungen bei den drei VOFI-Anbietern anfordern (Prüfliste kommt aus Anhang D des Berichts)
 - [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
 - [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
 - [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
-- [ ] Durchsicht der sechs Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016, MA-026) und der begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-022, Wertansatz in MA-026)
+- [ ] Durchsicht der sechs Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016, MA-026) und der begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-022, MA-023 beim Erwerb, Wertansatz in MA-026)
 - [ ] Gespräch mit der Hausbank (MA-026): Begrenzt die Beleihungsquote nur das eigene Darlehen oder alle Darlehen? Rechnet die Kapitaldienstfähigkeit das Förderdarlehen mit? Welcher Wertansatz und welche Bewirtschaftungspauschale gelten?
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
@@ -62,6 +62,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Recherchebericht abgenommen: Schlussredaktion nach Prüfrunde 5 eingearbeitet (24 Punkte), gegengelesen, Prüfskripte grün; 29 Modellannahmen, 219 Quellen
 - [x] 2026-11-18 Gesprächsleitfaden für die NBank erstellt: 20 Fragen, je mit bisheriger Annahme und Zuordnung zu MA-001 bis MA-006, MA-017, MA-020, MA-021
 - [x] 2026-11-18 Prüfrunde 5 zum Recherchebericht (letzte Runde): Noten 9, 9, 9, 9, 9, 8; gesichtet; Spezifikation, Entscheidungsprotokoll und Aufgabenliste nachgezogen
 - [x] 2026-11-18 Formel der VOFI-Gesamtkapitalrentabilität liegt vor (Bildschirmfoto des Auftraggebers); Kennzahl kommt auf das Kennzahlenblatt

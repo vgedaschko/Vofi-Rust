@@ -16,7 +16,7 @@ Anlass: Der Auftraggeber will die Lehrbuchfragen nicht über den Kauf der Büche
 
 ## VOFI-Kennzahlen
 
-**Quellen.** Die Stichwörter „VOFI", „VOFI-Eigenkapitalrentibilität" und „VOFI-Gesamtkapitalrentabilität" im Gabler Banklexikon (gabler-banklexikon.de, Definitionen 62370, 62371, 62372; Revision des Eintrags zur Eigenkapitalrentabilität vom 26.03.2020). Die Seiten sind von der Cloud-Umgebung aus nicht erreichbar; gelesen wurden nur die Auszüge der Websuche vom 18.11.2026. Wer die Stichwörter verfasst hat, zeigt der Auszug nicht. Am Original gelesen wurde der Beitrag „Die Beurteilung von Investitionen mit Hilfe der VOFI" der Dr. Klein Wowi Redaktion vom 06.04.2021 (drklein-wowi.de).
+**Quellen.** Die Stichwörter „VOFI", „VOFI-Eigenkapitalrentibilität" und „VOFI-Gesamtkapitalrentabilität" im Gabler Banklexikon (gabler-banklexikon.de, Definitionen 62370, 62371, 62372; Revision des Eintrags zur Eigenkapitalrentabilität vom 26.03.2020). Die Seiten sind von der Cloud-Umgebung aus nicht erreichbar; von den Stichwörtern 62370 und 62371 wurden nur die Auszüge der Websuche vom 18.11.2026 gelesen, das Stichwort 62372 liegt als Bildschirmfoto des Auftraggebers vor. Wer die Stichwörter verfasst hat, zeigt der Auszug nicht. Am Original gelesen wurde der Beitrag „Die Beurteilung von Investitionen mit Hilfe der VOFI" der Dr. Klein Wowi Redaktion vom 06.04.2021 (drklein-wowi.de).
 
 **Amortisationsdauer, zwei Lesarten der Rechenregel.**
 

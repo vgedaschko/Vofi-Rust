@@ -291,11 +291,11 @@ Nach Klärungsweg:
 - **Annahme:** Kann der Bauherr die Vorsteuer nicht abziehen, zählt die Umsatzsteuer zu den zuwendungsfähigen Kosten.
 - **Warum offen:** Die Richtlinie regelt die Behandlung der Umsatzsteuer nicht ausdrücklich. Der Verwendungsnachweis der NBank setzt voraus, dass nicht abziehbare Umsatzsteuer zuwendungsfähig ist; eine ausdrückliche Bestätigung der NBank steht aus, und die ANBest-P, auf die die Richtlinie verweist, sind noch nicht gelesen.
 - **Andere Lesart:** Zuwendungsfähig sind nur die Nettokosten; die Umsatzsteuer ist zusätzlich zu finanzieren.
-- **Grundlage:** NBank, Vordruck 4009 „Einfacher Verwendungsnachweis“ (Stand Juli 2026), Nummer 5.4, vom Juristen am 18.11.2026 gelesen: Der Zuwendungsempfänger erklärt, dass die zuwendungsfähigen Ausgaben keine Umsatzsteuer enthalten, soweit sie nach § 15 UStG als Vorsteuer abziehbar ist. Das setzt voraus, dass nicht abziehbare Umsatzsteuer zuwendungsfähig ist. Die Richtlinie verweist in Nummer 12.5 für den Verwendungsnachweis auf Nummer 6 ANBest-P. Die Voreinstellung ist damit die am Text gestützte Lesart und keine Ausnahme von der Vorsichtsregel. Die andere Lesart senkte die Förderung auf die Baukosten um bis zu einem Sechstel (19/119 der Bruttokosten), weniger, wenn die Bemessungsgrenze kappt; die umsatzsteuerfreien Grundstückskosten berührt sie nicht. Quellen: `NBANK-VORDR-4009`, `NBANK-RL-MIETWOHNRAUM-2026`, `NI-ANBEST-P`.
+- **Grundlage:** NBank, Vordruck 4009 „Einfacher Verwendungsnachweis“ (Stand Juli 2026), Nummer 5.4, vom Juristen am 18.11.2026 gelesen: Der Zuwendungsempfänger erklärt, dass die zuwendungsfähigen Ausgaben keine Umsatzsteuer enthalten, soweit sie nach § 15 UStG als Vorsteuer abziehbar ist. Das setzt voraus, dass nicht abziehbare Umsatzsteuer zuwendungsfähig ist. Die Richtlinie verweist in Nummer 12.5 für den Verwendungsnachweis auf Nummer 6 ANBest-P. Die Voreinstellung ist damit die am Text gestützte Lesart und keine Ausnahme von der Vorsichtsregel. Die andere Lesart senkte die Förderung auf die Baukosten um bis zu einem Sechstel (19/119 der Bruttokosten), weniger, wenn die Bemessungsgrenze kappt; die umsatzsteuerfreien Grundstückskosten berührt sie nicht. Quellen: `NBANK-VORDRUCK-4009`, `NBANK-RL-MIETWOHNRAUM-2026`, `NI-ANBEST-P`.
 - **Wirkung (gering):** Höhe von Darlehen und Zuschuss; Finanzierungslücke.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank (nur noch Bestätigung) · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts; Größe der Wirkung und Klärungsweg nach Prüfrunde 4 (Finanzmathematiker, Jurist) berichtigt. Prüfrunde 5 (Jurist): Grundlage ist jetzt der Vordruck 4009; Gewicht von mittel auf gering gesetzt, die Einordnung als Ausnahme von der Vorsichtsregel entfällt.
 
 ### MA-022 · Leerstand beim Mieterwechsel und Sonderabschreibung
@@ -307,7 +307,7 @@ Nach Klärungsweg:
 - **Wirkung (mittel):** Steuerzahlungen im Neubau mit Sonderabschreibung; Ergebnis im Stressfall Leerstand.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Aus Prüfrunde 3 (Jurist) und der dritten Überarbeitung des Rechercheberichts; schädliche Nutzungen und Begriff „Nutzungszeitraum“ aus Prüfrunde 4 (Jurist).
 
 ### MA-023 · Kostenbasis der Baukostenobergrenze der Sonderabschreibung
@@ -315,11 +315,11 @@ Nach Klärungsweg:
 - **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird bei Herstellung an derselben Kostensumme gemessen wie die Förderung der NBank, den Kostengruppen 200 bis 700. Beim Erwerb zählt der Gebäudeanteil des Kaufpreises nach der Kaufpreisaufteilung zuzüglich der anteiligen Erwerbsnebenkosten, ohne den Marktwertdeckel der NBank.
 - **Warum offen:** Welche Kosten in die Grenze des § 7b EStG einzurechnen sind, beantwortet das Gesetz nicht nach Kostengruppen. Für die Anschaffung ist keine Kostensumme bestimmt; Kostengruppen gibt es beim Kauf vom Bauträger nicht.
 - **Andere Lesart:** Strenger beim Erwerb: der Kaufpreis einschließlich Boden nebst Erwerbskosten; die Grenze würde häufiger überschritten. Enger bei Herstellung: eine Kostensumme ohne Außenanlagen oder Baunebenkosten; die Grenze würde seltener überschritten.
-- **Grundlage:** § 7b Abs. 2 und 3 EStG messen die Anschaffungs- oder Herstellungskosten der begünstigten Wohnung. Bei Herstellung ist die weitere Kostensumme und damit der ungünstigere Fall angesetzt (Richtlinie Mietwohnraum 2026, Nummern 1.5 und 5.3.2). Beim Erwerb ist nicht die strengste Lesart angesetzt, sondern der Gebäudeanteil (Einschätzung des Juristen am Wortlaut, Prüfrunde 5): Grund und Boden ist ein eigenes, nicht abnutzbares Wirtschaftsgut und zählt auch bei der Herstellung nicht mit (Kostengruppe 100); dieselben Worte würden sonst für Bau und Kauf verschieden gelesen. Der Marktwertdeckel der NBank beim Ersterwerb stammt aus den Nummern 5.3.2.1 und 5.3.2.4 der Richtlinie und hat in § 7b keine Grundlage; ohne ihn greift die Grenze eher. Quellen: `ESTG-7B`, `NBANK-RL-MIETWOHNRAUM-2026`.
+- **Grundlage:** § 7b Abs. 2 und 3 EStG messen die Anschaffungs- oder Herstellungskosten der begünstigten Wohnung. Bei Herstellung ist die weitere Kostensumme und damit der ungünstigere Fall angesetzt (Richtlinie Mietwohnraum 2026, Nummern 1.5 und 5.3.2). Beim Erwerb gilt eine begründete Ausnahme von der Vorsichtsregel: Angesetzt ist nicht die strengste Lesart, sondern der Gebäudeanteil (Einschätzung des Juristen am Wortlaut, Prüfrunde 5): Grund und Boden ist ein eigenes, nicht abnutzbares Wirtschaftsgut und zählt auch bei der Herstellung nicht mit (Kostengruppe 100); dieselben Worte würden sonst für Bau und Kauf verschieden gelesen. Der Marktwertdeckel der NBank beim Ersterwerb stammt aus den Nummern 5.3.2.1 und 5.3.2.4 der Richtlinie und hat in § 7b keine Grundlage; ohne ihn greift die Grenze eher. Quellen: `ESTG-7B`, `NBANK-RL-MIETWOHNRAUM-2026`.
 - **Wirkung (mittel):** Ob die Sonderabschreibung überhaupt gewährt wird; die Grenze ist eine Ausschlussgrenze.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts; Ersterwerb aus Prüfrunde 4 (Jurist). Prüfrunde 5 (Jurist): beim Erwerb Gebäudeanteil statt Kaufpreis einschließlich Boden, ohne Marktwertdeckel. Offen bleibt, welche Gebäudekosten im Einzelnen zählen, etwa Außenanlagen.
 
 ### MA-024 · Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises
@@ -331,7 +331,7 @@ Nach Klärungsweg:
 - **Wirkung (gering):** Mieterlös nach Einbau einer Wärmepumpe.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts.
 
 ### MA-025 · Modernisierungsumlage für den Glasfaseranschluss
@@ -343,7 +343,7 @@ Nach Klärungsweg:
 - **Wirkung (gering):** Mieterlös nach Glasfaserausbau.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Aus Prüfrunde 3 (Jurist); Grund und andere Lesart nach Prüfrunde 4 (Jurist) neu gefasst. Frage an den Anwalt: Ist Nr. 4a über § 559 Abs. 1 Satz 2 oder über Nr. 4 umlagefähig?
 
 ### MA-026 · Rechengrundlage des Bankdarlehens
