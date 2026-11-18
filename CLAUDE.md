@@ -13,6 +13,7 @@ Diese Dateien steuern das Projekt. Sie sind verbindlich, nicht Hintergrundmateri
 | `docs/entwicklungsplan.md` | Phasen, Freigabepunkte, Bestandsaufnahme der Grundlagen, Prüfplan | Zu Sitzungsbeginn: In welcher Phase sind wir, was ist dran, welche Prüfung ist fällig? | Wenn eine Phase endet oder sich die Reihenfolge ändert |
 | `TASKS.md` | Offene Arbeit, auch die Punkte, die beim Auftraggeber liegen | Zu Sitzungsbeginn und vor jedem Stopp (der Hook erinnert daran) | Laufend |
 | `docs/quellenkataster.md` | Normen- und Quellenkataster: jede Quelle mit Kennung, Stand, Beleg und Prüfturnus | Bevor eine Rechts-, Förder- oder Normangabe verwendet oder geändert wird | Daten in `docs/quellenkataster/quellen.toml` ändern, dann `python3 scripts/quellenkataster.py`; bei jeder neuen Quelle und jedem Lesen am Original |
+| `docs/modellannahmen.md` | Verzeichnis der Modellannahmen: was das Modell annimmt, wo sich etwas vor dem Bau nicht klären lässt | Bevor eine Regel gebaut wird, deren Grundlage ungeklärt ist | Daten in `docs/modellannahmen/annahmen.toml` ändern, dann `python3 scripts/modellannahmen.py`; bei jeder neuen, geklärten oder widerlegten Annahme |
 | `docs/entscheidungen.md` | Entscheidungsprotokoll: was wann warum geändert wurde | Bevor eine frühere Festlegung angefasst wird | Bei jeder Entscheidung oder Änderung |
 | `docs/pruefung/regeln.md` und `docs/pruefung/protokoll.md` | Maßstab und Format der Prüfer; was wann mit welchem Ergebnis geprüft wurde | Vor jeder Prüfrunde | Nach jeder Prüfrunde |
 
@@ -34,6 +35,15 @@ Gehört ein Dokument neu zu denen, ohne die man nicht richtig arbeiten kann, kom
 - Keine Rechts-, Förder- oder Normangabe ohne Eintrag im Normen- und Quellenkataster. Neue Quelle: erst ins Kataster, dann verwenden.
 - Als „am Original gelesen" gilt nur, was in dieser oder einer protokollierten Prüfung tatsächlich am Originaltext gelesen wurde; das Datum wird im Kataster nachgetragen. Zahlen und Paragrafen aus dem Gedächtnis sind keine Quelle.
 - Spezifikation, Katalog, Code und Tests nennen die Kennung (zum Beispiel `BGB-559`), nicht Fundstelle und Stand – die stehen nur im Kataster.
+
+## Modellannahmen
+
+Lässt sich etwas vor dem Bau nicht klären, wird nicht stillschweigend eine Lesart eingebaut. Die Konvention steht in `docs/spezifikation.md`, Kapitel 8; in Kürze:
+
+- Jede solche Setzung bekommt eine Kennung (`MA-000`) im Verzeichnis der Modellannahmen – mit der anderen Lesart, dem Gewicht und dem, der klären kann.
+- Die Kennung steht überall, wo die Annahme wirkt: Spezifikation, Katalog, Code, Tests.
+- Voreingestellt ist die vorsichtige Lesart; bei Gewicht hoch oder mittel nach Möglichkeit umschaltbar.
+- Nicht verwechseln: eine Festlegung ist unsere Bauentscheidung, eine Eingabe gehört dem Anwender, eine ungeprüfte Quelle steht im Kataster. Eine Modellannahme ist eine Annahme über die Außenwelt, die sich als falsch herausstellen kann.
 
 ## Spezifikation ist der Pfad
 

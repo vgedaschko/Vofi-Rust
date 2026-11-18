@@ -7,7 +7,7 @@ Das maßgebliche Entwicklungsdokument. Es beschreibt, was gebaut wird und warum,
 ## Wie dieses Dokument gepflegt wird
 
 - **Erst die Spezifikation, dann die Umsetzung.** Soll etwas anders gebaut werden als hier beschrieben, wird zuerst dieser Text geändert und die Änderung im Entscheidungsprotokoll (`docs/entscheidungen.md`) begründet.
-- **Jede Festlegung trägt einen Status:** **fest** (entschieden, Änderung nur mit Protokolleintrag) · **vorläufig** (Arbeitsstand, wird im jeweiligen Kapitel ausgearbeitet) · **offen** (noch zu klären, mit Zuständigkeit).
+- **Jede Festlegung trägt einen Status:** **fest** (entschieden, Änderung nur mit Protokolleintrag) · **vorläufig** (Arbeitsstand, wird im jeweiligen Kapitel ausgearbeitet) · **offen** (noch zu klären, mit Zuständigkeit). Ruht eine Festlegung auf einer ungeklärten Annahme über Recht, Förderpraxis oder Methode, steht deren Kennung dabei (zum Beispiel `MA-001`); siehe Kapitel 8.
 - **Prüfbefunde fließen ein, wenn sie tragen.** Nach jeder Prüfrunde wird geprüft, ob ein übernommener Befund eine Festlegung berührt; dann wird sie hier angepasst.
 - **Annahmen dürfen fallen.** Eine frühere Festlegung zu ändern ist kein Fehler, solange Grund und Datum im Protokoll stehen und die betroffenen Kapitel nachgezogen sind.
 - **Soll, nicht Ist.** Sobald ein Teil gebaut und abgenommen ist, beschreibt ihn die Anwendungsdokumentation; hier bleibt ein Verweis.
@@ -51,8 +51,8 @@ Die vollständige Fachspezifikation (Tabellenaufbau, Rechenreihenfolge, Formeln,
 | Zeitraster | Intern monatlich; Jahresdarstellung als Verdichtung; zusätzlich ein Jahresmodus für den Vergleich mit Lehrbuchfällen | fest |
 | Zeithorizont | Mindestens 42 Jahre abbildbar (Laufzeit der NBank-Darlehen), Bindungen von 35 Jahren vollständig | fest |
 | Konventionen | Je Zahlungsart sind Basisperiode der Indexierung, Zahlungszeitpunkt, Steuermonat und Verzinsungstakt ausdrücklich festgelegt und dokumentiert | fest (Inhalt: vorläufig) |
-| Geldbeträge | Exakte Dezimalrechnung. Je Zahlungsart ist eine Rundungsregel festgelegt; Darlehenspläne runden je Rate kaufmännisch auf Cent, je Darlehen umstellbar, damit Restschulden mit dem Kontoauszug übereinstimmen | fest (Regeln je Zahlungsart: vorläufig) |
-| Ausschüttungen und Nachschüsse | Die Unterlassensalternative erhält dieselbe Einlagen- und Entnahmenreihe wie die Investition. Einlagen und Entnahmen derselben Monatsperiode werden saldiert. Die Renditeformel bei mehreren Einlagen über die Laufzeit ist eindeutig festzulegen; maßgeblich für Randfälle ist ihr Zähler, nicht der Endwert allein | fest / Formel: offen |
+| Geldbeträge | Exakte Dezimalrechnung. Je Zahlungsart ist eine Rundungsregel festgelegt; Darlehenspläne runden je Rate kaufmännisch auf Cent, je Darlehen umstellbar, damit Restschulden mit dem Kontoauszug übereinstimmen | fest (Regeln je Zahlungsart: vorläufig) – `MA-013` |
+| Ausschüttungen und Nachschüsse | Die Unterlassensalternative erhält dieselbe Einlagen- und Entnahmenreihe wie die Investition. Einlagen und Entnahmen derselben Monatsperiode werden saldiert. Die Renditeformel bei mehreren Einlagen über die Laufzeit ist eindeutig festzulegen; maßgeblich für Randfälle ist ihr Zähler, nicht der Endwert allein | fest / Formel: vorläufig – `MA-012` |
 | Kontrollsummen | Ergebnisse erscheinen erst, wenn alle Kontrollsummen bestanden sind; die Proben berücksichtigen Zuschüsse, Tilgungszuschüsse, Disagio und kapitalisierte Zinsen | fest |
 | Randfälle | Zinssatz null, Eigenkapital null, negativer Endwert und mehrdeutiger interner Zinsfuß haben definierte Ergebnisse statt Fehlern | fest |
 | Nachvollziehbarkeit | Jede Ergebniszahl lässt sich bis zur Eingabe zurückverfolgen; jede Kalkulation speichert Regelstand und Version des Rechenkerns | fest |
@@ -65,10 +65,10 @@ Die vollständige Fachspezifikation (Tabellenaufbau, Rechenreihenfolge, Formeln,
 |---|---|---|
 | Grundsatz | Steuersätze, Mietrechtsregeln, Förderkonditionen und Fristen sind datierte Daten mit Quelle und Gültigkeit, niemals fest im Programm | fest |
 | Fördermodul | Baukasten aus Förderkomponenten (zinsverbilligtes Darlehen, Tilgungszuschuss, Einmalzuschuss, laufender Zuschuss, steuerliche Förderung, Bürgschaft) mit Bemessung, Auszahlungsplan, Bindungen, Voraussetzungen und Kumulierungsregeln; Programme werden konfiguriert, nicht programmiert | fest |
-| Kopplungen | Förderung wirkt automatisch auf Miete (Bindungen, Abzug von Drittmitteln bei Modernisierungsumlage und Vergleichsmietenerhöhung), Finanzplan und Abschreibung | fest |
+| Kopplungen | Förderung wirkt automatisch auf Miete (Bindungen, Abzug von Drittmitteln bei Modernisierungsumlage und Vergleichsmietenerhöhung), Finanzplan und Abschreibung | fest – Dauer des Abzugs: `MA-007` |
 | Pflege | Redaktionell gepflegt mit benannter Verantwortung im Unternehmen; automatisiert höchstens bei Zinssätzen und nur mit Zustimmung der Quelle | fest / Verantwortung: offen – Auftraggeber |
 | Rechtsstand | Laufende Gesetzgebung wird als Entwurfsstand geführt und kann je Kalkulation zugeschaltet werden | vorläufig |
-| NBank-Renditeprüfung | Das Werkzeug weist die Eigenkapitalrendite im Sinne der Überkompensationsprüfung aus, sobald die Rechenweise der NBank geklärt ist | offen – Auftraggeber fragt NBank |
+| NBank-Renditeprüfung | Das Werkzeug weist die Eigenkapitalrendite für die Überkompensationsprüfung aus dem eigenen Finanzplan aus und bezeichnet sie als eigene Berechnung, bis die Rechenweise der NBank geklärt ist | vorläufig – `MA-001`; dazu `MA-002` bis `MA-006` zur NBank-Förderung |
 
 ## 5 Technik
 
@@ -85,7 +85,7 @@ Technische Entscheidungen trifft Claude; hier stehen sie mit ihrer geschäftlich
 | Mandantentrennung | Jede Tabelle trägt von Beginn an ein Mandantenkennzeichen | Kundenzugänge später ohne Umbau der Datenhaltung | fest |
 | Datenhaltung und Betrieb | Eine Anwendung, eine PostgreSQL-Datenbank, Betrieb in der EU | Geringe Betriebskosten, kein Anbieterzwang | fest / Anbieter: offen |
 | Personenbezogene Daten | Mieternamen und Einkommensangaben gehören nicht in das unveränderliche Änderungsprotokoll; Lösch- und Auskunftspflichten werden vor dessen Spezifikation geklärt | Datenschutz und Mitbestimmung prägen die Architektur | offen – vor Spezifikation des Protokolls |
-| Simulation | Zufallsstartwert, Generator und Version werden je Lauf gespeichert; Server und Browser verwenden dieselben mathematischen Funktionen | Wiederholbare Ergebnisse | fest |
+| Simulation | Zufallsstartwert, Generator und Version werden je Lauf gespeichert; Server und Browser verwenden dieselben mathematischen Funktionen. Voreingestellte Streuungen und Korrelationen sind Schätzwerte (`MA-014`) | Wiederholbare Ergebnisse | fest |
 | Excel | Import von Beginn an; Export mit Annahmenblatt und Versionsstempel, ab dem zweiten Teilschritt der Stufe 1 mit Summen- und Saldoformeln, sodass Bank und Gremium nachrechnen können | Banken und Gremien arbeiten mit Excel | fest |
 
 ## 6 Gestaltung und Bedienung
@@ -110,9 +110,27 @@ Vor dem Einsatz bei Kunden mit Anwalt und Steuerberater zu klären; bis dahin si
 | Nutzungsrechte | Lizenzen für Normen, Kostenkennwerte und fremde Datenquellen vor deren Einbindung klären | offen |
 | Mitbestimmung | Änderungsprotokoll und Präsenzanzeige können mitbestimmungspflichtig sein | offen – Auftraggeber |
 
-## 8 Offene Punkte beim Auftraggeber
+## 8 Modellannahmen
+
+Manches lässt sich vor dem Bau nicht klären: eine Bank legt ihre Rechenweise nicht offen, ein Gesetz lässt eine Frage offen, ein Lehrbuch definiert einen Fall nicht. Das Modell muss trotzdem rechnen. Damit solche Setzungen nicht unsichtbar im Programm verschwinden, gilt diese Konvention.
+
+**Was eine Modellannahme ist.** Eine Annahme über die Außenwelt – Recht, Förderpraxis, Bankpraxis, Methode –, die sich als falsch herausstellen kann und auf der ein Ergebnis beruht. Sie ist zu unterscheiden von der Festlegung (wir entscheiden, wie wir bauen; steht in dieser Spezifikation), von der Eingabe des Anwenders (seine Annahme zum Vorhaben, etwa die Mietsteigerung) und von der ungeprüften Quelle (der Wert steht fest, wurde aber noch nicht am Original gelesen; steht im Quellenkataster).
+
+| Regel | Inhalt | Status |
+|---|---|---|
+| Verzeichnis | Jede Modellannahme steht mit Kennung `MA-000` im Verzeichnis `docs/modellannahmen.md` (Daten: `docs/modellannahmen/annahmen.toml`): was angenommen wird, warum es offen ist, die andere Lesart, Grundlage mit Quellenkennungen, Gewicht und Wirkung, wer klären kann, Wiedervorlage | fest |
+| Kennzeichnung | Wo eine Annahme wirkt, steht ihre Kennung: in Spezifikation und Fachhandbuch an der betroffenen Regel, im Regel- und Förderkatalog am Datensatz, im Code an der umsetzenden Stelle und an den Tests, die von ihr abhängen. Eine Kennung, die im Verzeichnis fehlt, lässt die Prüfung scheitern | fest |
+| Vorsicht | Voreingestellt ist die Lesart, die das Vorhaben ungünstiger rechnet. Ausnahmen werden im Verzeichnis begründet | fest |
+| Umschaltbar | Annahmen mit hohem oder mittlerem Gewicht werden nach Möglichkeit als Einstellung gebaut, sodass die andere Lesart ohne Programmänderung gewählt und in der Sensitivität gegenübergestellt werden kann | fest |
+| Mitgeführt im Ergebnis | Der Rechenkern gibt mit jedem Ergebnis die Liste der Annahmen zurück, die in dieser Kalkulation tatsächlich gewirkt haben. Angezeigt wird nur, was gewirkt hat | fest |
+| Sichtbarkeit | Drei Stufen: **Kundenbericht** – steht im Annahmenblatt des Berichts, einmal, in einem Satz, mit der Wirkung; **Anwendung** – am betroffenen Ergebnis abrufbar und in internen Berichten; **nur intern** – in den Entwicklungsunterlagen. Annahmen mit hohem Gewicht sind nie nur intern. Das Annahmenblatt ist der eine Ort für solche Hinweise; sie werden nicht über den Bericht verstreut | fest |
+| Auflösung | Wird eine Annahme geklärt, erhält sie den Status bestätigt (mit Quelle im Quellenkataster) oder widerlegt. Bei widerlegt werden Spezifikation, Katalog und Code geändert, das Entscheidungsprotokoll ergänzt und die Änderungshistorie nennt, welche Ergebnisse sich ändern. Kennungen bleiben bestehen und werden nie neu vergeben | fest |
+| Wiedervorlage | Offene Annahmen werden an jedem Freigabepunkt durchgesehen; vor dem Kundeneinsatz darf keine Annahme mit hohem Gewicht ohne ausdrückliche Freigabe des Auftraggebers offen sein | fest |
+
+## 9 Offene Punkte beim Auftraggeber
 
 1. Gespräch mit der NBank über die Rechenweise der Renditeprüfung.
 2. Drei bis fünf Gespräche mit Anwendern oder Kunden.
 3. Mengengerüst für die Wirtschaftlichkeitsrechnung (Projekte pro Jahr, heutiger Zeitaufwand, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau).
 4. Benennung der Verantwortung für die Pflege des Regel- und Förderkatalogs.
+5. Durchsicht der Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`): Ist die jeweils vorsichtige Voreinstellung fachlich richtig gewählt?

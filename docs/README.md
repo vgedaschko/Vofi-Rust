@@ -10,10 +10,11 @@ Einstieg in alles, was zum Vorhaben und zur Anwendung geschrieben steht. Diese S
 2. **Soll und Ist sind getrennt.** Die Spezifikation beschreibt, was gebaut werden soll. Sobald ein Teil gebaut und abgenommen ist, wird die Anwendungsdokumentation seine Quelle; die Spezifikation verweist dann nur noch dorthin.
 3. **Im selben Arbeitsgang.** Eine Änderung ist erst fertig, wenn die zugehörige Dokumentation nachgezogen ist. Dokumentation wird nicht „später" geschrieben.
 4. **Quellen stehen im Kataster.** Rechts-, Förder- und Normangaben nennen die Kennung aus dem Normen- und Quellenkataster; Fundstelle, Stand und Prüfdatum stehen nur dort.
-5. **Erzeugen statt abschreiben.** Was sich aus Daten oder Code ableiten lässt (Kennzahlenliste, Regel- und Förderkatalog, Schnittstellen), wird daraus erzeugt und nicht von Hand gepflegt.
-6. **Nichts auf Vorrat.** Ein Dokument entsteht, wenn es Inhalt hat. Leere Gerüste gibt es nicht; was in der Übersicht als „ab Phase …" steht, existiert noch nicht.
-7. **Überholtes verschwindet.** Abgelöste Fassungen werden gelöscht, nicht daneben abgelegt; die Versionsverwaltung bewahrt die Geschichte.
-8. **Jedes Dokument beginnt mit Zweck, Leser und Stand** – in zwei, drei Zeilen.
+5. **Ungeklärtes ist gekennzeichnet.** Wo das Modell auf einer ungeklärten Annahme rechnet, steht deren Kennung aus dem Verzeichnis der Modellannahmen.
+6. **Erzeugen statt abschreiben.** Was sich aus Daten oder Code ableiten lässt (Kennzahlenliste, Regel- und Förderkatalog, Schnittstellen), wird daraus erzeugt und nicht von Hand gepflegt.
+7. **Nichts auf Vorrat.** Ein Dokument entsteht, wenn es Inhalt hat. Leere Gerüste gibt es nicht; was in der Übersicht als „ab Phase …" steht, existiert noch nicht.
+8. **Überholtes verschwindet.** Abgelöste Fassungen werden gelöscht, nicht daneben abgelegt; die Versionsverwaltung bewahrt die Geschichte.
+9. **Jedes Dokument beginnt mit Zweck, Leser und Stand** – in zwei, drei Zeilen.
 
 ## Teil A: Projektdokumentation
 
@@ -26,6 +27,7 @@ Wie das Vorhaben gesteuert wird. Leser: Auftraggeber, Entwicklung, Prüfer.
 | [`entscheidungen.md`](entscheidungen.md) | Wann was warum entschieden oder geändert wurde | bei jeder Entscheidung | vorhanden |
 | [`../TASKS.md`](../TASKS.md) | Offene Arbeit, auch beim Auftraggeber | laufend | vorhanden |
 | [`quellenkataster.md`](quellenkataster.md) | Alle Gesetze, Förderrichtlinien, Normen, Standards, Fachliteratur und Datenquellen mit Stand, Beleg und Prüfturnus; erzeugt aus `quellenkataster/quellen.toml` | eine Quelle hinzukommt, sich ändert oder neu am Original gelesen wird | vorhanden |
+| [`modellannahmen.md`](modellannahmen.md) | Annahmen über Recht, Förderpraxis und Methode, die sich vor dem Bau nicht klären lassen: Kennung, Lesart, Gewicht, Sichtbarkeit, Klärungsweg; erzeugt aus `modellannahmen/annahmen.toml` | eine Annahme gesetzt, geklärt oder widerlegt wird | vorhanden |
 | [`pruefung/`](pruefung/) | Prüfregeln, Protokoll, Prüfberichte und Sichtung je Runde | nach jeder Prüfrunde | vorhanden |
 | [`skills-und-werkzeuge.md`](skills-und-werkzeuge.md) | Eingesetzte Skills, Plugins, Hooks, Prüferrollen | ein Werkzeug hinzukommt oder entfällt | vorhanden |
 | [`../reports/`](../reports/), [`../research_notes/`](../research_notes/) | Recherchebericht, Quellnotizen, Referenzrechnungen | eine Recherche abgeschlossen ist; Berichte werden danach nicht fortgeschrieben, sondern durch Spezifikation und Anwendungsdokumentation abgelöst | vorhanden |

@@ -10,6 +10,8 @@ Du prüfst ein Arbeitsergebnis des VOFI-Projekts (Dokument, Fachkonzept, Rechenl
 
 **Quellen:** Das Normen- und Quellenkataster (`docs/quellenkataster.md`) verzeichnet jede Quelle mit Stand und Beleg. Nennt das Prüfobjekt eine Rechts-, Förder- oder Normangabe ohne Katastereintrag, ist das ein Befund. Liest du eine Quelle am Original, vermerke im Bericht Kennung, Lesedatum und die vorgefundene Fassung, damit das Kataster nachgetragen werden kann; weicht das Original vom Kataster ab, ist das ein Befund.
 
+**Modellannahmen:** Rechnet das Prüfobjekt an einer Stelle, deren Grundlage ungeklärt ist (Rechtsfrage offen, Praxis einer Bank nicht veröffentlicht, Lehrbuch schweigt), muss dort eine Kennung aus dem Verzeichnis der Modellannahmen (`docs/modellannahmen.md`) stehen. Fehlt sie, ist das ein Befund – nenne die Stelle und schlage die Annahme mit ihrer anderen Lesart vor. Hältst du eine verzeichnete Annahme für falsch gewählt, nicht vorsichtig genug oder inzwischen klärbar, ist das ebenfalls ein Befund.
+
 **Was ein Befund braucht**
 - Fundstelle (Datei und Abschnitt/Zeile oder Bildschirm und Element).
 - Was genau nicht stimmt und warum es aus deiner Rolle zählt – mit Beleg: Gegenrechnung, Quelle, konkretes Szenario. „Könnte unklar sein" ohne Szenario ist kein Befund.

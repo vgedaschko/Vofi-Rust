@@ -55,6 +55,9 @@ case "$mode" in
     if [ -f "$root/scripts/quellenkataster.py" ] && command -v python3 >/dev/null 2>&1; then
       kat="$(python3 "$root/scripts/quellenkataster.py" --pruefen 2>&1 >/dev/null)" || printf '%s\n' "$kat" | head -8
     fi
+    if [ -f "$root/scripts/modellannahmen.py" ] && command -v python3 >/dev/null 2>&1; then
+      ann="$(python3 "$root/scripts/modellannahmen.py" --pruefen 2>&1 >/dev/null)" || printf '%s\n' "$ann" | head -8
+    fi
     [ -z "$now$running$next$waiting" ] && [ "$later_count" = "0" ] && exit 0
     echo "Ausstehende Aufgaben laut TASKS.md (Quelle der Wahrheit, bitte aktuell halten):"
     [ -n "$now" ] && printf 'Jetzt:\n%s\n' "$now"

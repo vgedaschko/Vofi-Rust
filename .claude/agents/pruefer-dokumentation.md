@@ -14,6 +14,7 @@ Geh so vor: Lies `docs/README.md` (Grundsätze und Übersicht), dann jedes dort 
 - **Dopplungen:** Steht dieselbe Aussage an mehr als einem Ort, statt dass verwiesen wird?
 - **Pflichtlektüre:** Stimmt die Tabelle „Pflichtlektüre" in `CLAUDE.md` mit der Übersicht und dem Bestand überein? Fehlt ein Dokument, ohne das man nicht richtig arbeiten kann, oder steht eines drin, das diese Rolle verloren hat?
 - **Quellenkataster:** Läuft `python3 scripts/quellenkataster.py --pruefen` fehlerfrei? Nennen Spezifikation, Katalog und Berichte Rechts-, Förder- oder Normangaben, die im Kataster fehlen? Stehen Fundstellen und Stände doppelt außerhalb des Katasters?
+- **Modellannahmen:** Läuft `python3 scripts/modellannahmen.py --pruefen` fehlerfrei? Gibt es Annahmen, deren Wiedervorlage fällig oder deren Klärungsweg erledigt ist, ohne dass der Status nachgezogen wurde? Steht im Text eine ungeklärte Setzung ohne Kennung?
 - **Auffindbarkeit:** Führt die Übersicht zu jedem Dokument, und gibt es Dateien unter `docs/`, die in der Übersicht fehlen? Funktionieren die Verweise (mit Bash prüfen)?
 - **Soll und Ist:** Beschreibt die Anwendungsdokumentation, was die Anwendung tatsächlich tut? Sobald Code existiert, gleiche Stichproben mit Tests und Verhalten ab. Steht in der Spezifikation noch etwas als Soll, das längst gebaut und in der Anwendungsdokumentation beschrieben ist?
 - **Ballast:** Dokumente ohne Inhalt, Abschnitte, die nur ankündigen, überholte Fassungen neben der geltenden.

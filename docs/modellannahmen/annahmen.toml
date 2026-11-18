@@ -1,0 +1,305 @@
+# Verzeichnis der Modellannahmen – Datenbestand.
+# Felder und erlaubte Werte: siehe Kopf von scripts/modellannahmen.py.
+# Regeln: docs/spezifikation.md, Kapitel „Modellannahmen".
+# Nach jeder Änderung: python3 scripts/modellannahmen.py
+# Kennungen werden fortlaufend vergeben und nie wiederverwendet.
+
+[[annahme]]
+id = "MA-001"
+titel = "Rechenweise der NBank-Renditeprüfung"
+annahme = "Das Werkzeug weist die Eigenkapitalrendite für die Überkompensationsprüfung aus dem eigenen Finanzplan des Vorhabens aus und vergleicht sie mit dem 30-Jahres-Swapsatz zuzüglich 100 Basispunkten; Bewirtschaftungskosten, Mietsteigerung, Restwert und Betrachtungszeitraum folgen den Annahmen des Vorhabens."
+grund = "Die Richtlinie nennt Verfahren und Schwelle, die NBank veröffentlicht aber weder ihre Rechenannahmen noch ein Rechenblatt."
+alternative = "Die NBank rechnet mit eigenen Pauschalen (etwa nach II. BV), ohne Restwert oder über einen festen Zeitraum; dann weicht ihre Rendite von der des Werkzeugs ab."
+grundlage = "Richtlinie Mietwohnraum 2026, Nummern 5.3.7 und 11.10."
+quellen = ["NBANK-RL-MIETWOHNRAUM-2026"]
+gewicht = "hoch"
+wirkung = "Aussage, ob die Förderung als angemessen gilt oder gekürzt wird; trägt den Nutzen des Werkzeugs im Fördergeschäft."
+sichtbar = "kunde"
+umschaltbar = true
+klaerung = "NBank"
+wiedervorlage = "nach dem Gespräch mit der NBank"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, NBank-Renditeprüfung"]
+bemerkung = "Bis zur Klärung wird die Kennzahl als eigene Berechnung des Werkzeugs bezeichnet, nicht als Ergebnis der NBank-Prüfung."
+
+[[annahme]]
+id = "MA-002"
+titel = "Tilgungsplan des NBank-Darlehens"
+annahme = "Das zinslose Darlehen wird in gleichbleibenden Jahresraten so getilgt, dass es nach 42 Jahren ab Vollauszahlung zurückgezahlt ist."
+grund = "Die Richtlinie nennt nur die Höchstlaufzeit; den Tilgungsplan setzt die NBank im Einzelfall fest. Ein fester Tilgungssatz steht nicht mehr in der Richtlinie."
+alternative = "Fester Tilgungssatz mit Restschuld am Ende oder schnellere Tilgung nach Vorgabe der NBank."
+grundlage = "Richtlinie Mietwohnraum 2026: Rückzahlung binnen 42 Jahren."
+quellen = ["NBANK-RL-MIETWOHNRAUM-2026"]
+gewicht = "mittel"
+wirkung = "Liquidität und Schuldendienstdeckung je Jahr; Endwert nur gering, weil das Darlehen 35 Jahre zinslos ist."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "NBank"
+wiedervorlage = "nach dem Gespräch mit der NBank; im Einzelfall der Bewilligungsbescheid"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Fördermodul"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-003"
+titel = "Zins des NBank-Darlehens ab dem 36. Jahr"
+annahme = "Ab dem 36. Jahr wird das Darlehen mit dem Basiszinssatz zuzüglich 3 Prozentpunkten verzinst; den Basiszinssatz der fernen Jahre gibt der Anwender vor."
+grund = "Die Richtlinie nennt nur die Obergrenze „bis zu 3 Prozentpunkte über dem Basiszinssatz“; der tatsächliche Aufschlag wird erst dann festgelegt."
+alternative = "Geringerer Aufschlag oder Fortführung zinslos."
+grundlage = "Richtlinie Mietwohnraum 2026; Basiszinssatz nach § 247 BGB. Angesetzt ist der ungünstigste zulässige Fall."
+quellen = ["NBANK-RL-MIETWOHNRAUM-2026", "BGB-247"]
+gewicht = "gering"
+wirkung = "Zinsaufwand der Jahre 36 bis 42 auf die Restschuld."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "NBank"
+wiedervorlage = "nach dem Gespräch mit der NBank"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 3, Zeithorizont"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-004"
+titel = "KfW-Darlehen als Ersatz für Eigenmittel bei der NBank"
+annahme = "Ein KfW-Darlehen zählt nicht als Eigenmittel; die geforderten 20 % sind aus Eigenkapital aufzubringen."
+grund = "Die Richtlinie erlaubt die Kombination mit anderen Fördermitteln, regelt aber nicht, ob sie auf die Eigenmittel angerechnet werden."
+alternative = "Die NBank erkennt nachrangige Förderdarlehen ganz oder teilweise als Eigenmittelersatz an."
+grundlage = "Richtlinie Mietwohnraum 2026, Nummer 11.4; Antragsvordruck mit eigener Zeile für KfW-Darlehen. Angesetzt ist der ungünstigere Fall."
+quellen = ["NBANK-RL-MIETWOHNRAUM-2026", "NBANK-VORDRUCK-1011"]
+gewicht = "hoch"
+wirkung = "Eigenkapitalbedarf und damit Eigenkapitalrendite und Finanzierbarkeit des Vorhabens."
+sichtbar = "kunde"
+umschaltbar = true
+klaerung = "NBank"
+wiedervorlage = "nach dem Gespräch mit der NBank"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Fördermodul"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-005"
+titel = "Finanzierungskosten als zuwendungsfähige Kosten der NBank"
+annahme = "Finanzierungskosten einschließlich Bauzeitzinsen gehören nicht zu den zuwendungsfähigen Kosten und sind zusätzlich zu finanzieren."
+grund = "Die gelesenen Unterlagen grenzen die zuwendungsfähigen Kosten nicht abschließend ab."
+alternative = "Finanzierungskosten sind ganz oder teilweise zuwendungsfähig."
+grundlage = "Richtlinie Mietwohnraum 2026; Bemessung nach Herstellungskosten. Angesetzt ist der ungünstigere Fall."
+quellen = ["NBANK-RL-MIETWOHNRAUM-2026"]
+gewicht = "mittel"
+wirkung = "Höhe von Darlehen und Zuschuss; Finanzierungslücke in der Bauphase."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "NBank"
+wiedervorlage = "nach dem Gespräch mit der NBank"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Fördermodul"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-006"
+titel = "Aufteilung bei teilgeförderten Vorhaben"
+annahme = "Kosten, Finanzierung und gemeinsame Erträge werden zwischen geförderten und frei finanzierten Wohnungen nach Wohnfläche aufgeteilt."
+grund = "Ob die NBank einen bestimmten Schlüssel verlangt, ist nicht geprüft; der Antragsvordruck wurde dafür nicht im Einzelnen gelesen."
+alternative = "Aufteilung nach Wohnungszahl, nach tatsächlich zurechenbaren Kosten oder nach Vorgabe der NBank."
+grundlage = "Übliche Praxis der Kostenzuordnung; keine Fundstelle."
+quellen = []
+gewicht = "mittel"
+wirkung = "Zuwendungsfähige Kosten des geförderten Teils und damit Förderhöhe; Rendite je Teil."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "NBank"
+wiedervorlage = "nach dem Gespräch mit der NBank"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Fördermodul"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-007"
+titel = "Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete"
+annahme = "Fördermittel mindern Mieterhöhungen auf die ortsübliche Vergleichsmiete über den gesamten Betrachtungszeitraum."
+grund = "Das Gesetz nennt keine Dauer; Rechtsprechung dazu ist nicht geprüft."
+alternative = "Der Abzug endet nach einer begrenzten Zeit, etwa mit dem Auslaufen des Förderzwecks oder nach einer von der Rechtsprechung gezogenen Frist."
+grundlage = "§ 558 Abs. 5 in Verbindung mit § 559a BGB. Angesetzt ist der für den Vermieter ungünstigere Fall."
+quellen = ["BGB-558", "BGB-559A"]
+gewicht = "mittel"
+wirkung = "Mietpfad geförderter Sanierungen nach der ersten Erhöhung; Endwert und Rendite."
+sichtbar = "kunde"
+umschaltbar = true
+klaerung = "Anwalt"
+wiedervorlage = "mit der Rechtsprüfung vor dem Kundeneinsatz"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Kopplungen"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-008"
+titel = "Modernisierungsumlage für den Heizungstausch bei Staffelmiete"
+annahme = "Bei vereinbarter Staffelmiete ist während der Laufzeit der Staffeln keine Umlage für den Heizungstausch möglich."
+grund = "Der Ausschluss von Mieterhöhungen bei Staffelmiete nennt die neue Umlage für den Heizungstausch nicht ausdrücklich; ob er sie erfasst, ist offen."
+alternative = "Die Umlage nach § 559e BGB ist neben der Staffelmiete zulässig."
+grundlage = "§ 557a BGB und § 559e BGB. Angesetzt ist der für den Vermieter ungünstigere Fall."
+quellen = ["BGB-557A", "BGB-559E"]
+gewicht = "gering"
+wirkung = "Mieterlös nach Heizungstausch in Wohnungen mit Staffelmiete; gedeckelt auf 0,50 €/m² im Monat."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Anwalt"
+wiedervorlage = "mit der Rechtsprüfung vor dem Kundeneinsatz"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-009"
+titel = "Teilung der Bio-Brennstoffkosten im Neubau"
+annahme = "Im Neubau werden keine Kosten eines Bio-Brennstoffanteils zwischen Vermieter und Mieter geteilt."
+grund = "Die Kostenteilung verweist für Neubauten auf die Regeln für neue fossile Heizungen; der Pflichtanteil an Bio-Brennstoff gilt aber nur in bestehenden Gebäuden."
+alternative = "Die Teilung greift im Neubau auch für freiwillig bezogene Bio-Brennstoffe."
+grundlage = "§ 5b CO2KostAufG und § 43 GModG."
+quellen = ["CO2KOSTAUFG-5B", "GMODG-43"]
+gewicht = "gering"
+wirkung = "Nicht umlagefähige Betriebskosten im Neubau mit Gas- oder Ölheizung ab 2029."
+sichtbar = "intern"
+umschaltbar = false
+klaerung = "Anwalt"
+wiedervorlage = "mit der Rechtsprüfung vor dem Kundeneinsatz"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-010"
+titel = "Verlustverrechnung ab 2028"
+annahme = "Verlustvorträge oberhalb von 1 Mio. € sind bis Veranlagungszeitraum 2027 zu 70 % und ab 2028 zu 60 % verrechenbar."
+grund = "Der veröffentlichte Gesetzestext zeigt nur die heute geltende Fassung mit 70 %; die künftig geltende Fassung ist am Bundesgesetzblatt noch nicht gelesen."
+alternative = "Es bleibt auch ab 2028 bei 70 %."
+grundlage = "§ 10d EStG in der geltenden Fassung; die Befristung bis 2027 ist nur aus zweiter Hand belegt. Angesetzt ist der ungünstigere Fall."
+quellen = ["ESTG-10D"]
+gewicht = "mittel"
+wirkung = "Steuerzahlungen von Vorhaben mit Anlaufverlusten ab 2028."
+sichtbar = "anwender"
+umschaltbar = false
+klaerung = "Steuerberater; Bundesgesetzblatt"
+wiedervorlage = "mit der nächsten vierteljährlichen Rechtsprüfung"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 4, Regel- und Förderkatalog"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-011"
+titel = "Bagatellgrenze bei der Umsatzsteueroption"
+annahme = "Die Option zur Umsatzsteuer wird nur für Flächen angesetzt, deren Mieter ausschließlich vorsteuerunschädliche Umsätze ausführt; eine Bagatellgrenze wird nicht berücksichtigt."
+grund = "Das Gesetz kennt keine Bagatellgrenze; eine von der Verwaltung anerkannte Grenze von 5 % ist nur aus zweiter Hand bekannt."
+alternative = "Vorsteuerschädliche Umsätze des Mieters bis 5 % sind unschädlich."
+grundlage = "§ 9 Abs. 2 UStG. Angesetzt ist der ungünstigere Fall."
+quellen = ["USTG-9", "USTAE-9-2"]
+gewicht = "gering"
+wirkung = "Vorsteuerabzug aus Bau- und Erwerbskosten bei gemischt genutzten Gewerbeflächen."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Steuerberater"
+wiedervorlage = "vor Stufe 3 (Gewerbe)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 2, Stufe 3"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-012"
+titel = "Rendite bei mehreren Einlagen und Entnahmen"
+annahme = "Einlagen und Entnahmen werden je Monat saldiert; Entnahmen werden zum Alternativzins nach Steuern auf das Ende des Planungszeitraums aufgezinst und dem Endwert zugerechnet, spätere Einlagen entsprechend dem eingesetzten Eigenkapital."
+grund = "Das Lehrbuch definiert die VOFI-Rendite nur für eine einzige Einlage zu Beginn. Für Nachschüsse und Ausschüttungen gibt es mehrere vertretbare Lesarten."
+alternative = "Im nachgerechneten Testfall liefern die naheliegenden Lesarten 7,18 %, 7,25 %, 7,50 % und 7,88 %."
+grundlage = "Lehrbuchformel nach Grob und Kirchner; die gewählte Lesart bleibt in der Logik der ausdrücklichen Wiederanlage."
+quellen = ["KIRCHNER-IWU-2004", "GROB-EINFUEHRUNG"]
+gewicht = "hoch"
+wirkung = "VOFI-Eigenkapitalrendite jedes Vorhabens mit Eigenkapitaleinsatz über die Bauzeit oder mit laufenden Ausschüttungen."
+sichtbar = "kunde"
+umschaltbar = false
+klaerung = "Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber"
+wiedervorlage = "mit der Fachspezifikation des Rechenkerns (Phase 1)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 3, Ausschüttungen und Nachschüsse"]
+bemerkung = "Die genaue Formel ist in Phase 1 festzulegen und finanzmathematisch nachzurechnen."
+
+[[annahme]]
+id = "MA-013"
+titel = "Rundung in Darlehensplänen"
+annahme = "Zins und Tilgung jeder Rate werden kaufmännisch auf Cent gerundet."
+grund = "Banken runden unterschiedlich; welche Regel gilt, steht im jeweiligen Darlehensvertrag."
+alternative = "Abschneiden statt Runden oder Rundung nur des Gesamtbetrags der Rate."
+grundlage = "Gegenrechnung: kaufmännische Rundung und Abschneiden liegen bei einem Darlehen über 700.000 € zu 4 % nach zehn Jahren 0,60 € auseinander."
+quellen = []
+gewicht = "gering"
+wirkung = "Restschuld im Cent-Bereich; Übereinstimmung mit dem Kontoauszug der Bank."
+sichtbar = "intern"
+umschaltbar = true
+klaerung = "Darlehensvertrag im Einzelfall"
+wiedervorlage = "bei der ersten Parallelrechnung mit echten Darlehen (Abnahme Stufe 1)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 3, Geldbeträge"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-014"
+titel = "Streuungen und Korrelationen der Simulation"
+annahme = "Voreingestellte Streuungen, Beharrungswerte und Korrelationen der Risikogrößen sind Schätzwerte des Werkzeugs; der Anwender kann sie überschreiben."
+grund = "Belastbare Marktquellen für Streuungen und Korrelationen deutscher Immobilienmärkte liegen nicht vor."
+alternative = "Kalibrierung an eigenen Zeitreihen des Unternehmens oder an Marktdaten eines Anbieters."
+grundlage = "Fachliteratur zur Simulation in der Immobilienbewertung nennt Verfahren, aber keine deutschen Parameter."
+quellen = []
+gewicht = "hoch"
+wirkung = "Bandbreite der Ergebnisse, Wahrscheinlichkeit, die Zielrendite zu verfehlen, schlechter Fall."
+sichtbar = "kunde"
+umschaltbar = true
+klaerung = "Auftraggeber (eigene Erfahrungswerte); später Marktdaten"
+wiedervorlage = "vor Stufe 2 (Simulation)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 5, Simulation"]
+bemerkung = ""
+
+[[annahme]]
+id = "MA-015"
+titel = "Modernisierungsumlage im Referenzfall IWU 2013"
+annahme = "Der Referenzfall rechnet mit einer Modernisierungsumlage von 11 % auf die Kosten abzüglich Zuschuss."
+grund = "Der Satz steht nicht in der gelesenen Tabelle; er ist daraus erschlossen, dass die Mietzeile damit exakt übereinstimmt."
+alternative = "Eine andere Kombination aus Satz und Bemessungsgrundlage, die zufällig dieselbe Mietzeile ergibt."
+grundlage = "Endbericht des IWU von 2013, Anhang C; 11 % war der 2013 geltende gesetzliche Satz."
+quellen = ["IWU-2013-ENDBERICHT"]
+gewicht = "gering"
+wirkung = "Nur der Abnahmetest; kein Einfluss auf Kalkulationen."
+sichtbar = "intern"
+umschaltbar = false
+klaerung = "Fachliteratur (Endbericht im Volltext)"
+wiedervorlage = "beim Anlegen des Abnahmetests (Phase 3)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 3, Abnahmetests"]
+bemerkung = ""
