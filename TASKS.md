@@ -7,19 +7,18 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 ## Jetzt
 
 - [~] Fachspezifikation des Rechenkerns: zweite Überarbeitung nach Prüfrunde 2 läuft (32 Sichtungspunkte, dazu die Regeln aus der NBank-Richtlinie); danach Nachziehen der Blindrechnung durch einen zweiten Bearbeiter und Prüfrunde 3
-- [~] Recherche läuft: jede offene Modellannahme und jede Frage der drei Leitfäden an amtlichen Quellen prüfen (BMF-Schreiben, Steuerrichtlinien, Landesrecht, NBank, KfW) → Quellnotiz 13
-- [~] Recherche läuft: Grunderwerbsteuer, Mietpreisbremse und Kappungsgrenze für Niedersachsen, Bremen, Hamburg, Schleswig-Holstein und Nordrhein-Westfalen am amtlichen Original mit Gemeindelisten → Quellnotiz 14
+- [~] Recherche läuft: Wortlaut der Steuerrichtlinien und älteren Urteile, die Quellnotiz 13 nur sekundär belegt (R 21.5, R 6.5, R 9.2, R 7.1, Vermietungsgenossenschaft, BMF-Schreiben zu Vorfälligkeit und Damnum, § 10d ab 2028), auf frei zugänglichem Weg ohne die Captcha-Seiten → Quellnotiz 15; danach Steuerfragen im Leitfaden kürzen
 
 ## Als Nächstes
 
 - [ ] Nach Rückkehr der zweiten Überarbeitung: Entscheidung „Netzzugang der Cloud-Umgebung uneingeschränkt (Einstellung des Auftraggebers vom 2026-11-18)" ins Entscheidungsprotokoll und in den Entwicklungsplan (Abschnitt Grundlagen) eintragen; Kataster-Einträge mit Vermerk „gesperrt" neu lesen (Gabler Banklexikon, Deutsche Nationalbibliothek, niedersächsisches Haushaltsrecht)
-- [ ] Nach den Quellnotizen 13 und 14: Verzeichnis der Modellannahmen, Quellenkataster und die drei Gesprächsleitfäden nachziehen; Landeswerte in den Katalog der Fachspezifikation
+- [ ] Aus den Quellnotizen 13 und 14 nachziehen, sobald die zweite Überarbeitung zurück ist (sie bearbeitet dieselben Dateien): Verzeichnis der Modellannahmen nach Notiz 13, Abschnitt (a) – `MA-021` und `MA-022` schließen, `MA-023` (Kostenbasis nach § 255 HGB, geteilt durch Nutzfläche), `MA-029` (Voreinstellung auf Verwaltungsauffassung), `MA-030` (im Verkaufsjahr keine erweiterte Kürzung; Eingabe „Übergang zum Jahresende“), `MA-033` (KfW verlangt Vorfälligkeit), `MA-034`, `MA-017` (Übernahme durch Käufer umschaltbar), `MA-006`, `MA-005`, `MA-008`, `MA-020`, `MA-024`, `MA-010`, `MA-002`; Quellenkataster nach Notiz 13 (c) und Notiz 14 (dort auch Fundstelle `NI-MIETERSCHUTZVO` berichtigen: Nds. GVBl. 2024 Nr. 122); neue Regeln für Teil 2 der Fachspezifikation vormerken (Rücknahme der Sonderabschreibung bei steuerfreiem Verkauf im Nutzungszeitraum, Beihilfewert nach § 7b, Leerstand über drei Monate in der Bindung, KfW-Katalogwerte); Landeswerte in den Katalog (je Instrument eigener Gültigkeitszeitraum, Gemeinden über den amtlichen Gemeindeschlüssel, Samtgemeinden auflösen); neue Modellannahme „Was gilt nach Ablauf einer Gebietsverordnung“ mit `MA-039` abgleichen
 - [ ] Aus Quellnotiz 12 nachziehen, sobald die zweite Überarbeitung der Fachspezifikation zurück ist: prüfen, was sie davon schon umgesetzt hat (Rang des Förderdarlehens, Mindesttilgung 1 % der Bankmittel, Auszahlungsraten, Tilgungsbeginn, Tragfähigkeit nach Nr. 4.1); Verzeichnis `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-017`, `MA-026`; Kataster-Eintrag der Richtlinie mit den gelesenen Nummern
 - [ ] Arbeitsregel aus dem Fehler: Bevor eine Frage an Dritte geht (NBank, Bank, Steuerberater), wird sie am Originaltext der einschlägigen Quelle gegengelesen und die Fundstelle oder „schweigt dazu" vermerkt; ebenso bei jeder neuen Modellannahme. Die Fragen an Hausbank und Steuerberater sind danach noch einmal durchzusehen
 - [ ] Nach dem NBank-Gespräch: Antworten mit Datum und Gesprächspartner im Verzeichnis der Modellannahmen nachtragen (Status, Voreinstellung), Spezifikation und Katalogvorgaben nachziehen
 - [ ] Fachspezifikation: offene Punkte aus Prüfrunde 3 klären – Renditeformel bei Einlagen und Entnahmen in verschiedenen Perioden, Reihenfolge der Rechenschritte bei der Rundung, nominal/effektiv je Zahlungsart, Buchung von Barzuschüssen, Prozessdefinition der Simulation
 - [ ] Recherche zu den fünf bisher nicht untersuchten Anbietern (Reasult, PROBIS und weitere) bis zur Vorprüfung
-- [ ] **Hält den Einsatz in vier von fünf Ländern auf:** Quellenkataster und Katalog für die vier weiteren Länder (Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen): Grunderwerbsteuersätze, Verordnungen zu Mietpreisbremse und Kappungsgrenze am Original lesen und eintragen; dafür werden Landesrechtsportale gebraucht, die die Cloud-Umgebung bisher nicht erreicht
+- [ ] Landesrecht nachholen (Quellnotiz 14): Niedersachsen, Nordrhein-Westfalen und Hamburg sind am Original gelesen; für Bremen (Mietenbegrenzungs- und Kappungsgrenzen-Verordnung, Verkündung des Grunderwerbsteuersatzes 5,5 %) und Schleswig-Holstein (Kappungsgrenzen-Verordnung mit 62 Gemeinden, Grunderwerbsteuergesetz) liegen nur Sekundärbelege vor, weil die Landesserver die Verbindung abweisen – bis dahin im Katalog als „nicht am Original“ kennzeichnen
 - [ ] Zuschnitt nachziehen (Fachspezifikation, Kapitel 2): KfW-Neubaudarlehen 297/298 und 296 in Teilschritt 1b-2 statt 1c; Prüfen, was von den KfW-Programmen für den Bestand schon in 1b-1 gebraucht wird
 - [ ] Quellenkataster: als Nächstes am Original lesen – KfW-Merkblatt 459 (Heizungsförderung für Vermieter), niedersächsisches Landesrecht (Mietpreisbremse und Kappungsgrenze, Grunderwerbsteuersatz, Einkommensgrenzen NWoFG), amtliche Fassung BEG EM, De-minimis-Verordnung, gif-Kennzahlen; künftig geltende Fassungen am Bundesgesetzblatt (Verlustvortrag ab 2028)
 - [ ] Quellenkataster: Mindestkapitalisierungszinssätze der BaFin am Original nachziehen
@@ -34,7 +33,6 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Fachspezifikation Rechenkern (aus Quellnotiz 11): Unterlassensalternative als eigener Finanzplan mit zwei Zinssätzen und Vergleichsfaktor der Rendite dazu (MA-012); „freie Tilgung" (Periodenüberschuss tilgt) als benannte Tilgungsart; Lehrbuchdarstellung als Ansicht; die beiden Musterrechnungen als automatische Tests
 - [ ] Fachspezifikation Finanzierung (aus Prüfrunde 5): Anschlusszins und Tilgung nach Ende der Zinsbindung, auch für übernommene Förderdarlehen; Vorfälligkeitsentschädigung bei Zinsbindung über die Haltedauer hinaus; tragbarer Preis im Stressfall; Suchbereich und Raster der Zielwertsuche; Zahl der Eingaben beim Ankauf gebundener Bestände; Abgrenzung der Sollzinsen in der Gesamtkapitalrendite (MA-028)
 - [ ] Fachspezifikation Steuern (aus Prüfrunde 4 und 5): Gewerbesteuer auf den Verkaufsgewinn je Steuerstatus, De-minimis-Bindung nach Person (MA-029); Gewerbesteuer der Personengesellschaft beim Verkauf, Veräußerungsgewinn bei erweiterter Kürzung, Bewertung bei laufender Bindung über MA-017 hinaus, Zuschussentgelt in der Kreditprobe, Abstand zur Zielrendite als Endwertüberschuss (MA-012)
-- [ ] Quellenkataster: niedersächsisches Haushaltsrecht (VV zu § 44 LHO, ANBest-P; klärt MA-021) und Übergangsrecht zu § 559f BGB am Original lesen – von der Cloud-Umgebung aus bisher nicht erreichbar
 
 ## Wartet auf Nutzer
 
@@ -54,7 +52,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
 - [ ] Vertretung für die Katalogverantwortung benennen
 - [ ] Sichtbarkeit des Repositorys `Vofi-Rust` entscheiden: derzeit öffentlich, enthält interne Planungsunterlagen
-- [ ] Gespräch mit der NBank (Termin in der Woche ab 23.11.2026): Leitfaden auf zehn offene Fragen gekürzt, nachdem die Richtlinie dagegen gelesen ist (13 der 20 ursprünglichen Fragen beantwortet sie ganz oder teilweise) – https://claude.ai/artifact/H2xAUn4xT3EikxE8E1rqX1 . Danach Antworten zurückmelden
+- [ ] Gespräch mit der NBank (Termin in der Woche ab 23.11.2026): Leitfaden mit zwölf offenen Fragen; alles Übrige ist aus Richtlinie, Landesrecht und NBank-Unterlagen beantwortet und steht dort als Stand (zuletzt am 18.11.2026 nach Quellnotiz 13 nachgezogen) – https://claude.ai/artifact/H2xAUn4xT3EikxE8E1rqX1 . Danach Antworten zurückmelden
 - [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
 - [ ] Verantwortung für die Pflege des Regel- und Förderkatalogs im Unternehmen benennen
 - [ ] Mengengerüst für die Wirtschaftlichkeitsrechnung: Projekte pro Jahr, Zeitaufwand je Kalkulation heute, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau; für das Beratungsgeschäft Mandate pro Jahr und Honorare
@@ -73,6 +71,9 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18: Quellnotiz 13 – 25 Modellannahmen und die Fragen an Steuerberater und Hausbank an amtlichen Quellen geprüft (3 beantwortet, 4 überwiegend, 13 teilweise, 5 geschärft, 12 offen); Kernbefunde am Text nachgeprüft (§ 9 Nr. 1 GewStG, BFH III R 1/23, BMF zu § 7b Rn. 49–51, 83, 86, Entgeltkatalog NBank, KfW-Merkblatt 297/298); niedersächsisches Haushaltsrecht (VV zu § 44 LHO, ANBest-P) gelesen, klärt `MA-021`
+- [x] 2026-11-18: Quellnotiz 14 – Grunderwerbsteuer, Mietpreisbremse und Kappungsgrenze für fünf Länder mit Gemeindelisten (drei Länder am Original, Bremen und Schleswig-Holstein sekundär)
+- [x] 2026-11-18: Gesprächsleitfaden NBank nach Notiz 13 nachgezogen (zwölf offene Fragen, fünf weitere Punkte als beantwortet); Bankfragen B2, B7, B8, B9 geschärft
 - [x] 2026-11-18 NBank-Richtlinie gegen die Fragenliste gelesen (Hinweis des Auftraggebers): 5 Fragen ganz, 8 überwiegend oder teilweise beantwortet → Quellnotiz 12; Leitfaden gekürzt
 - [x] 2026-11-18 Prüfrunde 2 zur Fachspezifikation: sieben Rollen bei 8 von 10; Blindrechnung trifft rund 340 Sollwerte allein aus dem Text; gesichtet (32 Punkte)
 - [x] 2026-11-18 Fachspezifikation des Rechenkerns nach Prüfrunde 1 überarbeitet: 167 Regeln, 19 Proben, 20 Referenzfälle mit 906 Prüfungen, alle bestanden; 37 Modellannahmen, 229 Quellen
