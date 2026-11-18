@@ -22,6 +22,7 @@ Das maßgebliche Entwicklungsdokument. Es beschreibt, was gebaut wird und warum,
 | Vorhabensarten | Ankauf Bestand · Neubau zur Vermietung · Sanierung im Bestand · Entwicklung mit Verkauf | fest |
 | Nutzungsarten | Frei finanziertes Wohnen · geförderter Wohnungsbau · Gewerbe/Mixed-Use · Sonderimmobilien | fest |
 | Investorensichten | Kapitalgesellschaft · Privatperson und vermögensverwaltende Personengesellschaft · steuerbefreite, kommunale und genossenschaftliche Unternehmen | fest |
+| Steuerstatus | Eigenes Merkmal neben der Investorensicht: Die Rechtsform bestimmt nicht die Steuerpflicht (eine kommunale Wohnungs-GmbH ist steuerpflichtig, eine Vermietungsgenossenschaft nur unter Bedingungen befreit) | fest |
 | Regionaler Schwerpunkt | Deutschland, Förderlogik zuerst für Niedersachsen (NBank) und Bund (KfW, BAFA) | fest |
 | Fachliche Grundlage | Lehrbuch-VOFI (Grob; Schulte/Ropeter), Branchenrichtlinien, geltendes Recht mit Quelle und Stand. Keine eigene Excel-Vorlage; die älteren Repositories `VoFi` und `NBank` werden nicht herangezogen | fest |
 | Qualitätsanspruch | 9 von 10 nach den Maßstäben in `CLAUDE.md` | fest |
@@ -37,7 +38,8 @@ Grundlage ist der Recherchebericht (`reports/VOFI Immobiliensoftware Marktrecher
 | Arbeitsablauf | Das Werkzeug trägt den Weg von der Grobkalkulation mit wenigen Eingaben über die Verfeinerung bis zur Gremien-, Bank- und Förderantragsunterlage. Eine frühe Phase mit wenigen Eingaben gehört in Stufe 1 | fest |
 | Vollständigkeit je Vorhabensart | Eine Vorhabensart kommt erst in eine Stufe, wenn sie dort vollständig rechenbar ist (bei Ankauf Bestand also mit Bewirtschaftung, Instandhaltung, Kaufpreisaufteilung und CO2-Kosten) | fest |
 | Kennzahlen | VOFI-Kennzahlen und die international üblichen Größen nebeneinander; ein festes Kennzahlenblatt je Vorhabensart; Zielrendite als Vergleichsmaß neben der Unterlassensalternative | vorläufig |
-| Entscheidungspunkte | Vor jeder Stufe eine Freigabe durch den Auftraggeber mit vorher benannten Abbruchkriterien | fest |
+| Entscheidungspunkte | Vor jeder Stufe eine Freigabe durch den Auftraggeber mit vorher benannten Abbruchkriterien. Der erste Freigabepunkt ist die Vorprüfung vor Beginn der Phase 2: Gespräch mit der NBank, Anwendergespräche, Herstellervorführungen und Katalogverantwortung müssen dann vorliegen | fest |
+| Erster Teilschritt | Der erste Teilschritt der Stufe 1 enthält nur, was für eine belegbare Grobkalkulation nötig ist: Änderungsprotokoll, Anmeldung, Projektzuweisung mit einfacher Rollenunterscheidung, benannter Arbeitsstand. Präsenzanzeige und das volle Rollenmodell mit Freigaben folgen im zweiten Teilschritt | fest |
 
 ## 3 Rechenkern
 
@@ -49,12 +51,12 @@ Die vollständige Fachspezifikation (Tabellenaufbau, Rechenreihenfolge, Formeln,
 | Zeitraster | Intern monatlich; Jahresdarstellung als Verdichtung; zusätzlich ein Jahresmodus für den Vergleich mit Lehrbuchfällen | fest |
 | Zeithorizont | Mindestens 42 Jahre abbildbar (Laufzeit der NBank-Darlehen), Bindungen von 35 Jahren vollständig | fest |
 | Konventionen | Je Zahlungsart sind Basisperiode der Indexierung, Zahlungszeitpunkt, Steuermonat und Verzinsungstakt ausdrücklich festgelegt und dokumentiert | fest (Inhalt: vorläufig) |
-| Geldbeträge | Exakte Dezimalrechnung; Darlehenspläne mit banküblicher Rundung auf Cent je Rate, damit Restschulden mit dem Kontoauszug übereinstimmen | fest |
-| Ausschüttungen und Nachschüsse | Die Unterlassensalternative erhält dieselbe Einlagen- und Entnahmenreihe wie die Investition. Die Renditeformel bei mehreren Einlagen über die Laufzeit ist eindeutig festzulegen | fest / Formel: offen |
+| Geldbeträge | Exakte Dezimalrechnung. Je Zahlungsart ist eine Rundungsregel festgelegt; Darlehenspläne runden je Rate kaufmännisch auf Cent, je Darlehen umstellbar, damit Restschulden mit dem Kontoauszug übereinstimmen | fest (Regeln je Zahlungsart: vorläufig) |
+| Ausschüttungen und Nachschüsse | Die Unterlassensalternative erhält dieselbe Einlagen- und Entnahmenreihe wie die Investition. Einlagen und Entnahmen derselben Monatsperiode werden saldiert. Die Renditeformel bei mehreren Einlagen über die Laufzeit ist eindeutig festzulegen; maßgeblich für Randfälle ist ihr Zähler, nicht der Endwert allein | fest / Formel: offen |
 | Kontrollsummen | Ergebnisse erscheinen erst, wenn alle Kontrollsummen bestanden sind; die Proben berücksichtigen Zuschüsse, Tilgungszuschüsse, Disagio und kapitalisierte Zinsen | fest |
 | Randfälle | Zinssatz null, Eigenkapital null, negativer Endwert und mehrdeutiger interner Zinsfuß haben definierte Ergebnisse statt Fehlern | fest |
 | Nachvollziehbarkeit | Jede Ergebniszahl lässt sich bis zur Eingabe zurückverfolgen; jede Kalkulation speichert Regelstand und Version des Rechenkerns | fest |
-| Abnahmetests | Zwei veröffentlichte Rechenbeispiele des IWU (2004, 2013) und der nachgerechnete Testfall mit Varianten laufen als automatische Tests; weitere Fälle für Verlustvortrag, steuerpflichtigen Verkauf und Monatsraster kommen hinzu | fest |
+| Abnahmetests | Zwei veröffentlichte Rechenbeispiele des IWU (2004, 2013) und der nachgerechnete Testfall mit Varianten laufen als automatische Tests, jeder mit benannter Toleranz (eigene Fälle auf den Cent; das IWU-Beispiel von 2013 ist nur auf rund 3,40 € nachvollziehbar); weitere Fälle für Verlustvortrag, steuerpflichtigen Verkauf und Monatsraster kommen hinzu | fest |
 | Offene Lehrbuchdefinitionen | VOFI-Gesamtkapitalrendite und Amortisationsdauer nach Grob sind am Original zu beschaffen; bis dahin wird die Gesamtkapitalrendite nicht ausgewiesen | offen – Literatur beschaffen |
 
 ## 4 Regel- und Förderkatalog
@@ -84,7 +86,7 @@ Technische Entscheidungen trifft Claude; hier stehen sie mit ihrer geschäftlich
 | Datenhaltung und Betrieb | Eine Anwendung, eine PostgreSQL-Datenbank, Betrieb in der EU | Geringe Betriebskosten, kein Anbieterzwang | fest / Anbieter: offen |
 | Personenbezogene Daten | Mieternamen und Einkommensangaben gehören nicht in das unveränderliche Änderungsprotokoll; Lösch- und Auskunftspflichten werden vor dessen Spezifikation geklärt | Datenschutz und Mitbestimmung prägen die Architektur | offen – vor Spezifikation des Protokolls |
 | Simulation | Zufallsstartwert, Generator und Version werden je Lauf gespeichert; Server und Browser verwenden dieselben mathematischen Funktionen | Wiederholbare Ergebnisse | fest |
-| Excel | Import von Beginn an; Export zunächst als Werte mit Annahmenblatt und Versionsstempel | Banken und Gremien arbeiten mit Excel | vorläufig – Praktiker verlangt nachrechenbaren Export früher |
+| Excel | Import von Beginn an; Export mit Annahmenblatt und Versionsstempel, ab dem zweiten Teilschritt der Stufe 1 mit Summen- und Saldoformeln, sodass Bank und Gremium nachrechnen können | Banken und Gremien arbeiten mit Excel | fest |
 
 ## 6 Gestaltung und Bedienung
 

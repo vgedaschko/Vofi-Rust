@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Prüfrunde 2 zum überarbeiteten Recherchebericht läuft (sechs Rollen); danach sichten, einarbeiten, weitere Runden bis mindestens 9 von 10, dann Protokoll
+- [~] Zweite Überarbeitung des Rechercheberichts läuft (Auftrag: `docs/pruefung/2026-11-18-recherchebericht-runde2/sichtung.md`); danach Prüfrunde 3
 
 ## Als Nächstes
 
@@ -18,6 +18,9 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Wartet auf Nutzer
 
+- [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
+- [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
+- [ ] Im NBank-Gespräch zusätzlich klären: Aufteilung bei teilgeförderten Vorhaben; Zuwendungsfähigkeit von Finanzierungskosten
 - [ ] Sichtbarkeit des Repositorys `Vofi-Rust` entscheiden: derzeit öffentlich, enthält interne Planungsunterlagen
 - [ ] Gespräch mit der NBank: Rechenweise der Renditeprüfung (Überkompensation) erfragen
 - [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
@@ -35,6 +38,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Prüfrunde 2 zum Recherchebericht: Noten 7, 7, 7, 8, 8, 8; gesichtet; Spezifikation und Plan nachgezogen
 - [x] 2026-11-18 Entwicklungsumgebung mit Probeläufen geprüft; Hooks für Rust und Spezifikations-Merker eingerichtet und getestet
 - [x] 2026-11-18 Dokumentationsübersicht mit Pflegegrundsätzen (`docs/README.md`), Rolle Dokumentation als 16. Prüfer
 - [x] 2026-11-18 Recherchebericht nach Prüfrunde 1 überarbeitet
