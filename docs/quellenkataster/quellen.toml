@@ -1,6 +1,180 @@
 # Normen- und Quellenkataster – Datenbestand.
 # Felder und erlaubte Werte: siehe Kopf von scripts/quellenkataster.py.
 # Nach jeder Änderung: python3 scripts/quellenkataster.py
+#
+# Erstbefüllung 18.11.2026 aus den Prüfberichten der Runden 1 und 2 (docs/pruefung/2026-11-17-*, 2026-11-18-*),
+# den Notizen 03, 06, 07, 08, 09 (research_notes/VOFI Immobiliensoftware Marktrecherche/) und dem Recherchebericht.
+# „Fassung TT.MM.JJJJ" bei Bundesrecht = Datum des letzten Änderungsgesetzes der Gesamtausgabe auf
+# gesetze-im-internet.de, nicht das Datum der letzten Änderung der Einzelnorm.
+
+# ---------------------------------------------------------------------------
+# Gesetze und Verordnungen: Mietrecht (BGB)
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "BGB-247"
+gruppe = "gesetz"
+kurz = "§ 247 BGB"
+titel = "Basiszinssatz"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__247.html"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Anschlusszins des NBank-Darlehens ab dem 36. Jahr (Basiszinssatz plus bis zu 3 Prozentpunkte)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur über RL Mietwohnraum 2026 Nr. 5.3.4 genannt. Den jeweils geltenden Wert veröffentlicht die Bundesbank; als Datenquelle noch nicht erfasst."
+
+[[quelle]]
+id = "BGB-307"
+gruppe = "gesetz"
+kurz = "§ 307 BGB"
+titel = "Inhaltskontrolle"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__307.html"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Haftungsbegrenzung in Beratungsverträgen mit Unternehmern"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nach Prüfrunde 2 (Jurist, Befund 10) Maßstab gegenüber Unternehmern statt § 309; Wortlaut nicht gelesen."
+
+[[quelle]]
+id = "BGB-309"
+gruppe = "gesetz"
+kurz = "§ 309 BGB"
+titel = "Klauselverbote ohne Wertungsmöglichkeit"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__309.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Haftungsbegrenzung in Beratungsverträgen mit Verbrauchern (Nr. 7)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Nr. 7. Gilt gegenüber Unternehmern nicht unmittelbar (§ 310 Abs. 1); dort § 307."
+
+[[quelle]]
+id = "BGB-310"
+gruppe = "gesetz"
+kurz = "§ 310 BGB"
+titel = "Anwendungsbereich der AGB-Kontrolle"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__310.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abgrenzung der Klauselkontrolle bei Kunden, die Unternehmer sind"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Abs. 1."
+
+[[quelle]]
+id = "BGB-555B"
+gruppe = "gesetz"
+kurz = "§ 555b BGB"
+titel = "Modernisierungsmaßnahmen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__555b.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Pflichtfeld Maßnahmenart je Modernisierung", "Entscheidungsbaum Modernisierungsumlage und Heizungstausch"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nr. 1a (Heizungsanlage nach § 42 GModG) ist nur über § 559e umlagefähig; Nr. 2 und Nr. 7 sind nicht umlagefähig (Prüfrunde 2). Ob ein Gaskessel-Ersatz Nr. 1 erfüllt, ist Auslegungsfrage für den Anwalt."
+
+[[quelle]]
+id = "BGB-556D"
+gruppe = "gesetz"
+kurz = "§ 556d BGB"
+titel = "Zulässige Miethöhe bei Mietbeginn (Mietpreisbremse)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__556d.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mietpfad bei Neuvermietung", "Mietpfad nach Bindungsende"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gilt nur mit Landesverordnung (siehe NI-MIETERSCHUTZVO); Verordnungen längstens bis 31.12.2029. Laufendes Vorhaben „Mietrecht II“ nicht geprüft."
+
+[[quelle]]
+id = "BGB-556E"
+gruppe = "gesetz"
+kurz = "§ 556e BGB"
+titel = "Berücksichtigung der Vormiete oder einer durchgeführten Modernisierung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__556e.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Vormiete und Vormodernisierung in der Mieterliste", "Zulässige Neuvermietungsmiete beim Ankauf"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BGB-556F"
+gruppe = "gesetz"
+kurz = "§ 556f BGB"
+titel = "Ausnahmen von der Mietpreisbremse"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__556f.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mietpfad bei Neuvermietung nach Bindungsende (Erstbezug nach 01.10.2014 ohne Grenze)", "Erste Vermietung nach umfassender Modernisierung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BGB-557A"
+gruppe = "gesetz"
+kurz = "§ 557a BGB"
+titel = "Staffelmiete"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__557a.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Matrix Mietvertragsart und Erhöhungsweg", "Mietpreisbremse je Staffel"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 2 schließt §§ 558 bis 559b aus, nennt § 559e aber nicht – offene Frage an den Anwalt."
+
+[[quelle]]
+id = "BGB-557B"
+gruppe = "gesetz"
+kurz = "§ 557b BGB"
+titel = "Indexmiete"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__557b.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Matrix Mietvertragsart und Erhöhungsweg", "Mietpfad bei Indexmietverträgen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Keine betragsmäßige Obergrenze im geltenden Text; ein Indexmietdeckel aus „Mietrecht II“ ist laufende Gesetzgebung und nicht geprüft."
+
+[[quelle]]
+id = "BGB-558"
+gruppe = "gesetz"
+kurz = "§ 558 BGB"
+titel = "Mieterhöhung bis zur ortsüblichen Vergleichsmiete"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__558.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Wartefrist und Kappungsgrenze im Mietpfad", "Drittmittelabzug bei der Vergleichsmiete (Abs. 5)", "Mietpfad nach Bindungsende"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Wie lange der Drittmittelabzug nach Abs. 5 wirkt, sagt das Gesetz nicht – Rechtsprechung nicht geprüft, Frage an den Anwalt. 15-%-Gebiete nach Abs. 3 regelt Landesrecht (siehe NI-MIETERSCHUTZVO)."
 
 [[quelle]]
 id = "BGB-559"
@@ -12,7 +186,2972 @@ fundstelle = "https://www.gesetze-im-internet.de/bgb/__559.html"
 stand = "Fassung 23.07.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Modernisierungsumlage", "Abzug des Erhaltungsanteils"]
+verwendet_fuer = ["Modernisierungsumlage", "Abzug des Erhaltungsanteils", "Kappung der Umlage einschließlich Heizungskappung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 1 erfasst nur Maßnahmen nach § 555b Nr. 1, 3, 4, 5 und 6. Die Heizungskappung von 0,50 €/m² (Abs. 3a Satz 3) gilt auch ohne Förderung (Prüfrunde 2)."
+
+[[quelle]]
+id = "BGB-559A"
+gruppe = "gesetz"
+kurz = "§ 559a BGB"
+titel = "Anrechnung von Drittmitteln"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__559a.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zuschussabzug von der Kostenbasis der Umlage", "Abzug des Zinsvorteils vom Erhöhungsbetrag", "Kopplung Fördermodul an den Mietpfad"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nicht abdingbar (Abs. 5); gehört deshalb schon in den ersten Zuschnitt für Ankauf Bestand."
+
+[[quelle]]
+id = "BGB-559B"
+gruppe = "gesetz"
+kurz = "§ 559b BGB"
+titel = "Geltendmachung der Erhöhung, Wirkung der Erhöhungserklärung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__559b.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Wirkungszeitpunkt der Umlage im Monatsraster"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 2: Wirkung ab dem dritten Monat, um sechs Monate später ohne ordnungsgemäße Ankündigung – noch nicht im Katalog (Prüfrunde 2, Katalogpflege)."
+
+[[quelle]]
+id = "BGB-559C"
+gruppe = "gesetz"
+kurz = "§ 559c BGB"
+titel = "Vereinfachtes Verfahren"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__559c.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Vereinfachte Modernisierungsumlage bis 10.000 € je Wohnung", "Fünfjährige Sperre weiterer Umlagen"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
 bemerkung = ""
+
+[[quelle]]
+id = "BGB-559D"
+gruppe = "gesetz"
+kurz = "§ 559d BGB"
+titel = "Pflichtverletzungen bei Ankündigung oder Durchführung einer baulichen Veränderung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__559d.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Vollständigkeit der Modernisierungsregeln (keine eigene Rechenregel)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BGB-559E"
+gruppe = "gesetz"
+kurz = "§ 559e BGB"
+titel = "Mieterhöhung nach Einbau oder Aufstellung einer Heizungsanlage"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__559e.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Umlage beim Heizungstausch (10 %)", "Erhaltungspauschale 15 % außer bei § 43-GModG-Anlagen", "Gemeinsame Kappung mit § 559"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur bei förderfähiger und tatsächlich geförderter Maßnahme; förderfähig, aber nicht gefördert → § 559; nicht förderfähig → § 559 nur bei zusätzlich § 555b Nr. 1 oder 6, sonst keine Umlage (Prüfrunde 2). Offen für den Anwalt: Ansatz zinsverbilligter Darlehen als Drittmittel."
+
+[[quelle]]
+id = "BGB-559F"
+gruppe = "gesetz"
+kurz = "§ 559f BGB"
+titel = "Mieterhöhung beim Einbau einer Wärmepumpe"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__559f.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Kürzung auf die Hälfte der Kosten ohne Nachweis der Jahresarbeitszahl 2,5", "Prüfmerkmale der vier Ausnahmen vom Nachweis"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Zeitlicher Anwendungsbereich offen: im EGBGB keine Übergangsvorschrift gefunden (siehe EGBGB-ART-229), Frage an den Anwalt. Nachweis nach VDI 4650 Blatt 1."
+
+[[quelle]]
+id = "BGB-650M"
+gruppe = "gesetz"
+kurz = "§ 650m BGB"
+titel = "Abschlagszahlungen; Absicherung des Vergütungsanspruchs (Verbraucherbauvertrag)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__650m.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["5-%-Sicherheit des Verbrauchers bei der ersten Abschlagszahlung im Vertriebsplan"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 2 gilt auch für Bauträgerverträge, weil § 650u Abs. 2 nur Abs. 1 ausschließt (Prüfrunde 2); Einbehalt als eigene Zahlungszeile mit Freigabe bei Abnahme."
+
+[[quelle]]
+id = "BGB-650U"
+gruppe = "gesetz"
+kurz = "§ 650u BGB"
+titel = "Bauträgervertrag; anwendbare Vorschriften"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__650u.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zahlungsregeln im Vertriebsplan für Bauträgerprojekte"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BGB-650V"
+gruppe = "gesetz"
+kurz = "§ 650v BGB"
+titel = "Abschlagszahlungen beim Bauträgervertrag"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__650v.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["MaBV als zivilrechtliche Obergrenze der Bauträgerraten"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "EGBGB-ART-229"
+gruppe = "gesetz"
+kurz = "Art. 229 EGBGB"
+titel = "Weitere Überleitungsvorschriften"
+herausgeber = "Bund"
+fundstelle = "Einführungsgesetz zum Bürgerlichen Gesetzbuch, Art. 229, gesetze-im-internet.de"
+stand = "Gesamtausgabe zuletzt geändert 22.10.2026; Einzelvorschriften nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Zeitlicher Anwendungsbereich der §§ 559e und 559f BGB"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Eine Volltextsuche am 17.11.2026 fand keine Übergangsvorschrift zu §§ 559e, 559f; §§ 35 und 49 nicht gelesen (Jurist, Runde 2)."
+
+[[quelle]]
+id = "NI-MIETERSCHUTZVO"
+gruppe = "gesetz"
+kurz = "Nds. Verordnung angespannte Wohnungsmärkte"
+titel = "Niedersächsische Verordnung zu Gebieten mit angespanntem Wohnungsmarkt (Mietpreisbremse, Kappungsgrenze)"
+herausgeber = "Land Niedersachsen"
+fundstelle = "Nds. GVBl. Nr. 121 vom 23.12.2024"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Gemeinden mit Mietpreisbremse (§ 556d BGB)", "Gemeinden mit 15-%-Kappungsgrenze (§ 558 Abs. 3 BGB)", "Härtefall § 5d CO2KostAufG"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fundstelle stammt aus einer falsch verlinkten NBank-Datei (Notiz 07); Inhalt, Gemeindeliste und Geltungsdauer nicht gelesen."
+
+# ---------------------------------------------------------------------------
+# Gesetze und Verordnungen: Heizung und CO2-Kosten
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "GMODG-10"
+gruppe = "gesetz"
+kurz = "§ 10 GModG"
+titel = "Grundsatz und Niedrigstenergiegebäude (Neubau)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/geg/__10.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Heizungsanforderungen im Neubau (§§ 42 bis 45 entsprechend)", "Stromdirektheizung im Neubau (Abs. 4)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gebäudemodernisierungsgesetz, bis 28.07.2026 Gebäudeenergiegesetz; Pfad /geg/ auf gesetze-im-internet.de unverändert."
+
+[[quelle]]
+id = "GMODG-42"
+gruppe = "gesetz"
+kurz = "§ 42 GModG"
+titel = "Heizungstausch in bestehenden Gebäuden: Wahl der Heizungsart"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/geg/__42.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Varianten des Heizungstauschs", "Tatbestand § 555b Nr. 1a BGB"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Die 65-%-Regel ist entfallen (§§ 71 bis 73 weggefallen). Übergangsvorschriften §§ 110 ff. nicht ausgewertet."
+
+[[quelle]]
+id = "GMODG-42A"
+gruppe = "gesetz"
+kurz = "§ 42a GModG"
+titel = "Grüngas- und Grünheizölquote"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/geg/__42a.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Brennstoffpreisannahmen ab 2029 (Gesetzgebungsvorbehalt)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Kündigt ein Gesetz bis 01.12.2026 an; Stand des Vorhabens vierteljährlich prüfen, im Katalog als Entwurfsstand führen."
+
+[[quelle]]
+id = "GMODG-43"
+gruppe = "gesetz"
+kurz = "§ 43 GModG"
+titel = "Pflichtanteil Bio-Brennstoff bei neu eingebauten Gas-, Öl- und Flüssiggasheizungen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/geg/__43.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Brennstoffkostenpfad 10/15/30/60 % ab 2029/2030/2035/2040", "Ersatzerfüllung durch Solarthermie, Lüftung mit Wärmerückgewinnung, Wärmepumpen-Hybrid", "Aufschub bei Heizungsausfall"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gilt nur für bestehende Gebäude, nicht für Neubauten (Prüfrunde 2, Jurist und Fachexperte). Havarie: zwölf Monate Aufschub (Abs. 7)."
+
+[[quelle]]
+id = "GMODG-46"
+gruppe = "gesetz"
+kurz = "§ 46 GModG"
+titel = "Stromdirektheizung in bestehenden Gebäuden"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/geg/__46.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Zulässigkeit der Stromdirektheizung im Variantenvergleich"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "CO2KOSTAUFG-5"
+gruppe = "gesetz"
+kurz = "§ 5 CO2KostAufG"
+titel = "Kostenaufteilung bei Wohngebäuden (Stufenmodell)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/__5.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Vermieteranteil an den CO2-Kosten", "Einstufung nach kg CO2 je m² (eine Nachkommastelle)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Änderung mWv 29.07.2026 laut gesetze-im-internet.de „textlich nachgewiesen, dokumentarisch noch nicht abschließend bearbeitet“ – beim nächsten Lesen Fassungsangabe prüfen. §§ 6, 7 und 9 nicht ausgewertet."
+
+[[quelle]]
+id = "CO2KOSTAUFG-5A"
+gruppe = "gesetz"
+kurz = "§ 5a CO2KostAufG"
+titel = "Hälftige Kostenteilung bei Heizungen nach § 43 GModG im Bestand"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/__5a.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Nicht umlagefähige Vermieterkosten: Gasnetzentgelte und CO2-Kosten ab 2028, Bio-Brennstoff ab 2029 (höchstens 30 %)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 4: zwölf Monate Aufschub bei Heizungsausfall."
+
+[[quelle]]
+id = "CO2KOSTAUFG-5B"
+gruppe = "gesetz"
+kurz = "§ 5b CO2KostAufG"
+titel = "Kostenteilung bei neu errichteten Gebäuden"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/__5b.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["CO2-Kosten im Neubau mit Gas-, Öl- oder Flüssiggasheizung (bis 31.12.2029 errichtet, Bauantrag ab 13.05.2026)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Wendet § 5a nur „entsprechend“ an; da § 43 GModG im Neubau keinen Bio-Pflichtanteil kennt, dürften nur Netzentgelte und CO2-Kosten zu teilen sein – Auslegung durch den Anwalt offen."
+
+[[quelle]]
+id = "CO2KOSTAUFG-5C"
+gruppe = "gesetz"
+kurz = "§ 5c CO2KostAufG"
+titel = "Evaluierung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/__5c.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Hinweis auf mögliche Änderung der Kostenteilung nach 2036"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "CO2KOSTAUFG-5D"
+gruppe = "gesetz"
+kurz = "§ 5d CO2KostAufG"
+titel = "Härtefall des Vermieters"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/__5d.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Prüfmerkmale der Rückkehr zum Stufenmodell (Miete unter 85 % bzw. 70 % der Vergleichsmiete, höchstens sechs Wohnungen)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "CO2KOSTAUFG-8"
+gruppe = "gesetz"
+kurz = "§ 8 CO2KostAufG"
+titel = "Kostenaufteilung bei Nichtwohngebäuden"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/__8.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["CO2-Kosten bei Gewerbeflächen (Mieter höchstens 50 %)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 4 kündigt für 2025 ein Stufenmodell für Nichtwohngebäude an; im Text bisher nicht umgesetzt."
+
+[[quelle]]
+id = "CO2KOSTAUFG-ANLAGE"
+gruppe = "gesetz"
+kurz = "Anlage CO2KostAufG"
+titel = "Stufentabelle zur Aufteilung der Kohlendioxidkosten (zu §§ 5 bis 7)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/co2kostaufg/anlage.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zehn Stufen Vermieteranteil 0 % bis 95 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BEHG"
+gruppe = "gesetz"
+kurz = "BEHG"
+titel = "Brennstoffemissionshandelsgesetz: CO2-Preis je Tonne"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["CO2-Kostenpfad in der Bewirtschaftung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Preiskorridor 55–65 €/t für 2026 nur aus einem Anbieterblog (Notiz 06); Norm, Paragraf und Preispfad ab 2027 am Gesetzestext zu lesen."
+
+[[quelle]]
+id = "WSCHV-1995"
+gruppe = "gesetz"
+kurz = "WSchV 1995"
+titel = "Wärmeschutzverordnung vom 16.08.1994"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "Verordnung vom 16.08.1994"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Ausnahme vom Nachweis der Jahresarbeitszahl nach § 559f Abs. 1 Satz 2 BGB"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur über § 559f BGB genannt; Notiz 08 schreibt „WSchV 1994“, Jurist Runde 1 „WSchV 1995“, Bericht „Verordnung vom 16.08.1994“ – gemeint ist dieselbe Verordnung. Außer Kraft; dient nur als Prüfmaßstab."
+
+# ---------------------------------------------------------------------------
+# Gesetze und Verordnungen: Steuern
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "ESTG-4H"
+gruppe = "gesetz"
+kurz = "§ 4h EStG"
+titel = "Betriebsausgabenabzug für Zinsaufwendungen (Zinsschranke)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__4h.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zinsschranke in der Steuerrechnung der Kapitalgesellschaft", "EBITDA- und Zinsvortrag"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Berichtigung Prüfrunde 2: abziehbar bis Zinsertrag plus verrechenbares EBITDA; dieses ist bereits 30 % des steuerlichen EBITDA. Ausnahmen Abs. 2 Buchst. b (kein Konzern) und c (Eigenkapitalvergleich) als Eingaben; BMF-Anwendungsschreiben (März 2025) nicht gelesen."
+
+[[quelle]]
+id = "ESTG-6"
+gruppe = "gesetz"
+kurz = "§ 6 EStG"
+titel = "Bewertung; anschaffungsnahe Herstellungskosten (Abs. 1 Nr. 1a)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__6.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["15-%-Prüfung binnen drei Jahren nach Anschaffung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Abs. 1 Nr. 1a. Gilt für alle steuerpflichtigen Investoren, nicht nur für Privatpersonen. Ein § 6f (Kaufpreisaufteilung) existiert in der Fassung 15.10.2026 nicht (siehe JSTG-2026)."
+
+[[quelle]]
+id = "ESTG-7"
+gruppe = "gesetz"
+kurz = "§ 7 EStG"
+titel = "Absetzung für Abnutzung (Gebäude: Abs. 4, 5 und 5a)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__7.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abschreibung Wohngebäude linear 3/2/2,5 %", "Degressive Abschreibung 5 % im Neubau", "3 % für Nichtwohngebäude im Betriebsvermögen", "Zeitanteilige Abschreibung im Erstjahr"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Berichtigung Prüfrunde 2: degressive Abschreibung (Abs. 5a) nur bei Herstellung oder Anschaffung bis Ende des Fertigstellungsjahres, nicht beim Ankauf älterer Bestände; Herstellungsbeginn = Baubeginnsanzeige. Abschreibungsregeln an Vorhabensart und Nutzung binden, nicht an die Investorensicht."
+
+[[quelle]]
+id = "ESTG-7B"
+gruppe = "gesetz"
+kurz = "§ 7b EStG"
+titel = "Sonderabschreibung für Mietwohnungsneubau"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__7b.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Sonderabschreibung 4 × 5 %", "Baukostenobergrenze als Ausschlussbedingung", "Rückabwicklungsereignisse (Abs. 4)", "De-minimis-Prüfung bei Gewinneinkünften (Abs. 5)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Berichtigung Prüfrunde 2: 5.200 €/m² ist keine Deckelung, sondern schließt die Sonderabschreibung ganz aus; Rückabwicklung bei nachträglichen Kosten über der Grenze binnen drei Jahren, Nutzungsänderung oder steuerfreier Veräußerung binnen zehn Jahren. Beim Erwerb nur „neu“ bis Ende des Fertigstellungsjahres."
+
+[[quelle]]
+id = "ESTG-7H"
+gruppe = "gesetz"
+kurz = "§ 7h EStG"
+titel = "Erhöhte Absetzungen bei Gebäuden in Sanierungsgebieten"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__7h.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Erhöhte Absetzungen 8 × 9 % und 4 × 7 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Sätze gelten nur für die Kosten der begünstigten Maßnahmen, nicht für das ganze Gebäude; Zuschüsse mindern die Bemessungsgrundlage."
+
+[[quelle]]
+id = "ESTG-7I"
+gruppe = "gesetz"
+kurz = "§ 7i EStG"
+titel = "Erhöhte Absetzungen bei Baudenkmalen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__7i.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Erhöhte Absetzungen 8 × 9 % und 4 × 7 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Sätze gelten nur für die Kosten der begünstigten Maßnahmen, nicht für das ganze Gebäude."
+
+[[quelle]]
+id = "ESTG-10D"
+gruppe = "gesetz"
+kurz = "§ 10d EStG"
+titel = "Verlustabzug"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__10d.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Verlustrücktrag und Verlustvortrag (Sockel 1 Mio. €, darüber 70 %)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Der geltende Text zeigt 70 % ohne Enddatum. Eine Rückkehr auf 60 % ab 2028 kann bereits verkündet sein, weil gesetze-im-internet.de keine künftig geltenden Fassungen zeigt – am BGBl. prüfen (siehe BGBL-2024-I-108)."
+
+[[quelle]]
+id = "ESTG-21"
+gruppe = "gesetz"
+kurz = "§ 21 EStG"
+titel = "Einkünfte aus Vermietung und Verpachtung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__21.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Verbilligte Vermietung: Grenzen 50 % und 66 % der ortsüblichen Miete"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Abs. 2. Totalüberschussprognose zwischen 50 % und 66 % ist Verwaltungsauffassung, nicht geprüft."
+
+[[quelle]]
+id = "ESTG-23"
+gruppe = "gesetz"
+kurz = "§ 23 EStG"
+titel = "Private Veräußerungsgeschäfte"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__23.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Steuer auf den Veräußerungsgewinn bei Haltedauer bis zehn Jahre", "Minderung der Anschaffungskosten um Abschreibungen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Drei-Objekt-Grenze (gewerblicher Grundstückshandel) ist Rechtsprechung, nicht geprüft."
+
+[[quelle]]
+id = "ESTG-52"
+gruppe = "gesetz"
+kurz = "§ 52 EStG"
+titel = "Anwendungsvorschriften"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__52.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Altes Fenster § 7b letztmals 2026 (Abs. 15a)", "Anwendungsbeginn 70 % beim Verlustvortrag (Abs. 18b)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Abs. 15a und 18b."
+
+[[quelle]]
+id = "ESTDV-82B"
+gruppe = "gesetz"
+kurz = "§ 82b EStDV"
+titel = "Verteilung größeren Erhaltungsaufwands bei Wohngebäuden"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estdv_1955/__82b.html"
+stand = "Fassung 19.12.2025"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Verteilung von Erhaltungsaufwand auf zwei bis fünf Jahre (Privatvermögen)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KSTG-5"
+gruppe = "gesetz"
+kurz = "§ 5 KStG"
+titel = "Befreiungen (Abs. 1 Nr. 10: Vermietungsgenossenschaften und -vereine)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__5.html"
+stand = "Fassung 04.02.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Steuerstatus befreite Genossenschaft", "Laufende 10-%-Prüfung (30 % bei Mieterstrom)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gilt nur für Genossenschaften und Vereine; die kommunale Wohnungs-GmbH ist in der Regel voll steuerpflichtig (Prüfrunde 2). Steuerstatus deshalb als eigenes Merkmal neben der Investorensicht."
+
+[[quelle]]
+id = "KSTG-8A"
+gruppe = "gesetz"
+kurz = "§ 8a KStG"
+titel = "Betriebsausgabenabzug für Zinsaufwendungen bei Körperschaften"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__8a.html"
+stand = "Fassung 04.02.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zinsschranke bei der Kapitalgesellschaft (maßgebliches Einkommen; Gesellschafter-Fremdfinanzierung)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KSTG-8C"
+gruppe = "gesetz"
+kurz = "§ 8c KStG"
+titel = "Verlustabzug bei Körperschaften (schädlicher Beteiligungserwerb)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__8c.html"
+stand = "Fassung 04.02.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Untergang von Verlustvorträgen beim Anteilsverkauf (Exit über Share Deal)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KSTG-23"
+gruppe = "gesetz"
+kurz = "§ 23 KStG"
+titel = "Steuersatz"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/kstg_1977/__23.html"
+stand = "Fassung 04.02.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Körperschaftsteuersatz je Veranlagungszeitraum (15 % bis 2027, dann 14/13/12/11 %, ab 2032 10 %)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "SOLZG-3"
+gruppe = "gesetz"
+kurz = "§ 3 SolzG"
+titel = "Bemessungsgrundlage und Freigrenze des Solidaritätszuschlags"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/solzg_1995/__3.html"
+stand = "Fassung 23.12.2024"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Solidaritätszuschlag auf die Körperschaftsteuer (keine Freigrenze für Körperschaften)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "SOLZG-4"
+gruppe = "gesetz"
+kurz = "§ 4 SolzG"
+titel = "Zuschlagsatz"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/solzg_1995/__4.html"
+stand = "Fassung 23.12.2024"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Solidaritätszuschlag 5,5 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "GEWSTG-8"
+gruppe = "gesetz"
+kurz = "§ 8 GewStG"
+titel = "Hinzurechnungen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__8.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Hinzurechnung eines Viertels der Finanzierungsentgelte über 200.000 €"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Der Freibetrag gilt für die Summe aller Hinzurechnungen nach Nr. 1, einschließlich der Hälfte von Miet- und Pachtzinsen für Grundbesitz wie dem Erbbauzins (Prüfrunde 2)."
+
+[[quelle]]
+id = "GEWSTG-9"
+gruppe = "gesetz"
+kurz = "§ 9 GewStG"
+titel = "Kürzungen (Nr. 1: einfache und erweiterte Grundstückskürzung)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__9.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Erweiterte Kürzung mit Unschädlichkeitsgrenzen 20 % (Strom) und 5 % (sonstige Mieterleistungen)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Nr. 1. Bezugsgröße der Grenzen sind die Einnahmen aus der Gebrauchsüberlassung des Grundbesitzes."
+
+[[quelle]]
+id = "GEWSTG-10A"
+gruppe = "gesetz"
+kurz = "§ 10a GewStG"
+titel = "Gewerbeverlust"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__10a.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Gewerbesteuerlicher Verlustvortrag (Sockel 1 Mio. €, darüber 60 %)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "GEWSTG-11"
+gruppe = "gesetz"
+kurz = "§ 11 GewStG"
+titel = "Steuermesszahl und Steuermessbetrag"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__11.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Messzahl 3,5 %", "Rundung und Freibetrag"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "GEWSTG-16"
+gruppe = "gesetz"
+kurz = "§ 16 GewStG"
+titel = "Hebesatz"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__16.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mindesthebesatz 280 % ab Erhebungszeitraum 2027"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Der bis 2026 geltende Mindesthebesatz von 200 % ist auf gesetze-im-internet.de nicht mehr abgebildet. Gemeindehebesätze sind als Datenquelle noch nicht erfasst."
+
+[[quelle]]
+id = "GEWSTG-36"
+gruppe = "gesetz"
+kurz = "§ 36 GewStG"
+titel = "Zeitlicher Anwendungsbereich"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__36.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Anwendungsbeginn Mindesthebesatz 280 % (Abs. 5b)", "Einfache Grundbesitzkürzung ab 2025 (Abs. 4b)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "AO-52"
+gruppe = "gesetz"
+kurz = "§ 52 AO"
+titel = "Gemeinnützige Zwecke (Abs. 2 Satz 1 Nr. 27: Wohngemeinnützigkeit)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ao_1977/__52.html"
+stand = "Fassung 22.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Steuerstatus gemeinnützig", "Einkommensgrenze der Mieter (Fünf- bzw. Sechsfaches des Regelsatzes) bei Mietbeginn"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Abs. 2 Satz 1 Nr. 27. AEAO zu Nr. 27 („vergünstigt“, Mittelverwendung) nicht gelesen."
+
+[[quelle]]
+id = "AO-53"
+gruppe = "gesetz"
+kurz = "§ 53 AO"
+titel = "Mildtätige Zwecke"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ao_1977/__53.html"
+stand = "Fassung 22.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Personenkreis der Wohngemeinnützigkeit"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "SGB12-28"
+gruppe = "gesetz"
+kurz = "§ 28 SGB XII"
+titel = "Ermittlung der Regelbedarfe"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Bezugsgröße der Einkommensgrenzen nach § 52 Abs. 2 Satz 1 Nr. 27 AO"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Nur als Verweis in § 52 AO gelesen; der jeweils geltende Regelsatz ist als Datenquelle noch nicht erfasst."
+
+[[quelle]]
+id = "USTG-4"
+gruppe = "gesetz"
+kurz = "§ 4 UStG"
+titel = "Steuerbefreiungen (Nr. 12: Vermietung von Grundstücken)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ustg_1980/__4.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Umsatzsteuerkennzeichen je Ertragsposition", "Stellplätze an Dritte steuerpflichtig"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Nr. 12. Steuerfreiheit von Stellplätzen als Nebenleistung zur Wohnung ist Verwaltungsauffassung, nicht geprüft."
+
+[[quelle]]
+id = "USTG-9"
+gruppe = "gesetz"
+kurz = "§ 9 UStG"
+titel = "Verzicht auf Steuerbefreiungen (Option)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ustg_1980/__9.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Umsatzsteueroption bei Gewerbevermietung und Vorsteuerabzug"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gesetz kennt keine Bagatellgrenze; eine 5-%-Grenze nach Verwaltungsauffassung ist nicht „überholt“, sondern zu prüfen (siehe USTAE-9-2)."
+
+[[quelle]]
+id = "USTG-12"
+gruppe = "gesetz"
+kurz = "§ 12 UStG"
+titel = "Steuersätze"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ustg_1980/__12.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Regelsteuersatz 19 % für Brutto/Netto-Umrechnung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "USTG-15A"
+gruppe = "gesetz"
+kurz = "§ 15a UStG"
+titel = "Berichtigung des Vorsteuerabzugs"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ustg_1980/__15a.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zehnjähriger Berichtigungszeitraum bei Nutzungsänderung und Verkauf"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Jurist Runde 2 las Abs. 1 bis 3; Abs. 5, 8 bis 10 nur am 17.11.2026 (Notiz 08)."
+
+[[quelle]]
+id = "USTAE-9-2"
+gruppe = "gesetz"
+kurz = "UStAE Abschn. 9.2"
+titel = "Umsatzsteuer-Anwendungserlass: Einschränkung des Verzichts auf Steuerbefreiungen"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Bagatellgrenze bei der Umsatzsteueroption", "Stellplätze als Nebenleistung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 3 nach Kenntnis des Juristen Grundlage einer 5-%-Grenze; nicht abgerufen."
+
+[[quelle]]
+id = "GRESTG-11"
+gruppe = "gesetz"
+kurz = "§ 11 GrEStG"
+titel = "Steuersatz, Abrundung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/grestg_1983/__11.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Grunderwerbsteuer: Bundessatz 3,5 % als Rückfallwert", "Abrundung auf volle Euro"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Änderungen durch Art. 9 und 10 G v. 29.06.2026 inhaltlich nicht ausgewertet. Ländersatz siehe NI-GREST-SATZ."
+
+[[quelle]]
+id = "NI-GREST-SATZ"
+gruppe = "gesetz"
+kurz = "Grunderwerbsteuersatz Niedersachsen"
+titel = "Landesrechtlicher Grunderwerbsteuersatz Niedersachsen"
+herausgeber = "Land Niedersachsen"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Erwerbsnebenkosten in Niedersachsen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "5,0 % nur nach Sekundärangabe; Landesgesetz, Fundstelle und Fassung am Original nachzuziehen."
+
+[[quelle]]
+id = "ASTG-1"
+gruppe = "gesetz"
+kurz = "§ 1 AStG"
+titel = "Nahestehende Personen (Abs. 2)"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Konzernzugehörigkeit als Ausnahme von der Zinsschranke (§ 4h Abs. 2 Buchst. b EStG)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur als Verweis in § 4h EStG gelesen; Einordnung durch den Steuerberater."
+
+[[quelle]]
+id = "BMF-ZINSSCHRANKE-2025"
+gruppe = "gesetz"
+kurz = "BMF-Schreiben Zinsschranke"
+titel = "BMF-Anwendungsschreiben zur Zinsschranke"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "nicht erfasst"
+stand = "März 2025"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Auslegung von § 4h EStG und § 8a KStG"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "bundesfinanzministerium.de lieferte am 17.11.2026 nur eine Bot-Schutzseite."
+
+[[quelle]]
+id = "BGBL-2024-I-108"
+gruppe = "gesetz"
+kurz = "BGBl. 2024 I Nr. 108"
+titel = "Änderungsgesetz mit möglicher Rückkehr der Verlustvortragsgrenze auf 60 % ab 2028"
+herausgeber = "Bund"
+fundstelle = "BGBl. 2024 I Nr. 108"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Verlustvortrag ab Veranlagungszeitraum 2028"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fundstelle nach Vermutung des Juristen (Runde 2); recht.bund.de war gesperrt. Klärt, ob § 10d EStG ab 2028 wieder 60 % vorsieht."
+
+[[quelle]]
+id = "JSTG-2026"
+gruppe = "gesetz"
+kurz = "JStG 2026 (§ 6f EStG-E)"
+titel = "Jahressteuergesetz 2026, Entwurf einer Regel zur Kaufpreisaufteilung"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "Entwurf; in der EStG-Fassung 15.10.2026 nicht enthalten"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Kaufpreisaufteilung Grund und Gebäude (Entwurfsstand, je Kalkulation zuschaltbar)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Laufende Gesetzgebung; Stand nicht geprüft (Bundestag, BGBl. und BMF nicht abrufbar)."
+
+# ---------------------------------------------------------------------------
+# Gesetze und Verordnungen: Bewirtschaftung, Bewertung, Flächen, Bauträger
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "IIBV-25"
+gruppe = "gesetz"
+kurz = "§ 25 II. BV"
+titel = "Abschreibung in der Wirtschaftlichkeitsberechnung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bvo_2/__25.html"
+stand = "Fassung 23.11.2007"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Kostenmiete und NBank-Wirtschaftlichkeitsberechnung (Abschreibung 1 %)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "IIBV-26"
+gruppe = "gesetz"
+kurz = "§ 26 II. BV"
+titel = "Verwaltungskosten"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bvo_2/__26.html"
+stand = "Fassung 23.11.2007"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Verwaltungskostenpauschale (Basisbetrag 230 € je Wohnung, 30 € je Stellplatz)", "Dreijährliche Indexregel nach VPI"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Text nennt nur Basisbeträge mit Preisstand 2002; die ab 01.01.2026 anzusetzenden Beträge siehe IIBV-WERTE-2026. Nächste Anpassung 01.01.2029."
+
+[[quelle]]
+id = "IIBV-28"
+gruppe = "gesetz"
+kurz = "§ 28 II. BV"
+titel = "Instandhaltungskosten"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bvo_2/__28.html"
+stand = "Fassung 23.11.2007"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Instandhaltungspauschale nach Gebäudealter (Basis 7,10 / 9,00 / 11,50 €/m²)", "Zu- und Abschläge: Aufzug, Kleinreparaturen, Schönheitsreparaturen, Garagen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Zu- und Abschläge (Abs. 2 Satz 2 und 3, Abs. 3 bis 5) fehlen noch im Katalog (Prüfrunde 2, Katalogpflege). Pauschale deckt die gesamte Instandhaltung – Abgrenzung zum Maßnahmenplan beachten."
+
+[[quelle]]
+id = "IIBV-29"
+gruppe = "gesetz"
+kurz = "§ 29 II. BV"
+titel = "Mietausfallwagnis"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bvo_2/__29.html"
+stand = "Fassung 23.11.2007"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mietausfallwagnis höchstens 2 % (nicht indexiert)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "IMMOWERTV-ANLAGE-3"
+gruppe = "gesetz"
+kurz = "Anlage 3 ImmoWertV"
+titel = "Modellansätze für Bewirtschaftungskosten (zu § 12 Abs. 5 Satz 2)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/immowertv_2022/anlage_3.html"
+stand = "Vollzitat vom 14.07.2021, keine Änderung ausgewiesen"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Bewirtschaftungskosten der Ertragswert-Nebenrechnung", "Modellkonformität mit dem Liegenschaftszins", "Jährliche Indexregel (VPI Oktober, Basis Oktober 2001)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Text enthält nur die Werte für 2021 und die Basiswerte; fortgeschriebene Werte siehe IMMOWERTV-WERTE. Eigentumswohnung 357 € und Gewerbe-Instandhaltung 100/50/30 % fehlen noch im Katalog."
+
+[[quelle]]
+id = "BELWERTV-4"
+gruppe = "gesetz"
+kurz = "§ 4 BelWertV"
+titel = "Verfahren zur Ermittlung des Beleihungswerts"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/__4.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Ertragswert als Obergrenze des Beleihungswerts"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BELWERTV-11"
+gruppe = "gesetz"
+kurz = "§ 11 BelWertV"
+titel = "Bewirtschaftungskosten"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/__11.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mindestbewirtschaftungskosten 15 % des Rohertrags", "Modernisierungsrisiko"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BELWERTV-12"
+gruppe = "gesetz"
+kurz = "§ 12 BelWertV"
+titel = "Kapitalisierung der Reinerträge"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/__12.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mindestkapitalisierungszins (Korridor Wohnen 3,5–5,5 %, Gewerbe 4,5–6,5 %)", "Vervielfältiger", "Beleihungsauslauf"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Geltender Mindestsatz folgt aus der BaFin-Bekanntgabe (siehe BAFIN-MINDESTKAPZINS). Abs. 5 (−0,5 Prozentpunkte für erstklassige Objekte) fehlt noch im Katalog."
+
+[[quelle]]
+id = "BELWERTV-ANLAGE-1"
+gruppe = "gesetz"
+kurz = "Anlage 1 BelWertV"
+titel = "Bewirtschaftungskosten: Einzelansätze"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/anlage_1.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Verwaltung, Instandhaltung, Mietausfallwagnis und Modernisierungsrisiko im Beleihungswert"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BELWERTV-ANLAGE-2"
+gruppe = "gesetz"
+kurz = "Anlage 2 BelWertV"
+titel = "Nutzungsdauern"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/anlage_2.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Höchstnutzungsdauer je Objektart (Wohnhäuser 80 Jahre)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BELWERTV-ANLAGE-3"
+gruppe = "gesetz"
+kurz = "Anlage 3 BelWertV"
+titel = "Aufschläge auf den Kapitalisierungszins nach Nutzungsart"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/anlage_3.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Aufschläge +0,5 / +1,0 Prozentpunkte für Betreiber- und Produktionsimmobilien"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "PFANDBG-14"
+gruppe = "gesetz"
+kurz = "§ 14 PfandBG"
+titel = "Beleihungsgrenze"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/pfandbg/__14.html"
+stand = "Fassung 25.03.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Pfandbriefdeckung bis 60 % des Beleihungswerts (erstrangiger Finanzierungsteil)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "WOFLV-2"
+gruppe = "gesetz"
+kurz = "§ 2 WoFlV"
+titel = "Zur Wohnfläche gehörende Grundflächen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/woflv/__2.html"
+stand = "Vollzitat vom 25.11.2003, keine Änderung ausgewiesen"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Wohnfläche je Einheit (Ausschluss von Zubehörräumen)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "WOFLV-3"
+gruppe = "gesetz"
+kurz = "§ 3 WoFlV"
+titel = "Ermittlung der Grundfläche"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/woflv/__3.html"
+stand = "Vollzitat vom 25.11.2003, keine Änderung ausgewiesen"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Messregel der Wohnfläche"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "WOFLV-4"
+gruppe = "gesetz"
+kurz = "§ 4 WoFlV"
+titel = "Anrechnung der Grundflächen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/woflv/__4.html"
+stand = "Vollzitat vom 25.11.2003, keine Änderung ausgewiesen"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Anrechnung von Dachschrägen, Wintergärten, Balkonen (in der Regel ein Viertel)", "Bemessungsfläche der Bewilligungsmiete"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "MABV-3"
+gruppe = "gesetz"
+kurz = "§ 3 MaBV"
+titel = "Besondere Sicherungspflichten für Bauträger (Raten nach Baufortschritt)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewo_34cdv/__3.html"
+stand = "Fassung 28.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Bauträgerraten: höchstens sieben Teilbeträge aus 13 Vomhundertsätzen", "Fälligkeitsvoraussetzungen im Vertriebsplan"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Bei Wohnungs- und Teileigentum zusätzlich Begründung im Grundbuch (Abs. 1 Satz 1 Nr. 2) – fehlt noch im Bericht (Prüfrunde 2)."
+
+[[quelle]]
+id = "MABV-7"
+gruppe = "gesetz"
+kurz = "§ 7 MaBV"
+titel = "Ausnahmevorschrift (Sicherheitsleistung, Verzicht)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewo_34cdv/__7.html"
+stand = "Fassung 28.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Bürgschaftsvariante statt Ratenplan", "Verzicht unter Kaufleuten und öffentlichen Käufern (Abs. 2) für frei vereinbarte Ratenpläne"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "HOAI-2021"
+gruppe = "gesetz"
+kurz = "HOAI 2021"
+titel = "Honorarordnung für Architekten und Ingenieure"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "Fassung 2021"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Honorare in Kostengruppe 700", "Bezug der anrechenbaren Kosten auf DIN 276-1:2008-12"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Verweis auf DIN 276-1:2008-12 nur aus einer Sekundärquelle (Notiz 06)."
+
+[[quelle]]
+id = "ERBBAURG-9A"
+gruppe = "gesetz"
+kurz = "§ 9a ErbbauRG"
+titel = "Wertsicherung des Erbbauzinses bei Wohnzwecken"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Erbbauzinsanpassung im vollen Erbbaurechtsmodell (Stufe 3)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur vom Fachexperten (Runde 2) genannt; zum Erbbaurecht wurde nichts recherchiert."
+
+[[quelle]]
+id = "NWOFG-3"
+gruppe = "gesetz"
+kurz = "§ 3 NWoFG"
+titel = "Niedersächsisches Wohnraumfördergesetz: Einkommensgrenzen (Abs. 2)"
+herausgeber = "Land Niedersachsen"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Einkommensgruppen A/B/C der NBank-Förderung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Euro-Beträge weder hier noch in der DVO-NWoFG gelesen; belegt sind nur die Orientierungswerte des NBank-Rechners (NBANK-EINKOMMENSRECHNER). VV-NWoFG ebenfalls nicht geprüft."
+
+[[quelle]]
+id = "DVO-NWOFG"
+gruppe = "gesetz"
+kurz = "DVO-NWoFG §§ 3, 4"
+titel = "Durchführungsverordnung zum Niedersächsischen Wohnraumfördergesetz"
+herausgeber = "Land Niedersachsen"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Einkommensermittlung für die Einkommensgruppen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Die auf der NBank-Seite als DVO-NWoFG verlinkte Datei enthält eine andere Verordnung; richtige Fundstelle beschaffen."
+
+[[quelle]]
+id = "BAFOEG-13"
+gruppe = "gesetz"
+kurz = "§ 13 BAföG"
+titel = "Bedarf für Studierende (Abs. 2 Nr. 2: Wohnkostenpauschale)"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Mietobergrenze im NBank-Programm Junges Wohnen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur über die RL Junges Wohnen 2026 genannt."
+
+# ---------------------------------------------------------------------------
+# Gesetze und Verordnungen: Rechtsrahmen des Werkzeugs
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "STBERG-2"
+gruppe = "gesetz"
+kurz = "§ 2 StBerG"
+titel = "Geschäftsmäßige Hilfeleistung in Steuersachen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/stberg/__2.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Grenze der Steuerrechnung in Kundenberichten (Steuerparameter als Annahmen des Kunden)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fassungsdatum der Gesamtausgabe beim Lesen nicht festgehalten."
+
+[[quelle]]
+id = "STBERG-4E"
+gruppe = "gesetz"
+kurz = "§ 4e StBerG"
+titel = "Hilfeleistung in Steuersachen als Nebenleistung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/stberg/__4e.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abgrenzung steuerlicher Aussagen in Investitions- und Förderberatung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Reichweite für das Beratungsgeschäft klärt der Anwalt mit dem Steuerberater. §§ 3, 4, 4a bis 4d mitgelesen, ohne Bezug zum Werkzeug. Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "STBERG-5"
+gruppe = "gesetz"
+kurz = "§ 5 StBerG"
+titel = "Verbot der unbefugten Hilfeleistung in Steuersachen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/stberg/__5.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Rechtsfolgen bei Überschreiten der Beratungsgrenze"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "STBERG-6"
+gruppe = "gesetz"
+kurz = "§ 6 StBerG"
+titel = "Ausnahmen vom Verbot der unbefugten Hilfeleistung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/stberg/__6.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abgrenzung der Beratungsgrenze (nur Buchführung und unentgeltliche Hilfe)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Für entgeltliche Beratung nicht einschlägig. Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "RDG-2"
+gruppe = "gesetz"
+kurz = "§ 2 RDG"
+titel = "Begriff der Rechtsdienstleistung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/rdg/__2.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Grenze mietrechtlicher Aussagen in Kundenberichten"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "RDG-5"
+gruppe = "gesetz"
+kurz = "§ 5 RDG"
+titel = "Rechtsdienstleistungen im Zusammenhang mit einer anderen Tätigkeit"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/rdg/__5.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Fördermittelberatung als erlaubte Nebenleistung (Abs. 2 Nr. 3)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "STGB-264"
+gruppe = "gesetz"
+kurz = "§ 264 StGB"
+titel = "Subventionsbetrug"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/stgb/__264.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Antragssicht nur aus freigegebenem Arbeitsstand", "Sorgfaltsmaßstab für Zahlen in Förderanträgen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen Abs. 1, 5, 8, 9. Schon Leichtfertigkeit strafbar (Abs. 5); ob Wohnraumförderung eine Subvention nach Abs. 8 ist, klärt der Anwalt. Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "URHG-5"
+gruppe = "gesetz"
+kurz = "§ 5 UrhG"
+titel = "Amtliche Werke"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/urhg/__5.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Nutzungsrechte: Gesetze frei, private Normen (DIN) geschützt"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "URHG-87B"
+gruppe = "gesetz"
+kurz = "§ 87b UrhG"
+titel = "Rechte des Datenbankherstellers"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/urhg/__87b.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Automatisierter Abruf der KfW-Zinsdaten nur mit Zustimmung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "BETRVG-87"
+gruppe = "gesetz"
+kurz = "§ 87 BetrVG"
+titel = "Mitbestimmungsrechte (Abs. 1 Nr. 6: technische Überwachungseinrichtungen)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/betrvg/__87.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Änderungsprotokoll und Präsenzanzeige: Mitbestimmung des Betriebsrats"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Abs. 1 Nr. 6; Rechtsprechung nicht geprüft. Fassungsdatum nicht festgehalten."
+
+[[quelle]]
+id = "DSGVO"
+gruppe = "gesetz"
+kurz = "DSGVO"
+titel = "Verordnung (EU) 2016/679, Datenschutz-Grundverordnung"
+herausgeber = "Europäische Union"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Datenschutz durch Technikgestaltung (Mieterlisten, Einkommensgruppen)", "Löschpflichten gegenüber dem Änderungsprotokoll", "Auftragsverarbeitung und Folgenabschätzung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Text nicht abgerufen; die maßgeblichen Artikel sind bei der Spezifikation des Protokolls zu bestimmen und dann je Artikel zu erfassen."
+
+[[quelle]]
+id = "EU-DE-MINIMIS-2023-2831"
+gruppe = "gesetz"
+kurz = "VO (EU) 2023/2831"
+titel = "De-minimis-Verordnung"
+herausgeber = "Europäische Union"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["De-minimis-Konto je Unternehmensgruppe über drei Jahre", "Beihilfekennzeichen von KfW 266 und § 7b EStG"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Schwelle 300.000 € in drei Jahren nur laut KfW-Merkblatt 266; Verordnungstext und Berechnung des Beihilfewerts der Sonderabschreibung nicht geprüft (Steuerberater)."
+
+[[quelle]]
+id = "EU-DAWI-2025-2630"
+gruppe = "gesetz"
+kurz = "Beschluss (EU) 2025/2630"
+titel = "DAWI-Freistellungsbeschluss vom 16.12.2025"
+herausgeber = "Europäische Union"
+fundstelle = "nicht erfasst"
+stand = "Beschluss vom 16.12.2025 (hebt Beschluss 2012/21/EU auf)"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Beihilfegrundlage der NBank-Förderung", "Überkompensationskontrolle (Eigenkapitalrendite gegen Swapsatz plus 100 Basispunkte)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur über RL Mietwohnraum 2026 Nr. 1.2 bekannt; Beschlusstext nicht gelesen."
+
+[[quelle]]
+id = "MIETRECHT-II"
+gruppe = "gesetz"
+kurz = "Mietrecht II (Vorhaben)"
+titel = "Gesetzgebungsvorhaben zu Indexmiete, Möblierungszuschlag und Kurzzeitmiete"
+herausgeber = "Bund"
+fundstelle = "nicht erfasst"
+stand = "Vorhaben; im BGB mit Fassung 23.07.2026 nicht enthalten"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Mietpfad bei Indexmiete und möbliertem Wohnen (Entwurfsstand, je Kalkulation zuschaltbar)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Stand des Verfahrens nicht geprüft."
+
+# ---------------------------------------------------------------------------
+# Förderung: NBank (Niedersachsen)
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "NBANK-RL-MIETWOHNRAUM-2026"
+gruppe = "foerderung"
+kurz = "RL Mietwohnraum 2026"
+titel = "Richtlinie über die Gewährung von Zuwendungen zur Förderung von Mietwohnraum"
+herausgeber = "Land Niedersachsen (MW); Bewilligung NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Richtlinie-F%C3%B6rderung-von-Mietwohnraum-%28RL-Mietwohnraum-2026%29.pdf"
+stand = "RdErl. d. MW v. 25.06.2026, Nds. MBl. 2026 Nr. 319; in Kraft 01.07.2026 bis 31.12.2031"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Förderhöhe Darlehen und Zuschuss je Einkommensgruppe", "Zuwendungsfähige Kosten und Bemessungsgrenze (Indexregel)", "Bindung 35 Jahre, Eingangsmiete, Mieterhöhung in der Bindung", "Auszahlungsraten, Entgelte, Verwaltungskostenbeitrag", "Renditeprüfung gegen 30-Jahres-Swapsatz plus 100 Basispunkte", "Programme Bindungserwerb und Bindungsverlängerung"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst."
+
+[[quelle]]
+id = "NBANK-PI-MIETWOHNUNGEN-MFH"
+gruppe = "foerderung"
+kurz = "NBank PI Mietwohnungen in MFH"
+titel = "Produktinformation Mietwohnungen in Mehrfamilienhäusern"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Produktinformation-Mietwohnungen-in-Mehrfamilienh%C3%A4usern-%28NB-AuE-EE%29.pdf"
+stand = "Stand 05.11.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Bemessungsgrenze seit 01.10.2026: 5.250 / 5.460 €/m²", "Eingangsmieten und Zuschlag Effizienzhaus 40"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Bemessungsgrenze wird zum 01.04. und 01.10. fortgeschrieben (siehe LSN-BAULEISTUNGSPREISE)."
+
+[[quelle]]
+id = "NBANK-PI-EH-NEUBAU"
+gruppe = "foerderung"
+kurz = "NBank PI Energetisch hochwertiger Neubau"
+titel = "Produktinformation Energetisch hochwertiger Mietwohnungsneubau in Mehrfamilienhäusern"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Produktinformation-Energetisch-hochwertiger-Mietwohnungsneubau-in-Mehrfamilienh%C3%A4usern.pdf"
+stand = "Stand 10.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Reiner Zuschuss 50/40/30 %, höchstens 90.000/75.000/60.000 € je Wohneinheit", "Eingangsmieten ohne Zuschlag"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Ob seit 01.10.2026 geänderte Werte gelten, ist aus dem Stand 10.07.2026 nicht erkennbar."
+
+[[quelle]]
+id = "NBANK-PI-MODERNISIERUNG"
+gruppe = "foerderung"
+kurz = "NBank PI Modernisierung von Mietwohnraum"
+titel = "Produktinformation Modernisierung von Mietwohnraum (klimagerechte Modernisierung)"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Produktinformation-Modernisierung-von-Mietwohnraum.pdf"
+stand = "Stand 10.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Zuschuss nach Sprung der Effizienzklasse (9.000 bis 31.000 € je Wohnung)", "Bindung 25 Jahre (bei vermieteter Wohnung plus 10 Jahre)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Nur für Gebäude mit Fertigstellung vor dem 08.12.2004. Das alte Darlehensprogramm gilt für Anträge bis 31.12.2026 fort (Wahlrecht, RL Nr. 13.3)."
+
+[[quelle]]
+id = "NBANK-PI-BINDUNGSERWERB"
+gruppe = "foerderung"
+kurz = "NBank PI Erwerb von Bindungen"
+titel = "Produktinformation Erwerb von Belegungs- und Mietbindungen"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Produktinformation-Erwerb-von-Belegungs-und-Mietbindungen.pdf"
+stand = "Stand 01.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Zuschuss 2,00 / 2,50 / 3,00 €/m² und Monat je Bindungsdauer", "Auszahlung in zwei Raten"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "NBANK-PI-BINDUNGSVERLAENGERUNG"
+gruppe = "foerderung"
+kurz = "NBank PI Verlängerung von Bindungen"
+titel = "Produktinformation Verlängerung auslaufender Belegungs- und Mietbindungen"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Mietwohnraumf%C3%B6rderung-Verl%C3%A4ngerung-auslaufender-Belegungs-und-Mietbindungen.pdf"
+stand = "Stand 01.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Halten-Variante bei auslaufender Bindung: Zinsverbilligung auf 0 % bis 20 Jahre"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Nach Prüfrunde 2 als Programm für Ankauf Bestand aufzunehmen."
+
+[[quelle]]
+id = "NBANK-PI-OSTFRIESISCHE-INSELN"
+gruppe = "foerderung"
+kurz = "NBank PI Ostfriesische Inseln"
+titel = "Produktinformation Mietwohnraum auf den Ostfriesischen Inseln"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Mietwohnraum-auf-den-Ostfriesischen-Inseln.pdf"
+stand = "Stand 05.11.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Sonderkonditionen Inseln (RL Nr. 8)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "NBANK-RL-JUNGES-WOHNEN-2026"
+gruppe = "foerderung"
+kurz = "RL Junges Wohnen 2026"
+titel = "Richtlinie über die Förderung von Wohnheimplätzen für Studierende und für Auszubildende"
+herausgeber = "Land Niedersachsen; Bewilligung NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Richtlinie-F%C3%B6rderung-von-Wohnheimpl%C3%A4tzen-f%C3%BCr-Studierende-und-f%C3%BCr-Auszubildende-%28RL-Junges-Wohnen-2026%29.pdf"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Förderung von Wohnheimplätzen: Darlehen und Zuschuss je Platz, Bindung 25 oder 40 Jahre"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Datum und Fundstelle des Erlasses nicht festgehalten. Mindestzahl zusammenhängender Plätze und Mieterhöhungsregeln nicht nachgeprüft."
+
+[[quelle]]
+id = "NBANK-PI-WOHNHEIMPLAETZE"
+gruppe = "foerderung"
+kurz = "NBank PI Wohnheimplätze"
+titel = "Produktinformation Wohnheimplätze für Studierende"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Wohnheimpl%C3%A4tze-f%C3%BCr-Studierende.pdf"
+stand = "Stand 05.11.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Höchstbeträge je Platz, Zins, Gebühren, Eigenmittel 15 %"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "NBANK-PI-MODERNISIERUNG-WOHNHEIME"
+gruppe = "foerderung"
+kurz = "NBank PI Modernisierung Wohnheime"
+titel = "Produktinformation Modernisierung (inklusive energetischer Modernisierung) von Wohnheimen für Studierende und Auszubildende"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Produktinformation-Modernisierung-%28inklusive-energetischer-Modernisierung%29-von-Wohnheimen-f%C3%BCr-Studierende-und-Auszubildende-%28Junges-Wohnen%29.pdf"
+stand = "Stand 16.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Zuschuss 50 bis 70 % nach Effizienzsprung, Zweckbindung 20 Jahre"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "NBANK-VORDRUCK-1011"
+gruppe = "foerderung"
+kurz = "NBank Vordruck 1011"
+titel = "Förderantrag Mietwohnungen"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Formulare-zur-Antragstellung/F%C3%B6rderantrag-Mietwohnungen-Vordruck-1011.pdf"
+stand = "Stand Juli 2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Antragssicht: Kosten nach DIN 276, Finanzierungsmittel, Mieterträge, Bewilligungsgrundlagen"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "NBANK-KOSTEN-FINANZIERUNGSAUFTEILUNG"
+gruppe = "foerderung"
+kurz = "NBank Kosten-Finanzierungsaufteilung"
+titel = "Arbeitsmappe Kosten-Finanzierungsaufteilung (Angaben Hauptantrag, Finanzierungsaufteilung)"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Formulare-zur-Antragstellung/Kosten-Finanzierungsaufteilung.xlsx"
+stand = "Dateieigenschaft „geändert 31.08.2026“"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Abgleich der Antragssicht mit Fördersätzen, Höchstdarlehen und Eigenmittelprüfung der NBank"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "NBANK-VORDRUCK-2012"
+gruppe = "foerderung"
+kurz = "NBank Vordruck 2012"
+titel = "Wirtschaftlichkeitsberechnung (zum Antrag auf Landesbürgschaft)"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Formulare-zur-Antragstellung/Wirtschaftlichkeitsberechnung-Vordr.-2012.pdf"
+stand = "Fassung 05/15"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Wirtschaftlichkeitsberechnung nach II. BV als Ausgabeformat"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Gehört zur Landesbürgschaft und ist auf den Programmseiten der Mietwohnraumförderung nicht verlinkt."
+
+[[quelle]]
+id = "NBANK-CHECKLISTE-ANTRAG"
+gruppe = "foerderung"
+kurz = "NBank Checkliste Antragsunterlagen"
+titel = "Beizufügende Antragsunterlagen Mietwohnraumförderung – Checkliste"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Arbeitshilfen-Merkbl%C3%A4tter/Merkbl%C3%A4tter-Produkte/Beizuf%C3%BCgende-Antragsunterlagen-Mietwohnraumf%C3%B6rderung-Checkliste.pdf"
+stand = "Stand 20.07.2025"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Inhalt der Antragsunterlage (Ertrags-, Finanz- und Liquiditätsplanung)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Stand liegt vor der RL 2026; auf Neufassung achten."
+
+[[quelle]]
+id = "NBANK-WFB-AENDERUNG-2025"
+gruppe = "foerderung"
+kurz = "WFB-Änderungserlass 2025"
+titel = "Wohnraumförderbestimmungen, Änderungserlass"
+herausgeber = "Land Niedersachsen"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Rechtliche-Grundlagen/Richtlinien/Wohnraumf%C3%B6rderbestimmungen-%28WFB%29-%28Rd.Erl.-v.-09.12.2025%29.pdf"
+stand = "RdErl. v. 09.12.2025, Nds. MBl. 2025 Nr. 597; außer Kraft mit Ablauf 30.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Altkonditionen für fortgeltendes Modernisierungsdarlehen (Anträge bis 31.12.2026)", "Bestandsbindungen nach altem Recht"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Nach dem 31.12.2026 nur noch für Altfälle relevant."
+
+[[quelle]]
+id = "NBANK-KONDITIONEN-INVESTKREDIT"
+gruppe = "foerderung"
+kurz = "NBank Konditionenübersicht"
+titel = "Konditionenübersicht für Endkreditnehmer (NBank Investkredit)"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Konditionen/Konditionsuebersicht-Endkreditnehmer-ab-17.11.2026.pdf"
+stand = "Stand 17.11.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Konditionen des beihilfefreien NBank-Investkredits (Preisklassen A bis H)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Betrifft nicht die Wohnraumförderung; die Datei wird laufend neu datiert, der Dateiname ändert sich mit."
+
+# ---------------------------------------------------------------------------
+# Förderung: KfW und BAFA (Bund)
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "KFW-261-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 261"
+titel = "Bundesförderung für effiziente Gebäude – Wohngebäude, Kredit (261)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000004854_M_261.pdf"
+stand = "Merkblatt 09/2026, gültig ab 24.09.2026 (Bestellnummer 600 000 4854)"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Kredithöchstbetrag 150.000 € je Wohneinheit", "Tilgungszuschüsse und Boni", "Verrechnung des Tilgungszuschusses nach 2, 4 und 5 Jahren", "Kumulierungsgrenze 60 %", "Bereitstellungsprovision"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Keine Obergrenze für die Summe aus WPB- und SerSan-Bonus im Merkblatt. Rechtsgrundlage siehe BEG-WG-RL."
+
+[[quelle]]
+id = "KFW-263-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 263"
+titel = "Bundesförderung für effiziente Gebäude – Nichtwohngebäude, Kredit (263)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000004822_M_263.pdf"
+stand = "Merkblatt 09/2026, gültig ab 24.09.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Sanierung von Gewerbeflächen: Kredit, Tilgungszuschüsse, risikogerechtes Zinssystem"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KFW-297-298-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 297/298"
+titel = "Klimafreundlicher Neubau – Wohngebäude (297, 298)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000005051_M_297_298.pdf"
+stand = "Merkblatt 07/2026, gültig ab 30.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Neubaukredit 100.000 € bzw. 150.000 € mit QNG je Wohneinheit", "Stufe Effizienzhaus 55 (befristet)", "Kumulierungsausschlüsse und Sperrfristen"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "EH55-Stufe bis Mittelausschöpfung, längstens 31.12.2026 (KFW-PM-2026-06-19); Ausschöpfung der 800 Mio. € nicht veröffentlicht."
+
+[[quelle]]
+id = "KFW-296-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 296"
+titel = "Klimafreundlicher Neubau im Niedrigpreissegment (296)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000005195_M_296.pdf"
+stand = "Merkblatt 06/2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Neubaukredit 100.000 € je Wohneinheit mit Flächen- und Lebenszykluskostengrenzen"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KFW-458-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 458"
+titel = "Heizungsförderung für Privatpersonen – Wohngebäude (458)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000005131_M_458.pdf"
+stand = "Merkblatt 09/2026, gültig ab 24.09.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Zuschuss Heizungstausch: Grundförderung, Boni, Obergrenze 70/80 %", "Förderfähige Kosten je Wohneinheit mit halbjährlicher Absenkung", "Drittmittel nach § 559e BGB"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Klimageschwindigkeitsbonus sinkt ab 01.02.2027 halbjährlich und entfällt ab 01.08.2028 – Stichtage im Katalog führen."
+
+[[quelle]]
+id = "KFW-459-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 459"
+titel = "Heizungsförderung für Unternehmen und Vermieter (459)"
+herausgeber = "KfW"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Zuschuss Heizungstausch für vermietete Wohngebäude", "Drittmittel nach § 559e BGB"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Nicht eigens geprüft; die 70-%-Obergrenze ist nur für 458 belegt. Für Vermieter vorrangig zu lesen."
+
+[[quelle]]
+id = "KFW-522-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 522"
+titel = "Heizungsförderung für Nichtwohngebäude (522)"
+herausgeber = "KfW"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Zuschuss Heizungstausch in Gewerbeflächen"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Nicht eigens geprüft."
+
+[[quelle]]
+id = "KFW-266-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 266"
+titel = "Gewerbe zu Wohnen (266)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000005303_M_266.pdf"
+stand = "Merkblatt 07/2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Zuschuss 30 % auf höchstens 100.000 € je entstehender Wohneinheit", "De-minimis-Kennzeichen", "Kombination mit BEG WG"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Antrag laut Produktseite kfw.de/266 bis 31.12.2026; Budget (300 Mio. €) nicht primär belegt."
+
+[[quelle]]
+id = "KFW-308-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 308"
+titel = "Jung kauft Alt (308)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000005152_M_308.pdf"
+stand = "Merkblatt 08/2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Selbstnutzer-Erwerb mit Sanierungspflicht (Beratungsgeschäft)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KFW-134-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 134"
+titel = "Genossenschaftliches Wohnen (134)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000004835_M_134.pdf"
+stand = "Merkblatt 02/2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Erwerb von Genossenschaftsanteilen mit Tilgungszuschuss 15 %"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KFW-270-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 270"
+titel = "Erneuerbare Energien – Standard (270)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000000178_M_270_EE-Standard.pdf"
+stand = "Merkblatt 05/2025"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Refinanzierung von Photovoltaik und Speichern"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Ältester Stand aller gelesenen Merkblätter; auf Neufassung achten."
+
+[[quelle]]
+id = "KFW-358-359-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 358/359"
+titel = "Ergänzungskredit Wohngebäude (358, 359)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inlandsf%C3%B6rderung%29/PDF-Dokumente/6000005135_M_358_359.pdf"
+stand = "Merkblatt 09/2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Ergänzungskredit 120.000 € je Wohneinheit zu BEG-Einzelmaßnahmen"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "KFW-299-MERKBLATT"
+gruppe = "foerderung"
+kurz = "KfW-Merkblatt 299"
+titel = "Klimafreundlicher Neubau – Nichtwohngebäude (299)"
+herausgeber = "KfW"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Neubaukredit für Gewerbeflächen im Mixed-Use"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Nur die Zinsen im KfW-Zinsdatensatz gesichtet; Merkblatt nicht gelesen."
+
+[[quelle]]
+id = "KFW-ANPASSUNGEN-BEG-2026"
+gruppe = "foerderung"
+kurz = "KfW Anpassungen BEG 2026"
+titel = "Übersichtsseite Anpassungen der Bundesförderung für effiziente Gebäude 2026"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/inlandsfoerderung/Bundesf%C3%B6rderung-f%C3%BCr-effiziente-Geb%C3%A4ude/Anpassungen-2026/"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Stichtage der BEG-Reform (Boni, Absenkungspfade, Wertschöpfungsbonus ab 2027)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Webseite ohne Stand-Datum."
+
+[[quelle]]
+id = "KFW-PM-2026-06-19"
+gruppe = "foerderung"
+kurz = "KfW-Pressemitteilung 19.06.2026"
+titel = "Verlängerung der EH55-Neubauförderung bis 31.12.2026"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/%C3%9Cber-die-KfW/Newsroom/Aktuelles/Pressemitteilungen-Details_898560.html"
+stand = "Pressemitteilung vom 19.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Befristung der Stufe Effizienzhaus 55 in 297/298"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BEG-WG-RL"
+gruppe = "foerderung"
+kurz = "Richtlinie BEG WG"
+titel = "Richtlinie für die Bundesförderung für effiziente Gebäude – Wohngebäude"
+herausgeber = "Bund"
+fundstelle = "BAnz AT 02.09.2026 B1"
+stand = "Richtlinie vom 17.08.2026, in Kraft seit 21.07.2026"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Rechtsgrundlage von KfW 261"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Fundstelle nur aus dem KfW-Merkblatt 261; Richtlinientext nicht gelesen. Ob zwischen 21.07. und 24.09.2026 ein Antragsstopp bestand, ist offen."
+
+[[quelle]]
+id = "BEG-NWG-RL"
+gruppe = "foerderung"
+kurz = "Richtlinie BEG NWG"
+titel = "Richtlinie für die Bundesförderung für effiziente Gebäude – Nichtwohngebäude"
+herausgeber = "Bund"
+fundstelle = "BAnz AT 02.09.2026 B1"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Rechtsgrundlage von KfW 263"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Fundstelle laut Notiz 07 gemeinsam mit BEG WG; Richtlinientext nicht gelesen."
+
+[[quelle]]
+id = "BEG-EM-RL"
+gruppe = "foerderung"
+kurz = "Richtlinie BEG EM"
+titel = "Richtlinie für die Bundesförderung für effiziente Gebäude – Einzelmaßnahmen"
+herausgeber = "Bund"
+fundstelle = "https://www.energiewechsel.de/KAENEF/Redaktion/DE/PDF-Anlagen/BEG/beg-richtlinien-juli-2026/20260720-beg-einzelmassnahmen.pdf?__blob=publicationFile&v=5"
+stand = "Richtlinie vom 17.07.2026, in Kraft seit 21.07.2026, befristet bis 31.12.2030"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Fördersätze Gebäudehülle und Anlagentechnik", "Höchstgrenzen je Wohneinheit und Kalenderjahr, mit Sanierungsfahrplan", "Kumulierungsgrenze 60 % (Kommunen 90 %)", "Absenkungspfad der Heizungs-Höchstgrenze"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Gelesen wurde die Fassung auf energiewechsel.de mit Platzhalter „BAnz AT XX.XX.XXXX“; Abgleich mit der amtlichen Fassung BAnz AT 27.08.2026 B1 steht aus."
+
+[[quelle]]
+id = "BAFA-BEG-EM-MERKBLATT"
+gruppe = "foerderung"
+kurz = "BAFA-Merkblatt BEG EM"
+titel = "Allgemeines Merkblatt zur Antragstellung BEG Einzelmaßnahmen"
+herausgeber = "BAFA"
+fundstelle = "https://www.bafa.de/SharedDocs/Downloads/DE/Energie/beg_merkblatt_allgemein_antragstellung_neu.pdf?__blob=publicationFile&v=17"
+stand = "Version 1.14 vom 19.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Berechnung des Sanierungsfahrplan-Bonus", "Nutzungspflicht zehn Jahre"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BAFA-BEG-EM-FOERDERUEBERSICHT"
+gruppe = "foerderung"
+kurz = "BAFA-Förderübersicht BEG EM"
+titel = "Förderübersicht Bundesförderung für effiziente Gebäude – Einzelmaßnahmen"
+herausgeber = "BAFA"
+fundstelle = "https://www.bafa.de/SharedDocs/Downloads/DE/Energie/beg_em_foerderuebersicht_neu.pdf?__blob=publicationFile&v=4"
+stand = "Stand 28.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Fördersätze und Gesamtobergrenze 70/80 % auf einen Blick"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = ""
+
+[[quelle]]
+id = "BEG-FAQ"
+gruppe = "foerderung"
+kurz = "BEG-FAQ"
+titel = "Häufige Fragen zur Bundesförderung für effiziente Gebäude"
+herausgeber = "Bund (energiewechsel.de)"
+fundstelle = "nicht erfasst"
+stand = "Stand 14.08.2026"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Auslegung der BEG-Richtlinien"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Am 17.11.2026 heruntergeladen, aber nicht ausgewertet."
+
+# ---------------------------------------------------------------------------
+# Normen und Branchenrichtlinien
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "DIN-276"
+gruppe = "norm"
+kurz = "DIN 276"
+titel = "Kosten im Bauwesen"
+herausgeber = "DIN"
+fundstelle = "https://www.din.de/de/mitwirken/normenausschuesse/nabau/veroeffentlichungen/wdc-beuth:din21:293154016/toc-2873248/download"
+stand = "Ausgabe 2018-12"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Kostengliederung KG 100 bis 800", "Sechs Stufen der Kostenermittlung (einschließlich Kostenvoranschlag)", "Zuwendungsfähige Kosten der NBank (KG 200 bis 700)"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur Inhaltsverzeichnis und Sekundärquellen gesehen. Gliederung mit Nummern und Kurzbezeichnungen getrennt vom Normtext behandeln; Lizenz bei DIN Media klären. Eine angebliche „DIN 276:2022“ ist nicht belegt."
+
+[[quelle]]
+id = "DIN-276-1-2008"
+gruppe = "norm"
+kurz = "DIN 276-1:2008-12"
+titel = "Kosten im Bauwesen – Teil 1: Hochbau (Vorgängerfassung)"
+herausgeber = "DIN"
+fundstelle = "nicht erfasst"
+stand = "Ausgabe 2008-12"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Anrechenbare Kosten für Honorare nach HOAI 2021"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Abweichende Normfassung zwischen Honorar und Kostenplanung; nur aus Sekundärquelle."
+
+[[quelle]]
+id = "DIN-277"
+gruppe = "norm"
+kurz = "DIN 277"
+titel = "Grundflächen und Rauminhalte im Hochbau"
+herausgeber = "DIN"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Brutto-Grundfläche und Nutzungsfläche je Gebäude", "Kostenkennwerte je m² BGF", "Flächeneffizienz"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Ausgabe 2021-08 nur vermutet, nicht bestätigt (Notiz 06). Aussagen zur Flächenlogik nur aus Suchtreffern."
+
+[[quelle]]
+id = "DIN-18040-2"
+gruppe = "norm"
+kurz = "DIN 18040-2"
+titel = "Barrierefreies Bauen – Wohnungen"
+herausgeber = "DIN"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Rollstuhlgerechte Plätze („R“) mit erhöhten Höchstbeträgen im Programm Junges Wohnen"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur über die NBank-Produktinformation genannt."
+
+[[quelle]]
+id = "VDI-4650-1"
+gruppe = "norm"
+kurz = "VDI 4650 Blatt 1"
+titel = "Berechnung der Jahresarbeitszahl von Wärmepumpenanlagen"
+herausgeber = "VDI"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Nachweis der Jahresarbeitszahl 2,5 nach § 559f BGB"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur über § 559f Abs. 1 BGB genannt. Das Werkzeug übernimmt das Ergebnis des Fachunternehmers, rechnet die Zahl nicht selbst."
+
+[[quelle]]
+id = "QNG"
+gruppe = "norm"
+kurz = "QNG"
+titel = "Qualitätssiegel Nachhaltiges Gebäude (QNG-PLUS, QNG-PREMIUM)"
+herausgeber = "nicht erfasst"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Voraussetzung der Sonderabschreibung § 7b EStG (neues Fenster)", "Höherer Kredit in KfW 297/298 und NH-Bonus in KfW 261"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur über § 7b EStG und die KfW-Merkblätter genannt; Träger und Anforderungen nicht erfasst. Das Werkzeug führt das Siegel als Merkmal, prüft es nicht."
+
+[[quelle]]
+id = "GIF-MF-GIF-2023"
+gruppe = "norm"
+kurz = "MF-GIF 2023"
+titel = "Richtlinie zur Berechnung der Mietfläche für Gebäude"
+herausgeber = "gif Gesellschaft für Immobilienwirtschaftliche Forschung"
+fundstelle = "nicht erfasst"
+stand = "Ausgabe Februar 2023 (löst MFG 2017 und MF/G 2012 ab)"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Mietfläche bei Gewerbe und Mixed-Use (MF-GIF-0, -1, -2)", "Rent Roll je Mietvertrag"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Inhalt nur aus einer Kanzleiveröffentlichung (Notiz 06)."
+
+[[quelle]]
+id = "GIF-KENNZAHLENKATALOG"
+gruppe = "norm"
+kurz = "gif-Kennzahlenkatalog"
+titel = "Kennzahlenkatalog Immobilienmanagement"
+herausgeber = "gif Gesellschaft für Immobilienwirtschaftliche Forschung"
+fundstelle = "https://kennzahlenkatalog.gif-ev.com/"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Definition Brutto- und Nettoanfangsrendite, Kaufpreisfaktor", "Bezugsbasis des Restwerts (Faktor auf Jahresnettokaltmiete, Nettoanfangsrendite auf Reinertrag und Bruttokaufpreis)"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Formeln nur aus Suchauszug; gif-„Nettomieteinnahmen“ sind laut Sekundärquelle nicht mit dem Reinertrag nach ImmoWertV identisch – am Original abgrenzen. Trägt die Restwert-Konvention (Prüfrunde 2, Fachexperte Befund 1)."
+
+[[quelle]]
+id = "GIF-RENDITEDEFINITIONEN-2007"
+gruppe = "norm"
+kurz = "gif Renditedefinitionen"
+titel = "Rendite-Definitionen Real Estate Investment Management"
+herausgeber = "gif Gesellschaft für Immobilienwirtschaftliche Forschung"
+fundstelle = "Wiesbaden 2007"
+stand = "Ausgabe 2007"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Renditekennzahlen im Kennzahlenblatt"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur über ein Literaturverzeichnis bekannt; aktuelle Auflage nicht ermittelt."
+
+[[quelle]]
+id = "GIF-REIM-LEISTUNGSKATALOG"
+gruppe = "norm"
+kurz = "gif REIM-Leistungskatalog"
+titel = "Definition und Leistungskatalog Real Estate Investment Management"
+herausgeber = "gif Gesellschaft für Immobilienwirtschaftliche Forschung"
+fundstelle = "nicht erfasst"
+stand = "Stand 2004"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Begriffe des Investment Managements"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur über ein Literaturverzeichnis bekannt."
+
+[[quelle]]
+id = "GIF-RISIKOMANAGEMENT"
+gruppe = "norm"
+kurz = "gif Immobilien-Risikomanagement"
+titel = "Implementierung Immobilien-Risikomanagement"
+herausgeber = "gif Gesellschaft für Immobilienwirtschaftliche Forschung"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Methodik von Sensitivität, Szenario und Simulation"]
+turnus = "bei-neuausgabe"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur Literaturverweis; ob es eine aktuelle gif-Richtlinie zum Risikomanagement gibt, ist offen."
+
+[[quelle]]
+id = "INREV-DEFINITIONS"
+gruppe = "norm"
+kurz = "INREV Global Definitions Database"
+titel = "INREV Global Definitions Database"
+herausgeber = "INREV"
+fundstelle = "https://www.inrev.org/definitions/EN/all"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Definition Eigenkapitalvervielfacher (Equity Multiple, D0150)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur aus Suchauszügen; IRR-, LTV- und ICR-Definitionen nicht gefunden."
+
+# ---------------------------------------------------------------------------
+# Methoden- und Qualitätsstandards
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "FAST-STANDARD"
+gruppe = "methode"
+kurz = "FAST Standard"
+titel = "FAST Standard für Finanzmodelle (Flexible, Appropriate, Structured, Transparent)"
+herausgeber = "FAST Standard Organisation"
+fundstelle = "http://www.fast-standard.org/wp-content/uploads/2015/03/FASTStandard_02a.pdf"
+stand = "Fassung 02c vom Juli 2019 laut Notiz 03; verlinkt ist 02a"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Trennung von Eingabe, Rechnung und Ausgabe", "Eine Formel je Zeile, Zeitachse, Flags", "Aufbau des Excel-Exports"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Regelkatalog nicht im Volltext gelesen; der Bericht verlinkt die ältere Fassung 02a – beim Lesen die geltende Fassung 02c beschaffen."
+
+[[quelle]]
+id = "ICAEW-FMC"
+gruppe = "methode"
+kurz = "ICAEW Financial Modelling Code"
+titel = "Financial Modelling Code (aufbauend auf den Twenty Principles for Good Spreadsheet Practice)"
+herausgeber = "ICAEW"
+fundstelle = "https://www.icaew.com/-/media/corporate/files/technical/technology/excel-community/financial-modelling-code.ashx"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Keine versteckten Konstanten", "Kontrollsummen und Modellprüfung", "Nachvollziehbarkeit jeder Ergebniszahl"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge gelesen; Ausgabe nicht ermittelt."
+
+[[quelle]]
+id = "IBCS"
+gruppe = "methode"
+kurz = "IBCS"
+titel = "International Business Communication Standards"
+herausgeber = "IBCS Association"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Notation von Berichten und Diagrammen", "Aussage im Titel"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In CLAUDE.md und Spezifikation als Maßstab gesetzt; Fassung vor dem Entwurf der Berichte festlegen."
+
+[[quelle]]
+id = "WCAG-2-2"
+gruppe = "methode"
+kurz = "WCAG 2.2"
+titel = "Web Content Accessibility Guidelines 2.2, Stufe AA"
+herausgeber = "W3C"
+fundstelle = "nicht erfasst"
+stand = "Version 2.2"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Barrierefreiheit der Oberfläche (Stufe AA)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In CLAUDE.md als Maßstab gesetzt."
+
+[[quelle]]
+id = "OWASP-ASVS"
+gruppe = "methode"
+kurz = "OWASP ASVS"
+titel = "Application Security Verification Standard"
+herausgeber = "OWASP Foundation"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Sicherheitsanforderungen an Anmeldung, Rechte und Änderungsprotokoll"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In CLAUDE.md als Maßstab gesetzt; Version und Prüfstufe vor der Sicherheitsarchitektur festlegen."
+
+[[quelle]]
+id = "RUST-API-GUIDELINES"
+gruppe = "methode"
+kurz = "Rust API Guidelines"
+titel = "Rust API Guidelines"
+herausgeber = "Rust-Projekt"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Gestaltung der Schnittstellen des Rechenkerns"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In CLAUDE.md als Maßstab gesetzt."
+
+[[quelle]]
+id = "ARC42"
+gruppe = "methode"
+kurz = "arc42"
+titel = "arc42 Vorlage für Architekturdokumentation"
+herausgeber = "arc42"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Gliederung der Architekturdokumentation"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In docs/README.md als Form gesetzt; ab Phase 2."
+
+[[quelle]]
+id = "DIATAXIS"
+gruppe = "methode"
+kurz = "Diátaxis"
+titel = "Diátaxis – Gliederung technischer Dokumentation"
+herausgeber = "nicht erfasst"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Gliederung des Benutzerhandbuchs (Einstieg, Anleitungen, Nachschlageteil, Erklärung)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In docs/README.md als Form gesetzt; ab Phase 4."
+
+[[quelle]]
+id = "KEEP-A-CHANGELOG"
+gruppe = "methode"
+kurz = "Keep a Changelog"
+titel = "Keep a Changelog"
+herausgeber = "nicht erfasst"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Form der Änderungshistorie"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In docs/README.md als Form gesetzt; ab Phase 3."
+
+[[quelle]]
+id = "SEMVER"
+gruppe = "methode"
+kurz = "SemVer"
+titel = "Semantic Versioning"
+herausgeber = "nicht erfasst"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Versionsnummern der Anwendung und des Rechenkerns"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "In docs/README.md als Form gesetzt; ab Phase 3."
+
+# ---------------------------------------------------------------------------
+# Fachliteratur und Rechenbeispiele
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "GROB-EINFUEHRUNG"
+gruppe = "literatur"
+kurz = "Grob, Einführung in die Investitionsrechnung"
+titel = "Einführung in die Investitionsrechnung (VOFI-Kapitel S. 285–292)"
+herausgeber = "Grob"
+fundstelle = "Grob (2006), S. 285–292; zitiert nach TU Ilmenau, db-thueringen"
+stand = "Ausgabe 2006"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Lehrbuchschema des VOFI", "Definitionen VOFI-Gesamtkapitalrentabilität und Amortisationsdauer", "Kritische Werte im VOFI"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Schema nur über FernUni Hagen und Wikipedia; die Definitionen von Gesamtkapitalrendite und Amortisationsdauer sind ungeklärt, bis das Original vorliegt (Kennzahlen bis dahin nicht ausgewiesen). Neueste Auflage nicht ermittelt."
+
+[[quelle]]
+id = "GROB-1989"
+gruppe = "literatur"
+kurz = "Grob, Investitionsrechnung mit vollständigen Finanzplänen"
+titel = "Investitionsrechnung mit vollständigen Finanzplänen"
+herausgeber = "Grob"
+fundstelle = "nicht erfasst"
+stand = "Ausgabe 1989"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Ursprung und Begriffe der VOFI-Methode"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Nur aus dem Fachwissen des Bearbeiters genannt (Notiz 03)."
+
+[[quelle]]
+id = "SCHULTE-ROPETER-1996"
+gruppe = "literatur"
+kurz = "Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte"
+titel = "Rentabilitätsanalyse für Immobilienprojekte, in: Handbuch Immobilien-Projektentwicklung"
+herausgeber = "Schulte, Ropeter"
+fundstelle = "Handbuch Immobilien-Projektentwicklung, 1996"
+stand = "Ausgabe 1996"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Immobilien-VOFI: Zeilenstruktur, unterjährige Zahlungen"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Die Zeilenstruktur in Notiz 03 ist eine Rekonstruktion ohne Blick ins Original."
+
+[[quelle]]
+id = "ROPETER-1998"
+gruppe = "literatur"
+kurz = "Ropeter, Investitionsanalyse für Gewerbeimmobilien"
+titel = "Investitionsanalyse für Gewerbeimmobilien"
+herausgeber = "Ropeter"
+fundstelle = "https://epub.uni-regensburg.de/6569/"
+stand = "Ausgabe 1998"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Immobilien-VOFI für Gewerbe"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Liegt laut Notiz 03 auf dem Publikationsserver der Universität Regensburg; nicht abgerufen. Zugang beim Abruf bestätigen."
+
+[[quelle]]
+id = "SCHULTE-IMMOBILIENOEKONOMIE-1"
+gruppe = "literatur"
+kurz = "Schulte (Hrsg.), Immobilienökonomie Bd. I"
+titel = "Immobilienökonomie, Band I; darin Schulte/Allendorf/Ropeter, Immobilieninvestition"
+herausgeber = "Schulte (Hrsg.)"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Immobilien-VOFI-Tabelle", "Vergleich VOFI und DCF", "Fehlerkataloge und Musterrechnungen"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Nicht eingesehen (Notizen 03 und 06)."
+
+[[quelle]]
+id = "KIRCHNER-IWU-2004"
+gruppe = "literatur"
+kurz = "Kirchner, IWU 2004 (Skript)"
+titel = "Investitionsrechnungen in der Wohnungswirtschaft, Skript zur Vorlesung Wohnungswirtschaftliche Theorie I"
+herausgeber = "Joachim Kirchner, Institut Wohnen und Umwelt"
+fundstelle = "https://www.iwu.de/fileadmin/publikationen/wohnen/2004_IWU_Kirchner_Investitionsrechnungen-in-der-Wohnungswirtschaft-Wohnungswirtschaftliche-Theorie-I.pdf"
+stand = "Skript vom 28.01.2004"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Referenzfall 1: Endwert 1.322,48 €, VOFI-Rendite 9,76 % (S. 17–18)", "Renditeformel und Rekursion des Finanzplans"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Zwei Druckfehler im Original (S. 17 Vorzeichen, S. 22 −313,44 statt −314,44); Endwerte rechnerisch bestätigt."
+
+[[quelle]]
+id = "KIRCHNER-IWU-2004-FOLIEN"
+gruppe = "literatur"
+kurz = "Kirchner, IWU 2004 (Folien)"
+titel = "Folien Investitionsrechnung in der Wohnungswirtschaft"
+herausgeber = "Joachim Kirchner, Institut Wohnen und Umwelt"
+fundstelle = "https://www.iwu.de/fileadmin/publikationen/wohnen/2004_IWU_Kirchner_Folien-Investitionsrechnung-in-der-Wohnungswirtschaft.pdf"
+stand = "Ausgabe 2004"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Möglicher weiterer Testfall mit Steuern und Verkauf (Eigenkapital 2.100, VOFI-Rendite 7,95 %)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Zahlen nur aus Suchauszug (Notiz 03); vor Verwendung als Testfall am Original lesen."
+
+[[quelle]]
+id = "IWU-2013-ENDBERICHT"
+gruppe = "literatur"
+kurz = "IWU 2013, Akteursbezogene Wirtschaftlichkeit"
+titel = "Akteursbezogene Wirtschaftlichkeitsberechnungen von Energieeffizienzmaßnahmen im Bestand – Berechnungen mit dem Vollständigen Finanzplan"
+herausgeber = "Andreas Enseling, Eberhard Hinz, Martin Vaché, Institut Wohnen und Umwelt (im Auftrag des HMUELV)"
+fundstelle = "https://www.iwu.de/fileadmin/user_upload/dateien/energie/sonstiges/Endbericht_Akteursbezogene_Wirtschaftlichkeit.pdf"
+stand = "Endbericht vom 31.07.2013"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Referenzfall 2: MFH68 – KfW 100, Endwert 153.032 €, VOFI-Rendite 3,11 % (Anhang C, S. 51)", "Weiterer Testfall MFH68 – KfW 70 (VOFI-Rendite 3,08 %)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Tabelle nur als Bild mit geringer Auflösung; abgelesene Werte rekursiv geprüft (Abweichung höchstens 3,40 €). Gerechnet mit der 2013 geltenden Umlage von 11 %, ohne Steuern."
+
+[[quelle]]
+id = "GABLER-BANKLEXIKON-VOFI"
+gruppe = "literatur"
+kurz = "Gabler Banklexikon, VOFI"
+titel = "Stichwörter VOFI, VOFI-Eigenkapitalrentabilität, VOFI-Gesamtkapitalrentabilität"
+herausgeber = "Gabler"
+fundstelle = "https://www.gabler-banklexikon.de/definition/vofi-62370"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Definition des VOFI und der VOFI-Rendite", "Unterlassensalternative als Entscheidungsmaß"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Suchauszüge; die Formeln sind dort als Bild eingebunden und nicht gelesen."
+
+[[quelle]]
+id = "FERNUNI-HAGEN-INVESTITIONSCONTROLLING"
+gruppe = "literatur"
+kurz = "FernUni Hagen, Investitionscontrolling"
+titel = "Probekapitel Investitionscontrolling"
+herausgeber = "FernUniversität in Hagen"
+fundstelle = "https://www.fernuni-hagen.de/controlling/docs/probekapitel_innovationscontrolling.pdf"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Standardschema des VOFI (Zeilen für Eigenmittel, Kredite, Kontokorrent, Geldanlage, Steuern)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Suchauszug."
+
+[[quelle]]
+id = "KRUSCHWITZ"
+gruppe = "literatur"
+kurz = "Kruschwitz, Investitionsrechnung"
+titel = "Investitionsrechnung (Endwertmodelle, vollständige Finanzplanung)"
+herausgeber = "Kruschwitz"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Allgemeine Theorie der Endwertmodelle"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Nur genannt, nicht recherchiert (Notiz 03)."
+
+[[quelle]]
+id = "GONDRING-IMMOBILIENWIRTSCHAFT"
+gruppe = "literatur"
+kurz = "Gondring, Immobilienwirtschaft"
+titel = "Lehrbuch Immobilienwirtschaft"
+herausgeber = "Gondring"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Fehlerkataloge und Musterrechnungen der Praxis"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Nur genannt, nicht eingesehen (Notiz 06); Titel nicht genau erfasst."
+
+[[quelle]]
+id = "BRAUER-IMMOBILIENWIRTSCHAFT"
+gruppe = "literatur"
+kurz = "Brauer, Grundlagen der Immobilienwirtschaft"
+titel = "Lehrbuch zur Immobilienwirtschaft"
+herausgeber = "Brauer"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Fehlerkataloge und Musterrechnungen der Praxis"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Nur genannt, nicht eingesehen (Notiz 06); Titel nicht genau erfasst."
+
+[[quelle]]
+id = "WUESTEFELD-2000"
+gruppe = "literatur"
+kurz = "Wüstefeld, Risiko und Rendite von Immobilieninvestments"
+titel = "Risiko und Rendite von Immobilieninvestments"
+herausgeber = "Wüstefeld"
+fundstelle = "Frankfurt am Main 2000; TU Darmstadt, Publikation Nr. 9848"
+stand = "Ausgabe 2000"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["VOFI-Rendite und Monte-Carlo-Simulation (S. 146–147)"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Nur Literaturverweise gefunden."
+
+[[quelle]]
+id = "HOESLI-JANI-BENDER-2006"
+gruppe = "literatur"
+kurz = "Hoesli/Jani/Bender 2006"
+titel = "Monte Carlo simulations for real estate valuation"
+herausgeber = "Hoesli, Jani, Bender"
+fundstelle = "Journal of Property Investment & Finance 24(2), S. 102–122; https://ideas.repec.org/a/eme/jpifpp/14635780610655076.html"
+stand = "Ausgabe 2006"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Empfindlichste Einflussgrößen (Diskontsatz, Verkaufsrendite)", "Aufbau der Simulation in Stufe 2"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Nur Abstract und Auszüge; frei zugängliche Arbeitsfassung SFI Research Paper 148 / ERES 2005."
+
+[[quelle]]
+id = "FRENCH-GABRIELLI-UNCERTAINTY"
+gruppe = "literatur"
+kurz = "French/Gabrielli, The Uncertainty of Valuation"
+titel = "The Uncertainty of Valuation"
+herausgeber = "French, Gabrielli"
+fundstelle = "https://centaur.reading.ac.uk/27304/1/0703.pdf"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Drei-Punkt-Schätzung als Eingabeform der Simulation"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge. Weitere Fassung CentAUR 20890."
+
+[[quelle]]
+id = "FRENCH-GABRIELLI-DCF"
+gruppe = "literatur"
+kurz = "French/Gabrielli, DCF: Accounting for Uncertainty"
+titel = "Discounted Cash Flow: Accounting for Uncertainty"
+herausgeber = "French, Gabrielli"
+fundstelle = "https://centaur.reading.ac.uk/20893/1/0505.pdf"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Unsicherheit im DCF und in der Simulation"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge."
+
+[[quelle]]
+id = "HERIOT-WATT-BETA"
+gruppe = "literatur"
+kurz = "Heriot-Watt, Beta-Verteilungen im Monte-Carlo-DCF"
+titel = "Beyond Normal and Triangular: Beta Distributions for Monte Carlo DCF Valuation"
+herausgeber = "Heriot-Watt University (Autoren nicht erfasst)"
+fundstelle = "https://researchportal.hw.ac.uk/en/publications/beyond-normal-and-triangular-beta-distributions-for-monte-carlo-d/"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["PERT- statt Dreiecksverteilung (Dreieck 55 % breitere Bandbreite)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Kennzahl 55 % nicht an der Quelle geprüft (Notiz 09)."
+
+[[quelle]]
+id = "GLEISSNER-RISIKO-PORTFOLIO"
+gruppe = "literatur"
+kurz = "Gleißner, Integrierte Risiko- und Portfoliomanagementsysteme"
+titel = "Integrierte Risiko- und Portfoliomanagementsysteme in der Immobilienwirtschaft"
+herausgeber = "Gleißner"
+fundstelle = "https://werner-gleissner.de/site/publikationen/WernerGleissner_Integrierte-Risiko-und-Portfoliomanagementsysteme-in-der-Immobilienwirtschaft.pdf"
+stand = "nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Risikoaggregation durch Simulation mit Korrelationen"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge."
+
+[[quelle]]
+id = "GLEISSNER-ZFIFP-2008"
+gruppe = "literatur"
+kurz = "Gleißner, ZfiFP 07/2008"
+titel = "Risiko- und Portfoliosteuerung bei Immobilieninvestments"
+herausgeber = "Gleißner"
+fundstelle = "Zeitschrift für immobilienwirtschaftliche Forschung und Praxis 07/2008; https://www.werner-gleissner.de/site/publikationen/WernerGleissner_Risiko-und-Portfoliosteuerung-bei-Immobilieninvestments.pdf"
+stand = "Heft 07/2008"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Risikosteuerung im Immobilienportfolio"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge."
+
+[[quelle]]
+id = "NOELDEKE-2008"
+gruppe = "literatur"
+kurz = "Nöldeke, CUREM 2008"
+titel = "Masterarbeit zu Risikoanalyse und Monte-Carlo-Simulation von Immobilieninvestitionen"
+herausgeber = "Johannes Nöldeke, CUREM Universität Zürich"
+fundstelle = "https://www.curem.uzh.ch/static/abschlussarbeiten/2008/Noeldeke_Johannes_Masterthesis_2008.pdf"
+stand = "Masterarbeit 2008"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Gestuftes Vorgehen Sensitivität, Szenario, Simulation"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge; genauer Titel nicht erfasst."
+
+[[quelle]]
+id = "PETITJEAN-2009"
+gruppe = "literatur"
+kurz = "Petitjean, CUREM 2009"
+titel = "Masterarbeit zur Risikoanalyse von Immobilieninvestitionen"
+herausgeber = "Marc Petitjean, CUREM Universität Zürich"
+fundstelle = "https://www.curem.uzh.ch/static/abschlussarbeiten/2009/Petitjean_Marc_MT_2009.pdf"
+stand = "Masterarbeit 2009"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Schwächen von Sensitivitäts- und Szenarioanalyse"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge; genauer Titel nicht erfasst."
+
+[[quelle]]
+id = "GROSSMAN-OEZLUEK-2010"
+gruppe = "literatur"
+kurz = "Grossman/Özlük 2010"
+titel = "Spreadsheets Grow Up: Three Spreadsheet Engineering Methodologies for Large Financial Planning Models"
+herausgeber = "Grossman, Özlük"
+fundstelle = "nicht erfasst"
+stand = "Ausgabe 2010"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Vergleich FAST, SMART und BPM als Grundlage der Modellregeln"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur Auszüge; Zuordnung der drei Methodiken nicht am Text bestätigt."
+
+# ---------------------------------------------------------------------------
+# Datenquellen
+# ---------------------------------------------------------------------------
+
+[[quelle]]
+id = "KFW-ZINSDATEN"
+gruppe = "daten"
+kurz = "KfW-Zinsdatensatz"
+titel = "Zinssätze der KfW-Förderprogramme (alle.rates; ergänzend IKK.json, effektiv.rates, soll.rates)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw.de/zinsen/alle.rates"
+stand = "Datensatz gültig ab 18.11.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Soll- und Effektivzins je Programm, Laufzeit, Freijahre, Zinsbindung", "Zinsstufe Effizienzhaus 55 als eigener Parameter"]
+turnus = "monatlich"
+zugang = "lizenz-klaeren"
+bemerkung = "Undokumentierte Schnittstelle ohne zugesicherte Stabilität; automatischer Abruf nur mit Zustimmung der KfW (§ 87b UrhG). Enthält keine Bereitstellungsprovisionen."
+
+[[quelle]]
+id = "KFW-KONDITIONENANZEIGER"
+gruppe = "daten"
+kurz = "KfW-Konditionenanzeiger"
+titel = "Konditionenanzeiger für Endkreditnehmer (Maximalzinssätze)"
+herausgeber = "KfW"
+fundstelle = "https://www.kfw-formularsammlung.de/KonditionenanzeigerINet/KonditionenAnzeiger"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Maximalzinssätze laut Merkblättern"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Host am 17.11.2026 gesperrt; Format und möglicher PDF-Export unbekannt."
+
+[[quelle]]
+id = "FOERDERDATENBANK-RSS"
+gruppe = "daten"
+kurz = "Förderdatenbank RSS"
+titel = "RSS-Feed Förderprogramme der Förderdatenbank des Bundes"
+herausgeber = "Bund (Förderdatenbank)"
+fundstelle = "https://www.foerderdatenbank.de/FDB/DE/Service/RSS/Functions/foerderprogram_rssnewsfeed.xml"
+stand = "RSS 2.0; jüngster Eintrag beim Abruf 12.11.2026"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Änderungsmelder für die Katalogpflege (keine Konditionen)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Kein Export und keine Schnittstelle belegt; robots.txt mit Crawl-delay 30, Startseite hinter Bot-Schutz."
+
+[[quelle]]
+id = "DESTATIS-BAUPREISINDEX"
+gruppe = "daten"
+kurz = "Destatis Baupreisindex"
+titel = "Preisindizes für den Neubau von Wohngebäuden und die Instandhaltung"
+herausgeber = "Statistisches Bundesamt"
+fundstelle = "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_360_61261.html"
+stand = "Berichtsmonat August 2026 (Pressemitteilung Nr. 360 vom 09.10.2026)"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Baukostenindexierung getrennt vom Verbraucherpreisindex", "Instandhaltungskosten-Steigerung"]
+turnus = "vierteljaehrlich"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur aus Suchauszügen; destatis.de war gesperrt. Lizenz für Kundenberichte nicht geprüft. Abruf über GENESIS als Differenzierungsmerkmal."
+
+[[quelle]]
+id = "DESTATIS-VPI"
+gruppe = "daten"
+kurz = "Destatis Verbraucherpreisindex"
+titel = "Verbraucherpreisindex für Deutschland"
+herausgeber = "Statistisches Bundesamt"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Fortschreibung II. BV (dreijährlich) und ImmoWertV Anlage 3 (jährlich), Basis Oktober 2001", "Indexmiete", "Inflationsannahme"]
+turnus = "monatlich"
+zugang = "lizenz-klaeren"
+bemerkung = "destatis.de am 17.11.2026 gesperrt; Oktoberwerte und Lizenz nicht geprüft."
+
+[[quelle]]
+id = "LSN-BAULEISTUNGSPREISE"
+gruppe = "daten"
+kurz = "LSN Bauleistungspreise"
+titel = "Bauleistungspreise des Landesamts für Statistik Niedersachsen"
+herausgeber = "Landesamt für Statistik Niedersachsen"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Fortschreibung der NBank-Bemessungsgrenze zum 01.04. und 01.10."]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur über RL Mietwohnraum 2026 Nr. 5.3.2.2 genannt."
+
+[[quelle]]
+id = "IIBV-WERTE-2026"
+gruppe = "daten"
+kurz = "II. BV, Beträge ab 01.01.2026"
+titel = "Indexierte Verwaltungs- und Instandhaltungskosten nach §§ 26, 28 II. BV ab 01.01.2026"
+herausgeber = "Haufe (Sekundärquelle)"
+fundstelle = "https://www.haufe.de/immobilien/verwaltung/erhoehung-der-kostenmiete-bei-sozialwohnungen_258_392374.html"
+stand = "gültig ab 01.01.2026"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Verwaltung 372,46 € je Wohnung; Instandhaltung 11,50 / 14,58 / 18,62 €/m²"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Rechnerisch konsistent mit den Basisbeträgen (Faktor 1,6194), Faktor selbst nicht geprüft; amtliche Bekanntmachung beschaffen oder aus VPI selbst rechnen. Nächste Anpassung 01.01.2029."
+
+[[quelle]]
+id = "IMMOWERTV-WERTE"
+gruppe = "daten"
+kurz = "ImmoWertV, fortgeschriebene Modellwerte"
+titel = "Fortgeschriebene Bewirtschaftungskosten nach Anlage 3 ImmoWertV"
+herausgeber = "Oberer Gutachterausschuss Brandenburg (BewKo 2025)"
+fundstelle = "https://gutachterausschuss.brandenburg.de/sixcms/media.php/9/BewKo_2025.pdf"
+stand = "Werte ab 01.01.2025; Werte 2026 nicht erfasst"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Bewirtschaftungskosten der Ertragswert-Nebenrechnung im laufenden Jahr"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "2025: 359 € je Wohnung, 429 € je Eigentumswohnung, 47 € je Stellplatz, 14,00 €/m² – nur aus Suchauszug (Notiz 06). Werte 2026 aus VPI selbst rechnen oder amtlich beschaffen."
+
+[[quelle]]
+id = "LIEGENSCHAFTSZINSEN"
+gruppe = "daten"
+kurz = "Liegenschaftszinssätze"
+titel = "Liegenschaftszinssätze der Gutachterausschüsse und des IVD"
+herausgeber = "Gutachterausschüsse; IVD"
+fundstelle = "https://ivd.net/wp-content/uploads/2025/12/2026_Liegenschaftszinsaetze_.pdf"
+stand = "Ausgabe 2026"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Ertragswert-Nebenrechnung und Restwert-Plausibilisierung (modellkonform mit Anlage 3 ImmoWertV)"]
+turnus = "jaehrlich"
+zugang = "lizenz-klaeren"
+bemerkung = "Nur aus Suchauszug. Für Niedersachsen sind die Marktberichte der Gutachterausschüsse als Quelle noch nicht erfasst; Nutzungsrecht in Kundenberichten klären."
+
+[[quelle]]
+id = "BODENRICHTWERTE-NI"
+gruppe = "daten"
+kurz = "Bodenrichtwerte Niedersachsen"
+titel = "Bodenrichtwerte der Gutachterausschüsse in Niedersachsen"
+herausgeber = "Gutachterausschüsse für Grundstückswerte Niedersachsen"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Deckel der zuwendungsfähigen Grundstückskosten bei der NBank (Bodenrichtwert × Fläche)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Nur über RL Mietwohnraum 2026 Nr. 5.3.2 begründet; Quelle und Zugang nicht recherchiert."
+
+[[quelle]]
+id = "BAFIN-MINDESTKAPZINS"
+gruppe = "daten"
+kurz = "BaFin Mindestkapitalisierungszinssätze"
+titel = "Bekanntgabe der Mindestkapitalisierungszinssätze nach § 12 Abs. 4 BelWertV"
+herausgeber = "BaFin"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Kapitalisierungszins im Beleihungswert (Anpassung zum 01.01.)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "bafin.de am 17.11.2026 gesperrt."
+
+[[quelle]]
+id = "BUNDESBANK-RENDITE-30J"
+gruppe = "daten"
+kurz = "Rendite 30-jähriger Bundesanleihen"
+titel = "Umlaufsrendite 30-jähriger Bundesanleihen"
+herausgeber = "Deutsche Bundesbank"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Herleitung des Mindestkapitalisierungszinses (§ 12 Abs. 4 BelWertV)", "Unterlassensalternative"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "bundesbank.de am 17.11.2026 gesperrt."
+
+[[quelle]]
+id = "SWAPSATZ-30J"
+gruppe = "daten"
+kurz = "30-Jahres-Swapsatz"
+titel = "Swapsatz mit 30 Jahren Laufzeit"
+herausgeber = "nicht erfasst"
+fundstelle = "nicht erfasst"
+stand = "nicht erfasst"
+beleg = "ungeprueft"
+gelesen_am = ""
+verwendet_fuer = ["Schwelle der NBank-Renditeprüfung (Swapsatz plus 100 Basispunkte)"]
+turnus = "monatlich"
+zugang = "lizenz-klaeren"
+bemerkung = "Welche Quelle und welchen Stichtag die NBank verwendet, ist offen (Gespräch mit der NBank)."
+
+[[quelle]]
+id = "NBANK-EINKOMMENSRECHNER"
+gruppe = "daten"
+kurz = "NBank Einkommensermittlung"
+titel = "Online-Rechner Einkommensermittlung mit Orientierungstabelle"
+herausgeber = "NBank"
+fundstelle = "https://www.nbank.de/F%C3%B6rderprogramme/Einkommensermittlung.html"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-17"
+verwendet_fuer = ["Orientierungswerte Brutto-Jahreseinkommen je Haushaltsgröße für die Einkommensgruppen"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Orientierungswerte, keine Rechtsgrundlage; maßgeblich sind § 3 Abs. 2 NWoFG und die DVO-NWoFG."
+
+[[quelle]]
+id = "BKI-KOSTENKENNWERTE"
+gruppe = "daten"
+kurz = "BKI Kostenkennwerte"
+titel = "Baukosten-Kennwerte (Kostengruppen 300 und 400 nach DIN 276)"
+herausgeber = "BKI"
+fundstelle = "https://www.aksachsen.org/fileadmin/Image_Archive/Berufspolitik/BKI/BKI_Flyer_2025.pdf"
+stand = "Ausgabe 2025 (Flyer)"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Plausibilisierung der Baukosten gegen Kennwert-Bandbreiten"]
+turnus = "jaehrlich"
+zugang = "lizenz-klaeren"
+bemerkung = "Kennwerte selbst kostenpflichtig und nicht ermittelt; Einbau nur mit Lizenz, die Kundenberichte abdeckt."

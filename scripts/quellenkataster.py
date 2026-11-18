@@ -67,8 +67,9 @@ def pruefen(quellen):
         datum = q.get("gelesen_am", "")
         if datum:
             try:
-                datetime.date.fromisoformat(datum)
-            except ValueError:
+                if datetime.date.fromisoformat(datum) > datetime.date.today():
+                    fehler.append(f"{wo}: gelesen_am liegt in der Zukunft")
+            except (ValueError, TypeError):
                 fehler.append(f"{wo}: gelesen_am ist kein Datum JJJJ-MM-TT")
         if q.get("beleg") == "original" and not datum:
             fehler.append(f"{wo}: beleg = original verlangt gelesen_am")
@@ -79,6 +80,11 @@ def pruefen(quellen):
         for feld in ("kurz", "titel", "herausgeber", "fundstelle", "stand"):
             if not str(q.get(feld, "")).strip():
                 fehler.append(f"{wo}: {feld} ist leer")
+        for feld in ("id", "kurz", "titel", "herausgeber", "fundstelle", "stand", "gelesen_am", "bemerkung"):
+            if feld in q and not isinstance(q[feld], str):
+                fehler.append(f"{wo}: {feld} muss Text sein")
+        if str(q.get("fundstelle", "")).startswith("http") and " " in str(q.get("fundstelle", "")).strip():
+            fehler.append(f"{wo}: fundstelle mit Adresse darf keinen weiteren Text enthalten (Text gehört in bemerkung)")
     return fehler
 
 
@@ -111,7 +117,8 @@ def erzeugen(quellen):
     offen = [q for q in quellen if q["beleg"] != "original" or q["zugang"] == "lizenz-klaeren"]
     if offen:
         z += ["## Handlungsbedarf", "", "Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu klären ist.", "", "| Kennung | Quelle | Was fehlt |", "|---|---|---|"]
-        for q in sorted(offen, key=lambda q: (q["gruppe"], q["id"])):
+        folge = list(GRUPPEN)
+        for q in sorted(offen, key=lambda q: (folge.index(q["gruppe"]), q["id"])):
             was = []
             if q["beleg"] != "original":
                 was.append(BELEG[q["beleg"]])
