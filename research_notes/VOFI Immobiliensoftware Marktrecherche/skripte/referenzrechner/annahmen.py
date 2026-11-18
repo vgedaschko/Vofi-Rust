@@ -78,7 +78,8 @@ KATALOG = Katalog(
     land="Niedersachsen", gemeinde="Beispielgemeinde (Annahme)",    # Land und Gemeinde, fuer die aufgeloest ist
     enk_satz=D("0.10"),                                 # KAT-01: Annahme der Beispiele (Voreinstellung von E-11)
     kappung_gesetzlich=D("0.20"),                       # KAT-08 (BGB-558): Kappungsgrenze ohne Gebietsverordnung
-    kappung_ende_jahr=2029, bremse_ende_jahr=2029)      # KAT-08: Geltungsende der Verordnungen (BGB-556D; Annahme
+    kappung_ende_jahr=2029, bremse_ende_jahr=2029,
+    vorauszahlung_jahre=5)                              # KAT-19 (ESTG-11): Verteilung bei mehr als fuenf Jahren      # KAT-08: Geltungsende der Verordnungen (BGB-556D; Annahme
                                                         # zur Gemeinde fuer die Kappungsverordnung)
 KATALOG_NEUBAU = replace(KATALOG, afa_satz=D("0.03"),   # KAT-07 (ESTG-7): Fertigstellung nach 2022
                          enk_satz=D("0.08"))

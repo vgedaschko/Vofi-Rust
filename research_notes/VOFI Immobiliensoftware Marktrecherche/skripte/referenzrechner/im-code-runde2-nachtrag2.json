@@ -1,0 +1,32 @@
+[
+ [
+  "RF-19: Anlagezins der Alternative 0,5 % (H-09) ohne Begruendung",
+  "M-20",
+  "gerechnet; tragbarer Preis 2.317.235 unveraendert",
+  "R-3.2, Nachtrag 2: Massstab der Begruendungspflicht ist der tragbare Preis, nicht die Endwertdifferenz; die Abweichung aendert weder Preis noch Rendite"
+ ],
+ [
+  "RF-19: Mindestdeckung 1,3 statt 1,2 ohne Begruendung, Zielrendite 5 %",
+  "M-20",
+  "gerechnet; tragbarer Preis 2.297.764 (2.317.235 - 19.471)",
+  "R-3.2, Nachtrag 2: Die Abweichung senkt den tragbaren Preis und wird nur aufgelistet"
+ ],
+ [
+  "RF-19: Mindestdeckung 1,3 ohne Begruendung, Zielrendite 2 %",
+  "M-20",
+  "in der Preissuche M-20 (Preis + 10.228); zum eingegebenen Preis gerechnet",
+  "R-3.2, Nachtrag 2: ohne Preissuche gilt der Abstand der Rendite zur Zielrendite beim eingegebenen Preis; dort sinkt er"
+ ],
+ [
+  "RF-17: Voreinstellung des Zuschusses mit Kennzeichen E-41",
+  "'minderung'",
+  "'verteilt'",
+  "R-7.19, Nachtrag 2: Die Kopplung der Voreinstellung an das Kennzeichen entfaellt; im Betriebsvermoegen gilt 'verteilt' (ESTR-6-5, ESTH-5-6)"
+ ],
+ [
+  "RF-13, RF-17: Koerperschaft mit Kennzeichen und E-69",
+  "Endwert 2.570.679,38; Steuer des Verkaufsjahres im Baustein 167.932,50",
+  "Endwert 2.710.609,38; 97.932,50 (Verkaufsgewinn mitgekuerzt); die bisherigen Werte gelten fuer die strengere Lesart von MA-030",
+  "R-7.8, Nachtrag 2: E-69 neu gefasst; mit E-69 ist der Verkaufsgewinn nach GEWSTR-9-2 gekuerzt"
+ ]
+]

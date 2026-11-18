@@ -247,9 +247,9 @@ def _steuer_nachgerechnet(par, raster, rd, protokoll, alternative=False):
             g_gew = g_v * (EINS - par.anteil_natuerliche) if (par.aufgabegewinn and pg) else g_v
             linear = sofort and not pg
             kuerzung = (par.erweiterte_kuerzung and not alternative
-                        and not (j == par.haltedauer and not par.uebergang_jahresende))
+                        and not (j == par.haltedauer and not par.kuerzung_bleibt_verkaufsjahr))
             if kuerzung:
-                ertrag = z_h + (NULL if par.kuerzung_verkauf else g_gew)
+                ertrag = z_h + (g_gew if par.ma030_verkaufsgewinn_pflichtig else NULL)
             else:
                 frei = NULL if linear else par.hinzu_freibetrag
                 hinzu = par.hinzu_anteil * max(NULL, t.get("entgelte", NULL) + par.hinzu_pacht * t.get("pacht", NULL) - frei)

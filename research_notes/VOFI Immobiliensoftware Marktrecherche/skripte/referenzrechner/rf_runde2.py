@@ -253,13 +253,18 @@ def rf13_runde2():
     for name, st in faelle:
         e = rechne_grob(replace(A.ANKAUF, steuer=st, begruendungen=GRUND), VG, KAT)
         pruefe_fest(k, f"{name}: Endwert der Unterlassensalternative", e.alt.endwert)
-    e = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, uebergang_jahresende=True),
-                            begruendungen=GRUND), VG, KAT)
+    e69 = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True),
+                              begruendungen=GRUND), VG, KAT)
+    e = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True,
+                                                      ma030_verkaufsgewinn_pflichtig=True), begruendungen=GRUND), VG, KAT)
     mk = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True)), VG, KAT)
     pruefe(k, "Koerperschaft mit Kuerzung, Voreinstellung (BFH-III-R-1-23: im Verkaufsjahr entfaellt die Kuerzung ganz): Endwert (Wert der bisherigen dritten Lesart)",
            mk.plan.endwert, "2562727.38", "0")
-    pruefe(k, "... Uebergang zum Jahresende (E-69): Endwert (Wert der bisherigen Voreinstellung)", e.plan.endwert, "2570679.38", "0")
-    pruefe_fest(k, "Koerperschaft mit Kuerzung, Uebergang zum Jahresende (E-69; laufender Ertrag gekuerzt, Verkaufsgewinn gewerbesteuerpflichtig): Endwert, Rendite (%), Abstand zur Voreinstellung",
+    pruefe(k, "... Kuerzung bleibt (E-69): Endwert mit gekuerztem Verkaufsgewinn (GEWSTR-9-2)", e69.plan.endwert, "2710609.38", "0")
+    pruefe(k, "... E-69 mit der strengeren Lesart von MA-030: Endwert (Wert der Voreinstellung nach Pruefrunde 1)", e.plan.endwert, "2570679.38", "0")
+    pruefe_gleich(k, "Hinweis M-51 mit Kennzeichen ohne E-69; mit E-69 nicht; ohne Kennzeichen nicht",
+                  ["M-51" in kennungen(x_) for x_ in (mk, e69, rechne_grob(A.ANKAUF, VG, KAT))], [True, False, False])
+    pruefe_fest(k, "Koerperschaft mit Kuerzung, E-69 mit der strengeren Lesart von MA-030 (laufender Ertrag gekuerzt, Verkaufsgewinn gewerbesteuerpflichtig): Endwert, Rendite (%), Abstand zur Voreinstellung",
                 [str(e.plan.endwert), q(e.kennzahlen["rendite"] * 100, "0.001"), str(e.plan.endwert - mk.plan.endwert)])
     for jahre in (10, 11):
         e = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT_OHNE_GEWST), haltedauer=jahre), VG, KAT)
@@ -318,7 +323,7 @@ def rf17_runde2():
 
     # R-7.8 in gesetzlicher Reihenfolge: Kuerzung vor dem Verlustvortrag (GEWSTG-9, GEWSTG-10A); Jahr 2 ist das
     # Verkaufsjahr mit Uebergang zum Jahresende (E-69)
-    s = st(KOERPERSCHAFT, erweiterte_kuerzung=True, uebergang_jahresende=True, haltedauer=2)
+    s = st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True, ma030_verkaufsgewinn_pflichtig=True, haltedauer=2)
     pruefe(k, "Kennzeichen, Anlaufverlust 50.000: keine Steuer", s.jahr(1, D(-50000), NULL), "0", "0")
     pruefe(k, "... der gekuerzte Verlust bildet keinen gewerbesteuerlichen Vortrag", s.vv_gew, "0", "0")
     pruefe(k, "... Folgejahr 2028 mit 100.000 Ergebnis, 10.000 Zinsen, 500.000 Verkaufsgewinn: 14,77 % von 560.000 + 14 % von 510.000",
@@ -326,8 +331,10 @@ def rf17_runde2():
     # R-7.8 (BFH-III-R-1-23): im Verkaufsjahr entfaellt die Kuerzung ganz, ausser bei Uebergang zum Jahresende (E-69)
     pruefe(k, "Verkaufsjahr mit Kennzeichen, Voreinstellung: 15,825 % und 14 % von 610.000",
            st(KOERPERSCHAFT, erweiterte_kuerzung=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "181932.50", "0")
-    pruefe(k, "... die Lesart 'Verkaufsgewinn gekuerzt' (MA-030) wirkt ohne Uebergang zum Jahresende nicht",
-           st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_verkauf=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "181932.50", "0")
+    pruefe(k, "... Kuerzung bleibt (E-69): 15,825 % von 610.000 + 14 % von 10.000 (Verkaufsgewinn mitgekuerzt, GEWSTR-9-2)",
+           st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "97932.50", "0")
+    pruefe(k, "... die strengere Lesart von MA-030 wirkt ohne E-69 nicht",
+           st(KOERPERSCHAFT, erweiterte_kuerzung=True, ma030_verkaufsgewinn_pflichtig=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "181932.50", "0")
     pruefe(k, "... in einem Jahr vor dem Verkauf bleibt die Kuerzung: 17.407,50 + 14 % von 10.000",
            st(KOERPERSCHAFT, erweiterte_kuerzung=True, haltedauer=2).jahr(1, D(100000), D(10000)), "18807.50", "0")
     pg = dict(hebesatz=D("4.00"), anteil_natuerliche=D("0.6"))
@@ -347,7 +354,7 @@ def rf17_runde2():
     # R-7.19 Zuschuss: Voreinstellung nach Kennzeichen; Rueckzahlung im laufenden Ergebnis (Lesart "sofort")
     gek = replace(GEFOERDERT, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True))
     e = rechne_grob(gek, VG, KATN)
-    pruefe_gleich(k, "Voreinstellung mit Kennzeichen E-41: 'minderung'", e.zuschuss_lesart, "minderung")
+    pruefe_gleich(k, "Voreinstellung im Betriebsvermoegen, auch mit Kennzeichen E-41: 'verteilt' (keine Kopplung an das Kennzeichen)", e.zuschuss_lesart, "verteilt")
     werte = {}
     for lesart in ("verteilt", "minderung", "sofort"):
         for jahre in (38, 20):
@@ -365,13 +372,24 @@ def rf17_runde2():
                     [str(x.verkauf.foerder_rueckzahlung), str(t["e_op"]), str(t["g_v"]), str(t["steuer"]), q(x.kennzahlen["rendite"] * 100, "0.001")])
         pruefe_gleich(k, f"{name}, Zuschuss 'sofort', 20 Jahre: Kontrollsummen (Bruecke P-15)", (x.gesperrt, x.befunde), (False, []))
     for lesart in ("sofort", "verteilt"):
-        x = rechne_grob(replace(GEFOERDERT, haltedauer=20, steuer=A.steuer(PRIVAT, verlust="sofort"), begruendungen=GRUND),
-                        replace(VG, ma031_zuschuss=lesart), KATN)
+        x = rechne_grob(replace(GEFOERDERT, haltedauer=20, steuer=A.steuer(PRIVAT, verlust="sofort"), begruendungen=GRUND,
+                                zuschuss_verteilung=(lesart == "verteilt")), VG, KATN)
         pruefe_fest(k, f"Privatperson mit sofortiger Verlustverrechnung, Zuschuss '{lesart}', 20 Jahre: Steuer des Verkaufsjahres, Summe der Steuern, Rendite (%)",
                     [str(x.plan.steuer.protokoll[-1]["steuer"]), str(sum(x.plan.reihe("steuer"))), q(x.kennzahlen["rendite"] * 100, "0.001")])
     pv = rechne_grob(replace(GEFOERDERT, steuer=A.steuer(PRIVAT)), VG, KATN)
     pruefe_fest(k, "Privatperson, gefoerdert: Entgelt des Darlehens verteilt (ESTG-11), Planjahre 1 bis 3; Lesart des Zuschusses",
                 [[str(pv.plan.jahressumme("einbehalt_steuer", j)) for j in (1, 2, 3)], pv.zuschuss_lesart])
+    priv = replace(GEFOERDERT, steuer=A.steuer(PRIVAT), begruendungen=GRUND)
+    pruefe_gleich(k, "Privatperson: Einnahme im Jahr des Zuflusses ist Regel (ESTR-21-5); mit E-70 verteilt; die Lesarten von MA-031 wirken nicht",
+                  [pv.zuschuss_lesart, rechne_grob(replace(priv, zuschuss_verteilung=True), VG, KATN).zuschuss_lesart,
+                   rechne_grob(priv, replace(VG, ma031_zuschuss="minderung"), KATN).zuschuss_lesart], ["sofort", "verteilt", "sofort"])
+    pruefe_gleich(k, "E-70 im Betriebsvermoegen und bei einer Bindung von fuenf Jahren: M-20",
+                  [status(replace(GEFOERDERT, zuschuss_verteilung=True, begruendungen=GRUND), VG, KATN),
+                   status(replace(priv, zuschuss_verteilung=True, foerderung=replace(A.FOERDERUNG_B, bindung_jahre=5)), VG, KATN)],
+                  [["eingabe", "M-20"], ["eingabe", "M-20"]])
+    vv = rechne_grob(replace(priv, zuschuss_verteilung=True), VG, KATN)
+    pruefe_fest(k, "Privatperson, gefoerdert, 38 Jahre: Rendite (%) und Endwertdifferenz bei Einnahme im Zuflussjahr (Regel) und mit Verteilung (E-70)",
+                [[q(x_.kennzahlen["rendite"] * 100, "0.001"), str(x_.kennzahlen["endwertdifferenz"])] for x_ in (pv, vv)])
     mi = rechne_grob(GEFOERDERT, replace(VG, ma031_zuschuss="minderung"), KATN)
     pruefe(k, "Lesart 'Minderung': das Entgelt auf den Zuschuss kuerzt ihn; Abschreibungsgrundlage = Baukosten - Gebaeudeanteil + Entgeltanteil",
            mi.plan.e.afa_grundlage, str(mi.baukosten - mi.bemessung.zuschuss_gebaeude
@@ -456,17 +474,25 @@ def rf19_runde2():
     liste = abweichungsliste(replace(A.ANKAUF, abweichungen={"kalk_zins": (D("0.01"), GRUNDTEXT)}), VG, KAT)
     pruefe(k, "... mit Begruendung: Wirkung auf den tragbaren Preis (Gegenrechnung Controller: 2.359.366 - 2.317.235)", liste[0]["wirkung_preis"], "42131", "0")
     pruefe(k, "... Wirkung auf die Endwertdifferenz (wie Lesart 2 von MA-026: die Bank rechnet dann mit dem Vertragszins)", liste[0]["wirkung_endwertdifferenz"], "-38496.31", "0")
-    pruefe_gleich(k, "langfristiger Anlagezins 0,5 % statt gleich dem Habenzins (H-09) ohne Begruendung: M-20", ohne("a_lang", D("0.005")), ["eingabe", "M-20"])
+    al = replace(A.ANKAUF, abweichungen={"a_lang": (D("0.005"), None)})
+    pruefe_gleich(k, "langfristiger Anlagezins 0,5 % statt gleich dem Habenzins (H-09) ohne Begruendung: gerechnet, auch in der Preissuche "
+                     "(er aendert weder Rendite noch tragbaren Preis; die hoehere Endwertdifferenz steht in der Liste)",
+                  [ohne("a_lang", D("0.005")), tragbarer_preis(al, VG, KAT)["preis"]], [["ergebnis", None], 2317235])
     e = rechne_grob(replace(A.ANKAUF, abweichungen={"a_lang": (D("0.005"), GRUNDTEXT)}), VG, KAT)
     pruefe(k, "... mit Begruendung: Endwertdifferenz (Gegenrechnung Controller)", e.kennzahlen["endwertdifferenz"], "966697.17", "0")
     # Richtung haengt am Fall (Finanzmathematiker 2): hoehere Mindestdeckung hebt den tragbaren Preis bei negativem Hebel
     z2 = replace(VG, zielrendite=D("0.02"))
-    pruefe_gleich(k, "Zielrendite 2 %: Mindestdeckung 1,3 statt 1,2 ohne Begruendung: M-20 (sie erhoeht den tragbaren Preis)",
-                  status(replace(A.ANKAUF, abweichungen={"mindestdeckung": (D("1.3"), None)}), z2), ["eingabe", "M-20"])
+    md = replace(A.ANKAUF, abweichungen={"mindestdeckung": (D("1.3"), None)})
+    tp2 = tragbarer_preis(md, z2, KAT)
+    pruefe_gleich(k, "Zielrendite 2 %: Mindestdeckung 1,3 statt 1,2 ohne Begruendung: in der Preissuche M-20 (sie erhoeht den tragbaren Preis); "
+                     "zum eingegebenen Preis gerechnet (dort sinkt der Abstand der Rendite zur Zielrendite)",
+                  [(tp2["preis"], tp2["meldung"]), status(md, z2)], [(None, "M-20"), ["ergebnis", None]])
     liste = abweichungsliste(replace(A.ANKAUF, abweichungen={"mindestdeckung": (D("1.3"), GRUNDTEXT)}), z2, KAT)
     pruefe(k, "... Wirkung auf den tragbaren Preis (Gegenrechnung Finanzmathematiker: 2.983.619 - 2.973.391)", liste[0]["wirkung_preis"], "10228", "0")
-    pruefe_gleich(k, "Zielrendite 5 %: Mindestdeckung 1,3 ohne Begruendung: M-20 (sie erhoeht die Endwertdifferenz, weil das Darlehen mehr kostet als die Anlage bringt)",
-                  status(replace(A.ANKAUF, abweichungen={"mindestdeckung": (D("1.3"), None)})), ["eingabe", "M-20"])
+    tp5 = tragbarer_preis(md, VG, KAT)
+    pruefe_gleich(k, "Zielrendite 5 %: Mindestdeckung 1,3 ohne Begruendung: gerechnet, tragbarer Preis 2.317.235 - 19.471 (sie senkt ihn; "
+                     "die hoehere Endwertdifferenz steht in der Liste)",
+                  [status(md), (tp5["preis"], tp5["meldung"])], [["ergebnis", None], (2297764, None)])
     liste = abweichungsliste(replace(A.ANKAUF, abweichungen={"mindestdeckung": (D("1.3"), GRUNDTEXT)}), VG, KAT)
     pruefe_fest(k, "... Wirkung auf Endwertdifferenz und tragbaren Preis bei Zielrendite 5 %", [str(liste[0]["wirkung_endwertdifferenz"]), str(liste[0]["wirkung_preis"])])
     for regel in ("restlaufzeit", "rate"):

@@ -151,6 +151,7 @@ class Katalog:
     land: Optional[str] = None          # Land und Gemeinde, fuer die der Katalog aufgeloest ist (R-3.7)
     gemeinde: Optional[str] = None
     enk_satz: Optional[D] = None        # KAT-01: Voreinstellung der Erwerbsnebenkosten (E-11)
+    vorauszahlung_jahre: Optional[int] = None   # KAT-19 (ESTG-11): Verteilung nur bei Nutzungsueberlassung ueber dieser Dauer
     kappung_gesetzlich: Optional[D] = None      # KAT-08 (BGB-558): Kappungsgrenze ohne Gebietsverordnung
     kappung_ende_jahr: Optional[int] = None     # KAT-08: letztes Kalenderjahr der Kappungsverordnung; None = keine
     bremse_ende_jahr: Optional[int] = None      # KAT-08 (BGB-556D): letztes Kalenderjahr der Mietpreisbremse
@@ -201,6 +202,8 @@ class Grobeingabe:
     markt_miete: D = NULL               # E-16: Neuvermietungsmiete; beim Neubau die Miete bei Bezug
     tilgungssatz: Optional[D] = None    # E-64; None = H-04
     foerder_aufschub_monate: int = 0    # E-68: bewilligter Aufschub des Tilgungsbeginns des Foerderdarlehens
+    zuschuss_verteilung: bool = False   # E-70: Verteilung des Zuschusses ueber die Bindung beantragt (ESTG-11); nur bei
+                                        # Ueberschusseinkuenften und einer Bindung ueber der Mindestdauer des Katalogs
     # Ankauf
     kaufpreis: D = NULL                 # E-10
     angebotspreis: Optional[D] = None   # E-18
@@ -325,7 +328,8 @@ KENNUNG_EINGABE = {
 # ... und Eingaben und Lesarten mit fester Voreinstellung: {Feld: (Kennung, Voreinstellung)}
 FESTE_VOREINSTELLUNG = {
     "festpreis": ("E-24", False), "vorvermietet": ("E-39", False), "steuer.verlust": ("E-44 (MA-016)", "vortrag"),
-    "steuer.kuerzung_verkauf": ("MA-030", False), "steuer.uebergang_jahresende": ("E-69", False),
+    "steuer.ma030_verkaufsgewinn_pflichtig": ("MA-030", False), "steuer.kuerzung_bleibt_verkaufsjahr": ("E-69", False),
+    "zuschuss_verteilung": ("E-70", False),
     "steuer.aufgabegewinn": ("MA-036", False), "uebernommen.foerderdarlehen": ("E-59", False),
 }
 ANSCHLUSSREGELN = ("rate", "tilgungssatz", "restlaufzeit")     # H-07
@@ -416,34 +420,49 @@ def _wirkung_preis(ein, vg, kat, a, preis_voll, p):
     return None if (preis_voll is None or ohne is None) else D(preis_voll) - D(ohne)
 
 
-def pruefe_begruendungen(ein, vg, kat, p=MONATE, rundung="cent"):
-    """R-3.2: Eine Abweichung ohne Begruendung ist nur zulaessig, wenn sie am Fall weder die Endwertdifferenz
-    noch den hoechsten tragbaren Preis erhoeht (gemessen im Basisfall, je Abweichung gegen den Auftrag ohne
-    sie). Sonst M-20."""
+def _abstand(e):
+    """Abstand der Rendite zur Zielrendite; ohne eingesetztes Eigenkapital der Endwertueberschuss."""
+    if e is None or e.gesperrt:
+        return None
+    k = e.kennzahlen
+    return k["abstand_zielrendite"] if k["abstand_zielrendite"] is not None else k["endwertueberschuss"]
+
+
+def pruefe_begruendungen(ein, vg, kat, p=MONATE, rundung="cent", mit_preis=False):
+    """R-3.2: Massstab ist der hoechste tragbare Preis im Basisfall. Eine Abweichung ohne Begruendung ist nur
+    zulaessig, wenn sie ihn nicht erhoeht (je Abweichung gegen den Auftrag ohne sie). Laeuft keine Preissuche
+    (mit_preis = False) oder liefert sie mit oder ohne die Abweichung keinen Preis, gilt derselbe Massstab am
+    Abstand der Rendite zur Zielrendite beim eingegebenen Preis. Sonst M-20."""
     _, liste = vorgaben_im_vorhaben(vg, ein)
     offen = [a for a in liste if a["quelle"] != "haus" and not a["begruendung"]]
     if not offen:
         return
-    voll = rechne_grob(ein, vg, kat, p=p, rundung=rundung, mit_blatt=False, _begruendung=False)
-    ewd = None if voll.gesperrt else voll.kennzahlen["endwertdifferenz"]
-    preis_voll = None
+    preis_voll = _tragbarer_preis(ein, vg, kat, p=p)["preis"] if mit_preis else None
+    voll = None
     for a in offen:
-        w = _wirkung_ewd(ein, vg, kat, a, ewd, False, p, rundung)
-        if w is not None and w <= 0:
-            if preis_voll is None:
-                preis_voll = _tragbarer_preis(ein, vg, kat, p=p)
-            w = _wirkung_preis(ein, vg, kat, a, preis_voll["preis"], p)
+        w = _wirkung_preis(ein, vg, kat, a, preis_voll, p) if preis_voll is not None else None
+        massstab = "den tragbaren Preis"
+        if w is None:
+            if voll is None:
+                voll = rechne_grob(ein, vg, kat, p=p, rundung=rundung, mit_blatt=False, _begruendung=False)
+            ein_o, vg_o = _ohne(ein, vg, a)
+            try:
+                ohne = rechne_grob(ein_o, vg_o, kat, p=p, rundung=rundung, mit_blatt=False, _begruendung=False)
+            except Meldung:
+                ohne = None
+            mit_, ohne_ = _abstand(voll), _abstand(ohne)
+            w = None if (mit_ is None or ohne_ is None) else mit_ - ohne_
+            massstab = "den Abstand der Rendite zur Zielrendite"
         if w is not None and w > 0:
             raise Meldung("M-20", f"{a['kennung']} {a['vorgabe']}: Abweichung von {a['haus']} auf {a['vorhaben']} erhoeht "
-                                  "die Endwertdifferenz oder den tragbaren Preis und braucht eine Begruendung",
-                          dict(wirkung=w))
+                                  f"{massstab} und braucht eine Begruendung", dict(wirkung=w))
 
 
 def abweichungsliste(ein, vg, kat, p=MONATE):
     """R-3.2: Liste "Abweichungen vom Hausstandard" mit der Wirkung jeder Abweichung in Euro auf die
     Endwertdifferenz und auf den hoechsten tragbaren Preis, je im Basisfall und je Abweichung gegen den Auftrag
     ohne sie; bei mehreren Abweichungen bleiben die uebrigen stehen."""
-    pruefe_begruendungen(ein, vg, kat, p)
+    pruefe_begruendungen(ein, vg, kat, p, mit_preis=True)
     _, liste = vorgaben_im_vorhaben(vg, ein)
     voll = rechne_grob(ein, vg, kat, p=p, mit_blatt=False, _begruendung=False)
     ewd = None if voll.gesperrt else voll.kennzahlen["endwertdifferenz"]
@@ -554,6 +573,14 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
             f = ein.foerderung
             b("E-30", "Bodenrichtwert", ein.bodenrichtwert, NULL, None, True)
             b("E-68", "Aufschub der Tilgung des Foerderdarlehens", ein.foerder_aufschub_monate, 0, f.aufschub_max_monate)
+            if ein.zuschuss_verteilung:
+                if ein.steuer.status not in UEBERSCHUSS:
+                    raise Meldung("M-20", "E-70 Verteilung des Zuschusses beantragt: nur bei Privatperson, Verein und Stiftung; "
+                                          "im Betriebsvermoegen gilt die Lesart nach MA-031")
+                kg("KAT-19", "Mindestdauer der Nutzungsueberlassung fuer die Verteilung", "vorauszahlung_jahre")
+                if f.bindung_jahre <= kat.vorauszahlung_jahre:
+                    raise Meldung("M-20", f"E-70 Verteilung des Zuschusses beantragt: nur bei einer Bindung von mehr als "
+                                          f"{kat.vorauszahlung_jahre} Jahren (ESTG-11)")
             if len(f.teilraten) != len(BAUABSCHNITTE) or sum(f.teilraten) != 1 or min(f.teilraten) < 0:
                 raise Meldung("M-20", "KAT-10 Teilraten der Foerderauszahlung: je Bauabschnitt ein Anteil, zusammen eins")
             # NBANK-RL-MIETWOHNRAUM-2026 Nr. 5.3.6: Mindesttilgung der vorrangigen Bankmittel
@@ -1259,8 +1286,14 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     steuer = replace(ein.steuer, haltedauer=ein.haltedauer)
     boden = bm.boden
     basis = baukosten if neubau else gebaeude_ak
-    # R-7.19 (MA-031): Voreinstellung ohne Kennzeichen E-41 "ueber die Bindung verteilt", mit Kennzeichen "Minderung"
-    lesart = vg.ma031_zuschuss or ("minderung" if steuer.erweiterte_kuerzung else "verteilt")
+    # R-7.19: nach der Vermoegenssphaere. Ueberschusseinkuenfte (Privatperson, Verein, Stiftung): Einnahme im Jahr
+    # des Zuflusses ist Regel (ESTR-21-5, BFH-IX-R-60-02); Verteilung ueber die Bindung nur auf Antrag (E-70, ESTG-11).
+    # Betriebsvermoegen (MA-031): voreingestellt ueber die Bindung verteilt (ESTR-6-5, ESTH-5-6); "sofort" und
+    # "minderung" umschaltbar
+    if steuer.status in UEBERSCHUSS:
+        lesart = "verteilt" if ein.zuschuss_verteilung else "sofort"
+    else:
+        lesart = vg.ma031_zuschuss or "verteilt"
     steuer_ertrag = null()
     steuer_zus_entgelt = None                            # None: Entgelt auf den Zuschuss im Jahr der Zahlung
     rueck_im_gewinn = rueck_laufend = False
@@ -1430,7 +1463,11 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
         melde("M-42", "Verlust beim Verkauf: Der Verkaufserloes deckt Abloesung, Steuer und Kosten nicht",
               betrag=erg.fehlbetrag_verkauf)
     if steuer.status == BEFREIT:
-        melde("M-44", "Verkauf in befreiter Koerperschaft: Die Befreiung im Verkaufsjahr ist vom Steuerberater zu pruefen (KSTG-5)")
+        melde("M-44", "Verkauf in befreiter Koerperschaft: Der Verkauf aus dem beguenstigten Bereich ist beguenstigtes Geschaeft "
+                      "(BMF-VERMGEN-1991); das gilt nicht, wenn der Grundstueckshandel gewerblichen Charakter annimmt")
+    if steuer.erweiterte_kuerzung and steuer.status in MIT_KENNZEICHEN and not steuer.kuerzung_bleibt_verkaufsjahr:
+        melde("M-51", "Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz. Sie bleibt nur erhalten (E-69), wenn weiterer "
+                      "Grundbesitz im Unternehmen verbleibt oder Besitz, Nutzen und Lasten zum 31.12., 23:59 Uhr, uebergehen")
     if "M-45" in plan.steuer.hinweise:
         melde("M-45", "Ein Verlustvortrag ueber dem Sockelbetrag wird in einem Jahr verrechnet; die Mindestbesteuerung ist nicht gerechnet")
     erg.meldungen = meldungen
@@ -1813,7 +1850,7 @@ def tragbarer_preis(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, stress=False, 
     endet nie mit einem Rechenfehler.
     """
     try:
-        pruefe_begruendungen(ein, vg, kat, p)
+        pruefe_begruendungen(ein, vg, kat, p, mit_preis=True)
     except Meldung as m:
         return dict(renditegrenze=None, ek_grenze=None, preis=None, bindend=None, meldung=m.kennung, text=m.text,
                     angaben=m.angaben, meldungen=[], unten=None, oben=None, ergebnis=None)
@@ -2016,7 +2053,7 @@ PREISGROESSEN = ("preis", "bindend", "meldung", "faktor", "faktor_ist", "preis_j
 # R-3.1: Herkunft der Steuerwerte (Katalog, Eingabe des Anwenders, Lesart einer Modellannahme)
 HERKUNFT_STEUER = {
     "status": "E", "verlust": "E", "erweiterte_kuerzung": "E", "est_satz": "E", "anteil_natuerliche": "E",
-    "kuerzung_verkauf": "MA", "uebergang_jahresende": "E", "aufgabegewinn": "MA", "haltedauer": "E",
+    "ma030_verkaufsgewinn_pflichtig": "MA", "kuerzung_bleibt_verkaufsjahr": "E", "aufgabegewinn": "MA", "haltedauer": "E",
     "satz": "E", "verkaufsgewinn_pflichtig": "E",
 }
 

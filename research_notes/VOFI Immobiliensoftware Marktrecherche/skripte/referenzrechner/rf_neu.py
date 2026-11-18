@@ -99,10 +99,10 @@ def rf17_steuer():
     # R-7.8 (GEWSTG-9, MA-030)
     pruefe(k, "Koerperschaft mit Kuerzung, 100.000 Ergebnis und 10.000 Zinsen: 17.407,50 + 14 % von 10.000",
            st(KOERPERSCHAFT, erweiterte_kuerzung=True).jahr(1, D(100000), D(10000)), "18807.50", "0")
-    pruefe(k, "... dazu 500.000 Verkaufsgewinn bei Uebergang zum Jahresende (E-69), gewerbesteuerpflichtig (MA-030): 96.532,50 + 14 % von 510.000",
-           st(KOERPERSCHAFT, erweiterte_kuerzung=True, uebergang_jahresende=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "167932.50", "0")
-    pruefe(k, "... andere Lesart MA-030: Verkaufsgewinn gekuerzt",
-           st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_verkauf=True, uebergang_jahresende=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "97932.50", "0")
+    pruefe(k, "... dazu 500.000 Verkaufsgewinn, Kuerzung bleibt (E-69), strengere Lesart von MA-030 (Verkaufsgewinn gewerbesteuerpflichtig): 96.532,50 + 14 % von 510.000",
+           st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True, ma030_verkaufsgewinn_pflichtig=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "167932.50", "0")
+    pruefe(k, "... Kuerzung bleibt (E-69), Voreinstellung nach GEWSTR-9-2: auch der Verkaufsgewinn gekuerzt",
+           st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "97932.50", "0")
     pruefe(k, "Unterlassensalternative bei gesetztem Kennzeichen: 10.000 Zinsen zu 29,825 %",
            st(KOERPERSCHAFT, alternative=True, erweiterte_kuerzung=True).jahr(1, NULL, D(10000)), "2982.50", "0")
     s = st(KOERPERSCHAFT, erweiterte_kuerzung=True)

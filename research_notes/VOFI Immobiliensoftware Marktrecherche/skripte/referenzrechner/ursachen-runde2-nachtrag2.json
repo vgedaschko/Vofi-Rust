@@ -1,0 +1,73 @@
+{
+ "umbenannt": [],
+ "ursachen": [
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ Kuerzung\\ bleibt\\ im\\ Verkaufsjahr\\ \\(E\\-69\\):\\ Endwert$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert, Name geaendert: bisher 'andere Lesart MA-030'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ Kuerzung\\ bleibt\\ im\\ Verkaufsjahr\\ \\(E\\-69\\):\\ Endwertdifferenz$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert, Name geaendert: bisher 'andere Lesart MA-030'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ Kuerzung\\ bleibt\\ im\\ Verkaufsjahr\\ \\(E\\-69\\):\\ VOFI\\-Rendite\\ \\(%\\)$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert, Name geaendert: bisher 'andere Lesart MA-030'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ Kuerzung\\ bleibt\\ im\\ Verkaufsjahr\\ \\(E\\-69\\):\\ Vergleichsrendite\\ \\(%\\)$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert, Name geaendert: bisher 'andere Lesart MA-030'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ Kuerzung\\ bleibt\\ im\\ Verkaufsjahr\\ \\(E\\-69\\):\\ Summe\\ der\\ Steuerzahlungen$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert, Name geaendert: bisher 'andere Lesart MA-030'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ Kuerzung\\ bleibt\\ im\\ Verkaufsjahr\\ \\(E\\-69\\):\\ Steuer\\ auf\\ den\\ Verkaufsgewinn$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert, Name geaendert: bisher 'andere Lesart MA-030'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ Kuerzung,\\ E\\-69\\ mit\\ der\\ strengeren\\ Lesart\\ von\\ MA\\-030\\ \\(laufender\\ Ertrag\\ gekuerzt,\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ Endwert,\\ Rendite\\ \\(%\\),\\ Abstand\\ zur\\ Voreinstellung$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Die bisherige Rechnung 'Uebergang zum Jahresende' ist jetzt die strengere Lesart von MA-030; Wert unveraendert, Name geaendert"
+  ],
+  [
+   "^RF\\-17\\|Privatperson,\\ gefoerdert:\\ Entgelt\\ des\\ Darlehens\\ verteilt\\ \\(ESTG\\-11\\),\\ Planjahre\\ 1\\ bis\\ 3;\\ Lesart\\ des\\ Zuschusses$",
+   "R-7.19, Nachtrag 2: Bei der Privatperson ist der Zuschuss Einnahme im Jahr des Zuflusses (ESTR-21-5, BFH-IX-R-60-02); die Verteilung ist Wahlrecht (E-70, ESTG-11). Lesart 'verteilt' -> 'sofort'; das Entgelt des Darlehens unveraendert"
+  ],
+  [
+   "^RF\\-17\\|Privatperson,\\ gefoerdert,\\ 38\\ Jahre:\\ Rendite\\ \\(%\\)\\ und\\ Endwertdifferenz\\ bei\\ Einnahme\\ im\\ Zuflussjahr\\ \\(Regel\\)\\ und\\ mit\\ Verteilung\\ \\(E\\-70\\)$",
+   "neuer Wert zu R-7.19, Nachtrag 2: Privatperson mit Einnahme im Zuflussjahr (Regel) und mit Verteilung auf Antrag (E-70)"
+  ],
+  [
+   "^RF\\-20\\|Herkunft\\ je\\ Wert\\ des\\ Auftrags:\\ Zahl\\ der\\ Werte\\ je\\ Herkunft\\ \\(E,\\ H,\\ KAT,\\ MA\\)$",
+   "Nachtrag 2: neue Eingabe E-70 (Verteilung des Zuschusses beantragt) und neuer Katalogwert KAT-19 (Mindestdauer nach ESTG-11)"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ andere\\ Lesart\\ MA\\-030:\\ Endwert$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert unter dem neuen Namen 'Kuerzung bleibt im Verkaufsjahr (E-69)'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ andere\\ Lesart\\ MA\\-030:\\ Endwertdifferenz$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert unter dem neuen Namen 'Kuerzung bleibt im Verkaufsjahr (E-69)'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ andere\\ Lesart\\ MA\\-030:\\ Steuer\\ auf\\ den\\ Verkaufsgewinn$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert unter dem neuen Namen 'Kuerzung bleibt im Verkaufsjahr (E-69)'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ andere\\ Lesart\\ MA\\-030:\\ Summe\\ der\\ Steuerzahlungen$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert unter dem neuen Namen 'Kuerzung bleibt im Verkaufsjahr (E-69)'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ andere\\ Lesart\\ MA\\-030:\\ VOFI\\-Rendite\\ \\(%\\)$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert unter dem neuen Namen 'Kuerzung bleibt im Verkaufsjahr (E-69)'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ erweiterter\\ Kuerzung,\\ andere\\ Lesart\\ MA\\-030:\\ Vergleichsrendite\\ \\(%\\)$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert unter dem neuen Namen 'Kuerzung bleibt im Verkaufsjahr (E-69)'"
+  ],
+  [
+   "^RF\\-13\\|Koerperschaft\\ mit\\ Kuerzung,\\ Uebergang\\ zum\\ Jahresende\\ \\(E\\-69;\\ laufender\\ Ertrag\\ gekuerzt,\\ Verkaufsgewinn\\ gewerbesteuerpflichtig\\):\\ Endwert,\\ Rendite\\ \\(%\\),\\ Abstand\\ zur\\ Voreinstellung$",
+   "R-7.8, Nachtrag 2 (Quellnotiz 15): Bleibt die erweiterte Kuerzung im Verkaufsjahr erhalten (E-69 neu gefasst), ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt; das ist dort Voreinstellung. Wert unveraendert unter dem neuen Namen 'E-69 mit der strengeren Lesart von MA-030'"
+  ]
+ ]
+}

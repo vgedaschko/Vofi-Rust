@@ -41,10 +41,11 @@ class Steuerparameter:
     hebesatz: D = NULL                          # 4 = 400 %
     abrundung: D = NULL                         # Abrundung des Gewerbeertrags auf volle Betraege (GEWSTG-11)
     erweiterte_kuerzung: bool = False           # E-41
-    kuerzung_verkauf: bool = False              # MA-030, andere Lesart bei Uebergang zum Jahresende (E-69): die Kuerzung
-                                                # erfasst auch den Verkaufsgewinn
-    uebergang_jahresende: bool = False          # E-69: Besitz, Nutzen und Lasten gehen zum 31.12., 23:59 Uhr, ueber; nur dann
-                                                # bleibt die Kuerzung im Verkaufsjahr (BFH-III-R-1-23; R-7.8, MA-030)
+    kuerzung_bleibt_verkaufsjahr: bool = False  # E-69: es verbleibt weiterer Grundbesitz, oder Besitz, Nutzen und Lasten
+                                                # gehen zum 31.12., 23:59 Uhr, ueber; nur dann bleibt die Kuerzung im
+                                                # Verkaufsjahr (BFH-III-R-1-23, BFH-I-R-89-03; R-7.8)
+    ma030_verkaufsgewinn_pflichtig: bool = False    # MA-030, strengere Lesart mit E-69: nur der laufende Ertrag wird
+                                                    # gekuerzt, der Verkaufsgewinn nicht (Voreinstellung: GEWSTR-9-2)
     freibetrag: D = NULL                        # nur Personenunternehmen (GEWSTG-11)
     hinzu_anteil: D = NULL                      # GEWSTG-8: hinzugerechneter Anteil der Entgelte fuer Schulden
     hinzu_freibetrag: D = NULL                  # GEWSTG-8: Freibetrag der Hinzurechnung
@@ -82,9 +83,9 @@ class Steuer:
     # ------------------------------------------------------------- Grenzsaetze fuer Kennzahlen (R-7.14)
     def _kuerzung(self):
         p = self.par
-        # R-7.8 (BFH-III-R-1-23): Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, ausser der Uebergang liegt
-        # am Jahresende (E-69); nur dann stellt sich die Frage von MA-030 nach dem Verkaufsgewinn
-        if self._jahr is not None and self._jahr == p.haltedauer and not p.uebergang_jahresende:
+        # R-7.8 (BFH-III-R-1-23): Im Verkaufsjahr entfaellt die erweiterte Kuerzung ganz, ausser sie bleibt nach E-69
+        # erhalten; dann ist nach GEWSTR-9-2 auch der Verkaufsgewinn gekuerzt (strengere Lesart: MA-030)
+        if self._jahr is not None and self._jahr == p.haltedauer and not p.kuerzung_bleibt_verkaufsjahr:
             return False
         return p.erweiterte_kuerzung and not self.alternative
 
@@ -155,7 +156,7 @@ class Steuer:
             # GEWSTG-9: gekuerzt wird der Ertrag aus Verwaltung und Nutzung des eigenen Grundbesitzes samt der
             # darauf entfallenden Hinzurechnung; Zinsertraege bleiben, der Verkaufsgewinn nach MA-030
             hinzu = NULL
-            ertrag = z_h + (NULL if p.kuerzung_verkauf else g_gew)
+            ertrag = z_h + (g_gew if p.ma030_verkaufsgewinn_pflichtig else NULL)
         else:
             frei = NULL if freibetrag_verbraucht else p.hinzu_freibetrag
             hinzu = p.hinzu_anteil * max(NULL, entgelte + p.hinzu_pacht * pacht - frei)

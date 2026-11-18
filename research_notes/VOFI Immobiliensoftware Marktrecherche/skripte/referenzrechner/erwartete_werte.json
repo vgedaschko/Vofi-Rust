@@ -742,7 +742,7 @@
  "RF-13|Einzelunternehmen mit Betriebsvermoegen, Hebesatz 440 %: Summe der Steuerzahlungen": "593811.83",
  "RF-13|Einzelunternehmen mit Betriebsvermoegen, Hebesatz 440 %: VOFI-Rendite (%)": "3.585",
  "RF-13|Einzelunternehmen mit Betriebsvermoegen, Hebesatz 440 %: Vergleichsrendite (%)": "1.154",
- "RF-13|Koerperschaft mit Kuerzung, Uebergang zum Jahresende (E-69; laufender Ertrag gekuerzt, Verkaufsgewinn gewerbesteuerpflichtig): Endwert, Rendite (%), Abstand zur Voreinstellung": [
+ "RF-13|Koerperschaft mit Kuerzung, E-69 mit der strengeren Lesart von MA-030 (laufender Ertrag gekuerzt, Verkaufsgewinn gewerbesteuerpflichtig): Endwert, Rendite (%), Abstand zur Voreinstellung": [
   "2570679.38",
   "4.697",
   "7952.00"
@@ -753,12 +753,12 @@
  "RF-13|Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig): Summe der Steuerzahlungen": "300734.86",
  "RF-13|Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig): VOFI-Rendite (%)": "4.670",
  "RF-13|Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig): Vergleichsrendite (%)": "1.483",
- "RF-13|Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030: Endwert": "2710609.38",
- "RF-13|Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030: Endwertdifferenz": "942359.69",
- "RF-13|Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030: Steuer auf den Verkaufsgewinn": "105456.69",
- "RF-13|Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030: Summe der Steuerzahlungen": "152852.86",
- "RF-13|Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030: VOFI-Rendite (%)": "5.161",
- "RF-13|Koerperschaft mit erweiterter Kuerzung, andere Lesart MA-030: Vergleichsrendite (%)": "1.483",
+ "RF-13|Koerperschaft mit erweiterter Kuerzung, Kuerzung bleibt im Verkaufsjahr (E-69): Endwert": "2710609.38",
+ "RF-13|Koerperschaft mit erweiterter Kuerzung, Kuerzung bleibt im Verkaufsjahr (E-69): Endwertdifferenz": "942359.69",
+ "RF-13|Koerperschaft mit erweiterter Kuerzung, Kuerzung bleibt im Verkaufsjahr (E-69): Steuer auf den Verkaufsgewinn": "105456.69",
+ "RF-13|Koerperschaft mit erweiterter Kuerzung, Kuerzung bleibt im Verkaufsjahr (E-69): Summe der Steuerzahlungen": "152852.86",
+ "RF-13|Koerperschaft mit erweiterter Kuerzung, Kuerzung bleibt im Verkaufsjahr (E-69): VOFI-Rendite (%)": "5.161",
+ "RF-13|Koerperschaft mit erweiterter Kuerzung, Kuerzung bleibt im Verkaufsjahr (E-69): Vergleichsrendite (%)": "1.483",
  "RF-13|Koerperschaft mit erweiterter Kuerzung: Endwert der Unterlassensalternative": "1768249.69",
  "RF-13|Koerperschaft ohne Gewerbesteuer (Verein, Stiftung): Endwert": "2822736.55",
  "RF-13|Koerperschaft ohne Gewerbesteuer (Verein, Stiftung): Endwert der Unterlassensalternative": "1826982.29",
@@ -940,13 +940,23 @@
   "3984.47",
   "1.240"
  ],
+ "RF-17|Privatperson, gefoerdert, 38 Jahre: Rendite (%) und Endwertdifferenz bei Einnahme im Zuflussjahr (Regel) und mit Verteilung (E-70)": [
+  [
+   "3.808",
+   "6731341.45"
+  ],
+  [
+   "4.380",
+   "7281505.57"
+  ]
+ ],
  "RF-17|Privatperson, gefoerdert: Entgelt des Darlehens verteilt (ESTG-11), Planjahre 1 bis 3; Lesart des Zuschusses": [
   [
    "1199.88",
    "1439.86",
    "1439.86"
   ],
-  "verteilt"
+  "sofort"
  ],
  "RF-17|Zuschuss 'minderung', 20 Jahre: Endwert, Endwertdifferenz, Summe der Steuern, Eigenkapital der Investitionsphase": [
   "3275573.58",
@@ -1508,16 +1518,6 @@
   "9320.73"
  ],
  "RF-19|Zinsbindung des uebernommenen Darlehens 8, 9, 10, 12 Jahre: Bemessungszins, Kapitaldienst, Bankdarlehen (keine Klippe)": {
-  "8": [
-   "0.010000000000",
-   "18000.00",
-   "843802.85"
-  ],
-  "9": [
-   "0.007500000000",
-   "16500.00",
-   "865231.42"
-  ],
   "10": [
    "0.005",
    "15000.00",
@@ -1527,6 +1527,16 @@
    "0.005",
    "15000.00",
    "886660.00"
+  ],
+  "8": [
+   "0.010000000000",
+   "18000.00",
+   "843802.85"
+  ],
+  "9": [
+   "0.007500000000",
+   "16500.00",
+   "865231.42"
   ]
  },
  "RF-19|andere Lesart MA-026 (Vertragszins): hoechster tragbarer Kaufpreis": 2359366,
@@ -1557,9 +1567,9 @@
  "RF-20|... Preis, bis zu dem der Endwert ohne Eigenkapital nicht negativ ist (Nebenangabe)": 1569899,
  "RF-20|... kleinster zulaessiger Preis (darunter M-22)": 1818182,
  "RF-20|Herkunft je Wert des Auftrags: Zahl der Werte je Herkunft (E, H, KAT, MA)": {
-  "E": 73,
+  "E": 74,
   "H": 53,
-  "KAT": 38,
+  "KAT": 39,
   "MA": 12
  },
  "RF-20|Vergleich gleicher Eingaben mit anderem Katalogstand (Koerperschaftsteuer 15 % in allen Jahren): Zahl der Zeilen, abweichende Werte (Herkunft, Name)": [

@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Fachspezifikation des Rechenkerns: zweite Überarbeitung ist zurück und besteht (20 Referenzfälle, 1.150 Prüfungen); Nachtrag 2 läuft – Regeln aus den Steuerrichtlinien (Verkaufsjahr bei erweiterter Kürzung in drei Fällen, Zuschuss getrennt nach Privat- und Betriebsvermögen, befreite Genossenschaft), Begründungspflicht am tragbaren Preis, Spezifikation Kapitel 1 und 4. Danach: Blindrechnung durch einen zweiten Bearbeiter nachziehen (Regelliste im Rückbericht), Prüfrunde 3 mit denselben sieben Rollen
+- [ ] **Angehalten am 2026-11-18 auf Wunsch des Auftraggebers (Fable-Kontingent aufgebraucht; weiter ab Samstag, 21.11.2026):** Nachtrag 2 zur zweiten Überarbeitung der Fachspezifikation. Der Zwischenstand ist gesichert und in sich stimmig (20 Referenzfälle, 1.156 Prüfungen bestanden), aber unvollständig. Auftrag im Wortlaut: Punkte A bis H meiner Nachricht an die Überarbeitung (Verkaufsjahr bei erweiterter Kürzung in drei Fällen mit neu gefasster Eingabe E-69; Zuschuss getrennt nach Privat- und Betriebsvermögen; Vorfälligkeit und Disagio der Privatperson; `MA-036`; befreite Genossenschaft M-44; Begründungspflicht am tragbaren Preis; Spezifikation Kapitel 1 und 4 und Zeile „Teilschritte der Stufe 1“; Entscheidungsprotokoll; Kapitel 16). Beim Wiederaufnehmen zuerst prüfen, was davon in Fachspezifikation, Referenzrechner (`aenderungen-runde2.md`, Abschnitt Nachtrag 2) und `annahmen.toml` schon steht; `docs/spezifikation.md` und `docs/entscheidungen.md` sind vom Nachtrag noch unberührt. Danach: Blindrechnung durch einen zweiten Bearbeiter nachziehen, Prüfrunde 3 mit denselben sieben Rollen
 
 ## Als Nächstes
 
