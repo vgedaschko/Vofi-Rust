@@ -62,7 +62,7 @@ Die vollständige Fachspezifikation (Tabellenaufbau, Rechenreihenfolge, Formeln,
 | Randfälle | Zinssatz null, Eigenkapital null, negativer Endwert und mehrdeutiger interner Zinsfuß haben definierte Ergebnisse statt Fehlern | fest |
 | Nachvollziehbarkeit | Jede Ergebniszahl lässt sich bis zur Eingabe zurückverfolgen; jede Kalkulation speichert Regelstand und Version des Rechenkerns | fest |
 | Abnahmetests | Zwei veröffentlichte Rechenbeispiele des IWU (`KIRCHNER-IWU-2004`, `IWU-2013-ENDBERICHT`) und der nachgerechnete Testfall mit Varianten laufen als automatische Tests, jeder mit benannter Toleranz (eigene Fälle auf den Cent; das IWU-Beispiel von 2013 ist nur auf rund 3,40 € nachvollziehbar); weitere Fälle für Verlustvortrag, steuerpflichtigen Verkauf und Monatsraster kommen hinzu | fest – Umlage im Fall von 2013: `MA-015` |
-| Offene Lehrbuchdefinitionen | VOFI-Gesamtkapitalrendite und Amortisationsdauer nach Grob sind am Original zu beschaffen; bis dahin wird die Gesamtkapitalrendite nicht ausgewiesen | offen – Literatur beschaffen |
+| Offene Lehrbuchdefinitionen | Die VOFI-Eigenkapitalrendite ist über das Fachlexikon bestätigt. Die VOFI-Gesamtkapitalrendite wird nicht ausgewiesen, bis ihre Formel gelesen ist. Die Amortisationsdauer wird nach der vorsichtigen von zwei Lesarten gerechnet: von dem Zeitpunkt an, an dem das Vermögen aus der Investition die Anlage des Eigenkapitals zur Unterlassensalternative übertrifft, ohne Ansatz eines Restwerts vor dem geplanten Verkauf (`MA-027`; Quellnotiz 10) | vorläufig – Klärung über frei zugängliche Quellen |
 
 ## 4 Regel- und Förderkatalog
 

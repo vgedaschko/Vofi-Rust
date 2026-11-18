@@ -19,7 +19,9 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Spezifikation Kapitel 2 (Funktionsumfang, Stufen) aus dem überarbeiteten Bericht füllen
 - [ ] Spezifikation Kapitel 5 zum Architekturentwurf ausbauen (Datenmodell, Schnittstellen, Rechte, Oberfläche)
 - [ ] Spezifikation Kapitel 3 zur vollständigen Fachspezifikation des Rechenkerns ausbauen (Tabellenaufbau, Formeln, Konventionen, Testfälle)
-- [ ] Fachliteratur auswerten, sobald der Auftraggeber sie bereitstellt: Grob (VOFI-Gesamtkapitalrendite, Amortisationsdauer), Schulte/Ropeter (Immobilien-VOFI); Fundstellen ins Kataster
+- [ ] Nach Rückkehr der Berichtsüberarbeitung: Quellenkataster und Verzeichnis der Modellannahmen aus Quellnotiz 10 nachziehen (ImmoWertV-Werte 2026/2027, II. BV, Preisindex, Banklexikon; `MA-027` Rechenregel der Amortisationsdauer)
+- [ ] Immobilien-VOFI nach Schulte/Ropeter (Zeilenaufbau) aus frei zugänglichen Quellen belegen: Hochschulschriften und Verbandsveröffentlichungen; Bücher nur, wenn eine Lücke bleibt
+- [ ] II. BV: amtliche oder verbandliche Veröffentlichung der Beträge ab 01.01.2026 beschaffen (aus dem heutigen Preisindex nicht nachrechenbar, Notiz 10)
 - [ ] Fachspezifikation Steuern (aus Prüfrunde 4): Gewerbesteuer der Personengesellschaft beim Verkauf, Veräußerungsgewinn bei erweiterter Kürzung, Bewertung bei laufender Bindung über MA-017 hinaus, Zuschussentgelt in der Kreditprobe, Abstand zur Zielrendite als Endwertüberschuss (MA-012)
 - [ ] Quellenkataster: niedersächsisches Haushaltsrecht (VV zu § 44 LHO, ANBest-P; klärt MA-021) und Übergangsrecht zu § 559f BGB am Original lesen – von der Cloud-Umgebung aus bisher nicht erreichbar
 
@@ -30,7 +32,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Vorführungen bei den drei VOFI-Anbietern anfordern (Prüfliste kommt aus Anhang D des Berichts)
 - [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
 - [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
-- [ ] Fachbücher bereitstellen: zuerst „Immobilienökonomie I" (De Gruyter, eBook) und Grob, „Einführung in die Investitionsrechnung" (gebraucht oder Bibliothek); im Gespräch hochladen, nicht ins öffentliche Repository
+- [ ] Ein Bildschirmfoto genügt statt eines Buchkaufs: Formel der „VOFI-Gesamtkapitalrentabilität" aus dem Gabler Banklexikon (gabler-banklexikon.de, Stichwort VOFI-Gesamtkapitalrentabilität) – die Formel ist dort ein Bild und von hier nicht lesbar. Ohne sie wird die Kennzahl nicht ausgewiesen; alles andere läuft ohne die Bücher
 - [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
 - [ ] Durchsicht der fünf Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016) und der zwei Ausnahmen von der Vorsichtsregel (MA-021, MA-022)
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
@@ -55,6 +57,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Lehrbuchfragen ohne Buchkauf verfolgt (Quellnotiz 10): Eigenkapitalrentabilität bestätigt, Amortisationsdauer als Annahme mit zwei Lesarten, Gesamtkapitalrentabilität weiter offen; ImmoWertV-Werte 2026/2027 aus dem Preisindex nachgerechnet
 - [x] 2026-11-18 Steuerungsdokumente durch die Rolle Dokumentation geprüft (Note 7); zehn Befunde am Bestand bestätigt und behoben bis auf die Erweiterung der Prüfmodi
 - [x] 2026-11-18 Prüfrunde 4 zum Recherchebericht: Noten 9, 9, 8, 8, 8, 8; gesichtet (31 Punkte); Spezifikation, Entscheidungsprotokoll und Aufgabenliste nachgezogen
 - [x] 2026-11-18 Recherchebericht nach Prüfrunde 3 überarbeitet (30 Sichtungspunkte); 25 Modellannahmen, 211 Quellen
