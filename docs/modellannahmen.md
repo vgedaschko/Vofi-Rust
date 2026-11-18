@@ -12,7 +12,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 |---|---|---|---|---|---|---|
 | `MA-001` | Rechenweise der NBank-Renditeprüfung | hoch | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-004` | KfW-Darlehen als Ersatz für Eigenmittel bei der NBank | hoch | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
-| `MA-012` | Rendite bei mehreren Einlagen und Entnahmen | hoch | Kundenbericht | nein | Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber | mit der Fachspezifikation des Rechenkerns (Phase 1) |
+| `MA-012` | Rendite bei mehreren Einlagen und Entnahmen | hoch | Kundenbericht | nein | Fachliteratur: Ropeter (1998), S. 186 ff. (`ROPETER-1998`); fachliche Freigabe durch den Auftraggeber | mit der Fachspezifikation des Rechenkerns (Phase 1) |
 | `MA-014` | Streuungen und Korrelationen der Simulation | hoch | Kundenbericht | ja | Auftraggeber (eigene Erfahrungswerte); später Marktdaten | vor Stufe 2 (Simulation) |
 | `MA-016` | Verrechnung von Anlaufverlusten | hoch | Kundenbericht | ja | Anwender je Vorhaben; im Zweifel Steuerberater des Investors | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-026` | Rechengrundlage des Bankdarlehens | hoch | Kundenbericht | ja | Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses | mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a |
@@ -38,7 +38,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-024` | Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-025` | Modernisierungsumlage für den Glasfaseranschluss | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-027` | Rechenregel der VOFI-Amortisationsdauer | gering | Anwendung | ja | Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
-| `MA-028` | Zuzurechnende Sollzinsen in der VOFI-Gesamtkapitalrentabilität | gering | Anwendung | nein | Fachliteratur (Grob, Einführung in die Investitionsrechnung) | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
+| `MA-028` | Zuzurechnende Sollzinsen in der VOFI-Gesamtkapitalrentabilität | gering | Anwendung | nein | Fachliteratur: Grob, Einführung in die Investitionsrechnung, nach `SCHULTE-IMMOBILIENINVESTITION-2025` (S. 813) dort S. 140 f. | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
 
 Nach Klärungsweg:
 
@@ -47,9 +47,9 @@ Nach Klärungsweg:
 - **Auftraggeber (eigene Erfahrungswerte); später Marktdaten:** `MA-014`
 - **Darlehensvertrag im Einzelfall:** `MA-013`
 - **Fachliteratur (Endbericht im Volltext):** `MA-015`
-- **Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber:** `MA-012`
-- **Fachliteratur (Grob, Einführung in die Investitionsrechnung):** `MA-028`
 - **Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt:** `MA-027`
+- **Fachliteratur: Grob, Einführung in die Investitionsrechnung, nach `SCHULTE-IMMOBILIENINVESTITION-2025` (S. 813) dort S. 140 f.:** `MA-028`
+- **Fachliteratur: Ropeter (1998), S. 186 ff. (`ROPETER-1998`); fachliche Freigabe durch den Auftraggeber:** `MA-012`
 - **Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses:** `MA-026`
 - **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`
 - **NBank (nur noch Bestätigung):** `MA-021`
@@ -188,10 +188,10 @@ Nach Klärungsweg:
 - **Andere Lesart:** Im nachgerechneten Testfall liefern die naheliegenden Lesarten 7,18 %, 7,25 %, 7,50 % und 7,88 %.
 - **Grundlage:** Lehrbuchformel nach Grob und Kirchner; die gewählte Lesart bleibt in der Logik der ausdrücklichen Wiederanlage. Quellen: `KIRCHNER-IWU-2004`, `GROB-EINFUEHRUNG`.
 - **Wirkung (hoch):** VOFI-Eigenkapitalrendite jedes Vorhabens mit Eigenkapitaleinsatz über die Bauzeit oder mit laufenden Ausschüttungen.
-- **Sichtbar:** Kundenbericht · **Umschaltbar:** nein · **Klärung durch:** Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber · **Wiedervorlage:** mit der Fachspezifikation des Rechenkerns (Phase 1)
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** nein · **Klärung durch:** Fachliteratur: Ropeter (1998), S. 186 ff. (`ROPETER-1998`); fachliche Freigabe durch den Auftraggeber · **Wiedervorlage:** mit der Fachspezifikation des Rechenkerns (Phase 1)
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 3, Ausschüttungen und Nachschüsse
-- **Bemerkung:** Die genaue Formel ist in Phase 1 festzulegen und finanzmathematisch nachzurechnen.
+- **Bemerkung:** Die genaue Formel ist in Phase 1 festzulegen und finanzmathematisch nachzurechnen. Am Original bestätigt (`SCHULTE-IMMOBILIENINVESTITION-2025`, S. 816): Das Lehrbuch definiert die VOFI-Rendite nur für eine Einlage zu Beginn und gibt für mehrere Einlagen und Entnahmen keine Formel; die Formel des Projekts ist damit eine eigene Erweiterung. Rechnet die Unterlassensalternative mit zwei Zinssätzen, ist der Vergleichsfaktor neu zu fassen.
 
 ### MA-013 · Rundung in Darlehensplänen
 
@@ -377,7 +377,7 @@ Nach Klärungsweg:
 - **Andere Lesart:** Einschließlich der Kontokorrentzinsen oder mit aufgezinsten Sollzinsen; Kennzahl und Referenzzinsfuß fielen dann beide höher aus.
 - **Grundlage:** Gabler Banklexikon, Stichwort VOFI-Gesamtkapitalrentabilität, als Bildschirmfoto gelesen am 18.11.2026 (Quellnotiz 10). Die Abgrenzung ändert die Entscheidung nicht: Die Sollzinsen gehen in Kennzahl und Referenzzinsfuß mit demselben Betrag ein, und die Kennzahl liegt genau dann über dem Referenzzinsfuß, wenn die Endwertdifferenz positiv ist. Im Testfall des Berichts ergibt die Voreinstellung 4,61 % gegen einen Referenzzinsfuß von 2,14 %. Quellen: `GABLER-BANKLEXIKON-GKR`.
 - **Wirkung (gering):** Ausgewiesene VOFI-Gesamtkapitalrentabilität und ihr Referenzzinsfuß auf dem vollen Kennzahlenblatt; keine Wirkung auf Endwert, Eigenkapitalrendite, Endwertdifferenz oder tragbaren Preis.
-- **Sichtbar:** Anwendung · **Umschaltbar:** nein · **Klärung durch:** Fachliteratur (Grob, Einführung in die Investitionsrechnung) · **Wiedervorlage:** mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3)
+- **Sichtbar:** Anwendung · **Umschaltbar:** nein · **Klärung durch:** Fachliteratur: Grob, Einführung in die Investitionsrechnung, nach `SCHULTE-IMMOBILIENINVESTITION-2025` (S. 813) dort S. 140 f. · **Wiedervorlage:** mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3)
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 3, Lehrbuchkennzahlen
 - **Bemerkung:** Aus Prüfrunde 5 (Sichtung, Punkt 17). Im Bildschirmfoto ist der Wurzelexponent des Referenzzinsfußes nicht zu erkennen; nach dem Aufbau der Formel ist es wie bei der Kennzahl die n-te Wurzel.

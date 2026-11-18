@@ -4,7 +4,7 @@ Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fach
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/quellenkataster/quellen.toml`; danach `python3 scripts/quellenkataster.py` ausführen. Jede Rechts-, Förder- oder Normangabe im Projekt verweist auf eine Kennung aus diesem Kataster.
 
-**Stand:** 219 Quellen · zuletzt am Original gelesen: 2026-11-18
+**Stand:** 220 Quellen · zuletzt am Original gelesen: 2026-11-18
 
 ## Überblick
 
@@ -14,9 +14,9 @@ Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fach
 | Förderrichtlinien, Merkblätter und Produktinformationen | 38 | 32 | 0 | 6 |
 | Normen und Branchenrichtlinien | 12 | 0 | 6 | 6 |
 | Methoden- und Qualitätsstandards | 10 | 0 | 2 | 8 |
-| Fachliteratur und Rechenbeispiele | 25 | 4 | 13 | 8 |
+| Fachliteratur und Rechenbeispiele | 26 | 5 | 13 | 8 |
 | Datenquellen | 15 | 4 | 5 | 6 |
-| **Gesamt** | **219** | **135** | **31** | **53** |
+| **Gesamt** | **220** | **136** | **31** | **53** |
 
 ## Handlungsbedarf
 
@@ -481,6 +481,7 @@ Bemerkungen:
 | `NOELDEKE-2008` | [Nöldeke, CUREM 2008](https://www.curem.uzh.ch/static/abschlussarbeiten/2008/Noeldeke_Johannes_Masterthesis_2008.pdf) – Masterarbeit zu Risikoanalyse und Monte-Carlo-Simulation von Immobilieninvestitionen | Masterarbeit 2008 | nur Sekundärquelle | Gestuftes Vorgehen Sensitivität, Szenario, Simulation | bei Neuausgabe | frei |
 | `PETITJEAN-2009` | [Petitjean, CUREM 2009](https://www.curem.uzh.ch/static/abschlussarbeiten/2009/Petitjean_Marc_MT_2009.pdf) – Masterarbeit zur Risikoanalyse von Immobilieninvestitionen | Masterarbeit 2009 | nur Sekundärquelle | Schwächen von Sensitivitäts- und Szenarioanalyse | bei Neuausgabe | frei |
 | `ROPETER-1998` | Ropeter, Investitionsanalyse für Gewerbeimmobilien – Investitionsanalyse für Gewerbeimmobilien · nicht erfasst; Schriften zur Immobilienökonomie Bd. 5 | Ausgabe 1998 | nicht geprüft | Immobilien-VOFI für Gewerbe | bei Neuausgabe | kostenpflichtig |
+| `SCHULTE-IMMOBILIENINVESTITION-2025` | Schulte et al., Immobilieninvestition (Investitionsrechnung) – Kapitel 4 Immobilieninvestition, Abschnitte 4 bis 6: Einführung in die Investitionsrechnung für Immobilieninvestitionen, Fazit, Literatur; in: Schulte/Bone-Winkel/Schäfers (Hrsg.), Immobilienökonomie · S. 787–838; DOI des Werks 10.1515/9783111704906 | © 2025; Auflage und Bandzählung im vorliegenden Auszug nicht erkennbar | am Original gelesen (2026-11-18) | Zeilenaufbau und Rechenreihenfolge des Immobilien-VOFI; Endvermögen, Vermögensendwert und VOFI-Rendite nach Lehrbuch; Unterlassensalternative als eigener Finanzplan mit zwei Zinssätzen; Zwei Musterrechnungen als Referenzfälle (Standardbeispiel, Fallbeispiel Bürogebäude) | bei Neuausgabe | kostenpflichtig |
 | `SCHULTE-IMMOBILIENOEKONOMIE-1` | Schulte (Hrsg.), Immobilienökonomie Bd. I – Immobilienökonomie, Band I; darin Schulte/Allendorf/Ropeter, Immobilieninvestition · De Gruyter Oldenbourg, eBook ISBN 978-3-486-85454-1 | 5. Auflage 2016 | nicht geprüft | Immobilien-VOFI-Tabelle; Vergleich VOFI und DCF; Fehlerkataloge und Musterrechnungen | bei Neuausgabe | kostenpflichtig |
 | `SCHULTE-ROPETER-1996` | Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte – Rentabilitätsanalyse für Immobilienprojekte, in: Handbuch Immobilien-Projektentwicklung · Schulte/Ropeter, Rentabilitätsanalyse für Immobilienprojekte, in: Schulte (Hrsg.), Handbuch Immobilien-Projektentwicklung, Müller, Köln 1996, S. 165–221, ISBN 3-481-00986-0; Katalogeintrag: https://epub.uni-regensburg.de/6569/ | Ausgabe 1996 | nicht geprüft | Immobilien-VOFI: Zeilenstruktur, unterjährige Zahlungen | bei Neuausgabe | kostenpflichtig |
 | `WUESTEFELD-2000` | Wüstefeld, Risiko und Rendite von Immobilieninvestments – Risiko und Rendite von Immobilieninvestments · Frankfurt am Main 2000; TU Darmstadt, Publikation Nr. 9848 | Ausgabe 2000 | nicht geprüft | VOFI-Rendite und Monte-Carlo-Simulation (S. 146–147) | bei Neuausgabe | kostenpflichtig |
@@ -498,7 +499,7 @@ Bemerkungen:
 - `GLEISSNER-ZFIFP-2008`: Nur Auszüge.
 - `GONDRING-IMMOBILIENWIRTSCHAFT`: Nur genannt, nicht eingesehen (Notiz 06); Titel nicht genau erfasst.
 - `GROB-1989`: Nur aus dem Fachwissen des Bearbeiters genannt (Notiz 03).
-- `GROB-EINFUEHRUNG`: Schema nur über FernUni Hagen und Wikipedia. Eigen- und Gesamtkapitalrentabilität sind über das Gabler Banklexikon belegt (GABLER-BANKLEXIKON-VOFI, GABLER-BANKLEXIKON-GKR). Offen bleiben die Rechenregel der Amortisationsdauer (MA-027) und die Abgrenzung der zuzurechnenden Sollzinsen in der Gesamtkapitalrentabilität (MA-028). 5. Auflage 2006 bei Vahlen; kein eBook-Angebot gefunden.
+- `GROB-EINFUEHRUNG`: Schema nur über FernUni Hagen und Wikipedia. Eigen- und Gesamtkapitalrentabilität sind über das Gabler Banklexikon belegt (GABLER-BANKLEXIKON-VOFI, GABLER-BANKLEXIKON-GKR). Offen bleiben die Rechenregel der Amortisationsdauer (MA-027) und die Abgrenzung der zuzurechnenden Sollzinsen (MA-028); für die Gesamtkapitalrentabilität verweist SCHULTE-IMMOBILIENINVESTITION-2025 (S. 813) auf Grob (2015), S. 140 f. Das Erscheinungsjahr der 5. Auflage ist widersprüchlich überliefert (2006 nach Sekundärquelle, 2015 nach diesem Zitat) und nicht am Original geprüft.
 - `GROSSMAN-OEZLUEK-2010`: Nur Auszüge; Zuordnung der drei Methodiken nicht am Text bestätigt.
 - `HERIOT-WATT-BETA`: Kennzahl 55 % nicht an der Quelle geprüft (Notiz 09).
 - `HOESLI-JANI-BENDER-2006`: Nur Abstract und Auszüge; frei zugängliche Arbeitsfassung SFI Research Paper 148 / ERES 2005.
@@ -508,8 +509,9 @@ Bemerkungen:
 - `KRUSCHWITZ`: Nur genannt, nicht recherchiert (Notiz 03).
 - `NOELDEKE-2008`: Nur Auszüge; genauer Titel nicht erfasst.
 - `PETITJEAN-2009`: Nur Auszüge; genauer Titel nicht erfasst.
-- `ROPETER-1998`: Berichtigt am 18.11.2026: Die bisher eingetragene Adresse epub.uni-regensburg.de/6569/ gehört nicht zu diesem Werk, sondern ist der Katalogeintrag zu SCHULTE-ROPETER-1996; ein frei zugänglicher Volltext ist nicht bekannt. Original nicht eingesehen.
-- `SCHULTE-IMMOBILIENOEKONOMIE-1`: Nicht eingesehen (Notizen 03 und 06). Auflage, Verlag und ISBN stammen aus einer Websuche und sind nicht am Original geprüft.
+- `ROPETER-1998`: Original nicht eingesehen; ein frei zugänglicher Volltext ist nicht bekannt. Nach SCHULTE-IMMOBILIENINVESTITION-2025 (S. 816) steht die Behandlung mehrerer Einlagen und Entnahmen bei Ropeter (1998), S. 186 ff.; das ist der Klärungsweg für MA-012. Die früher eingetragene Adresse epub.uni-regensburg.de/6569/ gehört zu SCHULTE-ROPETER-1996.
+- `SCHULTE-IMMOBILIENINVESTITION-2025`: Vom Auftraggeber als PDF bereitgestellt (52 Seiten), vollständig gelesen; Auswertung in Quellnotiz 11, Nachbau der Musterrechnungen in skripte/schulte_musterrechnung.py. Die Abschnitte 1 bis 3 des Kapitels und die Titelei liegen nicht vor. Die PDF liegt nicht im Repository. Nicht im Kapitel: Rechenregel der Amortisationsdauer, Abgrenzung der Sollzinsen der Gesamtkapitalrentabilität, Renditeformel bei mehreren Einlagen und Entnahmen.
+- `SCHULTE-IMMOBILIENOEKONOMIE-1`: Band als Ganzes nicht eingesehen. Das Kapitel zur Investitionsrechnung einer neueren Ausgabe (2025) ist am Original ausgewertet: SCHULTE-IMMOBILIENINVESTITION-2025. Auflage, Verlag und ISBN dieses Eintrags stammen aus einer Websuche und sind nicht am Original geprüft.
 - `SCHULTE-ROPETER-1996`: Der Publikationsserver der Universität Regensburg führt nur den Katalogeintrag ohne Volltext (nachgesehen am 18.11.2026); Original nicht eingesehen. Die Zeilenstruktur in Notiz 03 ist eine Rekonstruktion ohne Blick ins Original.
 - `WUESTEFELD-2000`: Nur Literaturverweise gefunden.
 

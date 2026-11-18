@@ -6,8 +6,6 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Auswertung des Lehrbuchkapitels „Immobilieninvestition" (Schulte et al., S. 787–838) läuft: Quellnotiz 11 und Nachbau der Musterrechnung als Referenzfall
-
 ## Als Nächstes
 
 - [ ] Nach dem NBank-Gespräch: Antworten mit Datum und Gesprächspartner im Verzeichnis der Modellannahmen nachtragen (Status, Voreinstellung), Spezifikation und Katalogvorgaben nachziehen
@@ -22,8 +20,8 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Spezifikation Kapitel 2 (Funktionsumfang, Stufen) aus dem überarbeiteten Bericht füllen
 - [ ] Spezifikation Kapitel 5 zum Architekturentwurf ausbauen (Datenmodell, Schnittstellen, Rechte, Oberfläche)
 - [ ] Spezifikation Kapitel 3 zur vollständigen Fachspezifikation des Rechenkerns ausbauen (Tabellenaufbau, Formeln, Konventionen, Testfälle)
-- [ ] Immobilien-VOFI nach Schulte/Ropeter (Zeilenaufbau) aus frei zugänglichen Quellen belegen: Hochschulschriften und Verbandsveröffentlichungen; Bücher nur, wenn eine Lücke bleibt
 - [ ] II. BV: amtliche oder verbandliche Veröffentlichung der Beträge ab 01.01.2026 beschaffen (aus dem heutigen Preisindex nicht nachrechenbar, Notiz 10)
+- [ ] Fachspezifikation Rechenkern (aus Quellnotiz 11): Unterlassensalternative als eigener Finanzplan mit zwei Zinssätzen und Vergleichsfaktor der Rendite dazu (MA-012); „freie Tilgung" (Periodenüberschuss tilgt) als benannte Tilgungsart; Lehrbuchdarstellung als Ansicht; die beiden Musterrechnungen als automatische Tests
 - [ ] Fachspezifikation Finanzierung (aus Prüfrunde 5): Anschlusszins und Tilgung nach Ende der Zinsbindung, auch für übernommene Förderdarlehen; Vorfälligkeitsentschädigung bei Zinsbindung über die Haltedauer hinaus; tragbarer Preis im Stressfall; Suchbereich und Raster der Zielwertsuche; Zahl der Eingaben beim Ankauf gebundener Bestände; Abgrenzung der Sollzinsen in der Gesamtkapitalrendite (MA-028)
 - [ ] Fachspezifikation Steuern (aus Prüfrunde 4 und 5): Gewerbesteuer auf den Verkaufsgewinn je Steuerstatus, De-minimis-Bindung nach Person (MA-029); Gewerbesteuer der Personengesellschaft beim Verkauf, Veräußerungsgewinn bei erweiterter Kürzung, Bewertung bei laufender Bindung über MA-017 hinaus, Zuschussentgelt in der Kreditprobe, Abstand zur Zielrendite als Endwertüberschuss (MA-012)
 - [ ] Quellenkataster: niedersächsisches Haushaltsrecht (VV zu § 44 LHO, ANBest-P; klärt MA-021) und Übergangsrecht zu § 559f BGB am Original lesen – von der Cloud-Umgebung aus bisher nicht erreichbar
@@ -37,6 +35,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
 - [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
 - [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
+- [ ] Falls greifbar, zwei Buchstellen als Foto oder Auszug: Grob, „Einführung in die Investitionsrechnung", S. 140 f. (Gesamtkapitalrentabilität: welche Sollzinsen zählen; dazu die Amortisationsdauer) und Ropeter, „Investitionsanalyse für Gewerbeimmobilien" (1998), S. 186 ff. (Rendite bei mehreren Einlagen und Entnahmen). Nicht dringend: Bis dahin rechnet das Werkzeug mit gekennzeichneten Annahmen (MA-012, MA-027, MA-028)
 - [ ] Durchsicht der sechs Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016, MA-026) und der begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-022, MA-023 beim Erwerb, Wertansatz in MA-026)
 - [ ] Gespräch mit der Hausbank (MA-026): Begrenzt die Beleihungsquote nur das eigene Darlehen oder alle Darlehen? Rechnet die Kapitaldienstfähigkeit das Förderdarlehen mit? Welcher Wertansatz und welche Bewirtschaftungspauschale gelten?
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
@@ -62,6 +61,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Lehrbuchkapitel „Immobilieninvestition" (Schulte et al., S. 787–838, vom Auftraggeber bereitgestellt) ausgewertet: Zeilenaufbau am Original belegt, zwei Musterrechnungen nachgebaut (50 von 53 Buchwerten getroffen, drei um je eine Einheit abweichend) → Quellnotiz 11
 - [x] 2026-11-18 Recherchebericht abgenommen: Schlussredaktion nach Prüfrunde 5 eingearbeitet (24 Punkte), gegengelesen, Prüfskripte grün; 29 Modellannahmen, 219 Quellen
 - [x] 2026-11-18 Gesprächsleitfaden für die NBank erstellt: 20 Fragen, je mit bisheriger Annahme und Zuordnung zu MA-001 bis MA-006, MA-017, MA-020, MA-021
 - [x] 2026-11-18 Prüfrunde 5 zum Recherchebericht (letzte Runde): Noten 9, 9, 9, 9, 9, 8; gesichtet; Spezifikation, Entscheidungsprotokoll und Aufgabenliste nachgezogen

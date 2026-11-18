@@ -4,3 +4,6 @@ Aus der Sitzung gesichert, damit die Rechnungen nachvollziehbar bleiben. Kein Pr
 
 - `finanzmathematik-pruefung/` – unabhängige Gegenrechnung des Testfalls S1 und der Varianten aus Notiz 09 (Python).
 - `monte-carlo-benchmark/` – Messprogramm aus Notiz 05: Durchsatz nativ gegenüber WebAssembly und Ergebnisgleichheit (Rust).
+- `runde4/`, `runde5/` – Gegenrechnungen der Prüfrunden 4 und 5 und Belege für die Zahlen der Überarbeitungen (Python).
+- `bewirtschaftungskosten_index.py` – Fortschreibung der Bewirtschaftungskosten nach Anlage 3 ImmoWertV aus dem Verbraucherpreisindex (Notiz 10).
+- `schulte_musterrechnung.py` – Nachbau der beiden Musterrechnungen aus dem Lehrbuchkapitel (Notiz 11); vergleicht mit den Buchwerten und endet mit Rückgabewert 1, solange die drei bekannten Abweichungen um je eine Einheit bestehen.

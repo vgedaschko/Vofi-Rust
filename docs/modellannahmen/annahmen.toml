@@ -236,13 +236,13 @@ gewicht = "hoch"
 wirkung = "VOFI-Eigenkapitalrendite jedes Vorhabens mit Eigenkapitaleinsatz über die Bauzeit oder mit laufenden Ausschüttungen."
 sichtbar = "kunde"
 umschaltbar = false
-klaerung = "Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber"
+klaerung = "Fachliteratur: Ropeter (1998), S. 186 ff. (`ROPETER-1998`); fachliche Freigabe durch den Auftraggeber"
 wiedervorlage = "mit der Fachspezifikation des Rechenkerns (Phase 1)"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 3, Ausschüttungen und Nachschüsse"]
-bemerkung = "Die genaue Formel ist in Phase 1 festzulegen und finanzmathematisch nachzurechnen."
+bemerkung = "Die genaue Formel ist in Phase 1 festzulegen und finanzmathematisch nachzurechnen. Am Original bestätigt (`SCHULTE-IMMOBILIENINVESTITION-2025`, S. 816): Das Lehrbuch definiert die VOFI-Rendite nur für eine Einlage zu Beginn und gibt für mehrere Einlagen und Entnahmen keine Formel; die Formel des Projekts ist damit eine eigene Erweiterung. Rechnet die Unterlassensalternative mit zwei Zinssätzen, ist der Vergleichsfaktor neu zu fassen."
 
 [[annahme]]
 id = "MA-013"
@@ -556,7 +556,7 @@ gewicht = "gering"
 wirkung = "Ausgewiesene VOFI-Gesamtkapitalrentabilität und ihr Referenzzinsfuß auf dem vollen Kennzahlenblatt; keine Wirkung auf Endwert, Eigenkapitalrendite, Endwertdifferenz oder tragbaren Preis."
 sichtbar = "anwender"
 umschaltbar = false
-klaerung = "Fachliteratur (Grob, Einführung in die Investitionsrechnung)"
+klaerung = "Fachliteratur: Grob, Einführung in die Investitionsrechnung, nach `SCHULTE-IMMOBILIENINVESTITION-2025` (S. 813) dort S. 140 f."
 wiedervorlage = "mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3)"
 status = "offen"
 gesetzt_am = "2026-11-18"

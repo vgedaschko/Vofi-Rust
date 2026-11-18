@@ -2670,7 +2670,7 @@ gelesen_am = ""
 verwendet_fuer = ["Lehrbuchschema des VOFI", "Definitionen VOFI-Gesamtkapitalrentabilität und Amortisationsdauer", "Kritische Werte im VOFI"]
 turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
-bemerkung = "Schema nur über FernUni Hagen und Wikipedia. Eigen- und Gesamtkapitalrentabilität sind über das Gabler Banklexikon belegt (GABLER-BANKLEXIKON-VOFI, GABLER-BANKLEXIKON-GKR). Offen bleiben die Rechenregel der Amortisationsdauer (MA-027) und die Abgrenzung der zuzurechnenden Sollzinsen in der Gesamtkapitalrentabilität (MA-028). 5. Auflage 2006 bei Vahlen; kein eBook-Angebot gefunden."
+bemerkung = "Schema nur über FernUni Hagen und Wikipedia. Eigen- und Gesamtkapitalrentabilität sind über das Gabler Banklexikon belegt (GABLER-BANKLEXIKON-VOFI, GABLER-BANKLEXIKON-GKR). Offen bleiben die Rechenregel der Amortisationsdauer (MA-027) und die Abgrenzung der zuzurechnenden Sollzinsen (MA-028); für die Gesamtkapitalrentabilität verweist SCHULTE-IMMOBILIENINVESTITION-2025 (S. 813) auf Grob (2015), S. 140 f. Das Erscheinungsjahr der 5. Auflage ist widersprüchlich überliefert (2006 nach Sekundärquelle, 2015 nach diesem Zitat) und nicht am Original geprüft."
 
 [[quelle]]
 id = "GROB-1989"
@@ -2715,7 +2715,7 @@ gelesen_am = ""
 verwendet_fuer = ["Immobilien-VOFI für Gewerbe"]
 turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
-bemerkung = "Berichtigt am 18.11.2026: Die bisher eingetragene Adresse epub.uni-regensburg.de/6569/ gehört nicht zu diesem Werk, sondern ist der Katalogeintrag zu SCHULTE-ROPETER-1996; ein frei zugänglicher Volltext ist nicht bekannt. Original nicht eingesehen."
+bemerkung = "Original nicht eingesehen; ein frei zugänglicher Volltext ist nicht bekannt. Nach SCHULTE-IMMOBILIENINVESTITION-2025 (S. 816) steht die Behandlung mehrerer Einlagen und Entnahmen bei Ropeter (1998), S. 186 ff.; das ist der Klärungsweg für MA-012. Die früher eingetragene Adresse epub.uni-regensburg.de/6569/ gehört zu SCHULTE-ROPETER-1996."
 
 [[quelle]]
 id = "SCHULTE-IMMOBILIENOEKONOMIE-1"
@@ -2730,7 +2730,7 @@ gelesen_am = ""
 verwendet_fuer = ["Immobilien-VOFI-Tabelle", "Vergleich VOFI und DCF", "Fehlerkataloge und Musterrechnungen"]
 turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
-bemerkung = "Nicht eingesehen (Notizen 03 und 06). Auflage, Verlag und ISBN stammen aus einer Websuche und sind nicht am Original geprüft."
+bemerkung = "Band als Ganzes nicht eingesehen. Das Kapitel zur Investitionsrechnung einer neueren Ausgabe (2025) ist am Original ausgewertet: SCHULTE-IMMOBILIENINVESTITION-2025. Auflage, Verlag und ISBN dieses Eintrags stammen aus einer Websuche und sind nicht am Original geprüft."
 
 [[quelle]]
 id = "KIRCHNER-IWU-2004"
@@ -3335,4 +3335,19 @@ verwendet_fuer = ["Zielgrößen des VOFI in der wohnungswirtschaftlichen Praxis:
 turnus = "bei-neuausgabe"
 zugang = "frei"
 bemerkung = "Praxisbeitrag eines Anbieters, kein Lehrbuch; ohne Formeln."
+
+[[quelle]]
+id = "SCHULTE-IMMOBILIENINVESTITION-2025"
+gruppe = "literatur"
+kurz = "Schulte et al., Immobilieninvestition (Investitionsrechnung)"
+titel = "Kapitel 4 Immobilieninvestition, Abschnitte 4 bis 6: Einführung in die Investitionsrechnung für Immobilieninvestitionen, Fazit, Literatur; in: Schulte/Bone-Winkel/Schäfers (Hrsg.), Immobilienökonomie"
+herausgeber = "Karl-Werner Schulte et al.; De Gruyter"
+fundstelle = "S. 787–838; DOI des Werks 10.1515/9783111704906"
+stand = "© 2025; Auflage und Bandzählung im vorliegenden Auszug nicht erkennbar"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zeilenaufbau und Rechenreihenfolge des Immobilien-VOFI", "Endvermögen, Vermögensendwert und VOFI-Rendite nach Lehrbuch", "Unterlassensalternative als eigener Finanzplan mit zwei Zinssätzen", "Zwei Musterrechnungen als Referenzfälle (Standardbeispiel, Fallbeispiel Bürogebäude)"]
+turnus = "bei-neuausgabe"
+zugang = "kostenpflichtig"
+bemerkung = "Vom Auftraggeber als PDF bereitgestellt (52 Seiten), vollständig gelesen; Auswertung in Quellnotiz 11, Nachbau der Musterrechnungen in skripte/schulte_musterrechnung.py. Die Abschnitte 1 bis 3 des Kapitels und die Titelei liegen nicht vor. Die PDF liegt nicht im Repository. Nicht im Kapitel: Rechenregel der Amortisationsdauer, Abgrenzung der Sollzinsen der Gesamtkapitalrentabilität, Renditeformel bei mehreren Einlagen und Entnahmen."
 
