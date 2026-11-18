@@ -8,7 +8,7 @@ Eine Zeile je Prüfrunde; Details darunter. Stand: Datum der letzten Zeile. Lese
 | 2026-11-18 | Recherchebericht, nach erster Überarbeitung | dieselben sechs | 2 / 29 / 25 | Noten 7 bis 8; zweite Überarbeitung · [Runde 2](2026-11-18-recherchebericht-runde2/sichtung.md) |
 | 2026-11-18 | Recherchebericht, nach zweiter Überarbeitung | dieselben sechs | 1 / 17 / 33 | Noten 8 bis 9; dritte Überarbeitung · [Runde 3](2026-11-18-recherchebericht-runde3/sichtung.md) |
 | 2026-11-18 | Recherchebericht, nach dritter Überarbeitung | vier Rollen voll; Finanzmathematiker und Jurist nur die Änderungen | 0 / 16 / 30 | Noten 8 bis 9; vierte Überarbeitung, danach gezielte Nachprüfung · [Runde 4](2026-11-18-recherchebericht-runde4/sichtung.md) |
-| 2026-11-18 | Recherchebericht, nach vierter Überarbeitung | alle sechs, nur die geänderten Stellen | 0 / 15 / 21 | Noten 8 bis 9 (fünfmal 9); abgenommen nach Schlussredaktion ohne weitere Runde · [Runde 5](2026-11-18-recherchebericht-runde5/sichtung.md) |
+| 2026-11-18 | Recherchebericht, nach vierter Überarbeitung | alle sechs, nur die geänderten Stellen | 0 / 12 / 28 | Noten 8 bis 9 (fünfmal 9); abgenommen nach Schlussredaktion ohne weitere Runde · [Runde 5](2026-11-18-recherchebericht-runde5/sichtung.md) |
 | 2026-11-18 | Steuerungsdokumente (Spezifikation, Plan, Entscheidungsprotokoll, Arbeitsregeln, Hooks, Rollen) | Dokumentation | 0 / 7 / 3 | Note 7; Befunde behoben · [Sichtung](2026-11-18-steuerungsdokumente/sichtung.md) |
 | 2026-11-18 | Steuerungsdokumente, Nachprüfung | Dokumentation | 0 / 4 / 3 | Note 8; Befunde behoben, nicht erneut nachgeprüft · [Sichtung](2026-11-18-steuerungsdokumente/sichtung.md) |
 
