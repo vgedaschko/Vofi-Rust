@@ -64,7 +64,17 @@ Sechzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
 
 Die Prüfer lesen nur und berichten; eingearbeitet wird erst nach Gegenprüfung. Ergebnisse stehen in `docs/pruefung/protokoll.md`.
 
-Für Gestaltungsvorbilder stehen die Mobbin-Werkzeuge bereit (Bildschirme und Abläufe realer Anwendungen durchsuchen); sie werden vor jedem Oberflächenentwurf genutzt.
+## 7 Gestaltungsreferenzen
+
+| Quelle | Wofür | Stand 18.11.2026 |
+|---|---|---|
+| Mobbin (angebunden) | Bildschirme und Abläufe realer Anwendungen: Tabellen mit Zeitachse, Szenariowechsel, Versionen, Umschalter Monat/Jahr, Kennzahlenleisten | Probesuche erfolgreich. Stark bei allgemeinen Mustern aus Finanz- und Planungsanwendungen (Causal, Monarch, Fey, YNAB, Origin); für immobilienspezifische Fachsoftware fand die Probesuche nichts Brauchbares. Noch keine Sammlung angelegt |
+| IBCS | Notation und Aufbau von Berichten und Diagrammen | Maßstab laut `CLAUDE.md`; Regelwerk noch nicht am Original gelesen (siehe Quellenkataster) |
+| Öffentliche Gestaltungssysteme für datendichte Fachanwendungen | Bausteine und Regeln für Tabellen, Formulare, Zustände, Barrierefreiheit | Auswahl in Phase 2 |
+| Produktseiten und Handbücher der Fachsoftware (ARGUS, Forbury, Causal) | Fachliche Bedienmuster: Mieterliste, Szenarien, Bandbreiteneingabe | In der Recherche ausgewertet |
+| Geschäftsberichte großer Unternehmen | Typografie, Raster und Tabellensatz der Berichte | In Phase 2 |
+
+Vorgehen in Phase 2: je Kernansicht (Projektübersicht, Eingabe, Finanzplan-Tabelle, Szenariovergleich, Sensitivität, Förderung, Bericht) drei bis fünf Referenzen sammeln, das Muster benennen, dem der Entwurf folgt, und festhalten, was bewusst anders gemacht wird.
 
 ## 6 Hooks (eingerichtet)
 

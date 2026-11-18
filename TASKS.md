@@ -33,6 +33,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Später
 
+- [ ] Phase 2: Gestaltungsreferenzen je Kernansicht sammeln (Mobbin, Gestaltungssysteme, IBCS) und Muster benennen
 - [ ] Geplante Aufgaben einrichten, sobald der Regel- und Förderkatalog steht: monatlich Förderkonditionen, vierteljährlich Rechtsstand
 - [ ] Projekteigene Skills bauen: `vofi-fachmodell`, `referenzfall-anlegen`, später `foerderprogramm-pflegen`, `steuer-regeln`
 - [ ] Phase 3: Einrichtungsskript der Cloud-Umgebung, Prüfkette auf dem Server, Hooks für die Oberfläche
