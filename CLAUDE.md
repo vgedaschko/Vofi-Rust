@@ -21,6 +21,13 @@ Nachschlagen bei Bedarf: `reports/` und `research_notes/` (Recherchebericht, Que
 
 Widersprechen sich zwei dieser Dateien, gilt die Spezifikation; der Widerspruch wird sofort behoben, nicht umgangen.
 
+**Diese Liste aktuell halten.** Sie ist nur nützlich, wenn sie stimmt. Prüfen, ob sie noch zur Dokumentationsübersicht (`docs/README.md`) und zum tatsächlichen Bestand passt,
+- sofort, wenn ein steuerndes Dokument entsteht, entfällt, umbenannt wird oder seinen Zweck ändert,
+- am Ende jeder Phase und an jedem Freigabepunkt (die Rolle Dokumentation prüft das mit),
+- wenn der Hook beim Sitzungsstart eine fehlende oder nicht verzeichnete Datei meldet.
+
+Gehört ein Dokument neu zu denen, ohne die man nicht richtig arbeiten kann, kommt es in die Tabelle; hat eines diese Rolle verloren, fliegt es raus. Die Tabelle bleibt kurz – alles Übrige steht in der Übersicht.
+
 ## Spezifikation ist der Pfad
 
 `docs/spezifikation.md` ist das maßgebliche Entwicklungsdokument und wird laufend fortgeschrieben.

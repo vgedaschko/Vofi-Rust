@@ -40,6 +40,18 @@ case "$mode" in
     if [ -f "$root/docs/spezifikation.md" ]; then
       echo "Verbindlich und vor inhaltlicher Arbeit zu lesen: CLAUDE.md (Abschnitt Pflichtlektüre), docs/spezifikation.md, docs/entwicklungsplan.md. Änderungen an Festlegungen zuerst dort und in docs/entscheidungen.md."
     fi
+    # Stimmt die Pflichtlektüre in CLAUDE.md noch mit dem Bestand überein?
+    if [ -f "$root/CLAUDE.md" ]; then
+      missing="$(awk '/^## Pflichtlektüre/{on=1;next} /^## /{on=0} on' "$root/CLAUDE.md" \
+        | grep -o '`[A-Za-z0-9_./-]*\.md`' | tr -d '`' | sort -u \
+        | while read -r f; do [ -e "$root/$f" ] || printf '  - %s\n' "$f"; done)"
+      [ -n "$missing" ] && printf 'Pflichtlektüre in CLAUDE.md nennt Dateien, die es nicht gibt – Liste berichtigen:\n%s\n' "$missing"
+    fi
+    if [ -f "$root/docs/README.md" ]; then
+      unlisted="$(for f in "$root"/docs/*.md; do b="$(basename "$f")"; [ "$b" = "README.md" ] && continue
+        grep -q "$b" "$root/docs/README.md" || printf '  - docs/%s\n' "$b"; done)"
+      [ -n "$unlisted" ] && printf 'Nicht in der Dokumentationsübersicht (docs/README.md) verzeichnet – eintragen oder löschen:\n%s\n' "$unlisted"
+    fi
     [ -z "$now$running$next$waiting" ] && [ "$later_count" = "0" ] && exit 0
     echo "Ausstehende Aufgaben laut TASKS.md (Quelle der Wahrheit, bitte aktuell halten):"
     [ -n "$now" ] && printf 'Jetzt:\n%s\n' "$now"
