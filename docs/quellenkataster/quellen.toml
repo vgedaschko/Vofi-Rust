@@ -575,6 +575,21 @@ bemerkung = "Nur über § 559f BGB genannt; Notiz 08 schreibt „WSchV 1994“, 
 # ---------------------------------------------------------------------------
 
 [[quelle]]
+id = "ESTG-4-5B"
+gruppe = "gesetz"
+kurz = "§ 4 Abs. 5b EStG"
+titel = "Gewerbesteuer ist keine Betriebsausgabe (Abs. 5b)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/estg/__4.html"
+stand = "Fassung 15.10.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Gewerbesteuer mindert weder den Gewinn für die Einkommen- oder Körperschaftsteuer noch ihre eigene Bemessungsgrundlage (Steuer in Kurzform und Grundform)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen nur Abs. 5b in Prüfrunde 5 (Jurist). Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+
+[[quelle]]
 id = "ESTG-4H"
 gruppe = "gesetz"
 kurz = "§ 4h EStG"
@@ -722,7 +737,7 @@ gelesen_am = "2026-11-18"
 verwendet_fuer = ["Anrechnung der Gewerbesteuer auf die Einkommensteuer bei gewerblicher oder gewerblich geprägter Personengesellschaft und Einzelunternehmen", "Steuer in Kurzform der Grobkalkulation (pauschal) und in der Grundform (nach Gesetz)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen Abs. 1 und 2 in Prüfrunde 4 (Jurist). Ermäßigung um das Vierfache des Gewerbesteuer-Messbetrags, beim Mitunternehmer des anteiligen; begrenzt auf den Ermäßigungshöchstbetrag (Abs. 1 Satz 1 und 2) und auf die tatsächlich zu zahlende Gewerbesteuer (Abs. 1 Satz 5). Der Ermäßigungshöchstbetrag hängt an den übrigen Einkünften des Gesellschafters; Prüfauftrag an den Steuerberater. Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
+bemerkung = "Gelesen Abs. 1 und 2 in Prüfrunde 4 (Jurist), Abs. 1 bis 4 in Prüfrunde 5 (Jurist; Abs. 1 auch Fachexperte). Ermäßigung um das Vierfache des Gewerbesteuer-Messbetrags, beim Mitunternehmer des anteiligen; begrenzt auf den Ermäßigungshöchstbetrag (Abs. 1 Satz 1 und 2) und auf die tatsächlich zu zahlende Gewerbesteuer (Abs. 1 Satz 5). Der Ermäßigungshöchstbetrag hängt an den übrigen Einkünften des Gesellschafters; Prüfauftrag an den Steuerberater. Ermäßigt wird nur die Einkommensteuer, also nur der Anteil natürlicher Personen; einen Vortrag nicht ausgenutzter Ermäßigung gibt es nicht. Der Messbetrag ist nach dem Freibetrag für natürliche Personen und Personengesellschaften zu rechnen (GEWSTG-11). Stand wie bei den übrigen Einträgen zum EStG nach der Gesamtausgabe."
 
 [[quelle]]
 id = "ESTG-52"
@@ -845,6 +860,21 @@ zugang = "frei"
 bemerkung = ""
 
 [[quelle]]
+id = "GEWSTG-7"
+gruppe = "gesetz"
+kurz = "§ 7 GewStG"
+titel = "Gewerbeertrag; Gewinne aus der Veräußerung von Betrieb, Teilbetrieb und Mitunternehmeranteil (Satz 2)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/gewstg/__7.html"
+stand = "Fassung 29.06.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Gewerbesteuer auf den Verkaufsgewinn je Steuerstatus (Prüfauftrag an den Steuerberater, Bericht Anhang B.5)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen in Prüfrunde 5 vom Fachexperten und vom Juristen (Satz 1 bis 4). Satz 2 rechnet den Gewinn aus der Veräußerung des Betriebs, eines Teilbetriebs oder eines Mitunternehmeranteils zum Gewerbeertrag, soweit er nicht auf eine natürliche Person als unmittelbar beteiligten Mitunternehmer entfällt. Den Verkauf eines einzelnen Objekts aus dem fortbestehenden Betrieb nennt Satz 2 nicht; dass dessen Gewinn als laufender Gewinn der Gewerbesteuer unterliegt, ist Einschätzung der Prüfer und vom Steuerberater zu bestätigen. Stand wie bei den übrigen Einträgen zum GewStG nach der Gesamtausgabe."
+
+[[quelle]]
 id = "GEWSTG-8"
 gruppe = "gesetz"
 kurz = "§ 8 GewStG"
@@ -899,10 +929,10 @@ fundstelle = "https://www.gesetze-im-internet.de/gewstg/__11.html"
 stand = "Fassung 29.06.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Messzahl 3,5 %", "Rundung und Freibetrag"]
+verwendet_fuer = ["Messzahl 3,5 %", "Abrundung des Gewerbeertrags auf volle 100 €", "Freibetrag 24.500 € für natürliche Personen und Personengesellschaften (Abs. 1 Satz 3 Nr. 1); 5.000 € für die in Abs. 1 Satz 3 Nr. 2 genannten Unternehmen"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = ""
+bemerkung = "In Prüfrunde 5 am 18.11.2026 erneut gelesen: Fachexperte (Abs. 1 und 2), Finanzmathematiker (Abs. 1 Satz 3 Nr. 1), Jurist (Abs. 1 bis 3). Der Freibetrag gilt genau für den Kreis, für den § 35 EStG die Gewerbesteuer anrechnet (ESTG-35). Beispiel: 100.000 € Gewerbeertrag einer Personengesellschaft ergeben nach Freibetrag 2.642,50 € Messbetrag."
 
 [[quelle]]
 id = "GEWSTG-16"
@@ -1877,6 +1907,21 @@ zugang = "frei"
 bemerkung = ""
 
 [[quelle]]
+id = "NBANK-VORDR-4009"
+gruppe = "foerderung"
+kurz = "NBank Vordruck 4009"
+titel = "Einfacher Verwendungsnachweis"
+herausgeber = "NBank"
+fundstelle = "www.nbank.de, Downloads, Formulare zum Verwendungsnachweis; verlinkt auf der Programmseite „Mietwohnungen in Mehrfamilienhäusern (Allgemeine Mietwohnraumförderung)“"
+stand = "Stand Juli 2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zuwendungsfähigkeit nicht abziehbarer Umsatzsteuer bei der NBank (Grundlage von MA-021)"]
+turnus = "monatlich"
+zugang = "frei"
+bemerkung = "Gelesen Nr. 5.4 in Prüfrunde 5 (Jurist): Erklärung des Zuwendungsempfängers, dass die zuwendungsfähigen Ausgaben keine Umsatzsteuerbestandteile enthalten, soweit diese nach § 15 UStG als Vorsteuer abziehbar sind. XFA-Formular, Text aus dem Formular ausgelesen; PDF erstellt am 22.07.2026. Die genaue Adresse der Datei nennt der Prüfbericht nicht; beim nächsten Lesen nachtragen."
+
+[[quelle]]
 id = "NBANK-KOSTEN-FINANZIERUNGSAUFTEILUNG"
 gruppe = "foerderung"
 kurz = "NBank Kosten-Finanzierungsaufteilung"
@@ -2625,7 +2670,7 @@ gelesen_am = ""
 verwendet_fuer = ["Lehrbuchschema des VOFI", "Definitionen VOFI-Gesamtkapitalrentabilität und Amortisationsdauer", "Kritische Werte im VOFI"]
 turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
-bemerkung = "Schema nur über FernUni Hagen und Wikipedia. Die VOFI-Eigenkapitalrentabilität ist über das Gabler Banklexikon bestätigt (GABLER-BANKLEXIKON-VOFI). Die Formel der Gesamtkapitalrentabilität ist nicht gelesen (Kennzahl bis dahin nicht ausgewiesen); die Rechenregel der Amortisationsdauer ist Modellannahme MA-027. 5. Auflage 2006 bei Vahlen; kein eBook-Angebot gefunden."
+bemerkung = "Schema nur über FernUni Hagen und Wikipedia. Eigen- und Gesamtkapitalrentabilität sind über das Gabler Banklexikon belegt (GABLER-BANKLEXIKON-VOFI, GABLER-BANKLEXIKON-GKR). Offen bleiben die Rechenregel der Amortisationsdauer (MA-027) und die Abgrenzung der zuzurechnenden Sollzinsen in der Gesamtkapitalrentabilität (MA-028). 5. Auflage 2006 bei Vahlen; kein eBook-Angebot gefunden."
 
 [[quelle]]
 id = "GROB-1989"
@@ -3034,7 +3079,7 @@ gelesen_am = ""
 verwendet_fuer = ["Verwaltung 372,46 € je Wohnung; Instandhaltung 11,50 / 14,58 / 18,62 €/m²"]
 turnus = "jaehrlich"
 zugang = "frei"
-bemerkung = "Faktor 1,6194 auf die Basisbeträge. Aus der heutigen Indexreihe (2020 = 100) nicht nachrechenbar: Oktober 2025 zu Oktober 2001 ergibt 1,5953, also 366,93 € statt 372,46 € (Notiz 10); die Abweichung von 1,5 % passt zur Fortschreibung in Dreijahresschritten mit den jeweils damaligen Indexständen, ist aber nicht belegt. Die Beträge werden als veröffentlichte Werte geführt, nicht errechnet; amtliche oder verbandliche Veröffentlichung beschaffen. Nächste Anpassung 01.01.2029."
+bemerkung = "Faktor 1,6194 auf die Basisbeträge. Aus der heutigen Indexreihe (2020 = 100) nicht nachrechenbar: Oktober 2025 zu Oktober 2001 ergibt 1,5953, also 366,93 € statt 372,46 € (Notiz 10); die Abweichung von 1,5 % ist ungeklärt; eine reine Umrechnung der Indexbasis erklärt sie nicht. Die Beträge werden als veröffentlichte Werte geführt, nicht errechnet; amtliche oder verbandliche Veröffentlichung beschaffen. Nächste Anpassung 01.01.2029."
 
 [[quelle]]
 id = "IMMOWERTV-WERTE"
@@ -3250,16 +3295,31 @@ bemerkung = "Oktoberwerte: 2001 77,1; 2020 99,9; 2022 113,5; 2024 120,2; 2025 12
 id = "GABLER-BANKLEXIKON-VOFI"
 gruppe = "literatur"
 kurz = "Gabler Banklexikon, Stichwörter zum VOFI"
-titel = "Stichwörter VOFI, VOFI-Eigenkapitalrentibilität, VOFI-Gesamtkapitalrentabilität (Definitionen 62370, 62371, 62372)"
+titel = "Stichwörter VOFI und VOFI-Eigenkapitalrentibilität (Definitionen 62370 und 62371)"
 herausgeber = "Springer Gabler"
 fundstelle = "https://www.gabler-banklexikon.de/definition/vofi-62370"
 stand = "Revision des Stichworts Eigenkapitalrentibilität vom 26.03.2020"
 beleg = "sekundaer"
 gelesen_am = ""
-verwendet_fuer = ["Definition des VOFI und der VOFI-Eigenkapitalrentabilität", "Unterlassensalternative als Entscheidungsmaß", "Begriff der VOFI-Amortisationsdauer (Pay-off-Periode)", "Bestandteile der VOFI-Gesamtkapitalrentabilität"]
+verwendet_fuer = ["Definition des VOFI und der VOFI-Eigenkapitalrentabilität", "Unterlassensalternative als Entscheidungsmaß", "Begriff der VOFI-Amortisationsdauer (Pay-off-Periode)"]
 turnus = "bei-neuausgabe"
 zugang = "frei"
-bemerkung = "Nur als Auszug der Websuche vom 18.11.2026 gelesen; die Seiten sind aus der Cloud-Umgebung nicht erreichbar. Die Formel der Gesamtkapitalrentabilität ist dort ein Bild und im Auszug nicht lesbar. Verfasser der Stichwörter im Auszug nicht genannt."
+bemerkung = "Nur als Auszug der Websuche vom 18.11.2026 gelesen (Suchauszug); die Seiten sind aus der Cloud-Umgebung nicht erreichbar. Verfasser der Stichwörter im Auszug nicht genannt. Das Stichwort VOFI-Gesamtkapitalrentabilität (Definition 62372) ist als eigener Eintrag GABLER-BANKLEXIKON-GKR geführt."
+
+[[quelle]]
+id = "GABLER-BANKLEXIKON-GKR"
+gruppe = "literatur"
+kurz = "Gabler Banklexikon, VOFI-Gesamtkapitalrentabilität"
+titel = "Stichwort VOFI-Gesamtkapitalrentabilität (Definition 62372)"
+herausgeber = "Springer Gabler"
+fundstelle = "https://www.gabler-banklexikon.de/definition/vofi-gesamtkapitalrentabilitaet-62372"
+stand = "nicht erfasst"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Formel der VOFI-Gesamtkapitalrentabilität nach Steuern", "Referenzzinsfuß, mit dem die Kennzahl zu vergleichen ist"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Als Bildschirmfoto des Auftraggebers gelesen, Formel in Quellnotiz 10. Im Bild des Referenzzinsfußes ist der Wurzelexponent nicht zu erkennen. Wie die zuzurechnenden Sollzinsen abgegrenzt sind, sagt der Eintrag nicht (MA-028). Revisionsdatum des Stichworts nicht erfasst."
 
 [[quelle]]
 id = "DRKLEIN-VOFI-2021"

@@ -4,7 +4,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/modellannahmen/annahmen.toml`; danach `python3 scripts/modellannahmen.py` ausführen.
 
-**Stand:** 27 offene Annahmen, davon 5 mit hohem Gewicht · 0 erledigt
+**Stand:** 29 offene Annahmen, davon 6 mit hohem Gewicht · 0 erledigt
 
 ## Offene Annahmen
 
@@ -15,16 +15,16 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-012` | Rendite bei mehreren Einlagen und Entnahmen | hoch | Kundenbericht | nein | Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber | mit der Fachspezifikation des Rechenkerns (Phase 1) |
 | `MA-014` | Streuungen und Korrelationen der Simulation | hoch | Kundenbericht | ja | Auftraggeber (eigene Erfahrungswerte); später Marktdaten | vor Stufe 2 (Simulation) |
 | `MA-016` | Verrechnung von Anlaufverlusten | hoch | Kundenbericht | ja | Anwender je Vorhaben; im Zweifel Steuerberater des Investors | mit der Fachspezifikation des Steuermoduls (Phase 1) |
+| `MA-026` | Rechengrundlage des Bankdarlehens | hoch | Kundenbericht | ja | Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses | mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a |
 | `MA-002` | Tilgungsplan des NBank-Darlehens | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank; im Einzelfall der Bewilligungsbescheid |
 | `MA-005` | Finanzierungskosten als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-006` | Aufteilung bei teilgeförderten Vorhaben | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-007` | Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete | mittel | Kundenbericht | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-010` | Verlustverrechnung ab 2028 | mittel | Anwendung | ja | Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater | mit der nächsten vierteljährlichen Rechtsprüfung |
 | `MA-017` | Restwert bei laufender Bindung | mittel | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
-| `MA-021` | Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank | mittel | Anwendung | ja | Projekt am Haushaltsrecht (ANBest-P zu § 44 LHO), dann NBank | sobald die ANBest-P gelesen sind, spätestens nach dem Gespräch mit der NBank |
 | `MA-022` | Leerstand beim Mieterwechsel und Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-023` | Kostenbasis der Baukostenobergrenze der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
-| `MA-026` | Rechengrundlage der Bankgrenze in der Grobkalkulation | mittel | Kundenbericht | ja | Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung) sind Vorgaben des Hauses | mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a |
+| `MA-029` | Anknüpfung der De-minimis-Bindung der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-003` | Zins des NBank-Darlehens ab dem 36. Jahr | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-008` | Modernisierungsumlage für den Heizungstausch bei Staffelmiete | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-009` | Teilung der Bio-Brennstoffkosten im Neubau | gering | nur intern | nein | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
@@ -34,9 +34,11 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-018` | Ersatz eines Gaskessels als energetische Modernisierung | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-019` | Zinsverbilligte Darlehen bei der Umlage für den Heizungstausch | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-020` | Umlage für den Heizungstausch in der NBank-Bindung | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
+| `MA-021` | Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank | gering | Anwendung | ja | NBank (nur noch Bestätigung) | nach dem Gespräch mit der NBank |
 | `MA-024` | Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-025` | Modernisierungsumlage für den Glasfaseranschluss | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-027` | Rechenregel der VOFI-Amortisationsdauer | gering | Anwendung | ja | Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
+| `MA-028` | Zuzurechnende Sollzinsen in der VOFI-Gesamtkapitalrentabilität | gering | Anwendung | nein | Fachliteratur (Grob, Einführung in die Investitionsrechnung) | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
 
 Nach Klärungsweg:
 
@@ -46,12 +48,13 @@ Nach Klärungsweg:
 - **Darlehensvertrag im Einzelfall:** `MA-013`
 - **Fachliteratur (Endbericht im Volltext):** `MA-015`
 - **Fachliteratur (Grob im Original); fachliche Freigabe durch den Auftraggeber:** `MA-012`
+- **Fachliteratur (Grob, Einführung in die Investitionsrechnung):** `MA-028`
 - **Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt:** `MA-027`
-- **Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung) sind Vorgaben des Hauses:** `MA-026`
+- **Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses:** `MA-026`
 - **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`
+- **NBank (nur noch Bestätigung):** `MA-021`
 - **Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater:** `MA-010`
-- **Projekt am Haushaltsrecht (ANBest-P zu § 44 LHO), dann NBank:** `MA-021`
-- **Steuerberater:** `MA-011`, `MA-022`, `MA-023`
+- **Steuerberater:** `MA-011`, `MA-022`, `MA-023`, `MA-029`
 
 ## Einzelheiten
 
@@ -76,7 +79,7 @@ Nach Klärungsweg:
 - **Wirkung (mittel):** Liquidität und Schuldendienstdeckung je Jahr; Endwert nur gering, weil das Darlehen 35 Jahre zinslos ist.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank; im Einzelfall der Bewilligungsbescheid
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 
 ### MA-003 · Zins des NBank-Darlehens ab dem 36. Jahr
 
@@ -98,7 +101,7 @@ Nach Klärungsweg:
 - **Wirkung (hoch):** Eigenkapitalbedarf und damit Eigenkapitalrendite und Finanzierbarkeit des Vorhabens.
 - **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Nummer 11.5 der Richtlinie spricht von „als Ersatz der Eigenmittel anerkannten Fremdmitteln“; das stützt die andere Lesart. Die vorsichtige Voreinstellung bleibt bis zum Gespräch mit der NBank.
 
 ### MA-005 · Finanzierungskosten als zuwendungsfähige Kosten der NBank
@@ -110,7 +113,7 @@ Nach Klärungsweg:
 - **Wirkung (mittel):** Höhe von Darlehen und Zuschuss; Finanzierungslücke in der Bauphase.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 
 ### MA-006 · Aufteilung bei teilgeförderten Vorhaben
 
@@ -121,7 +124,7 @@ Nach Klärungsweg:
 - **Wirkung (mittel):** Zuwendungsfähige Kosten des geförderten Teils und damit Förderhöhe; Rendite je Teil.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 
 ### MA-007 · Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete
 
@@ -244,7 +247,7 @@ Nach Klärungsweg:
 - **Wirkung (mittel):** Restwert und Endwert geförderter Vorhaben mit Verkauf vor Bindungsende.
 - **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage; Spezifikation Kapitel 3, Restwert
 - **Bemerkung:** Aus Prüfrunde 3 (Fachexperte, Jurist).
 
 ### MA-018 · Ersatz eines Gaskessels als energetische Modernisierung
@@ -264,12 +267,12 @@ Nach Klärungsweg:
 - **Annahme:** Der Zinsvorteil eines zinsverbilligten Darlehens mindert die Umlage für den Heizungstausch in gleicher Weise wie bei der allgemeinen Modernisierungsumlage.
 - **Warum offen:** Die Vorschrift zum Heizungstausch spricht vom Abzug der in Anspruch genommenen Drittmittel; wie ein Zinsvorteil dabei anzusetzen ist, regelt sie nicht ausdrücklich.
 - **Andere Lesart:** Strenger: Das Darlehen wird wie ein Zuschuss mit seinem Nennbetrag von den Kosten abgezogen; dafür spricht der Wortlaut, der den Abzug an den Kosten ansetzt. Günstiger für den Vermieter: Nur Zuschüsse werden abgezogen; der Zinsvorteil bleibt unberücksichtigt.
-- **Grundlage:** § 559e Abs. 1 in Verbindung mit § 559a BGB. Begründete Abweichung von der Vorsichtsregel: Angesetzt ist nicht die strengste Lesart (Nennbetrag), sondern der Zinsvorteil. Dafür spricht die Systematik: § 559e Abs. 1 nimmt für die Drittmittel auf § 559a Bezug, und dessen Absatz 2 erfasst Darlehen über den Zinsvorteil; ein Darlehen ist zurückzuzahlen. Der Unterschied wirkt selten, weil meist die Kappung bindet. Quellen: `BGB-559E`, `BGB-559A`.
+- **Grundlage:** § 559e Abs. 1 in Verbindung mit § 559a BGB. Begründete Ausnahme von der Vorsichtsregel: Angesetzt ist nicht die strengste Lesart (Nennbetrag), sondern der Zinsvorteil. Dafür spricht die Systematik: § 559e Abs. 1 nimmt für die Drittmittel auf § 559a Bezug, und dessen Absatz 2 erfasst Darlehen über den Zinsvorteil; ein Darlehen ist zurückzuzahlen. Der Unterschied wirkt selten, weil meist die Kappung bindet. Quellen: `BGB-559E`, `BGB-559A`.
 - **Wirkung (gering):** Mieterlös nach gefördertem Heizungstausch; gedeckelt auf 0,50 €/m² im Monat.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Kopplungen
-- **Bemerkung:** Aus Prüfrunde 3 (Jurist); Lesart „Nennbetrag“ und Einordnung als Abweichung von der Vorsichtsregel aus Prüfrunde 4 (Jurist).
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist); Lesart „Nennbetrag“ und Einordnung als Ausnahme von der Vorsichtsregel aus Prüfrunde 4 (Jurist); Bezeichnung in Prüfrunde 5 vereinheitlicht.
 
 ### MA-020 · Umlage für den Heizungstausch in der NBank-Bindung
 
@@ -280,20 +283,20 @@ Nach Klärungsweg:
 - **Wirkung (gering):** Mieterlös gebundener Wohnungen nach Heizungstausch.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 4, Fördermodul
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
 - **Bemerkung:** Aus Prüfrunde 3 (Jurist).
 
 ### MA-021 · Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank
 
 - **Annahme:** Kann der Bauherr die Vorsteuer nicht abziehen, zählt die Umsatzsteuer zu den zuwendungsfähigen Kosten.
-- **Warum offen:** Die Richtlinie regelt die Behandlung der Umsatzsteuer nicht ausdrücklich. Sie erklärt in Nummer 12.3.1 die Verwaltungsvorschriften zu § 44 LHO für anwendbar, zu denen die ANBest-P gehören; dort ist die Frage zu klären, gelesen sind sie noch nicht.
+- **Warum offen:** Die Richtlinie regelt die Behandlung der Umsatzsteuer nicht ausdrücklich. Der Verwendungsnachweis der NBank setzt voraus, dass nicht abziehbare Umsatzsteuer zuwendungsfähig ist; eine ausdrückliche Bestätigung der NBank steht aus, und die ANBest-P, auf die die Richtlinie verweist, sind noch nicht gelesen.
 - **Andere Lesart:** Zuwendungsfähig sind nur die Nettokosten; die Umsatzsteuer ist zusätzlich zu finanzieren.
-- **Grundlage:** Übliche Regel des Zuwendungsrechts, hier nicht am Text gelesen: Nur die abziehbare Vorsteuer ist nicht zuwendungsfähig. Ausnahme von der Vorsichtsregel: Im Wohnungsbau ist die Umsatzsteuer echter Aufwand. Die ungünstige Lesart senkte die Förderung auf die Baukosten um bis zu einem Sechstel (19/119 der Bruttokosten), weniger, wenn die Bemessungsgrenze kappt; die umsatzsteuerfreien Grundstückskosten berührt sie nicht. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `NI-ANBEST-P`.
-- **Wirkung (mittel):** Höhe von Darlehen und Zuschuss; Finanzierungslücke.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Projekt am Haushaltsrecht (ANBest-P zu § 44 LHO), dann NBank · **Wiedervorlage:** sobald die ANBest-P gelesen sind, spätestens nach dem Gespräch mit der NBank
+- **Grundlage:** NBank, Vordruck 4009 „Einfacher Verwendungsnachweis“ (Stand Juli 2026), Nummer 5.4, vom Juristen am 18.11.2026 gelesen: Der Zuwendungsempfänger erklärt, dass die zuwendungsfähigen Ausgaben keine Umsatzsteuer enthalten, soweit sie nach § 15 UStG als Vorsteuer abziehbar ist. Das setzt voraus, dass nicht abziehbare Umsatzsteuer zuwendungsfähig ist. Die Richtlinie verweist in Nummer 12.5 für den Verwendungsnachweis auf Nummer 6 ANBest-P. Die Voreinstellung ist damit die am Text gestützte Lesart und keine Ausnahme von der Vorsichtsregel. Die andere Lesart senkte die Förderung auf die Baukosten um bis zu einem Sechstel (19/119 der Bruttokosten), weniger, wenn die Bemessungsgrenze kappt; die umsatzsteuerfreien Grundstückskosten berührt sie nicht. Quellen: `NBANK-VORDR-4009`, `NBANK-RL-MIETWOHNRAUM-2026`, `NI-ANBEST-P`.
+- **Wirkung (gering):** Höhe von Darlehen und Zuschuss; Finanzierungslücke.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank (nur noch Bestätigung) · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
-- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts; Größe der Wirkung und Klärungsweg nach Prüfrunde 4 (Finanzmathematiker, Jurist) berichtigt.
+- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts; Größe der Wirkung und Klärungsweg nach Prüfrunde 4 (Finanzmathematiker, Jurist) berichtigt. Prüfrunde 5 (Jurist): Grundlage ist jetzt der Vordruck 4009; Gewicht von mittel auf gering gesetzt, die Einordnung als Ausnahme von der Vorsichtsregel entfällt.
 
 ### MA-022 · Leerstand beim Mieterwechsel und Sonderabschreibung
 
@@ -309,15 +312,15 @@ Nach Klärungsweg:
 
 ### MA-023 · Kostenbasis der Baukostenobergrenze der Sonderabschreibung
 
-- **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird an derselben Kostensumme gemessen wie die Förderung der NBank: bei Herstellung an den Kostengruppen 200 bis 700, beim Ersterwerb am Kaufpreis nebst Erwerbskosten, höchstens dem Marktwert.
+- **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird bei Herstellung an derselben Kostensumme gemessen wie die Förderung der NBank, den Kostengruppen 200 bis 700. Beim Erwerb zählt der Gebäudeanteil des Kaufpreises nach der Kaufpreisaufteilung zuzüglich der anteiligen Erwerbsnebenkosten, ohne den Marktwertdeckel der NBank.
 - **Warum offen:** Welche Kosten in die Grenze des § 7b EStG einzurechnen sind, beantwortet das Gesetz nicht nach Kostengruppen. Für die Anschaffung ist keine Kostensumme bestimmt; Kostengruppen gibt es beim Kauf vom Bauträger nicht.
-- **Andere Lesart:** Engere Kostensumme, etwa ohne Außenanlagen oder Baunebenkosten, beim Erwerb nur der Gebäudeanteil des Kaufpreises mit anteiligen Erwerbsnebenkosten; die Grenze würde seltener überschritten.
-- **Grundlage:** § 7b Abs. 2 EStG; Richtlinie Mietwohnraum 2026, Nummern 1.5, 5.3.2.1 und 5.3.2.4 (Bemessungsgrundlage der NBank, beim Ersterwerb Kaufpreis nebst Erwerbskosten, höchstens Marktwert). Angesetzt ist die weitere Kostensumme und damit der ungünstigere Fall. Quellen: `ESTG-7B`, `NBANK-RL-MIETWOHNRAUM-2026`.
+- **Andere Lesart:** Strenger beim Erwerb: der Kaufpreis einschließlich Boden nebst Erwerbskosten; die Grenze würde häufiger überschritten. Enger bei Herstellung: eine Kostensumme ohne Außenanlagen oder Baunebenkosten; die Grenze würde seltener überschritten.
+- **Grundlage:** § 7b Abs. 2 und 3 EStG messen die Anschaffungs- oder Herstellungskosten der begünstigten Wohnung. Bei Herstellung ist die weitere Kostensumme und damit der ungünstigere Fall angesetzt (Richtlinie Mietwohnraum 2026, Nummern 1.5 und 5.3.2). Beim Erwerb ist nicht die strengste Lesart angesetzt, sondern der Gebäudeanteil (Einschätzung des Juristen am Wortlaut, Prüfrunde 5): Grund und Boden ist ein eigenes, nicht abnutzbares Wirtschaftsgut und zählt auch bei der Herstellung nicht mit (Kostengruppe 100); dieselben Worte würden sonst für Bau und Kauf verschieden gelesen. Der Marktwertdeckel der NBank beim Ersterwerb stammt aus den Nummern 5.3.2.1 und 5.3.2.4 der Richtlinie und hat in § 7b keine Grundlage; ohne ihn greift die Grenze eher. Quellen: `ESTG-7B`, `NBANK-RL-MIETWOHNRAUM-2026`.
 - **Wirkung (mittel):** Ob die Sonderabschreibung überhaupt gewährt wird; die Grenze ist eine Ausschlussgrenze.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
-- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts; Ersterwerb aus Prüfrunde 4 (Jurist).
+- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts; Ersterwerb aus Prüfrunde 4 (Jurist). Prüfrunde 5 (Jurist): beim Erwerb Gebäudeanteil statt Kaufpreis einschließlich Boden, ohne Marktwertdeckel. Offen bleibt, welche Gebäudekosten im Einzelnen zählen, etwa Außenanlagen.
 
 ### MA-024 · Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises
 
@@ -343,26 +346,50 @@ Nach Klärungsweg:
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
 - **Bemerkung:** Aus Prüfrunde 3 (Jurist); Grund und andere Lesart nach Prüfrunde 4 (Jurist) neu gefasst. Frage an den Anwalt: Ist Nr. 4a über § 559 Abs. 1 Satz 2 oder über Nr. 4 umlagefähig?
 
-### MA-026 · Rechengrundlage der Bankgrenze in der Grobkalkulation
+### MA-026 · Rechengrundlage des Bankdarlehens
 
-- **Annahme:** Die Bank gibt höchstens das Darlehen, dessen Schuldendienst die Mindestdeckung einhält, gerechnet aus dem Reinertrag im ersten Jahr der Vollvermietung gegen den Kapitaldienst aller Darlehen einschließlich des Förderdarlehens. Sie beleiht bis zur Beleihungsquote den Kaufpreis, beim Neubau die Gesamtkosten, nicht einen eigenen Beleihungswert.
-- **Warum offen:** Wie eine Bank Kapitaldienstfähigkeit und Beleihung im Einzelfall rechnet, ist nicht veröffentlicht und von Haus zu Haus verschieden: mit welchem Ertrag, ob mit dem Kapitaldienst eines Förderdarlehens und auf welchen Wert.
-- **Andere Lesart:** Die Bank rechnet die Mindestdeckung nur gegen ihr eigenes Darlehen; dann fällt das Bankdarlehen im geförderten Neubau höher aus. Oder sie setzt einen eigenen Wert an, etwa einen Beleihungswert unter dem Kaufpreis; dann fällt es niedriger aus.
-- **Grundlage:** Gegenrechnungen der Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Bei der Mindestdeckung ist der ungünstigere Fall angesetzt. Beim Wertansatz ist der Kaufpreis eine Vereinfachung, weil die Grobkalkulation keinen Beleihungswert kennt; er ist deshalb als „Wertansatz der Bank“ überschreibbar, und das Blatt zeigt, ob Beleihungsquote oder Mindestdeckung das Darlehen begrenzt.
-- **Wirkung (mittel):** Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation.
-- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung) sind Vorgaben des Hauses · **Wiedervorlage:** mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a
+- **Annahme:** Die Bank rechnet über alle Darlehen: Die Beleihungsquote begrenzt die Summe aller Darlehen gegen den Wertansatz, und die Mindestdeckung rechnet aus dem Reinertrag im ersten Jahr der Vollvermietung gegen den Kapitaldienst aller Darlehen einschließlich eines Förderdarlehens oder übernommenen Darlehens. Wertansatz ist der Kaufpreis, beim Neubau die Gesamtkosten, nicht ein eigener Beleihungswert.
+- **Warum offen:** Wie eine Bank Kapitaldienstfähigkeit und Beleihung im Einzelfall rechnet, ist nicht veröffentlicht und von Haus zu Haus verschieden: mit welchem Ertrag, ob vorrangige und geförderte Darlehen auf Quote und Deckung angerechnet werden und auf welchen Wert.
+- **Andere Lesart:** Die Bank rechnet Beleihungsquote und Mindestdeckung nur für ihr eigenes Darlehen; dann fällt das Bankdarlehen neben einem Förderdarlehen oder übernommenen Darlehen höher aus. Oder sie setzt einen eigenen Wert an, etwa einen Beleihungswert unter dem Kaufpreis; dann fällt es niedriger aus.
+- **Grundlage:** Gegenrechnungen der Prüfrunden 4 und 5 (Finanzmathematiker, Fachexperte, Praktiker). Bei Beleihungsquote und Mindestdeckung ist der ungünstigere Fall angesetzt; die andere Lesart ist umschaltbar. Begründete Ausnahme von der Vorsichtsregel beim Wertansatz: Voreingestellt ist der Kaufpreis, beim Neubau die Gesamtkosten, obwohl ein eigener Wert der Bank darunter liegen kann. Die Grobkalkulation kennt keinen Beleihungswert; die Ausnahme wirkt höchstens bis zum Darlehen nach Mindestdeckung, das aus dem Ertrag und nicht aus dem Gebot folgt. Der Wert ist als „Wertansatz der Bank“ überschreibbar, über dem Kaufpreis nur mit Begründung, und das Blatt zeigt, welche Grenze das Darlehen bestimmt.
+- **Wirkung (hoch):** Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation. Im geförderten Neubau und beim Ankauf gebundener Bestände entscheidet die Lesart über das Eigenkapital: im Beispiel des Berichts (Anhang D.4) über bis zu 1 Mio. Euro bei 10 Mio. Euro Gesamtkosten.
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Hausbank; die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung) sind Vorgaben des Hauses · **Wiedervorlage:** mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 2, Grobkalkulation
-- **Bemerkung:** Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Ob die Beleihungsquote im geförderten Neubau nur das Bankdarlehen oder die Summe aller Darlehen begrenzt, ist in der Fachspezifikation festzulegen.
+- **Bemerkung:** Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Prüfrunde 5: Bezug der Beleihungsquote auf die Summe aller Darlehen festgelegt, Gewicht von mittel auf hoch gesetzt, Wertansatz als Ausnahme von der Vorsichtsregel gekennzeichnet. Weitere Frage an die Hausbank: Rechnet sie den Reinertrag der Deckung mit eigenen Bewirtschaftungspauschalen statt mit den Kosten des Vorhabens?
 
 ### MA-027 · Rechenregel der VOFI-Amortisationsdauer
 
-- **Annahme:** Die Amortisationsdauer endet in der ersten Periode, in der das Vermögen aus der Investition die Anlage des eingesetzten Eigenkapitals zur Unterlassensalternative erreicht oder übertrifft. Vor dem geplanten Verkauf wird dabei kein Restwert der Immobilie angesetzt.
+- **Annahme:** Die Amortisationsdauer endet mit der Periode, von der an das Vermögen aus der Investition bei gedachtem Verkauf zum Wertpfad, nach Verkaufskosten, Ablösung der Restschuld und Steuern, die Anlage des eingesetzten Eigenkapitals zur Unterlassensalternative dauerhaft erreicht oder übertrifft.
 - **Warum offen:** Der Begriff ist belegt (Amortisationsdauer unter Berücksichtigung von Finanzierungskonditionen und steuerlichen Konsequenzen), die Rechenregel nach Grob liegt nicht am Original vor. Die zugänglichen Quellen beschreiben zwei verschiedene Regeln.
-- **Andere Lesart:** Rückgewinnung des Eigenkapitals: die erste Periode, in der das Vermögen aus der Investition das eingesetzte Eigenkapital erreicht, ohne Vergleich mit der Unterlassensalternative; mit oder ohne Ansatz eines Restwerts. Diese Lesart amortisiert früher.
-- **Grundlage:** Quellnotiz 10 (research_notes): Suchauszug aus dem Stichwort VOFI im Gabler Banklexikon; Beitrag der Dr. Klein Wowi Redaktion vom 06.04.2021, am Original gelesen. Voreingestellt ist die Lesart mit der längeren Amortisationsdauer. Quellen: `GABLER-BANKLEXIKON-VOFI`, `DRKLEIN-VOFI-2021`, `GROB-EINFUEHRUNG`.
+- **Andere Lesart:** Rückgewinnung des Eigenkapitals: die erste Periode, in der das Vermögen aus der Investition das eingesetzte Eigenkapital erreicht, ohne Vergleich mit der Unterlassensalternative. Diese Lesart amortisiert früher.
+- **Grundlage:** Quellnotiz 10 (research_notes): Suchauszug aus dem Stichwort VOFI im Gabler Banklexikon; Beitrag der Dr. Klein Wowi Redaktion vom 06.04.2021, am Original gelesen. Voreingestellt ist die Lesart mit der längeren Amortisationsdauer. Sie rechnet mit dem Wertpfad je Periode, den der Bericht in Anhang A, Nr. 18 verlangt: Ohne Restwert vor dem Verkauf ergäbe die Kennzahl bei jedem fremdfinanzierten Bestand nur die Haltedauer (Finanzmathematiker, Prüfrunde 5). Im Testfall des Berichts ergibt die Voreinstellung bei angenommenem linearem Wertpfad drei Jahre, die andere Lesart zwei. Quellen: `GABLER-BANKLEXIKON-VOFI`, `DRKLEIN-VOFI-2021`, `GROB-EINFUEHRUNG`.
 - **Wirkung (gering):** Ausgewiesene Amortisationsdauer auf dem Kennzahlenblatt; keine Wirkung auf Endwert, Rendite oder tragbaren Preis.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt · **Wiedervorlage:** mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3)
 - **Status:** offen, gesetzt am 2026-11-18
-- **Verwendet in:** Spezifikation Kapitel 3, Offene Lehrbuchdefinitionen
-- **Bemerkung:** Die Gesamtkapitalrentabilität ist keine Annahme: Sie wird nicht ausgewiesen, bis ihre Formel gelesen ist.
+- **Verwendet in:** Spezifikation Kapitel 3, Lehrbuchkennzahlen
+- **Bemerkung:** In Prüfrunde 5 neu gefasst: gedachter Verkauf zum Wertpfad und dauerhafte Überschreitung statt „ohne Restwert vor dem geplanten Verkauf“. Die Kennzahl steht damit erst mit dem Wertpfad ab der Vollkalkulation zur Verfügung. Die Gesamtkapitalrentabilität ist gelesen; ihre offene Einzelheit führt MA-028.
+
+### MA-028 · Zuzurechnende Sollzinsen in der VOFI-Gesamtkapitalrentabilität
+
+- **Annahme:** Der Anschaffungsauszahlung zuzurechnen ist die einfache Summe der Sollzinsen aller Darlehen, die die Anschaffungsauszahlung finanzieren, über den Betrachtungszeitraum; Zinsen auf den Kontokorrentkredit zählen nicht dazu.
+- **Warum offen:** Formel und Referenzzinsfuß der Kennzahl sind am Lexikoneintrag gelesen. Der Eintrag sagt aber nicht, wie die zuzurechnenden Sollzinsen abgegrenzt sind: ob als einfache Summe, ob einschließlich der Zinsen auf einen Kontokorrentkredit und wie bei mehreren Tranchen und Sondertilgungen.
+- **Andere Lesart:** Einschließlich der Kontokorrentzinsen oder mit aufgezinsten Sollzinsen; Kennzahl und Referenzzinsfuß fielen dann beide höher aus.
+- **Grundlage:** Gabler Banklexikon, Stichwort VOFI-Gesamtkapitalrentabilität, als Bildschirmfoto gelesen am 18.11.2026 (Quellnotiz 10). Die Abgrenzung ändert die Entscheidung nicht: Die Sollzinsen gehen in Kennzahl und Referenzzinsfuß mit demselben Betrag ein, und die Kennzahl liegt genau dann über dem Referenzzinsfuß, wenn die Endwertdifferenz positiv ist. Im Testfall des Berichts ergibt die Voreinstellung 4,61 % gegen einen Referenzzinsfuß von 2,14 %. Quellen: `GABLER-BANKLEXIKON-GKR`.
+- **Wirkung (gering):** Ausgewiesene VOFI-Gesamtkapitalrentabilität und ihr Referenzzinsfuß auf dem vollen Kennzahlenblatt; keine Wirkung auf Endwert, Eigenkapitalrendite, Endwertdifferenz oder tragbaren Preis.
+- **Sichtbar:** Anwendung · **Umschaltbar:** nein · **Klärung durch:** Fachliteratur (Grob, Einführung in die Investitionsrechnung) · **Wiedervorlage:** mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 3, Lehrbuchkennzahlen
+- **Bemerkung:** Aus Prüfrunde 5 (Sichtung, Punkt 17). Im Bildschirmfoto ist der Wurzelexponent des Referenzzinsfußes nicht zu erkennen; nach dem Aufbau der Formel ist es wie bei der Kennzahl die n-te Wurzel.
+
+### MA-029 · Anknüpfung der De-minimis-Bindung der Sonderabschreibung
+
+- **Annahme:** Die De-minimis-Bindung der Sonderabschreibung knüpft an die Person an: Gebunden ist jeder Anspruchsberechtigte, der Einkünfte aus Land- und Forstwirtschaft, Gewerbebetrieb oder selbständiger Arbeit hat, auch wenn die Wohnung nicht zu diesen Einkünften gehört. Das gilt auch für die Privatperson mit Praxis oder Gewerbe und für die Kapitalgesellschaft als Gesellschafterin einer vermögensverwaltenden Personengesellschaft. Das Merkmal wird am Investor geführt, bei Personengesellschaften je Gesellschafter.
+- **Warum offen:** § 7b Abs. 5 Satz 2 EStG wendet die Bindung an „nur bei Anspruchsberechtigten mit Einkünften im Sinne der §§ 13, 15 und 18“. Der Satz knüpft an die Person an und sagt nicht, dass die Wohnung selbst zu diesen Einkünften gehören muss. Die Verwaltungsauffassung dazu ist nicht gelesen.
+- **Andere Lesart:** Gebunden ist nur, wessen Wohnung zu diesen Einkünften gehört. Privatpersonen und vermögensverwaltende Personengesellschaften wären dann auch frei, wenn der Investor daneben eine Praxis oder ein Gewerbe hat; die Sonderabschreibung liefe bei ihnen ohne De-minimis-Prüfung.
+- **Grundlage:** § 7b Abs. 5 Satz 2 EStG, Einschätzung des Juristen am Wortlaut (Prüfrunde 5). Körperschaften nach § 1 Abs. 1 Nr. 1 bis 3 KStG sind nach beiden Lesarten gebunden, weil alle ihre Einkünfte als gewerblich gelten (§ 8 Abs. 2 KStG), auch für ihren Anteil an einer vermögensverwaltenden Personengesellschaft. Angesetzt ist die weitere Bindung und damit der ungünstigere Fall. Quellen: `ESTG-7B`, `KSTG-8`.
+- **Wirkung (mittel):** Ob die Sonderabschreibung eines Investors mit solchen Einkünften an der De-minimis-Höchstgrenze endet; Steuerzahlungen und Rendite nach Steuern im Neubau.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
+- **Status:** offen, gesetzt am 2026-11-18
+- **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
+- **Bemerkung:** Aus Prüfrunde 5 (Jurist, Befund 1; Sichtung, Punkt 12).
