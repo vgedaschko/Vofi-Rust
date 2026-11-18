@@ -7,6 +7,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 ## Jetzt
 
 - [~] Recherchebericht: vierte Überarbeitung nach der Sichtung der Prüfrunde 4 läuft (31 Punkte), danach Prüfrunde 5 als gezielte Nachprüfung (letzte Runde)
+- [~] Prüfung der Steuerungsdokumente durch die Rolle Dokumentation läuft (`docs/pruefung/2026-11-18-steuerungsdokumente/`)
 
 ## Als Nächstes
 
