@@ -22,7 +22,6 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Wartet auf Nutzer
 
-- [ ] Plugin `frontend-design` im Konto aktivieren (Installationskarte); Pflicht bei jeder Gestaltungsarbeit
 - [ ] Vorgaben des Hauses: Kalkulationszins, Zielrendite, Höhe der Stressfälle, Schwelle für „Bedarf bestätigt" in den Anwendergesprächen
 - [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
 - [ ] Durchsicht der fünf Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016): Ist die vorsichtige Voreinstellung fachlich richtig gewählt?
@@ -48,6 +47,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Plugin `frontend-design` für das Projekt installiert (Eintrag in `.claude/settings.json`)
 - [x] 2026-11-18 Gestaltungsreferenzen: 34 Vorbilder in der Mobbin-Sammlung, ausgewertet in `docs/gestaltungsreferenzen.md`
 - [x] 2026-11-18 Gestaltung abgesichert: `frontend-design` als Pflicht, Hook für die Gestaltungsprüfung, Rolle Gestaltung
 - [x] 2026-11-18 Prüfrunde 3 zum Recherchebericht: Noten 9, 9, 8, 8, 8, 8; gesichtet; Spezifikation, Kataster und Modellannahmen nachgezogen

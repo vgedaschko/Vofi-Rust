@@ -84,7 +84,7 @@ Sammlung in Mobbin: „VOFI Referenzen" (privat). Ausgewertet in `docs/gestaltun
 | Rolle `pruefer-slop` | eigener Prüfer | Vorhanden; prüft Text und Oberfläche |
 | `design:design-critique`, `design:accessibility-review`, `design:ux-copy`, `design:design-system` | Anthropic, in der Sitzung verfügbar | Für Kritik, Barrierefreiheit, Texte, Gestaltungssystem |
 | `dataviz` | eingebaut | Diagramme mit geprüfter Farb- und Formlogik |
-| `frontend-design` | Anthropic, Plugin-Verzeichnis | **Pflicht bei jeder Gestaltungsarbeit.** In den Projekteinstellungen eingetragen (`.claude/settings.json`); ob er darüber in Cloud-Sitzungen lädt, ist noch nicht bestätigt – sicher ist die Aktivierung im Konto |
+| `frontend-design` | Anthropic, Plugin-Verzeichnis | **Pflicht bei jeder Gestaltungsarbeit.** Am 18.11.2026 für das Projekt installiert (`claude plugin install frontend-design@anthropic-plugin-directory --scope project`); der Eintrag steht in `.claude/settings.json` und gilt für Sitzungen, die mit diesem Repository starten |
 | Rolle `pruefer-gestaltung` | eigener Prüfer | Prüft am gerenderten Ergebnis; führt Designkritik und Barrierefreiheitsprüfung selbst aus |
 | VectorLab UI/UX Skills (`anti-slop`, Typografie, Abstände, Formulare, Leerzustände, Tastatur) | Community, nicht aktiviert | Kommt einem „Unslop"-Skill am nächsten; von mir nicht geprüft – an einem Entwurf testen, bevor man sich darauf verlässt |
 | UXKIN (`no-ui-slop`), UI Design Review, ux-ui-audit | Community, nicht aktiviert | Überschneiden sich mit Mobbin, den `design:`-Skills und der Jury; nicht nötig |
