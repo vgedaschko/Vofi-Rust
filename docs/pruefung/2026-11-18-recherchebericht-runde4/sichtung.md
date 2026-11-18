@@ -83,3 +83,13 @@ Bereits nachgezogen (durch die Projektleitung, nicht Teil des Überarbeitungsauf
 ## Auftrag für Runde 5
 
 Gezielte Nachprüfung der geänderten Stellen durch Investor, Praktiker, Fachexperte und Einheitsbrei-Prüfer; der Finanzmathematiker rechnet die neue Preisregel und die Restwertprobe nach; der Jurist prüft die Zeilen zu § 35 EStG und die geänderten Annahmen. Runde 5 ist die letzte. Bleibt eine Rolle unter 9, wird dem Auftraggeber benannt, was fehlt und wer es liefern kann.
+
+## Stand nach der Überarbeitung
+
+Alle 31 Punkte sind eingearbeitet. Drei Abweichungen vom Wortlaut der Sichtung:
+
+- **Punkt 1:** Der Preis nach der neuen Regel steht nicht als zweite Zahl im Beispiel von D.4, weil er rund elf weitere Annahmen brauchte, die das Beispiel nicht hat. Das Beispiel zeigt stattdessen das gedeckelte Darlehen bei 2,6 Mio. Euro (1,496 statt 1,69 Mio. Euro, 194.000 Euro mehr Eigenkapital). Die Gegenrechnung des Finanzmathematikers bleibt als Skript erhalten.
+- **Punkt 20:** Beim Abgleich mit Quellnotiz 03 zeigte sich, dass die Abschreibung des Testfalls auf 80 % der Gesamtinvestition von 1,1 Mio. Euro läuft (17.600 Euro im Jahr), nicht auf 80 % des Kaufpreises. A.6 nennt das jetzt so.
+- **Punkt 29:** Drei Aufgaben standen nur im Bericht (BaFin-Zinssätze, Erbbaurecht, Betreiberimmobilien). Sie sind nach `TASKS.md` übertragen; der Bericht führt keine Aufgabenliste mehr.
+
+Zusätzlich aus derselben Sitzung: Quellnotiz 10 (Lehrbuchdefinitionen ohne Buchkauf, Bewirtschaftungskosten 2026/2027), `MA-027` (Rechenregel der Amortisationsdauer), Quellen `NI-ANBEST-P`, `DRKLEIN-VOFI-2021` und aktualisierte Einträge zu Preisindex, II. BV und ImmoWertV. Mit `MA-019` gibt es jetzt drei begründete Ausnahmen von der Vorsichtsregel (`MA-019`, `MA-021`, `MA-022`).

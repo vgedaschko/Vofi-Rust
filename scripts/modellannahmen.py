@@ -40,6 +40,7 @@ WURZEL = Path(__file__).resolve().parent.parent
 DATEN = WURZEL / "docs/modellannahmen/annahmen.toml"
 AUSGABE = WURZEL / "docs/modellannahmen.md"
 QUELLEN = WURZEL / "docs/quellenkataster/quellen.toml"
+SPEZIFIKATION = WURZEL / "docs/spezifikation.md"
 
 GEWICHT = {"hoch": "hoch", "mittel": "mittel", "gering": "gering"}
 SICHTBAR = {"kunde": "Kundenbericht", "anwender": "Anwendung", "intern": "nur intern"}
@@ -136,6 +137,13 @@ def pruefen(annahmen):
     for k, dateien in sorted(verweise().items()):
         if k not in gesehen:
             fehler.append(f"{k}: wird genannt in {', '.join(sorted(dateien)[:3])}, steht aber nicht im Verzeichnis")
+    # Gegenrichtung: Nennt das Verzeichnis die Spezifikation als Wirkort, muss die Kennung dort stehen.
+    if SPEZIFIKATION.exists():
+        genannt = set(KENNUNG.findall(SPEZIFIKATION.read_text(encoding="utf-8")))
+        for a in annahmen:
+            orte = a.get("verwendet_in") if isinstance(a.get("verwendet_in"), list) else []
+            if a.get("status") == "offen" and any(str(o).startswith("Spezifikation") for o in orte) and a.get("id") not in genannt:
+                fehler.append(f"{a.get('id')}: verwendet_in nennt die Spezifikation, die Kennung steht dort aber nicht")
     return fehler
 
 

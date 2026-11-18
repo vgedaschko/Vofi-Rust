@@ -4,7 +4,7 @@ Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fach
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/quellenkataster/quellen.toml`; danach `python3 scripts/quellenkataster.py` ausführen. Jede Rechts-, Förder- oder Normangabe im Projekt verweist auf eine Kennung aus diesem Kataster.
 
-**Stand:** 214 Quellen · zuletzt am Original gelesen: 2026-11-18
+**Stand:** 215 Quellen · zuletzt am Original gelesen: 2026-11-18
 
 ## Überblick
 
@@ -14,9 +14,9 @@ Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fach
 | Förderrichtlinien, Merkblätter und Produktinformationen | 37 | 31 | 0 | 6 |
 | Normen und Branchenrichtlinien | 12 | 0 | 6 | 6 |
 | Methoden- und Qualitätsstandards | 10 | 0 | 2 | 8 |
-| Fachliteratur und Rechenbeispiele | 23 | 2 | 13 | 8 |
-| Datenquellen | 15 | 3 | 5 | 7 |
-| **Gesamt** | **214** | **129** | **31** | **54** |
+| Fachliteratur und Rechenbeispiele | 24 | 3 | 13 | 8 |
+| Datenquellen | 15 | 4 | 5 | 6 |
+| **Gesamt** | **215** | **131** | **31** | **53** |
 
 ## Handlungsbedarf
 
@@ -80,7 +80,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `FERNUNI-HAGEN-INVESTITIONSCONTROLLING` | FernUni Hagen, Investitionscontrolling | nur Sekundärquelle |
 | `FRENCH-GABRIELLI-DCF` | French/Gabrielli, DCF: Accounting for Uncertainty | nur Sekundärquelle |
 | `FRENCH-GABRIELLI-UNCERTAINTY` | French/Gabrielli, The Uncertainty of Valuation | nur Sekundärquelle |
-| `GABLER-BANKLEXIKON-VOFI` | Gabler Banklexikon, VOFI | nur Sekundärquelle |
+| `GABLER-BANKLEXIKON-VOFI` | Gabler Banklexikon, Stichwörter zum VOFI | nur Sekundärquelle |
 | `GLEISSNER-RISIKO-PORTFOLIO` | Gleißner, Integrierte Risiko- und Portfoliomanagementsysteme | nur Sekundärquelle |
 | `GLEISSNER-ZFIFP-2008` | Gleißner, ZfiFP 07/2008 | nur Sekundärquelle |
 | `GONDRING-IMMOBILIENWIRTSCHAFT` | Gondring, Immobilienwirtschaft | nicht geprüft |
@@ -102,7 +102,7 @@ Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu kl�
 | `BODENRICHTWERTE-NI` | Bodenrichtwerte Niedersachsen | nicht geprüft |
 | `BUNDESBANK-RENDITE-30J` | Rendite 30-jähriger Bundesanleihen | nicht geprüft |
 | `DESTATIS-BAUPREISINDEX` | Destatis Baupreisindex | nur Sekundärquelle; Lizenz klären |
-| `DESTATIS-VPI` | Destatis Verbraucherpreisindex | nicht geprüft; Lizenz klären |
+| `DESTATIS-VPI` | Destatis, Verbraucherpreisindex für Deutschland | Lizenz klären |
 | `IIBV-WERTE-2026` | II. BV, Beträge ab 01.01.2026 | nur Sekundärquelle |
 | `IMMOWERTV-WERTE` | ImmoWertV, fortgeschriebene Modellwerte | nur Sekundärquelle |
 | `KFW-KONDITIONENANZEIGER` | KfW-Konditionenanzeiger | nicht geprüft |
@@ -453,10 +453,11 @@ Bemerkungen:
 | Kennung | Quelle | Stand | Beleg | Verwendet für | Prüfturnus | Zugang |
 |---|---|---|---|---|---|---|
 | `BRAUER-IMMOBILIENWIRTSCHAFT` | Brauer, Grundlagen der Immobilienwirtschaft – Lehrbuch zur Immobilienwirtschaft · nicht erfasst | nicht erfasst | nicht geprüft | Fehlerkataloge und Musterrechnungen der Praxis | bei Neuausgabe | kostenpflichtig |
+| `DRKLEIN-VOFI-2021` | [Dr. Klein Wowi, Beurteilung von Investitionen mit Hilfe der VOFI](https://www.drklein-wowi.de/news-finanzierung/die-beurteilung-von-investitionen-mit-hilfe-der-vofi/) – Die Beurteilung von Investitionen mit Hilfe der VOFI | 06.04.2021 | am Original gelesen (2026-11-18) | Zielgrößen des VOFI in der wohnungswirtschaftlichen Praxis: Vermögensendwert, Eigenkapitalrentabilität, Amortisationsdauer; Lesart der Amortisationsdauer als Rückgewinnung des Eigenkapitals | bei Neuausgabe | frei |
 | `FERNUNI-HAGEN-INVESTITIONSCONTROLLING` | [FernUni Hagen, Investitionscontrolling](https://www.fernuni-hagen.de/controlling/docs/probekapitel_innovationscontrolling.pdf) – Probekapitel Investitionscontrolling | nicht erfasst | nur Sekundärquelle | Standardschema des VOFI (Zeilen für Eigenmittel, Kredite, Kontokorrent, Geldanlage, Steuern) | bei Neuausgabe | frei |
 | `FRENCH-GABRIELLI-DCF` | [French/Gabrielli, DCF: Accounting for Uncertainty](https://centaur.reading.ac.uk/20893/1/0505.pdf) – Discounted Cash Flow: Accounting for Uncertainty | nicht erfasst | nur Sekundärquelle | Unsicherheit im DCF und in der Simulation | bei Neuausgabe | frei |
 | `FRENCH-GABRIELLI-UNCERTAINTY` | [French/Gabrielli, The Uncertainty of Valuation](https://centaur.reading.ac.uk/27304/1/0703.pdf) – The Uncertainty of Valuation | nicht erfasst | nur Sekundärquelle | Drei-Punkt-Schätzung als Eingabeform der Simulation | bei Neuausgabe | frei |
-| `GABLER-BANKLEXIKON-VOFI` | [Gabler Banklexikon, VOFI](https://www.gabler-banklexikon.de/definition/vofi-62370) – Stichwörter VOFI, VOFI-Eigenkapitalrentabilität, VOFI-Gesamtkapitalrentabilität | nicht erfasst | nur Sekundärquelle | Definition des VOFI und der VOFI-Rendite; Unterlassensalternative als Entscheidungsmaß | bei Neuausgabe | frei |
+| `GABLER-BANKLEXIKON-VOFI` | [Gabler Banklexikon, Stichwörter zum VOFI](https://www.gabler-banklexikon.de/definition/vofi-62370) – Stichwörter VOFI, VOFI-Eigenkapitalrentibilität, VOFI-Gesamtkapitalrentabilität (Definitionen 62370, 62371, 62372) | Revision des Stichworts Eigenkapitalrentibilität vom 26.03.2020 | nur Sekundärquelle | Definition des VOFI und der VOFI-Eigenkapitalrentabilität; Unterlassensalternative als Entscheidungsmaß; Begriff der VOFI-Amortisationsdauer (Pay-off-Periode); Bestandteile der VOFI-Gesamtkapitalrentabilität | bei Neuausgabe | frei |
 | `GLEISSNER-RISIKO-PORTFOLIO` | [Gleißner, Integrierte Risiko- und Portfoliomanagementsysteme](https://werner-gleissner.de/site/publikationen/WernerGleissner_Integrierte-Risiko-und-Portfoliomanagementsysteme-in-der-Immobilienwirtschaft.pdf) – Integrierte Risiko- und Portfoliomanagementsysteme in der Immobilienwirtschaft | nicht erfasst | nur Sekundärquelle | Risikoaggregation durch Simulation mit Korrelationen | bei Neuausgabe | frei |
 | `GLEISSNER-ZFIFP-2008` | Gleißner, ZfiFP 07/2008 – Risiko- und Portfoliosteuerung bei Immobilieninvestments · Zeitschrift für immobilienwirtschaftliche Forschung und Praxis 07/2008; https://www.werner-gleissner.de/site/publikationen/WernerGleissner_Risiko-und-Portfoliosteuerung-bei-Immobilieninvestments.pdf | Heft 07/2008 | nur Sekundärquelle | Risikosteuerung im Immobilienportfolio | bei Neuausgabe | frei |
 | `GONDRING-IMMOBILIENWIRTSCHAFT` | Gondring, Immobilienwirtschaft – Lehrbuch Immobilienwirtschaft · nicht erfasst | nicht erfasst | nicht geprüft | Fehlerkataloge und Musterrechnungen der Praxis | bei Neuausgabe | kostenpflichtig |
@@ -479,15 +480,16 @@ Bemerkungen:
 Bemerkungen:
 
 - `BRAUER-IMMOBILIENWIRTSCHAFT`: Nur genannt, nicht eingesehen (Notiz 06); Titel nicht genau erfasst.
+- `DRKLEIN-VOFI-2021`: Praxisbeitrag eines Anbieters, kein Lehrbuch; ohne Formeln.
 - `FERNUNI-HAGEN-INVESTITIONSCONTROLLING`: Nur Suchauszug.
 - `FRENCH-GABRIELLI-DCF`: Nur Auszüge.
 - `FRENCH-GABRIELLI-UNCERTAINTY`: Nur Auszüge. Weitere Fassung CentAUR 20890.
-- `GABLER-BANKLEXIKON-VOFI`: Nur Suchauszüge; die Formeln sind dort als Bild eingebunden und nicht gelesen.
+- `GABLER-BANKLEXIKON-VOFI`: Nur als Auszug der Websuche vom 18.11.2026 gelesen; die Seiten sind aus der Cloud-Umgebung nicht erreichbar. Die Formel der Gesamtkapitalrentabilität ist dort ein Bild und im Auszug nicht lesbar. Verfasser der Stichwörter im Auszug nicht genannt.
 - `GLEISSNER-RISIKO-PORTFOLIO`: Nur Auszüge.
 - `GLEISSNER-ZFIFP-2008`: Nur Auszüge.
 - `GONDRING-IMMOBILIENWIRTSCHAFT`: Nur genannt, nicht eingesehen (Notiz 06); Titel nicht genau erfasst.
 - `GROB-1989`: Nur aus dem Fachwissen des Bearbeiters genannt (Notiz 03).
-- `GROB-EINFUEHRUNG`: Schema nur über FernUni Hagen und Wikipedia; die Definitionen von Gesamtkapitalrendite und Amortisationsdauer sind ungeklärt, bis das Original vorliegt (Kennzahlen bis dahin nicht ausgewiesen). Neueste Auflage nicht ermittelt.
+- `GROB-EINFUEHRUNG`: Schema nur über FernUni Hagen und Wikipedia. Die VOFI-Eigenkapitalrentabilität ist über das Gabler Banklexikon bestätigt (GABLER-BANKLEXIKON-VOFI). Die Formel der Gesamtkapitalrentabilität ist nicht gelesen (Kennzahl bis dahin nicht ausgewiesen); die Rechenregel der Amortisationsdauer ist Modellannahme MA-027. 5. Auflage 2006 bei Vahlen; kein eBook-Angebot gefunden.
 - `GROSSMAN-OEZLUEK-2010`: Nur Auszüge; Zuordnung der drei Methodiken nicht am Text bestätigt.
 - `HERIOT-WATT-BETA`: Kennzahl 55 % nicht an der Quelle geprüft (Notiz 09).
 - `HOESLI-JANI-BENDER-2006`: Nur Abstract und Auszüge; frei zugängliche Arbeitsfassung SFI Research Paper 148 / ERES 2005.
@@ -511,10 +513,10 @@ Bemerkungen:
 | `BODENRICHTWERTE-NI` | Bodenrichtwerte Niedersachsen – Bodenrichtwerte der Gutachterausschüsse in Niedersachsen · nicht erfasst | nicht erfasst | nicht geprüft | Deckel der zuwendungsfähigen Grundstückskosten bei der NBank (Bodenrichtwert × Fläche) | jährlich | frei |
 | `BUNDESBANK-RENDITE-30J` | Rendite 30-jähriger Bundesanleihen – Umlaufsrendite 30-jähriger Bundesanleihen · nicht erfasst | nicht erfasst | nicht geprüft | Herleitung des Mindestkapitalisierungszinses (§ 12 Abs. 4 BelWertV); Unterlassensalternative | monatlich | frei |
 | `DESTATIS-BAUPREISINDEX` | [Destatis Baupreisindex](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_360_61261.html) – Preisindizes für den Neubau von Wohngebäuden und die Instandhaltung | Berichtsmonat August 2026 (Pressemitteilung Nr. 360 vom 09.10.2026) | nur Sekundärquelle | Baukostenindexierung getrennt vom Verbraucherpreisindex; Instandhaltungskosten-Steigerung | vierteljährlich | Lizenz klären |
-| `DESTATIS-VPI` | Destatis Verbraucherpreisindex – Verbraucherpreisindex für Deutschland · nicht erfasst | nicht erfasst | nicht geprüft | Fortschreibung II. BV (dreijährlich) und ImmoWertV Anlage 3 (jährlich), Basis Oktober 2001; Indexmiete; Inflationsannahme | monatlich | Lizenz klären |
+| `DESTATIS-VPI` | [Destatis, Verbraucherpreisindex für Deutschland](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Tabellen/Verbraucherpreise-12Kategorien.html) – Verbraucherpreisindex für Deutschland, 2020 = 100, Monatswerte (Tabelle nach 12 Abteilungen; Statistischer Bericht Lange Reihen ab 1948, Ausgabe Juni 2025) | Monatswerte bis Oktober 2026 | am Original gelesen (2026-11-18) | Fortschreibung der Bewirtschaftungskosten nach Anlage 3 ImmoWertV (jährlich, Basis Oktober 2001); Probe der Beträge nach §§ 26, 28 II. BV (dreijährlich); Indexmiete; Inflationsannahme | monatlich | Lizenz klären |
 | `FOERDERDATENBANK-RSS` | [Förderdatenbank RSS](https://www.foerderdatenbank.de/FDB/DE/Service/RSS/Functions/foerderprogram_rssnewsfeed.xml) – RSS-Feed Förderprogramme der Förderdatenbank des Bundes | RSS 2.0; jüngster Eintrag beim Abruf 12.11.2026 | am Original gelesen (2026-11-17) | Änderungsmelder für die Katalogpflege (keine Konditionen) | monatlich | frei |
 | `IIBV-WERTE-2026` | [II. BV, Beträge ab 01.01.2026](https://www.haufe.de/immobilien/verwaltung/erhoehung-der-kostenmiete-bei-sozialwohnungen_258_392374.html) – Indexierte Verwaltungs- und Instandhaltungskosten nach §§ 26, 28 II. BV ab 01.01.2026 | gültig ab 01.01.2026 | nur Sekundärquelle | Verwaltung 372,46 € je Wohnung; Instandhaltung 11,50 / 14,58 / 18,62 €/m² | jährlich | frei |
-| `IMMOWERTV-WERTE` | [ImmoWertV, fortgeschriebene Modellwerte](https://gutachterausschuss.brandenburg.de/sixcms/media.php/9/BewKo_2025.pdf) – Fortgeschriebene Bewirtschaftungskosten nach Anlage 3 ImmoWertV | Werte ab 01.01.2025; Werte 2026 nicht erfasst | nur Sekundärquelle | Bewirtschaftungskosten der Ertragswert-Nebenrechnung im laufenden Jahr | jährlich | frei |
+| `IMMOWERTV-WERTE` | [ImmoWertV, fortgeschriebene Modellwerte](https://gutachterausschuss.brandenburg.de/sixcms/media.php/9/BewKo_2025.pdf) – Fortgeschriebene Bewirtschaftungskosten nach Anlage 3 ImmoWertV | Werte ab 01.01.2025 (Sekundärquelle); 2026 und 2027 eigene Rechnung | nur Sekundärquelle | Bewirtschaftungskosten der Ertragswert-Nebenrechnung im laufenden Jahr | jährlich | frei |
 | `KFW-KONDITIONENANZEIGER` | [KfW-Konditionenanzeiger](https://www.kfw-formularsammlung.de/KonditionenanzeigerINet/KonditionenAnzeiger) – Konditionenanzeiger für Endkreditnehmer (Maximalzinssätze) | nicht erfasst | nicht geprüft | Maximalzinssätze laut Merkblättern | monatlich | frei |
 | `KFW-ZINSDATEN` | [KfW-Zinsdatensatz](https://www.kfw.de/zinsen/alle.rates) – Zinssätze der KfW-Förderprogramme (alle.rates; ergänzend IKK.json, effektiv.rates, soll.rates) | Datensatz gültig ab 18.11.2026 | am Original gelesen (2026-11-17) | Soll- und Effektivzins je Programm, Laufzeit, Freijahre, Zinsbindung; Zinsstufe Effizienzhaus 55 als eigener Parameter | monatlich | Lizenz klären |
 | `LIEGENSCHAFTSZINSEN` | [Liegenschaftszinssätze](https://ivd.net/wp-content/uploads/2025/12/2026_Liegenschaftszinsaetze_.pdf) – Liegenschaftszinssätze der Gutachterausschüsse und des IVD | Ausgabe 2026 | nur Sekundärquelle | Ertragswert-Nebenrechnung und Restwert-Plausibilisierung (modellkonform mit Anlage 3 ImmoWertV) | jährlich | Lizenz klären |
@@ -529,10 +531,10 @@ Bemerkungen:
 - `BODENRICHTWERTE-NI`: Nur über RL Mietwohnraum 2026 Nr. 5.3.2 begründet; Quelle und Zugang nicht recherchiert.
 - `BUNDESBANK-RENDITE-30J`: bundesbank.de am 17.11.2026 gesperrt.
 - `DESTATIS-BAUPREISINDEX`: Nur aus Suchauszügen; destatis.de war gesperrt. Lizenz für Kundenberichte nicht geprüft. Abruf über GENESIS als Differenzierungsmerkmal.
-- `DESTATIS-VPI`: destatis.de am 17.11.2026 gesperrt; Oktoberwerte und Lizenz nicht geprüft.
+- `DESTATIS-VPI`: Oktoberwerte: 2001 77,1; 2020 99,9; 2022 113,5; 2024 120,2; 2025 123,0; 2026 126,5. Werte vor Juli 2025 aus dem Statistischen Bericht Lange Reihen (letzte Ausgabe dieser Form). Umbasierungen verändern zurückliegende Verhältnisse geringfügig (Notiz 10). Nutzungsbedingungen für die Übernahme der Reihe in den Katalog nicht geprüft.
 - `FOERDERDATENBANK-RSS`: Kein Export und keine Schnittstelle belegt; robots.txt mit Crawl-delay 30, Startseite hinter Bot-Schutz.
-- `IIBV-WERTE-2026`: Rechnerisch konsistent mit den Basisbeträgen (Faktor 1,6194), Faktor selbst nicht geprüft; amtliche Bekanntmachung beschaffen oder aus VPI selbst rechnen. Nächste Anpassung 01.01.2029.
-- `IMMOWERTV-WERTE`: 2025: 359 € je Wohnung, 429 € je Eigentumswohnung, 47 € je Stellplatz, 14,00 €/m² – nur aus Suchauszug (Notiz 06). Werte 2026 aus VPI selbst rechnen oder amtlich beschaffen.
+- `IIBV-WERTE-2026`: Faktor 1,6194 auf die Basisbeträge. Aus der heutigen Indexreihe (2020 = 100) nicht nachrechenbar: Oktober 2025 zu Oktober 2001 ergibt 1,5953, also 366,93 € statt 372,46 € (Notiz 10); die Abweichung von 1,5 % passt zur Fortschreibung in Dreijahresschritten mit den jeweils damaligen Indexständen, ist aber nicht belegt. Die Beträge werden als veröffentlichte Werte geführt, nicht errechnet; amtliche oder verbandliche Veröffentlichung beschaffen. Nächste Anpassung 01.01.2029.
+- `IMMOWERTV-WERTE`: 2025: 359 € je Wohnung, 429 € je Eigentumswohnung, 47 € je Stellplatz, 14,00 €/m² – nur aus Suchauszug (Notiz 06). 2026 und 2027 aus dem Verbraucherpreisindex nach Anlage 3 Abschnitt III selbst gerechnet (Notiz 10, Skript bewirtschaftungskosten_index.py): 2026 367 / 439 / 48 € und 14,40 €/m², 2027 377 / 451 / 49 € und 14,80 €/m²; die Probe trifft die Werte 2025. Eigene Werte können wegen der Umbasierung des Index um 1 € von veröffentlichten abweichen; veröffentlichte Werte eines Gutachterausschusses gehen vor.
 - `KFW-KONDITIONENANZEIGER`: Host am 17.11.2026 gesperrt; Format und möglicher PDF-Export unbekannt.
 - `KFW-ZINSDATEN`: Undokumentierte Schnittstelle ohne zugesicherte Stabilität; automatischer Abruf nur mit Zustimmung der KfW (§ 87b UrhG). Enthält keine Bereitstellungsprovisionen.
 - `LIEGENSCHAFTSZINSEN`: Nur aus Suchauszug. Für Niedersachsen sind die Marktberichte der Gutachterausschüsse als Quelle noch nicht erfasst; Nutzungsrecht in Kundenberichten klären.

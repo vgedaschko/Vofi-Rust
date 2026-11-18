@@ -2625,7 +2625,7 @@ gelesen_am = ""
 verwendet_fuer = ["Lehrbuchschema des VOFI", "Definitionen VOFI-Gesamtkapitalrentabilität und Amortisationsdauer", "Kritische Werte im VOFI"]
 turnus = "bei-neuausgabe"
 zugang = "kostenpflichtig"
-bemerkung = "Schema nur über FernUni Hagen und Wikipedia; die Definitionen von Gesamtkapitalrendite und Amortisationsdauer sind ungeklärt, bis das Original vorliegt (Kennzahlen bis dahin nicht ausgewiesen). Neueste Auflage nicht ermittelt."
+bemerkung = "Schema nur über FernUni Hagen und Wikipedia. Die VOFI-Eigenkapitalrentabilität ist über das Gabler Banklexikon bestätigt (GABLER-BANKLEXIKON-VOFI). Die Formel der Gesamtkapitalrentabilität ist nicht gelesen (Kennzahl bis dahin nicht ausgewiesen); die Rechenregel der Amortisationsdauer ist Modellannahme MA-027. 5. Auflage 2006 bei Vahlen; kein eBook-Angebot gefunden."
 
 [[quelle]]
 id = "GROB-1989"
@@ -2731,21 +2731,6 @@ verwendet_fuer = ["Referenzfall 2: MFH68 – KfW 100, Endwert 153.032 €, VOFI-
 turnus = "bei-neuausgabe"
 zugang = "frei"
 bemerkung = "Tabelle nur als Bild mit geringer Auflösung; abgelesene Werte rekursiv geprüft (Abweichung höchstens 3,40 €). Gerechnet mit der 2013 geltenden Umlage von 11 %, ohne Steuern."
-
-[[quelle]]
-id = "GABLER-BANKLEXIKON-VOFI"
-gruppe = "literatur"
-kurz = "Gabler Banklexikon, VOFI"
-titel = "Stichwörter VOFI, VOFI-Eigenkapitalrentabilität, VOFI-Gesamtkapitalrentabilität"
-herausgeber = "Gabler"
-fundstelle = "https://www.gabler-banklexikon.de/definition/vofi-62370"
-stand = "nicht erfasst"
-beleg = "sekundaer"
-gelesen_am = ""
-verwendet_fuer = ["Definition des VOFI und der VOFI-Rendite", "Unterlassensalternative als Entscheidungsmaß"]
-turnus = "bei-neuausgabe"
-zugang = "frei"
-bemerkung = "Nur Suchauszüge; die Formeln sind dort als Bild eingebunden und nicht gelesen."
 
 [[quelle]]
 id = "FERNUNI-HAGEN-INVESTITIONSCONTROLLING"
@@ -3022,21 +3007,6 @@ zugang = "lizenz-klaeren"
 bemerkung = "Nur aus Suchauszügen; destatis.de war gesperrt. Lizenz für Kundenberichte nicht geprüft. Abruf über GENESIS als Differenzierungsmerkmal."
 
 [[quelle]]
-id = "DESTATIS-VPI"
-gruppe = "daten"
-kurz = "Destatis Verbraucherpreisindex"
-titel = "Verbraucherpreisindex für Deutschland"
-herausgeber = "Statistisches Bundesamt"
-fundstelle = "nicht erfasst"
-stand = "nicht erfasst"
-beleg = "ungeprueft"
-gelesen_am = ""
-verwendet_fuer = ["Fortschreibung II. BV (dreijährlich) und ImmoWertV Anlage 3 (jährlich), Basis Oktober 2001", "Indexmiete", "Inflationsannahme"]
-turnus = "monatlich"
-zugang = "lizenz-klaeren"
-bemerkung = "destatis.de am 17.11.2026 gesperrt; Oktoberwerte und Lizenz nicht geprüft."
-
-[[quelle]]
 id = "LSN-BAULEISTUNGSPREISE"
 gruppe = "daten"
 kurz = "LSN Bauleistungspreise"
@@ -3064,7 +3034,7 @@ gelesen_am = ""
 verwendet_fuer = ["Verwaltung 372,46 € je Wohnung; Instandhaltung 11,50 / 14,58 / 18,62 €/m²"]
 turnus = "jaehrlich"
 zugang = "frei"
-bemerkung = "Rechnerisch konsistent mit den Basisbeträgen (Faktor 1,6194), Faktor selbst nicht geprüft; amtliche Bekanntmachung beschaffen oder aus VPI selbst rechnen. Nächste Anpassung 01.01.2029."
+bemerkung = "Faktor 1,6194 auf die Basisbeträge. Aus der heutigen Indexreihe (2020 = 100) nicht nachrechenbar: Oktober 2025 zu Oktober 2001 ergibt 1,5953, also 366,93 € statt 372,46 € (Notiz 10); die Abweichung von 1,5 % passt zur Fortschreibung in Dreijahresschritten mit den jeweils damaligen Indexständen, ist aber nicht belegt. Die Beträge werden als veröffentlichte Werte geführt, nicht errechnet; amtliche oder verbandliche Veröffentlichung beschaffen. Nächste Anpassung 01.01.2029."
 
 [[quelle]]
 id = "IMMOWERTV-WERTE"
@@ -3073,13 +3043,13 @@ kurz = "ImmoWertV, fortgeschriebene Modellwerte"
 titel = "Fortgeschriebene Bewirtschaftungskosten nach Anlage 3 ImmoWertV"
 herausgeber = "Oberer Gutachterausschuss Brandenburg (BewKo 2025)"
 fundstelle = "https://gutachterausschuss.brandenburg.de/sixcms/media.php/9/BewKo_2025.pdf"
-stand = "Werte ab 01.01.2025; Werte 2026 nicht erfasst"
+stand = "Werte ab 01.01.2025 (Sekundärquelle); 2026 und 2027 eigene Rechnung"
 beleg = "sekundaer"
 gelesen_am = ""
 verwendet_fuer = ["Bewirtschaftungskosten der Ertragswert-Nebenrechnung im laufenden Jahr"]
 turnus = "jaehrlich"
 zugang = "frei"
-bemerkung = "2025: 359 € je Wohnung, 429 € je Eigentumswohnung, 47 € je Stellplatz, 14,00 €/m² – nur aus Suchauszug (Notiz 06). Werte 2026 aus VPI selbst rechnen oder amtlich beschaffen."
+bemerkung = "2025: 359 € je Wohnung, 429 € je Eigentumswohnung, 47 € je Stellplatz, 14,00 €/m² – nur aus Suchauszug (Notiz 06). 2026 und 2027 aus dem Verbraucherpreisindex nach Anlage 3 Abschnitt III selbst gerechnet (Notiz 10, Skript bewirtschaftungskosten_index.py): 2026 367 / 439 / 48 € und 14,40 €/m², 2027 377 / 451 / 49 € und 14,80 €/m²; die Probe trifft die Werte 2025. Eigene Werte können wegen der Umbasierung des Index um 1 € von veröffentlichten abweichen; veröffentlichte Werte eines Gutachterausschusses gehen vor."
 
 [[quelle]]
 id = "LIEGENSCHAFTSZINSEN"
@@ -3260,3 +3230,49 @@ verwendet_fuer = ["Zuwendungsfähigkeit nicht abziehbarer Vorsteuer bei der NBan
 turnus = "vierteljaehrlich"
 zugang = "frei"
 bemerkung = "Nur über RL Mietwohnraum 2026 Nr. 1.4 und 12.3.1 genannt (ANBest-P als Anlage 2 zu VV Nr. 5.1 zu § 44 LHO). Von der Cloud-Umgebung aus nicht erreichbar (Jurist, Prüfrunde 4); Leseauftrag in TASKS.md."
+
+[[quelle]]
+id = "DESTATIS-VPI"
+gruppe = "daten"
+kurz = "Destatis, Verbraucherpreisindex für Deutschland"
+titel = "Verbraucherpreisindex für Deutschland, 2020 = 100, Monatswerte (Tabelle nach 12 Abteilungen; Statistischer Bericht Lange Reihen ab 1948, Ausgabe Juni 2025)"
+herausgeber = "Statistisches Bundesamt"
+fundstelle = "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Tabellen/Verbraucherpreise-12Kategorien.html"
+stand = "Monatswerte bis Oktober 2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Fortschreibung der Bewirtschaftungskosten nach Anlage 3 ImmoWertV (jährlich, Basis Oktober 2001)", "Probe der Beträge nach §§ 26, 28 II. BV (dreijährlich)", "Indexmiete", "Inflationsannahme"]
+turnus = "monatlich"
+zugang = "lizenz-klaeren"
+bemerkung = "Oktoberwerte: 2001 77,1; 2020 99,9; 2022 113,5; 2024 120,2; 2025 123,0; 2026 126,5. Werte vor Juli 2025 aus dem Statistischen Bericht Lange Reihen (letzte Ausgabe dieser Form). Umbasierungen verändern zurückliegende Verhältnisse geringfügig (Notiz 10). Nutzungsbedingungen für die Übernahme der Reihe in den Katalog nicht geprüft."
+
+[[quelle]]
+id = "GABLER-BANKLEXIKON-VOFI"
+gruppe = "literatur"
+kurz = "Gabler Banklexikon, Stichwörter zum VOFI"
+titel = "Stichwörter VOFI, VOFI-Eigenkapitalrentibilität, VOFI-Gesamtkapitalrentabilität (Definitionen 62370, 62371, 62372)"
+herausgeber = "Springer Gabler"
+fundstelle = "https://www.gabler-banklexikon.de/definition/vofi-62370"
+stand = "Revision des Stichworts Eigenkapitalrentibilität vom 26.03.2020"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Definition des VOFI und der VOFI-Eigenkapitalrentabilität", "Unterlassensalternative als Entscheidungsmaß", "Begriff der VOFI-Amortisationsdauer (Pay-off-Periode)", "Bestandteile der VOFI-Gesamtkapitalrentabilität"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Nur als Auszug der Websuche vom 18.11.2026 gelesen; die Seiten sind aus der Cloud-Umgebung nicht erreichbar. Die Formel der Gesamtkapitalrentabilität ist dort ein Bild und im Auszug nicht lesbar. Verfasser der Stichwörter im Auszug nicht genannt."
+
+[[quelle]]
+id = "DRKLEIN-VOFI-2021"
+gruppe = "literatur"
+kurz = "Dr. Klein Wowi, Beurteilung von Investitionen mit Hilfe der VOFI"
+titel = "Die Beurteilung von Investitionen mit Hilfe der VOFI"
+herausgeber = "Dr. Klein Wowi Redaktion"
+fundstelle = "https://www.drklein-wowi.de/news-finanzierung/die-beurteilung-von-investitionen-mit-hilfe-der-vofi/"
+stand = "06.04.2021"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zielgrößen des VOFI in der wohnungswirtschaftlichen Praxis: Vermögensendwert, Eigenkapitalrentabilität, Amortisationsdauer", "Lesart der Amortisationsdauer als Rückgewinnung des Eigenkapitals"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Praxisbeitrag eines Anbieters, kein Lehrbuch; ohne Formeln."
+

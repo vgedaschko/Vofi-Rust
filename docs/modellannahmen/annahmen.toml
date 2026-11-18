@@ -523,3 +523,23 @@ gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation"]
 bemerkung = "Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Ob die Beleihungsquote im geförderten Neubau nur das Bankdarlehen oder die Summe aller Darlehen begrenzt, ist in der Fachspezifikation festzulegen."
+
+[[annahme]]
+id = "MA-027"
+titel = "Rechenregel der VOFI-Amortisationsdauer"
+annahme = "Die Amortisationsdauer endet in der ersten Periode, in der das Vermögen aus der Investition die Anlage des eingesetzten Eigenkapitals zur Unterlassensalternative erreicht oder übertrifft. Vor dem geplanten Verkauf wird dabei kein Restwert der Immobilie angesetzt."
+grund = "Der Begriff ist belegt (Amortisationsdauer unter Berücksichtigung von Finanzierungskonditionen und steuerlichen Konsequenzen), die Rechenregel nach Grob liegt nicht am Original vor. Die zugänglichen Quellen beschreiben zwei verschiedene Regeln."
+alternative = "Rückgewinnung des Eigenkapitals: die erste Periode, in der das Vermögen aus der Investition das eingesetzte Eigenkapital erreicht, ohne Vergleich mit der Unterlassensalternative; mit oder ohne Ansatz eines Restwerts. Diese Lesart amortisiert früher."
+grundlage = "Quellnotiz 10 (research_notes): Suchauszug aus dem Stichwort VOFI im Gabler Banklexikon; Beitrag der Dr. Klein Wowi Redaktion vom 06.04.2021, am Original gelesen. Voreingestellt ist die Lesart mit der längeren Amortisationsdauer."
+quellen = ["GABLER-BANKLEXIKON-VOFI", "DRKLEIN-VOFI-2021", "GROB-EINFUEHRUNG"]
+gewicht = "gering"
+wirkung = "Ausgewiesene Amortisationsdauer auf dem Kennzahlenblatt; keine Wirkung auf Endwert, Rendite oder tragbaren Preis."
+sichtbar = "anwender"
+umschaltbar = true
+klaerung = "Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt"
+wiedervorlage = "mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3)"
+status = "offen"
+gesetzt_am = "2026-11-18"
+erledigt_am = ""
+verwendet_in = ["Spezifikation Kapitel 3, Offene Lehrbuchdefinitionen"]
+bemerkung = "Die Gesamtkapitalrentabilität ist keine Annahme: Sie wird nicht ausgewiesen, bis ihre Formel gelesen ist."

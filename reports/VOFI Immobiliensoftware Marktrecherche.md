@@ -70,7 +70,7 @@ Die Kriterien der Vorprüfung brauchen Maßstäbe, die Sie freigeben, bevor die 
 - **Ein Produkt deckt den Bedarf,** wenn es alle Pflichtbausteine der Teilschritte 1a bis 1c enthält oder die Lücke mit benanntem Zukauf schließt. Geprüft wird nach einer Liste aus Anhang D, die das Projekt stellt, ergänzt um Einsatz in der Beratung für Dritte, Lizenz für Kundenberichte, Preis und Katalogpflege. Gekauft wird dann nicht unmittelbar: Die Vorstudie vergleicht nur noch Kauf und Excel-Ausbau, und der Architekturentwurf für den Eigenbau entfällt. So geht der Preis in die Entscheidung ein.
 - **Allgemeiner Bedarf:** Die Mehrheit der Befragten würde die Grobkalkulation statt Excel nutzen. Fehlt er, wird abgebrochen, denn unterhalb der Mehrheit bliebe Excel der Normalfall.
 - **Bedarf, der nur den Eigenbau trägt:** Die Mehrheit der Befragten braucht mindestens eines von Änderungsprotokoll, Arbeit mehrerer Personen an einem Projekt oder Berichten und Zugang für Kunden. Fehlt er, wird auf den Vergleich von Kauf und Excel-Ausbau umgesteuert, denn eine Grobkalkulation liefern auch diese beiden Wege. Beide Schwellen sind als Mehrheit gefasst, damit sie auch bei drei oder vier Gesprächen bestimmt sind.
-- **Mindestfallzahl:** Die Zeitersparnis über zehn Jahre deckt mindestens den Lizenzpreis des günstigsten vorgeführten Produkts. Die Zeitersparnis ergibt sich aus Kalkulationen pro Jahr, Stunden je Kalkulation, Stundensatz des Hauses und Ersparnisanteil; Stundensatz und Ersparnisanteil geben Sie vor, der Lizenzpreis kommt aus den Vorführungen. Trägt die Fallzahl nicht einmal den Kauf, trägt sie keinen Eigenbau.
+- **Mindestfallzahl:** Die Zeitersparnis über zehn Jahre deckt mindestens die Lizenzkosten des günstigsten vorgeführten Produkts über dieselben zehn Jahre. Die Zeitersparnis ergibt sich aus Kalkulationen pro Jahr, Stunden je Kalkulation, Stundensatz des Hauses und Ersparnisanteil; Stundensatz und Ersparnisanteil geben Sie vor, der Lizenzpreis kommt aus den Vorführungen. Trägt die Fallzahl nicht einmal den Kauf, trägt sie keinen Eigenbau.
 
 Drei Risiken liegen außerhalb der Technik. Die Nutzer bleiben bei Excel, wenn die erste Zahl dort schneller steht; dagegen stehen die Grobkalkulation im ersten Teilschritt, der sichtbare Rechenweg und der Excel-Export. Die Katalogpflege hängt an einer Person; sie braucht eine Vertretung und ein Vier-Augen-Verfahren. Und ein fehlerhafter Katalogwert kann in einen Kundenbericht gelangen (Abschnitt 7).
 
@@ -334,13 +334,7 @@ Die Festlegungen zu Anmeldung und Tabellenbaustein und die offenen Punkte zu Exc
 
 **Offene Arbeit**
 
-Offene Aufträge führt `TASKS.md` (siehe „Freigabepunkte und Abhängigkeiten“). Drei Punkte stehen dort noch nicht und bleiben deshalb hier, bis sie übertragen sind:
-
-| Punkt | Zuständig | Wird gebraucht |
-|---|---|---|
-| Am Original nachzuziehen, weil der Wert nicht im Verordnungstext steht: die geltenden Mindestkapitalisierungszinssätze der BaFin (Anhang B.4) | Katalogverantwortung | mit der Erstbefüllung des Katalogs |
-| Recherche zum Erbbaurecht, falls es vorgezogen wird (Abschnitt 5) | Entwicklung | nach der Antwort auf die Fachfrage zum Erbbaurecht |
-| Marktübliche Werte für Betreiberimmobilien; belastbare Quellen fehlen. Kreditauflagen gehören nicht hierher: Beleihungsquote und Mindestdeckung sind Vorgaben des Hauses (Freigabe 7), und die Streuungen und Abhängigkeiten der Simulation führt `MA-014` | offen | vor Stufe 4 |
+Offene Aufträge führt `TASKS.md` (siehe „Freigabepunkte und Abhängigkeiten“); dieser Bericht führt keine eigene Aufgabenliste. Kreditauflagen sind keine offene Recherche: Beleihungsquote und Mindestdeckung sind Vorgaben des Hauses (Freigabe 7), und die Streuungen und Abhängigkeiten der Simulation führt `MA-014`.
 
 ## Anhang A: Vorgaben an den Rechenkern
 

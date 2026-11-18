@@ -41,6 +41,8 @@ GRUPPEN = {
 BELEG = {"original": "am Original gelesen", "sekundaer": "nur Sekundärquelle", "ungeprueft": "nicht geprüft"}
 TURNUS = {"monatlich": "monatlich", "vierteljaehrlich": "vierteljährlich", "jaehrlich": "jährlich", "bei-neuausgabe": "bei Neuausgabe"}
 ZUGANG = {"frei": "frei", "kostenpflichtig": "kostenpflichtig", "lizenz-klaeren": "Lizenz klären"}
+VERWEISENDE = ["docs/spezifikation.md", "docs/entwicklungsplan.md", "docs/entscheidungen.md", "CLAUDE.md", "docs/modellannahmen/annahmen.toml"]
+VERWEIS = re.compile(r"`([A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+)`")
 PFLICHT = ["id", "gruppe", "kurz", "titel", "herausgeber", "fundstelle", "stand", "beleg", "gelesen_am", "verwendet_fuer", "turnus", "zugang", "bemerkung"]
 
 
@@ -85,6 +87,27 @@ def pruefen(quellen):
                 fehler.append(f"{wo}: {feld} muss Text sein")
         if str(q.get("fundstelle", "")).startswith("http") and " " in str(q.get("fundstelle", "")).strip():
             fehler.append(f"{wo}: fundstelle mit Adresse darf keinen weiteren Text enthalten (Text gehört in bemerkung)")
+    fehler.extend(verweise_pruefen(gesehen))
+    return fehler
+
+
+def verweise_pruefen(bekannt):
+    """Quellenkennungen, die Steuerungsdokumente in Backticks nennen, müssen im Kataster stehen.
+
+    Geprüft wird jede Kennung, deren erster Teil (zum Beispiel ESTG, BGB, NBANK) im Kataster
+    vorkommt; so fällt eine fehlende Vorschrift eines bekannten Gesetzes auf, ohne dass andere
+    Kürzel in Backticks (Programmnamen, Modellannahmen) stören. Code und Tests kommen hinzu,
+    sobald es sie gibt.
+    """
+    fehler = []
+    vorsilben = {k.split("-")[0] for k in bekannt if k}
+    for name in VERWEISENDE:
+        pfad = WURZEL / name
+        if not pfad.is_file():
+            continue
+        for k in sorted(set(VERWEIS.findall(pfad.read_text(encoding="utf-8")))):
+            if k.split("-")[0] in vorsilben and k not in bekannt and not re.fullmatch(r"MA-\d{3}", k):
+                fehler.append(f"{k}: wird in {name} genannt, steht aber nicht im Kataster")
     return fehler
 
 

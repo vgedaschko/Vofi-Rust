@@ -6,20 +6,21 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Recherchebericht: vierte Überarbeitung nach der Sichtung der Prüfrunde 4 läuft (31 Punkte), danach Prüfrunde 5 als gezielte Nachprüfung (letzte Runde)
-- [ ] Prüfmodi erweitern, sobald die Überarbeitung des Berichts zurück ist: `modellannahmen.py --pruefen` gleicht Wirkorte in der Spezifikation ab, `quellenkataster.py --pruefen` die Quellenkennungen in den Steuerungsdokumenten; danach Nachprüfung durch die Rolle Dokumentation
+- [~] Prüfrunde 5 zum Recherchebericht läuft: gezielte Nachprüfung der geänderten Stellen durch alle sechs Rollen (letzte Runde); dazu Nachprüfung der Steuerungsdokumente durch die Rolle Dokumentation
 
 ## Als Nächstes
 
 - [ ] Fachspezifikation: offene Punkte aus Prüfrunde 3 klären – Renditeformel bei Einlagen und Entnahmen in verschiedenen Perioden, Reihenfolge der Rechenschritte bei der Rundung, nominal/effektiv je Zahlungsart, Buchung von Barzuschüssen, Prozessdefinition der Simulation
 - [ ] Recherche zu den fünf bisher nicht untersuchten Anbietern (Reasult, PROBIS und weitere) bis zur Vorprüfung
 - [ ] Quellenkataster: als Nächstes am Original lesen – KfW-Merkblatt 459 (Heizungsförderung für Vermieter), niedersächsisches Landesrecht (Mietpreisbremse und Kappungsgrenze, Grunderwerbsteuersatz, Einkommensgrenzen NWoFG), amtliche Fassung BEG EM, De-minimis-Verordnung, gif-Kennzahlen; künftig geltende Fassungen am Bundesgesetzblatt (Verlustvortrag ab 2028)
+- [ ] Quellenkataster: Mindestkapitalisierungszinssätze der BaFin am Original nachziehen
+- [ ] Recherche zum Erbbaurecht, falls es nach der Antwort auf die Fachfrage vorgezogen wird
+- [ ] Prüfliste für die Herstellervorführungen aus Anhang D des Berichts ableiten (vor der Vorprüfung)
 - [ ] Quellenkataster: Lizenzen klären für DIN 276/277, MF-GIF, BKI-Kennwerte und die KfW-Zinsdatei (16 Einträge)
 - [ ] Vorstudie Wirtschaftlichkeit: Eigenbau gegen Kauf und Excel-Ausbau, mit Mengengerüst des Auftraggebers und Aufwandsschätzung nach dem Architekturentwurf
 - [ ] Spezifikation Kapitel 2 (Funktionsumfang, Stufen) aus dem überarbeiteten Bericht füllen
 - [ ] Spezifikation Kapitel 5 zum Architekturentwurf ausbauen (Datenmodell, Schnittstellen, Rechte, Oberfläche)
 - [ ] Spezifikation Kapitel 3 zur vollständigen Fachspezifikation des Rechenkerns ausbauen (Tabellenaufbau, Formeln, Konventionen, Testfälle)
-- [ ] Nach Rückkehr der Berichtsüberarbeitung: Quellenkataster und Verzeichnis der Modellannahmen aus Quellnotiz 10 nachziehen (ImmoWertV-Werte 2026/2027, II. BV, Preisindex, Banklexikon; `MA-027` Rechenregel der Amortisationsdauer)
 - [ ] Immobilien-VOFI nach Schulte/Ropeter (Zeilenaufbau) aus frei zugänglichen Quellen belegen: Hochschulschriften und Verbandsveröffentlichungen; Bücher nur, wenn eine Lücke bleibt
 - [ ] II. BV: amtliche oder verbandliche Veröffentlichung der Beträge ab 01.01.2026 beschaffen (aus dem heutigen Preisindex nicht nachrechenbar, Notiz 10)
 - [ ] Fachspezifikation Steuern (aus Prüfrunde 4): Gewerbesteuer der Personengesellschaft beim Verkauf, Veräußerungsgewinn bei erweiterter Kürzung, Bewertung bei laufender Bindung über MA-017 hinaus, Zuschussentgelt in der Kreditprobe, Abstand zur Zielrendite als Endwertüberschuss (MA-012)
@@ -27,17 +28,18 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Wartet auf Nutzer
 
-- [ ] **Vor den Anwendergesprächen freigeben:** Schwellen der Vorprüfung. Vorschlag: (1) Bedarf allgemein – die Mehrheit der Befragten würde die Grobkalkulation statt Excel nutzen, sonst Abbruch; (2) Bedarf, der nur den Eigenbau trägt – die Mehrheit braucht Änderungsprotokoll, Arbeit mehrerer Personen an einem Projekt oder Berichte und Zugang für Kunden, sonst Vergleich nur von Kauf und Excel-Ausbau; (3) Mindestfallzahl – die Zeitersparnis über zehn Jahre deckt mindestens den Lizenzpreis des günstigsten vorgeführten Produkts
-- [ ] Vorgaben des Hauses (fällig mit der Fachspezifikation): Kalkulationszins, Zielrendite, Höhe der Stressfälle, Beleihungsquote, Mindestdeckung des Schuldendienstes, Anschlusszins, Warnschwellen
+- [ ] **Vor den Anwendergesprächen freigeben:** Schwellen der Vorprüfung. Vorschlag: (1) Bedarf allgemein – die Mehrheit der Befragten würde die Grobkalkulation statt Excel nutzen, sonst Abbruch; (2) Bedarf, der nur den Eigenbau trägt – die Mehrheit braucht Änderungsprotokoll, Arbeit mehrerer Personen an einem Projekt oder Berichte und Zugang für Kunden, sonst Vergleich nur von Kauf und Excel-Ausbau; (3) Mindestfallzahl – die Zeitersparnis über zehn Jahre deckt mindestens die Lizenzkosten des günstigsten vorgeführten Produkts über dieselben zehn Jahre
+- [ ] Vorgaben des Hauses (fällig mit der Fachspezifikation, spätestens vor dem Einsatz der Grobkalkulation): Kalkulationszins, Zielrendite, Höhe der Stressfälle, Beleihungsquote, Mindestdeckung des Schuldendienstes, Anschlusszins, Warnschwellen
 - [ ] Vorführungen bei den drei VOFI-Anbietern anfordern (Prüfliste kommt aus Anhang D des Berichts)
 - [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
 - [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
 - [ ] Ein Bildschirmfoto genügt statt eines Buchkaufs: Formel der „VOFI-Gesamtkapitalrentabilität" aus dem Gabler Banklexikon (gabler-banklexikon.de, Stichwort VOFI-Gesamtkapitalrentabilität) – die Formel ist dort ein Bild und von hier nicht lesbar. Ohne sie wird die Kennzahl nicht ausgewiesen; alles andere läuft ohne die Bücher
 - [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
-- [ ] Durchsicht der fünf Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016) und der zwei Ausnahmen von der Vorsichtsregel (MA-021, MA-022)
+- [ ] Durchsicht der fünf Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016) und der drei begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-021, MA-022)
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
-- [ ] Im NBank-Gespräch zusätzlich klären: Aufteilung bei teilgeförderten Vorhaben; Zuwendungsfähigkeit von Finanzierungskosten
+- [ ] Im NBank-Gespräch zusätzlich klären (Fragenliste: Bericht, Anhang B.6): Tilgungsplan und Zins ab dem 36. Jahr, KfW-Darlehen als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben, Restwert bei laufender Bindung, Umlage für den Heizungstausch in der Bindung (MA-002 bis MA-006, MA-017, MA-020, MA-021)
+- [ ] Vertretung für die Katalogverantwortung benennen
 - [ ] Sichtbarkeit des Repositorys `Vofi-Rust` entscheiden: derzeit öffentlich, enthält interne Planungsunterlagen
 - [ ] Gespräch mit der NBank: Rechenweise der Renditeprüfung (Überkompensation) erfragen
 - [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
@@ -52,11 +54,13 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Geplante Aufgaben einrichten, sobald der Regel- und Förderkatalog steht (Phase 1): monatlich Förderkonditionen, vierteljährlich Rechtsstand; bis dahin Durchsicht an jedem Freigabepunkt
 - [ ] Projekteigene Skills bauen: `vofi-fachmodell`, `referenzfall-anlegen`, später `foerderprogramm-pflegen`, `steuer-regeln`
 - [ ] Phase 3: Einrichtungsskript der Cloud-Umgebung, Prüfkette auf dem Server, Hooks für die Oberfläche
+- [ ] Stufe 4: marktübliche Werte für Betreiberimmobilien recherchieren
 - [ ] Rust-Workspace aufsetzen, CI, SessionStart-Hook für Toolchain in Cloud-Sitzungen; dabei `CLAUDE.md` um Glossar, Vorzeichenkonvention, „Geld nie als Gleitkommazahl“ und Build- und Testbefehle ergänzen
 - [ ] Referenzfälle (Golden-Master) aus Lehrbuch-/Excel-VOFI als Tests
 
 ## Erledigt
 
+- [x] 2026-11-18 Recherchebericht nach Prüfrunde 4 überarbeitet (31 Sichtungspunkte); 27 Modellannahmen, 215 Quellen; Prüfmodi beider Verzeichnisse gleichen jetzt auch die Kennungen in der Spezifikation ab
 - [x] 2026-11-18 Lehrbuchfragen ohne Buchkauf verfolgt (Quellnotiz 10): Eigenkapitalrentabilität bestätigt, Amortisationsdauer als Annahme mit zwei Lesarten, Gesamtkapitalrentabilität weiter offen; ImmoWertV-Werte 2026/2027 aus dem Preisindex nachgerechnet
 - [x] 2026-11-18 Steuerungsdokumente durch die Rolle Dokumentation geprüft (Note 7); zehn Befunde am Bestand bestätigt und behoben bis auf die Erweiterung der Prüfmodi
 - [x] 2026-11-18 Prüfrunde 4 zum Recherchebericht: Noten 9, 9, 8, 8, 8, 8; gesichtet (31 Punkte); Spezifikation, Entscheidungsprotokoll und Aufgabenliste nachgezogen
