@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Prüfrunde 4 zum Recherchebericht läuft (Investor, Praktiker, Fachexperte, Einheitsbrei-Prüfer; Finanzmathematiker und Jurist prüfen nur die Änderungen)
+- [~] Recherchebericht: vierte Überarbeitung nach der Sichtung der Prüfrunde 4 läuft (31 Punkte), danach Prüfrunde 5 als gezielte Nachprüfung (letzte Runde)
 
 ## Als Nächstes
 
@@ -18,11 +18,18 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Spezifikation Kapitel 2 (Funktionsumfang, Stufen) aus dem überarbeiteten Bericht füllen
 - [ ] Spezifikation Kapitel 5 zum Architekturentwurf ausbauen (Datenmodell, Schnittstellen, Rechte, Oberfläche)
 - [ ] Spezifikation Kapitel 3 zur vollständigen Fachspezifikation des Rechenkerns ausbauen (Tabellenaufbau, Formeln, Konventionen, Testfälle)
-- [ ] Fachliteratur beschaffen: Grob (VOFI-Gesamtkapitalrendite, Amortisationsdauer), Schulte/Ropeter (Immobilien-VOFI)
+- [ ] Fachliteratur auswerten, sobald der Auftraggeber sie bereitstellt: Grob (VOFI-Gesamtkapitalrendite, Amortisationsdauer), Schulte/Ropeter (Immobilien-VOFI); Fundstellen ins Kataster
+- [ ] Fachspezifikation Steuern (aus Prüfrunde 4): Gewerbesteuer der Personengesellschaft beim Verkauf, Veräußerungsgewinn bei erweiterter Kürzung, Bewertung bei laufender Bindung über MA-017 hinaus, Zuschussentgelt in der Kreditprobe, Abstand zur Zielrendite als Endwertüberschuss (MA-012)
+- [ ] Quellenkataster: niedersächsisches Haushaltsrecht (VV zu § 44 LHO, ANBest-P; klärt MA-021) und Übergangsrecht zu § 559f BGB am Original lesen – von der Cloud-Umgebung aus bisher nicht erreichbar
 
 ## Wartet auf Nutzer
 
-- [ ] Vorgaben des Hauses: Kalkulationszins, Zielrendite, Höhe der Stressfälle, Beleihungsquote, Mindestdeckung des Schuldendienstes, Warnschwellen, Schwelle für „Bedarf bestätigt" in den Anwendergesprächen
+- [ ] **Vor den Anwendergesprächen freigeben:** Schwellen der Vorprüfung. Vorschlag: (1) Bedarf allgemein – die Mehrheit der Befragten würde die Grobkalkulation statt Excel nutzen, sonst Abbruch; (2) Bedarf, der nur den Eigenbau trägt – die Mehrheit braucht Änderungsprotokoll, Arbeit mehrerer Personen an einem Projekt oder Berichte und Zugang für Kunden, sonst Vergleich nur von Kauf und Excel-Ausbau; (3) Mindestfallzahl – die Zeitersparnis über zehn Jahre deckt mindestens den Lizenzpreis des günstigsten vorgeführten Produkts
+- [ ] Vorgaben des Hauses (fällig mit der Fachspezifikation): Kalkulationszins, Zielrendite, Höhe der Stressfälle, Beleihungsquote, Mindestdeckung des Schuldendienstes, Anschlusszins, Warnschwellen
+- [ ] Vorführungen bei den drei VOFI-Anbietern anfordern (Prüfliste kommt aus Anhang D des Berichts)
+- [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
+- [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
+- [ ] Fachbücher bereitstellen: zuerst „Immobilienökonomie I" (De Gruyter, eBook) und Grob, „Einführung in die Investitionsrechnung" (gebraucht oder Bibliothek); im Gespräch hochladen, nicht ins öffentliche Repository
 - [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
 - [ ] Durchsicht der fünf Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016) und der zwei Ausnahmen von der Vorsichtsregel (MA-021, MA-022)
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
@@ -47,6 +54,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Prüfrunde 4 zum Recherchebericht: Noten 9, 9, 8, 8, 8, 8; gesichtet (31 Punkte); Spezifikation, Entscheidungsprotokoll und Aufgabenliste nachgezogen
 - [x] 2026-11-18 Recherchebericht nach Prüfrunde 3 überarbeitet (30 Sichtungspunkte); 25 Modellannahmen, 211 Quellen
 - [x] 2026-11-18 Plugin `frontend-design` für das Projekt installiert (Eintrag in `.claude/settings.json`)
 - [x] 2026-11-18 Gestaltungsreferenzen: 34 Vorbilder in der Mobbin-Sammlung, ausgewertet in `docs/gestaltungsreferenzen.md`
