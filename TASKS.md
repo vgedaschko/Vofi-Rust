@@ -10,6 +10,8 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Als Nächstes
 
+- [ ] Aus Quellnotiz 12 nachziehen, sobald die zweite Überarbeitung der Fachspezifikation zurück ist: prüfen, was sie davon schon umgesetzt hat (Rang des Förderdarlehens, Mindesttilgung 1 % der Bankmittel, Auszahlungsraten, Tilgungsbeginn, Tragfähigkeit nach Nr. 4.1); Verzeichnis `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-017`, `MA-026`; Kataster-Eintrag der Richtlinie mit den gelesenen Nummern
+- [ ] Arbeitsregel aus dem Fehler: Bevor eine Frage an Dritte geht (NBank, Bank, Steuerberater), wird sie am Originaltext der einschlägigen Quelle gegengelesen und die Fundstelle oder „schweigt dazu" vermerkt; ebenso bei jeder neuen Modellannahme. Die Fragen an Hausbank und Steuerberater sind danach noch einmal durchzusehen
 - [ ] Nach dem NBank-Gespräch: Antworten mit Datum und Gesprächspartner im Verzeichnis der Modellannahmen nachtragen (Status, Voreinstellung), Spezifikation und Katalogvorgaben nachziehen
 - [ ] Fachspezifikation: offene Punkte aus Prüfrunde 3 klären – Renditeformel bei Einlagen und Entnahmen in verschiedenen Perioden, Reihenfolge der Rechenschritte bei der Rundung, nominal/effektiv je Zahlungsart, Buchung von Barzuschüssen, Prozessdefinition der Simulation
 - [ ] Recherche zu den fünf bisher nicht untersuchten Anbietern (Reasult, PROBIS und weitere) bis zur Vorprüfung
@@ -48,7 +50,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
 - [ ] Vertretung für die Katalogverantwortung benennen
 - [ ] Sichtbarkeit des Repositorys `Vofi-Rust` entscheiden: derzeit öffentlich, enthält interne Planungsunterlagen
-- [ ] Gespräch mit der NBank (Termin in der Woche ab 23.11.2026): Leitfaden mit 20 Fragen liegt als Dokument vor – https://claude.ai/artifact/H2xAUn4xT3EikxE8E1rqX1 . Danach Antworten zurückmelden (ausgefüllte Spalte oder Foto der Notizen)
+- [ ] Gespräch mit der NBank (Termin in der Woche ab 23.11.2026): Leitfaden auf zehn offene Fragen gekürzt, nachdem die Richtlinie dagegen gelesen ist (13 der 20 ursprünglichen Fragen beantwortet sie ganz oder teilweise) – https://claude.ai/artifact/H2xAUn4xT3EikxE8E1rqX1 . Danach Antworten zurückmelden
 - [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
 - [ ] Verantwortung für die Pflege des Regel- und Förderkatalogs im Unternehmen benennen
 - [ ] Mengengerüst für die Wirtschaftlichkeitsrechnung: Projekte pro Jahr, Zeitaufwand je Kalkulation heute, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau; für das Beratungsgeschäft Mandate pro Jahr und Honorare
@@ -67,6 +69,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 NBank-Richtlinie gegen die Fragenliste gelesen (Hinweis des Auftraggebers): 5 Fragen ganz, 8 überwiegend oder teilweise beantwortet → Quellnotiz 12; Leitfaden gekürzt
 - [x] 2026-11-18 Prüfrunde 2 zur Fachspezifikation: sieben Rollen bei 8 von 10; Blindrechnung trifft rund 340 Sollwerte allein aus dem Text; gesichtet (32 Punkte)
 - [x] 2026-11-18 Fachspezifikation des Rechenkerns nach Prüfrunde 1 überarbeitet: 167 Regeln, 19 Proben, 20 Referenzfälle mit 906 Prüfungen, alle bestanden; 37 Modellannahmen, 229 Quellen
 - [x] 2026-11-18 Prüfrunde 1 zur Fachspezifikation des Rechenkerns: Noten 8, 7, 7, 7, 7, 7, 7; gesichtet (45 Punkte)
