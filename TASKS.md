@@ -6,10 +6,14 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Fachspezifikation des Rechenkerns: zweite Überarbeitung nach Prüfrunde 2 läuft (32 Sichtungspunkte); danach Nachziehen der Blindrechnung durch einen zweiten Bearbeiter und Prüfrunde 3
+- [~] Fachspezifikation des Rechenkerns: zweite Überarbeitung nach Prüfrunde 2 läuft (32 Sichtungspunkte, dazu die Regeln aus der NBank-Richtlinie); danach Nachziehen der Blindrechnung durch einen zweiten Bearbeiter und Prüfrunde 3
+- [~] Recherche läuft: jede offene Modellannahme und jede Frage der drei Leitfäden an amtlichen Quellen prüfen (BMF-Schreiben, Steuerrichtlinien, Landesrecht, NBank, KfW) → Quellnotiz 13
+- [~] Recherche läuft: Grunderwerbsteuer, Mietpreisbremse und Kappungsgrenze für Niedersachsen, Bremen, Hamburg, Schleswig-Holstein und Nordrhein-Westfalen am amtlichen Original mit Gemeindelisten → Quellnotiz 14
 
 ## Als Nächstes
 
+- [ ] Nach Rückkehr der zweiten Überarbeitung: Entscheidung „Netzzugang der Cloud-Umgebung uneingeschränkt (Einstellung des Auftraggebers vom 2026-11-18)" ins Entscheidungsprotokoll und in den Entwicklungsplan (Abschnitt Grundlagen) eintragen; Kataster-Einträge mit Vermerk „gesperrt" neu lesen (Gabler Banklexikon, Deutsche Nationalbibliothek, niedersächsisches Haushaltsrecht)
+- [ ] Nach den Quellnotizen 13 und 14: Verzeichnis der Modellannahmen, Quellenkataster und die drei Gesprächsleitfäden nachziehen; Landeswerte in den Katalog der Fachspezifikation
 - [ ] Aus Quellnotiz 12 nachziehen, sobald die zweite Überarbeitung der Fachspezifikation zurück ist: prüfen, was sie davon schon umgesetzt hat (Rang des Förderdarlehens, Mindesttilgung 1 % der Bankmittel, Auszahlungsraten, Tilgungsbeginn, Tragfähigkeit nach Nr. 4.1); Verzeichnis `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-017`, `MA-026`; Kataster-Eintrag der Richtlinie mit den gelesenen Nummern
 - [ ] Arbeitsregel aus dem Fehler: Bevor eine Frage an Dritte geht (NBank, Bank, Steuerberater), wird sie am Originaltext der einschlägigen Quelle gegengelesen und die Fundstelle oder „schweigt dazu" vermerkt; ebenso bei jeder neuen Modellannahme. Die Fragen an Hausbank und Steuerberater sind danach noch einmal durchzusehen
 - [ ] Nach dem NBank-Gespräch: Antworten mit Datum und Gesprächspartner im Verzeichnis der Modellannahmen nachtragen (Status, Voreinstellung), Spezifikation und Katalogvorgaben nachziehen
