@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Prüfrunde 1 zur Fachspezifikation des Rechenkerns, Teil 1, läuft (Finanzmathematiker, Fachexperte, Praktiker, Steuerberater, Bank, Controller, Grenzfälle) → `docs/pruefung/2026-11-18-fachspezifikation-rechenkern/`; danach Sichtung, die fünf vorgeschlagenen Modellannahmen eintragen, Spezifikation nachziehen
+- [~] Fachspezifikation des Rechenkerns: erste Überarbeitung nach Prüfrunde 1 läuft (45 Sichtungspunkte; Dokument, Referenzrechner, Verzeichnisse, Spezifikation); danach Blindrechnung der noch unbestätigten Referenzfälle durch einen zweiten Bearbeiter und Prüfrunde 2 mit denselben sieben Rollen
 
 ## Als Nächstes
 
@@ -39,8 +39,11 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
 - [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
 - [ ] Falls greifbar, zwei Buchstellen als Foto oder Auszug: Grob, „Einführung in die Investitionsrechnung", S. 140 f. (Gesamtkapitalrentabilität: welche Sollzinsen zählen; dazu die Amortisationsdauer) und Ropeter, „Investitionsanalyse für Gewerbeimmobilien" (1998), S. 186 ff. (Rendite bei mehreren Einlagen und Entnahmen). Nicht dringend: Bis dahin rechnet das Werkzeug mit gekennzeichneten Annahmen (MA-012, MA-027, MA-028)
+- [ ] Gespräch mit der Hausbank: zehn Fragen zur Kreditrechnung (Rang und Beleihungsraum, Wertansatz, kalkulatorischer Zins, Ertragsansatz, Deckung, Restfinanzierung neben dem NBank-Darlehen, Bereitstellungszinsen, Vorfälligkeit, Prolongation, Entgelte) – Leitfaden folgt als Dokument
+- [ ] Fragen an Ihren Steuerberater (fünf Punkte): Gewerbesteuer auf den Verkaufsgewinn bei erweiterter Kürzung; steuerliche Einordnung des NBank-Zuschusses; Vorfälligkeitsentschädigung bei der Privatperson; Objektverkauf einer GmbH & Co. KG; Verkauf in der befreiten Genossenschaft – Leitfaden folgt als Dokument
+- [ ] Zwei bis drei abgeschlossene eigene Kalkulationen (Excel) für die Parallelrechnung bereitstellen, hier im Gespräch, nicht im Repository; dazu, wenn greifbar, ein echter Tilgungsplan Ihrer Bank
+- [ ] Entscheiden: Soll ein Fehlbetrag in der Kalkulation als Nachschuss aus Eigenkapital erscheinen (Voreinstellung) oder über eine Kontokorrentlinie laufen? Und: Haltedauer im geförderten Neubau – Vorschlag Bindungsende plus ein Jahr
 - [ ] Durchsicht der sechs Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016, MA-026) und der begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-022, MA-023 beim Erwerb, Wertansatz in MA-026)
-- [ ] Gespräch mit der Hausbank (MA-026): Begrenzt die Beleihungsquote nur das eigene Darlehen oder alle Darlehen? Rechnet die Kapitaldienstfähigkeit das Förderdarlehen mit? Welcher Wertansatz und welche Bewirtschaftungspauschale gelten?
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
 - [ ] Vertretung für die Katalogverantwortung benennen
@@ -64,6 +67,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Prüfrunde 1 zur Fachspezifikation des Rechenkerns: Noten 8, 7, 7, 7, 7, 7, 7; gesichtet (45 Punkte)
 - [x] 2026-11-18 Fachspezifikation des Rechenkerns, Teil 1, als Entwurf: 148 Regeln, 14 Proben, 38 neue Festlegungen; Referenzrechner mit 15 Fällen und 529 Prüfungen, alle bestanden; in Dokumentationsübersicht und Pflichtlektüre aufgenommen
 - [x] 2026-11-18 Reihenfolge der Stufe 1 entschieden (Auftraggeber): nach der Grobkalkulation zuerst der Neubau in voller Tiefe, dann NBank-Förderung, danach Ankauf Bestand
 - [x] 2026-11-18 Regionaler Schwerpunkt geklärt (Auftraggeber): Niedersachsen, Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen; Förderung überwiegend KfW und NBank – Spezifikation und Entscheidungsprotokoll nachgezogen
