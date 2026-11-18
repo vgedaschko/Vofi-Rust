@@ -30,20 +30,48 @@ Parallel beim Auftraggeber, spätestens bis zur Bauentscheidung: Gespräch mit d
 | Architektur und Gestaltung | Grundsatzentscheidungen in Spezifikation Kapitel 5 und 6 | Architekturentwurf; Gestaltungssystem; Datenschutzkonzept | Phase 2 |
 | Prüfung | 16 Prüferrollen, Ablauf `/pruefrunde`, gemeinsame Regeln, Protokoll | – | – |
 | Skills | Eingebaut: `/code-review`, `/security-review`, `/simplify`, Tabellen-, PDF-, Diagramm- und Gestaltungs-Skills, Recherche | Projekt-Skills `vofi-fachmodell`, `referenzfall-anlegen`, `foerderprogramm-pflegen`, `steuer-regeln`; Plugins „Engineering" und „Product Management" sind vorgeschlagen, aber nicht aktiviert (nützlich, nicht notwendig) | Projekt-Skills mit Phase 1 und 3 |
-| Entwicklungsumgebung | Rust 1.97 mit `clippy`, `rustfmt` und WebAssembly-Ziel; Node 22 mit `pnpm`; PostgreSQL-Client; Cloud-Umgebung mit freigegebenen Quellen (KfW, NBank, BAFA, Gesetze) | Einrichtungsskript für Zusatzwerkzeuge (`wasm-pack`, `cargo-nextest`, `cargo-deny`, `sqlx-cli`); Rust-Arbeitsbereich; Oberflächenprojekt | Phase 3 |
-| Automatische Prüfkette | – | Hooks für Format, Lint und Tests; Prüfkette bei jeder Änderung auf dem Server; Abhängigkeitsprüfung | Phase 3 |
+| Entwicklungsumgebung | Am 18.11.2026 mit Probeläufen bestätigt, siehe Abschnitt 2a | Rust-Arbeitsbereich und Oberflächenprojekt; Einrichtungsskript der Cloud-Umgebung; Prüfkette auf dem Server | Phase 3 |
+| Automatische Prüfkette | Hooks für Formatierung nach jeder Änderung und für Lint und Tests vor jedem Stopp (getestet, wirksam ab der ersten Rust-Datei); Merker bei Änderungen an Spezifikation und Plan | Dieselbe Kette auf dem Server (GitHub Actions); Prüfungen für die Oberfläche; Abhängigkeitsprüfung | Phase 3 |
 | Wirtschaftlichkeit | – | Vorstudie mit Mengengerüst und Aufwandsschätzung | Phase 2 |
 
 Bewertung: Für Phase 0 und 1 ist alles Nötige da. Die technischen Werkzeuge der Phase 3 jetzt schon einzurichten wäre verfrüht, weil ihr Zuschnitt vom Architekturentwurf abhängt.
+
+## 2a Bereitschaft für den Programmierstart
+
+Geprüft am 18.11.2026 mit Probeläufen in der Cloud-Umgebung „VOFI Immobilienkalkulation".
+
+| Baustein | Befund | Beleg |
+|---|---|---|
+| Rust-Werkzeuge | bereit | Rust 1.97 mit `clippy` und `rustfmt`; Probepaket mit exakter Dezimalrechnung gebaut und getestet |
+| WebAssembly | bereit | Dasselbe Probepaket für den Browser gebaut und in Node ausgeführt |
+| Bibliotheken aus den Paketregistern | bereit | Abruf von crates.io und npm funktioniert |
+| Oberflächen-Werkzeuge | bereit | Node 22, `pnpm`; Vite, TypeScript und Vitest installierbar; Chromium für Oberflächentests vorhanden |
+| Datenbank | bereit | PostgreSQL 16 vorinstalliert, gestartet, Geldbeträge exakt summiert |
+| Rechenleistung | ausreichend | 4 Prozessorkerne, 15 GB Arbeitsspeicher, 30 GB frei |
+| Hooks | bereit | Formatierung, Lint und Tests gegen ein Probepaket getestet, einschließlich Fehlerfall |
+| WebAssembly-Bindewerkzeug | nachzuinstallieren | `wasm-bindgen-cli` in rund einer Minute installiert; geht bei einem Neustart der Umgebung verloren |
+
+Vor der ersten Zeile Produktcode noch zu tun (Phase 3, je rund ein Arbeitsgang):
+
+1. Rust-Arbeitsbereich und Oberflächenprojekt nach dem Architekturentwurf anlegen.
+2. Einrichtungsskript der Cloud-Umgebung: Bindewerkzeug in der festgelegten Version installieren, Datenbank starten.
+3. Prüfkette auf dem Server (GitHub Actions): Format, Lint, Tests, WebAssembly-Bau, Abhängigkeitsprüfung.
+4. Hooks für die Oberfläche (Typprüfung, Lint).
+5. Projekt-Skills `vofi-fachmodell` und `referenzfall-anlegen`.
+6. Sichtbarkeit des Repositorys entscheiden: `Vofi-Rust` ist derzeit öffentlich.
+
+Betriebsrisiko: Die Cloud-Umgebung wurde am 17./18.11.2026 zweimal neu gestartet; dabei gehen laufende Hintergrundarbeiten und nachinstallierte Werkzeuge verloren. Gegenmaßnahmen: früh und abschnittsweise speichern, Zwischenstände auf dem Arbeitszweig sichern, Werkzeuge über das Einrichtungsskript statt von Hand installieren.
+
+Die Umgebung ist damit nicht der Engpass. Was den Programmierstart bestimmt, sind die Ergebnisse der Phasen 1 und 2: die Fachspezifikation des Rechenkerns und der Architekturentwurf.
 
 ## 3 Prüfplan
 
 | Anlass oder Turnus | Was wird geprüft | Werkzeug | Status |
 |---|---|---|---|
-| Jeder Sitzungsstart und jeder Stopp | Offene Aufgaben | Hook `anything-else.sh` mit `TASKS.md` | aktiv |
+| Jeder Sitzungsstart und jeder Stopp | Offene Aufgaben; Pflichtlektüre und Dokumentationsübersicht stimmen mit dem Bestand überein | Hook `anything-else.sh` mit `TASKS.md` | aktiv |
 | Jedes Arbeitsergebnis (Bericht, Spezifikationskapitel, Entwurf, Rechenfunktion) | Fachlich, rechnerisch, rechtlich, aus Nutzer- und Entscheidersicht | `/pruefrunde` mit den passenden Rollen, wiederholt bis mindestens 9 von 10 (Abbruchregeln siehe dort) | aktiv |
-| Jede Antwort des Auftraggebers, jede Prüfrunde | Berührt das eine Festlegung? | Abgleich mit `docs/spezifikation.md`, Eintrag in `docs/entscheidungen.md` | aktiv |
-| Jede Codeänderung | Format, typische Fehler, Tests | Hooks mit `cargo fmt`, `cargo clippy`, `cargo test`; dieselbe Kette auf dem Server | ab Phase 3 |
+| Jede Antwort des Auftraggebers, jede Prüfrunde | Berührt das eine Festlegung? | Abgleich mit `docs/spezifikation.md`, Eintrag in `docs/entscheidungen.md`; Hook `spezifikation-merker.sh` erinnert bei jeder Änderung an Spezifikation oder Plan an die Folgepflichten | aktiv |
+| Jede Codeänderung | Format, typische Fehler, Tests | Hooks `rust-format.sh` (nach jeder Änderung) und `rust-pruefung.sh` (vor jedem Stopp: `clippy` ohne Warnungen, alle Tests) | eingerichtet, wirksam ab der ersten Rust-Datei; Server-Kette ab Phase 3 |
 | Jede Änderung am Rechenkern | Referenzfälle, Eigenschaftstests (Finanzierungssaldo null, Kontrollsummen), Ergebnisgleichheit Server und Browser | Testgerüst in der Prüfkette; Rolle Finanzmathematiker bei Formeländerungen | ab Phase 3 |
 | Jede Zusammenführung von Code | Korrektheit, Wartbarkeit | `/code-review`; Rolle Architekt bei größeren Änderungen | ab Phase 3 |
 | Jede Änderung an Anmeldung, Rechten, Kundenzugang, Datenhaltung | Sicherheit, Datenschutz, Nachweisbarkeit | `/security-review`; Rollen Revision und Jurist | ab Phase 3 |

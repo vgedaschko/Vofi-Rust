@@ -18,6 +18,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Wartet auf Nutzer
 
+- [ ] Sichtbarkeit des Repositorys `Vofi-Rust` entscheiden: derzeit öffentlich, enthält interne Planungsunterlagen
 - [ ] Gespräch mit der NBank: Rechenweise der Renditeprüfung (Überkompensation) erfragen
 - [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
 - [ ] Verantwortung für die Pflege des Regel- und Förderkatalogs im Unternehmen benennen
@@ -28,12 +29,13 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 - [ ] Geplante Aufgaben einrichten, sobald der Regel- und Förderkatalog steht: monatlich Förderkonditionen, vierteljährlich Rechtsstand
 - [ ] Projekteigene Skills bauen: `vofi-fachmodell`, `referenzfall-anlegen`, später `foerderprogramm-pflegen`, `steuer-regeln`
-- [ ] Hooks für `cargo fmt`/`clippy`/`test` einrichten, sobald der Rust-Workspace steht
+- [ ] Phase 3: Einrichtungsskript der Cloud-Umgebung, Prüfkette auf dem Server, Hooks für die Oberfläche
 - [ ] Rust-Workspace aufsetzen, CI, SessionStart-Hook für Toolchain in Cloud-Sitzungen
 - [ ] Referenzfälle (Golden-Master) aus Lehrbuch-/Excel-VOFI als Tests
 
 ## Erledigt
 
+- [x] 2026-11-18 Entwicklungsumgebung mit Probeläufen geprüft; Hooks für Rust und Spezifikations-Merker eingerichtet und getestet
 - [x] 2026-11-18 Dokumentationsübersicht mit Pflegegrundsätzen (`docs/README.md`), Rolle Dokumentation als 16. Prüfer
 - [x] 2026-11-18 Recherchebericht nach Prüfrunde 1 überarbeitet
 - [x] 2026-11-18 Entwicklungsplan mit Phasen, Bestandsaufnahme und Prüfplan → `docs/entwicklungsplan.md`

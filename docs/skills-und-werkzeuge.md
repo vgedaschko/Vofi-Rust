@@ -65,3 +65,15 @@ Sechzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
 Die Prüfer lesen nur und berichten; eingearbeitet wird erst nach Gegenprüfung. Ergebnisse stehen in `docs/pruefung/protokoll.md`.
 
 Für Gestaltungsvorbilder stehen die Mobbin-Werkzeuge bereit (Bildschirme und Abläufe realer Anwendungen durchsuchen); sie werden vor jedem Oberflächenentwurf genutzt.
+
+## 6 Hooks (eingerichtet)
+
+| Hook | Auslöser | Wirkung |
+|---|---|---|
+| `anything-else.sh start` | Sitzungsstart | Zeigt Pflichtlektüre und offene Aufgaben; meldet fehlende Dateien der Pflichtlektüre und Dokumente, die in der Übersicht fehlen |
+| `anything-else.sh stop` | Vor jedem Stopp | Hält einmal auf, solange unter „Jetzt" in `TASKS.md` etwas offen ist |
+| `spezifikation-merker.sh` | Nach Änderung an Spezifikation oder Entwicklungsplan | Erinnert an Stand-Datum, Entscheidungsprotokoll und Folgeänderungen |
+| `rust-format.sh` | Nach Änderung an einer Rust-Datei | Formatiert das Paket |
+| `rust-pruefung.sh` | Vor jedem Stopp, wenn sich Rust-Code geändert hat | `clippy` ohne Warnungen und alle Tests; hält bei Fehlern einmal auf |
+
+Dazu kommt der Hook der Cloud-Umgebung, der vor jedem Stopp nicht gesicherte Änderungen meldet. Noch nicht eingerichtet, weil sie vom Projektzuschnitt abhängen: Typprüfung und Lint der Oberfläche, die Prüfkette auf dem Server (Phase 3).
