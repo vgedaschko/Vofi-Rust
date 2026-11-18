@@ -12,6 +12,7 @@ Diese Dateien steuern das Projekt. Sie sind verbindlich, nicht Hintergrundmateri
 | `docs/spezifikation.md` | Was gebaut wird und warum; geltender Stand mit Status je Festlegung | Vor jeder inhaltlichen Arbeit | Bei jeder geänderten oder neuen Festlegung – vor der Umsetzung |
 | `docs/entwicklungsplan.md` | Phasen, Freigabepunkte, Bestandsaufnahme der Grundlagen, Prüfplan | Zu Sitzungsbeginn: In welcher Phase sind wir, was ist dran, welche Prüfung ist fällig? | Wenn eine Phase endet oder sich die Reihenfolge ändert |
 | `TASKS.md` | Offene Arbeit, auch die Punkte, die beim Auftraggeber liegen | Zu Sitzungsbeginn und vor jedem Stopp (der Hook erinnert daran) | Laufend |
+| `docs/quellenkataster.md` | Normen- und Quellenkataster: jede Quelle mit Kennung, Stand, Beleg und Prüfturnus | Bevor eine Rechts-, Förder- oder Normangabe verwendet oder geändert wird | Daten in `docs/quellenkataster/quellen.toml` ändern, dann `python3 scripts/quellenkataster.py`; bei jeder neuen Quelle und jedem Lesen am Original |
 | `docs/entscheidungen.md` | Entscheidungsprotokoll: was wann warum geändert wurde | Bevor eine frühere Festlegung angefasst wird | Bei jeder Entscheidung oder Änderung |
 | `docs/pruefung/regeln.md` und `docs/pruefung/protokoll.md` | Maßstab und Format der Prüfer; was wann mit welchem Ergebnis geprüft wurde | Vor jeder Prüfrunde | Nach jeder Prüfrunde |
 
@@ -27,6 +28,12 @@ Widersprechen sich zwei dieser Dateien, gilt die Spezifikation; der Widerspruch 
 - wenn der Hook beim Sitzungsstart eine fehlende oder nicht verzeichnete Datei meldet.
 
 Gehört ein Dokument neu zu denen, ohne die man nicht richtig arbeiten kann, kommt es in die Tabelle; hat eines diese Rolle verloren, fliegt es raus. Die Tabelle bleibt kurz – alles Übrige steht in der Übersicht.
+
+## Quellen
+
+- Keine Rechts-, Förder- oder Normangabe ohne Eintrag im Normen- und Quellenkataster. Neue Quelle: erst ins Kataster, dann verwenden.
+- Als „am Original gelesen" gilt nur, was in dieser oder einer protokollierten Prüfung tatsächlich am Originaltext gelesen wurde; das Datum wird im Kataster nachgetragen. Zahlen und Paragrafen aus dem Gedächtnis sind keine Quelle.
+- Spezifikation, Katalog, Code und Tests nennen die Kennung (zum Beispiel `BGB-559`), nicht Fundstelle und Stand – die stehen nur im Kataster.
 
 ## Spezifikation ist der Pfad
 

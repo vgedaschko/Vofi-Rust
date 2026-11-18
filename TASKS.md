@@ -6,6 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
+- [~] Normen- und Quellenkataster wird befüllt (`docs/quellenkataster/quellen.toml`); danach Stichprobe prüfen, Lücken als Aufgaben eintragen
 - [~] Zweite Überarbeitung des Rechercheberichts läuft (Auftrag: `docs/pruefung/2026-11-18-recherchebericht-runde2/sichtung.md`); danach Prüfrunde 3
 
 ## Als Nächstes

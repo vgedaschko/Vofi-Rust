@@ -28,6 +28,8 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
 
 4. **Einarbeiten.** Übernommene Befunde direkt im Prüfobjekt beheben; was nicht sofort geht, als Aufgabe in `TASKS.md`. Berührt ein Befund eine Festlegung, zuerst `docs/spezifikation.md` anpassen und die Änderung in `docs/entscheidungen.md` eintragen.
 
+   Haben Prüfer Quellen am Original gelesen, Lesedatum und Fassung im Quellenkataster nachtragen (`docs/quellenkataster/quellen.toml`, dann `python3 scripts/quellenkataster.py`).
+
 5. **Protokollieren** in `docs/pruefung/protokoll.md`: Datum, Prüfobjekt, eingesetzte Rollen, Note je Rolle, Zahl der Befunde je Schweregrad, was übernommen und was mit welchem Grund abgelehnt wurde. Widersprechen sich zwei Rollen, den Zielkonflikt benennen statt ihn stillschweigend zu entscheiden.
 
 6. **Wiederholen bis 9 von 10.** Nach dem Einarbeiten prüfen die Rollen erneut, die unter 9 lagen; in der letzten Runde liest zusätzlich der Einheitsbrei-Prüfer, ob die Korrekturen den Text verschlechtert haben. Jeder Prüfer bekommt in der Folgerunde seinen eigenen vorigen Bericht und die Sichtung, damit er prüft, ob seine Befunde behoben sind, statt von vorn zu beginnen – und er sucht trotzdem nach Neuem.

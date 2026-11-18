@@ -1,0 +1,18 @@
+# Normen- und Quellenkataster – Datenbestand.
+# Felder und erlaubte Werte: siehe Kopf von scripts/quellenkataster.py.
+# Nach jeder Änderung: python3 scripts/quellenkataster.py
+
+[[quelle]]
+id = "BGB-559"
+gruppe = "gesetz"
+kurz = "§ 559 BGB"
+titel = "Mieterhöhung nach Modernisierungsmaßnahmen"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__559.html"
+stand = "Fassung 23.07.2026"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Modernisierungsumlage", "Abzug des Erhaltungsanteils"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = ""

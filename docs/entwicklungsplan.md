@@ -26,6 +26,7 @@ Die Fachspezifikation (Phase 1) läuft parallel zur Vorprüfung, weil sie in jed
 |---|---|---|---|
 | Steuerung | Spezifikation mit Status je Festlegung, Entscheidungsprotokoll, Aufgabenliste mit Erinnerungs-Hook, dieser Plan | – | – |
 | Dokumentation | Übersicht mit Pflegegrundsätzen (`docs/README.md`); Projektdokumentation vollständig | Anwendungsdokumentation (Fachhandbuch, Katalog, Benutzerhandbuch, Architektur, Betrieb, Änderungshistorie) | je Dokument ab Phase 1 bis 4, siehe Übersicht |
+| Quellen | Normen- und Quellenkataster mit Erzeuger und Prüfmodus | Lesen der noch nicht am Original geprüften Quellen; Lizenzen für Normen und Kennwerte | laufend; Lizenzen vor Phase 3 |
 | Recherche | Bericht (in Überarbeitung), neun Quellnotizen, am Original geprüfte Rechts- und Förderangaben, drei nachgerechnete Referenzfälle mit Skripten | Lehrbuchdefinitionen (Grob; Schulte/Ropeter) am Original | Phase 1 |
 | Fachspezifikation | Leitlinien in Spezifikation Kapitel 3 und 4 | Vollständige Rechenkern-Spezifikation; Katalog-Datenmodell; Anforderungen Stufe 1 | Phase 1 |
 | Architektur und Gestaltung | Grundsatzentscheidungen in Spezifikation Kapitel 5 und 6 | Architekturentwurf; Gestaltungssystem; Datenschutzkonzept | Phase 2 |
@@ -81,8 +82,9 @@ Die Umgebung ist damit nicht der Engpass. Was den Programmierstart bestimmt, sin
 | Jeder Freigabepunkt und nach größeren Änderungen | Dokumentation als Ganzes: aktuell, widerspruchsfrei, auffindbar, ohne Dopplungen; Anwendungsdokumentation gegen tatsächliches Verhalten | Rolle Dokumentation gegen `docs/README.md` | aktiv |
 | Abnahme einer Stufe | Stimmen die Ergebnisse mit echten Fällen? | Parallelrechnung gegen Excel-Kalkulationen des Auftraggebers; Rolle Grenzfälle | ab Phase 4 |
 | Wöchentlich | Sicherheitslücken und Lizenzen der eingesetzten Bibliotheken | `cargo-deny`, `cargo-audit`, `pnpm audit` als geplanter Lauf der Prüfkette | ab Phase 3 |
-| Monatlich | Förderkonditionen und Zinsen gegen KfW, BAFA, NBank | Geplante Aufgabe mit Rolle Fördermittelberater und Skill `pdf` | einrichtbar, sobald der Katalog steht (Phase 1) |
-| Vierteljährlich und zum Jahreswechsel | Rechtsstand: Steuern, Mietrecht, laufende Gesetzgebung | Geplante Aufgabe mit Rollen Jurist und Steuerberater | einrichtbar, sobald der Katalog steht (Phase 1) |
+| Monatlich | Förderdokumente und Zinsen: alle Katastereinträge mit Turnus „monatlich" gegen die Originale bei KfW, BAFA, NBank | Geplante Aufgabe mit Rolle Fördermittelberater und Skill `pdf`; trägt Lesedatum und Fassung im Quellenkataster nach und meldet Abweichungen | einrichtbar, sobald das Kataster befüllt ist |
+| Vierteljährlich und zum Jahreswechsel | Rechtsstand: alle Katastereinträge mit Turnus „vierteljährlich" am Gesetzestext; laufende Gesetzgebung | Geplante Aufgabe mit Rollen Jurist und Steuerberater; trägt Lesedatum und Fassung im Quellenkataster nach und meldet Abweichungen | einrichtbar, sobald das Kataster befüllt ist |
+| Bei jeder Änderung am Kataster und bei jedem Sitzungsstart | Kataster vollständig ausgefüllt, Kennungen eindeutig, erzeugte Übersicht aktuell | `python3 scripts/quellenkataster.py --pruefen`; der Hook `anything-else.sh` meldet Fehler beim Sitzungsstart | aktiv |
 | Halbjährlich | Wettbewerber und Markt | Skill `deep-research` | ab Bauentscheidung |
 
 Die zeitgesteuerten Prüfungen laufen als geplante Aufgaben in einer eigenen Sitzung und melden nur Abweichungen. Sie werden eingerichtet, wenn es einen Katalog gibt, gegen den sie prüfen können.

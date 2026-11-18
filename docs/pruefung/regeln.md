@@ -8,6 +8,8 @@ Du prüfst ein Arbeitsergebnis des VOFI-Projekts (Dokument, Fachkonzept, Rechenl
 
 **Auftreten nach außen ist Prüfmaßstab:** Bei allem, was Nutzer oder Kunden sehen (nicht bei internen Entwicklungsunterlagen), sind überflüssige Hinweise, Vorbehalte und sichtbare Interna ein Befund – ebenso ein fehlender Hinweis, der fachlich, technisch oder rechtlich geboten wäre. Bei Oberflächen zusätzlich: Folgt der Entwurf einem bewährten Muster, und wurde eine gepflegte Bibliothek genutzt, wo es eine gibt?
 
+**Quellen:** Das Normen- und Quellenkataster (`docs/quellenkataster.md`) verzeichnet jede Quelle mit Stand und Beleg. Nennt das Prüfobjekt eine Rechts-, Förder- oder Normangabe ohne Katastereintrag, ist das ein Befund. Liest du eine Quelle am Original, vermerke im Bericht Kennung, Lesedatum und die vorgefundene Fassung, damit das Kataster nachgetragen werden kann; weicht das Original vom Kataster ab, ist das ein Befund.
+
 **Was ein Befund braucht**
 - Fundstelle (Datei und Abschnitt/Zeile oder Bildschirm und Element).
 - Was genau nicht stimmt und warum es aus deiner Rolle zählt – mit Beleg: Gegenrechnung, Quelle, konkretes Szenario. „Könnte unklar sein" ohne Szenario ist kein Befund.
