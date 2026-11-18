@@ -4,7 +4,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 
 **Diese Datei wird erzeugt.** Gepflegt wird `docs/modellannahmen/annahmen.toml`; danach `python3 scripts/modellannahmen.py` ausführen.
 
-**Stand:** 41 offene Annahmen, davon 8 mit hohem Gewicht · 0 erledigt
+**Stand:** 36 offene Annahmen, davon 8 mit hohem Gewicht · 5 erledigt
 
 ## Offene Annahmen
 
@@ -18,13 +18,8 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-026` | Rechengrundlage des Bankdarlehens | hoch | Kundenbericht | ja | Hausbank (13 Fragen in der Fachspezifikation des Rechenkerns, Kapitel 16); die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins je Tranchenart, Bemessungszeitraum, Mindestansatz der Bewirtschaftung) sind Vorgaben des Hauses | mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a |
 | `MA-030` | Gewerbesteuer auf den Verkaufsgewinn bei erweiterter Kürzung | hoch | Kundenbericht | ja | Steuerberater des Auftraggebers | mit der Antwort des Steuerberaters; spätestens vor dem Einsatz von Teilschritt 1a |
 | `MA-031` | Steuerliche Einordnung des NBank-Zuschusses | hoch | Kundenbericht | ja | Steuerberater des Auftraggebers; zur Praxis der Bewilligung die NBank | mit der Antwort des Steuerberaters; spätestens vor dem Förderteil (1c) |
-| `MA-006` | Aufteilung bei teilgeförderten Vorhaben | mittel | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
-| `MA-007` | Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete | mittel | Kundenbericht | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
-| `MA-010` | Verlustverrechnung ab 2028 | mittel | Anwendung | ja | Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater | mit der nächsten vierteljährlichen Rechtsprüfung |
+| `MA-007` | Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete | mittel | Kundenbericht | ja | Anwalt (nur noch: gilt die Frist von zwölf Jahren beim Umlagesatz von 8 % fort?) | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-017` | Restwert bei laufender Bindung | mittel | Kundenbericht | ja | NBank | nach dem Gespräch mit der NBank |
-| `MA-022` | Leerstand beim Mieterwechsel und Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
-| `MA-023` | Kostenbasis der Baukostenobergrenze der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
-| `MA-029` | Anknüpfung der De-minimis-Bindung der Sonderabschreibung | mittel | Anwendung | ja | Steuerberater | mit der Fachspezifikation des Steuermoduls (Phase 1) |
 | `MA-032` | Finanzierungskosten und Vorfälligkeit in der Steuer | mittel | Anwendung | ja | Steuerberater des Auftraggebers | mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation) |
 | `MA-033` | Vorfälligkeitsentschädigung als Pauschale | mittel | Anwendung | nein | Hausbank | nach dem Gespräch mit der Hausbank; Zinsschadenrechnung mit der Vollkalkulation (Teil 2 der Fachspezifikation) |
 | `MA-034` | Prolongation mit unverändertem Tilgungssatz | mittel | Anwendung | ja | Hausbank | nach dem Gespräch mit der Hausbank |
@@ -35,6 +30,7 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-002` | Tilgungsplan des NBank-Darlehens | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank; im Einzelfall der Bewilligungsbescheid |
 | `MA-003` | Zins des NBank-Darlehens ab dem 36. Jahr | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-005` | Finanzierungskosten als zuwendungsfähige Kosten der NBank | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
+| `MA-006` | Aufteilung bei teilgeförderten Vorhaben | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
 | `MA-008` | Modernisierungsumlage für den Heizungstausch bei Staffelmiete | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-009` | Teilung der Bio-Brennstoffkosten im Neubau | gering | nur intern | nein | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-011` | Bagatellgrenze bei der Umsatzsteueroption | gering | Anwendung | ja | Steuerberater | vor Stufe 3 (Gewerbe) |
@@ -43,7 +39,6 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 | `MA-018` | Ersatz eines Gaskessels als energetische Modernisierung | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-019` | Zinsverbilligte Darlehen bei der Umlage für den Heizungstausch | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-020` | Umlage für den Heizungstausch in der NBank-Bindung | gering | Anwendung | ja | NBank | nach dem Gespräch mit der NBank |
-| `MA-021` | Nicht abziehbare Vorsteuer als zuwendungsfähige Kosten der NBank | gering | Anwendung | ja | NBank (nur noch Bestätigung) | nach dem Gespräch mit der NBank |
 | `MA-024` | Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-025` | Modernisierungsumlage für den Glasfaseranschluss | gering | Anwendung | ja | Anwalt | mit der Rechtsprüfung vor dem Kundeneinsatz |
 | `MA-027` | Rechenregel der VOFI-Amortisationsdauer | gering | Anwendung | ja | Fachliteratur (Grob, Einführung in die Investitionsrechnung) oder ein Hochschulskript, das die Regel wiedergibt | mit der Fachspezifikation des Kennzahlenblatts (Spezifikation Kapitel 3) |
@@ -54,7 +49,8 @@ Verzeichnis der Annahmen über Recht, Förderpraxis und Methode, die sich vor de
 
 Nach Klärungsweg:
 
-- **Anwalt:** `MA-007`, `MA-008`, `MA-009`, `MA-018`, `MA-019`, `MA-024`, `MA-025`
+- **Anwalt:** `MA-008`, `MA-009`, `MA-018`, `MA-019`, `MA-024`, `MA-025`
+- **Anwalt (nur noch: gilt die Frist von zwölf Jahren beim Umlagesatz von 8 % fort?):** `MA-007`
 - **Anwender je Vorhaben (Heizkostenabrechnung des Verkäufers):** `MA-035`
 - **Anwender je Vorhaben (Mieterliste des Verkäufers):** `MA-037`
 - **Anwender je Vorhaben; im Zweifel Steuerberater des Investors:** `MA-016`
@@ -70,9 +66,7 @@ Nach Klärungsweg:
 - **Hausbank; KfW:** `MA-040`
 - **Land als Verordnungsgeber; Beobachtung über den Katalog:** `MA-039`
 - **NBank:** `MA-001`, `MA-002`, `MA-003`, `MA-004`, `MA-005`, `MA-006`, `MA-017`, `MA-020`
-- **NBank (nur noch Bestätigung):** `MA-021`
-- **Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater:** `MA-010`
-- **Steuerberater:** `MA-011`, `MA-022`, `MA-023`, `MA-029`
+- **Steuerberater:** `MA-011`
 - **Steuerberater des Auftraggebers:** `MA-030`, `MA-032`, `MA-036`, `MA-041`
 - **Steuerberater des Auftraggebers; zur Praxis der Bewilligung die NBank:** `MA-031`
 
@@ -93,7 +87,7 @@ Nach Klärungsweg:
 ### MA-002 · Tilgungsplan des NBank-Darlehens
 
 - **Annahme:** Das zinslose Darlehen wird in gleichbleibenden Raten im Takt des Rechenrasters getilgt, im Monatsraster also monatlich.
-- **Warum offen:** Beginn und Ende der Tilgung stehen in der Richtlinie: Beginn am Monatsersten nach der vollständigen Auszahlung, spätestens zwei Jahre nach dem Monat, der auf die Förderentscheidung folgt; Rückzahlung längstens 42 Jahre nach Bezugsfertigkeit; Aufschub des Beginns um bis zu fünf Jahre. Offen ist nur die Form der Raten: Die Modalitäten setzt die NBank fest.
+- **Warum offen:** Beginn und Ende der Tilgung stehen in der Richtlinie: Beginn am Monatsersten nach der vollständigen Auszahlung, spätestens zwei Jahre nach dem Monat, der auf die Förderentscheidung folgt; Rückzahlung längstens 42 Jahre nach Bezugsfertigkeit; Aufschub des Beginns um bis zu fünf Jahre. Offen ist nur die Form der Raten: Die Modalitäten setzt die NBank fest. Nachtrag 2026-11-18: Auch die Produktinformation (Stand 05.11.2026) nennt keinen Tilgungssatz, nur die Rückzahlung nach längstens 42 Jahren. Eine ältere Produktinformation nach den Bestimmungen von 2024 nannte 1,25 % und ab dem Ende der zinslosen Zeit 2,50 %; sie gilt für die Richtlinie 2026 nicht.
 - **Andere Lesart:** Jahresraten statt Monatsraten; steigende oder nach Vorgabe der NBank gestaffelte Raten.
 - **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 5.3.5. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`.
 - **Wirkung (gering):** Liquidität innerhalb des Jahres und laufender Beitrag; Endwert nur gering, weil das Darlehen 35 Jahre zinslos ist. Im geförderten Neubau des Referenzfalls: Tilgung ab Monat 23 in 500 Raten von 10.462,98 Euro; Kapitaldienst zu Bemessungskonditionen 151.713,24 Euro im Jahr.
@@ -131,7 +125,7 @@ Nach Klärungsweg:
 - **Annahme:** Finanzierungskosten einschließlich Bauzeitzinsen gehören nicht zu den zuwendungsfähigen Kosten und sind zusätzlich zu finanzieren.
 - **Warum offen:** Die Richtlinie nennt als Herstellungskosten die Kostengruppen 200 bis 700 nach DIN 276; die Finanzierung ist dort eine eigene Kostengruppe außerhalb dieser Spanne. Die Norm selbst ist nur im Inhaltsverzeichnis gesehen.
 - **Andere Lesart:** Finanzierungskosten sind ganz oder teilweise zuwendungsfähig.
-- **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 1.5; DIN 276 nur als Sekundärquelle. Angesetzt ist der ungünstigere Fall. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `DIN-276`.
+- **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 1.5; DIN 276 nur als Sekundärquelle. Angesetzt ist der ungünstigere Fall. Die Produktinformation (Stand 05.11.2026) nennt als zuwendungsfähig die Herstellungskosten der Kostengruppen 200 bis 700 und die Grundstückskosten der Kostengruppe 100; Finanzierungskosten nennt sie nicht. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `DIN-276`.
 - **Wirkung (gering):** Höhe von Darlehen und Zuschuss; Finanzierungslücke in der Bauphase.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
@@ -140,32 +134,34 @@ Nach Klärungsweg:
 
 ### MA-006 · Aufteilung bei teilgeförderten Vorhaben
 
-- **Annahme:** Kosten, Finanzierung und gemeinsame Erträge werden zwischen geförderten und frei finanzierten Wohnungen nach Wohnfläche aufgeteilt.
-- **Warum offen:** Ob die NBank einen bestimmten Schlüssel verlangt, ist nicht geprüft; der Antragsvordruck wurde dafür nicht im Einzelnen gelesen.
-- **Andere Lesart:** Aufteilung nach Wohnungszahl, nach tatsächlich zurechenbaren Kosten oder nach Vorgabe der NBank.
-- **Grundlage:** Übliche Praxis der Kostenzuordnung; keine Fundstelle.
-- **Wirkung (mittel):** Zuwendungsfähige Kosten des geförderten Teils und damit Förderhöhe; Rendite je Teil.
+- **Annahme:** Kosten und Finanzierung werden innerhalb des Wohnens nach Wohnfläche auf geförderte Einkommensgruppen und frei finanzierte Wohnungen aufgeteilt, zwischen Wohnen und Gewerbe nach umbautem Raum; gemeinsame Erträge nach Wohnfläche. Einzeln zurechenbare Kosten werden nicht vorab zugeordnet.
+- **Warum offen:** Der Schlüssel ergibt sich aus der Arbeitsmappe der NBank. Offen ist nur, ob einzeln zurechenbare Kosten vorab zugeordnet werden dürfen.
+- **Andere Lesart:** Kosten, die sich einzelnen Wohnungen eindeutig zurechnen lassen, werden vorab zugeordnet; nur der Rest wird nach dem Schlüssel verteilt.
+- **Grundlage:** NBank-Arbeitsmappe „Kosten-Finanzierungsaufteilung“, Blatt 1, Zeilen 11 bis 41 (gelesen 2026-11-18): Wohnflächenanteil mal Anteil des umbauten Raums. Quellen: `NBANK-KOSTEN-FINANZIERUNGSAUFTEILUNG`.
+- **Wirkung (gering):** Zuwendungsfähige Kosten des geförderten Teils und damit Förderhöhe; Rendite je Teil.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
+- **Bemerkung:** Am 2026-11-18 nach Quellnotiz 13 genauer gefasst; Gewicht von mittel auf gering.
 
 ### MA-007 · Dauer des Drittmittelabzugs bei Mieterhöhungen auf die Vergleichsmiete
 
-- **Annahme:** Fördermittel mindern Mieterhöhungen auf die ortsübliche Vergleichsmiete über den gesamten Betrachtungszeitraum.
-- **Warum offen:** Das Gesetz nennt keine Dauer; Rechtsprechung dazu ist nicht geprüft.
-- **Andere Lesart:** Der Abzug endet nach einer begrenzten Zeit, etwa mit dem Auslaufen des Förderzwecks oder nach einer von der Rechtsprechung gezogenen Frist.
-- **Grundlage:** § 558 Abs. 5 in Verbindung mit § 559a BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-558`, `BGB-559A`.
+- **Annahme:** Fördermittel mindern Mieterhöhungen auf die ortsübliche Vergleichsmiete für zwölf Jahre ab der mittleren Bezugsfertigkeit der geförderten Maßnahme.
+- **Warum offen:** Der Bundesgerichtshof begrenzt die Anrechnung auf zwölf Jahre und leitet die Frist aus dem damaligen Umlagesatz von 11 % ab. Ob sie beim heutigen Satz von 8 % unverändert gilt, ist nicht entschieden.
+- **Andere Lesart:** Länger als zwölf Jahre, weil sich der Zuschuss beim Umlagesatz von 8 % später aufzehrt; im strengsten Fall über den gesamten Betrachtungszeitraum (frühere Voreinstellung).
+- **Grundlage:** § 558 Abs. 5 in Verbindung mit § 559a BGB; BGH vom 13.06.2012, VIII ZR 311/11, Rn. 20 bis 27 (Wortlaut in nichtamtlicher Sammlung gelesen, Quellnotiz 15): zwölf Jahre ab mittlerer Bezugsfertigkeit; eine längere vertragliche Bindung verlängert die Anrechnung nicht. Die Voreinstellung folgt der Rechtsprechung und ist nicht mehr die strengste Lesart; als begründete Ausnahme von der Vorsichtsregel gekennzeichnet. Quellen: `BGB-558`, `BGB-559A`, `BGH-VIII-ZR-311-11`.
 - **Wirkung (mittel):** Mietpfad geförderter Sanierungen nach der ersten Erhöhung; Endwert und Rendite.
-- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
+- **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** Anwalt (nur noch: gilt die Frist von zwölf Jahren beim Umlagesatz von 8 % fort?) · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Kopplungen
+- **Bemerkung:** Am 2026-11-18 nach Quellnotiz 15 von „gesamter Betrachtungszeitraum“ auf zwölf Jahre umgestellt.
 
 ### MA-008 · Modernisierungsumlage für den Heizungstausch bei Staffelmiete
 
 - **Annahme:** Bei vereinbarter Staffelmiete ist während der Laufzeit der Staffeln keine Umlage für den Heizungstausch möglich.
 - **Warum offen:** Der Ausschluss von Mieterhöhungen bei Staffelmiete nennt die neue Umlage für den Heizungstausch nicht ausdrücklich; ob er sie erfasst, ist offen.
 - **Andere Lesart:** Die Umlage nach § 559e BGB ist neben der Staffelmiete zulässig.
-- **Grundlage:** § 557a BGB und § 559e BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-557A`, `BGB-559E`.
+- **Grundlage:** § 557a BGB und § 559e BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Am Wortlaut gelesen (2026-11-18): § 557a Abs. 2 Satz 2 BGB schließt nur Erhöhungen „nach den §§ 558 bis 559b“ aus; § 559e liegt außerhalb, und § 559e Abs. 4 verweist nicht auf § 557a. Das spricht für die andere Lesart; die vorsichtige Voreinstellung bleibt bis zur Rechtsprüfung. Quellen: `BGB-557A`, `BGB-559E`.
 - **Wirkung (gering):** Mieterlös nach Heizungstausch in Wohnungen mit Staffelmiete; gedeckelt auf 0,50 €/m² im Monat.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
@@ -185,13 +181,14 @@ Nach Klärungsweg:
 ### MA-010 · Verlustverrechnung ab 2028
 
 - **Annahme:** Verlustvorträge oberhalb von 1 Mio. € sind bis Veranlagungszeitraum 2027 zu 70 % und ab 2028 zu 60 % verrechenbar.
-- **Warum offen:** Der veröffentlichte Gesetzestext zeigt nur die heute geltende Fassung mit 70 %; die künftig geltende Fassung ist am Bundesgesetzblatt noch nicht gelesen.
+- **Warum offen:** Geklärt am Bundesgesetzblatt: Die Rückkehr auf 60 % ab dem Veranlagungszeitraum 2028 ist verkündetes Recht.
 - **Andere Lesart:** Es bleibt auch ab 2028 bei 70 %.
-- **Grundlage:** § 10d EStG in der geltenden Fassung; die Befristung bis 2027 ist nur aus zweiter Hand belegt. Angesetzt ist der ungünstigere Fall. Quellen: `ESTG-10D`.
+- **Grundlage:** Wachstumschancengesetz, BGBl. 2024 I Nr. 108: Art. 6 ersetzt in § 10d Abs. 2 Satz 1 EStG „70 Prozent“ durch „60 Prozent“, erstmals für den Veranlagungszeitraum 2028; Art. 6 tritt am 01.01.2028 in Kraft (Art. 35 Abs. 9). Quellen: `ESTG-10D`, `BGBL-2024-I-108`.
 - **Wirkung (mittel):** Steuerzahlungen von Vorhaben mit Anlaufverlusten ab 2028.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Projekt am Bundesgesetzblatt, Bestätigung durch den Steuerberater · **Wiedervorlage:** mit der nächsten vierteljährlichen Rechtsprüfung
-- **Status:** offen, gesetzt am 2026-11-18
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** geklärt am Bundesgesetzblatt · **Wiedervorlage:** mit der nächsten vierteljährlichen Rechtsprüfung
+- **Status:** bestätigt, gesetzt am 2026-11-18, erledigt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regel- und Förderkatalog
+- **Bemerkung:** Bestätigt am 2026-11-18 (Quellnotiz 15). Die Regel ist damit Festlegung im Katalog; eine Gesetzesänderung vor 2028 fängt die vierteljährliche Rechtsprüfung.
 
 ### MA-011 · Bagatellgrenze bei der Umsatzsteueroption
 
@@ -264,9 +261,9 @@ Nach Klärungsweg:
 ### MA-017 · Restwert bei laufender Bindung
 
 - **Annahme:** Endet der Betrachtungszeitraum vor dem Ende der Bindung, löst der Verkäufer das zinslose Förderdarlehen ab und zahlt den Zuschuss anteilig zurück; der Verkaufswert wird aus der gebundenen Miete abgeleitet. Ein Käufer übernimmt Darlehen und Bindung nicht.
-- **Warum offen:** Rückzahlung und Nachwirkung der Bindung stehen in der Richtlinie: Bei freiwilliger vollständiger Rückzahlung ist der Anteil des Zuschusses zurückzuzahlen, der auf die verbleibende Bindungsdauer entfällt, und die Bindungen wirken nach. Zur Übernahme von Darlehen und Bindung durch einen Käufer sagt die Richtlinie nichts.
+- **Warum offen:** Rückzahlung und Nachwirkung der Bindung stehen in der Richtlinie: Bei freiwilliger vollständiger Rückzahlung ist der Anteil des Zuschusses zurückzuzahlen, der auf die verbleibende Bindungsdauer entfällt, und die Bindungen wirken nach. Zur Übernahme von Darlehen und Bindung durch einen Käufer sagt die Richtlinie nichts. Nachtrag 2026-11-18 (Quellnotiz 13): Die Bindungen treffen kraft Gesetzes jeden Verfügungsberechtigten, also auch einen Käufer (§ 9 Abs. 1, § 10 NWoFG). Für den Eigentümer- und Schuldnerwechsel sieht die NBank eine Zustimmung gegen Entgelt vor (Entgeltkatalog Nr. 3: 0,5 % der Restschuld, 100 bis 1.500 Euro). Offen ist, unter welchen Voraussetzungen sie zustimmt und ob der Käufer das Darlehen zu unveränderten Bedingungen übernimmt.
 - **Andere Lesart:** Der Käufer übernimmt Darlehen und Bindung; der Vorteil des zinslosen Darlehens geht dann in den Kaufpreis ein.
-- **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 5.4.6. Angesetzt ist der ungünstigere Fall. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`.
+- **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 5.4.6. Angesetzt ist der ungünstigere Fall. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `NWOFG-9`, `NWOFG-10`, `NBANK-ENTGELTKATALOG`.
 - **Wirkung (mittel):** Restwert und Endwert geförderter Vorhaben mit Verkauf vor Bindungsende.
 - **Sichtbar:** Kundenbericht · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
@@ -278,7 +275,7 @@ Nach Klärungsweg:
 - **Annahme:** Der Ersatz eines Gaskessels durch einen neuen Gas- oder Ölkessel gilt nicht als energetische Modernisierung; ohne Förderfähigkeit wird keine Modernisierungsumlage angesetzt.
 - **Warum offen:** Ob der bloße Kesseltausch Endenergie nachhaltig einspart und damit die allgemeine Umlage eröffnet, ist eine Auslegungsfrage des Einzelfalls.
 - **Andere Lesart:** Der Tausch gilt als energetische Modernisierung; dann ist die allgemeine Umlage von 8 % möglich.
-- **Grundlage:** § 555b Nr. 1 und § 559 BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-555B`, `BGB-559`.
+- **Grundlage:** § 555b Nr. 1 und § 559 BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. BGH vom 26.03.2025, VIII ZR 283/23, Rn. 31 (Quellnotiz 15): Die Erneuerung des Heizkessels kann Endenergie einsparen; die Umlage setzt eine zum Zeitpunkt der Erklärung erwartbare, messbare und dauerhafte Einsparung voraus, und der Erhaltungsanteil ist abzuziehen. Die vorsichtige Voreinstellung bleibt, weil das Modell die Einsparung nicht prüfen kann; die andere Lesart wird als Eingabe „Einsparung nachgewiesen“ mit Erhaltungsanteil geführt. Quellen: `BGB-555B`, `BGB-559`, `BGH-VIII-ZR-283-23`.
 - **Wirkung (gering):** Mieterlös nach Kesseltausch ohne Förderung.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
@@ -302,7 +299,7 @@ Nach Klärungsweg:
 - **Annahme:** Während der Mietbindung der NBank wird keine Umlage für den Heizungstausch angesetzt.
 - **Warum offen:** Die Richtlinie lässt Mieterhöhungen in der Bindung nach bestimmten Vorschriften zu und nennt die neue Umlage für den Heizungstausch dabei nicht.
 - **Andere Lesart:** Die Umlage ist auch in der Bindung zulässig, soweit die Höchstmiete eingehalten wird.
-- **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 5.4.5. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `BGB-559E`.
+- **Grundlage:** Richtlinie Mietwohnraum 2026, Nummer 5.4.5. Angesetzt ist der für den Vermieter ungünstigere Fall. Am Wortlaut gelesen (2026-11-18): § 9 Abs. 1 Satz 3 NWoFG lässt Erhöhungen in den Grenzen der Förderentscheidung nach den allgemeinen mietrechtlichen Vorschriften zu, ohne Paragrafen aufzuzählen. Das Gesetz stützt die andere Lesart; die Höchstmiete begrenzt in jedem Fall. Quellen: `NBANK-RL-MIETWOHNRAUM-2026`, `BGB-559E`, `NWOFG-9`.
 - **Wirkung (gering):** Mieterlös gebundener Wohnungen nach Heizungstausch.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank · **Wiedervorlage:** nach dem Gespräch mit der NBank
 - **Status:** offen, gesetzt am 2026-11-18
@@ -316,46 +313,46 @@ Nach Klärungsweg:
 - **Andere Lesart:** Zuwendungsfähig sind nur die Nettokosten; die Umsatzsteuer ist zusätzlich zu finanzieren.
 - **Grundlage:** NBank, Vordruck 4009 „Einfacher Verwendungsnachweis“ (Stand Juli 2026), Nummer 5.4, vom Juristen am 18.11.2026 gelesen: Der Zuwendungsempfänger erklärt, dass die zuwendungsfähigen Ausgaben keine Umsatzsteuer enthalten, soweit sie nach § 15 UStG als Vorsteuer abziehbar ist. Das setzt voraus, dass nicht abziehbare Umsatzsteuer zuwendungsfähig ist. Die Richtlinie verweist in Nummer 12.5 für den Verwendungsnachweis auf Nummer 6 ANBest-P. Die Voreinstellung ist damit die am Text gestützte Lesart und keine Ausnahme von der Vorsichtsregel. Die andere Lesart senkte die Förderung auf die Baukosten um bis zu einem Sechstel (19/119 der Bruttokosten), weniger, wenn die Bemessungsgrenze kappt; die umsatzsteuerfreien Grundstückskosten berührt sie nicht. Quellen: `NBANK-VORDRUCK-4009`, `NBANK-RL-MIETWOHNRAUM-2026`, `NI-ANBEST-P`.
 - **Wirkung (gering):** Höhe von Darlehen und Zuschuss; Finanzierungslücke.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** NBank (nur noch Bestätigung) · **Wiedervorlage:** nach dem Gespräch mit der NBank
-- **Status:** offen, gesetzt am 2026-11-18
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** geklärt am Text des niedersächsischen Haushaltsrechts · **Wiedervorlage:** mit der nächsten vierteljährlichen Rechtsprüfung
+- **Status:** bestätigt, gesetzt am 2026-11-18, erledigt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
-- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts; Größe der Wirkung und Klärungsweg nach Prüfrunde 4 (Finanzmathematiker, Jurist) berichtigt. Prüfrunde 5 (Jurist): Grundlage ist jetzt der Vordruck 4009; Gewicht von mittel auf gering gesetzt, die Einordnung als Ausnahme von der Vorsichtsregel entfällt.
+- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts; Größe der Wirkung und Klärungsweg nach Prüfrunde 4 (Finanzmathematiker, Jurist) berichtigt. Prüfrunde 5 (Jurist): Grundlage ist jetzt der Vordruck 4009; Gewicht von mittel auf gering gesetzt, die Einordnung als Ausnahme von der Vorsichtsregel entfällt. Bestätigt am 2026-11-18 durch VV Nr. 2.6 zu § 44 LHO und Nr. 6.4 ANBest-P (`NI-ANBEST-P`, Quellnotiz 13): Nur die nach § 15 UStG abziehbare Vorsteuer gehört nicht zu den zuwendungsfähigen Ausgaben. Die Bestätigung durch die NBank entfällt.
 
 ### MA-022 · Leerstand beim Mieterwechsel und Sonderabschreibung
 
 - **Annahme:** Ein Leerstand zwischen zwei Mietverhältnissen schadet der Sonderabschreibung nicht, solange die Vermietungsabsicht fortbesteht. Schädlich bleiben Selbstnutzung, unentgeltliche Überlassung, vorübergehende Beherbergung und die Aufgabe der Vermietungsabsicht.
 - **Warum offen:** Das Gesetz verlangt, dass die Wohnung der entgeltlichen Überlassung zu Wohnzwecken dient; ob das einen Leerstand beim Mieterwechsel einschließt, ergibt sich aus der Verwaltungsauffassung, die nicht gelesen ist.
 - **Andere Lesart:** Jeder Leerstand im Nutzungszeitraum nach § 7b, dem Jahr der Anschaffung oder Herstellung und den neun folgenden Jahren, löst die rückwirkende Versagung der Sonderabschreibung aus.
-- **Grundlage:** § 7b Abs. 2 und 4 EStG: Das Gesetz stellt darauf ab, ob die Wohnung der entgeltlichen Überlassung zu Wohnzwecken dient, also auf ihre Zweckbestimmung (Einschätzung des Juristen am Wortlaut, Prüfrunden 3 und 4). Ausnahme von der Vorsichtsregel: Die ungünstige Lesart striche bei jedem Leerstandsstress die gesamte Sonderabschreibung und machte den Stressfall unbrauchbar. Quellen: `ESTG-7B`.
+- **Grundlage:** BMF-Schreiben vom 21.05.2025 zu § 7b EStG, Rn. 33: Eine Wohnung dient der entgeltlichen Überlassung auch, wenn sie vorübergehend leer steht, die Überlassung aber weiterhin vorgesehen ist und die Wohnung dafür bereitgehalten wird. Schädlich bleiben Selbstnutzung und unentgeltliche Überlassung (Rn. 32) sowie die vorübergehende Beherbergung (Rn. 36). Verwaltungsauffassung; die Finanzverwaltung ist daran gebunden. Quellen: `ESTG-7B`, `BMF-7B-2025`.
 - **Wirkung (mittel):** Steuerzahlungen im Neubau mit Sonderabschreibung; Ergebnis im Stressfall Leerstand.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
-- **Status:** offen, gesetzt am 2026-11-18
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** geklärt am Anwendungsschreiben der Finanzverwaltung · **Wiedervorlage:** bei Neufassung des Anwendungsschreibens
+- **Status:** bestätigt, gesetzt am 2026-11-18, erledigt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
-- **Bemerkung:** Aus Prüfrunde 3 (Jurist) und der dritten Überarbeitung des Rechercheberichts; schädliche Nutzungen und Begriff „Nutzungszeitraum“ aus Prüfrunde 4 (Jurist).
+- **Bemerkung:** Aus Prüfrunde 3 (Jurist) und der dritten Überarbeitung des Rechercheberichts; schädliche Nutzungen und Begriff „Nutzungszeitraum“ aus Prüfrunde 4 (Jurist). Bestätigt am 2026-11-18 (Quellnotiz 13). Die Voreinstellung ist damit keine Ausnahme von der Vorsichtsregel mehr.
 
 ### MA-023 · Kostenbasis der Baukostenobergrenze der Sonderabschreibung
 
-- **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird bei Herstellung an derselben Kostensumme gemessen wie die Förderung der NBank, den Kostengruppen 200 bis 700. Beim Erwerb zählt der Gebäudeanteil des Kaufpreises nach der Kaufpreisaufteilung zuzüglich der anteiligen Erwerbsnebenkosten, ohne den Marktwertdeckel der NBank.
-- **Warum offen:** Welche Kosten in die Grenze des § 7b EStG einzurechnen sind, beantwortet das Gesetz nicht nach Kostengruppen. Für die Anschaffung ist keine Kostensumme bestimmt; Kostengruppen gibt es beim Kauf vom Bauträger nicht.
-- **Andere Lesart:** Strenger beim Erwerb: der Kaufpreis einschließlich Boden nebst Erwerbskosten; die Grenze würde häufiger überschritten. Enger bei Herstellung: eine Kostensumme ohne Außenanlagen oder Baunebenkosten; die Grenze würde seltener überschritten.
-- **Grundlage:** § 7b Abs. 2 und 3 EStG messen die Anschaffungs- oder Herstellungskosten der begünstigten Wohnung. Bei Herstellung ist die weitere Kostensumme und damit der ungünstigere Fall angesetzt (Richtlinie Mietwohnraum 2026, Nummern 1.5 und 5.3.2). Beim Erwerb gilt eine begründete Ausnahme von der Vorsichtsregel: Angesetzt ist nicht die strengste Lesart, sondern der Gebäudeanteil (Einschätzung des Juristen am Wortlaut, Prüfrunde 5): Grund und Boden ist ein eigenes, nicht abnutzbares Wirtschaftsgut und zählt auch bei der Herstellung nicht mit (Kostengruppe 100); dieselben Worte würden sonst für Bau und Kauf verschieden gelesen. Der Marktwertdeckel der NBank beim Ersterwerb stammt aus den Nummern 5.3.2.1 und 5.3.2.4 der Richtlinie und hat in § 7b keine Grundlage; ohne ihn greift die Grenze eher. Quellen: `ESTG-7B`, `NBANK-RL-MIETWOHNRAUM-2026`.
-- **Wirkung (mittel):** Ob die Sonderabschreibung überhaupt gewährt wird; die Grenze ist eine Ausschlussgrenze.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
-- **Status:** offen, gesetzt am 2026-11-18
+- **Annahme:** Die Baukostenobergrenze der Sonderabschreibung wird an den abschreibungsfähigen Anschaffungs- oder Herstellungskosten des Gebäudes gemessen: ohne Grund und Boden, ohne Erschließung außerhalb des Grundstücks, ohne Möblierung und ohne Finanzierungskosten, mit Hausanschlüssen und Baunebenkosten. Von den Außenanlagen zählt nur die Einfriedung des Wohngrundstücks; Gartenanlagen, Wege, Hofbefestigung und Zufahrten zählen nicht. Geteilt wird durch die Nutzfläche des ganzen Gebäudes einschließlich Nebenräumen und Garagen, wahlweise durch die Bruttogrundfläche. Beim Erwerb zählt der Gebäudeanteil des Kaufpreises nach der Kaufpreisaufteilung zuzüglich der anteiligen Erwerbsnebenkosten.
+- **Warum offen:** Kostenbegriff, Flächenmaß und Außenanlagen sind durch die Verwaltungsauffassung geklärt. Im Modell liegt die Kostengruppe 500 meist nur als Summe vor: Sie zählt nicht zur Kostenbasis; Einfriedungen gibt der Anwender gesondert an.
+- **Andere Lesart:** Die Kostengruppe 500 zählt ganz mit (strenger, ohne Stütze in der Verwaltungsauffassung).
+- **Grundlage:** BMF-Schreiben vom 21.05.2025 zu § 7b EStG: abschreibungsfähige Kosten nach § 255 HGB (Rn. 38, 41), Grund und Boden und Erschließung außerhalb des Grundstücks zählen nicht, Hausanschlüsse zählen (Rn. 42, 43), Möblierung zählt nicht (Rn. 46), Kaufpreisaufteilung beim Erwerb (Rn. 47), Nutzfläche des ganzen Gebäudes oder Bruttogrundfläche nach DIN 277 (Rn. 49 bis 51); bei Überschreitung entfällt die Sonderabschreibung ganz (Rn. 48). Außenanlagen: Rn. 45 verweist auf R 21.1 Abs. 3 Satz 1 EStR – von der Gartengestaltung gehört nur die „lebende Umzäunung“ zum Gebäude, im Übrigen ist die Gartenanlage ein eigenes Wirtschaftsgut; die Umzäunung eines Mietwohngrundstücks gehört in der Regel zum Gebäude (H 6.4, H 7.1 EStH; Wortlaut in Verlagswiedergabe, Quellnotiz 15). Bis 2026-11-18 war bei Herstellung die Kostensumme der NBank-Förderung (Kostengruppen 200 bis 700) geteilt durch die Wohnfläche angesetzt; das war beim Kostenbegriff nahe am Ergebnis, beim Flächenmaß zu streng. Quellen: `ESTG-7B`, `BMF-7B-2025`, `ESTR-21-1`, `ESTH-6-4-7-1`.
+- **Wirkung (gering):** Ob die Sonderabschreibung überhaupt gewährt wird; die Grenze ist eine Ausschlussgrenze.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** geklärt am Anwendungsschreiben der Finanzverwaltung und an den Einkommensteuer-Richtlinien · **Wiedervorlage:** bei Neufassung des Anwendungsschreibens
+- **Status:** bestätigt, gesetzt am 2026-11-18, erledigt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
-- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts; Ersterwerb aus Prüfrunde 4 (Jurist). Prüfrunde 5 (Jurist): beim Erwerb Gebäudeanteil statt Kaufpreis einschließlich Boden, ohne Marktwertdeckel. Offen bleibt, welche Gebäudekosten im Einzelnen zählen, etwa Außenanlagen.
+- **Bemerkung:** Aus Prüfrunde 3 (Fachexperte) und der dritten Überarbeitung des Rechercheberichts; Ersterwerb aus Prüfrunde 4 (Jurist). Prüfrunde 5 (Jurist): beim Erwerb Gebäudeanteil statt Kaufpreis einschließlich Boden, ohne Marktwertdeckel. Offen bleibt, welche Gebäudekosten im Einzelnen zählen, etwa Außenanlagen. Am 2026-11-18 nach den Quellnotizen 13 und 15 neu gefasst und geschlossen. Die Wohnfläche bleibt Maßstab für den Deckel der Bemessungsgrundlage (BMF Rn. 59, 60), nicht für die Obergrenze.
 
 ### MA-024 · Zeitlicher Anwendungsbereich des Wärmepumpen-Nachweises
 
-- **Annahme:** Für jede im Betrachtungszeitraum eingebaute Wärmepumpe ist der Nachweis der Jahresarbeitszahl erforderlich; ohne ihn wird nur die Hälfte der Kosten umgelegt.
-- **Warum offen:** Für welche Einbauzeitpunkte und Mietverhältnisse die Vorschrift gilt, ist am Übergangsrecht nicht geprüft.
+- **Annahme:** Für eine eingebaute Wärmepumpe ist der Nachweis der Jahresarbeitszahl erforderlich, außer in den Fällen des § 559f Abs. 1 Satz 2 Nr. 1 bis 4 BGB (Gebäude nach 1996 errichtet, nach der Wärmeschutzverordnung 1995 gebaut, nach einer Sanierung mindestens auf dem Stand des § 38 Gebäudemodernisierungsgesetz oder mit höchstens 55 °C Vorlauftemperatur beheizbar); ohne Nachweis wird nur die Hälfte der Kosten umgelegt. Im Neubau greift die Halbierung nicht.
+- **Warum offen:** Eine Übergangsvorschrift zu §§ 559e, 559f BGB nennt die Inhaltsübersicht von Art. 229 EGBGB nicht; die Einzelvorschriften sind nicht gelesen. Ob ein Ausnahmefall vorliegt, gibt der Anwender je Vorhaben an.
 - **Andere Lesart:** Die Vorschrift gilt nur für bestimmte Zeiträume; außerhalb ist die volle Umlage ohne Nachweis möglich.
-- **Grundlage:** § 559f BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-559F`.
+- **Grundlage:** § 559f BGB. Angesetzt ist der für den Vermieter ungünstigere Fall. Quellen: `BGB-559F`, `EGBGB-ART-229`.
 - **Wirkung (gering):** Mieterlös nach Einbau einer Wärmepumpe.
 - **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Anwalt · **Wiedervorlage:** mit der Rechtsprüfung vor dem Kundeneinsatz
 - **Status:** offen, gesetzt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
-- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts.
+- **Bemerkung:** Aus der dritten Überarbeitung des Rechercheberichts. Am 2026-11-18 nach Quellnotiz 13 um die gesetzlichen Ausnahmen ergänzt.
 
 ### MA-025 · Modernisierungsumlage für den Glasfaseranschluss
 
@@ -407,15 +404,15 @@ Nach Klärungsweg:
 
 ### MA-029 · Anknüpfung der De-minimis-Bindung der Sonderabschreibung
 
-- **Annahme:** Die De-minimis-Bindung der Sonderabschreibung knüpft an die Person an: Gebunden ist jeder Anspruchsberechtigte, der Einkünfte aus Land- und Forstwirtschaft, Gewerbebetrieb oder selbständiger Arbeit hat, auch wenn die Wohnung nicht zu diesen Einkünften gehört. Das gilt auch für die Privatperson mit Praxis oder Gewerbe und für die Kapitalgesellschaft als Gesellschafterin einer vermögensverwaltenden Personengesellschaft. Das Merkmal wird am Investor geführt, bei Personengesellschaften je Gesellschafter.
-- **Warum offen:** § 7b Abs. 5 Satz 2 EStG wendet die Bindung an „nur bei Anspruchsberechtigten mit Einkünften im Sinne der §§ 13, 15 und 18“. Der Satz knüpft an die Person an und sagt nicht, dass die Wohnung selbst zu diesen Einkünften gehören muss. Die Verwaltungsauffassung dazu ist nicht gelesen.
-- **Andere Lesart:** Gebunden ist nur, wessen Wohnung zu diesen Einkünften gehört. Privatpersonen und vermögensverwaltende Personengesellschaften wären dann auch frei, wenn der Investor daneben eine Praxis oder ein Gewerbe hat; die Sonderabschreibung liefe bei ihnen ohne De-minimis-Prüfung.
-- **Grundlage:** § 7b Abs. 5 Satz 2 EStG, Einschätzung des Juristen am Wortlaut (Prüfrunde 5). Körperschaften nach § 1 Abs. 1 Nr. 1 bis 3 KStG sind nach beiden Lesarten gebunden, weil alle ihre Einkünfte als gewerblich gelten (§ 8 Abs. 2 KStG), auch für ihren Anteil an einer vermögensverwaltenden Personengesellschaft. Angesetzt ist die weitere Bindung und damit der ungünstigere Fall. Quellen: `ESTG-7B`, `KSTG-8`.
-- **Wirkung (mittel):** Ob die Sonderabschreibung eines Investors mit solchen Einkünften an der De-minimis-Höchstgrenze endet; Steuerzahlungen und Rendite nach Steuern im Neubau.
-- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** Steuerberater · **Wiedervorlage:** mit der Fachspezifikation des Steuermoduls (Phase 1)
-- **Status:** offen, gesetzt am 2026-11-18
+- **Annahme:** Die De-minimis-Bindung der Sonderabschreibung gilt, wenn die Sonderabschreibung im Rahmen der Gewinnermittlung von Einkünften aus Land- und Forstwirtschaft, Gewerbebetrieb oder selbständiger Arbeit beansprucht wird: bei Körperschaften, gewerblich geprägten und gewerblichen Personengesellschaften und bei Kapitalgesellschaften als Gesellschafterinnen einer vermögensverwaltenden Personengesellschaft (je Beteiligtem). Die Privatperson, die die Wohnung im Privatvermögen vermietet, ist nicht gebunden, auch wenn sie daneben eine Praxis oder ein Gewerbe hat.
+- **Warum offen:** Der Wortlaut des § 7b Abs. 5 Satz 2 EStG knüpft an die Person an; die Finanzverwaltung wendet die Bindung aber nur an, wenn die Sonderabschreibung in der Gewinnermittlung beansprucht wird. Ein Gericht könnte am Wortlaut anders entscheiden; praktisch ist das ohne Gewicht, weil die Verwaltung an ihr Schreiben gebunden ist.
+- **Andere Lesart:** Wortlaut des § 7b Abs. 5 Satz 2 EStG: Gebunden ist jeder Anspruchsberechtigte mit solchen Einkünften, auch die Privatperson mit Praxis oder Gewerbe.
+- **Grundlage:** BMF-Schreiben vom 21.05.2025 zu § 7b EStG, Rn. 83, 87, 107; Mitunternehmerschaften je Beteiligtem (Rn. 101 bis 104, 112). Körperschaften sind nach beiden Lesarten gebunden (§ 8 Abs. 2 KStG). Quellen: `ESTG-7B`, `KSTG-8`, `BMF-7B-2025`.
+- **Wirkung (gering):** Ob die Sonderabschreibung eines Investors mit solchen Einkünften an der De-minimis-Höchstgrenze endet; Steuerzahlungen und Rendite nach Steuern im Neubau.
+- **Sichtbar:** Anwendung · **Umschaltbar:** ja · **Klärung durch:** geklärt am Anwendungsschreiben der Finanzverwaltung · **Wiedervorlage:** bei Neufassung des Anwendungsschreibens
+- **Status:** bestätigt, gesetzt am 2026-11-18, erledigt am 2026-11-18
 - **Verwendet in:** Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage
-- **Bemerkung:** Aus Prüfrunde 5 (Jurist, Befund 1; Sichtung, Punkt 12).
+- **Bemerkung:** Aus Prüfrunde 5 (Jurist, Befund 1; Sichtung, Punkt 12). Am 2026-11-18 nach Quellnotiz 13 umgestellt: Bis dahin war die Anknüpfung an die Person voreingestellt (strengere Lesart des Wortlauts); die Verwaltungsauffassung ist die frühere „andere Lesart“. Die strengere Lesart bleibt umschaltbar.
 
 ### MA-030 · Gewerbesteuer auf den Verkaufsgewinn bei erweiterter Kürzung
 

@@ -339,22 +339,22 @@ gelesen_am = ""
 verwendet_fuer = ["Zeitlicher Anwendungsbereich der §§ 559e und 559f BGB"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Eine Volltextsuche am 17.11.2026 fand keine Übergangsvorschrift zu §§ 559e, 559f; §§ 35 und 49 nicht gelesen (Jurist, Runde 2)."
+bemerkung = "Eine Volltextsuche am 17.11.2026 fand keine Übergangsvorschrift zu §§ 559e, 559f; §§ 35 und 49 nicht gelesen (Jurist, Runde 2). Inhaltsübersicht am 2026-11-18 erneut durchgesehen (Quellnotiz 13): keine Übergangsvorschrift zu §§ 559e, 559f; Einzelvorschriften weiter nicht gelesen."
 
 [[quelle]]
 id = "NI-MIETERSCHUTZVO"
 gruppe = "gesetz"
-kurz = "Nds. Verordnung angespannte Wohnungsmärkte"
-titel = "Niedersächsische Verordnung zu Gebieten mit angespanntem Wohnungsmarkt (Mietpreisbremse, Kappungsgrenze)"
+kurz = "Niedersächsische Mieterschutzverordnung"
+titel = "Niedersächsische Mieterschutzverordnung vom 20.12.2024 (Mietpreisbremse, Kappungsgrenze, Kündigungssperrfrist)"
 herausgeber = "Land Niedersachsen"
-fundstelle = "Nds. GVBl. Nr. 121 vom 23.12.2024"
-stand = "nicht erfasst"
-beleg = "ungeprueft"
-gelesen_am = ""
+fundstelle = "https://voris.wolterskluwer-online.de/browse/document/904ebbae-a7f0-3b29-98be-2df947047a11"
+stand = "Nds. GVBl. 2024 Nr. 122, geändert 2025 Nr. 93; Fassung ab 04.12.2025"
+beleg = "original"
+gelesen_am = "2026-11-18"
 verwendet_fuer = ["Gemeinden mit Mietpreisbremse (§ 556d BGB)", "Gemeinden mit 15-%-Kappungsgrenze (§ 558 Abs. 3 BGB)", "Härtefall § 5d CO2KostAufG"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Fundstelle stammt aus einer falsch verlinkten NBank-Datei (Notiz 07); Inhalt, Gemeindeliste und Geltungsdauer nicht gelesen."
+bemerkung = "Alle Paragrafen in beiden Fassungen gelesen (Quellnotiz 14): 57 Gebiete, davon sechs Samtgemeinden (im Katalog auf Mitgliedsgemeinden auflösen); Mietpreisbremse und Kappungsgrenze bis 31.12.2029, Kündigungssperrfrist fünf Jahre bis 31.12.2031. Die frühere Fundstellenangabe „Nr. 121 vom 23.12.2024“ war falsch."
 
 # ---------------------------------------------------------------------------
 # Gesetze und Verordnungen: Heizung und CO2-Kosten
@@ -692,7 +692,7 @@ gelesen_am = "2026-11-18"
 verwendet_fuer = ["Verlustrücktrag und Verlustvortrag (Sockel 1 Mio. €, darüber 70 %)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Der geltende Text zeigt 70 % ohne Enddatum. Eine Rückkehr auf 60 % ab 2028 kann bereits verkündet sein, weil gesetze-im-internet.de keine künftig geltenden Fassungen zeigt – am BGBl. prüfen (siehe BGBL-2024-I-108)."
+bemerkung = "Der geltende Text zeigt 70 % ohne Enddatum. Eine Rückkehr auf 60 % ab 2028 kann bereits verkündet sein, weil gesetze-im-internet.de keine künftig geltenden Fassungen zeigt – am BGBl. prüfen (siehe BGBL-2024-I-108). Abs. 2 Satz 1 am 2026-11-18 erneut gelesen (Quellnotiz 13): 70 % ohne zeitliche Grenze in der geltenden Fassung."
 
 [[quelle]]
 id = "ESTG-21"
@@ -752,7 +752,7 @@ gelesen_am = "2026-11-18"
 verwendet_fuer = ["Altes Fenster § 7b letztmals 2026, bei abweichendem Wirtschaftsjahr letztmals für Wirtschaftsjahre, die vor dem 01.01.2027 enden (Abs. 15a)", "Anwendungsbeginn 70 % beim Verlustvortrag (Abs. 18b)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen nur Abs. 15a und 18b, zuletzt in Prüfrunde 4 (Jurist)."
+bemerkung = "Gelesen nur Abs. 15a und 18b, zuletzt in Prüfrunde 4 (Jurist). Abs. 15a und 18b am 2026-11-18 gelesen (Quellnotiz 13)."
 
 [[quelle]]
 id = "ESTDV-82B"
@@ -902,7 +902,7 @@ gelesen_am = "2026-11-18"
 verwendet_fuer = ["Erweiterte Kürzung mit Unschädlichkeitsgrenzen 20 % (Strom) und 5 % (sonstige Mieterleistungen)", "Reichweite der erweiterten Kürzung in der Steuer in Kurzform: nur der Teil des Gewerbeertrags aus Verwaltung und Nutzung des eigenen Grundbesitzes (Fachspezifikation R-7.8, MA-030)", "Reihenfolge: gekürzt wird die Summe aus Gewinn und Hinzurechnungen; Kürzung vor dem Verlustabzug (R-7.8, NF-47)", "Einfache Kürzung: in der Kurzform nicht gerechnet (R-7.8)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Gelesen nur Nr. 1. Bezugsgröße der Grenzen sind die Einnahmen aus der Gebrauchsüberlassung des Grundbesitzes. Prüfrunde 1 der Fachspezifikation (Steuerberater, Satz 1 bis 6): Satz 2 kürzt auf Antrag um den Teil des Gewerbeertrags, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt, und nennt als Berechtigte Unternehmen, die ausschließlich eigenen Grundbesitz verwalten und nutzen; Zinserträge aus Kapitalvermögen sind nicht gekürzt. Ob der Gewinn aus dem Verkauf des Objekts zum gekürzten Teil gehört, sagt der Wortlaut nicht (MA-030, Frage an den Steuerberater). Satz 1 (einfache Kürzung) lautet in der gelesenen Fassung auf die im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens, nicht mehr auf einen Prozentsatz des Grundsteuerwerts (siehe GEWSTG-36). Prüfrunde 2 der Fachspezifikation (Steuerberater, Einleitungssatz und Nr. 1 Satz 1 bis 6, 2026-11-18): „Die Summe des Gewinns und der Hinzurechnungen wird gekürzt um …“. Zum Wegfall der erweiterten Kürzung im Verkaufsjahr siehe BFH-III-R-1-23."
+bemerkung = "Gelesen nur Nr. 1. Bezugsgröße der Grenzen sind die Einnahmen aus der Gebrauchsüberlassung des Grundbesitzes. Prüfrunde 1 der Fachspezifikation (Steuerberater, Satz 1 bis 6): Satz 2 kürzt auf Antrag um den Teil des Gewerbeertrags, der auf die Verwaltung und Nutzung des eigenen Grundbesitzes entfällt, und nennt als Berechtigte Unternehmen, die ausschließlich eigenen Grundbesitz verwalten und nutzen; Zinserträge aus Kapitalvermögen sind nicht gekürzt. Ob der Gewinn aus dem Verkauf des Objekts zum gekürzten Teil gehört, sagt der Wortlaut nicht (MA-030, Frage an den Steuerberater). Satz 1 (einfache Kürzung) lautet in der gelesenen Fassung auf die im Erhebungszeitraum als Betriebsausgabe erfasste Grundsteuer für Grundbesitz des Betriebsvermögens, nicht mehr auf einen Prozentsatz des Grundsteuerwerts (siehe GEWSTG-36). Prüfrunde 2 der Fachspezifikation (Steuerberater, Einleitungssatz und Nr. 1 Satz 1 bis 6, 2026-11-18): „Die Summe des Gewinns und der Hinzurechnungen wird gekürzt um …“. Zum Wegfall der erweiterten Kürzung im Verkaufsjahr siehe BFH-III-R-1-23. Nr. 1 Satz 5 Nr. 2 und Satz 6 am 2026-11-18 gelesen (Quellnotiz 15): Ausnahmen von der Kürzung für binnen drei Jahren unter Teilwert eingebrachten Grundbesitz und für Gewinne nach § 7 Satz 2 Nr. 2 und 3."
 
 [[quelle]]
 id = "GEWSTG-10A"
@@ -1103,16 +1103,16 @@ bemerkung = "Änderungen durch Art. 9 und 10 G v. 29.06.2026 inhaltlich nicht au
 id = "NI-GREST-SATZ"
 gruppe = "gesetz"
 kurz = "Grunderwerbsteuersatz Niedersachsen"
-titel = "Landesrechtlicher Grunderwerbsteuersatz Niedersachsen"
+titel = "Gesetz über die Festsetzung des Steuersatzes für die Grunderwerbsteuer in Niedersachsen, Abs. 2"
 herausgeber = "Land Niedersachsen"
-fundstelle = "nicht erfasst"
-stand = "nicht erfasst"
-beleg = "sekundaer"
-gelesen_am = ""
-verwendet_fuer = ["Erwerbsnebenkosten in Niedersachsen"]
+fundstelle = "https://voris.wolterskluwer-online.de/browse/document/c5cc2d0a-541b-306e-bb77-f9718e25c730"
+stand = "Fassung ab 01.01.2014 (Nds. GVBl. 2013 S. 310)"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Erwerbsnebenkosten in Niedersachsen: 5,0 %"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "5,0 % nur nach Sekundärangabe; Landesgesetz, Fundstelle und Fassung am Original nachzuziehen."
+bemerkung = "5 % für Rechtsvorgänge ab 01.01.2014, vorher 4,5 % (Quellnotiz 14). Keine künftige Fassung auf VORIS."
 
 [[quelle]]
 id = "ASTG-1"
@@ -1142,22 +1142,22 @@ gelesen_am = ""
 verwendet_fuer = ["Auslegung von § 4h EStG und § 8a KStG"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "bundesfinanzministerium.de lieferte am 17.11.2026 nur eine Bot-Schutzseite."
+bemerkung = "Seit der Netzfreigabe abrufbar (bundesfinanzministerium.de, Datei 2025-03-24-Zinsschranke.pdf), aber noch nicht gelesen (Quellnotiz 13)."
 
 [[quelle]]
 id = "BGBL-2024-I-108"
 gruppe = "gesetz"
 kurz = "BGBl. 2024 I Nr. 108"
-titel = "Änderungsgesetz mit möglicher Rückkehr der Verlustvortragsgrenze auf 60 % ab 2028"
+titel = "Wachstumschancengesetz: Art. 2 Nr. 4, Art. 6, Art. 35 Abs. 4 und 9 (Verlustvortrag 70 %, ab 2028 wieder 60 %)"
 herausgeber = "Bund"
-fundstelle = "BGBl. 2024 I Nr. 108"
-stand = "nicht erfasst"
-beleg = "ungeprueft"
-gelesen_am = ""
+fundstelle = "https://www.recht.bund.de/bgbl/1/2024/108/VO.html"
+stand = "Gesetz vom 27.03.2024"
+beleg = "original"
+gelesen_am = "2026-11-18"
 verwendet_fuer = ["Verlustvortrag ab Veranlagungszeitraum 2028"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Fundstelle nach Vermutung des Juristen (Runde 2); recht.bund.de war gesperrt. Klärt, ob § 10d EStG ab 2028 wieder 60 % vorsieht."
+bemerkung = "Am Bundesgesetzblatt gelesen (Quellnotiz 15): Art. 6 setzt in § 10d Abs. 2 Satz 1 EStG wieder 60 % ein, erstmals für den Veranlagungszeitraum 2028; Art. 6 tritt am 01.01.2028 in Kraft (Art. 35 Abs. 9). Klärt MA-010. Ob ein späteres Gesetz Art. 6 ändert, gehört in die vierteljährliche Rechtsprüfung; der Entwurf des Jahressteuergesetzes 2026 ändert ihn nicht."
 
 [[quelle]]
 id = "JSTG-2026"
@@ -1506,7 +1506,7 @@ gelesen_am = ""
 verwendet_fuer = ["Einkommensermittlung für die Einkommensgruppen"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Die auf der NBank-Seite als DVO-NWoFG verlinkte Datei enthält eine andere Verordnung; richtige Fundstelle beschaffen."
+bemerkung = "Die auf der NBank-Seite als DVO-NWoFG verlinkte Datei enthält eine andere Verordnung; richtige Fundstelle beschaffen. Die NBank stellt die Fassung ab 01.09.2025 als PDF bereit, VORIS führt §§ 1 bis 6; heruntergeladen, nicht im Einzelnen gelesen (Quellnotiz 13)."
 
 [[quelle]]
 id = "BAFOEG-13"
@@ -1754,7 +1754,7 @@ gelesen_am = "2026-11-18"
 verwendet_fuer = ["Förderhöhe Darlehen und Zuschuss je Einkommensgruppe", "Zuwendungsfähige Kosten und Bemessungsgrenze (Indexregel)", "Bindung 35 Jahre, Eingangsmiete, Mieterhöhung in der Bindung", "Auszahlungsraten, Entgelte, Verwaltungskostenbeitrag", "Renditeprüfung gegen 30-Jahres-Swapsatz plus 100 Basispunkte", "Programme Bindungserwerb und Bindungsverlängerung", "Rang des Förderdarlehens nach den erststelligen Kapitalmarktmitteln; Mindesttilgung der vorrangigen Bankmittel (Fachspezifikation R-5.12)", "Teilraten der Auszahlung nach Baufortschritt, Darlehen und Zuschuss anteilig, Eigenmittel vorrangig (R-11.3)", "Beginn und Ende der Tilgung, Aufschub, zinslose Zeit und Zins danach (R-5.11)", "Deckung von Finanzierungs- und Bewirtschaftungskosten als Voraussetzung (R-11.14, Meldung M-50)", "Rückzahlung des Zuschusses und Nachwirkung der Bindung bei vorzeitiger Ablösung (R-8.7, R-8.8)"]
 turnus = "monatlich"
 zugang = "frei"
-bemerkung = "Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst. Zuletzt gelesen in Prüfrunde 4 (Jurist): Nr. 1.4, 1.5, 2.1, 5.3.1, 5.3.2.1 bis 5.3.2.4, 5.4.1 bis 5.4.8, 11.6, 11.7, 12.3 und 12.4.1; zur Umsatzsteuer enthält die Richtlinie keine Regel (einziger Treffer: Auftragswert „ohne Umsatzsteuer“ in Nr. 5.4.8), siehe NI-ANBEST-P. Am 2026-11-18 gegen die Fragenliste gelesen (Quellnotiz 12): Nr. 1.5, 2, 3, 4, 5.2.4 bis 5.5.9, 11.3 bis 11.11, 12.2 bis 12.7 und 13; nicht gelesen: 5.1, 5.2.1 bis 5.2.3, 6 bis 10 im Einzelnen, Anlagen. Aus der Richtlinie beantwortet sind danach Rang (5.3.6, 11.5), Mindesttilgung der Bankmittel (5.3.6), Teilraten und vorrangiger Einsatz der Eigenmittel (5.5.3 bis 5.5.6, 12.4.1), Tilgungsbeginn, Rückzahlungsfrist und Aufschub (5.3.5), zinslose Zeit und Zins danach (5.3.4), Eigenmittel (5.2.6), Herstellungskosten nach Kostengruppen (1.5), Bodenrichtwert (5.3.2.3), Rückzahlung bei Ablösung (5.4.6) und die Deckung als Voraussetzung (4.1). Für das Gespräch mit der NBank bleiben: Rechenblatt und Annahmen der Renditeprüfung, Form der Raten, Voraussetzungen des Eigenmittelersatzes, Schlüssel bei Teilförderung, Übernahme durch einen Käufer."
+bemerkung = "Offen für das Gespräch mit der NBank: Rechenweise der Renditeprüfung, Tilgungsplan, Anerkennung eines KfW-Darlehens als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben. Zuordnung der Gemeinden zu den Mietenstufen: Quelle nicht erfasst. Zuletzt gelesen in Prüfrunde 4 (Jurist): Nr. 1.4, 1.5, 2.1, 5.3.1, 5.3.2.1 bis 5.3.2.4, 5.4.1 bis 5.4.8, 11.6, 11.7, 12.3 und 12.4.1; zur Umsatzsteuer enthält die Richtlinie keine Regel (einziger Treffer: Auftragswert „ohne Umsatzsteuer“ in Nr. 5.4.8), siehe NI-ANBEST-P. Am 2026-11-18 gegen die Fragenliste gelesen (Quellnotiz 12): Nr. 1.5, 2, 3, 4, 5.2.4 bis 5.5.9, 11.3 bis 11.11, 12.2 bis 12.7 und 13; nicht gelesen: 5.1, 5.2.1 bis 5.2.3, 6 bis 10 im Einzelnen, Anlagen. Aus der Richtlinie beantwortet sind danach Rang (5.3.6, 11.5), Mindesttilgung der Bankmittel (5.3.6), Teilraten und vorrangiger Einsatz der Eigenmittel (5.5.3 bis 5.5.6, 12.4.1), Tilgungsbeginn, Rückzahlungsfrist und Aufschub (5.3.5), zinslose Zeit und Zins danach (5.3.4), Eigenmittel (5.2.6), Herstellungskosten nach Kostengruppen (1.5), Bodenrichtwert (5.3.2.3), Rückzahlung bei Ablösung (5.4.6) und die Deckung als Voraussetzung (4.1). Für das Gespräch mit der NBank bleiben: Rechenblatt und Annahmen der Renditeprüfung, Form der Raten, Voraussetzungen des Eigenmittelersatzes, Schlüssel bei Teilförderung, Übernahme durch einen Käufer. Zusätzlich gelesen Nr. 1.4, 11.1 bis 11.11 und 13.1 bis 13.3 (Quellnotiz 13); die Richtlinie steht auch auf VORIS."
 
 [[quelle]]
 id = "NBANK-PI-MIETWOHNUNGEN-MFH"
@@ -1765,11 +1765,11 @@ herausgeber = "NBank"
 fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Programminformation/Produktinformationen/Produktinformation-Mietwohnungen-in-Mehrfamilienh%C3%A4usern-%28NB-AuE-EE%29.pdf"
 stand = "Stand 05.11.2026"
 beleg = "original"
-gelesen_am = "2026-11-17"
-verwendet_fuer = ["Bemessungsgrenze seit 01.10.2026: 5.250 / 5.460 €/m²", "Eingangsmieten und Zuschlag Effizienzhaus 40"]
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Bemessungsgrenze seit 01.10.2026: 5.250 / 5.460 €/m²", "Eingangsmieten und Zuschlag Effizienzhaus 40", "Tilgung: kein Satz, Rückzahlung nach längstens 42 Jahren (MA-002)", "Sicherheiten: nachrangige Grundschuld; Objektgesellschaften immer mit weiteren Sicherheiten"]
 turnus = "monatlich"
 zugang = "frei"
-bemerkung = "Bemessungsgrenze wird zum 01.04. und 01.10. fortgeschrieben (siehe LSN-BAULEISTUNGSPREISE)."
+bemerkung = "Bemessungsgrenze wird zum 01.04. und 01.10. fortgeschrieben (siehe LSN-BAULEISTUNGSPREISE). Am 2026-11-18 ganz gelesen. Unter anderer Adresse (Datei Allgemeine-Mietwohnraumförderung.pdf) steht noch eine ältere Produktinformation mit Stand 01.04.2026 nach den Bestimmungen von 2024 (Tilgungsnachlass 30 %, 1,25 % Tilgung, 25 % Eigenleistung); sie gilt für Neubau nach der Richtlinie 2026 nicht."
 
 [[quelle]]
 id = "NBANK-PI-EH-NEUBAU"
@@ -1930,11 +1930,11 @@ herausgeber = "NBank"
 fundstelle = "https://www.nbank.de/medien/nb-media/Downloads/Formulare-zur-Antragstellung/Kosten-Finanzierungsaufteilung.xlsx"
 stand = "Dateieigenschaft „geändert 31.08.2026“"
 beleg = "original"
-gelesen_am = "2026-11-17"
-verwendet_fuer = ["Abgleich der Antragssicht mit Fördersätzen, Höchstdarlehen und Eigenmittelprüfung der NBank"]
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abgleich der Antragssicht mit Fördersätzen, Höchstdarlehen und Eigenmittelprüfung der NBank", "Schlüssel der Kostenaufteilung bei Teilförderung: Wohnfläche innerhalb des Wohnens, umbauter Raum zwischen Wohnen und Gewerbe (MA-006)"]
 turnus = "monatlich"
 zugang = "frei"
-bemerkung = ""
+bemerkung = "Blatt 1, Zeilen 6 bis 41 mit Formeln gelesen am 2026-11-18 (Quellnotiz 13)."
 
 [[quelle]]
 id = "NBANK-VORDRUCK-2012"
@@ -2040,10 +2040,10 @@ fundstelle = "https://www.kfw.de/PDF/Download-Center/F%C3%B6rderprogramme-%28Inl
 stand = "Merkblatt 07/2026, gültig ab 30.07.2026"
 beleg = "original"
 gelesen_am = "2026-11-18"
-verwendet_fuer = ["Neubaukredit 100.000 € bzw. 150.000 € mit QNG je Wohneinheit (Fachspezifikation R-5.19, KAT-15)", "Laufzeitvarianten mit tilgungsfreien Anlaufjahren; danach Annuität in Monatsraten über die Restlaufzeit (R-5.19)", "Bereitstellungsprovision 0,15 % je Monat ab dem 13. Monat nach der Zusage; Abruffrist 12 Monate mit Verlängerung um bis zu 24 Monate (R-5.19, Meldung M-49)", "Außerplanmäßige Tilgung nur vollständig und nur gegen Vorfälligkeitsentschädigung (R-5.16, MA-033)", "Prolongationsangebot zum Ende der Zinsbindung ohne Zinsverbilligung aus Bundesmitteln (R-5.8, MA-034)", "Stufe Effizienzhaus 55 (befristet)", "Kumulierungsausschlüsse und Sperrfristen"]
+verwendet_fuer = ["Neubaukredit 100.000 € bzw. 150.000 € mit QNG je Wohneinheit (Fachspezifikation R-5.19, KAT-15)", "Laufzeitvarianten mit tilgungsfreien Anlaufjahren; danach Annuität in Monatsraten über die Restlaufzeit (R-5.19)", "Bereitstellungsprovision 0,15 % je Monat ab dem 13. Monat nach der Zusage; Abruffrist 12 Monate mit Verlängerung um bis zu 24 Monate (R-5.19, Meldung M-49)", "Außerplanmäßige Tilgung nur vollständig und nur gegen Vorfälligkeitsentschädigung (R-5.16, MA-033)", "Prolongationsangebot zum Ende der Zinsbindung ohne Zinsverbilligung aus Bundesmitteln (R-5.8, MA-034)", "Stufe Effizienzhaus 55 (befristet)", "Kumulierungsausschlüsse und Sperrfristen", "Tilgungsfreie Jahre, Zinsbindung, Bereitstellungsprovision 0,15 % je Monat ab dem 13. Monat", "Vorfälligkeitsentschädigung bei außerplanmäßiger Tilgung, keine Teilrückzahlung (MA-033)", "Prolongation ohne Zinsverbilligung des Bundes (MA-034)"]
 turnus = "monatlich"
 zugang = "frei"
-bemerkung = "EH55-Stufe bis Mittelausschöpfung, längstens 31.12.2026 (KFW-PM-2026-06-19); Ausschöpfung der 800 Mio. € nicht veröffentlicht. Prüfrunde 2 der Fachspezifikation (Fachexperte, Seiten 4 bis 6, 2026-11-18): Laufzeitvarianten, Tilgungsform, Höchstbeträge, Bereitstellungsprovision, Abruffrist und Vorfälligkeit gelesen; Abschnitte „Tilgung“ und „Zinssatz“ am 2026-11-18 erneut nachgeprüft (Quellnotiz 13). Nicht im Merkblatt: die Zinssätze (KFW-KONDITIONENANZEIGER, nicht gelesen) und ob Laufzeit und Anlaufjahre ab der Zusage oder ab dem Abruf zählen (MA-040)."
+bemerkung = "EH55-Stufe bis Mittelausschöpfung, längstens 31.12.2026 (KFW-PM-2026-06-19); Ausschöpfung der 800 Mio. € nicht veröffentlicht. Prüfrunde 2 der Fachspezifikation (Fachexperte, Seiten 4 bis 6, 2026-11-18): Laufzeitvarianten, Tilgungsform, Höchstbeträge, Bereitstellungsprovision, Abruffrist und Vorfälligkeit gelesen; Abschnitte „Tilgung“ und „Zinssatz“ am 2026-11-18 erneut nachgeprüft (Quellnotiz 13). Nicht im Merkblatt: die Zinssätze (KFW-KONDITIONENANZEIGER, nicht gelesen) und ob Laufzeit und Anlaufjahre ab der Zusage oder ab dem Abruf zählen (MA-040). Am 2026-11-18 gelesen: Kombination, Kreditbetrag, Laufzeit und Zinsbindung, Zinssatz, Bereitstellung, Tilgung (Quellnotiz 13; Tilgung und Prolongation bei der Auswertung nachgelesen). Fördervoraussetzungen und technische Mindestanforderungen nicht gelesen."
 
 [[quelle]]
 id = "KFW-296-MERKBLATT"
@@ -3267,14 +3267,14 @@ gruppe = "gesetz"
 kurz = "VV zu § 44 LHO mit ANBest-P (Niedersachsen)"
 titel = "Verwaltungsvorschriften zu § 44 der Niedersächsischen Landeshaushaltsordnung mit den ANBest-P als Anlage"
 herausgeber = "Land Niedersachsen"
-fundstelle = "nicht erfasst"
+fundstelle = "voris.wolterskluwer-online.de, VV-LHO (Gliederungs-Nr. 64100): VV zu § 44 LHO; ANBest-P als Anlage 2 zu VV Nr. 5.1 zu § 44 LHO"
 stand = "nicht erfasst"
-beleg = "ungeprueft"
-gelesen_am = ""
+beleg = "original"
+gelesen_am = "2026-11-18"
 verwendet_fuer = ["Zuwendungsfähigkeit nicht abziehbarer Vorsteuer bei der NBank (klärt MA-021)"]
 turnus = "vierteljaehrlich"
 zugang = "frei"
-bemerkung = "Nur über RL Mietwohnraum 2026 Nr. 1.4 und 12.3.1 genannt (ANBest-P als Anlage 2 zu VV Nr. 5.1 zu § 44 LHO). Von der Cloud-Umgebung aus nicht erreichbar (Jurist, Prüfrunde 4); Leseauftrag in TASKS.md."
+bemerkung = "Gelesen VV Nr. 2.6 zu § 44 LHO und Nr. 6.4 ANBest-P (Quellnotiz 13; VV Nr. 2.6 bei der Auswertung nachgelesen): Nur die nach § 15 UStG abziehbare Vorsteuer gehört nicht zu den zuwendungsfähigen Ausgaben. Die Richtlinie Mietwohnraum 2026 verweist in Nr. 1.4 und 12.5 darauf. Klärt MA-021. Stand der Fassung nicht erfasst."
 
 [[quelle]]
 id = "DESTATIS-VPI"
@@ -3574,4 +3574,589 @@ gelesen_am = "2026-11-18"
 verwendet_fuer = ["Wegfall der erweiterten Kürzung im ganzen Verkaufsjahr, wenn der Grundbesitz vor dem 31.12., 23:59 Uhr, übergeht; Ausnahme nur für den Übergang zum Jahresende (Fachspezifikation R-7.8, Eingabe E-69, MA-030)"]
 turnus = "jaehrlich"
 zugang = "frei"
-bemerkung = "Rechtsprechung, in der Gruppe der Gesetze geführt. Am 2026-11-18 von der Projektleitung am Original gelesen (ganz; Quellnotiz 13, Leitsatz und Gründe II.1.a bis c, II.3) und für die Überarbeitung nach Prüfrunde 2 der Fachspezifikation übernommen: Die erweiterte Kürzung wird nicht zeitanteilig gewährt. Ob der Verkaufsgewinn bei einem Übergang zum Jahresende zum gekürzten Ertrag gehört, entscheidet das Urteil nicht (MA-030; BFH I R 89/03 nicht am Original gelesen). Eintrag von der Überarbeitung angelegt; Angaben nach Quellnotiz 13, Abschnitt (c)."
+bemerkung = "Rechtsprechung, in der Gruppe der Gesetze geführt. Am 2026-11-18 von der Projektleitung am Original gelesen (ganz; Quellnotiz 13, Leitsatz und Gründe II.1.a bis c, II.3) und für die Überarbeitung nach Prüfrunde 2 der Fachspezifikation übernommen: Die erweiterte Kürzung wird nicht zeitanteilig gewährt. Ob der Verkaufsgewinn bei einem Übergang zum Jahresende zum gekürzten Ertrag gehört, entscheidet das Urteil nicht (MA-030; BFH I R 89/03 nicht am Original gelesen). Eintrag von der Überarbeitung angelegt; Angaben nach Quellnotiz 13, Abschnitt (c). Nachtrag (Quellnotiz 15): BFH I R 89/03 ist jetzt im Wortlaut gelesen (`BFH-I-R-89-03`); dass der Verkaufsgewinn mitgekürzt wird, wenn die Kürzung zusteht, folgt aus H 9.2 (3) GewStH (`GEWSTR-9-2`)."
+
+[[quelle]]
+id = "BMF-7B-2025"
+gruppe = "gesetz"
+kurz = "BMF-Schreiben zu § 7b EStG (2025)"
+titel = "Anwendungsschreiben zur Sonderabschreibung für Mietwohnungsneubau nach § 7b EStG"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "bundesfinanzministerium.de, BMF-Schreiben vom 21.05.2025, GZ IV C 3 - S 2197/00009/011/024 (Datei 2025-05-21-anwendungsschreiben-7b-estg-neu.pdf)"
+stand = "21.05.2025; ersetzt die Schreiben vom 07.07.2020, 21.09.2021 und 29.05.2024"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Leerstand und Sonderabschreibung (MA-022)", "Kostenbegriff und Flächenmaß der Baukostenobergrenze (MA-023)", "Anknüpfung der De-minimis-Bindung (MA-029)", "Rückgängigmachung der Sonderabschreibung bei Verkauf im Nutzungszeitraum", "Beihilfewert der Sonderabschreibung und Kumulierung mit anderen Beihilfen"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Ganz gelesen (Rn. 1 bis 118; Quellnotiz 13). Verwaltungsauffassung: bindet die Finanzverwaltung, nicht die Gerichte. Tragende Stellen: Rn. 32 bis 36 (Nutzung, Leerstand), 38 bis 52 (Baukostenobergrenze: abschreibungsfähige Kosten nach § 255 HGB, Nutzfläche des ganzen Gebäudes oder Bruttogrundfläche), 53 bis 66 (Bemessungsgrundlage, Jahresbeträge, Restwert), 71 bis 79 (Rückgängigmachung), 83 bis 115 (De-minimis, Beihilfewert), 86 (Kumulierung). Das in Rn. 99 genannte Berechnungsschema war am 2026-11-18 nicht abrufbar."
+
+[[quelle]]
+id = "BFH-I-R-95-09"
+gruppe = "gesetz"
+kurz = "BFH I R 95/09"
+titel = "Urteil vom 25.08.2010: Zinserträge einer steuerbefreiten Wohnungsgenossenschaft"
+herausgeber = "Bundesfinanzhof"
+fundstelle = "bundesfinanzhof.de, Entscheidung STRE201050845"
+stand = "25.08.2010"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Steuerstatus „befreite Körperschaft“: Zinsen auf Kapital über dem mittelfristigen Bedarf sind steuerpflichtig"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Leitsatz und Tatbestand gelesen (Quellnotiz 13), Gründe nicht."
+
+[[quelle]]
+id = "NWOFG-9"
+gruppe = "gesetz"
+kurz = "§ 9 NWoFG"
+titel = "Niedersächsisches Wohnraumfördergesetz: Mietbindung"
+herausgeber = "Land Niedersachsen"
+fundstelle = "voris.wolterskluwer-online.de, NWoFG (VORIS 23400), § 9"
+stand = "Fassung nicht gesondert geprüft; Gesetz zuletzt geändert durch Art. 11 des Gesetzes vom 18.12.2025"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mieterhöhung in der Bindung nach den allgemeinen mietrechtlichen Vorschriften (MA-020)", "Bindung trifft jeden Verfügungsberechtigten, auch einen Käufer (MA-017)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 1 gelesen (Quellnotiz 13; Satz 1 und 3 bei der Auswertung nachgelesen): Miete höchstens die in der Förderentscheidung zugelassene; Erhöhung „in den Grenzen der Förderentscheidung nach den allgemeinen mietrechtlichen Vorschriften“, ohne Aufzählung von Paragrafen."
+
+[[quelle]]
+id = "NWOFG-10"
+gruppe = "gesetz"
+kurz = "§ 10 NWoFG"
+titel = "Niedersächsisches Wohnraumfördergesetz: Sicherung der Zweckbestimmung"
+herausgeber = "Land Niedersachsen"
+fundstelle = "voris.wolterskluwer-online.de, NWoFG (VORIS 23400), § 10"
+stand = "Fassung ab 10.05.2021 (Versionsverlauf auf VORIS)"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Leerstand geförderter Wohnungen höchstens drei Monate (Meldung im Leerstandsstress)", "Übergang der Bindung auf den Erwerber (MA-017)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen (Quellnotiz 13; Abs. 1 bei der Auswertung nachgelesen): Geförderter Mietwohnraum darf nicht länger als drei Monate leer stehen; Ausnahmen genehmigt die zuständige Stelle (Abs. 2)."
+
+[[quelle]]
+id = "NWOFG-11"
+gruppe = "gesetz"
+kurz = "§ 11 NWoFG"
+titel = "Niedersächsisches Wohnraumfördergesetz: Freistellung von Bindungen"
+herausgeber = "Land Niedersachsen"
+fundstelle = "voris.wolterskluwer-online.de, NWoFG (VORIS 23400), § 11"
+stand = "geändert durch Gesetz vom 30.01.2025 (Nds. GVBl. 2025 Nr. 7)"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Freistellung von Bindungen gegen Ausgleich – vom Rechenkern nicht abgebildet"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen (Quellnotiz 13). Gestaltungsweg, keine Rechenregel."
+
+[[quelle]]
+id = "NBANK-ENTGELTKATALOG"
+gruppe = "foerderung"
+kurz = "NBank Entgeltkatalog Wohnraumförderung"
+titel = "Entgeltkatalog Wohnraumförderung"
+herausgeber = "NBank"
+fundstelle = "nbank.de, Rechtliche Grundlagen, Landesrecht, Datei Entgeltkatalog.pdf"
+stand = "Druckstand 11.07.2022"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Entgelt für die Zustimmung zum Eigentümer- oder Schuldnerwechsel beim Verkauf mit laufender Förderung (MA-017)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Ganz gelesen (Quellnotiz 13; Nr. 3 bei der Auswertung nachgelesen): Zustimmung zum Eigentümer-/Schuldnerwechsel und zu Schuldhaftentlassungen 0,5 % der Restschuld, mindestens 100 und höchstens 1.500 Euro. Voraussetzungen der Zustimmung nennt der Katalog nicht. Ob der Stand von 2022 noch gilt, ist nicht geprüft."
+
+[[quelle]]
+id = "NBANK-WFB-2024"
+gruppe = "foerderung"
+kurz = "Wohnraumförderbestimmungen 2024"
+titel = "Wohnraumförderbestimmungen (RdErl. d. MW v. 23.04.2024)"
+herausgeber = "Land Niedersachsen"
+fundstelle = "Nds. MBl. 2024 Nr. 237; nbank.de (Datei „Wohnraumförderprogramm-2019-(Förderbestimmungen).pdf“, Dateiname irreführend)"
+stand = "außer Kraft mit Ablauf des 30.06.2026; Teilfortgeltung nach RL Mietwohnraum 2026 Nr. 13.3"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Alter Rechtsstand der Renditeprüfung (Nr. 31) als Anhalt für die Folge einer Überschreitung (MA-001)", "Altkonditionen für Bestandsbindungen"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Gelesen Nr. 10, 11, 12 bis 14, 22, 23, 31 und 71 (Quellnotiz 13; Nr. 31.3 bei der Auswertung nachgelesen). Kein geltendes Recht für Neubau nach der Richtlinie 2026."
+
+[[quelle]]
+id = "BELWERTV-3"
+gruppe = "gesetz"
+kurz = "§ 3 BelWertV"
+titel = "Grundsatz der Beleihungswertermittlung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/__3.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Maßstab für den Wertansatz der Bank (MA-026): vorsichtige Bewertung, nachhaltige Merkmale"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 1 und 2 gelesen (Quellnotiz 13). Bindet nur Pfandbriefbanken."
+
+[[quelle]]
+id = "BELWERTV-16"
+gruppe = "gesetz"
+kurz = "§ 16 BelWertV"
+titel = "Wert der baulichen Anlage (Sachwert)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/belwertv/__16.html"
+stand = "Fassung 04.10.2022"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Sicherheitsabschlag von mindestens 10 % auf den Herstellungswert als Anhalt für den Wertansatz der Bank im Neubau (MA-026)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 1 bis 3 gelesen (Quellnotiz 13). Bindet nur Pfandbriefbanken."
+
+[[quelle]]
+id = "BGB-502"
+gruppe = "gesetz"
+kurz = "§ 502 BGB"
+titel = "Vorfälligkeitsentschädigung (Verbraucherdarlehen)"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/bgb/__502.html"
+stand = "Fassung 23.07.2026 (Gesamtausgabe; Einzelnorm nicht gesondert geprüft)"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Abgrenzung: Die Obergrenzen des Abs. 3 gelten nicht für Immobilienfinanzierungen und nicht für Unternehmer (MA-033)"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Abs. 1 bis 3 gelesen (Quellnotiz 13)."
+
+[[quelle]]
+id = "AO-14"
+gruppe = "gesetz"
+kurz = "§ 14 AO"
+titel = "Wirtschaftlicher Geschäftsbetrieb; Vermögensverwaltung"
+herausgeber = "Bund"
+fundstelle = "https://www.gesetze-im-internet.de/ao_1977/__14.html"
+stand = "Fassung 22.10.2026 (Gesamtausgabe; Einzelnorm nicht gesondert geprüft)"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Steuerstatus „Körperschaft ohne Gewerbesteuer“ (Verein, Stiftung): Vermietung ist in der Regel Vermögensverwaltung"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen (Quellnotiz 13): Satz 3 – Vermögensverwaltung liegt in der Regel vor, wenn unbewegliches Vermögen vermietet oder verpachtet wird."
+
+[[quelle]]
+id = "NRW-GREST-SATZ"
+gruppe = "gesetz"
+kurz = "Grunderwerbsteuersatz Nordrhein-Westfalen"
+titel = "Gesetz über die Festsetzung des Steuersatzes für die Grunderwerbsteuer, § 1"
+herausgeber = "Land Nordrhein-Westfalen"
+fundstelle = "https://recht.nrw.de/lrgv/gesetz/01012015-gesetz-ueber-die-festsetzung-des-steuersatzes-fuer-die-grunderwerbsteuer/"
+stand = "Fassung ab 01.01.2015 (GV. NRW. 2014 S. 954)"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Erwerbsnebenkosten in Nordrhein-Westfalen: 6,5 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "6,5 % für Erwerbsvorgänge ab 01.01.2015, vorher 5 % (Quellnotiz 14). Ein Entwurf zur Senkung wurde 2024 abgelehnt."
+
+[[quelle]]
+id = "NRW-MIETSCHVO"
+gruppe = "gesetz"
+kurz = "Mieterschutzverordnung NRW"
+titel = "Mieterschutzverordnung NRW vom 28.01.2025 mit Anlage (Mietpreisbremse, Kappungsgrenze, Kündigungssperrfrist)"
+herausgeber = "Land Nordrhein-Westfalen"
+fundstelle = "https://recht.nrw.de/lrgv/rechtsverordnung/07112025-mieterschutzverordnung-nrw-mietschvo-nrw/"
+stand = "GV. NRW. 2025 S. 111, geändert S. 848; Fassung ab 07.11.2025"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Gemeinden mit Mietpreisbremse (§ 556d BGB) in Nordrhein-Westfalen", "Gemeinden mit 15-%-Kappungsgrenze (§ 558 Abs. 3 BGB) in Nordrhein-Westfalen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen mit Anlage (Quellnotiz 14): 57 Gemeinden, je ganzes Gemeindegebiet, eine Liste für alle Instrumente. Mietpreisbremse bis 31.12.2029, Kappungsgrenze und Kündigungssperrfrist (acht Jahre) bis 28.02.2030. Die Anlage ordnet Kaarst einem falschen Kreis zu – Gemeinden nur über den amtlichen Gemeindeschlüssel verknüpfen."
+
+[[quelle]]
+id = "HH-GREST-SATZ"
+gruppe = "gesetz"
+kurz = "Grunderwerbsteuersatz Hamburg"
+titel = "Gesetz über die Festsetzung des Steuersatzes bei der Grunderwerbsteuer, § 1"
+herausgeber = "Freie und Hansestadt Hamburg"
+fundstelle = "HmbGVBl. 2022 Nr. 16 (https://www.luewu.de/wp-content/uploads/2025/08/GVBL_HH_2022-16.pdf, amtliche Ausgabestelle)"
+stand = "HmbGVBl. 2008 S. 433, geändert durch Gesetz vom 08.03.2022; gültig ab 01.01.2023"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Erwerbsnebenkosten in Hamburg: 5,5 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen ist das Änderungsgesetz im Verkündungsblatt, nicht die konsolidierte Fassung (landesrecht-hamburg.de nicht erreichbar; Quellnotiz 14). Vorher 4,5 %."
+
+[[quelle]]
+id = "HH-MIETPREISBEGRENZUNGSVO"
+gruppe = "gesetz"
+kurz = "Mietpreisbegrenzungsverordnung Hamburg"
+titel = "Mietpreisbegrenzungsverordnung vom 25.11.2025"
+herausgeber = "Freie und Hansestadt Hamburg"
+fundstelle = "HmbGVBl. 2025 Nr. 41 S. 684 (https://www.luewu.de/wp-content/uploads/2025/12/GVBL_HH_2025-41.pdf)"
+stand = "in Kraft 01.01.2026 bis 31.12.2029"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Mietpreisbremse (§ 556d BGB) in Hamburg: ganzes Stadtgebiet"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen im Verkündungsblatt (Quellnotiz 14)."
+
+[[quelle]]
+id = "HH-KAPPUNGSGRENZENVO"
+gruppe = "gesetz"
+kurz = "Kappungsgrenzenverordnung Hamburg"
+titel = "Kappungsgrenzenverordnung vom 08.08.2023"
+herausgeber = "Freie und Hansestadt Hamburg"
+fundstelle = "HmbGVBl. 2023 Nr. 31 S. 267 (https://www.luewu.de/wp-content/uploads/2025/08/GVBL_HH_2023-31.pdf)"
+stand = "in Kraft 01.09.2023 bis 31.08.2028"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["15-%-Kappungsgrenze (§ 558 Abs. 3 BGB) in Hamburg: ganzes Stadtgebiet"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Gelesen im Verkündungsblatt (Quellnotiz 14). Endet als erste der erfassten Verordnungen; Nachfolge prüfen ab 01.03.2028. Im selben Heft (S. 261) die Kündigungsschutzfristverordnung: zehn Jahre, bis 31.08.2033."
+
+[[quelle]]
+id = "HB-GREST-SATZ"
+gruppe = "gesetz"
+kurz = "Grunderwerbsteuersatz Bremen"
+titel = "Gesetz über die Festsetzung des Steuersatzes für die Grunderwerbsteuer (Bremen)"
+herausgeber = "Freie Hansestadt Bremen"
+fundstelle = "Brem.GBl. 2025 Nr. 9 (nicht abrufbar); Senatsentwurf: Bremische Bürgerschaft, Drucksache 21/885"
+stand = "5,5 % ab 01.07.2025, vorher 5,0 %"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Erwerbsnebenkosten in Bremen und Bremerhaven: 5,5 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Am Original gelesen ist nur der Senatsentwurf; die Verkündung ist sekundär belegt, weil die Server unter bremen.de den Abruf abweisen (Quellnotiz 14)."
+
+[[quelle]]
+id = "HB-MIETENBEGRENZUNGSVO"
+gruppe = "gesetz"
+kurz = "Mietenbegrenzungsverordnung Bremen"
+titel = "Mietenbegrenzungsverordnung vom 18.11.2025"
+herausgeber = "Freie Hansestadt Bremen"
+fundstelle = "Brem.GBl. 2025 S. 1254 (Adresse nicht ermittelt)"
+stand = "01.12.2025 bis 31.12.2029"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Mietpreisbremse (§ 556d BGB) in der Stadtgemeinde Bremen, nicht in Bremerhaven"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur Sekundärbelege und eine Senatsantwort (Quellnotiz 14); Verordnungstext nicht gelesen."
+
+[[quelle]]
+id = "HB-KAPPUNGSGRENZENVO"
+gruppe = "gesetz"
+kurz = "Kappungsgrenzen-Verordnung Bremen"
+titel = "Kappungsgrenzen-Verordnung vom 16.08.2024"
+herausgeber = "Freie Hansestadt Bremen"
+fundstelle = "Brem.GBl. 2024 S. 598 (Adresse nicht ermittelt)"
+stand = "01.09.2024 bis 31.08.2029"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["15-%-Kappungsgrenze (§ 558 Abs. 3 BGB) in der Stadtgemeinde Bremen"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Nur Sekundärbelege (Quellnotiz 14); Verordnungstext nicht gelesen."
+
+[[quelle]]
+id = "SH-GREST-SATZ"
+gruppe = "gesetz"
+kurz = "Grunderwerbsteuersatz Schleswig-Holstein"
+titel = "Landesgesetz über den Grunderwerbsteuersatz Schleswig-Holstein"
+herausgeber = "Land Schleswig-Holstein"
+fundstelle = "nicht ermittelt"
+stand = "6,5 % (Sekundärangabe)"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Erwerbsnebenkosten in Schleswig-Holstein: 6,5 %"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "Landesgesetz nicht gelesen; die Landesserver brechen die Verbindung ab (Quellnotiz 14)."
+
+[[quelle]]
+id = "SH-KAPPVO"
+gruppe = "gesetz"
+kurz = "Kappungsgrenzenverordnung Schleswig-Holstein"
+titel = "Kappungsgrenzenverordnung Schleswig-Holstein vom 25.03.2024"
+herausgeber = "Land Schleswig-Holstein"
+fundstelle = "GVOBl. Schl.-H. 2024 Nr. 4 S. 308 (nicht abrufbar)"
+stand = "01.05.2024 bis 30.04.2029"
+beleg = "sekundaer"
+gelesen_am = ""
+verwendet_fuer = ["Gemeinden mit 15-%-Kappungsgrenze (§ 558 Abs. 3 BGB) in Schleswig-Holstein"]
+turnus = "vierteljaehrlich"
+zugang = "frei"
+bemerkung = "62 Gemeinden nach zwei übereinstimmenden Sekundärlisten und einer Rede im Landtagsprotokoll (Quellnotiz 14); Verordnung nicht gelesen. Gemeindeliste erst nach Lesung am Verkündungsblatt in den Katalog."
+
+[[quelle]]
+id = "SH-LT-BESCHLUSS-2025-MIETPREISBREMSE"
+gruppe = "gesetz"
+kurz = "Landtag SH: Beschluss zur Mietpreisbremse 2025"
+titel = "Beschluss vom 22.05.2025 zu den Drucksachen 20/3187 und 20/3251"
+herausgeber = "Schleswig-Holsteinischer Landtag"
+fundstelle = "https://www.landtag.ltsh.de/export/sites/ltsh/infothek/wahl20/plenum/beschlusspro/2025/bp_20-032_05-25.pdf"
+stand = "22.05.2025"
+beleg = "original"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Beleg, dass in Schleswig-Holstein keine Mietpreisbremse gilt"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Antrag auf Einführung einer Mietpreisbremse abgelehnt (Quellnotiz 14). Ob seither eine Verordnung erlassen wurde, ist am Verkündungsportal nicht prüfbar gewesen."
+
+[[quelle]]
+id = "ESTR-21-5"
+gruppe = "gesetz"
+kurz = "R 21.5 EStR, H 21.5 EStH"
+titel = "Behandlung von Zuschüssen bei Vermietung und Verpachtung"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "datenbank.nwb.de, Dokument 443548_21___5; gegengeprüft an steuerschroeder.de (Einkommensteuer-Handbuch 2025) und haufe.de (H 21.5, 2024)"
+stand = "EStR 2012 i. d. F. vom 25.03.2013 (VZ 2012 bis 2026); Hinweise 2024/2025"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zuschuss als Gegenleistung für eine Mietpreis- oder Belegungsbindung: Einnahme im Zuflussjahr, Verteilung nach § 11 Abs. 1 Satz 3 EStG (MA-031, Privatperson)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15. Amtliches Handbuch wegen Captcha nicht gelesen. R 21.5 Abs. 2: Zuschuss als Gegenleistung für Mietpreisbindung oder Nutzung durch einen bestimmten Personenkreis ist Einnahme im Kalenderjahr des Zuflusses; „§ 11 Abs. 1 Satz 3 EStG ist zu beachten“. H 21.5: Fördermittel im Dritten Förderungsweg (BFH IX R 60/02)."
+
+[[quelle]]
+id = "ESTR-6-5"
+gruppe = "gesetz"
+kurz = "R 6.5 EStR, H 6.5 EStH"
+titel = "Zuschüsse für Anlagegüter"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "datenbank.nwb.de, Dokument 443548_6___5; gegengeprüft an steuerschroeder.de (Handbuch 2025)"
+stand = "EStR 2012 (VZ 2012 bis 2026); Hinweise 2025"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Wahlrecht bei Investitionszuschüssen im Betriebsvermögen; nicht bei Zuschüssen mit Gegenleistung (MA-031, Betriebsvermögen)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15. Abs. 1 Satz 3: In der Regel kein Zuschuss, wenn ein unmittelbarer wirtschaftlicher Zusammenhang mit einer Leistung des Empfängers besteht."
+
+[[quelle]]
+id = "ESTH-5-6"
+gruppe = "gesetz"
+kurz = "H 5.6 EStH"
+titel = "Rechnungsabgrenzung: Ertrags-, Investitions- und Zinszuschüsse"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "steuerschroeder.de (Handbuch 2025); gegengeprüft an datenbank.nwb.de, Dokument 1077356_5___6"
+stand = "Hinweise 2025 (NWB: VZ 2025 bis 2026)"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Passiver Rechnungsabgrenzungsposten für Ertragszuschüsse (MA-031, Betriebsvermögen)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15. Ausdrücklich zum Bindungszuschuss äußert sich der Hinweis nicht; die Einordnung ist ein Schluss."
+
+[[quelle]]
+id = "ESTR-21-1"
+gruppe = "gesetz"
+kurz = "R 21.1 Abs. 3 EStR"
+titel = "Gartenanlagen und lebende Umzäunung bei Wohngebäuden"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "steuerschroeder.de (Handbuch 2025); gegengeprüft an datenbank.nwb.de, Dokument 443548_21___1"
+stand = "EStR 2012 (VZ 2012 bis 2026)"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Außenanlagen in der Kostenbasis der Baukostenobergrenze nach § 7b EStG (MA-023)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15; nur Abs. 3 gelesen."
+
+[[quelle]]
+id = "ESTH-6-4-7-1"
+gruppe = "gesetz"
+kurz = "H 6.4 und H 7.1 EStH"
+titel = "Außenanlagen, Gartenanlage, Umzäunung als Gebäudebestandteil oder eigenes Wirtschaftsgut"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "steuerschroeder.de (Handbuch 2025)"
+stand = "Hinweise 2025"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Außenanlagen in der Kostenbasis der Baukostenobergrenze (MA-023)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15; eine Wiedergabe, nicht gegengeprüft."
+
+[[quelle]]
+id = "GEWSTR-9-2"
+gruppe = "gesetz"
+kurz = "R 9.2 GewStR, H 9.2 GewStH"
+titel = "Kürzung bei Grundstücksunternehmen"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "datenbank.nwb.de, Dokumente 1068784_9___2___1___ bis _4___; R 9.2 bei steuerschroeder.de (Gewerbesteuer-Handbuch 2024); H 9.2 (1) gegengeprüft an haufe.de"
+stand = "GewStR 2009; Hinweise VZ 2024 bis 2026"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Verkaufsgewinn aus Grundbesitz wird bei erweiterter Kürzung mitgekürzt (H 9.2 (3)); Wegfall der Kürzung bei Verkauf des letzten Grundstücks im Lauf des Jahres, Ausnahme 31.12., 23:59 Uhr (H 9.2 (1)) – Fachspezifikation R-7.8, MA-030"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15. H 9.2 (3) nur in einer Wiedergabe gelesen (zweite Stelle lieferte Fehler); der dort zitierte BFH vom 29.04.1987 (BStBl II S. 603) ist nicht gelesen. Ausnahmen: § 9 Nr. 1 Satz 5 Nr. 2 und Satz 6 GewStG, gewerblicher Grundstückshandel (H 9.2 (2))."
+
+[[quelle]]
+id = "GEWSTR-7-1"
+gruppe = "gesetz"
+kurz = "R 7.1 GewStR, H 7.1 GewStH"
+titel = "Gewerbeertrag; Veräußerungs- und Aufgabegewinne"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "datenbank.nwb.de, Dokumente 363299_7___1 und 1068784_7___1___3___"
+stand = "GewStR i. d. F. vom 28.04.2010; Hinweise VZ 2024 bis 2026"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Objektverkauf der gewerblich geprägten Personengesellschaft: laufender Gewinn oder begünstigter Aufgabegewinn (MA-036)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15; je eine Wiedergabe, nicht gegengeprüft."
+
+[[quelle]]
+id = "KSTR-5-9"
+gruppe = "gesetz"
+kurz = "R 5.9 KStR, H 5.9 KStH"
+titel = "Vermietungsgenossenschaften und -vereine"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "datenbank.nwb.de, Dokumente 883112_5___9 und 1102750_5___9"
+stand = "KStR 2022 (13.04.2022), Richtlinie unbesetzt; Hinweise VZ 2026"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Verweis auf das BMF-Schreiben vom 22.11.1991 für die befreite Vermietungsgenossenschaft"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15."
+
+[[quelle]]
+id = "BMF-VERMGEN-1991"
+gruppe = "gesetz"
+kurz = "BMF-Schreiben Vermietungsgenossenschaften (1991)"
+titel = "Steuerbefreiung für Vermietungsgenossenschaften und -vereine"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "BStBl I 1991 S. 1014, GZ IV B 7 - S 2730 - 24/91; gelesen als wortgleiche Verfügung der OFD Frankfurt vom 23.09.2013 (datenbank.nwb.de, Dokument 480060)"
+stand = "22.11.1991; in der Positivliste vom 20.03.2026"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Verkauf von Betriebsgrundstücken aus dem begünstigten Bereich ist begünstigt; Erlös zählt nicht zur 10-%-Grenze (Steuerstatus „befreite Körperschaft“, Fachspezifikation R-7.12)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15: Tz. 32, 38, 39, 42. Fassung im Bundessteuerblatt nicht gelesen (kostenpflichtig); Gegenprüfung an einem Kommentar. Ausnahme: gewerblicher Grundstückshandel."
+
+[[quelle]]
+id = "BMF-SCHULDZINSEN-2015"
+gruppe = "gesetz"
+kurz = "BMF-Schreiben Schuldzinsen nach Verkauf (2015)"
+titel = "Schuldzinsen und Vorfälligkeitsentschädigung nach Veräußerung des Mietobjekts"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "BStBl I 2015 S. 581, GZ IV C 1 - S 2211/11/10001; datenbank.nwb.de, Dokument 545773"
+stand = "27.07.2015; in der Positivliste vom 20.03.2026"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Vorfälligkeitsentschädigung der Privatperson beim Verkauf: Veräußerungskosten, keine Werbungskosten (MA-032)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15; ganz gelesen, eine Wiedergabe."
+
+[[quelle]]
+id = "BMF-BAUHERREN-2003"
+gruppe = "gesetz"
+kurz = "BMF-Schreiben Bauherren- und Fondserlass (2003)"
+titel = "Gesamtobjekte, Modelle mit einem Kapitalanleger, Fonds; Rz. 15: marktübliches Damnum"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "BStBl I 2003 S. 546, GZ IV C 3 - S 2253 a - 48/03; datenbank.nwb.de, Dokument 88184; gegengeprüft an der Verfügung der OFD München/Nürnberg vom 10.12.2003"
+stand = "20.10.2003; in der Positivliste vom 20.03.2026"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Disagio der Privatperson: bis 5 % bei mindestens fünf Jahren Zinsbindung sofort abziehbar, darüber Verteilung (MA-032)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15: Rz. 15 und 22 gelesen. Das BMF-Schreiben vom 05.04.2005 (BStBl I S. 617) verweist nur hierauf."
+
+[[quelle]]
+id = "BMF-POSITIVLISTE-2026"
+gruppe = "gesetz"
+kurz = "BMF-Positivliste 2026"
+titel = "Anwendung von BMF-Schreiben (Positivliste)"
+herausgeber = "Bundesministerium der Finanzen"
+fundstelle = "BStBl I 2026 S. 394; datenbank.nwb.de, Dokument 1090883"
+stand = "20.03.2026"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Nachweis, dass ältere BMF-Schreiben fortgelten (1991, 2003, 2005, 2015)"]
+turnus = "jaehrlich"
+zugang = "frei"
+bemerkung = "Quellnotiz 15: nur die Einträge lfd. Nr. 776, 788, 943, 969 und 1167 gelesen."
+
+[[quelle]]
+id = "BFH-IX-R-60-02"
+gruppe = "gesetz"
+kurz = "BFH IX R 60/02"
+titel = "Urteil vom 14.10.2003: Fördermittel im Dritten Förderungsweg als Einnahmen im Zuflussjahr"
+herausgeber = "Bundesfinanzhof"
+fundstelle = "BStBl II 2004 S. 14; datenbank.nwb.de, Dokument 122750"
+stand = "14.10.2003"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Zuschuss für Belegungs- und Mietbindung mindert die Herstellungskosten nicht (MA-031, Privatperson)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Quellnotiz 15; ganz gelesen."
+
+[[quelle]]
+id = "BFH-I-R-89-03"
+gruppe = "gesetz"
+kurz = "BFH I R 89/03"
+titel = "Urteil vom 11.08.2004: erweiterte Kürzung bei Veräußerung zum 31.12., 23:59 Uhr"
+herausgeber = "Bundesfinanzhof"
+fundstelle = "BStBl II 2004 S. 1080; datenbank.nwb.de, Dokument 145695"
+stand = "11.08.2004"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Erweiterte Kürzung bleibt bei Übergang des einzigen Grundstücks zum 31.12., 23:59 Uhr (Fachspezifikation R-7.8, MA-030)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Quellnotiz 15; ganz gelesen. Zum Veräußerungsgewinn selbst sagt das Urteil nichts."
+
+[[quelle]]
+id = "BFH-IV-R-3-05"
+gruppe = "gesetz"
+kurz = "BFH IV R 3/05"
+titel = "Urteil vom 14.12.2006: Grundstück der gewerblich geprägten Personengesellschaft als Anlagevermögen"
+herausgeber = "Bundesfinanzhof"
+fundstelle = "BStBl II 2007 S. 777; datenbank.nwb.de, Dokument 252516"
+stand = "14.12.2006"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Objektverkauf der geprägten Personengesellschaft: laufender Gewinn im Bestehen, begünstigt bei Betriebsaufgabe (MA-036)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Quellnotiz 15; ganz gelesen."
+
+[[quelle]]
+id = "BGH-VIII-ZR-311-11"
+gruppe = "gesetz"
+kurz = "BGH VIII ZR 311/11"
+titel = "Urteil vom 13.06.2012: Anrechnung von Drittmitteln auf zwölf Jahre begrenzt"
+herausgeber = "Bundesgerichtshof"
+fundstelle = "gesetze.co/urteile/VIII_ZR_311-11 (nichtamtliche Sammlung)"
+stand = "13.06.2012"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Dauer des Drittmittelabzugs bei Mieterhöhungen (MA-007)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Quellnotiz 15: Rn. 15 bis 27 gelesen; die Entscheidungsdatenbank des BGH war nicht erreichbar. Der BGH leitet die zwölf Jahre aus dem damaligen Umlagesatz von 11 % ab."
+
+[[quelle]]
+id = "BGH-VIII-ZR-283-23"
+gruppe = "gesetz"
+kurz = "BGH VIII ZR 283/23"
+titel = "Urteil vom 26.03.2025: energetische Modernisierung setzt erwartbare messbare Endenergieeinsparung voraus"
+herausgeber = "Bundesgerichtshof"
+fundstelle = "ECLI:DE:BGH:2025:260325UVIIIZR283.23.0; Urteilsabschrift bei rws-verlag.de"
+stand = "26.03.2025"
+beleg = "wortlaut"
+gelesen_am = "2026-11-18"
+verwendet_fuer = ["Kesseltausch als energetische Modernisierung (MA-018)"]
+turnus = "bei-neuausgabe"
+zugang = "frei"
+bemerkung = "Quellnotiz 15: Leitsatz und Rn. 1, 2, 31, 32 gelesen."

@@ -13,8 +13,11 @@ Felder je Eintrag ([[quelle]]):
     herausgeber     wer die Quelle verantwortet
     fundstelle      Adresse oder bibliografische Angabe
     stand           Fassung, Ausgabe oder Stand laut Quelle
-    beleg           original (am Original gelesen) | sekundaer | ungeprueft
-    gelesen_am      JJJJ-MM-TT, Pflicht bei beleg = original, sonst ""
+    beleg           original (an der amtlichen oder herausgebenden Stelle gelesen)
+                    | wortlaut (vollständiger wörtlicher Abdruck bei Fachverlag oder Volltextsammlung gelesen,
+                      weil die amtliche Stelle nicht erreichbar war; Stelle in der Fundstelle nennen)
+                    | sekundaer (nur Zusammenfassung, Kommentar oder Auszug) | ungeprueft
+    gelesen_am      JJJJ-MM-TT, Pflicht bei beleg = original oder wortlaut, sonst ""
     verwendet_fuer  Liste: wofür das Werkzeug die Quelle braucht
     turnus          monatlich | vierteljaehrlich | jaehrlich | bei-neuausgabe
     zugang          frei | kostenpflichtig | lizenz-klaeren
@@ -38,7 +41,8 @@ GRUPPEN = {
     "literatur": "Fachliteratur und Rechenbeispiele",
     "daten": "Datenquellen",
 }
-BELEG = {"original": "am Original gelesen", "sekundaer": "nur Sekundärquelle", "ungeprueft": "nicht geprüft"}
+BELEG = {"original": "am Original gelesen", "wortlaut": "Wortlaut in Verlagswiedergabe gelesen", "sekundaer": "nur Sekundärquelle", "ungeprueft": "nicht geprüft"}
+GELESEN = ("original", "wortlaut")
 TURNUS = {"monatlich": "monatlich", "vierteljaehrlich": "vierteljährlich", "jaehrlich": "jährlich", "bei-neuausgabe": "bei Neuausgabe"}
 ZUGANG = {"frei": "frei", "kostenpflichtig": "kostenpflichtig", "lizenz-klaeren": "Lizenz klären"}
 VERWEISENDE = ["docs/spezifikation.md", "docs/fachspezifikation-rechenkern.md", "docs/entwicklungsplan.md", "docs/entscheidungen.md", "CLAUDE.md", "docs/modellannahmen/annahmen.toml"]
@@ -73,10 +77,10 @@ def pruefen(quellen):
                     fehler.append(f"{wo}: gelesen_am liegt in der Zukunft")
             except (ValueError, TypeError):
                 fehler.append(f"{wo}: gelesen_am ist kein Datum JJJJ-MM-TT")
-        if q.get("beleg") == "original" and not datum:
-            fehler.append(f"{wo}: beleg = original verlangt gelesen_am")
-        if q.get("beleg") != "original" and datum:
-            fehler.append(f"{wo}: gelesen_am nur bei beleg = original")
+        if q.get("beleg") in GELESEN and not datum:
+            fehler.append(f"{wo}: beleg = original oder wortlaut verlangt gelesen_am")
+        if q.get("beleg") not in GELESEN and datum:
+            fehler.append(f"{wo}: gelesen_am nur bei beleg = original oder wortlaut")
         if not isinstance(q.get("verwendet_fuer"), list) or not q.get("verwendet_fuer"):
             fehler.append(f"{wo}: verwendet_fuer muss eine nicht leere Liste sein")
         for feld in ("kurz", "titel", "herausgeber", "fundstelle", "stand"):
@@ -127,18 +131,19 @@ def erzeugen(quellen):
     z += ["Zentrales Verzeichnis aller Gesetze, Förderrichtlinien, Normen, Standards, Fachliteratur und Datenquellen, auf die sich Spezifikation, Regel- und Förderkatalog und später die Anwendung stützen. Leser: Entwicklung, Katalogverantwortliche, Prüfer.", ""]
     z += ["**Diese Datei wird erzeugt.** Gepflegt wird `docs/quellenkataster/quellen.toml`; danach `python3 scripts/quellenkataster.py` ausführen. Jede Rechts-, Förder- oder Normangabe im Projekt verweist auf eine Kennung aus diesem Kataster.", ""]
     gelesen = [q["gelesen_am"] for q in quellen if q["gelesen_am"]]
-    z += [f"**Stand:** {len(quellen)} Quellen" + (f" · zuletzt am Original gelesen: {max(gelesen)}" if gelesen else ""), ""]
-    z += ["## Überblick", "", "| Gruppe | Quellen | am Original gelesen | nur Sekundärquelle | nicht geprüft |", "|---|---|---|---|---|"]
+    z += [f"**Stand:** {len(quellen)} Quellen" + (f" · zuletzt gelesen: {max(gelesen)}" if gelesen else ""), ""]
+    z += ["Belegstufen: „am Original gelesen“ heißt an der amtlichen oder herausgebenden Stelle; „Wortlaut in Verlagswiedergabe gelesen“ heißt vollständiger wörtlicher Abdruck bei einem Fachverlag oder in einer Volltextsammlung, weil die amtliche Stelle nicht erreichbar war; „nur Sekundärquelle“ heißt Zusammenfassung, Kommentar oder Auszug.", ""]
+    z += ["## Überblick", "", "| Gruppe | Quellen | am Original gelesen | Wortlaut in Verlagswiedergabe | nur Sekundärquelle | nicht geprüft |", "|---|---|---|---|---|---|"]
     for g, titel in GRUPPEN.items():
         teil = [q for q in quellen if q["gruppe"] == g]
         if teil:
             n = lambda b: sum(1 for q in teil if q["beleg"] == b)
-            z.append(f"| {titel} | {len(teil)} | {n('original')} | {n('sekundaer')} | {n('ungeprueft')} |")
+            z.append(f"| {titel} | {len(teil)} | {n('original')} | {n('wortlaut')} | {n('sekundaer')} | {n('ungeprueft')} |")
     n = lambda b: sum(1 for q in quellen if q["beleg"] == b)
-    z += [f"| **Gesamt** | **{len(quellen)}** | **{n('original')}** | **{n('sekundaer')}** | **{n('ungeprueft')}** |", ""]
+    z += [f"| **Gesamt** | **{len(quellen)}** | **{n('original')}** | **{n('wortlaut')}** | **{n('sekundaer')}** | **{n('ungeprueft')}** |", ""]
     offen = [q for q in quellen if q["beleg"] != "original" or q["zugang"] == "lizenz-klaeren"]
     if offen:
-        z += ["## Handlungsbedarf", "", "Quellen, die noch nicht am Original gelesen sind oder deren Nutzungsrecht zu klären ist.", "", "| Kennung | Quelle | Was fehlt |", "|---|---|---|"]
+        z += ["## Handlungsbedarf", "", "Quellen, die noch nicht an der amtlichen Stelle gelesen sind oder deren Nutzungsrecht zu klären ist.", "", "| Kennung | Quelle | Was fehlt |", "|---|---|---|"]
         folge = list(GRUPPEN)
         for q in sorted(offen, key=lambda q: (folge.index(q["gruppe"]), q["id"])):
             was = []
