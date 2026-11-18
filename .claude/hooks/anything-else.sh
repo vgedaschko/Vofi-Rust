@@ -37,6 +37,9 @@ later_count="$(open_in "Später" | grep -c . || true)"
 
 case "$mode" in
   start)
+    if [ -f "$root/docs/spezifikation.md" ]; then
+      echo "Verbindlich und vor inhaltlicher Arbeit zu lesen: CLAUDE.md (Abschnitt Pflichtlektüre), docs/spezifikation.md, docs/entwicklungsplan.md. Änderungen an Festlegungen zuerst dort und in docs/entscheidungen.md."
+    fi
     [ -z "$now$running$next$waiting" ] && [ "$later_count" = "0" ] && exit 0
     echo "Ausstehende Aufgaben laut TASKS.md (Quelle der Wahrheit, bitte aktuell halten):"
     [ -n "$now" ] && printf 'Jetzt:\n%s\n' "$now"

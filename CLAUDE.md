@@ -2,6 +2,22 @@
 
 Webanwendung zur Immobilien-Investitionsrechnung nach der VOFI-Methode (Vollständiger Finanzplan) mit Fördermodulen, Sensitivitäts- und Monte-Carlo-Analyse, Dashboard und Mehrbenutzerbetrieb. Stand: Konzeptphase, noch kein Code.
 
+## Pflichtlektüre
+
+Diese Dateien steuern das Projekt. Sie sind verbindlich, nicht Hintergrundmaterial: zu Beginn jeder Sitzung lesen, bei der Arbeit beachten und im selben Arbeitsgang aktuell halten.
+
+| Datei | Inhalt | Lesen | Pflegen |
+|---|---|---|---|
+| `docs/spezifikation.md` | Was gebaut wird und warum; geltender Stand mit Status je Festlegung | Vor jeder inhaltlichen Arbeit | Bei jeder geänderten oder neuen Festlegung – vor der Umsetzung |
+| `docs/entwicklungsplan.md` | Phasen, Freigabepunkte, Bestandsaufnahme der Grundlagen, Prüfplan | Zu Sitzungsbeginn: In welcher Phase sind wir, was ist dran, welche Prüfung ist fällig? | Wenn eine Phase endet oder sich die Reihenfolge ändert |
+| `TASKS.md` | Offene Arbeit, auch die Punkte, die beim Auftraggeber liegen | Zu Sitzungsbeginn und vor jedem Stopp (der Hook erinnert daran) | Laufend |
+| `docs/entscheidungen.md` | Entscheidungsprotokoll: was wann warum geändert wurde | Bevor eine frühere Festlegung angefasst wird | Bei jeder Entscheidung oder Änderung |
+| `docs/pruefung/regeln.md` und `docs/pruefung/protokoll.md` | Maßstab und Format der Prüfer; was wann mit welchem Ergebnis geprüft wurde | Vor jeder Prüfrunde | Nach jeder Prüfrunde |
+
+Nachschlagen bei Bedarf: `reports/` und `research_notes/` (Recherchebericht, Quellnotizen, Referenzrechnungen), `docs/skills-und-werkzeuge.md` (Skills, Plugins, Hooks), `docs/pruefung/<Datum>-<Thema>/` (Prüfberichte und Sichtung je Runde).
+
+Widersprechen sich zwei dieser Dateien, gilt die Spezifikation; der Widerspruch wird sofort behoben, nicht umgangen.
+
 ## Spezifikation ist der Pfad
 
 `docs/spezifikation.md` ist das maßgebliche Entwicklungsdokument und wird laufend fortgeschrieben.
@@ -58,13 +74,3 @@ Alles, was Nutzer oder Kunden sehen (Oberfläche, Kundenberichte, Exporte), trit
 - Jedes größere Arbeitsergebnis (Bericht, Fachkonzept, Rechenfunktion, Oberfläche) durchläuft vor der Übergabe Prüfrunden mit `/pruefrunde`, wiederholt bis mindestens 9 von 10 oder bis feststeht, warum das nicht erreichbar ist. Die Prüferrollen liegen in `.claude/agents/`, die gemeinsamen Regeln in `docs/pruefung/regeln.md`.
 - Leerlauf nutzen: Wenn auf Hintergrundarbeit oder eine Antwort gewartet wird, das jüngste ungeprüfte Ergebnis prüfen lassen.
 - Befunde der Prüfer sind Hinweise, keine Wahrheit: vor dem Einarbeiten an der Fundstelle nachprüfen.
-
-## Orientierung
-
-- `TASKS.md` – offene Arbeit; wird vom Hook `.claude/hooks/anything-else.sh` bei Sitzungsstart und vor jedem Stopp gelesen. Aktuell halten.
-- `docs/spezifikation.md` – was gebaut wird und warum; geltender Stand.
-- `docs/entscheidungen.md` – Entscheidungsprotokoll: wie der Stand zustande kam.
-- `docs/entwicklungsplan.md` – Phasen, Freigabepunkte, Bestandsaufnahme der Grundlagen und Prüfplan.
-- `docs/skills-und-werkzeuge.md` – empfohlene Skills, Plugins und Hooks.
-- `docs/pruefung/protokoll.md` – was wann von wem geprüft wurde.
-- `reports/`, `research_notes/` – Rechercheergebnisse und ihre Quellnotizen.
