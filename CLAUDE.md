@@ -107,3 +107,4 @@ Alles, was Nutzer oder Kunden sehen (Oberfläche, Kundenberichte, Exporte), trit
 - Jedes größere Arbeitsergebnis (Bericht, Fachkonzept, Rechenfunktion, Oberfläche) durchläuft vor der Übergabe Prüfrunden mit `/pruefrunde`, wiederholt bis mindestens 9 von 10 oder bis feststeht, warum das nicht erreichbar ist. Die Prüferrollen liegen in `.claude/agents/`, die gemeinsamen Regeln in `docs/pruefung/regeln.md`.
 - Leerlauf nutzen: Wenn auf Hintergrundarbeit oder eine Antwort gewartet wird, das jüngste ungeprüfte Ergebnis prüfen lassen.
 - Befunde der Prüfer sind Hinweise, keine Wahrheit: vor dem Einarbeiten an der Fundstelle nachprüfen.
+- Wesentlichkeit vor Vollständigkeit: Ein VOFI ist ein Modell. Ein Befund wird nur dann zur Regel oder Eingabe, wenn er die Schwelle der Spezifikation besteht (tragbarer Preis über etwa 1 %, Rendite über 0,1 Prozentpunkte) oder nichts kostet; sonst wird er eine benannte Vereinfachung. Keine Flut von Eingabefeldern.

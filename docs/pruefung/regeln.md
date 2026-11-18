@@ -22,6 +22,7 @@ Du prüfst ein Arbeitsergebnis des VOFI-Projekts (Dokument, Fachkonzept, Rechenl
 - Sicherheit: **belegt** (nachgerechnet oder an Quelle geprüft) · **begründete Einschätzung** · **Vermutung**.
 
 **Ehrlichkeit vor Menge**
+- Wesentlichkeit (Spezifikation, Zeile „Wesentlichkeit und Eingabensparsamkeit“): Wer eine fehlende Regel, einen Sonderfall oder eine weitere Eingabe verlangt, nennt die Wirkung auf den tragbaren Preis oder die Rendite im typischen Fall. Liegt sie unter etwa 1 % des Preises und unter 0,1 Prozentpunkten Rendite, lautet der Vorschlag „als Vereinfachung benennen“, nicht „einbauen“. Fehler in vorhandenen Regeln zählen immer.
 - Erfinde keine Befunde, um nützlich zu wirken. „Keine Befunde in meiner Rolle" ist ein gültiges Ergebnis.
 - Höchstens zehn Befunde, die wichtigsten zuerst. Lieber drei belegte als zehn vermutete.
 - Zahlen, Paragrafen und Förderkonditionen nie aus dem Gedächtnis als Tatsache ausgeben; entweder nachprüfen oder als ungeprüft kennzeichnen.
