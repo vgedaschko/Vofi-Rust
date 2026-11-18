@@ -10,6 +10,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Als Nächstes
 
+- [ ] Nach dem NBank-Gespräch: Antworten mit Datum und Gesprächspartner im Verzeichnis der Modellannahmen nachtragen (Status, Voreinstellung), Spezifikation und Katalogvorgaben nachziehen
 - [ ] Fachspezifikation: offene Punkte aus Prüfrunde 3 klären – Renditeformel bei Einlagen und Entnahmen in verschiedenen Perioden, Reihenfolge der Rechenschritte bei der Rundung, nominal/effektiv je Zahlungsart, Buchung von Barzuschüssen, Prozessdefinition der Simulation
 - [ ] Recherche zu den fünf bisher nicht untersuchten Anbietern (Reasult, PROBIS und weitere) bis zur Vorprüfung
 - [ ] Quellenkataster: als Nächstes am Original lesen – KfW-Merkblatt 459 (Heizungsförderung für Vermieter), niedersächsisches Landesrecht (Mietpreisbremse und Kappungsgrenze, Grunderwerbsteuersatz, Einkommensgrenzen NWoFG), amtliche Fassung BEG EM, De-minimis-Verordnung, gif-Kennzahlen; künftig geltende Fassungen am Bundesgesetzblatt (Verlustvortrag ab 2028)
@@ -40,10 +41,9 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Gespräch mit der Hausbank (MA-026): Begrenzt die Beleihungsquote nur das eigene Darlehen oder alle Darlehen? Rechnet die Kapitaldienstfähigkeit das Förderdarlehen mit? Welcher Wertansatz und welche Bewirtschaftungspauschale gelten?
 - [ ] Fachfrage: Kommt Erbbaurecht bei euren geförderten Neubauten häufig genug vor, um es in Stufe 1 vorzuziehen?
 - [ ] Fachfrage: Steht beim Neubau die Frage „gefördert oder frei finanziert" am Anfang der Kalkulation?
-- [ ] Im NBank-Gespräch zusätzlich klären (Fragenliste: Bericht, Anhang B.6): Tilgungsplan und Zins ab dem 36. Jahr, KfW-Darlehen als Eigenmittelersatz, Zuwendungsfähigkeit von Finanzierungskosten und nicht abziehbarer Vorsteuer, Aufteilung bei teilgeförderten Vorhaben, Restwert bei laufender Bindung, Umlage für den Heizungstausch in der Bindung (MA-002 bis MA-006, MA-017, MA-020, MA-021)
 - [ ] Vertretung für die Katalogverantwortung benennen
 - [ ] Sichtbarkeit des Repositorys `Vofi-Rust` entscheiden: derzeit öffentlich, enthält interne Planungsunterlagen
-- [ ] Gespräch mit der NBank: Rechenweise der Renditeprüfung (Überkompensation) erfragen
+- [ ] Gespräch mit der NBank (Termin in der Woche ab 23.11.2026): Leitfaden mit 20 Fragen liegt als Dokument vor – https://claude.ai/artifact/H2xAUn4xT3EikxE8E1rqX1 . Danach Antworten zurückmelden (ausgefüllte Spalte oder Foto der Notizen)
 - [ ] Drei bis fünf Gespräche mit Anwendern oder Kunden: Würden sie das Werkzeug nutzen, was fehlt ihnen heute?
 - [ ] Verantwortung für die Pflege des Regel- und Förderkatalogs im Unternehmen benennen
 - [ ] Mengengerüst für die Wirtschaftlichkeitsrechnung: Projekte pro Jahr, Zeitaufwand je Kalkulation heute, Zahl der Nutzer, Anteil geförderter Mietwohnungsbau; für das Beratungsgeschäft Mandate pro Jahr und Honorare
@@ -62,6 +62,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Gesprächsleitfaden für die NBank erstellt: 20 Fragen, je mit bisheriger Annahme und Zuordnung zu MA-001 bis MA-006, MA-017, MA-020, MA-021
 - [x] 2026-11-18 Prüfrunde 5 zum Recherchebericht (letzte Runde): Noten 9, 9, 9, 9, 9, 8; gesichtet; Spezifikation, Entscheidungsprotokoll und Aufgabenliste nachgezogen
 - [x] 2026-11-18 Formel der VOFI-Gesamtkapitalrentabilität liegt vor (Bildschirmfoto des Auftraggebers); Kennzahl kommt auf das Kennzahlenblatt
 - [x] 2026-11-18 Nachprüfung der Steuerungsdokumente (Note 8): sieben neue Befunde behoben, Prüfskripte strenger
