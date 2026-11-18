@@ -58,6 +58,7 @@ Lässt sich etwas vor dem Bau nicht klären, wird nicht stillschweigend eine Les
 
 - Der Auftraggeber ist Betriebswirt, kein Programmierer. Technische Entscheidungen selbst treffen und kurz in Geschäftssprache begründen (Kosten, Risiko, Nutzen) – nicht als Auswahlfrage zurückgeben.
 - Rückfragen nur zu fachlichen und betriebswirtschaftlichen Themen (Rechenlogik, Kennzahlen, Förderung, Steuern, Abläufe im Unternehmen).
+- Der Auftraggeber liest die internen Unterlagen (Recherchen, Spezifikation, Prüfberichte) nicht selbst; sie sind Arbeitsgrundlage für die Entwicklung. Was er wissen oder entscheiden muss, bekommt er kurz im Gespräch und in `TASKS.md` unter „Wartet auf Nutzer“. Für interne Unterlagen ist deshalb nicht die Länge der Maßstab, sondern ob man findet, was man braucht: eine Regel an einem Ort, stimmige Verweise, keine Widersprüche.
 - Sprache: Deutsch, auch in Dokumenten, Commit-Nachrichten und Oberflächentexten.
 
 ## Qualitätsanspruch
