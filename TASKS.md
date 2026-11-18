@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Recherchebericht wird nach Prüfrunde 1 überarbeitet (Auftrag: `docs/pruefung/2026-11-17-recherchebericht/sichtung.md`); danach zweite Runde mit den Rollen unter 8 und Protokoll
+- [~] Recherchebericht wird nach Prüfrunde 1 überarbeitet (Auftrag: `docs/pruefung/2026-11-17-recherchebericht/sichtung.md`); danach Folgerunden bis mindestens 9 von 10, dann Protokoll
 
 ## Als Nächstes
 
@@ -26,6 +26,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Später
 
+- [ ] Geplante Aufgaben einrichten, sobald der Regel- und Förderkatalog steht: monatlich Förderkonditionen, vierteljährlich Rechtsstand
 - [ ] Projekteigene Skills bauen: `vofi-fachmodell`, `referenzfall-anlegen`, später `foerderprogramm-pflegen`, `steuer-regeln`
 - [ ] Hooks für `cargo fmt`/`clippy`/`test` einrichten, sobald der Rust-Workspace steht
 - [ ] Rust-Workspace aufsetzen, CI, SessionStart-Hook für Toolchain in Cloud-Sitzungen
@@ -33,6 +34,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Entwicklungsplan mit Phasen, Bestandsaufnahme und Prüfplan → `docs/entwicklungsplan.md`
 - [x] 2026-11-18 Lebende Spezifikation `docs/spezifikation.md` angelegt; `docs/entscheidungen.md` ist jetzt das Entscheidungsprotokoll
 - [x] 2026-11-17 Prüfrunde 1 zum Recherchebericht: sechs Prüfer plus Lotse, Befunde nachgeprüft und gesichtet
 - [x] 2026-11-17 Prüfer eingerichtet: 14 Rollen (inkl. Jurist) in `.claude/agents/`, Ablauf `/pruefrunde`, Regeln und Protokoll in `docs/pruefung/`

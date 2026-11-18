@@ -29,4 +29,14 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
 
 5. **Protokollieren** in `docs/pruefung/protokoll.md`: Datum, Prüfobjekt, eingesetzte Rollen, Note je Rolle, Zahl der Befunde je Schweregrad, was übernommen und was mit welchem Grund abgelehnt wurde. Widersprechen sich zwei Rollen, den Zielkonflikt benennen statt ihn stillschweigend zu entscheiden.
 
-6. **Wiederholen nur bei Bedarf.** Eine zweite Runde lohnt sich, wenn kritische Befunde größere Änderungen ausgelöst haben oder eine Rolle unter 8 von 10 bewertet hat; dann nur die betroffenen Rollen erneut. Höchstens zwei Runden je Prüfobjekt, danach an den Auftraggeber berichten.
+6. **Wiederholen bis 9 von 10.** Nach dem Einarbeiten prüfen die Rollen erneut, die unter 9 lagen; in der letzten Runde liest zusätzlich der Einheitsbrei-Prüfer, ob die Korrekturen den Text verschlechtert haben. Jeder Prüfer bekommt in der Folgerunde seinen eigenen vorigen Bericht und die Sichtung, damit er prüft, ob seine Befunde behoben sind, statt von vorn zu beginnen – und er sucht trotzdem nach Neuem.
+
+   Die Schleife endet, wenn
+   - alle beteiligten Rollen mindestens 9 geben, oder
+   - die niedrigste Note in zwei aufeinanderfolgenden Runden nicht steigt, oder
+   - die verbleibenden Befunde außerhalb des Prüfobjekts liegen (fehlende Angaben des Auftraggebers, Auskünfte Dritter, Entscheidungen einer späteren Phase), oder
+   - fünf Runden erreicht sind.
+
+   In den letzten drei Fällen dem Auftraggeber berichten: erreichte Noten, was zur 9 fehlt und wer es liefern kann. Eine 9 wird nicht herbeigeredet – weder durch weichere Prüfaufträge noch durch Streichen unbequemer Befunde.
+
+7. **Prüfauftrag sauber fassen.** Jeder Prüfer erfährt, was das Prüfobjekt leisten soll und was ausdrücklich nicht (zum Beispiel: Recherchebericht, keine Wirtschaftlichkeitsrechnung). Bewertet wird gegen diesen Zweck; dass ein anderes Dokument fehlt, ist ein Hinweis an den Auftraggeber, kein Abzug am Prüfobjekt.

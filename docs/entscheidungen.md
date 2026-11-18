@@ -4,6 +4,8 @@ Chronologisch: was wann entschieden oder geändert wurde, warum und auf wessen V
 
 | Datum | Entscheidung | Grund | Auslöser | Ersetzt |
 |---|---|---|---|---|
+| 2026-11-18 | Prüfrunden werden wiederholt, bis alle beteiligten Rollen mindestens 9 von 10 geben; Abbruch nur bei Stillstand, bei Befunden außerhalb des Prüfobjekts oder nach fünf Runden, jeweils mit Bericht an den Auftraggeber | Qualitätsanspruch 9 von 10 | Auftraggeber | Begrenzung auf zwei Runden |
+| 2026-11-18 | Entwicklungsplan `docs/entwicklungsplan.md` mit Phasen, Freigabepunkten und Prüfplan; technische Werkzeuge der Bauphase werden erst nach dem Architekturentwurf eingerichtet | Reihenfolge und Absicherung festhalten; Werkzeugzuschnitt hängt von der Architektur ab | Auftraggeber; Entscheidung Claude | – |
 | 2026-11-18 | Lebende Spezifikation `docs/spezifikation.md` ist das maßgebliche Entwicklungsdokument; Änderungen erst dort, dann in der Umsetzung | Nicht vom Pfad abkommen; Prüfbefunde und geänderte Annahmen nachvollziehbar einarbeiten | Auftraggeber | Bisherige Tabelle „festgelegte Rahmenbedingungen" in dieser Datei |
 | 2026-11-18 | Die Regel „Interna bleiben intern" gilt für Produkt, Kundenberichte und Exporte, nicht für interne Entwicklungsunterlagen | Interne Unterlagen sollen Prüfungen und Einschränkungen offen benennen | Auftraggeber | Weite Auslegung vom 17.11. |
 | 2026-11-18 | Fachliteratur wird bei Bedarf beschafft (rechtmäßige Quellen; notfalls über den Rechner des Auftraggebers) | Lehrbuchdefinitionen am Original statt aus Sekundärquellen | Auftraggeber | – |

@@ -55,7 +55,7 @@ Alles, was Nutzer oder Kunden sehen (Oberfläche, Kundenberichte, Exporte), trit
 
 ## Prüfrunden
 
-- Jedes größere Arbeitsergebnis (Bericht, Fachkonzept, Rechenfunktion, Oberfläche) durchläuft vor der Übergabe eine Prüfrunde mit `/pruefrunde`. Die Prüferrollen liegen in `.claude/agents/`, die gemeinsamen Regeln in `docs/pruefung/regeln.md`.
+- Jedes größere Arbeitsergebnis (Bericht, Fachkonzept, Rechenfunktion, Oberfläche) durchläuft vor der Übergabe Prüfrunden mit `/pruefrunde`, wiederholt bis mindestens 9 von 10 oder bis feststeht, warum das nicht erreichbar ist. Die Prüferrollen liegen in `.claude/agents/`, die gemeinsamen Regeln in `docs/pruefung/regeln.md`.
 - Leerlauf nutzen: Wenn auf Hintergrundarbeit oder eine Antwort gewartet wird, das jüngste ungeprüfte Ergebnis prüfen lassen.
 - Befunde der Prüfer sind Hinweise, keine Wahrheit: vor dem Einarbeiten an der Fundstelle nachprüfen.
 
@@ -64,6 +64,7 @@ Alles, was Nutzer oder Kunden sehen (Oberfläche, Kundenberichte, Exporte), trit
 - `TASKS.md` – offene Arbeit; wird vom Hook `.claude/hooks/anything-else.sh` bei Sitzungsstart und vor jedem Stopp gelesen. Aktuell halten.
 - `docs/spezifikation.md` – was gebaut wird und warum; geltender Stand.
 - `docs/entscheidungen.md` – Entscheidungsprotokoll: wie der Stand zustande kam.
+- `docs/entwicklungsplan.md` – Phasen, Freigabepunkte, Bestandsaufnahme der Grundlagen und Prüfplan.
 - `docs/skills-und-werkzeuge.md` – empfohlene Skills, Plugins und Hooks.
 - `docs/pruefung/protokoll.md` – was wann von wem geprüft wurde.
 - `reports/`, `research_notes/` – Rechercheergebnisse und ihre Quellnotizen.
