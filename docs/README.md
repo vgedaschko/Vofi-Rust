@@ -23,6 +23,7 @@ Wie das Vorhaben gesteuert wird. Leser: Auftraggeber, Entwicklung, Prüfer.
 | Dokument | Quelle für | Aktualisiert, wenn | Status |
 |---|---|---|---|
 | [`spezifikation.md`](spezifikation.md) | Was gebaut wird und warum; geltende Festlegungen mit Status | eine Festlegung entsteht oder sich ändert – vor der Umsetzung | vorhanden |
+| [`fachspezifikation-rechenkern.md`](fachspezifikation-rechenkern.md) | Rechenregeln des Kerns mit Regelnummern, Proben, Randfällen und Referenzfällen; konkretisiert Spezifikation Kapitel 3. Teil 1: allgemeiner Kern und Grobkalkulation. Belegt durch den Referenzrechner unter `research_notes/…/skripte/referenzrechner/` | eine Rechenregel entsteht oder sich ändert – vor der Umsetzung; der Referenzrechner wird im selben Arbeitsgang nachgezogen | vorhanden (Teil 1, in Prüfung) |
 | [`entwicklungsplan.md`](entwicklungsplan.md) | Phasen, Freigabepunkte, Bestandsaufnahme, Prüfplan | eine Phase endet oder die Reihenfolge sich ändert | vorhanden |
 | [`entscheidungen.md`](entscheidungen.md) | Wann was warum entschieden oder geändert wurde | bei jeder Entscheidung | vorhanden |
 | [`../TASKS.md`](../TASKS.md) | Offene Arbeit, auch beim Auftraggeber | laufend | vorhanden |

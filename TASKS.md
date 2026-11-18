@@ -6,7 +6,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Jetzt
 
-- [~] Fachspezifikation des Rechenkerns, Teil 1 (allgemeiner Kern und Grobkalkulation) wird geschrieben, mit Referenzrechner für alle Referenzfälle → `docs/fachspezifikation-rechenkern.md`; danach Prüfrunde (Finanzmathematiker, Fachexperte, Praktiker, Controller, Grenzfälle) und Eintrag in Dokumentationsübersicht und Pflichtlektüre
+- [~] Prüfrunde 1 zur Fachspezifikation des Rechenkerns, Teil 1, läuft (Finanzmathematiker, Fachexperte, Praktiker, Steuerberater, Bank, Controller, Grenzfälle) → `docs/pruefung/2026-11-18-fachspezifikation-rechenkern/`; danach Sichtung, die fünf vorgeschlagenen Modellannahmen eintragen, Spezifikation nachziehen
 
 ## Als Nächstes
 
@@ -64,6 +64,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Fachspezifikation des Rechenkerns, Teil 1, als Entwurf: 148 Regeln, 14 Proben, 38 neue Festlegungen; Referenzrechner mit 15 Fällen und 529 Prüfungen, alle bestanden; in Dokumentationsübersicht und Pflichtlektüre aufgenommen
 - [x] 2026-11-18 Reihenfolge der Stufe 1 entschieden (Auftraggeber): nach der Grobkalkulation zuerst der Neubau in voller Tiefe, dann NBank-Förderung, danach Ankauf Bestand
 - [x] 2026-11-18 Regionaler Schwerpunkt geklärt (Auftraggeber): Niedersachsen, Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen; Förderung überwiegend KfW und NBank – Spezifikation und Entscheidungsprotokoll nachgezogen
 - [x] 2026-11-18 Lehrbuchkapitel „Immobilieninvestition" (Schulte et al., S. 787–838, vom Auftraggeber bereitgestellt) ausgewertet: Zeilenaufbau am Original belegt, zwei Musterrechnungen nachgebaut (50 von 53 Buchwerten getroffen, drei um je eine Einheit abweichend) → Quellnotiz 11

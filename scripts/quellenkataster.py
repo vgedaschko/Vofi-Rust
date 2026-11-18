@@ -41,7 +41,7 @@ GRUPPEN = {
 BELEG = {"original": "am Original gelesen", "sekundaer": "nur Sekundärquelle", "ungeprueft": "nicht geprüft"}
 TURNUS = {"monatlich": "monatlich", "vierteljaehrlich": "vierteljährlich", "jaehrlich": "jährlich", "bei-neuausgabe": "bei Neuausgabe"}
 ZUGANG = {"frei": "frei", "kostenpflichtig": "kostenpflichtig", "lizenz-klaeren": "Lizenz klären"}
-VERWEISENDE = ["docs/spezifikation.md", "docs/entwicklungsplan.md", "docs/entscheidungen.md", "CLAUDE.md", "docs/modellannahmen/annahmen.toml"]
+VERWEISENDE = ["docs/spezifikation.md", "docs/fachspezifikation-rechenkern.md", "docs/entwicklungsplan.md", "docs/entscheidungen.md", "CLAUDE.md", "docs/modellannahmen/annahmen.toml"]
 VERWEIS = re.compile(r"`([A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+)`")
 PFLICHT = ["id", "gruppe", "kurz", "titel", "herausgeber", "fundstelle", "stand", "beleg", "gelesen_am", "verwendet_fuer", "turnus", "zugang", "bemerkung"]
 

@@ -47,7 +47,7 @@ Grundlage ist der Recherchebericht (`reports/VOFI Immobiliensoftware Marktrecher
 
 ## 3 Rechenkern
 
-Die vollständige Fachspezifikation (Tabellenaufbau, Rechenreihenfolge, Formeln, Konventionen) entsteht als eigenes Kapitel aus dem Anhang des Berichts und den beiden finanzmathematischen Prüfberichten. Bis dahin gelten diese Leitlinien:
+Die vollständige Fachspezifikation steht in `docs/fachspezifikation-rechenkern.md` (Teil 1: allgemeiner Kern und Grobkalkulation; Teil 2 folgt mit Neubau, KfW und NBank). Sie konkretisiert die folgenden Festlegungen; bei Widerspruch gilt dieses Kapitel, und der Widerspruch wird sofort behoben.
 
 | Thema | Festlegung | Status |
 |---|---|---|
