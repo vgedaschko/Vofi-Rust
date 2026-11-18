@@ -12,8 +12,8 @@ Führe eine Prüfrunde durch. Prüfobjekt: $ARGUMENTS
    | Recherche, Bericht, Dokumentation | fachexperte, finanzmathematiker (wenn Zahlen), investor, slop |
    | Fachkonzept, Rechenmodell | fachexperte, finanzmathematiker, steuerberater, jurist, foerdermittel, controller, grenzfaelle |
    | Architektur, Datenmodell | architekt, revision, controller |
-   | Oberfläche, Eingabemasken | praktiker, endnutzer, slop, controller |
-   | Kundenbericht, Export | endnutzer, investor, bank, jurist, slop |
+   | Oberfläche, Eingabemasken | gestaltung (immer, am gerenderten Ergebnis), praktiker, endnutzer, slop, controller |
+   | Kundenbericht, Export | gestaltung, endnutzer, investor, bank, jurist, slop |
    | Rechencode | finanzmathematiker, grenzfaelle, architekt |
    | Anmeldung, Rechte, Kundenzugang | revision, architekt, jurist |
    | Dokumentation als Ganzes (an Freigabepunkten) | dokumentation |

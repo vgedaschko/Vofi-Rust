@@ -98,6 +98,7 @@ Technische Entscheidungen trifft Claude; hier stehen sie mit ihrer geschäftlich
 |---|---|---|
 | Vorgehen | Vor jedem Entwurf Vorbilder aus guten Finanz- und Tabellenanwendungen sichten und das Muster benennen, dem der Entwurf folgt | fest |
 | Wettbewerb | Die prägenden Ansichten (Finanzplan-Tabelle, Eingabe der Annahmen, Kennzahlenblatt mit Bericht) entstehen im Design-Wettbewerb: mindestens fünf Entwürfe in zugewiesenen, verschiedenen Richtungen, mit echten Zahlen, verdeckt bewertet; der Auftraggeber entscheidet unter den besten | fest |
+| Werkzeug und Prüfung | Jede Gestaltungsarbeit beginnt mit dem Skill `frontend-design`. Jede Änderung an Oberflächendateien durchläuft vor dem Stopp die Gestaltungsprüfung am gerenderten Ergebnis (Designkritik, Barrierefreiheit); ein Hook erzwingt das | fest |
 | Bausteine | Gepflegte Bibliotheken für Standardelemente; Eigenbau nur für das Fachliche (VOFI-Tabelle, Förderlogik) | fest |
 | Auftreten | Produkt, Kundenberichte und Exporte ohne Hinweisflut; Hinweise nur bei fachlicher, technischer oder rechtlicher Bedeutung, einmal und an der Stelle, an der sie gebraucht werden | fest |
 | Berichte und Diagramme | Nach IBCS; deutsche Zahl- und Datumsformate | fest |

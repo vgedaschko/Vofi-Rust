@@ -53,13 +53,13 @@ Reihenfolge: `vofi-fachmodell` und `referenzfall-anlegen` zuerst (entstehen aus 
 
 ## 5. Prüfer (eingerichtet)
 
-Sechzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
+Siebzehn Prüferrollen in `.claude/agents/`, gestartet über `/pruefrunde`:
 
 | Gruppe | Rollen |
 |---|---|
 | Fachlich | Fachexperte Immobilien · Finanzmathematiker · Steuerberater · Jurist · Fördermittelberater |
 | Nutzer und Entscheider | Praktiker · unbedarfter Endnutzer · Controller · Investor · Bank |
-| Qualität | KI-Einheitsbrei/Design · Grenzfälle · Software-Architekt · Revision und Datenschutz · Dokumentation |
+| Qualität | Gestaltung · KI-Einheitsbrei · Grenzfälle · Software-Architekt · Revision und Datenschutz · Dokumentation |
 | Brücke | Der Lotse (auf Zuruf und an Meilensteinen) |
 
 Die Prüfer lesen nur und berichten; eingearbeitet wird erst nach Gegenprüfung. Ergebnisse stehen in `docs/pruefung/protokoll.md`.
@@ -84,7 +84,8 @@ Sammlung in Mobbin: „VOFI Referenzen" (privat). Ausgewertet in `docs/gestaltun
 | Rolle `pruefer-slop` | eigener Prüfer | Vorhanden; prüft Text und Oberfläche |
 | `design:design-critique`, `design:accessibility-review`, `design:ux-copy`, `design:design-system` | Anthropic, in der Sitzung verfügbar | Für Kritik, Barrierefreiheit, Texte, Gestaltungssystem |
 | `dataviz` | eingebaut | Diagramme mit geprüfter Farb- und Formlogik |
-| `frontend-design` | Anthropic, Plugin-Verzeichnis, nicht aktiviert | Empfohlen: Leitlinien für eigenständige statt generischer Oberflächen |
+| `frontend-design` | Anthropic, Plugin-Verzeichnis | **Pflicht bei jeder Gestaltungsarbeit.** In den Projekteinstellungen eingetragen (`.claude/settings.json`); ob er darüber in Cloud-Sitzungen lädt, ist noch nicht bestätigt – sicher ist die Aktivierung im Konto |
+| Rolle `pruefer-gestaltung` | eigener Prüfer | Prüft am gerenderten Ergebnis; führt Designkritik und Barrierefreiheitsprüfung selbst aus |
 | VectorLab UI/UX Skills (`anti-slop`, Typografie, Abstände, Formulare, Leerzustände, Tastatur) | Community, nicht aktiviert | Kommt einem „Unslop"-Skill am nächsten; von mir nicht geprüft – an einem Entwurf testen, bevor man sich darauf verlässt |
 | UXKIN (`no-ui-slop`), UI Design Review, ux-ui-audit | Community, nicht aktiviert | Überschneiden sich mit Mobbin, den `design:`-Skills und der Jury; nicht nötig |
 
@@ -97,6 +98,8 @@ Vorgehen in Phase 2: je Kernansicht (Projektübersicht, Eingabe, Finanzplan-Tabe
 | `anything-else.sh start` | Sitzungsstart | Zeigt Pflichtlektüre und offene Aufgaben; meldet fehlende Dateien der Pflichtlektüre und Dokumente, die in der Übersicht fehlen |
 | `anything-else.sh stop` | Vor jedem Stopp | Hält einmal auf, solange unter „Jetzt" in `TASKS.md` etwas offen ist |
 | `spezifikation-merker.sh` | Nach Änderung an Spezifikation oder Entwicklungsplan | Erinnert an Stand-Datum, Entscheidungsprotokoll und Folgeänderungen |
+| `gestaltung.sh merker` | Erste Änderung an einer Oberflächendatei je Sitzung | Erinnert an `frontend-design`, Vorbilder und Gestaltungsprüfung |
+| `gestaltung.sh stop` | Vor jedem Stopp, wenn sich Oberflächendateien geändert haben | Hält auf, bis die Gestaltungsprüfung gelaufen und mit `gestaltung.sh bestanden` vermerkt ist |
 | `rust-format.sh` | Nach Änderung an einer Rust-Datei | Formatiert das Paket |
 | `rust-pruefung.sh` | Vor jedem Stopp, wenn sich Rust-Code geändert hat | `clippy` ohne Warnungen und alle Tests; hält bei Fehlern einmal auf |
 

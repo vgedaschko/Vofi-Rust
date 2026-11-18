@@ -4,6 +4,7 @@ Chronologisch: was wann entschieden oder geändert wurde, warum und auf wessen V
 
 | Datum | Entscheidung | Grund | Auslöser | Ersetzt |
 |---|---|---|---|---|
+| 2026-11-18 | `frontend-design` ist bei jeder Gestaltungsarbeit Pflicht; die Gestaltungsprüfung (Rendern, Designkritik, Barrierefreiheit) läuft selbsttätig und wird per Hook vor jedem Stopp erzwungen; neue Rolle Gestaltung | Gestaltungsqualität soll nicht davon abhängen, dass jemand an die Prüfung denkt | Auftraggeber; Umsetzung Claude | „soweit verfügbar" im Wettbewerbsablauf |
 | 2026-11-18 | Grobkalkulation mit Steuer in Kurzform und Finanzierungsgrenze; tragbarer Kaufpreis als niedrigerer aus Renditegrenze und Bankgrenze; Variantenvergleich und Zielwertsuche schon dort | Ohne Steuer und Finanzierungsgrenze fällt das Gebot zu hoch aus; von Praktiker und Fachexperte unabhängig gefunden und gegengerechnet | Prüfrunde 3 | Reduziertes Kennzahlenblatt ohne Kreditkennzahlen (Sichtung Runde 2) |
 | 2026-11-18 | Endwertdifferenz ist führende Entscheidungsgröße vor der Rendite; Zielrendite, Stresshöhen und Warnschwellen sind Vorgaben des Hauses | Die Rendite hängt davon ab, in welchem Monat Einlagen und Entnahmen fallen; frei wählbare Zielrenditen lassen sich schönrechnen | Prüfrunde 3 (Finanzmathematiker, Investor) | – |
 | 2026-11-18 | Steuerstatus um gewerblich geprägte Personengesellschaft und Einzelunternehmen mit Betriebsvermögen ergänzt; Verlustverrechnung als Merkmal je Vorhaben | Sonst würde ein Verkaufsgewinn nach zwölf Jahren fälschlich steuerfrei gerechnet | Prüfrunde 3 (Fachexperte) | – |

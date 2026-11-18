@@ -25,13 +25,13 @@ Warum ein Wettbewerb: Ein einzelner Entwurf landet verlässlich beim Naheliegend
    | E | Radikal reduziert: nur was für die Aufgabe nötig ist, ein Blick, eine Handlung |
    | F (optional) | Freie Wahl – ausdrücklich gegen die anderen fünf |
 
-   Jeder Teilnehmer ist ein eigener Agent (Modell: das neueste Opus), arbeitet in `…/<Buchstabe>/` und sieht die anderen Entwürfe nicht. Er nutzt, soweit verfügbar, die Skills `frontend-design`, `dataviz`, `design:ux-copy` und `artifact-design`. Im Auftrag an ihn steht nur der Auftrag und seine Richtung – keine Erwartung, wie das Ergebnis aussehen soll.
+   Jeder Teilnehmer ist ein eigener Agent (Modell: das neueste Opus), arbeitet in `…/<Buchstabe>/` und sieht die anderen Entwürfe nicht. Er lädt als Erstes den Skill `frontend-design` – das ist Pflicht; ist der Skill nicht verfügbar, findet der Wettbewerb nicht statt und der Auftraggeber wird gebeten, das Plugin zu aktivieren. Dazu nutzt er `dataviz` für Diagramme und `design:ux-copy` für Texte. Im Auftrag an ihn steht nur der Auftrag und seine Richtung – keine Erwartung, wie das Ergebnis aussehen soll.
 
 3. **Sichtbar machen.** Jeden Entwurf im Browser rendern (Playwright ist vorhanden) und Bildschirmfotos bei 1280 und 1920 Pixeln sowie von einem bedienten Zustand ablegen. Was nicht rendert oder mit erfundenen Zahlen arbeitet, scheidet aus und wird nachgefordert.
 
 4. **Verdeckte Jury.** Die Jury sieht Bildschirmfotos und Seiten unter den Buchstaben, nicht die Begründungen. Juroren, jeder für sich:
+   - Rolle `pruefer-gestaltung` (führt `design:design-critique` und `design:accessibility-review` aus und misst an `frontend-design`)
    - Rollen `pruefer-praktiker`, `pruefer-endnutzer`, `pruefer-controller`, `pruefer-slop`
-   - Skills `design:design-critique` und `design:accessibility-review`
 
    Bewertet wird je Entwurf mit 1 bis 10:
 

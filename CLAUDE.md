@@ -87,6 +87,9 @@ Alles, was Nutzer oder Kunden sehen (Oberfläche, Kundenberichte, Exporte), trit
 
 ### Gestaltung und Bedienung
 
+- **`frontend-design` ist Pflicht.** Bei jeder Gestaltungsarbeit – Entwurf, Wettbewerbsbeitrag, Umsetzung oder Überarbeitung einer Oberfläche oder eines Berichtslayouts – wird zuerst der Skill `frontend-design` geladen; das gilt auch für jeden Agenten, der gestaltet. Ist der Skill nicht verfügbar, wird nicht gestaltet, sondern der Auftraggeber gebeten, das Plugin zu aktivieren.
+- **Die Gestaltungsprüfung läuft von selbst.** Nach jeder Änderung an Oberflächendateien: im Browser rendern, Bildschirmfotos ablegen, die Rolle `pruefer-gestaltung` prüfen lassen (sie führt `design:design-critique` und `design:accessibility-review` aus, bei Texten `design:ux-copy`, bei Diagrammen `dataviz`), Befunde beheben, dann `.claude/hooks/gestaltung.sh bestanden`. Der Hook hält jeden Stopp auf, solange das nicht geschehen ist. Der Auftraggeber muss dafür nichts anstoßen.
+
 - An bewährten Vorbildern ausrichten, nicht frei erfinden: vor dem Entwurf einer Ansicht Referenzen aus guten Finanz-, Analyse- und Tabellenanwendungen ansehen (über die Mobbin-Werkzeuge, sofern verfügbar) und das Muster benennen, dem der Entwurf folgt.
 - Fertige, gepflegte Bibliotheken für Standardbausteine einsetzen (Tabellen, Diagramme, Formulare, Dialoge, Datumswahl) statt sie neu zu bauen. Eigenbau nur dort, wo das Fachliche es verlangt (VOFI-Tabelle, Förderlogik) – mit kurzer Begründung.
 - Auswahl einer Bibliothek nach Pflegezustand, Lizenz, Barrierefreiheit und Passung zum Gestaltungssystem; die Entscheidung trifft Claude und hält sie fest.
