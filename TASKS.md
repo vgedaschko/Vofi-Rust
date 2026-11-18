@@ -36,7 +36,6 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 - [ ] Vorführungen bei den drei VOFI-Anbietern anfordern (Prüfliste kommt aus Anhang D des Berichts)
 - [ ] Anwalt beauftragen (Datenschutz, Mitbestimmung, Nutzungsrechte, Haftung der Beratung) – vor der Bauentscheidung; Steuerberater für die Durchsicht der Steuerlogik – vor dem ersten Kundeneinsatz
 - [ ] Zustimmung der KfW zur Nutzung der Zinsdatei einholen, sobald die Lizenzfrage geklärt ist
-- [ ] Fachfrage: Ist der geförderte Neubau das Hauptgeschäft? Davon hängt die Reihenfolge der Teilschritte ab
 - [ ] Falls greifbar, zwei Buchstellen als Foto oder Auszug: Grob, „Einführung in die Investitionsrechnung", S. 140 f. (Gesamtkapitalrentabilität: welche Sollzinsen zählen; dazu die Amortisationsdauer) und Ropeter, „Investitionsanalyse für Gewerbeimmobilien" (1998), S. 186 ff. (Rendite bei mehreren Einlagen und Entnahmen). Nicht dringend: Bis dahin rechnet das Werkzeug mit gekennzeichneten Annahmen (MA-012, MA-027, MA-028)
 - [ ] Durchsicht der sechs Modellannahmen mit hohem Gewicht (`docs/modellannahmen.md`: MA-001, MA-004, MA-012, MA-014, MA-016, MA-026) und der begründeten Ausnahmen von der Vorsichtsregel (MA-019, MA-022, MA-023 beim Erwerb, Wertansatz in MA-026)
 - [ ] Gespräch mit der Hausbank (MA-026): Begrenzt die Beleihungsquote nur das eigene Darlehen oder alle Darlehen? Rechnet die Kapitaldienstfähigkeit das Förderdarlehen mit? Welcher Wertansatz und welche Bewirtschaftungspauschale gelten?
@@ -63,6 +62,7 @@ Aufgaben als `- [ ] …`; `- [~] …` heißt „läuft im Hintergrund / wartet a
 
 ## Erledigt
 
+- [x] 2026-11-18 Reihenfolge der Stufe 1 entschieden (Auftraggeber): nach der Grobkalkulation zuerst der Neubau in voller Tiefe, dann NBank-Förderung, danach Ankauf Bestand
 - [x] 2026-11-18 Regionaler Schwerpunkt geklärt (Auftraggeber): Niedersachsen, Bremen, Hamburg, Schleswig-Holstein, Nordrhein-Westfalen; Förderung überwiegend KfW und NBank – Spezifikation und Entscheidungsprotokoll nachgezogen
 - [x] 2026-11-18 Lehrbuchkapitel „Immobilieninvestition" (Schulte et al., S. 787–838, vom Auftraggeber bereitgestellt) ausgewertet: Zeilenaufbau am Original belegt, zwei Musterrechnungen nachgebaut (50 von 53 Buchwerten getroffen, drei um je eine Einheit abweichend) → Quellnotiz 11
 - [x] 2026-11-18 Recherchebericht abgenommen: Schlussredaktion nach Prüfrunde 5 eingearbeitet (24 Punkte), gegengelesen, Prüfskripte grün; 29 Modellannahmen, 219 Quellen
