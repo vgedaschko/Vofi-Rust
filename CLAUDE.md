@@ -44,7 +44,7 @@ Lässt sich etwas vor dem Bau nicht klären, wird nicht stillschweigend eine Les
 
 - Jede solche Setzung bekommt eine Kennung (`MA-000`) im Verzeichnis der Modellannahmen – mit der anderen Lesart, dem Gewicht und dem, der klären kann.
 - Die Kennung steht überall, wo die Annahme wirkt: Spezifikation, Katalog, Code, Tests.
-- Voreingestellt ist die vorsichtige Lesart; bei Gewicht hoch oder mittel nach Möglichkeit umschaltbar.
+- Voreingestellt ist die vorsichtige Lesart; bei Gewicht hoch oder mittel nach Möglichkeit umschaltbar – als Lesart des Hauses, nicht als Schalter je Vorhaben, und nur wo die Wirkung die Wesentlichkeitsschwelle besteht und keine Eingabe dasselbe leistet.
 - Nicht verwechseln: eine Festlegung ist unsere Bauentscheidung, eine Eingabe gehört dem Anwender, eine ungeprüfte Quelle steht im Kataster. Eine Modellannahme ist eine Annahme über die Außenwelt, die sich als falsch herausstellen kann.
 
 ## Spezifikation ist der Pfad
