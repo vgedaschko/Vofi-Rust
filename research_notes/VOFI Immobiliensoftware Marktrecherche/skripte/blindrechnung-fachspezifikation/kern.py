@@ -2,7 +2,7 @@
 """Blindrechnung: Nachbau der Grobkalkulation allein aus docs/fachspezifikation-rechenkern.md
 (Stand 2026-11-21, Teil 1 eingefroren). Nur Standardbibliothek, decimal.
 Kein Blick in den Referenzrechner. Der Stand nach Pruefrunde 1 liegt in stand-runde2/."""
-from decimal import Decimal as D, getcontext, ROUND_HALF_UP, ROUND_FLOOR, ROUND_CEILING
+from decimal import Decimal as D, getcontext, ROUND_HALF_UP, ROUND_FLOOR, ROUND_CEILING, ROUND_DOWN
 import copy
 
 getcontext().prec = 60
@@ -22,7 +22,9 @@ def r12(x):
 
 
 def floor2(x):
-    return D(x).quantize(CENT, rounding=ROUND_FLOOR)
+    """auf Cent abrunden (R-5.12). Fuer einen negativen Wert B laesst der Text die Richtung offen; das Beispiel
+    der Tabelle zu RF-09 (-92.857,14) schneidet zur Null hin ab. Auf das Darlehen wirkt das nicht (L = 0)."""
+    return D(x).quantize(CENT, rounding=ROUND_DOWN)
 
 
 def ceil_int(x):

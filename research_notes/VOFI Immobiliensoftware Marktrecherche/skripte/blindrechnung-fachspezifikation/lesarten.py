@@ -1,56 +1,64 @@
+# -*- coding: utf-8 -*-
+"""Stellen, an denen der Text allein nicht entschieden hat: Wirkung der anderen Lesart in Zahlen.
+Kein Sollwertvergleich; die Zeilen gehen in den Bericht (Abschnitt 'Stellen, an denen geraten werden musste')."""
 from kern import *
-from rf12 import show
-def A(**kw):
-    c = ankauf(); c['H'] = dict(c['H']); c['K'] = dict(c['K'])
-    for k, v in kw.items():
-        if k.startswith('H_'): c['H'][k[2:]] = v
-        elif k.startswith('K_'): c['K'][k[2:]] = v
-        else: c[k] = v
-    return c
-def NB(**kw):
-    c = neubau(); c['H'] = dict(c['H']); c['K'] = dict(c['K'])
-    for k, v in kw.items():
-        if k.startswith('H_'): c['H'][k[2:]] = v
-        elif k.startswith('K_'): c['K'][k[2:]] = v
-        else: c[k] = v
-    return c
-print('(a) Rundungsrest der Entgeltverteilung im Verkaufsjahr ja/nein')
-for er in (True, False):
-    R = rechne(NB(foerder=True, n=38, einb_rest=er), detail=False); print('   einb_rest', er, fmt(R['EW']), '(Soll 9.943.743,02)')
-    R = rechne(NB(foerder=True, n=20, einb_rest=er), detail=False); print('   einb_rest', er, '20 J dEW', fmt(R['dEW']), '(Soll 129.107,95)')
-print('(b) Anpassungsdauer nach Bindungsende im Neubau: 4 (H-23) oder 0')
-for dd in (4, 0):
-    R = rechne(NB(foerder=True, n=39, nb_d_bind=dd), detail=False); print('   d', dd, '39 J', pct(R['r']), '(Soll 3,788 %)')
-    R = rechne(NB(foerder=True, n=42, nb_d_bind=dd), detail=False); print('   d', dd, '42 J EW', fmt(R['EW']), pct(R['r']), '(Soll 13.319.334,95 / 3,935 %)')
-print('(e) Stress: Anschlusszins = gestresster Zins + H-05 + Aufschlag (6,5 %) oder Basiszins + H-05 + Aufschlag (6,0 %)')
-B0 = rechne(A())
-for alt in (False, True):
-    S = rechne(A(stress_anschl_alt=alt), stress=True, basis=B0); print('   alt', alt, fmt(S['dEW']), fmt(S['deck'][11][0],3), '(Soll 196.967,13 / 1,581)')
-print('(17) Jahresmodus: Sollmiete = runde(Summe ungerundeter Monate) oder Summe gerundeter Monate')
-for alt in (False, True):
-    R = rechne(A(p=1, jm_soll_alt=alt)); print('   alt', alt, fmt(R['EW']), '(Soll 2.514.395,05)')
-print('(c) Mittelabruf: Rundung der Aufteilung Darlehen/Zuschuss -> kein Unterschied (siehe rf12f.py)')
-print('== RF-14 Neubau')
-R = rechne(NB(foerder=True, n=42)); show('42 J EW', R['EW'], '13.319.334,95'); show('42 J r', R['r'], '3,935 %', 3, True)
-tf = R['tr'][0]; show('Abloesung FD', tf.s['abl'][504], '186.840,56'); show('Rueckzahlung', R['rueck'], '0,00')
-show('Bew M283', R['bew'][283], '4.927,81'); show('Bew M403', R['bew'][403], '6.807,90')
-print('   letzte AfA im Planjahr', max(j for j in range(1,43) if R['afa'][j] > 0), '(soll 35); erster Zins FD im Planjahr', (min(u for u in range(1,505) if tf.s['zins'][u] > 0)-1)//12+1, '(soll 37)')
-R = rechne(NB(n=3)); show('3 J EW frei', R['EW'], '5.201.901,26')
-print('== R-11.15 noetige Miete')
-f = NB(foerder=True, n=38); R = rechne(f, detail=False); H = f['H']
-x = None
-for cent in range(820, 2000):
-    m = D(cent)/100
-    roh = 12*r2(D(2000)*m); einz = 12*r2(r2(D(2000)*m)*D('0.98'))
-    ren = roh - max(R['bew_vj'] + (roh-einz), r2(D('0.15')*roh))
-    Bv = floor2((ren/H['mu'] - R['KD_U'])/D('0.07'))
-    if Bv >= R['C']: x = m; break
-show('noetige Miete', x, '10,40')
-print('== RF-19/RF-20 weitere Preissuchen')
-ps = preissuche(A(stau=D(420000), stau_jahr=0), krit=lambda R: R['ek_ges'] <= D(1200000)); show('Stau 420.000 Stichtag, EK 1,2 Mio', D(ps['P']), '1.733.333', 0)
-ps = preissuche(A(stau=D(420000), stau_jahr=1), krit=lambda R: R['ek_ges'] <= D(1200000)); show('Stau 420.000 Jahr 1, EK 1,2 Mio', D(ps['P']), '1.763.092', 0)
-ue = dict(rest=D(2000000), nenn=D(2000000), zins=D('0.06'), tilg=D('0.02'), zb=10, anschluss=D('0.05'), foerder=True, rang='vor')
-ps = preissuche(A(vf=D(4), uebern=ue)); print('   uebern. 2,0 Mio 6 %, VF 4:', ps, '(soll U 1.818.182, M-32)')
-c = A(stau=D(6000000), stau_jahr=0); c['preis']=D(1); print('   Stau 6 Mio, Rendite bei U:', pct(rechne(c, detail=False)['r']), '(soll -1,905 %)')
-c = A(enk=D(0), vf=D(5), stau=D(0), H_beta=D(1), H_mu=D(1), ma026_2=True)
-ps = preissuche(c); R = ziel_eu(c, ps['P']); print('   Vollfinanzierung:', ps, 'D', R['Dn'], '(soll M-41, Nebenangabe 1.569.899)')
+from rf11g import geb
+from rf12f import foerderfall
+
+
+def main():
+    print('\n== Lesarten und Ursachensuche (ohne Zaehlung)')
+    c = ankauf()
+    # (1) R-10.9: Endwertueberschuss im Stressfall -- Sollwert des Fliesstexts stammt aus dem Stand mit neun Stressgroessen
+    S8 = rechne(c, stress=True, detail=False)
+    S9 = rechne(mit(c, H_st_inst=D('0.10')), stress=True, detail=False)
+    print(' 1 R-10.9 Endwertueberschuss Stress: acht Groessen', fmt(S8['EU']), '| mit Instandhaltung +10 % (Altstand)', fmt(S9['EU']),
+          'dEW', fmt(S9['dEW']), '(Text R-10.9: -739.303,12; R-15.6 nennt 216.856,20 fuer neun Groessen)')
+    # (2) R-11.11: frei gegen gefoerdert, 38 Jahre
+    Rf = rechne(mit(neubau(), n=38), detail=False)
+    Rg = rechne(foerderfall(), detail=False)
+    print(' 2 R-11.11 frei 38 J: EW', fmt(Rf['EW']), 'EW_U', fmt(Rf['EWU']), 'dEW', fmt(Rf['dEW']), '| gefoerdert dEW', fmt(Rg['dEW']),
+          '| Differenz', fmt(Rg['dEW'] - Rf['dEW']), '(Text: -10.726.689,93; daraus frei dEW', fmt(Rg['dEW'] + D('10726689.93')) + ')')
+    # (3) R-5.12 Beispiel: Rohertrag_n des gebundenen Bestands
+    G = rechne(geb(), nur_bemessung=True)
+    print(' 3 R-5.12 Rohertrag_n gebunden', fmt(G['roh_n']), '- Mietausfall', fmt(G['ausf_n']), '- Bew', fmt(G['bew_vj']), '= RE_n', fmt(G['re_n']),
+          '| Text nennt Rohertrag_n 123.869,76 (ergaebe RE_n', fmt(D('123869.76') - G['ausf_n'] - G['bew_vj']) + ')')
+    # (4) R-5.12 Beispiel: H-25 fest 4 % "fuer uebernommene Darlehen" und "Lesart (2)" -- beide Stellgroessen gibt es nicht mehr
+    G4 = rechne(geb(H_h25=D('0.04')), nur_bemessung=True)
+    print(' 4 R-5.12 gebunden, H-25 fest 4 % als ein Wert fuer alle Tranchen: KD_UE', fmt(G4['KD_U']), 'L', fmt(G4['L']),
+          '| Text: 826.660,00 (nur mit H-25 je Tranchenart: (RE_n/1,2 - 19.200)/7 % =', fmt(floor2((G['re_n'] / D('1.2') - 19200) / D('0.07'))) + ')',
+          '| "Lesart (2)" 1.034.436,66 = (RE_n/1,2 - 15.000)/6 % =', fmt(floor2((G['re_n'] / D('1.2') - 15000) / D('0.06'))))
+    # (5) R-10.14 Nr. 4: erstes Planjahr nach dem Ende der zinslosen Zeit (Ende im Monat 438, mitten im Planjahr 37)
+    Rg = rechne(foerderfall())
+    print(' 5 R-10.14 Nr. 4 gefoerdert: Deckung Planjahr 37', fmt(Rg['deck'][37][0], 4), '(Text) | Planjahr 38, das erste ganz nach dem Ende', fmt(Rg['deck'][38][0], 4))
+    # (6) R-11.15: Planjahr, in dem die Mindestdeckung erstmals erreicht ist -- ohne die Abgrenzung "ganz in der Vermietung"
+    print(' 6 R-11.15 gefoerdert: Deckung je Planjahr 1 bis 10:', ' / '.join('k.KD' if Rg['deck'][j][0] is None else fmt(Rg['deck'][j][0], 3) for j in range(1, 11)),
+          '-> erstes Jahr >= 1,2 ohne Abgrenzung:', min(j for j in Rg['deck'] if Rg['deck'][j][0] is not None and Rg['deck'][j][0] >= D('1.2')), '| mit Abgrenzung: 9 (Text)')
+    # (7) R-10.16 mit Kennzeichen E-41 ohne E-69: Steuer "die ohne Verkaufsgewinn anfiele"
+    K = rechne(mit(c, kennz=True))
+    gewst_lfd = D('7952.00')
+    a = K['restwertbeitrag'] / K['EW']
+    b = (K['restwertbeitrag'] - gewst_lfd) / K['EW']
+    print(' 7 R-10.16 mit E-41: Steuer auf den Verkaufsgewinn', fmt(K['steuer_verkauf']), '(Verkaufsjahr ohne Gewinn, Kuerzung entfaellt) | Restwertanteil', pct(a, 2),
+          '| andere Lesart (Jahr ohne Verkauf, Kuerzung bleibt): Steuer', fmt(K['steuer_verkauf'] + gewst_lfd), 'Restwertanteil', pct(b, 2))
+    # (8) R-11.8: kalkulatorischer Zins im Stressfall mit oder ohne Anschlussstress
+    re = rechne(c, nur_bemessung=True)['re_n']
+    print(' 8 R-11.8 Stress-Bemessung: i_k = 4,5 % + 1 = 5,5 %: L', fmt(S8['L']), '| mit Anschlussstress 6,5 %: L', fmt(floor2(re / D('1.2') / D('0.085'))))
+    # (9) R-12.4: Bemessungszins auf zwoelf Stellen -- des Satzes oder des Prozentwerts
+    print(' 9 R-5.19 H-32 15 Jahre: i_B = runde12(0,0333...) = 3,3333333333 % (Text schreibt 3,333333333333 %); KD_UE in beiden Schreibweisen 159.999,96')
+    # (10) R-11.5: Steigung am Knick aus gerundeten oder ungerundeten Renditen
+    rs = [lauf(c, 1887092 + x)['r'] for x in (-10000, 0, 10000)]
+    print('10 R-11.5 Steigung links', fmt((rs[1] - rs[0]) * 10000, 3), 'rechts', fmt((rs[2] - rs[1]) * 10000, 3), 'Basispunkte je 10.000 Euro (Text: -7,11 und -9,61)')
+    # (11) R-11.8 mit R-5.8: uebernommenes Darlehen mit dem voreingestellten Anschlusszins E-45 + H-05 -- folgt er im
+    #      Stressfall dem Bankdarlehen (+0,5 bis zur Zusage, +1 Anschluss) oder gilt er als eingegeben (+1)?
+    ue = dict(rest=D(500000), nenn=D(600000), zins=D('0.005'), tilg=D('0.02'), zb=8, anschluss=None, beitrag=D(0))
+    a = rechne(mit(geb(), uebern=ue), stress=True, detail=False)
+    b = rechne(mit(geb(), uebern=dict(ue, anschluss=D('0.05'))), stress=True, detail=False)
+    print('11 R-11.8 uebernommenes Darlehen mit voreingestelltem Anschlusszins, Stressfall: folgt der Bank (6,5 %): L', fmt(a['L']), 'dEW', fmt(a['dEW']),
+          '| gilt als eingegeben (6,0 %): L', fmt(b['L']), 'dEW', fmt(b['dEW']))
+    # (12) Betrag B negativ: abrunden zur Null hin oder nach unten
+    print('12 R-5.12 Tabelle RF-09: B = (180.000/1,2 - 155.571,428571)/6 % = -92.857,142857 -> zur Null hin -92.857,14 (Text), nach unten -92.857,15')
+
+
+if __name__ == '__main__':
+    main()

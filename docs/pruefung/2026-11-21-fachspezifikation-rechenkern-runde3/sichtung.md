@@ -59,7 +59,17 @@ Gesamtbild: Die Rechnung trägt. Der Finanzmathematiker hat rund 420 Werte mit e
 
 ## Blindrechnung
 
-(Wird nach Eingang des Berichts ergänzt.)
+Ein zweiter Bearbeiter hat die Regeln allein aus dem Text nachgebaut (ohne Referenzrechner, Sollwertdatei und Prüfberichte): **951 Sollwerte nachgerechnet, 946 getroffen, 5 abweichend.** Urteil: Nach dem heutigen Text lässt sich ohne Rückfrage programmieren; an keiner ergebniswirksamen Stelle musste der Sollwert die Lesart entscheiden. Die sieben Lücken der Runde 2 sind geschlossen. Zwei der fünf Abweichungen decken sich mit dem Finanzmathematiker (R-10.9 und R-11.11: zwei unabhängige Rechnungen ergeben −716.938,74 und −10.735.928,53 Euro); der Text ist falsch, nicht die Rechnung.
+
+Übernommen:
+
+22. **Die fünf Abweichungen berichtigen:** R-10.9; R-11.11 (am Referenzrechner mit den drei Werten der Blindrechnung für „frei, 38 Jahre“ klären: Endwert 25.525.695,66, Alternative 9.133.557,41, Endwertdifferenz 16.392.138,25 Euro); R-5.12 Rohertrag des gebundenen Bestands (123.868,80 Euro); R-11.5 Steigung aus ungerundeten Renditen; R-5.19 Schreibweise.
+23. **R-10.14 Nr. 4:** Endet eine Zinsbindung mitten im Planjahr, zählt das erste **volle** Planjahr danach (vorsichtiger; im geförderten Neubau 1,6943 statt 1,8848). Sollwert ändern.
+24. **R-11.8 mit R-5.8:** Ein nicht überschriebener Anschlusszins eines übernommenen Darlehens ist eine Voreinstellung und steigt im Stressfall wie der des Bankdarlehens; ein eingegebener bleibt. Sollwert für den gebundenen Bestand aufnehmen.
+25. **Formulierungen:** R-10.16 („Steuer ohne Verkaufsgewinn“ mit Kennzeichen E-41), R-5.12 (Abrundungsrichtung bei negativem B), RF-09 (ungerundeter Kapitaldienst), R-12.7 („Jahresmieten“ sind Mieteinzahlungen), R-12.4 (`runde12` am Dezimalwert); alte neben neuer Formulierung in R-12.5 und R-6.10/R-6.16.
+26. **Reste entfallener Kennungen** aus der Tabelle des Berichts – geht in Punkt 18 auf.
+
+Der Code der Blindrechnung liegt unter `research_notes/…/skripte/blindrechnung-fachspezifikation/` (`python3 blindwerte.py`, rund 20 Sekunden) und bleibt als zweite Umsetzung im Projekt.
 
 ## Wie es weitergeht
 

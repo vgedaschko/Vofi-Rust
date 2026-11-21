@@ -182,6 +182,34 @@ def main():
     s('Foerderdarlehen 2.320.000: Rate', t.s['tilg'][1], '55.238,10'); s('  Beitrag im ersten Jahr', t.s['beitr'][1], '11.600,00')
     s('  Restschuld nach 35 Jahren', t.s['rest'][35], '386.666,50'); s('  Zins im 36. Jahr', t.s['zins'][36], '19.333,33')
 
+    Z.titel('RF-09 Regel des Bankdarlehens, drei Grenzen (R-5.12)')
+
+    def bank(W, M, re, beta=D('0.65'), ue=D(0), kd_ue=D(0), zus=D(0), mek=D(0), p=1, ik=D('0.06'), mu=D('1.2')):
+        A_ = beta * W - ue
+        C_ = M - ue - zus - mek
+        B_ = floor2((re / mu - kd_ue) / ik)
+        while B_ > 0 and re < mu * (kd_ue + p * r2(B_ * ik / p)):
+            B_ -= CENT
+        mn = min(A_, B_, C_)
+        L_ = max(D(0), floor2(mn)) if B_ > 0 else D(0)
+        return A_, B_, C_, L_, 'abc'[[A_, B_, C_].index(mn)], M - ue - zus - L_
+    kdf = D(5400000) / 42 + D(27000)       # Anhang A.3: Kapitaldienst als Eingabe des Bausteins, ungerundet
+    s('Kapitaldienst des Foerderdarlehens im Beispiel', kdf, '155.571,43'); s('  Reinertrag, ab dem etwas fuer die Bank bleibt', D('1.2') * kdf, '186.685,71')
+    nbk = dict(ue=D(5400000), kd_ue=kdf, zus=D(1800000), mek=D(1800000))
+    T = [('Ankauf 2,6 Mio.', bank(D(2600000), D(2782000), D(107712)), '1.690.000,00', '1.496.000,00', '2.782.000,00', '1.496.000,00', 'b', '1.286.000,00'),
+         ('Ankauf 2,2 Mio.', bank(D(2200000), D(2354000), D(107712)), '1.430.000,00', '1.496.000,00', '2.354.000,00', '1.430.000,00', 'a', '924.000,00'),
+         ('uebernommenes Darlehen 1,0 Mio.', bank(D(2000000), D(2200000), D(140000), ue=D(1000000), kd_ue=D(25000)), '300.000,00', '1.527.777,74', '1.200.000,00', '300.000,00', 'a', '900.000,00'),
+         ('Neubau 65 %, 400.000', bank(D(10000000), D(10000000), D(400000), **nbk), '1.100.000,00', '2.962.698,41', '1.000.000,00', '1.000.000,00', 'c', '1.800.000,00'),
+         ('Neubau 60 %', bank(D(10000000), D(10000000), D(400000), beta=D('0.6'), **nbk), '600.000,00', '2.962.698,41', '1.000.000,00', '600.000,00', 'a', '2.200.000,00'),
+         ('Neubau 65 %, 200.000', bank(D(10000000), D(10000000), D(200000), **nbk), '1.100.000,00', '184.920,58', '1.000.000,00', '184.920,58', 'b', '2.615.079,42'),
+         ('Neubau 180.000', bank(D(10000000), D(10000000), D(180000), **nbk), '1.100.000,00', '-92.857,14', '1.000.000,00', '0,00', 'b', '2.800.000,00')]
+    for name, (A_, B_, C_, L_, bd, ek), a, b, c_, l, bi, e in T:
+        s(name + ': A', A_, a); s(name + ': B', B_, b); s(name + ': C', C_, c_); s(name + ': Bankdarlehen', L_, l); s(name + ': bindet', bd, bi); s(name + ': Eigenkapital', ek, e)
+    s('Knick zwischen (a) und (b)', D(1496000) / D('0.65'), '2.301.538,46')
+    A_, B_, C_, L_, bd, ek = bank(D(2600000), D(2782000), D('107712.37'), p=12)
+    s('Monatsraster: geschlossene Form', D('107712.37') / D('1.2') / D('0.06'), '1.496.005,14')
+    s('Monatsraster: gewaehrt', B_, '1.496.004,99'); s('  Kapitaldienst', 12 * r2(B_ * D('0.06') / 12), '89.760,24'); s('  Deckung', D('107712.37') / (12 * r2(B_ * D('0.06') / 12)), '1,200001', 6)
+
 
 if __name__ == '__main__':
     main()
