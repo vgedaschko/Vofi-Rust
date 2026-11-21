@@ -1,0 +1,14 @@
+== GF3-H2 Obergrenze an der Untergrenze
+  uebernommen 2,0 Mio., H-21 Faktor 13.0: Preis None bindend None Meldung M-32 [] R-Grenze None EK-Grenze None U 1818182 O 2320195 Neben None
+  uebernommen 2,0 Mio., H-21 Faktor 13.6: Preis None bindend None Meldung M-32 [] R-Grenze None EK-Grenze None U 1818182 O 2427281 Neben None
+  uebernommen 2,0 Mio., H-21 Faktor 13.7: Preis None bindend None Meldung M-32 [] R-Grenze None EK-Grenze None U 1818182 O 2445129 Neben None
+  uebernommen 2,0 Mio., H-21 Faktor 14: Preis None bindend None Meldung M-32 [] R-Grenze None EK-Grenze None U 1818182 O 2498672 Neben None
+  uebernommen 2,0 Mio., H-21 Faktor 100: Preis None bindend None Meldung M-32 [] R-Grenze None EK-Grenze None U 1818182 O 17847656 Neben None
+  H-21 Faktor 0,000001: Preis None bindend None Meldung M-31 [] R-Grenze None EK-Grenze None U None O None Neben None Text Suchbereich leer: keine Miete im Vorhaben
+  H-21 Faktor 0,00001: Preis None bindend None Meldung M-33 [] R-Grenze None EK-Grenze None U 1 O 2 Neben None
+  H-21 Rasterzahl 1, Fenster 0: Preis 2407109 bindend Rendite Meldung None [] R-Grenze 2407109 EK-Grenze None U 1 O 17847656 Neben None
+  H-21 Rasterzahl 100000: uebersprungen (Laufzeit)
+== GF3-H3 Ziel genau an U, Ziel knapp ueber dem Maximum
+  Ziel 1000 %: Preis None bindend None Meldung M-32 [] R-Grenze None EK-Grenze None U 1 O 17847656 Neben None
+  Ziel -99,99 %: Preis None bindend None Meldung M-33 [] R-Grenze None EK-Grenze None U 1 O 17847656 Neben None
+  Ziel -100 % (unzulaessig): Preis None bindend None Meldung M-20 [] R-Grenze None EK-Grenze None U None O None Neben None Text H-01 Zielrendite: Wert -1 ausserhalb des zulaessigen Bereichs (> -1)

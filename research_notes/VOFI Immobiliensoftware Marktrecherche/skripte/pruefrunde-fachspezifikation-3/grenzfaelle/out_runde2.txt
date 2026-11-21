@@ -1,0 +1,51 @@
+== Befund 1 (NG-22, NG-14): Rate bei Tilgungsbeginn nach Bindungsende
+  Bauzeit 24, Bindung 2, Stress False: Monat 25 Satz 0.05 Zins 16.696,43 Tilgung 6.678,57 Deckung VJ 1.2624 gesperrt False
+  Bauzeit 24, Bindung 2, Stress True: Monat 28 Satz 0.065 Zins 20.258,33 Tilgung 6.233,34 Deckung VJ 1.0884 gesperrt False
+  Bindung 1: M19 Rate 23.375,00 (Soll 23.375,00) Tilgung 6.678,57
+  KfW 5 tilgungsfreie Jahre, Bindung 3 J.: M68 Satz 0.05 Zins 12.500,00 Tilgung 0,00; Rest M240 2.110.991,20; gesperrt False
+== Befund 3 (NG-18): Kennzeichen Foerderdarlehen beim uebernommenen Darlehen
+  Kennzeichen True: [ergebnis] EW 1.377.913,43 | dEW 166.285,22 | r 4,090 % | L 1.012.324,28 ['b'] | EK0 1.127.675,72 | NS 0,00 | FB 0,00 | M ['M-25', 'M-37'] || VFE 69.043,11 KD_Ue 15.000,00
+  Kennzeichen False: [ergebnis] EW 1.377.913,43 | dEW 166.285,22 | r 4,090 % | L 1.012.324,28 ['b'] | EK0 1.127.675,72 | NS 0,00 | FB 0,00 | M ['M-25', 'M-37'] || VFE 69.043,11 KD_Ue 15.000,00
+  Kennzeichen None: [ergebnis] EW 1.377.913,43 | dEW 166.285,22 | r 4,090 % | L 1.012.324,28 ['b'] | EK0 1.127.675,72 | NS 0,00 | FB 0,00 | M ['M-25', 'M-37'] || VFE 69.043,11 KD_Ue 15.000,00
+== Befund 4 (NG-33): M-24 in Suchen
+  kalkuliere: [eingabe] M-24 Foerderdarlehen: Zinsbindung endet in Periode 438, Anschlusszins fehlt (R-5.8: keine stille Fortschreibung)
+  tragbar: Preis None bindend None Meldung M-24 [] R-Grenze None EK-Grenze None U 1 O 37375005 Neben None Text Foerderdarlehen: Zinsbindung endet in Periode 438, Anschlusszins fehlt (R-5.8: keine stille Fortschreibung)
+  Haltedauertabelle 37-38: [(37, None, None, 'M-24'), (38, None, None, 'M-24')]
+  Zielwertsuche Faktor: keine Suche: jeder Gitterwert endet mit M-24 [] M [] unz 6
+== Befund 5 (NG-31): Katalog
+  Bayern: [eingabe] M-47 Der Katalog fuehrt keine Werte fuer Land 'Bayern', Gemeinde 'Muenchen' (KAT-01, KAT-04, KAT-08)
+  Kappung fehlt: [eingabe] M-47 KAT-08 Kappungsgrenze: Katalogwert fehlt fuer Land 'Niedersachsen', Gemeinde 'Beispielgemeinde (Annahme)'
+  Hebesatz fehlt: [eingabe] M-47 KAT-04 Hebesatz der Gemeinde: Katalogwert fehlt fuer Land 'Niedersachsen', Gemeinde 'Beispielgemeinde (Annahme)'
+  Hebesatz fehlt, Preissuche: Preis None bindend None Meldung M-47 [] R-Grenze None EK-Grenze None U None O None Neben None Text KAT-04 Hebesatz der Gemeinde: Katalogwert fehlt fuer Land 'Niedersachsen', Gemeinde 'Beispielgemeinde (Annahme
+== Befund 6 (NG-09, NG-34, NG-35): Eingabepruefung
+  E-58 = 0: [eingabe] M-20 E-58 gebundene Miete: Wert 0 ausserhalb des zulaessigen Bereichs (> 0)
+  E-58 = -1: [eingabe] M-20 E-58 gebundene Miete: Wert -1 ausserhalb des zulaessigen Bereichs (> 0)
+  H-18 -1 %: [eingabe] M-20 H-18 Vorfaelligkeitssatz: Wert -0.01 ausserhalb des zulaessigen Bereichs (>= 0)
+  H-11 -100.000: [eingabe] M-20 H-11 Kontokorrentlinie: Wert -100000 ausserhalb des zulaessigen Bereichs (>= 0)
+  H-09 -50 %: [eingabe] M-20 H-09 langfristiger Anlagezins: Wert -0.5 ausserhalb des zulaessigen Bereichs (>= 0)
+  H-25 -10 %: [eingabe] M-20 H-25 kalkulatorischer Zins: Wert -0.1 ausserhalb des zulaessigen Bereichs (0 bis 0.20)
+  H-29 -500: [eingabe] M-20 H-29 CO2-Preis: Wert -500 ausserhalb des zulaessigen Bereichs (>= 0)
+  H-17 -2000: [eingabe] M-20 H-17 Verwaltung je Einheit: Wert -2000 ausserhalb des zulaessigen Bereichs (>= 0)
+  H-06 Leerstand -50 Pp.: [eingabe] M-20 H-06 Stresshoehe Leerstand: Wert -0.5 ausserhalb des zulaessigen Bereichs (>= 0)
+  H-21 Suchraster 0: [eingabe] M-20 H-21 Rasterzahl: Wert 0 ausserhalb des zulaessigen Bereichs (>= 1)
+  H-17 Staffel leer: [eingabe] M-20 H-17 Staffel der Instandhaltung: mindestens eine Stufe ab dem Gebaeudealter null, aufsteigend, Betraege nicht negativ
+  H-21 Suchraster 0, Preissuche: Preis None bindend None Meldung M-20 [] R-Grenze None EK-Grenze None U None O None Neben None Text H-21 Rasterzahl: Wert 0 ausserhalb des zulaessigen Bereichs (>= 1)
+  E-59 Anschluss -5 %: [eingabe] M-20 E-59 uebernommenes Darlehen, Anschlusszins: Wert -0.05 ausserhalb des zulaessigen Bereichs (0 bis 0.20)
+  E-59 Bindung 0: [eingabe] M-20 E-59 uebernommenes Darlehen, Ende der Zinsbindung: Wert 0 ausserhalb des zulaessigen Bereichs (1 bis 40)
+== Befund 7 (NG-36): Fehlerbilder Bemessung, Rate
+  verfuegbare Fehlerbilder: []
+  Mindestdeckung vergessen (von aussen): [gesperrt] GESPERRT [('P-12', 'Mindestdeckung (b)', Decimal('-20607.048'))]
+  Rate ohne Anschluss, Neubau Bindung 1: [gesperrt] GESPERRT [('P-20', (19, 'Bankdarlehen'), Decimal('-3339.29')), ('P-20', (20, 'Bankdarlehen'), Decimal('-3339.29')), ('P-20', (21, 'Bankdarlehen'), Decimal('-3339.29')), ('P-20', (22, 'Bankdarlehen'), Decimal('-3339.29'))]
+== Befund 8 (NG-25, NG-37): ohne Eigenkapital
+  E-60 leer: Preis None bindend Rendite Meldung M-41 [] R-Grenze 1569899 EK-Grenze None U 1 O 17847656 Neben 1569899
+  E-60 = 0: Preis None bindend Rendite Meldung M-41 [] R-Grenze 1569899 EK-Grenze 1569899 U 1 O 17847656 Neben 1569899
+  Zielwertsuche Faktor: eine Loesung [(Decimal('10.87'), 'steigend')] M [] unz 0
+== Befund 9 (NG-39): Rundungsmodus keine
+  Neubau keine: [eingabe] M-20 Rundungsmodus 'keine' ist nur im Jahresmodus zulaessig
+  Ankauf Jahresmodus keine: [ergebnis] EW 2.540.195,57 | dEW 853.681,45 | r 5,007 % | L 1.226.609,52 ['b'] | EK0 1.413.390,48 | NS 0,00 | FB 0,00 | M ['M-37']
+== Befund 10 (NG-16, NG-24)
+  Bindung 15 n=10 p=12: VFE 4.627,90
+  Bindung 15 n=10 p=1: VFE 9.320,73
+  Bindung 15 n=11 p=12: VFE 0,00
+  Bindung 15 n=11 p=1: VFE 0,00
+  E-60 = Bedarf bei 2,0 Mio.: Preis 2000000 bindend Eigenkapital Meldung None [] R-Grenze 2407109 EK-Grenze 2000000 U 1 O 17847656 Neben None

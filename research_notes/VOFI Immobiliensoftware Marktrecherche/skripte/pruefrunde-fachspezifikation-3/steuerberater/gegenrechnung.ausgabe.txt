@@ -1,0 +1,73 @@
+== Teil A: Bausteine Kapitel 7 ==
+R-7.7  100.000 (2027): 15825.00 14000.00
+R-7.7  -50.000 / +80.049 (2028): 4438.24 4200.00 8638.24
+R-7.8  Kennzeichen 2027: 17407.50 1400.00
+R-7.8  Verkaufsjahr, Kuerzung entfaellt: 181932.50
+R-7.8  Verkaufsjahr, E-69: 97932.50
+R-7.8  Anlaufverlust 2027, Verkauf 2028 mit E-69: 84112.00
+R-7.8  ohne E-69 dagegen: 168112.00
+R-7.8  RF-13 GewSt auf g_v 999.589,46: 139930.00
+R-7.9  4 1 0.42 (Decimal('42000.00'), Decimal('2642.50'), Decimal('10570.00'), Decimal('10570.00'), Decimal('42000.00'))
+R-7.9  2.8 1 0.42 (Decimal('42000.00'), Decimal('2642.50'), Decimal('7399.00'), Decimal('7399.00'), Decimal('42000.00'))
+R-7.9  4.8 1 0.42 (Decimal('42000.00'), Decimal('2642.50'), Decimal('12684.00'), Decimal('10570.00'), Decimal('44114.00'))
+R-7.9  4 0.5 0.42 (Decimal('42000.00'), Decimal('2642.50'), Decimal('10570.00'), Decimal('5285.00'), Decimal('47285.00'))
+R-7.9  4 1 0.08 (Decimal('8000.00'), Decimal('2642.50'), Decimal('10570.00'), Decimal('8000.00'), Decimal('10570.00'))
+R-7.18 440 %, 60 %: 243285.00 222285.00
+R-7.10 12863.75 131.88
+R-7.11 zehn Jahre: 63000.00
+R-7.16 34025.00 31925.00
+R-7.17 15825.00 15825.00 Vortrag nach elf Jahren: -15000
+R-7.15 Entgelt 52.314,91, Jahr 1 (10 Monate), Jahr 2: 1199.88 1439.86
+R-7.19 Zuschuss 6/420, 12/420; Entgelt: 24911.86 49823.73 186.84 373.68
+R-7.19 Entgelt 0,75 %: 13078.73
+
+== Teil B: Szenarien mit dem Referenzrechner ==
+Rechner wie gebaut
+  Ankauf Koerperschaft ohne Kennzeichen: Rendite 4.527 %, Endwertdifferenz 753701.96
+  Ankauf Koerperschaft E-41, E-69 nein: Rendite 4.670 %, Endwertdifferenz 794477.69
+  Ankauf Koerperschaft E-41, E-69 ja: Rendite 5.161 %, Endwertdifferenz 942359.69
+  Neubau frei Koerperschaft ohne Kennzeichen: Rendite 4.332 %, Endwertdifferenz 3324362.70
+  Neubau frei Koerperschaft E-41, E-69 nein: Rendite 4.324 %, Endwertdifferenz 3313762.08
+  gefoerdert 38 J. Koerperschaft ohne Kennzeichen: Rendite 3.956 %, Endwertdifferenz 5656209.72
+  gefoerdert 38 J. Koerperschaft E-41, E-69 nein: Rendite 4.001 %, Endwertdifferenz 5811051.82
+  gefoerdert 20 J. Koerperschaft ohne Kennzeichen: Rendite 2.081 %, Endwertdifferenz 357090.85
+  gefoerdert 20 J. Koerperschaft E-41, E-69 nein: Rendite 1.979 %, Endwertdifferenz 292344.63
+Antrag nur bei positivem Grundstuecksteil
+  Ankauf Koerperschaft ohne Kennzeichen: Rendite 4.527 %, Endwertdifferenz 753701.96
+  Ankauf Koerperschaft E-41, E-69 nein: Rendite 4.724 %, Endwertdifferenz 810368.37
+  Ankauf Koerperschaft E-41, E-69 ja: Rendite 5.183 %, Endwertdifferenz 949164.37
+  Neubau frei Koerperschaft ohne Kennzeichen: Rendite 4.332 %, Endwertdifferenz 3324362.70
+  Neubau frei Koerperschaft E-41, E-69 nein: Rendite 4.358 %, Endwertdifferenz 3361814.17
+  gefoerdert 38 J. Koerperschaft ohne Kennzeichen: Rendite 3.956 %, Endwertdifferenz 5656209.72
+  gefoerdert 38 J. Koerperschaft E-41, E-69 nein: Rendite 4.024 %, Endwertdifferenz 5894663.17
+  gefoerdert 20 J. Koerperschaft ohne Kennzeichen: Rendite 2.081 %, Endwertdifferenz 357090.85
+  gefoerdert 20 J. Koerperschaft E-41, E-69 nein: Rendite 2.089 %, Endwertdifferenz 362158.85
+Privatperson Ankauf je Haltedauer (Spez.: 3,365 / 3,528 / 4,882 / 5,141 %)
+  Privatperson 9 J.: Rendite 3.365 %, Endwertdifferenz 306666.71
+     Steuer auf den Verkaufsgewinn: 289237.34
+  Privatperson 10 J.: Rendite 3.528 %, Endwertdifferenz 381799.34
+     Steuer auf den Verkaufsgewinn: 334954.62
+  Privatperson 11 J.: Rendite 4.882 %, Endwertdifferenz 765025.71
+     Steuer auf den Verkaufsgewinn: 0.00
+  Privatperson 12 J.: Rendite 5.141 %, Endwertdifferenz 940775.50
+     Steuer auf den Verkaufsgewinn: 0.00
+Zuschuss im gefoerderten Neubau, Privatperson (Spez.: 3,808 % / 4,380 %)
+  Privatperson ohne E-70: Rendite 3.808 %, Endwertdifferenz 6731341.45
+  Privatperson mit E-70: Rendite 4.380 %, Endwertdifferenz 7281505.57
+  Koerperschaft (verteilt, Voreinstellung): Rendite 3.956 %, Endwertdifferenz 5656209.72
+  Koerperschaft mit Kennzeichen: Rendite 4.001 %, Endwertdifferenz 5811051.82
+  gepraegte PG 440 % mit Kennzeichen (Spez. 3,594 %): Rendite 3.594 %, Endwertdifferenz 564712.05
+  gepraegte PG 440 %, 60 %, Kennzeichen, E-69 nein: Rendite 3.369 %, Endwertdifferenz 511333.61
+  gepraegte PG 440 %, 60 %, Kennzeichen, E-69 ja: Rendite 3.648 %, Endwertdifferenz 584126.61
+Gepraegte PG 440 %, 60 % natuerliche Personen, Kennzeichen, Lesart des Hauses 'Aufgabe' (MA-036)
+  Aufgabe, E-69 nein: Rendite 3.531 %, Endwertdifferenz 553319.61
+  Aufgabe, E-69 ja: Rendite 3.648 %, Endwertdifferenz 584126.61
+Rueckzahlung des Zuschusses, Verkauf nach 20 Jahren (Spez.: Privatperson sofortige Verrechnung 359.862,30 Erstattung, 2,421 %; mit E-70 1.876,05 Steuer, 2,913 %)
+  Privatperson 20 J., E-70 nein, Verlust vortrag: Rendite 1.240 %, Endwertdifferenz -168910.57
+     Steuer im Verkaufsjahr: 3984.47
+  Privatperson 20 J., E-70 nein, Verlust sofort: Rendite 2.421 %, Endwertdifferenz 770043.44
+     Steuer im Verkaufsjahr: -359862.30
+  Privatperson 20 J., E-70 ja, Verlust vortrag: Rendite 2.573 %, Endwertdifferenz 699501.84
+     Steuer im Verkaufsjahr: 4040.02
+  Privatperson 20 J., E-70 ja, Verlust sofort: Rendite 2.913 %, Endwertdifferenz 943374.05
+     Steuer im Verkaufsjahr: 1876.05

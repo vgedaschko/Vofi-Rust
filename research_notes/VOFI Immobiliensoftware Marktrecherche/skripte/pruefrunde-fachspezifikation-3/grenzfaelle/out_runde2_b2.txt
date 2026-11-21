@@ -1,0 +1,5 @@
+Basis: Preis 2350070 bindend Rendite Meldung M-34 ['M-34'] R-Grenze 2350070 EK-Grenze None U 1 O 17847656 Neben None (0.9 s)
+  2350070 0,88 ['M-36', 'M-37']
+  2350071 -0,69 ['M-36', 'M-37']
+  2350089 -29,18 ['M-36', 'M-37']
+  2350090 10.536,50 ['M-37']

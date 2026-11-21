@@ -1,0 +1,4 @@
+5 Preis None bindend None Meldung M-22 [] R-Grenze None EK-Grenze None U None O None Neben None Text Uebrige Darlehen, Zuschuesse und Mindesteigenkapital uebersteigen den Mittelbedarf
+10 Preis None bindend None Meldung M-22 [] R-Grenze None EK-Grenze None U None O None Neben None Text Uebrige Darlehen, Zuschuesse und Mindesteigenkapital uebersteigen den Mittelbedarf
+10.18 Preis None bindend None Meldung M-22 [] R-Grenze None EK-Grenze None U None O None Neben None Text Uebrige Darlehen, Zuschuesse und Mindesteigenkapital uebersteigen den Mittelbedarf
+10.2 Preis None bindend None Meldung M-32 [] R-Grenze None EK-Grenze None U 1818182 O 1820461 Neben None

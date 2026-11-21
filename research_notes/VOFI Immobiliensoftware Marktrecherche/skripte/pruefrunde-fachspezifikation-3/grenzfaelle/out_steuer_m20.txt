@@ -1,0 +1,66 @@
+== GF3-E E-41/E-69: Verkauf im ersten Jahr, am Ende der Zinsbindung, am Bindungsende der Foerderung
+  Ankauf n 1 E-69 False: [ergebnis] EW 1.071.298,15 | dEW -361.938,31 | r -24,204 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-25', 'M-37', 'M-51', 'M-48'] || Steuer je Jahr ['0,00']
+  Ankauf n 1 E-69 True: [ergebnis] EW 1.071.270,15 | dEW -361.966,31 | r -24,206 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-25', 'M-35', 'M-37', 'M-48'] || Steuer je Jahr ['28,00']
+  Ankauf n 2 E-69 False: [ergebnis] EW 1.138.628,89 | dEW -315.034,54 | r -10,245 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-25', 'M-37', 'M-51'] || Steuer je Jahr ['2.416,71', '0,00']
+  Ankauf n 2 E-69 True: [ergebnis] EW 1.138.516,89 | dEW -315.146,54 | r -10,249 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-25', 'M-35', 'M-37', 'M-48'] || Steuer je Jahr ['2.416,71', '112,00']
+  Ankauf n 10 E-69 False: [ergebnis] EW 2.348.214,41 | dEW 711.479,01 | r 5,208 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37', 'M-51'] || Steuer je Jahr ['7.245,59', '211.483,94']
+  Ankauf n 10 E-69 True: [ergebnis] EW 2.467.690,41 | dEW 830.955,01 | r 5,731 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37'] || Steuer je Jahr ['7.245,59', '92.007,94']
+  Ankauf n 11 E-69 False: [ergebnis] EW 2.430.450,58 | dEW 769.011,96 | r 5,051 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37', 'M-51'] || Steuer je Jahr ['7.870,53', '219.995,65']
+  Ankauf n 11 E-69 True: [ergebnis] EW 2.554.602,58 | dEW 893.163,96 | r 5,528 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37'] || Steuer je Jahr ['7.870,53', '95.843,65']
+  Ankauf n 12 E-69 False: [ergebnis] EW 2.611.028,32 | dEW 924.514,55 | r 5,248 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37', 'M-51'] || Steuer je Jahr ['7.528,44', '261.999,86']
+  Ankauf n 12 E-69 True: [ergebnis] EW 2.758.924,32 | dEW 1.072.410,55 | r 5,732 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37'] || Steuer je Jahr ['7.528,44', '114.103,86']
+  gefoerdert n 36 E-69 False: [ergebnis] EW 9.052.930,54 | dEW 5.344.043,28 | r 4,048 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 0,00 | M ['M-21', 'M-37', 'M-51', 'M-38'] || Steuer je Jahr ['27.164,54', '1.946.332,29'] Rueckzahlung 24.911,86
+  gefoerdert n 36 E-69 True: [ergebnis] EW 10.154.492,54 | dEW 6.445.605,28 | r 4,380 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 0,00 | M ['M-21', 'M-35', 'M-37', 'M-38'] || Steuer je Jahr ['27.164,54', '844.770,29'] Rueckzahlung 24.911,86
+  gefoerdert n 37 E-69 False: [ergebnis] EW 9.361.119,15 | dEW 5.596.253,91 | r 4,030 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 0,00 | M ['M-21', 'M-37', 'M-51', 'M-38'] || Steuer je Jahr ['49.453,84', '1.935.966,09'] Rueckzahlung 0,00
+  gefoerdert n 37 E-69 True: [ergebnis] EW 10.456.325,15 | dEW 6.691.459,91 | r 4,342 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 0,00 | M ['M-21', 'M-35', 'M-37', 'M-38'] || Steuer je Jahr ['49.453,84', '840.760,09'] Rueckzahlung 0,00
+  gefoerdert n 38 E-69 False: [ergebnis] EW 9.632.742,48 | dEW 5.811.051,82 | r 4,001 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 0,00 | M ['M-21', 'M-37', 'M-51', 'M-38'] || Steuer je Jahr ['45.347,98', '1.926.394,82'] Rueckzahlung 0,00
+  gefoerdert n 38 E-69 True: [ergebnis] EW 10.722.110,48 | dEW 6.900.419,82 | r 4,294 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 0,00 | M ['M-21', 'M-35', 'M-37', 'M-38'] || Steuer je Jahr ['45.347,98', '837.026,82'] Rueckzahlung 0,00
+  E-69 ja ohne E-41: [ergebnis] EW 2.550.313,51 | dEW 863.799,74 | r 5,042 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37']
+  E-69 ja ohne E-41, ohne Begruendung: [ergebnis] EW 2.550.313,51 | dEW 863.799,74 | r 5,042 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37']
+  E-69 ja ohne Begruendung: [eingabe] M-20 E-69 steuer.kuerzung_bleibt_verkaufsjahr: Abweichung von False auf True erhoeht den Abstand der Rendite zur Zielrendite und braucht eine Beg
+  E-69 ja ohne Begruendung, Preissuche: Preis None bindend None Meldung M-20 [] R-Grenze None EK-Grenze None U None O None Neben None Text E-69 steuer.kuerzung_bleibt_verkaufsjahr: Abweichung von False auf True erhoeht den tragbaren Preis und brauch
+  E-69 ja bei Privatperson: [ergebnis] EW 2.712.739,47 | dEW 1.028.350,48 | r 5,583 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37']
+  E-69 geprägte PG n 1: [ergebnis] EW 1.071.298,15 | dEW -358.487,20 | r -24,204 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-25', 'M-35', 'M-37', 'M-48'] || Steuer je Jahr ['0,00']
+== GF3-F E-70 und Bindungsdauer
+  Privat, Bindung 5, n 5, E-70: [eingabe] M-20 E-70 Verteilung des Zuschusses beantragt: nur bei einer Bindung von mehr als 5 Jahren (ESTG-11)
+  Privat, Bindung 5, n 6, E-70: [eingabe] M-20 E-70 Verteilung des Zuschusses beantragt: nur bei einer Bindung von mehr als 5 Jahren (ESTG-11)
+  Privat, Bindung 5, n 7, E-70: [eingabe] M-20 E-70 Verteilung des Zuschusses beantragt: nur bei einer Bindung von mehr als 5 Jahren (ESTG-11)
+  Privat, Bindung 5, n 38, E-70: [eingabe] M-20 E-70 Verteilung des Zuschusses beantragt: nur bei einer Bindung von mehr als 5 Jahren (ESTG-11)
+  Privat, Bindung 6, n 5, E-70: [ergebnis] EW 0,00 | dEW -3.209.273,65 | r -100,000 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 157.186,02 | FB 742.853,80 | M ['M-21', 'M-29', 'M-35', 'M-37', 'M-42', 'M-38'] || Lesart verteilt Rueck 726.596,03
+  Privat, Bindung 6, n 6, E-70: [ergebnis] EW 0,00 | dEW -2.896.555,75 | r -100,000 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 225.278,33 | FB 324.722,94 | M ['M-21', 'M-29', 'M-35', 'M-37', 'M-42', 'M-38'] || Lesart verteilt Rueck 435.957,62
+  Privat, Bindung 6, n 7, E-70: [ergebnis] EW 89.898,31 | dEW -2.585.391,83 | r -37,507 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 289.913,70 | FB 0,00 | M ['M-21', 'M-35', 'M-37', 'M-38', 'M-48'] || Lesart verteilt Rueck 145.319,21
+  Privat, Bindung 6, n 38, E-70: [ergebnis] EW 24.255.296,62 | dEW 19.938.143,04 | r 6,188 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 358.774,65 | FB 0,00 | M ['M-21', 'M-35', 'M-37', 'M-38'] || Lesart verteilt Rueck 0,00
+  Privat, Bindung 35, n 5, E-70: [ergebnis] EW 0,00 | dEW -3.834.986,15 | r -100,000 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 1.500.890,31 | M ['M-21', 'M-29', 'M-35', 'M-37', 'M-42', 'M-38'] || Lesart verteilt Rueck 1.569.447,42
+  Privat, Bindung 35, n 6, E-70: [ergebnis] EW 0,00 | dEW -3.673.881,07 | r -100,000 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 1.305.415,67 | M ['M-21', 'M-29', 'M-35', 'M-37', 'M-42', 'M-38'] || Lesart verteilt Rueck 1.519.623,70
+  Privat, Bindung 35, n 7, E-70: [ergebnis] EW 0,00 | dEW -3.513.076,53 | r -100,000 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 1.109.735,50 | M ['M-21', 'M-29', 'M-35', 'M-37', 'M-42', 'M-38'] || Lesart verteilt Rueck 1.469.799,97
+  Privat, Bindung 35, n 38, E-70: [ergebnis] EW 11.062.573,59 | dEW 7.281.505,57 | r 4,380 % | L 0,00 ['b'] | EK0 2.144.688,71 | NS 27.636,75 | FB 0,00 | M ['M-21', 'M-35', 'M-37', 'M-38'] || Lesart verteilt Rueck 0,00
+  Privat, E-70 ohne Begruendung: [eingabe] M-20 E-70 zuschuss_verteilung: Abweichung von False auf True erhoeht den Abstand der Rendite zur Zielrendite und braucht eine Begruendung
+  Privat, E-70 im Ankauf: [ergebnis] EW 2.712.739,47 | dEW 1.028.350,48 | r 5,583 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37']
+  Privat, E-70 im Neubau ohne Foerderung: [ergebnis] EW 11.212.371,97 | dEW 4.756.812,65 | r 5,277 % | L 4.007.142,85 ['b'] | EK0 5.141.964,13 | NS 68.394,63 | FB 0,00 | M ['M-35', 'M-37']
+  Koerperschaft, E-70: [eingabe] M-20 E-70 Verteilung des Zuschusses beantragt: nur bei Privatperson, Verein und Stiftung; im Betriebsvermoegen gilt die Lesart nach MA-031
+  KAT-19 fehlt, Privat, E-70: [eingabe] M-47 KAT-19 Mindestdauer der Nutzungsueberlassung fuer die Verteilung: Katalogwert fehlt fuer Land 'Niedersachsen', Gemeinde 'Beispielgemeinde (A
+== GF3-G feste Werte im Vorhaben (M-20)
+  Vorhaben setzt a_lang=0.005: [eingabe] M-20 H-09 Vorgabe 'a_lang' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt kk_zins=0.07: [eingabe] M-20 H-10 Vorgabe 'kk_zins' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Vorhaben setzt kk_linie=100000: [eingabe] M-20 H-11 Vorgabe 'kk_linie' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt vfe_satz=0.02: [eingabe] M-20 H-18 Vorgabe 'vfe_satz' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt ma031_zuschuss=sofort: [eingabe] M-20 MA-031 Vorgabe 'ma031_zuschuss' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt ma026_ertrag_vorhaben=True: [eingabe] M-20 MA-026 Vorgabe 'ma026_ertrag_vorhaben' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt ma038_rueckfuehrung=False: [eingabe] M-20 MA-038 Vorgabe 'ma038_rueckfuehrung' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt anpassungsdauer=2: [eingabe] M-20 H-23 Vorgabe 'anpassungsdauer' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Vorhaben setzt forderungsausfall=0.01: [eingabe] M-20 H-27 Vorgabe 'forderungsausfall' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Vorhaben setzt bodenanteil=0.3: [eingabe] M-20 H-39 Vorgabe 'bodenanteil' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt suchraster=10: [eingabe] M-20 H-21 Vorgabe 'suchraster' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Vorhaben setzt bauabschnitt_rohbau=0.6: [eingabe] M-20 H-37 Vorgabe 'bauabschnitt_rohbau' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Vorhaben setzt bereit_frei=3: [eingabe] M-20 H-31 Vorgabe 'bereit_frei' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Vorhaben setzt bereit_satz=0.001: [eingabe] M-20 H-31 Vorgabe 'bereit_satz' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt vorlauf=6: [eingabe] M-20 H-35 Vorgabe 'vorlauf' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Vorhaben setzt zielrendite=0.04: [ergebnis] EW 2.550.313,51 | dEW 863.799,74 | r 5,042 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37']
+  Vorhaben setzt leerstand=0.03: [ergebnis] EW 2.524.054,57 | dEW 808.846,46 | r 4,804 % | L 1.202.567,14 ['b'] | EK0 1.437.432,86 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37']
+  Vorhaben setzt instandhaltung_staffel=[(0, Decimal('5'))]: [eingabe] M-20 H-17 Vorgabe 'instandhaltung_staffel' ist im Vorhaben nicht aenderbar (fester Hauswert oder Lesart des Hauses)
+  Vorhaben setzt foo=1: [eingabe] M-20  Vorgabe 'foo' ist im Vorhaben nicht aenderbar (fester Katalogwert)
+  Eingabe setzt steuer.verlust=sofort: [ergebnis] EW 2.606.420,94 | dEW 462.892,42 | r 3,150 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 388.495,74 | FB 0,00 | M ['M-36', 'M-35', 'M-37'] || [('H-38 (MA-016)', 'Hauswert')]
+  Eingabe setzt steuer.aufgabegewinn=True: [ergebnis] EW 2.285.682,88 | dEW 662.498,33 | r 4,087 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37'] || [('MA-036', 'Lesart des Hauses')]
+  Eingabe setzt steuer.hebesatz=200 % (Katalogwert): [ergebnis] EW 2.658.548,98 | dEW 943.960,06 | r 5,406 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37'] || []
+  E-05 im Neubau gesetzt: [ergebnis] EW 9.796.187,08 | dEW 3.324.362,70 | r 4,332 % | L 4.007.142,85 ['b'] | EK0 5.141.964,13 | NS 68.394,63 | FB 0,00 | M ['M-37']
+  E-12 bei Koerperschaft gesetzt (0,9): [ergebnis] EW 2.550.313,51 | dEW 863.799,74 | r 5,042 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']

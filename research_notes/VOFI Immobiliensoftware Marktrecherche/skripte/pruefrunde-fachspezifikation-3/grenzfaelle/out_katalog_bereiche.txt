@@ -1,0 +1,16 @@
+  KAT-10 Rueckzahlungsfrist 0 Jahre: [ergebnis] EW 111.989.789,61 | dEW 108.213.008,28 | r 10,971 % | L 27.047,14 ['b'] | EK0 2.118.743,20 | NS 28.042,47 | FB 0,00 | M ['M-37', 'M-39', 'M-50']
+  KAT-10 Rueckzahlungsfrist 1 Jahr, Bauzeit 36: [ergebnis] EW 16.115.844,91 | dEW 3.385.289,52 | r 2,133 % | L 0,00 ['b'] | EK0 4.869.773,03 | NS 2.582.729,21 | FB 0,00 | M ['M-21', 'M-37', 'M-50']
+  KAT-10 Tilgungsfrist -5 Monate: [ergebnis] EW 9.758.039,81 | dEW 5.604.839,79 | r 3,808 % | L 0,00 ['b'] | EK0 2.303.023,23 | NS 60.195,18 | FB 0,00 | M ['M-21', 'M-37', 'M-38']
+  KAT-10 Darlehensquote 1,5: [eingabe] M-22 Uebrige Darlehen, Zuschuesse und Mindesteigenkapital uebersteigen den Mittelbedarf
+  KAT-10 Verwaltungskostenbeitrag -0,5 %: [ergebnis] EW 9.838.469,78 | dEW 6.692.122,19 | r 4,592 % | L 361.393,64 ['c'] | EK0 1.766.654,14 | NS 20.921,39 | FB 0,00 | M ['M-37']
+  KAT-10 Bindung 0 Jahre: [ABSTURZ] KeyError: 18 @ ertrag.py:199 mieten_neubau
+  KAT-07 AfA-Satz 2,0 (200 %): [ergebnis] EW 2.561.950,32 | dEW 875.436,55 | r 5,081 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37', 'M-45']
+  KAT-07 AfA-Satz -2 %: [ergebnis] EW 2.515.568,35 | dEW 829.054,58 | r 4,922 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  KAT-08 Kappung -15 %: [ergebnis] EW 1.723.742,29 | dEW 37.228,52 | r 1,668 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  KAT-08 Wartefrist 0 Monate: [ergebnis] EW 2.557.955,26 | dEW 871.441,49 | r 5,068 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  KAT-13 Sperrfrist -120: [ergebnis] EW 2.550.313,51 | dEW 863.799,74 | r 5,042 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  KAT-14 Mindestansatz 150 %: [ergebnis] EW 4.236.362,28 | dEW 1.086.307,44 | r 4,020 % | L 0,00 ['b'] | EK0 2.640.000,00 | NS 0,00 | FB 0,00 | M ['M-21', 'M-37']
+  KAT-03 KSt 150 %: [ergebnis] EW 534.044,17 | dEW -822.674,30 | r -8,812 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 179.433,79 | FB 0,00 | M ['M-37', 'M-48']
+  KAT-04 Hebesatz -400 %: [ergebnis] EW 2.985.910,40 | dEW 1.184.509,61 | r 6,431 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  KAT-15 KfW Zinsbindung 0: [ergebnis] EW 9.510.115,24 | dEW 3.086.565,14 | r 4,178 % | L 1.007.142,85 ['b'] | EK0 5.110.311,56 | NS 60.894,63 | FB 0,00 | M ['M-49', 'M-37']
+  KAT-15 KfW Bereitstellung -0,15 %: [ergebnis] EW 8.527.122,87 | dEW 3.406.733,52 | r 4,998 % | L 2.078.571,42 ['b'] | EK0 4.049.722,76 | NS 67.561,32 | FB 0,00 | M ['M-49', 'M-37']

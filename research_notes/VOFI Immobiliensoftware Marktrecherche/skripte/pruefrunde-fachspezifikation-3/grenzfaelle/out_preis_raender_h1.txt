@@ -1,0 +1,43 @@
+== GF3-H1 Verlauf des Endwertueberschusses ueber dem Grundstueckspreis im gefoerderten Neubau
+  Ziel 0.03:
+    1: r 4,881 % EUe 5.002.789,60
+    100000: r 4,821 % EUe 4.856.573,85
+    300000: r 4,702 % EUe 4.563.890,52
+    500000: r 4,584 % EUe 4.270.873,15
+    700000: r 4,468 % EUe 3.977.468,64
+    900000: r 4,352 % EUe 3.682.218,39
+    925925: r 4,337 % EUe 3.643.976,71
+    925926: r 4,337 % EUe 3.643.975,10
+    1000000: r 4,228 % EUe 3.417.632,65
+    1200000: r 3,956 % EUe 2.806.507,42
+    1500000: r 3,599 % EUe 1.889.819,57
+    2000000: r 3,103 % EUe 362.006,50
+  Preissuche Ziel 0.03: Preis 2118474 bindend Rendite Meldung None [] R-Grenze 2118474 EK-Grenze None U 1 O 37375005 Neben None (3 s)
+  Ziel 0.04:
+    1: r 4,881 % EUe 2.759.798,19
+    100000: r 4,821 % EUe 2.580.073,90
+    300000: r 4,702 % EUe 2.220.242,14
+    500000: r 4,584 % EUe 1.859.891,66
+    700000: r 4,468 % EUe 1.498.967,00
+    900000: r 4,352 % EUe 1.135.276,58
+    925925: r 4,337 % EUe 1.088.178,43
+    925926: r 4,337 % EUe 1.088.176,39
+    1000000: r 4,228 % EUe 752.711,66
+    1200000: r 3,956 % EUe -153.044,04
+    1500000: r 3,599 % EUe -1.511.677,60
+    2000000: r 3,103 % EUe -3.776.066,87
+  Preissuche Ziel 0.04: Preis 1166209 bindend Rendite Meldung None [] R-Grenze 1166209 EK-Grenze None U 1 O 37375005 Neben None (3 s)
+  Ziel 0.045:
+    1: r 4,881 % EUe 1.300.560,83
+    100000: r 4,821 % EUe 1.099.036,67
+    300000: r 4,702 % EUe 695.519,72
+    500000: r 4,584 % EUe 291.363,90
+    700000: r 4,468 % EUe -113.487,78
+    900000: r 4,352 % EUe -521.703,76
+    925925: r 4,337 % EUe -574.563,71
+    925926: r 4,337 % EUe -574.566,03
+    1000000: r 4,228 % EUe -981.023,15
+    1200000: r 3,956 % EUe -2.078.458,50
+    1500000: r 3,599 % EUe -3.724.611,53
+    2000000: r 3,103 % EUe -6.468.199,90
+  Preissuche Ziel 0.045: Preis 643944 bindend Rendite Meldung None [] R-Grenze 643944 EK-Grenze None U 1 O 37375005 Neben None (3 s)

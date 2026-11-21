@@ -1,0 +1,7 @@
+  Einzellauf: [eingabe] M-20 H-12 mietsteigerung: Abweichung von 0.02 auf 0.025 erhoeht den Abstand der Rendite zur Zielrendite und braucht eine Begruendung
+  Stressfall: [eingabe] M-20 H-12 mietsteigerung: Abweichung von 0.02 auf 0.025 erhoeht den Abstand der Rendite zur Zielrendite und braucht eine Begruendung
+  Preissuche: Preis None bindend None Meldung M-20 [] R-Grenze None EK-Grenze None U None O None Neben None Text H-12 mietsteigerung: Abweichung von 0.02 auf 0.025 erhoeht den tragbaren Preis und braucht eine Begruendung
+  Zielwertsuche Faktor: keine Suche: jeder Gitterwert endet mit M-20 [] M [] unz 9
+  Haltedauertabelle 10-12: [(10, '5,556 %'), (11, '5,348 %'), (12, '5,594 %')]
+  ohne Abweichung:           [(10, '5,008 %'), (11, '4,842 %'), (12, '5,042 %')]
+  Vergleich: Meldung: M-20: H-12 mietsteigerung: Abweichung von 0.02 auf 0.025 erhoeht den Abstand der Rendite zur Zielren @ grobkalkulation.py:454 pruefe_begruendungen

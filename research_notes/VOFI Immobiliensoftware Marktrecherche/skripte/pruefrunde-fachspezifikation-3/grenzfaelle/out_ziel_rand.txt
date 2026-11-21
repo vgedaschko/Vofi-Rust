@@ -1,0 +1,6 @@
+  Preissuche (Vergleich): Preis 2577056 bindend Rendite Meldung None [] R-Grenze 2577056 EK-Grenze None U 1363637 O 17847656 Neben None
+  Zielwertsuche Kaufpreis 1 bis 5 Mio.: 2 Loesungen [(Decimal('1363637'), 'steigend'), (Decimal('2577056'), 'fallend')] unzulaessig: 21 ['M-22'] Meldungen []
+    1666666 [ergebnis] EW 2.079.201,55 | dEW 1.681.377,09 | r 16,480 % | L 0,00 ['a'] | EK0 333.332,60 | NS 0,00 | FB 0,00 | M ['M-37', 'M-48']
+    1666667 [ergebnis] EW 2.079.201,69 | dEW 1.681.376,13 | r 16,480 % | L 0,00 ['a'] | EK0 333.333,70 | NS 0,00 | FB 0,00 | M ['M-37', 'M-48']
+    1666668 [ergebnis] EW 2.079.201,79 | dEW 1.681.375,13 | r 16,480 % | L 0,00 ['a'] | EK0 333.334,80 | NS 0,00 | FB 0,00 | M ['M-37', 'M-48']
+  ohne uebernommenes Darlehen, Kaufpreis 0 bis 5 Mio.: 2 Loesungen [(Decimal('1'), 'steigend'), (Decimal('2407109'), 'fallend')] unzulaessig: 1

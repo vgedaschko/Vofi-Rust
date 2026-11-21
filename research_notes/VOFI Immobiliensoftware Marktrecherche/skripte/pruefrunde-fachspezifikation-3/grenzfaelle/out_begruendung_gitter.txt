@@ -1,0 +1,3 @@
+  Ausgangsauftrag 2,4 Mio.: [ergebnis] EW 2.680.030,59 | dEW 880.943,82 | r 4,910 % | L 1.132.255,38 ['b'] | EK0 1.507.744,62 | NS 0,00 | FB 0,00 | M ['M-35', 'M-37']
+  Zielwertsuche Kaufpreis (Abweichung ohne Begruendung): eine Loesung [(Decimal('2892601'), 'fallend')] unzulaessig 36 ['M-20'] ab 2892602
+  dieselbe Suche mit Begruendung:                     eine Loesung [(Decimal('3086928'), 'fallend')] unzulaessig 0

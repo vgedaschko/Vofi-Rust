@@ -1,0 +1,21 @@
+== GF3-I Zielwertsuche
+  Zins 0 bis 20 %: eine Loesung [(Decimal('0.04069'), 'fallend')] M [] unz 0 (0 s)
+  Zins -1 bis 10 %: 2 Loesungen [(Decimal('0.00000'), 'steigend'), (Decimal('0.04069'), 'fallend')] M [] unz 11
+  Faktor 0 bis 40: eine Loesung [(Decimal('17.91'), 'steigend')] M [] unz 1
+  Kaufpreis 0 bis 5 Mio.: 2 Loesungen [(Decimal('1'), 'steigend'), (Decimal('2407109'), 'fallend')] M [] unz 1
+  Ist-Miete 0 bis 20 (alles vermietet): eine Loesung [(Decimal('8.42'), 'steigend')] M [] unz 1
+  Stau 0 bis 1 Mio., Jahr fehlt: eine Loesung [(Decimal('0'), 'fallend')] M [] unz 19
+  Kostenkennwert 500 bis 6000 (Neubau): eine Loesung [(Decimal('2156'), 'fallend')] M [] unz 0
+  Haltedauer (nicht zugelassen): ABSTURZ Meldung: M-30: Eingabe 'haltedauer' ist fuer die Zielwertsuche nicht zugelassen @ grobkalkulation.py:1914 suche_eingabe
+== GF3-J Haltedauer 42
+  Ankauf n 40: [ergebnis] EW 8.644.228,88 | dEW 6.078.823,21 | r 4,631 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  Ankauf n 41: [ergebnis] EW 8.891.908,87 | dEW 6.287.790,08 | r 4,588 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  Ankauf n 42: [ergebnis] EW 9.319.756,20 | dEW 6.676.329,70 | r 4,593 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  Ankauf n 42, Bindung 40: [ergebnis] EW 9.567.505,49 | dEW 6.924.078,99 | r 4,659 % | L 1.226.609,99 ['b'] | EK0 1.413.390,01 | NS 0,00 | FB 0,00 | M ['M-37']
+  Ankauf n 42, Jahresmodus: [ergebnis] EW 9.238.166,64 | dEW 6.594.740,15 | r 4,571 % | L 1.226.609,49 ['b'] | EK0 1.413.390,51 | NS 0,00 | FB 0,00 | M ['M-37']
+  Neubau n 42: [ergebnis] EW 29.906.219,99 | dEW 20.208.728,95 | r 4,260 % | L 4.007.142,85 ['b'] | EK0 5.141.964,13 | NS 68.394,63 | FB 0,00 | M ['M-37']
+  Neubau n 42, Stress: [ergebnis] EW 22.661.477,52 | dEW 11.657.909,84 | r 3,263 % | L 3.740.000,00 ['b'] | EK0 5.851.491,95 | NS 69.062,49 | FB 0,00 | M ['M-37']
+  Ankauf n 42 Preissuche: Preis 2198679 bindend Rendite Meldung None [] R-Grenze 2198679 EK-Grenze None U 1 O 32328551 Neben None (3 s)
+  Haltedauertabelle 1-42: [(1, '-24,204 %'), (2, '-10,328 %'), (3, '-5,254 %')] ... [(41, '4,588 %'), (42, '4,593 %')] (1 s)
+  Haltedauertabelle Neubau 1-42: [(1, 'M-23'), (2, 'M-23'), (3, '0,104 %'), (4, '1,603 %')]
+  Haltedauertabelle 41-43: [(41, Decimal('8891908.87'), Decimal('6287790.08'), Decimal('0.04587863723678080098027542584950125651527050444064437530950')), (42, Decimal('9319756.20'), Decimal('6676329.70'), Decimal('0.04593186357212860657395511696570358404859307107865057621679')), (43, None, None, 'M-20')]

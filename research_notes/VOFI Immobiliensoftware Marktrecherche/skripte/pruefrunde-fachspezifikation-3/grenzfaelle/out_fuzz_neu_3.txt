@@ -1,0 +1,1 @@
+{'ergebnis': 324, 'eingabe': 76, 'eingabe M-22': 65, 'eingabe M-23': 11} 19 s
