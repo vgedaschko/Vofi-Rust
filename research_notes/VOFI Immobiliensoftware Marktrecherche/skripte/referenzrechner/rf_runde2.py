@@ -82,12 +82,6 @@ def rf12_runde2():
     # Kennwert als Gesamtkosten der Kostengruppen 200 bis 700 (E-25)
     kg = rechne_grob(replace(A.NEUBAU, kostenkennwert=D(2900), kennwert_gesamt=True), VG, KATN)
     pruefe(k, "Kennwert 2.900 Euro fuer die Kostengruppen 200 bis 700: Baukosten wie 2.320 Euro mit 25 % Zuschlag", kg.baukosten, str(n.baukosten), "0")
-    # Betriebskosten leerstehender Flaechen im Anlaufleerstand (H-36, R-6.17)
-    lk = rechne_grob(A.NEUBAU, replace(VG, leerstandskosten_je_qm=D(30)), KATN)
-    pruefe(k, "Leerstandskosten 30 Euro je m2 und Jahr: Bewirtschaftung im Monat 19 = 2.762,50 + 2.000 x 30 x 1,02 / 12 (Planjahr 2)",
-           lk.plan.zeilen[19]["kosten"], "7862.50", "0")
-    pruefe(k, "... ab dem ersten Vermietungsmonat 22 keine Leerstandskosten", lk.plan.zeilen[22]["kosten"], str(n.plan.zeilen[22]["kosten"]), "0")
-    pruefe_fest(k, "Leerstandskosten im Anlaufleerstand: laufender Nachschussbedarf, Endwertdifferenz", [str(lk.nachschuss_laufend), str(lk.kennzahlen["endwertdifferenz"])])
     # nachhaltige Miete der Bank im Neubau (E-65)
     nm = rechne_grob(replace(A.NEUBAU, nachhaltige_miete=D("15.00")), VG, KATN)
     pruefe(k, "nachhaltige Miete 15,00 Euro: nachhaltiger Reinertrag 85 % von 360.000 Euro", nm.bemessung.ertrag_nachhaltig, "306000.00", "0")
@@ -140,16 +134,6 @@ def rf12_runde2():
                   [status(replace(MIT_KFW, kfw_betrag=D(3000001)), VG, KATN)[1], status(replace(MIT_KFW, kfw_betrag=D(4500000), kfw_qng=True), VG, KATN)[0]],
                   ["M-20", "ergebnis"])
     pruefe_gleich(k, "KfW-Darlehen ohne Konditionen im Katalog (KAT-15): M-47", status(MIT_KFW, VG, replace(KATN, kfw=None)), ["eingabe", "M-47"])
-    ab = rechne_grob(MIT_KFW, replace(VG, ma040_ab_abruf=False), KATN)
-    t = [x for x in ab.plan.e.tranchen if x.name == "KfW-Darlehen"][0]
-    pruefe_fest(k, "KfW, andere Lesart MA-040 (tilgungsfreie Jahre ab der Bezugsfertigkeit): Tilgungsbeginn, Deckung im ersten Jahr, bei voller Tilgung, Endwertdifferenz",
-                [t.tilgungsbeginn, q(ab.dscr_vj), q(ab.dscr_vj_voll), str(ab.kennzahlen["endwertdifferenz"])])
-    tpa = tragbarer_preis(MIT_KFW, replace(VG, ma040_ab_abruf=False), KATN)
-    tpk = tragbarer_preis(MIT_KFW, VG, KATN)
-    pruefe_fest(k, "MA-040 in beide Richtungen: tragbarer Grundstueckspreis ab dem ersten Abruf (Voreinstellung) und ab der Bezugsfertigkeit",
-                [tpk["preis"], tpa["preis"]])
-    pruefe_gleich(k, "MA-040: die Voreinstellung zeigt die niedrigere Deckung im ersten Jahr (Massstab der Bank), aber nicht den niedrigeren Preis (Ausnahme)",
-                  (kf.dscr_vj < ab.dscr_vj, tpk["preis"] <= tpa["preis"]), (True, False))
     kz3 = rechne_grob(replace(MIT_KFW, kfw_zins=D("0.03"), voreinstellungen={"kfw_zins": (D("0.025"), "KAT-15")}), VG, KATN)
     pruefe_fest(k, "KfW-Zins 3 % als Eingabe statt 2,5 % aus dem Katalog: Liste der Abweichungen, kalkulatorischer Kapitaldienst",
                 [[[a["kennung"], str(a["wirkung_endwertdifferenz"])] for a in kz3.abweichungen], str(kz3.bemessung.kd_uebrige)])
@@ -159,9 +143,6 @@ def rf12_runde2():
     pruefe(k, "Bemessungszeitraum 15 Jahre (H-32): Bemessungszins (2,5 % x 120 + 5 % x 60) / 180", b15.bemessung.bemessungszins["KfW-Darlehen"],
            "0.033333333333", "0")
     pruefe_fest(k, "Bemessungszeitraum 15 Jahre: kalkulatorischer Kapitaldienst der KfW-Tranche, Bankdarlehen", [str(b15.bemessung.kd_uebrige), str(b15.darlehen)])
-    f5 = rechne_grob(MIT_KFW, replace(VG, kalk_zins_kfw=D("0.06"), bemessungszeitraum=15), KATN)
-    pruefe(k, "... mit festem kalkulatorischem Zins 6 % fuer das KfW-Darlehen (H-25): (2,5 % x 120 + 6 % x 60) / 180",
-           f5.bemessung.bemessungszins["KfW-Darlehen"], "0.036666666667", "0")
     k4 = rechne_grob(MIT_KFW, replace(VG, ma026_fremde_kalkulatorisch=True), KATN)
     pruefe(k, "KfW, Lesart 4 von MA-026 (uebrige Tranchen durchgehend kalkulatorisch): Kapitaldienst 3 Mio. x 7 %, Bankdarlehen wie nach Pruefrunde 1",
            k4.darlehen, "1007142.85", "0")
@@ -201,13 +182,9 @@ def rf12_runde2():
               "Stressfall: spaetestens 24 Monate nach dem Monat nach der Foerderentscheidung (25), 501 Raten",
            [tf.tilgungsbeginn, tf.laufzeit, tf.bindung, str(zf[23]["tranchen"]["Foerderdarlehen"]["rate"]), tfs.tilgungsbeginn, tfs.laufzeit],
            [23, 500, 438, "10462.98", 25, 501])
-    auf = rechne_grob(replace(GEFOERDERT, foerder_aufschub_monate=60), VG, KATN)
-    ta = [t_ for t_ in auf.plan.e.tranchen if t_.name == "Foerderdarlehen"][0]
-    pruefe_fest(k, "Aufschub der Tilgung um 60 Monate (E-68): Tilgungsbeginn, Zahl der Raten, Rate, Rendite (%)",
-                [ta.tilgungsbeginn, ta.laufzeit, str(auf.plan.zeilen[83]["tranchen"]["Foerderdarlehen"]["rate"]), q(auf.kennzahlen["rendite"] * 100, "0.001")])
-    pruefe_gleich(k, "Aufschub ueber dem Hoechstwert des Katalogs; Tilgungssatz des Bankdarlehens unter der Mindesttilgung der Richtlinie: M-20",
-                  [status(replace(GEFOERDERT, foerder_aufschub_monate=61), VG, KATN), status(replace(GEFOERDERT, tilgungssatz=D("0.005")), replace(VG, mindesttilgung=D("0.005")), KATN)],
-                  [["eingabe", "M-20"], ["eingabe", "M-20"]])
+    pruefe_gleich(k, "Tilgungssatz des Bankdarlehens unter der Mindesttilgung der Richtlinie: M-20",
+                  [status(replace(GEFOERDERT, tilgungssatz=D("0.005")), replace(VG, mindesttilgung=D("0.005")), KATN)],
+                  [["eingabe", "M-20"]])
     pruefe_gleich(k, "Mindesttilgung des Hauses 0,5 %: gefoerdert bemisst die Bank mit 1 % (KAT-10), frei finanziert mit 0,5 %",
                   [str(rechne_grob(GEFOERDERT, replace(VG, mindesttilgung=D("0.005")), KATN).bemessung.tilgung_kalk),
                    str(rechne_grob(replace(A.NEUBAU, begruendungen=GRUND), replace(VG, mindesttilgung=D("0.005")), KATN).bemessung.tilgung_kalk)], ["0.01", "0.005"])
@@ -255,17 +232,12 @@ def rf13_runde2():
         pruefe_fest(k, f"{name}: Endwert der Unterlassensalternative", e.alt.endwert)
     e69 = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True),
                               begruendungen=GRUND), VG, KAT)
-    e = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True,
-                                                      ma030_verkaufsgewinn_pflichtig=True), begruendungen=GRUND), VG, KAT)
     mk = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, erweiterte_kuerzung=True)), VG, KAT)
     pruefe(k, "Koerperschaft mit Kuerzung, Voreinstellung (BFH-III-R-1-23: im Verkaufsjahr entfaellt die Kuerzung ganz): Endwert (Wert der bisherigen dritten Lesart)",
            mk.plan.endwert, "2562727.38", "0")
     pruefe(k, "... Kuerzung bleibt (E-69): Endwert mit gekuerztem Verkaufsgewinn (GEWSTR-9-2)", e69.plan.endwert, "2710609.38", "0")
-    pruefe(k, "... E-69 mit der strengeren Lesart von MA-030: Endwert (Wert der Voreinstellung nach Pruefrunde 1)", e.plan.endwert, "2570679.38", "0")
     pruefe_gleich(k, "Hinweis M-51 mit Kennzeichen ohne E-69; mit E-69 nicht; ohne Kennzeichen nicht",
                   ["M-51" in kennungen(x_) for x_ in (mk, e69, rechne_grob(A.ANKAUF, VG, KAT))], [True, False, False])
-    pruefe_fest(k, "Koerperschaft mit Kuerzung, E-69 mit der strengeren Lesart von MA-030 (laufender Ertrag gekuerzt, Verkaufsgewinn gewerbesteuerpflichtig): Endwert, Rendite (%), Abstand zur Voreinstellung",
-                [str(e.plan.endwert), q(e.kennzahlen["rendite"] * 100, "0.001"), str(e.plan.endwert - mk.plan.endwert)])
     for jahre in (10, 11):
         e = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT_OHNE_GEWST), haltedauer=jahre), VG, KAT)
         pruefe_fest(k, f"Verein oder Stiftung, Verkauf nach {jahre} Jahren: Steuer auf den Verkaufsgewinn, Rendite (%)",
@@ -323,18 +295,16 @@ def rf17_runde2():
 
     # R-7.8 in gesetzlicher Reihenfolge: Kuerzung vor dem Verlustvortrag (GEWSTG-9, GEWSTG-10A); Jahr 2 ist das
     # Verkaufsjahr mit Uebergang zum Jahresende (E-69)
-    s = st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True, ma030_verkaufsgewinn_pflichtig=True, haltedauer=2)
+    s = st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True, haltedauer=2)
     pruefe(k, "Kennzeichen, Anlaufverlust 50.000: keine Steuer", s.jahr(1, D(-50000), NULL), "0", "0")
     pruefe(k, "... der gekuerzte Verlust bildet keinen gewerbesteuerlichen Vortrag", s.vv_gew, "0", "0")
-    pruefe(k, "... Folgejahr 2028 mit 100.000 Ergebnis, 10.000 Zinsen, 500.000 Verkaufsgewinn: 14,77 % von 560.000 + 14 % von 510.000",
-           s.jahr(2, D(100000), D(10000), D(500000)), "154112.00", "0")
+    pruefe(k, "... Folgejahr 2028 mit 100.000 Ergebnis, 10.000 Zinsen, 500.000 Verkaufsgewinn: 14,77 % von 560.000 + 14 % von 10.000 (Verkaufsgewinn mitgekuerzt)",
+           s.jahr(2, D(100000), D(10000), D(500000)), "84112.00", "0")
     # R-7.8 (BFH-III-R-1-23): im Verkaufsjahr entfaellt die Kuerzung ganz, ausser bei Uebergang zum Jahresende (E-69)
     pruefe(k, "Verkaufsjahr mit Kennzeichen, Voreinstellung: 15,825 % und 14 % von 610.000",
            st(KOERPERSCHAFT, erweiterte_kuerzung=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "181932.50", "0")
     pruefe(k, "... Kuerzung bleibt (E-69): 15,825 % von 610.000 + 14 % von 10.000 (Verkaufsgewinn mitgekuerzt, GEWSTR-9-2)",
            st(KOERPERSCHAFT, erweiterte_kuerzung=True, kuerzung_bleibt_verkaufsjahr=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "97932.50", "0")
-    pruefe(k, "... die strengere Lesart von MA-030 wirkt ohne E-69 nicht",
-           st(KOERPERSCHAFT, erweiterte_kuerzung=True, ma030_verkaufsgewinn_pflichtig=True, haltedauer=1).jahr(1, D(100000), D(10000), D(500000)), "181932.50", "0")
     pruefe(k, "... in einem Jahr vor dem Verkauf bleibt die Kuerzung: 17.407,50 + 14 % von 10.000",
            st(KOERPERSCHAFT, erweiterte_kuerzung=True, haltedauer=2).jahr(1, D(100000), D(10000)), "18807.50", "0")
     pg = dict(hebesatz=D("4.00"), anteil_natuerliche=D("0.6"))
@@ -356,15 +326,13 @@ def rf17_runde2():
     e = rechne_grob(gek, VG, KATN)
     pruefe_gleich(k, "Voreinstellung im Betriebsvermoegen, auch mit Kennzeichen E-41: 'verteilt' (keine Kopplung an das Kennzeichen)", e.zuschuss_lesart, "verteilt")
     werte = {}
-    for lesart in ("verteilt", "minderung", "sofort"):
+    for lesart in ("verteilt", "sofort"):
         for jahre in (38, 20):
             x = rechne_grob(replace(gek, haltedauer=jahre), replace(VG, ma031_zuschuss=lesart), KATN)
             werte[(lesart, jahre)] = x.kennzahlen["endwertdifferenz"]
             pruefe_fest(k, f"mit Kennzeichen, Zuschuss '{lesart}', {jahre} Jahre: Endwertdifferenz, Rendite (%), Summe der Steuern",
                         [str(x.kennzahlen["endwertdifferenz"]), q(x.kennzahlen["rendite"] * 100, "0.001"), str(sum(x.plan.reihe("steuer")))])
             pruefe_gleich(k, f"mit Kennzeichen, Zuschuss '{lesart}', {jahre} Jahre: Kontrollsummen", (x.gesperrt, x.befunde), (False, []))
-    pruefe_fest(k, "mit Kennzeichen: 'minderung' gegen 'verteilt', Endwertdifferenz 38 und 20 Jahre (Rechnung in beide Richtungen)",
-                [str(werte[("minderung", j)] - werte[("verteilt", j)]) for j in (38, 20)])
     for name, stx in (("Privatperson", A.steuer(PRIVAT)), ("Koerperschaft", A.steuer(KOERPERSCHAFT))):
         x = rechne_grob(replace(GEFOERDERT, haltedauer=20, steuer=stx), replace(VG, ma031_zuschuss="sofort"), KATN)
         t = x.plan.steuer.protokoll[-1]
@@ -382,7 +350,7 @@ def rf17_runde2():
     priv = replace(GEFOERDERT, steuer=A.steuer(PRIVAT), begruendungen=GRUND)
     pruefe_gleich(k, "Privatperson: Einnahme im Jahr des Zuflusses ist Regel (ESTR-21-5); mit E-70 verteilt; die Lesarten von MA-031 wirken nicht",
                   [pv.zuschuss_lesart, rechne_grob(replace(priv, zuschuss_verteilung=True), VG, KATN).zuschuss_lesart,
-                   rechne_grob(priv, replace(VG, ma031_zuschuss="minderung"), KATN).zuschuss_lesart], ["sofort", "verteilt", "sofort"])
+                   rechne_grob(priv, replace(VG, ma031_zuschuss="verteilt"), KATN).zuschuss_lesart], ["sofort", "verteilt", "sofort"])
     pruefe_gleich(k, "E-70 im Betriebsvermoegen und bei einer Bindung von fuenf Jahren: M-20",
                   [status(replace(GEFOERDERT, zuschuss_verteilung=True, begruendungen=GRUND), VG, KATN),
                    status(replace(priv, zuschuss_verteilung=True, foerderung=replace(A.FOERDERUNG_B, bindung_jahre=5)), VG, KATN)],
@@ -390,10 +358,6 @@ def rf17_runde2():
     vv = rechne_grob(replace(priv, zuschuss_verteilung=True), VG, KATN)
     pruefe_fest(k, "Privatperson, gefoerdert, 38 Jahre: Rendite (%) und Endwertdifferenz bei Einnahme im Zuflussjahr (Regel) und mit Verteilung (E-70)",
                 [[q(x_.kennzahlen["rendite"] * 100, "0.001"), str(x_.kennzahlen["endwertdifferenz"])] for x_ in (pv, vv)])
-    mi = rechne_grob(GEFOERDERT, replace(VG, ma031_zuschuss="minderung"), KATN)
-    pruefe(k, "Lesart 'Minderung': das Entgelt auf den Zuschuss kuerzt ihn; Abschreibungsgrundlage = Baukosten - Gebaeudeanteil + Entgeltanteil",
-           mi.plan.e.afa_grundlage, str(mi.baukosten - mi.bemessung.zuschuss_gebaeude
-                                        + CENT.geld(mi.bemessung.einbehalt_zuschuss * mi.bemessung.zuschuss_gebaeude / mi.bemessung.zuschuss)), "0")
     so = rechne_grob(GEFOERDERT, replace(VG, ma031_zuschuss="sofort"), KATN)
     pruefe(k, "Lesart 'sofort': das Entgelt auf den Zuschuss ist im Jahr der Zahlung Aufwand", sum(so.plan.jahressumme("zuschuss_entgelt_steuer", j) for j in (1, 2)),
            str(so.bemessung.einbehalt_zuschuss), "0")
@@ -419,15 +383,7 @@ def rf18_runde2():
                   ("MA-038" in a.modellannahmen, "MA-038" in rechne_grob(A.ANKAUF, VG, KAT).modellannahmen), (True, False))
     # Gebietsverordnungen (KAT-08, MA-039, E-05)
     basis = rechne_grob(A.ANKAUF, VG, KAT)
-    ende = rechne_grob(A.ANKAUF, replace(VG, ma039_fortgeltung=False), KAT)
     wechsel = lambda e: [m for m in range(2, 157) if e.miete_je_qm[m] != e.miete_je_qm[m - 1]]
-    pruefe_fest(k, "andere Lesart MA-039 (Verordnung endet 2029, danach 20 %): Monate der Erhoehungen und Mieten",
-                [wechsel(ende), [q(ende.miete_je_qm[m]) for m in wechsel(ende)]])
-    pruefe_fest(k, "MA-039: Endwertdifferenz mit Fortgeltung und ohne; die Voreinstellung ist die niedrigere",
-                [str(basis.kennzahlen["endwertdifferenz"]), str(ende.kennzahlen["endwertdifferenz"]),
-                 basis.kennzahlen["endwertdifferenz"] <= ende.kennzahlen["endwertdifferenz"]])
-    pruefe_fest(k, "MA-039: tragbarer Kaufpreis ohne Fortgeltung (mit Fortgeltung 2.317.235 Euro)",
-                tragbarer_preis(A.ANKAUF, replace(VG, ma039_fortgeltung=False), KAT)["preis"], 0)
     ausser = rechne_grob(replace(A.ANKAUF, im_kappungsgebiet=False, voreinstellungen={"im_kappungsgebiet": (True, "KAT-08")},
                                  begruendungen={"im_kappungsgebiet": "Teilgebiet ausserhalb der Verordnung"}), VG, KAT)
     pruefe_fest(k, "Vorhaben ausserhalb des Gebiets der abgesenkten Kappungsgrenze (E-05): Monate der Erhoehungen, Mieten, Liste der Abweichungen",
@@ -438,19 +394,6 @@ def rf18_runde2():
                              begruendungen={"im_bremsgebiet": "Teilgebiet ausserhalb der Verordnung"}), VG, KAT)
     pruefe_gleich(k, "200 m2 leer, Vorhaben ausserhalb des Gebiets der Mietpreisbremse (E-05): Sollmiete im Monat 4 mit 10,50 statt 10,12 Euro",
                   [str(mb.ertrag.soll(4)), str(ob.ertrag.soll(4))], ["11544.00", "11620.00"])
-    # Betriebskosten leerstehender Flaechen (H-36, R-6.17)
-    lk = rechne_grob(leer, replace(VG, leerstandskosten_je_qm=D(30)), KAT)
-    pruefe(k, "200 m2 leer, 30 Euro je m2 und Jahr: Bewirtschaftung im Monat 1 hoeher um 200 x 30 / 12",
-           lk.plan.zeilen[1]["kosten"] - mb.plan.zeilen[1]["kosten"], "500.00", "0")
-    pruefe(k, "... ab dem Monat 4 (vermietet) keine Leerstandskosten", lk.plan.zeilen[4]["kosten"] - mb.plan.zeilen[4]["kosten"], "0", "0")
-    pruefe_fest(k, "... Reinertrag im ersten Jahr und Bankdarlehen ohne und mit Leerstandskosten",
-                [str(mb.bemessung.reinertrag_vj), str(lk.bemessung.reinertrag_vj), str(mb.darlehen), str(lk.darlehen)])
-    # CO2-Kosten: haelftige Teilung nach CO2KOSTAUFG-5A ab dem Katalogjahr (E-66), weitere Kosten des Vermieters (E-67)
-    h = rechne_grob(replace(A.ANKAUF, heizung_5a=True), VG, KAT)
-    pruefe(k, "Heizung nach CO2KOSTAUFG-5A: 2027 Stufenanteil 40 %: 66,00 Euro CO2-Kosten im Monat 1", h.plan.zeilen[1]["kosten"] - D("2343.33"), "66.00", "0")
-    pruefe(k, "... 2028 haelftig: 30 x 1.320 x 50 % x 52,50 / 1.000 / 12", h.plan.zeilen[13]["kosten"] - CENT.geld(D(28120) * D("1.02") / 12), "86.63", "0")
-    pruefe_fest(k, "Heizung nach CO2KOSTAUFG-5A: Endwertdifferenz gegen den Basisfall", str(h.kennzahlen["endwertdifferenz"] - basis.kennzahlen["endwertdifferenz"]))
-    pruefe_gleich(k, "Heizung nach CO2KOSTAUFG-5A ohne Katalogwert: M-47", status(replace(A.ANKAUF, heizung_5a=True), VG, replace(KAT, co2_5a_anteil=None)), ["eingabe", "M-47"])
 
 
 # ------------------------------------------------------------------------------------------------ RF-19
@@ -474,12 +417,17 @@ def rf19_runde2():
     liste = abweichungsliste(replace(A.ANKAUF, abweichungen={"kalk_zins": (D("0.01"), GRUNDTEXT)}), VG, KAT)
     pruefe(k, "... mit Begruendung: Wirkung auf den tragbaren Preis (Gegenrechnung Controller: 2.359.366 - 2.317.235)", liste[0]["wirkung_preis"], "42131", "0")
     pruefe(k, "... Wirkung auf die Endwertdifferenz (wie Lesart 2 von MA-026: die Bank rechnet dann mit dem Vertragszins)", liste[0]["wirkung_endwertdifferenz"], "-38496.31", "0")
-    al = replace(A.ANKAUF, abweichungen={"a_lang": (D("0.005"), None)})
-    pruefe_gleich(k, "langfristiger Anlagezins 0,5 % statt gleich dem Habenzins (H-09) ohne Begruendung: gerechnet, auch in der Preissuche "
-                     "(er aendert weder Rendite noch tragbaren Preis; die hoehere Endwertdifferenz steht in der Liste)",
-                  [ohne("a_lang", D("0.005")), tragbarer_preis(al, VG, KAT)["preis"]], [["ergebnis", None], 2317235])
-    e = rechne_grob(replace(A.ANKAUF, abweichungen={"a_lang": (D("0.005"), GRUNDTEXT)}), VG, KAT)
-    pruefe(k, "... mit Begruendung: Endwertdifferenz (Gegenrechnung Controller)", e.kennzahlen["endwertdifferenz"], "966697.17", "0")
+    # Drei Klassen (R-3.2): fester Hauswert, Lesart des Hauses und fester Katalogwert sind im Vorhaben nicht aenderbar
+    pruefe_gleich(k, "fester Hauswert (H-09), Lesart des Hauses (MA-026) und fester Katalogwert (H-10) im Vorhaben geaendert: je M-20",
+                  [ohne("a_lang", D("0.005")), ohne("ma026_fremde_kalkulatorisch", True), ohne("kk_zins", D("0.06"))], [["eingabe", "M-20"]] * 3)
+    vga = replace(VG, a_lang=D("0.005"))
+    pruefe_gleich(k, "langfristiger Anlagezins 0,5 % als Hauswert (H-09): tragbarer Preis unveraendert, keine Abweichung des Vorhabens",
+                  [tragbarer_preis(A.ANKAUF, vga, KAT)["preis"], rechne_grob(A.ANKAUF, vga, KAT).abweichungen], [2317235, []])
+    e = rechne_grob(A.ANKAUF, vga, KAT)
+    pruefe(k, "... Endwertdifferenz (Gegenrechnung Controller)", e.kennzahlen["endwertdifferenz"], "966697.17", "0")
+    h = rechne_grob(replace(A.ANKAUF, steuer=A.steuer(KOERPERSCHAFT, verlust="sofort")), replace(VG, ma026_ertrag_vorhaben=True), KAT)
+    pruefe_fest(k, "Lesart des Hauses (MA-026, Lesart 3) und Hauswert H-38 'sofort': Liste (Kennung, Art, Begruendung), ohne Begruendungspflicht",
+                [[a["kennung"], a["art"], a["begruendung"]] for a in h.abweichungen])
     # Richtung haengt am Fall (Finanzmathematiker 2): hoehere Mindestdeckung hebt den tragbaren Preis bei negativem Hebel
     z2 = replace(VG, zielrendite=D("0.02"))
     md = replace(A.ANKAUF, abweichungen={"mindestdeckung": (D("1.3"), None)})
@@ -495,27 +443,13 @@ def rf19_runde2():
                   [status(md), (tp5["preis"], tp5["meldung"])], [["ergebnis", None], (2297764, None)])
     liste = abweichungsliste(replace(A.ANKAUF, abweichungen={"mindestdeckung": (D("1.3"), GRUNDTEXT)}), VG, KAT)
     pruefe_fest(k, "... Wirkung auf Endwertdifferenz und tragbaren Preis bei Zielrendite 5 %", [str(liste[0]["wirkung_endwertdifferenz"]), str(liste[0]["wirkung_preis"])])
-    for regel in ("restlaufzeit", "rate"):
-        pruefe_gleich(k, f"Anschlussregel '{regel}' statt 'tilgungssatz' (H-07) ohne Begruendung: M-20 (hoehere Endwertdifferenz)",
-                      ohne("anschluss_regel", regel), ["eingabe", "M-20"])
     pruefe_gleich(k, "feste Vorgabe (H-21 Rasterzahl) im Vorhaben geaendert: M-20", ohne("suchraster", 80), ["eingabe", "M-20"])
     # Voreinstellungen aus Vorgabe und Katalog (Bericht Controller 2)
-    vor = {"enk_satz": (D("0.10"), "KAT-01"), "anpassungsdauer": (4, "H-23"), "zinsbindung_jahre": (10, "H-24")}
+    vor = {"enk_satz": (D("0.10"), "KAT-01"), "zinsbindung_jahre": (10, "H-24")}
     pruefe_gleich(k, "Erwerbsnebenkosten 3 % statt 10 % aus dem Katalog ohne Begruendung: M-20",
                   status(replace(A.ANKAUF, enk_satz=D("0.03"), voreinstellungen=vor)), ["eingabe", "M-20"])
     liste = abweichungsliste(replace(A.ANKAUF, enk_satz=D("0.03"), voreinstellungen=vor, begruendungen={"enk_satz": GRUNDTEXT}), VG, KAT)
     pruefe(k, "... mit Begruendung: Wirkung auf den tragbaren Preis (Gegenrechnung Controller: 2.474.717 - 2.317.235)", liste[0]["wirkung_preis"], "157482", "0")
-    e = rechne_grob(replace(A.ANKAUF, anpassungsdauer=1, zinsbindung_jahre=5, voreinstellungen=vor, begruendungen={"anpassungsdauer": GRUNDTEXT}), VG, KAT)
-    pruefe_fest(k, "Anpassungsdauer 1 statt 4 Jahre (H-23) und Zinsbindung 5 statt 10 Jahre (H-24): Liste mit Wirkung auf die Endwertdifferenz",
-                [[a["kennung"], str(a["haus"]), str(a["vorhaben"]), str(a["wirkung_endwertdifferenz"])] for a in e.abweichungen])
-    pruefe(k, "... Aenderung der Endwertdifferenz gegen den Basisfall (Gegenrechnung Controller)", e.kennzahlen["endwertdifferenz"] - basis.kennzahlen["endwertdifferenz"],
-           "-39643", "0.5")
-    # Lesart einer Modellannahme im Vorhaben und als Lesart des Hauses
-    pruefe_gleich(k, "Lesart 2 von MA-026 im Vorhaben ohne Begruendung: M-20", ohne("ma026_vertragszins", True), ["eingabe", "M-20"])
-    e = rechne_grob(replace(A.ANKAUF, abweichungen={"ma026_vertragszins": (True, GRUNDTEXT)}), VG, KAT)
-    h = rechne_grob(A.ANKAUF, replace(VG, ma026_vertragszins=True), KAT)
-    pruefe_fest(k, "Lesart 2 von MA-026 im Vorhaben mit Begruendung und als Lesart des Hauses: Liste (Kennung, Art, Begruendung, Wirkung)",
-                [[[a["kennung"], a["art"], a["begruendung"], str(a["wirkung_endwertdifferenz"])] for a in x.abweichungen] for x in (e, h)])
     # ---- R-5.12: Bemessungszins je Tranche am uebernommenen Darlehen
     g = rechne_grob(GEBUNDEN, VG, KAT)
     pruefe(k, "gebundener Bestand: Bemessungszins (0,5 % x 96 + 3 % x 24) / 120", g.bemessung.bemessungszins["Uebernommenes Darlehen"], "0.01", "0")
@@ -528,38 +462,19 @@ def rf19_runde2():
         reihe[str(bindung)] = [str(x.bemessung.bemessungszins["Uebernommenes Darlehen"]), str(x.bemessung.kd_uebrige), str(x.darlehen)]
     pruefe_fest(k, "Zinsbindung des uebernommenen Darlehens 8, 9, 10, 12 Jahre: Bemessungszins, Kapitaldienst, Bankdarlehen (keine Klippe)", reihe)
     pruefe(k, "Zinsbindung 12 Jahre: Kapitaldienst 15.000, Bankdarlehen (Gegenrechnung Bank)", D(reihe["12"][2]), "886660.00", "0")
-    ohne_k = rechne_grob(replace(GEBUNDEN, uebernommen=dict(GEBUNDEN.uebernommen, foerderdarlehen=None)), VG, KAT)
-    mit_k = rechne_grob(GEBUNDEN, VG, KAT)
-    pruefe_gleich(k, "Kennzeichen Foerderdarlehen nicht angegeben: wie 'nein'; das Kennzeichen aendert die Bemessung nicht mehr",
-                  (ohne_k.darlehen == mit_k.darlehen, [a["kennung"] for a in ohne_k.abweichungen], [a["kennung"] for a in mit_k.abweichungen]),
-                  (True, [], ["E-59"]))
-    fuenf = replace(GEBUNDEN, haltedauer=5, uebernommen=dict(GEBUNDEN.uebernommen, bindung_jahre=20))
-    pruefe_gleich(k, "Kennzeichen Foerderdarlehen 'ja' ohne Begruendung, wenn es die Vorfaelligkeit erspart: M-20",
-                  status(replace(fuenf, begruendungen=None)), ["eingabe", "M-20"])
-    pruefe_fest(k, "... Vorfaelligkeit nach 5 Jahren mit und ohne Kennzeichen (Zinsbindung 20 Jahre)",
-                [str(rechne_grob(replace(fuenf, uebernommen=dict(fuenf.uebernommen, foerderdarlehen=x)), VG, KAT).plan.zeilen[60]["vfe"]) for x in (True, False)])
-    # Lesart 2 von MA-026 und H-25 je Tranchenart
-    pruefe_fest(k, "gebundener Bestand: Bankdarlehen nach Lesart 2 von MA-026 und mit festem kalkulatorischem Zins 4 % fuer uebernommene Darlehen (H-25)",
-                [str(rechne_grob(GEBUNDEN, replace(VG, ma026_vertragszins=True), KAT).darlehen),
-                 str(rechne_grob(GEBUNDEN, replace(VG, kalk_zins_uebernommen=D("0.04")), KAT).darlehen)])
     pruefe(k, "Mindestansatz der Bewirtschaftung als Vorgabe H-33 (10 % statt 15 % aus dem Katalog): Neubau, Reinertrag des Vorhabens bindet",
            rechne_grob(A.NEUBAU, replace(VG, bewirtschaftung_mindest=D("0.10")), KATN).bemessung.ertrag_nachhaltig, "354432.75", "0")
     # ---- R-10.24, R-10.14: Kennzahlen nach Bemessungskonditionen, Anschlussregel mit der niedrigsten Deckung
     pruefe_fest(k, "Ankauf: Deckung nach Bemessung, Reserve nach Bemessung, Kapitaldienstreserve laut Finanzplan",
                 [q(basis.deckung_bemessung, "0.000001"), str(basis.reserve_bemessung), str(basis.kapitaldienstreserve)])
     pruefe(k, "Ankauf: Kapitaldienst zu Bemessungskonditionen 12 x 7.155,22", basis.kd_bemessung, "85862.64", "0")
-    w26 = rechne_grob(replace(A.ANKAUF, wertansatz_bank=D(2600000), wertansatz_begruendung="Gutachten vom Stichtag"), VG, KAT)
-    pruefe_fest(k, "Wertansatz 2,6 Mio. Euro: Darlehen zu Kaufpreis und Darlehen zu Wertansatz (%)",
-                [q(w26.darlehen_zu_wert * 100, "0.01"), q(w26.darlehen_zu_wertansatz * 100, "0.01")])
-    pruefe_fest(k, "tragbarer Kaufpreis je Anschlussregel 'rate' und 'restlaufzeit' (Gegenrechnung Finanzmathematiker: 2.317.477 und 2.317.632)",
-                [tragbarer_preis(A.ANKAUF, replace(VG, anschluss_regel=r_), KAT)["preis"] for r_ in ("rate", "restlaufzeit")])
     pruefe_fest(k, "Ankauf: kleinste Deckung nach der unguenstigsten Anschlussregel (Deckung, Jahr, Regel)",
                 [q(basis.deckung_min_anschluss[0]), basis.deckung_min_anschluss[1], basis.deckung_min_anschluss[2]])
     bank = replace(OHNE_STAU, zins=D("0.03"), ist_miete=D("8.50"), vergleichsmiete=D("8.50"))
     vgb = replace(VG, mietsteigerung=D("0.005"))
     tab = {}
-    for name, vg_, stress in (("kalkulatorisch, Stress", vgb, True), ("Vertragskonditionen, Basis", replace(vgb, ma026_vertragszins=True), False),
-                              ("Vertragskonditionen, Stress", replace(vgb, ma026_vertragszins=True), True)):
+    for name, vg_, stress in (("kalkulatorisch, Stress", vgb, True), ("Vertragskonditionen, Basis", replace(vgb, kalk_zins=D("0.03")), False),
+                              ("Vertragskonditionen, Stress", replace(vgb, kalk_zins=D("0.03")), True)):
         x = rechne_grob(bank, vg_, KAT, stress=stress)
         tab[name] = [q(x.deckung_min), q(x.deckung_min_anschluss[0]), x.deckung_min_anschluss[2], [m for m in kennungen(x) if m in ("M-38", "M-39")]]
     pruefe_fest(k, "Bankfall (Zins 3 %, Mietsteigerung 0,5 %): kleinste Deckung, nach der unguenstigsten Anschlussregel, Regel, Meldung", tab)
@@ -630,7 +545,7 @@ def rf20_runde2():
     pruefe_gleich(k, "... Haltedauertabelle 37 und 38 Jahre: M-24 je Zeile", [x[3] for x in haltedauer_tabelle(ohne_zins, VG, KATN, 37, 38)], ["M-24", "M-24"])
     # ---- ohne eingesetztes Eigenkapital (NG-25, NG-37)
     voll = replace(OHNE_STAU, enk_satz=NULL, verkaufsfaktor=D(5))
-    vgv = replace(VG, beleihungsquote=EINS, mindestdeckung=EINS, ma026_vertragszins=True)
+    vgv = replace(VG, beleihungsquote=EINS, mindestdeckung=EINS, kalk_zins=D("0.04"))
     tp = tragbarer_preis(replace(voll, verfuegbares_ek=NULL), vgv, KAT)
     pruefe_fest(k, "Vollfinanzierung, verfuegbares Eigenkapital 0: kein tragbarer Preis (M-41), bindende Grenze, Nebenangabe",
                 [tp["preis"], tp["meldung"], tp["bindend"], tp.get("nebenangabe")])

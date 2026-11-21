@@ -23,14 +23,10 @@ VG, KAT, KATN = A.VORGABEN, A.KATALOG, A.KATALOG_NEUBAU
 # Varianten der Referenzobjekte (Anhang A)
 GEBUNDEN = replace(A.ANKAUF, gebunden_anteil=D("0.4"), bindung_jahre=6, gebundene_miete=D("6.80"),
                    uebernommen=dict(restschuld=D(500000), nennbetrag=D(600000), zins=D("0.005"), tilgungssatz=D("0.02"),
-                                    bindung_jahre=8, anschluss_zins=D("0.03"), beitrag_satz=D(0),
-                                    foerderdarlehen=True, rang="vor"),
-                   begruendungen={"uebernommen.foerderdarlehen": "Bewilligungsbescheid liegt vor (Annahme)"})
+                                    bindung_jahre=8, anschluss_zins=D("0.03"), beitrag_satz=D(0)))
 GEFOERDERT = replace(A.NEUBAU, foerderung=A.FOERDERUNG_B, haltedauer=38)
 # Begruendung fuer Lesarten und Eingaben, die ein Referenzfall bewusst von der Voreinstellung abweichend setzt (R-3.2)
-GRUND = {k: "Lesart des Referenzfalls" for k in ("steuer.verlust", "steuer.ma030_verkaufsgewinn_pflichtig", "zuschuss_verteilung", "steuer.aufgabegewinn",
-                                                  "steuer.kuerzung_bleibt_verkaufsjahr", "festpreis", "vorvermietet",
-                                                  "uebernommen.foerderdarlehen")}
+GRUND = {k: "Lesart des Referenzfalls" for k in ("zuschuss_verteilung", "steuer.kuerzung_bleibt_verkaufsjahr", "festpreis", "vorvermietet")}
 MIT_KFW = replace(A.NEUBAU, kfw_betrag=D(3000000), kfw_laufzeit=35, kfw_tilgungsfrei=1)
 
 
@@ -182,12 +178,6 @@ def rf11_ankauf():
     pruefe_fest(k, "gebundener Bestand: Grenzen (a), (b), (c)", [str(eg.bemessung.bank[x]) for x in "abc"])
     pruefe_fest(k, "gebundener Bestand: Deckung im ersten Jahr nach jeder Zinsbindung",
                 {n: [j_, str(x.quantize(D("0.0001")))] for n, (j_, x) in eg.deckung_nach_bindung.items()})
-    nach = replace(GEBUNDEN, uebernommen=dict(GEBUNDEN.uebernommen, rang="nach"))
-    eg2 = rechne_grob(nach, VG, KAT)
-    pruefe_fest(k, "gebundener Bestand, Rang des uebernommenen Darlehens nach der Bank: Bankdarlehen", eg2.darlehen)
-    pruefe_fest(k, "gebundener Bestand, Rang nach der Bank: bindende Grenze", eg2.bemessung.bank["bindend"])
-    eg3 = rechne_grob(GEBUNDEN, replace(VG, ma026_vertragszins=True), KAT)
-    pruefe_fest(k, "gebundener Bestand, andere Lesart MA-026 (Vertragskonditionen): Bankdarlehen", eg3.darlehen)
     egs = rechne_grob(GEBUNDEN, VG, KAT, stress=True)
     pruefe_fest(k, "gebundener Bestand im Stressfall: Zins des uebernommenen Darlehens im Jahr 9 (Anschluss mit Aufschlag)",
                 egs.plan.jahressumme("zins", 9) - sum(egs.plan.zeilen[u]["tranchen"]["Bankdarlehen"]["zins"] for u in range(97, 109)))
@@ -243,12 +233,6 @@ def rf12_neubau():
     pruefe_fest(k, "KfW: Kapitaldienst je Darlehen im ersten Jahr der Vollvermietung", {a: str(b) for a, b in kf.kd_je_darlehen.items()})
     tpk = tragbarer_preis(MIT_KFW, VG, KATN)
     preis(k, "tragbarer Grundstueckspreis mit KfW-Darlehen", tpk)
-    kf2 = rechne_grob(MIT_KFW, replace(VG, ma026_vertragszins=True), KATN)
-    pruefe_fest(k, "KfW, andere Lesart MA-026 (Vertragskonditionen): Bankdarlehen", kf2.darlehen)
-    tpk2 = tragbarer_preis(MIT_KFW, replace(VG, ma026_vertragszins=True), KATN)
-    pruefe_fest(k, "KfW, andere Lesart MA-026: tragbarer Grundstueckspreis", tpk2["preis"], 0)
-    tpv = tragbarer_preis(A.NEUBAU, replace(VG, ma026_vertragszins=True), KATN)
-    pruefe_fest(k, "ohne KfW, andere Lesart MA-026: tragbarer Grundstueckspreis", tpv["preis"], 0)
     # Stellplaetze (R-6.15)
     sp = rechne_grob(replace(A.NEUBAU, stellplaetze=20, stellplatz_miete=D(60)), VG, KATN)
     pruefe_fest(k, "Neubau mit 20 Stellplaetzen: Baukosten zum Preisstand des Stichtags", sp.bemessung.baukosten_stichtag)
@@ -281,9 +265,6 @@ def rf12_neubau():
     pruefe_fest(k, "Grobfoerderung, 20 Jahre: Rueckzahlung des Zuschusses beim Verkauf (MA-017)", f20.verkauf.foerder_rueckzahlung)
     pruefe_fest(k, "Grobfoerderung, 20 Jahre: Abloesung des Foerderdarlehens beim Verkauf", f20.plan.zeilen[240]["tranchen"]["Foerderdarlehen"]["abloesung"])
     pruefe_fest(k, "Grobfoerderung, 20 Jahre: Verkaufspreis aus der gebundenen Miete", f20.verkauf.preis_brutto)
-    f2 = rechne_grob(GEFOERDERT, replace(VG, ma026_foerder_nachrang=True), KATN)
-    pruefe_fest(k, "Grobfoerderung, Foerderdarlehen im Nachrang (andere Lesart MA-026): Grenze (a) und Bankdarlehen",
-                [str(f2.bemessung.bank["a"]), str(f2.darlehen)])
     v = vergleiche(rechne_grob(replace(A.NEUBAU, haltedauer=38), VG, KATN), f)
     pruefe_fest(k, "Vergleich frei gegen gefoerdert (38 Jahre): Differenz der Endwertdifferenz", v["zeilen"][2][3])
     tab = haltedauer_tabelle(GEFOERDERT, VG, KATN, 36, 39)

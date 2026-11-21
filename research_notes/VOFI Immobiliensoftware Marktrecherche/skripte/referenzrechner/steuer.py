@@ -32,7 +32,7 @@ UEBERSCHUSS = (PRIVAT, KOERPERSCHAFT_OHNE_GEWST)
 class Steuerparameter:
     """Aufgeloester Katalog- und Eingabestand fuer die Kurzform. Alle Saetze als Dezimalbruch."""
     status: str
-    verlust: str = "vortrag"                    # MA-016: "vortrag" (Voreinstellung) oder "sofort"
+    verlust: str = "vortrag"                    # H-38 (MA-016), fester Hauswert: "vortrag" (Voreinstellung) oder "sofort"
     # Koerperschaft (KSTG-23, SOLZG-4)
     kst_satz: Optional[Callable[[int], D]] = None   # Satz je Kalenderjahr
     soli_satz: D = NULL
@@ -44,8 +44,6 @@ class Steuerparameter:
     kuerzung_bleibt_verkaufsjahr: bool = False  # E-69: es verbleibt weiterer Grundbesitz, oder Besitz, Nutzen und Lasten
                                                 # gehen zum 31.12., 23:59 Uhr, ueber; nur dann bleibt die Kuerzung im
                                                 # Verkaufsjahr (BFH-III-R-1-23, BFH-I-R-89-03; R-7.8)
-    ma030_verkaufsgewinn_pflichtig: bool = False    # MA-030, strengere Lesart mit E-69: nur der laufende Ertrag wird
-                                                    # gekuerzt, der Verkaufsgewinn nicht (Voreinstellung: GEWSTR-9-2)
     freibetrag: D = NULL                        # nur Personenunternehmen (GEWSTG-11)
     hinzu_anteil: D = NULL                      # GEWSTG-8: hinzugerechneter Anteil der Entgelte fuer Schulden
     hinzu_freibetrag: D = NULL                  # GEWSTG-8: Freibetrag der Hinzurechnung
@@ -55,7 +53,7 @@ class Steuerparameter:
     zins_satz: Optional[D] = None               # Satz auf Habenzinsen (PRIVAT: ESTG-32D; LEHRBUCH); None = est_satz
     anrechnungsfaktor: D = NULL                 # Vielfaches des Messbetrags (ESTG-35)
     anteil_natuerliche: D = EINS                # Anteil natuerlicher Personen am Gewinn (R-7.9)
-    aufgabegewinn: bool = False                 # MA-036, andere Lesart: Objektverkauf ist Aufgabegewinn (GEWSTG-7)
+    aufgabegewinn: bool = False                 # MA-036, Lesart des Hauses: Objektverkauf ist Aufgabegewinn (GEWSTG-7)
     frist_privatverkauf: int = 0                # Jahre (ESTG-23)
     haltedauer: int = 0
     sockel_verlust: Optional[D] = None          # ESTG-10D, GEWSTG-10A: Sockelbetrag; nur fuer den Hinweis M-45
@@ -156,7 +154,7 @@ class Steuer:
             # GEWSTG-9: gekuerzt wird der Ertrag aus Verwaltung und Nutzung des eigenen Grundbesitzes samt der
             # darauf entfallenden Hinzurechnung; Zinsertraege bleiben, der Verkaufsgewinn nach MA-030
             hinzu = NULL
-            ertrag = z_h + (g_gew if p.ma030_verkaufsgewinn_pflichtig else NULL)
+            ertrag = z_h                             # MA-030: der Verkaufsgewinn ist mitgekuerzt (GEWSTR-9-2)
         else:
             frei = NULL if freibetrag_verbraucht else p.hinzu_freibetrag
             hinzu = p.hinzu_anteil * max(NULL, entgelte + p.hinzu_pacht * pacht - frei)

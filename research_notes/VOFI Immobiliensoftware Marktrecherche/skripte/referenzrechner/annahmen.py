@@ -68,7 +68,6 @@ KATALOG = Katalog(
     wartefrist=15, kappung=D("0.15"), kappung_monate=36,    # KAT-08 (BGB-558); 15 % als Annahme zur Gemeinde
     mietpreisbremse=True, bremse_aufschlag=D("0.10"),   # KAT-08 (BGB-556D): Annahme zur Gemeinde und zum Aufschlag
     co2_vermieteranteil=D("0.40"),                      # KAT-09 (CO2KOSTAUFG-ANLAGE): Annahme zur Stufe bei 30 kg
-    co2_5a_anteil=D("0.5"), co2_5a_ab_jahr=2028,        # KAT-09 (CO2KOSTAUFG-5A): haelftige Teilung ab dem genannten Jahr
     geb_steigerung=D("0.0615"), geb_fest_jahre=3, geb_schritt_jahre=3,      # KAT-11: Werte nach Bericht C.1 (Annahme)
     ahk_quote=D("0.15"), ahk_jahre=3,                   # KAT-12 (ESTG-6)
     ust_satz=D("0.19"),                                 # KAT-12 (USTG-12): Annahme zum Katalogstand
@@ -91,8 +90,7 @@ FOERDERUNG_B = Foerderung(
     bemessungsgrenze_je_qm=D("5460"), eingangsmiete=D("8.20"), steigerung=D("0.0615"),
     fest_jahre=3, schritt_jahre=3, bindung_jahre=35, vkb_satz=D("0.005"), entgelt_darlehen=D("0.01"),
     entgelt_zuschuss=D("0.0075"), tilgung_jahre=42, zinslos_jahre=35, zins_danach=D("0.05"),
-    teilraten=(D("0.30"), D("0.30"), D("0.30"), D("0.10")), bank_mindesttilgung=D("0.01"), tilgungsfrist_monate=24,
-    aufschub_max_monate=60)
+    teilraten=(D("0.30"), D("0.30"), D("0.30"), D("0.10")), bank_mindesttilgung=D("0.01"), tilgungsfrist_monate=24)
 
 # Zulaessige Bereiche der Eingabepruefung (R-3.3, R-3.4, Spalte "zulaessig")
 grobkalkulation.GRENZEN.update(
@@ -101,12 +99,12 @@ grobkalkulation.GRENZEN.update(
 
 # ------------------------------------------------------------------ Vorgaben des Hauses (alle Werte Annahmen)
 STRESS = Stress(anschlusszins_pp=D("0.01"), zusage_pp=D("0.005"), leerstand_pp=D("0.02"),
-                verkaufsfaktor_rel=D("0.10"), mietsteigerung_pp=D("0.005"), instandhaltung_rel=D("0.10"),
+                verkaufsfaktor_rel=D("0.10"), mietsteigerung_pp=D("0.005"),
                 stau_rel=D("0.10"), baukosten_rel=D("0.05"), bauzeit_monate=3)
 
 VORGABEN = Vorgaben(
     zielrendite=D("0.05"), beleihungsquote=D("0.65"), mindestdeckung=D("1.2"), mindesttilgung=D("0.02"),
-    anschluss_aufschlag=D("0.01"), stress=STRESS, anschluss_regel="tilgungssatz", h_kurz=D("0.02"),
+    anschluss_aufschlag=D("0.01"), stress=STRESS, h_kurz=D("0.02"),
     kk_zins=D("0.08"), kk_linie=D(0), mietsteigerung=D("0.02"), kostensteigerung=D("0.02"),
     baupreissteigerung=D("0.03"), leerstand=D("0.015"), verkaufskostensatz=D("0.015"),
     verwaltung_je_einheit=D("350"),
@@ -119,7 +117,7 @@ VORGABEN = Vorgaben(
     zuschlag_kg_uebrige=D("0.05"), zuschlag_kg700=D("0.20"), kosten_je_stellplatz=D("20000"),
     bereit_satz=D("0.0025"), bereit_frei=6,
     anpassungsdauer=4, vorlauf=0,                                           # H-23, H-35
-    leerstandskosten_je_qm=D(0),                                            # H-36: in den bezeichneten Faellen 30 Euro
+    bodenanteil=D("0.25"),                                                  # H-39
     warnschwelle_restwertanteil=D("0.95"), warnschwelle_faktorabstand=D(1),
     bauabschnitt_rohbau=D("0.5"), bauabschnitt_innenputz=D("0.75"))  # H-20
 
@@ -130,7 +128,7 @@ ANKAUF = Grobeingabe(
     steuer=steuer(KOERPERSCHAFT), zins=D("0.04"), zinsbindung_jahre=10, verkaufsfaktor=D("18"), haltedauer=12,
     wohnflaeche=D("1320"), einheiten=20, enk_satz=D("0.10"), kaufpreis=D("2400000"), angebotspreis=D("2600000"),
     bodenanteil=D("0.25"), baujahr=1990, ist_miete=D("8.50"), vergleichsmiete=D("9.20"), markt_miete=D("10.50"),
-    anpassungsdauer=4, stau_betrag=D("120000"), stau_jahr=2, stau_art="erhaltung", co2_ausstoss=D("30"))
+    stau_betrag=D("120000"), stau_jahr=2, co2_ausstoss=D("30"))
 
 # Referenzobjekt Neubau: 30 Wohnungen, 2.000 m2 Wohnflaeche, 2.600 m2 Brutto-Grundflaeche
 NEUBAU = Grobeingabe(

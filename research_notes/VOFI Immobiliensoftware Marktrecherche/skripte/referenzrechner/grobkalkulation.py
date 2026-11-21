@@ -37,7 +37,6 @@ class Stress:
     leerstand_pp: D = NULL              # Aufschlag auf die Leerstandsquote
     verkaufsfaktor_rel: D = NULL        # Abschlag auf den Verkaufsfaktor, relativ
     mietsteigerung_pp: D = NULL         # Abschlag auf die Mietsteigerung
-    instandhaltung_rel: D = NULL        # Aufschlag auf die Instandhaltungskosten, relativ
     stau_rel: D = NULL                  # Mehrkosten des Investitionsstaus, relativ (Ankauf)
     baukosten_rel: D = NULL             # Aufschlag auf die Baukosten, relativ (Neubau)
     bauzeit_monate: int = 0             # Verlaengerung der Bauzeit (Neubau)
@@ -45,15 +44,16 @@ class Stress:
 
 @dataclass
 class Vorgaben:
-    """Vorgaben des Hauses (H-..). In den Referenzfaellen Annahmen (annahmen.py). Voreinstellungen haben nur die
-    Schalter der Modellannahmen (vorsichtige Lesart) und Groessen, die leer sein duerfen."""
+    """Vorgaben des Hauses (H-..) in drei Klassen (R-3.2, R-3.4): Vorgabe, im Vorhaben aenderbar (KENNUNG_VORGABE);
+    fester Hauswert und Lesart des Hauses, nur im Katalog des Hauses aenderbar (FESTE_HAUSWERTE); fester Katalogwert
+    (FESTE_KATALOGWERTE). In den Referenzfaellen Annahmen (annahmen.py). Voreinstellungen haben nur die Lesarten der
+    Modellannahmen (vorsichtige Lesart) und Groessen, die leer sein duerfen."""
     zielrendite: D                      # H-01
     beleihungsquote: D                  # H-02
     mindestdeckung: D                   # H-03
     mindesttilgung: D                   # H-04
     anschluss_aufschlag: D              # H-05
     stress: Stress                      # H-06
-    anschluss_regel: str                # H-07
     h_kurz: D                           # H-08
     kk_zins: D                          # H-10
     kk_linie: Optional[D]               # H-11: Betrag oder None = unbegrenzt
@@ -73,9 +73,9 @@ class Vorgaben:
     izf_unten: D                        # H-21: Suchbereich des internen Zinsfusses
     izf_oben: D
     izf_raster: int
-    kalk_zins: Optional[D]              # H-25: fester kalkulatorischer Zins; None = Anschlusszins der Tranche
+    kalk_zins: Optional[D]              # H-25: fester kalkulatorischer Zins aller Tranchen; None = Anschlusszins der Tranche
     fluktuation: D                      # H-26
-    forderungsausfall: D                # H-27
+    forderungsausfall: D                # H-27: fester Katalogwert
     anlaufleerstand: int                # H-28: Monate bis zur Vermietung leerer Flaechen und bei Erstvermietung
     co2_preis: D                        # H-29: Euro je Tonne im Planjahr 1
     co2_steigerung: D                   # H-29
@@ -89,28 +89,20 @@ class Vorgaben:
     warnschwelle_faktorabstand: Optional[D] = None      # H-20: Ausstiegs- minus Einstiegsfaktor, ab dem M-48 erscheint
     zielrendite_neubau: Optional[D] = None      # H-01 je Vorhabensart; None = zielrendite
     zielrendite_gefoerdert: Optional[D] = None  # H-01 fuer gefoerderte Vorhaben; None = wie die Vorhabensart
-    kalk_zins_kfw: Optional[D] = None           # H-25 je Tranchenart; None = Anschlusszins der Tranche
-    kalk_zins_foerder: Optional[D] = None
-    kalk_zins_uebernommen: Optional[D] = None
     bemessungszeitraum: Optional[int] = None    # H-32 in Jahren; None = Zinsbindung des Bankdarlehens
     bewirtschaftung_mindest: Optional[D] = None     # H-33; None = Katalogwert KAT-14
     anlaufleerstand_neubau: Optional[int] = None    # H-34: Monate bis zur Erstvermietung; None = H-28
     bauabschnitt_rohbau: Optional[D] = None         # H-37: Anteil der Bauzeit bis zur Fertigstellung des Rohbaus
     bauabschnitt_innenputz: Optional[D] = None      # H-37: Anteil der Bauzeit bis zur Fertigstellung des Innenputzes
     vorlauf: Optional[int] = None               # H-35: Voreinstellung des Vorlaufs bis zum Baubeginn (E-23)
-    leerstandskosten_je_qm: D = NULL            # H-36: Betriebskosten leerstehender Flaechen, Euro je m2 und Jahr
-    anpassungsdauer: Optional[int] = None       # H-23: Voreinstellung der Anpassungsdauer (E-53)
-    # Schalter der Modellannahmen; Voreinstellung ist die vorsichtige Lesart
-    ma026_foerder_nachrang: bool = False    # Lesart 1: die Bank rechnet ihre Quote ohne das nachrangige Foerderdarlehen
-    ma026_vertragszins: bool = False        # Kapitaldienstrechnung mit Vertragskonditionen statt kalkulatorisch
-    ma026_ertrag_vorhaben: bool = False     # Ertrag und Bewirtschaftung des Vorhabens statt nachhaltig
-    ma026_fremde_kalkulatorisch: bool = False   # uebrige Tranchen ueber den ganzen Bemessungszeitraum kalkulatorisch
-    ma031_zuschuss: Optional[str] = None    # "verteilt", "minderung" oder "sofort"; None = Voreinstellung nach R-7.19
-    ma032_entgelte_sofort: bool = False     # einbehaltene Entgelte der Darlehen im Jahr der Zahlung
-    ma037_vorsicht: bool = True             # Kappungsspielraum bei unbekannter Mietenhistorie ausgeschoepft
+    anpassungsdauer: Optional[int] = None       # H-23: Anpassungsdauer der Ist-Miete (fester Katalogwert)
+    bodenanteil: Optional[D] = None             # H-39: Bodenanteil im Ankauf, wo der Verkauf steuerpflichtig ist (E-12 sonst)
+    # Lesarten des Hauses (R-3.2): im Vorhaben nicht umschaltbar; Voreinstellung ist die vorsichtige Lesart.
+    # Die Verlustverrechnung H-38 (MA-016) und die Lesart von MA-036 stehen in den Steuerparametern.
+    ma026_ertrag_vorhaben: bool = False     # Lesart 3: Ertrag und Bewirtschaftung des Vorhabens statt nachhaltig
+    ma026_fremde_kalkulatorisch: bool = False   # Lesart 4: uebrige Tranchen ueber den ganzen Bemessungszeitraum kalkulatorisch
+    ma031_zuschuss: Optional[str] = None    # Betriebsvermoegen: "verteilt" (None, Voreinstellung) oder "sofort" (R-7.19)
     ma038_rueckfuehrung: bool = True        # eine Miete ueber der Vergleichsmiete wird zurueckgefuehrt
-    ma039_fortgeltung: bool = True          # Gebietsverordnungen gelten nach ihrem Geltungsende fort
-    ma040_ab_abruf: bool = True             # tilgungsfreie Jahre des KfW-Darlehens zaehlen ab dem ersten Abruf
 
 
 @dataclass
@@ -155,8 +147,6 @@ class Katalog:
     kappung_gesetzlich: Optional[D] = None      # KAT-08 (BGB-558): Kappungsgrenze ohne Gebietsverordnung
     kappung_ende_jahr: Optional[int] = None     # KAT-08: letztes Kalenderjahr der Kappungsverordnung; None = keine
     bremse_ende_jahr: Optional[int] = None      # KAT-08 (BGB-556D): letztes Kalenderjahr der Mietpreisbremse
-    co2_5a_anteil: Optional[D] = None           # KAT-09 (CO2KOSTAUFG-5A): Anteil des Vermieters bei haelftiger Teilung
-    co2_5a_ab_jahr: Optional[int] = None        # KAT-09 (CO2KOSTAUFG-5A): erstes Kalenderjahr der haelftigen Teilung
 
 
 @dataclass
@@ -180,7 +170,6 @@ class Foerderung:
     teilraten: tuple                 # Auszahlung in Teilraten: nach Baubeginn, Rohbau, Innenputz, Fertigstellung und Belegung
     bank_mindesttilgung: D           # Mindesttilgung der vorrangigen Bankmittel (Nr. 5.3.6)
     tilgungsfrist_monate: int        # Tilgungsbeginn spaetestens so viele Monate nach dem Monat nach der Foerderentscheidung
-    aufschub_max_monate: int         # laengster Aufschub des Tilgungsbeginns (Nr. 5.3.5)
 
 
 @dataclass
@@ -191,7 +180,8 @@ class Grobeingabe:
     gemeinde: str                       # E-04 (amtlicher Gemeindeschluessel)
     stichtag_jahr: int                  # E-02
     stichtag_monat: int                 # E-02
-    steuer: Steuerparameter             # E-40 bis E-44 mit den Steuerwerten des Katalogs
+    steuer: Steuerparameter             # E-40 bis E-43, E-69 mit den Steuerwerten des Katalogs, dem Hauswert H-38
+                                        # (Verlustverrechnung, MA-016) und der Lesart des Hauses zu MA-036
     zins: D                             # E-45
     zinsbindung_jahre: int              # E-46
     verkaufsfaktor: D                   # E-47
@@ -201,34 +191,29 @@ class Grobeingabe:
     enk_satz: D                         # E-11 (Voreinstellung KAT-01)
     markt_miete: D = NULL               # E-16: Neuvermietungsmiete; beim Neubau die Miete bei Bezug
     tilgungssatz: Optional[D] = None    # E-64; None = H-04
-    foerder_aufschub_monate: int = 0    # E-68: bewilligter Aufschub des Tilgungsbeginns des Foerderdarlehens
     zuschuss_verteilung: bool = False   # E-70: Verteilung des Zuschusses ueber die Bindung beantragt (ESTG-11); nur bei
                                         # Ueberschusseinkuenften und einer Bindung ueber der Mindestdauer des Katalogs
     # Ankauf
     kaufpreis: D = NULL                 # E-10
     angebotspreis: Optional[D] = None   # E-18
-    bodenanteil: Optional[D] = None     # E-12; None = Voreinstellung aus Bodenrichtwert und Grundstuecksflaeche
+    bodenanteil: Optional[D] = None     # E-12, nur bei Privatperson, Verein und Stiftung (sonst Hauswert H-39);
+                                        # None = Voreinstellung aus Bodenrichtwert und Grundstuecksflaeche
     ist_miete: D = NULL                 # E-15 in Euro je m2 der vermieteten Flaeche
     vergleichsmiete: D = NULL           # E-19
     baujahr: Optional[int] = None       # E-17
     leere_flaeche: D = NULL             # E-31
     sonstige_ertraege: D = NULL         # E-32: Stellplaetze und anderes, Euro je Jahr
     mietenhistorie: Optional[tuple] = None  # E-33: (Monate seit der letzten Erhoehung, Miete drei Jahre zuvor)
-    anpassungsdauer: Optional[int] = None   # E-53; None = Vorgabe H-23
     stau_betrag: D = NULL               # E-50
     stau_jahr: Optional[int] = None     # E-51; Pflicht, wenn E-50 angegeben ist
-    stau_art: str = "erhaltung"         # E-52
-    co2_ausstoss: D = NULL              # E-34 in kg je m2 und Jahr, oder Naeherung aus E-54 und E-55
-    co2_aus_naeherung: bool = False     # True: aus Effizienzklasse und Energietraeger abgeleitet (MA-035)
-    heizung_5a: bool = False            # E-66: Heizung im Sinn von CO2KOSTAUFG-5A (haelftige Teilung der CO2-Kosten)
-    weitere_vermieterkosten: D = NULL   # E-67: weitere Kosten des Vermieters nach CO2KOSTAUFG-5A, Euro im Planjahr 1
-    im_kappungsgebiet: Optional[bool] = None    # E-05: abgesenkte Kappungsgrenze; None = nach Katalog der Gemeinde
+    co2_ausstoss: D = NULL              # E-34 in kg je m2 und Jahr, freiwillig; null = kein Vermieteranteil gerechnet
+    im_kappungsgebiet: Optional[bool] = None    # E-05, nur Ankauf: abgesenkte Kappungsgrenze; None = nach Katalog der Gemeinde
     im_bremsgebiet: Optional[bool] = None       # E-05: Mietpreisbremse; None = nach Katalog der Gemeinde
     gebunden_anteil: D = NULL           # E-56
     bindung_jahre: int = 0              # E-57: Jahre ab dem Stichtag bis zum Bindungsende
     gebundene_miete: Optional[D] = None     # E-58
     uebernommen: Optional[dict] = None  # E-59: restschuld, nennbetrag, zins, tilgungssatz, bindung_jahre,
-                                        #       anschluss_zins, beitrag_satz, foerderdarlehen, rang
+                                        #       anschluss_zins, beitrag_satz
     # Neubau
     grundstueckspreis: D = NULL         # E-20
     grundstuecksflaeche: D = NULL       # E-21
@@ -251,10 +236,7 @@ class Grobeingabe:
     foerderung: Optional[Foerderung] = None     # E-28, E-29 aufgeloest (KAT-10)
     # freiwillig oder im Einzelfall
     verfuegbares_ek: Optional[D] = None     # E-60
-    wertansatz_bank: Optional[D] = None     # E-61
-    wertansatz_begruendung: str = ""
-    erbbauzins: D = NULL                # E-62
-    erbbauzins_steigerung: D = NULL     # E-63
+    erbbauzins: D = NULL                # E-62; steigt mit der Kostensteigerung H-13
     abweichungen: Optional[dict] = None     # R-3.2: {Vorgabe: (Wert, Begruendung)}
     voreinstellungen: Optional[dict] = None     # R-3.1: {Eingabe: (Wert der Voreinstellung, Herkunft H-.. oder KAT-..)};
                                                 # None = die Eingaben sind der Hausstandard (Referenzobjekte)
@@ -299,40 +281,47 @@ class Grobergebnis:
 
 
 # ------------------------------------------------------------------------------------------------ R-3.2, R-3.7
-# Kennung je Vorgabe (R-3.4). Feste Vorgaben (H-20 Warnschwellen, H-21 Suchparameter) sind im Vorhaben nicht aenderbar.
+# Drei Klassen der Vorgaben des Hauses (R-3.2, R-3.4), je Feld mit Kennung:
+# (a) Vorgabe: im Vorhaben aenderbar, jede Abweichung steht in der Liste "Abweichungen vom Hausstandard"
 KENNUNG_VORGABE = {
     "zielrendite": "H-01", "zielrendite_neubau": "H-01", "zielrendite_gefoerdert": "H-01", "beleihungsquote": "H-02",
     "mindestdeckung": "H-03", "mindesttilgung": "H-04", "anschluss_aufschlag": "H-05", "stress": "H-06",
-    "anschluss_regel": "H-07", "h_kurz": "H-08", "a_lang": "H-09", "kk_zins": "H-10", "kk_linie": "H-11",
-    "mietsteigerung": "H-12", "kostensteigerung": "H-13", "baupreissteigerung": "H-14", "leerstand": "H-15",
+    "mietsteigerung": "H-12", "leerstand": "H-15", "kalk_zins": "H-25", "anlaufleerstand": "H-28",
+    "zuschlag_kg_uebrige": "H-30", "zuschlag_kg700": "H-30", "kosten_je_stellplatz": "H-30",
+    "anlaufleerstand_neubau": "H-34",
+}
+# (b) fester Hauswert und Lesart des Hauses: nur im Katalog des Hauses aenderbar, nicht im Vorhaben, kein Feld der Maske
+FESTE_HAUSWERTE = {
+    "h_kurz": "H-08", "a_lang": "H-09", "kk_linie": "H-11", "kostensteigerung": "H-13", "baupreissteigerung": "H-14",
     "verkaufskostensatz": "H-16", "verwaltung_je_einheit": "H-17", "instandhaltung_staffel": "H-17",
-    "betriebskosten_je_qm": "H-17", "vfe_satz": "H-18", "kalk_zins": "H-25", "kalk_zins_kfw": "H-25",
-    "kalk_zins_foerder": "H-25", "kalk_zins_uebernommen": "H-25", "fluktuation": "H-26", "forderungsausfall": "H-27",
-    "anlaufleerstand": "H-28", "co2_preis": "H-29", "co2_steigerung": "H-29", "zuschlag_kg_uebrige": "H-30",
-    "zuschlag_kg700": "H-30", "kosten_je_stellplatz": "H-30", "bereit_satz": "H-31", "bereit_frei": "H-31",
-    "bemessungszeitraum": "H-32", "bewirtschaftung_mindest": "H-33", "anlaufleerstand_neubau": "H-34",
-    "bauabschnitt_rohbau": "H-37", "bauabschnitt_innenputz": "H-37",
-    "leerstandskosten_je_qm": "H-36",
-    "ma026_foerder_nachrang": "MA-026", "ma026_vertragszins": "MA-026", "ma026_ertrag_vorhaben": "MA-026",
-    "ma026_fremde_kalkulatorisch": "MA-026",
-    "ma031_zuschuss": "MA-031", "ma032_entgelte_sofort": "MA-032", "ma037_vorsicht": "MA-037",
-    "ma038_rueckfuehrung": "MA-038", "ma039_fortgeltung": "MA-039", "ma040_ab_abruf": "MA-040",
+    "betriebskosten_je_qm": "H-17", "vfe_satz": "H-18", "fluktuation": "H-26", "bereit_satz": "H-31",
+    "bemessungszeitraum": "H-32", "bewirtschaftung_mindest": "H-33", "bodenanteil": "H-39",
+    "ma026_ertrag_vorhaben": "MA-026", "ma026_fremde_kalkulatorisch": "MA-026", "ma031_zuschuss": "MA-031",
+    "ma038_rueckfuehrung": "MA-038",
+}
+HAUSWERTE_STEUER = {"steuer.verlust": ("H-38 (MA-016)", "vortrag"), "steuer.aufgabegewinn": ("MA-036", False)}
+# (c) fester Katalogwert: Wert mit Quelle im Katalog, ohne Freigabeentscheidung und ohne Feld
+FESTE_KATALOGWERTE = {
+    "kk_zins": "H-10", "warnschwelle_restwertanteil": "H-20", "warnschwelle_faktorabstand": "H-20",
+    "such_obergrenze_faktor": "H-21", "suchraster": "H-21", "nachsuchfenster": "H-21", "such_miete_max": "H-21",
+    "izf_unten": "H-21", "izf_oben": "H-21", "izf_raster": "H-21", "anpassungsdauer": "H-23", "forderungsausfall": "H-27",
+    "co2_preis": "H-29", "co2_steigerung": "H-29", "bereit_frei": "H-31", "bauabschnitt_rohbau": "H-37",
+    "bauabschnitt_innenputz": "H-37", "vorlauf": "H-35",
 }
 # Eingaben mit Voreinstellung aus Vorgabe oder Katalog (der Auftrag traegt Wert und Herkunft, R-3.1) ...
 KENNUNG_EINGABE = {
-    "enk_satz": "E-11", "zinsbindung_jahre": "E-46", "haltedauer": "E-48", "anpassungsdauer": "E-53",
-    "tilgungssatz": "E-64", "foerder_aufschub_monate": "E-68", "vorlauf_monate": "E-23", "kfw_zins": "E-38", "nachhaltige_miete": "E-65",
+    "enk_satz": "E-11", "zinsbindung_jahre": "E-46", "haltedauer": "E-48",
+    "tilgungssatz": "E-64", "vorlauf_monate": "E-23", "kfw_zins": "E-38", "nachhaltige_miete": "E-65",
     "im_kappungsgebiet": "E-05", "im_bremsgebiet": "E-05", "steuer.est_satz": "E-42",
     "uebernommen.anschluss_zins": "E-59",
 }
-# ... und Eingaben und Lesarten mit fester Voreinstellung: {Feld: (Kennung, Voreinstellung)}
+# ... und Eingaben mit fester Voreinstellung: {Feld: (Kennung, Voreinstellung)}
 FESTE_VOREINSTELLUNG = {
-    "festpreis": ("E-24", False), "vorvermietet": ("E-39", False), "steuer.verlust": ("E-44 (MA-016)", "vortrag"),
-    "steuer.ma030_verkaufsgewinn_pflichtig": ("MA-030", False), "steuer.kuerzung_bleibt_verkaufsjahr": ("E-69", False),
-    "zuschuss_verteilung": ("E-70", False),
-    "steuer.aufgabegewinn": ("MA-036", False), "uebernommen.foerderdarlehen": ("E-59", False),
+    "festpreis": ("E-24", False), "vorvermietet": ("E-39", False),
+    "steuer.kuerzung_bleibt_verkaufsjahr": ("E-69", False), "zuschuss_verteilung": ("E-70", False),
 }
-ANSCHLUSSREGELN = ("rate", "tilgungssatz", "restlaufzeit")     # H-07
+ANSCHLUSSREGEL = "tilgungssatz"                                # R-5.9: nach der Zinsbindung bleibt der Tilgungssatz (MA-034)
+ANSCHLUSSREGELN = ("rate", "tilgungssatz", "restlaufzeit")     # nur fuer den Ausweis der kleinsten Deckung (R-10.14)
 
 
 def _hole(ein, feld):
@@ -364,7 +353,9 @@ def vorgaben_im_vorhaben(vg: Vorgaben, ein: Grobeingabe):
     standard = {f_.name: f_.default for f_ in fields(Vorgaben)}
     for feld, (wert, text) in (ein.abweichungen or {}).items():
         if feld not in KENNUNG_VORGABE:
-            raise Meldung("M-20", f"Vorgabe '{feld}' ist im Vorhaben nicht aenderbar (H-20, H-21: fest)")
+            klasse = ("fester Hauswert oder Lesart des Hauses" if feld in FESTE_HAUSWERTE else "fester Katalogwert")
+            kennung = FESTE_HAUSWERTE.get(feld) or FESTE_KATALOGWERTE.get(feld, "")
+            raise Meldung("M-20", f"{kennung} Vorgabe '{feld}' ist im Vorhaben nicht aenderbar ({klasse})")
         haus = getattr(vg, feld)
         if wert == haus:
             continue
@@ -372,14 +363,18 @@ def vorgaben_im_vorhaben(vg: Vorgaben, ein: Grobeingabe):
         liste.append(dict(kennung=kennung, vorgabe=feld, haus=haus, vorhaben=wert, begruendung=text or "",
                           art="Lesart" if kennung.startswith("MA-") else "Vorgabe", quelle="vg", feld=feld))
         neu[feld] = wert
-    for feld, kennung in KENNUNG_VORGABE.items():     # Lesarten, die schon das Haus umgeschaltet hat
-        if kennung.startswith("MA-") and feld not in neu and getattr(vg, feld) != standard[feld]:
+    for feld, kennung in FESTE_HAUSWERTE.items():     # Lesarten, die das Haus umgeschaltet hat
+        if kennung.startswith("MA-") and getattr(vg, feld) != standard[feld]:
             liste.append(dict(kennung=kennung, vorgabe=feld, haus=standard[feld], vorhaben=getattr(vg, feld),
                               begruendung="Lesart des Hauses", art="Lesart", quelle="haus", feld=feld))
+    for feld, (kennung, wert) in HAUSWERTE_STEUER.items():    # H-38 und MA-036 stehen in den Steuerparametern
+        if _hole(ein, feld) != wert:
+            liste.append(dict(kennung=kennung, vorgabe=feld, haus=wert, vorhaben=_hole(ein, feld),
+                              begruendung="Lesart des Hauses" if kennung.startswith("MA-") else "Hauswert",
+                              art="Lesart" if kennung.startswith("MA-") else "Hauswert", quelle="haus", feld=feld))
     vor = dict(ein.voreinstellungen or {})
     for feld, (kennung, wert) in FESTE_VOREINSTELLUNG.items():
-        if not (feld.startswith("uebernommen.") and not ein.uebernommen):
-            vor.setdefault(feld, (wert, kennung))
+        vor.setdefault(feld, (wert, kennung))
     for feld, (wert, herkunft) in vor.items():
         ist = _hole(ein, feld)
         if feld in FESTE_VOREINSTELLUNG:
@@ -401,6 +396,8 @@ def _ohne(ein, vg, a):
         rest = {k: v for k, v in ein.abweichungen.items() if k != a["feld"]}
         return replace(ein, abweichungen=rest or None), vg
     if a["quelle"] == "haus":
+        if a["feld"].startswith("steuer."):
+            return _setze(ein, a["feld"], a["haus"]), vg
         return ein, replace(vg, **{a["feld"]: a["haus"]})
     return _setze(ein, a["feld"], a["haus"]), vg
 
@@ -507,9 +504,6 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
                        ("kappung_gesetzlich", "Kappungsgrenze ohne Gebietsverordnung")):
         kg("KAT-08", name, feld)
     kg("KAT-09", "Anteil des Vermieters an den CO2-Kosten", "co2_vermieteranteil")
-    if ein.heizung_5a:
-        kg("KAT-09", "Anteil bei haelftiger Teilung", "co2_5a_anteil")
-        kg("KAT-09", "erstes Jahr der haelftigen Teilung", "co2_5a_ab_jahr")
     kg("KAT-13", "Kuendigungsrecht: Sperrfrist", "kuendigung_sperre")
     kg("KAT-13", "Kuendigungsrecht: Kuendigungsfrist", "kuendigung_frist")
     if vg.bewirtschaftung_mindest is None:
@@ -533,9 +527,7 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
     if ein.tilgungssatz is not None:
         b("E-64", "Tilgungssatz des Bankdarlehens", ein.tilgungssatz, vg.mindesttilgung)
     b("E-62", "Erbbauzins", ein.erbbauzins, NULL)
-    b("E-63", "Steigerung des Erbbauzinses", ein.erbbauzins_steigerung, vg_grenze("steigerung_min"), vg_grenze("steigerung_max"))
     b("E-34", "CO2-Ausstoss", ein.co2_ausstoss, NULL)
-    b("E-67", "weitere Kosten des Vermieters", ein.weitere_vermieterkosten, NULL)
     if ein.verfuegbares_ek is not None:
         b("E-60", "verfuegbares Eigenkapital", ein.verfuegbares_ek, NULL)
     if st.erweiterte_kuerzung and st.status not in MIT_KENNZEICHEN:
@@ -572,7 +564,6 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
         if ein.foerderung is not None:
             f = ein.foerderung
             b("E-30", "Bodenrichtwert", ein.bodenrichtwert, NULL, None, True)
-            b("E-68", "Aufschub der Tilgung des Foerderdarlehens", ein.foerder_aufschub_monate, 0, f.aufschub_max_monate)
             if ein.zuschuss_verteilung:
                 if ein.steuer.status not in UEBERSCHUSS:
                     raise Meldung("M-20", "E-70 Verteilung des Zuschusses beantragt: nur bei Privatperson, Verein und Stiftung; "
@@ -605,7 +596,9 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
         if ein.leere_flaeche > 0 or vg.fluktuation > 0:
             b("E-16", "Neuvermietungsmiete", ein.markt_miete, NULL, None, True)
             b("E-19", "ortsuebliche Vergleichsmiete", ein.vergleichsmiete, NULL, None, True)
-        if ein.bodenanteil is None:
+        if ein.steuer.status not in UEBERSCHUSS:
+            b("H-39", "Bodenanteil", vg.bodenanteil, NULL, EINS)
+        elif ein.bodenanteil is None:
             if not (ein.bodenrichtwert > 0 and ein.grundstuecksflaeche > 0):
                 raise Meldung("M-20", "E-12 Bodenanteil: Angabe fehlt (oder Bodenrichtwert E-30 und Grundstuecksflaeche E-21)")
         else:
@@ -614,12 +607,9 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
         b("E-50", "Investitionsstau", ein.stau_betrag, NULL)
         if ein.stau_betrag > 0:
             b("E-51", "Jahr der Ausfuehrung", ein.stau_jahr, 0)
-            if ein.stau_art not in ("erhaltung", "modernisierung"):
-                raise Meldung("M-20", "E-52 Kennzeichen der Massnahme: 'erhaltung' oder 'modernisierung'")
             for feld, name in (("ahk_quote", "Schwelle"), ("ahk_jahre", "Zeitraum"), ("ust_satz", "Umsatzsteuersatz")):
                 kg("KAT-12", "anschaffungsnahe Herstellungskosten: " + name, feld)
-        b("E-53", "Anpassungsdauer", ein.anpassungsdauer if ein.anpassungsdauer is not None else vg.anpassungsdauer,
-          0, vg_grenze("anpassung_max"))
+        b("H-23", "Anpassungsdauer", vg.anpassungsdauer, 0, vg_grenze("anpassung_max"))
         b("E-56", "gebundener Flaechenanteil", ein.gebunden_anteil, NULL, EINS)
         if ein.gebunden_anteil > 0:
             b("E-57", "Bindungsende", ein.bindung_jahre, 1)
@@ -641,10 +631,6 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
             if ue.get("anschluss_zins") is not None:
                 b("E-59", "uebernommenes Darlehen, Anschlusszins", d(ue["anschluss_zins"]), NULL, vg_grenze("zins_max"))
             b("E-59", "uebernommenes Darlehen, laufender Beitrag", d(ue.get("beitrag_satz", 0)), NULL, vg_grenze("zins_max"))
-            if ue.get("rang", "vor") not in ("vor", "nach"):
-                raise Meldung("M-20", "E-59 uebernommenes Darlehen, Rang: 'vor' oder 'nach' der Bank")
-    if ein.wertansatz_bank is not None:
-        b("E-61", "Wertansatz der Bank", ein.wertansatz_bank, NULL, None, True)
     # ---- Vorgaben des Hauses (R-3.4): jede Vorgabe hat einen zulaessigen Bereich
     b("H-01", "Zielrendite", zielrendite(ein, vg), -EINS, None, True)
     b("H-02", "Beleihungsquote", vg.beleihungsquote, NULL, EINS)
@@ -654,12 +640,10 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
     s = vg.stress
     for name, wert in (("Anschlusszins", s.anschlusszins_pp), ("Zins bis zur Zusage", s.zusage_pp), ("Leerstand", s.leerstand_pp),
                        ("Verkaufsfaktor", s.verkaufsfaktor_rel), ("Mietsteigerung", s.mietsteigerung_pp),
-                       ("Instandhaltung", s.instandhaltung_rel), ("Investitionsstau", s.stau_rel),
+                       ("Investitionsstau", s.stau_rel),
                        ("Baukosten", s.baukosten_rel), ("Bauzeit", s.bauzeit_monate)):
         b("H-06", "Stresshoehe " + name, wert, 0)
     b("H-06", "Stresshoehe Verkaufsfaktor", s.verkaufsfaktor_rel, NULL, EINS)
-    if vg.anschluss_regel not in ANSCHLUSSREGELN:
-        raise Meldung("M-20", f"H-07 Regel fuer die Rate nach der Zinsbindung: '{vg.anschluss_regel}' ist nicht zulaessig")
     b("H-08", "kurzfristiger Habenzins", vg.h_kurz, NULL)
     if vg.a_lang is not None:
         b("H-09", "langfristiger Anlagezins", vg.a_lang, NULL)
@@ -687,10 +671,8 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
     b("H-21", "interner Zinsfuss, Untergrenze", vg.izf_unten, -EINS, None, True)
     b("H-21", "interner Zinsfuss, Obergrenze", vg.izf_oben, vg.izf_unten, None, True)
     b("H-21", "interner Zinsfuss, Rasterzahl", vg.izf_raster, 1)
-    for name, wert in (("Bankdarlehen", vg.kalk_zins), ("KfW-Darlehen", vg.kalk_zins_kfw), ("Foerderdarlehen", vg.kalk_zins_foerder),
-                       ("uebernommenes Darlehen", vg.kalk_zins_uebernommen)):
-        if wert is not None:
-            b("H-25", "kalkulatorischer Zins, " + name, wert, NULL, vg_grenze("zins_max"))
+    if vg.kalk_zins is not None:
+        b("H-25", "kalkulatorischer Zins", vg.kalk_zins, NULL, vg_grenze("zins_max"))
     b("H-26", "Fluktuation", vg.fluktuation, NULL, EINS)
     b("H-28", "Anlaufleerstand", vg.anlaufleerstand, 0)
     if vg.anlaufleerstand_neubau is not None:
@@ -711,9 +693,18 @@ def pruefe_eingaben(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, p):
         b("H-32", "Bemessungszeitraum", vg.bemessungszeitraum, 1, vg_grenze("bindung_max"))
     if vg.bewirtschaftung_mindest is not None:
         b("H-33", "Mindestansatz der Bewirtschaftung", vg.bewirtschaftung_mindest, NULL, EINS)
-    b("H-36", "Betriebskosten leerstehender Flaechen", vg.leerstandskosten_je_qm, NULL)
-    if vg.ma031_zuschuss not in (None, "sofort", "verteilt", "minderung"):
+    if vg.ma031_zuschuss not in (None, "sofort", "verteilt"):
         raise Meldung("M-20", "MA-031: Lesart des Zuschusses unbekannt")
+
+
+def _bodenanteil(ein, vg, preis):
+    """E-12 gilt nur, wo der Verkauf nach der Frist steuerfrei bleiben kann (Privatperson, Verein, Stiftung); sonst
+    gleichen sich Abschreibung und Verkaufsgewinn aus, und der Kern rechnet mit dem festen Hauswert H-39."""
+    if ein.steuer.status not in UEBERSCHUSS:
+        return vg.bodenanteil
+    if ein.bodenanteil is not None:
+        return ein.bodenanteil
+    return min(EINS, ein.bodenrichtwert * ein.grundstuecksflaeche / D(preis))
 
 
 def zielrendite(ein, vg):
@@ -764,23 +755,17 @@ def _mietrecht(ein, vg, kat, raster):
     Gemeinde, je Vorhaben ueberschreibbar (E-05). Nach dem Geltungsende einer Gebietsverordnung gilt sie
     voreingestellt fort (MA-039); in der anderen Lesart gelten ab dem folgenden Kalenderjahr die Kappungsgrenze
     ohne Verordnung und keine Mietpreisbremse. Ein Neubau unterliegt der Mietpreisbremse nicht (BGB-556F)."""
-    gebiet_k = (kat.kappung != kat.kappung_gesetzlich) if ein.im_kappungsgebiet is None else ein.im_kappungsgebiet
+    gebiet_k = ((kat.kappung != kat.kappung_gesetzlich) if (ein.im_kappungsgebiet is None or ein.art == "neubau")
+                else ein.im_kappungsgebiet)             # E-05 nur im Ankauf; im Neubau gilt der Katalogwert
     gebiet_b = kat.mietpreisbremse if ein.im_bremsgebiet is None else ein.im_bremsgebiet
     if ein.art == "neubau":
         gebiet_b = False
     abgesenkt = kat.kappung if gebiet_k else kat.kappung_gesetzlich
 
-    def kalenderjahr(m):
-        return raster.startjahr + (max(m, 1) - 1) // MONATE
-
-    def kappung(m):
-        if not vg.ma039_fortgeltung and kat.kappung_ende_jahr is not None and kalenderjahr(m) > kat.kappung_ende_jahr:
-            return kat.kappung_gesetzlich
+    def kappung(m):                                      # MA-039: die Gebietsverordnungen gelten fort
         return abgesenkt
 
     def bremse(m):
-        if not vg.ma039_fortgeltung and kat.bremse_ende_jahr is not None and kalenderjahr(m) > kat.bremse_ende_jahr:
-            return False
         return gebiet_b
 
     mr = ertrag.Mietrecht(kat.wartefrist, kat.kappung_monate, kappung, bremse, kat.bremse_aufschlag)
@@ -805,22 +790,22 @@ def _ertragsreihen(ein, vg, kat, raster, rd, stress, bauende):
     r.erste = (bauende + anlauf + 1) if neubau else 1    # erster Vermietungsmonat
     r.bezug = bauende + 1
     r.mietrecht = mr
-    dauer = ein.anpassungsdauer if ein.anpassungsdauer is not None else (vg.anpassungsdauer or 0)
+    dauer = vg.anpassungsdauer or 0                      # H-23
     if neubau:
         # R-6.7: nach dem Ende einer Bindung gilt die Anpassungsdauer der Vorgabe H-23
         pools, vm, vm_n = ertrag.mieten_neubau(M, ein, mr, r.erste, r.bezug, steig, vg.anpassungsdauer or 0, rd, ein.foerderung)
         sonst_jahr = ein.stellplaetze * ein.stellplatz_miete * MONATE
     else:
         pools, vm, vm_n = ertrag.mieten_ankauf(M, ein, mr, vg.fluktuation, anlauf, steig, dauer, rd,
-                                               vg.ma037_vorsicht, vg.ma038_rueckfuehrung)
+                                               rueckfuehrung=vg.ma038_rueckfuehrung)
         sonst_jahr = ein.sonstige_ertraege
     soll_roh, nachh_roh, flaeche = ertrag.monatswerte(pools, vm_n, M)
     idx_m = ertrag.indexreihe(jahre, steig, rd)
     idx_k = ertrag.indexreihe(jahre, vg.kostensteigerung, rd)
     idx_co2 = ertrag.indexreihe(jahre, vg.co2_steigerung, rd)
-    idx_erb = ertrag.indexreihe(jahre, ein.erbbauzins_steigerung, rd)
+    idx_erb = idx_k                                      # R-6.11: der Erbbauzins steigt mit der Kostensteigerung H-13
     r.indexreihen = {"Mieten": (idx_m, steig), "Kosten": (idx_k, vg.kostensteigerung),
-                     "CO2-Preis": (idx_co2, vg.co2_steigerung), "Erbbauzins": (idx_erb, ein.erbbauzins_steigerung)}
+                     "CO2-Preis": (idx_co2, vg.co2_steigerung), "Erbbauzins": (idx_erb, vg.kostensteigerung)}
     r.pools, r.vm, r.flaeche, r.leer, r.ausfall = pools, vm, flaeche, leer, ausfall
     r.miete_je_qm = [None] + [soll_roh[m] / ein.wohnflaeche for m in range(1, M + 1)]
 
@@ -838,30 +823,18 @@ def _ertragsreihen(ein, vg, kat, raster, rd, stress, bauende):
     r.nachhaltig = lambda u: rd.geld(sum(nachh_roh[m] + sonstige(m) for m in monate(u)))
     r.einzahlung = lambda u: rd.geld(r.soll(u) * (EINS - ausfall))
     alter0 = None if neubau else raster.startjahr - ein.baujahr
-    inst_rel = EINS + st.instandhaltung_rel
 
-    def leere_flaeche(m):                                # R-6.17: ausdruecklich gefuehrter Leerstand im Monat m
-        if neubau:
-            return ein.wohnflaeche if r.bezug <= m < r.erste else NULL
-        return ein.leere_flaeche if m <= anlauf else NULL
-
-    def vermieteranteil(j):                              # R-6.9 (CO2KOSTAUFG-5, CO2KOSTAUFG-5A)
-        if ein.heizung_5a and raster.kalenderjahr(j) >= kat.co2_5a_ab_jahr:
-            return kat.co2_5a_anteil
-        return kat.co2_vermieteranteil
-
-    def bewirtschaftung(u):                              # R-6.8, R-6.9, R-6.17 ohne Erbbauzins
+    def bewirtschaftung(u):                              # R-6.8, R-6.9 ohne Erbbauzins
         if u < 1 or u * MONATE // p < r.bezug:
             return NULL
         j = raster.planjahr(u)
         # Gebaeudealter im Planjahr: Ankauf Kalenderjahr - Baujahr, Neubau Jahre seit dem Bezug
         alter = (alter0 + j - 1) if not neubau else (u * MONATE // p - r.bezug) // MONATE
-        inst = ertrag.instandhaltung_je_qm(vg.instandhaltung_staffel, alter) * inst_rel
+        inst = ertrag.instandhaltung_je_qm(vg.instandhaltung_staffel, alter)
         jahr = (vg.verwaltung_je_einheit * ein.einheiten + inst * ein.wohnflaeche
-                + vg.betriebskosten_je_qm * ein.wohnflaeche + ein.weitere_vermieterkosten) * idx_k[j]
-        co2 = ein.co2_ausstoss * ein.wohnflaeche * vermieteranteil(j) * vg.co2_preis * idx_co2[j] / 1000
-        leerkosten = sum(leere_flaeche(m) for m in monate(u)) * vg.leerstandskosten_je_qm * idx_k[j] / MONATE
-        return rd.geld(jahr / p) + rd.geld(co2 / p) + rd.geld(leerkosten)
+                + vg.betriebskosten_je_qm * ein.wohnflaeche) * idx_k[j]
+        co2 = ein.co2_ausstoss * ein.wohnflaeche * kat.co2_vermieteranteil * vg.co2_preis * idx_co2[j] / 1000
+        return rd.geld(jahr / p) + rd.geld(co2 / p)
 
     r.erbbau = lambda u: rd.geld(ein.erbbauzins * idx_erb[raster.planjahr(u)] / p) if u >= 1 else NULL
     r.erbbau_monat = lambda m: rd.geld(ein.erbbauzins * idx_erb[min(ertrag.jahr_von(m), jahre)] / MONATE)
@@ -896,15 +869,14 @@ def _tranche_uebernommen(ein, vg, kat, p, stress_pp=NULL, zins_bank=None):
     anschluss = ue.get("anschluss_zins")
     if anschluss is None:                                # Voreinstellung: Anschlusszins des Bankdarlehens (R-5.8)
         anschluss = (ein.zins if zins_bank is None else zins_bank) + vg.anschluss_aufschlag
-    foerder = bool(ue.get("foerderdarlehen", False))     # E-59: Voreinstellung "nein"
     ende = None if bindung is None else bindung * p
     # BGB-489: der Beginn der Zinsbindung ist nicht bekannt; vorsichtig zaehlt die Frist ab dem Stichtag
     kuendbar = _perioden_auf(kat.kuendigung_sperre + kat.kuendigung_frist, p)
     return Tranche("Uebernommenes Darlehen", ue["restschuld"], "annuitaet_prozent", ue["zins"],
                    tilgungssatz=ue["tilgungssatz"], rate_betrag=ue.get("nennbetrag", ue["restschuld"]),
-                   bindung=ende, anschluss_zins=d(anschluss) + stress_pp, anschluss_regel=vg.anschluss_regel,
+                   bindung=ende, anschluss_zins=d(anschluss) + stress_pp, anschluss_regel=ANSCHLUSSREGEL,
                    anschluss_tilgung=max(d(ue["tilgungssatz"]), vg.mindesttilgung),
-                   beitrag_satz=ue.get("beitrag_satz", 0), bank=False, foerder=foerder,
+                   beitrag_satz=ue.get("beitrag_satz", 0), bank=False, foerder=False,
                    vfe_bis=None if ende is None else min(ende, kuendbar))
 
 
@@ -938,7 +910,7 @@ def _foerder_termine(ein, vg, vorlauf, bauzeit, bauende):
               (vorlauf + _auf_ganze(vg.bauabschnitt_rohbau * bauzeit) + 1, a[0] + a[1]),
               (vorlauf + _auf_ganze(vg.bauabschnitt_innenputz * bauzeit) + 1, a[0] + a[1] + a[2]),
               (m4, EINS)]
-    beginn = min(m4 + 1, vorlauf + 1 + f.tilgungsfrist_monate) + ein.foerder_aufschub_monate
+    beginn = min(m4 + 1, vorlauf + 1 + f.tilgungsfrist_monate)
     laufzeit = bauende + f.tilgung_jahre * MONATE - beginn + 1
     return stufen, beginn, laufzeit
 
@@ -999,14 +971,10 @@ def bemesse(ein, vg, kat, raster, rd, preis=None, miete_ansatz=None, zusage_pp=N
     anschluss_bank = zins_bank + vg.anschluss_aufschlag
     zeitraum = (vg.bemessungszeitraum if vg.bemessungszeitraum is not None else ein.zinsbindung_jahre) * p
 
-    def kalk(zins, anschluss, vorgabe):                  # kalkulatorischer Zins einer Tranche (H-25 je Tranchenart)
-        if vg.ma026_vertragszins:
-            return zins
+    def kalk(zins, anschluss, vorgabe):                  # kalkulatorischer Zins einer Tranche (H-25)
         return max(zins, vorgabe if vorgabe is not None else anschluss)
 
     def zins_b(zins, bindung, anschluss, vorgabe):       # Bemessungszins einer uebrigen Tranche
-        if vg.ma026_vertragszins:
-            return zins
         if vg.ma026_fremde_kalkulatorisch:               # Lesart 4 von MA-026: wie das Bankdarlehen
             return kalk(zins, anschluss, vorgabe)
         return bemessungszins(zins, bindung, kalk(zins, anschluss, vorgabe), zeitraum, rd)
@@ -1020,10 +988,9 @@ def bemesse(ein, vg, kat, raster, rd, preis=None, miete_ansatz=None, zusage_pp=N
         ue = ein.uebernommen
         schuld = d(ue["restschuld"])
         uebrige += schuld
-        if ue.get("rang", "vor") == "vor":               # Rang aus dem Grundbuch (Eingabe), Voreinstellung "vor"
-            im_raum += schuld
+        im_raum += schuld                                # vorsichtig: im Rang vor der Bank
         tr = _tranche_uebernommen(ein, vg, kat, p, zins_bank=zins_bank)
-        ib[tr.name] = zins_b(tr.zins, tr.bindung, tr.anschluss_zins, vg.kalk_zins_uebernommen)
+        ib[tr.name] = zins_b(tr.zins, tr.bindung, tr.anschluss_zins, vg.kalk_zins)
         # der Tilgungssatz bezieht sich wie in der Rate auf den urspruenglichen Nennbetrag (R-5.11)
         kd[tr.name] = bemessungskapitaldienst("annuitaet_prozent", tr.rate_betrag, ib[tr.name], vg.mindesttilgung, p, rd,
                                               tilgungssatz=tr.tilgungssatz, beitrag_basis=schuld, beitrag_satz=tr.beitrag_satz)
@@ -1032,7 +999,7 @@ def bemesse(ein, vg, kat, raster, rd, preis=None, miete_ansatz=None, zusage_pp=N
         kfw_kond = _kfw_konditionen(ein, kat)
         uebrige += kfw
         im_raum += kfw                                   # Festlegung: das durchgeleitete KfW-Darlehen belegt den Raum
-        ib["KfW-Darlehen"] = zins_b(kfw_kond["zins"], kfw_kond["bindung"] * p // MONATE, anschluss_bank, vg.kalk_zins_kfw)
+        ib["KfW-Darlehen"] = zins_b(kfw_kond["zins"], kfw_kond["bindung"] * p // MONATE, anschluss_bank, vg.kalk_zins)
         kd["KfW-Darlehen"] = bemessungskapitaldienst("annuitaet_laufzeit", kfw, ib["KfW-Darlehen"], vg.mindesttilgung, p, rd,
                                                      laufzeit=kfw_kond["tilgungsperioden"] * p // MONATE)
     zk_bau = zk = NULL
@@ -1047,20 +1014,19 @@ def bemesse(ein, vg, kat, raster, rd, preis=None, miete_ansatz=None, zusage_pp=N
         if zuschuss_geb > zk_bau or zuschuss - zuschuss_geb > zk - zk_bau:
             raise Meldung("M-43", "Der Zuschuss uebersteigt die Kosten, auf die er entfaellt")
         uebrige += fd
-        # Der Nachrang steht in der Richtlinie (Nr. 5.3.6, 11.5); Annahme ist nur, ob die Bank ihre Quote trotzdem
-        # ueber alle Darlehen rechnet (MA-026, voreingestellt: ja)
-        if not vg.ma026_foerder_nachrang:
-            im_raum += fd
+        # Der Nachrang steht in der Richtlinie (Nr. 5.3.6, 11.5); der Kern rechnet die Quote der Bank trotzdem ueber
+        # alle Darlehen (MA-026). Im gefoerderten Neubau bindet die Schuldendienstdeckung, nicht die Quote
+        im_raum += fd
         zinslos_bis = f.zinslos_jahre * p + bauende * p // MONATE
         danach = f.zins_danach if f.zins_danach is not None else NULL
-        ib["Foerderdarlehen"] = zins_b(NULL, zinslos_bis, danach, vg.kalk_zins_foerder)
+        ib["Foerderdarlehen"] = zins_b(NULL, zinslos_bis, danach, vg.kalk_zins)
         _, _, laufzeit_fd = _foerder_termine(ein, vg, vorlauf, bauzeit, bauende)
         kd["Foerderdarlehen"] = bemessungskapitaldienst("raten", fd, ib["Foerderdarlehen"], vg.mindesttilgung, p, rd,
                                                         laufzeit=laufzeit_fd, beitrag_basis=fd, beitrag_satz=f.vkb_satz)
     kd_ue = sum(kd.values(), NULL)
     mittelbedarf = P + enk + baukosten + stau0 + e_d + e_z
     gesamtkosten = P + enk + baukosten                   # R-1.1: Gesamtkosten ohne Finanzierungskosten
-    wert = ein.wertansatz_bank if ein.wertansatz_bank is not None else (gesamtkosten if neubau else P)
+    wert = gesamtkosten if neubau else P                 # Wertansatz der Bank: Kaufpreis, im Neubau die Gesamtkosten
     bank = bankdarlehen(wert, vg.beleihungsquote, ertrag_n, vg.mindestdeckung, zins_kalk, tilg_kalk, mittelbedarf,
                         uebrige_darlehen=uebrige, uebrige_im_beleihungsraum=im_raum, kd_uebrige=kd_ue,
                         zuschuesse=zuschuss, ek_min=ek_min, p=p, rd=rd)
@@ -1075,9 +1041,7 @@ def bemesse(ein, vg, kat, raster, rd, preis=None, miete_ansatz=None, zusage_pp=N
     if neubau:
         boden, anteil = P + enk, None
     else:
-        anteil = ein.bodenanteil
-        if anteil is None:                               # Voreinstellung E-12 aus Bodenrichtwert und Flaeche
-            anteil = min(EINS, ein.bodenrichtwert * ein.grundstuecksflaeche / P)
+        anteil = _bodenanteil(ein, vg, P)
         boden = rd.geld((P + enk) * anteil)
     return Bemessung(P, enk, bk0, baukosten, mittelbedarf, wert, uebrige, im_raum, zuschuss, zuschuss_geb, fd, kfw,
                      ek_min, e_d, e_z, reinertrag_vj, ertrag_n, kd_ue, kd, zins_kalk, tilg_kalk, bank, boden, anteil,
@@ -1118,9 +1082,6 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
         # bemessen; die Bank rechnet mit dem hoeheren Zins. Alle uebrigen Groessen der Bemessung bleiben Basis.
         bm = bemesse(ein, vg, kat, raster, rd, preis, zusage_pp=st.zusage_pp)
     L = bm.bank["darlehen"]
-    wert_ueber = ein.wertansatz_bank is not None and ein.wertansatz_bank > (bm.preis + bm.enk + bm.baukosten if neubau else bm.preis)
-    if wert_ueber and not ein.wertansatz_begruendung:
-        raise Meldung("M-20", "E-61 Wertansatz der Bank ueber dem Kaufpreis oder den Gesamtkosten ohne Begruendung")
     vorlauf = _vorlauf(ein, vg)
     bauzeit = (ein.bauzeit_monate + st.bauzeit_monate) if neubau else 0
     bauende = vorlauf + bauzeit                           # letzter Monat der Bauzeit; Ende der Investitionsphase
@@ -1148,8 +1109,8 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
         if ein.stau_jahr <= raster.n:
             stau_zahlung = rd.geld(stau_betrag * bpi[ein.stau_jahr + 1])
             stau_jahr = ein.stau_jahr
-            aktivieren = ein.stau_art != "erhaltung"
-            if (not aktivieren and not neubau and stau_jahr <= kat.ahk_jahre
+            aktivieren = False                           # Erhaltungsaufwand, ausser anschaffungsnah (R-6.16)
+            if (not neubau and stau_jahr <= kat.ahk_jahre
                     and stau_zahlung / (EINS + kat.ust_satz) > kat.ahk_quote * gebaeude_ak):
                 aktivieren = True
                 melde("M-36", "Erhaltungsmassnahmen der ersten Jahre uebersteigen die Schwelle der anschaffungsnahen "
@@ -1257,7 +1218,7 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
             "Bankdarlehen", L, "annuitaet_prozent", zins_bank, tilgungssatz=tilg, auszahlung=plan_aus,
             tilgungsbeginn=bauende + 1, bindung=bindung,
             anschluss_zins=zins_bank + st.anschlusszins_pp if "tranche_ohne_aufschlag" in FEHLER else anschluss_bank,
-            anschluss_regel=vg.anschluss_regel, anschluss_tilgung=max(tilg, vg.mindesttilgung), bank=True,
+            anschluss_regel=ANSCHLUSSREGEL, anschluss_tilgung=max(tilg, vg.mindesttilgung), bank=True,
             vfe_bis=min(bindung, _perioden_auf(max(plan_aus) * MONATE // p + kuendbar, p)),
             bereit_satz=vg.bereit_satz if neubau else NULL, bereit_frei=vg.bereit_frei))
     if bm.kfw > 0:
@@ -1266,11 +1227,11 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
         k, kk = kat.kfw, bm.kfw_kond
         plan_aus = aus_kfw or {0: bm.kfw}
         erster, letzter = min(plan_aus), max(plan_aus)
-        start = erster if vg.ma040_ab_abruf else bauende
+        start = erster                                   # MA-040: die Anlaufjahre zaehlen ab dem ersten Abruf
         tranchen.append(Tranche(
             "KfW-Darlehen", bm.kfw, "annuitaet_laufzeit", kk["zins"], laufzeit=kk["tilgungsperioden"],
             auszahlung=plan_aus, tilgungsbeginn=start + kk["tilgungsfrei"] * MONATE + 1, bindung=kk["bindung"],
-            anschluss_zins=anschluss_bank, anschluss_regel=vg.anschluss_regel, bank=False,
+            anschluss_zins=anschluss_bank, anschluss_regel=ANSCHLUSSREGEL, bank=False,
             vfe_bis=min(kk["bindung"], letzter + kuendbar), bereit_satz=k.bereit_satz, bereit_frei=k.bereit_frei))
         if letzter > k.abruffrist:
             reicht = letzter <= k.abruffrist + k.abruf_verlaengerung
@@ -1288,8 +1249,8 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     basis = baukosten if neubau else gebaeude_ak
     # R-7.19: nach der Vermoegenssphaere. Ueberschusseinkuenfte (Privatperson, Verein, Stiftung): Einnahme im Jahr
     # des Zuflusses ist Regel (ESTR-21-5, BFH-IX-R-60-02); Verteilung ueber die Bindung nur auf Antrag (E-70, ESTG-11).
-    # Betriebsvermoegen (MA-031): voreingestellt ueber die Bindung verteilt (ESTR-6-5, ESTH-5-6); "sofort" und
-    # "minderung" umschaltbar
+    # Betriebsvermoegen (MA-031): voreingestellt ueber die Bindung verteilt (ESTR-6-5, ESTH-5-6); "sofort" ist
+    # Lesart des Hauses
     if steuer.status in UEBERSCHUSS:
         lesart = "verteilt" if ein.zuschuss_verteilung else "sofort"
     else:
@@ -1298,16 +1259,6 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     steuer_zus_entgelt = None                            # None: Entgelt auf den Zuschuss im Jahr der Zahlung
     rueck_im_gewinn = rueck_laufend = False
     e_z = bm.einbehalt_zuschuss
-    if bm.zuschuss > 0 and lesart == "minderung":
-        # Investitionszuschuss: mindert Gebaeude und Boden anteilig; das Entgelt kuerzt den Zuschuss
-        z_boden = bm.zuschuss - bm.zuschuss_gebaeude
-        if bm.zuschuss_gebaeude > basis or z_boden > boden:
-            raise Meldung("M-43", "Der Zuschuss uebersteigt die Kosten, auf die er entfaellt")
-        e_geb = rd.geld(e_z * bm.zuschuss_gebaeude / bm.zuschuss)
-        basis -= bm.zuschuss_gebaeude - e_geb
-        boden -= z_boden - (e_z - e_geb)
-        steuer_zus_entgelt = null()
-        rueck_im_gewinn = True
     rest_basis = basis
     rest_stau = stau_aktiv                               # aktivierte Massnahme: Abschreibung ab dem Jahr nach der Zahlung;
     for j in range(1, raster.n + 1):                     # eine Massnahme zum Stichtag (k = 0) also ab dem Planjahr 1
@@ -1356,7 +1307,7 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     # bei jedem Steuerstatus (ESTG-5, ESTG-11); andere Lesart MA-032: im Jahr der Zahlung
     einbehalten = bm.einbehalt_darlehen
     steuer_einbehalt = None
-    if einbehalten > 0 and not vg.ma032_entgelte_sofort:
+    if einbehalten > 0:
         start = min(aus_fd) if aus_fd else 0
         steuer_einbehalt = verteile(einbehalten, einbehalten, start, ein.foerderung.zinslos_jahre * p + bauende)
     pe = PlanEingabe(raster=raster, miete=miete, kosten=kost, erhaltung=erh, investition=inv, afa=afa,
@@ -1407,7 +1358,7 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
     # P-21 Tranchenprobe: jede Tranche traegt die Konditionen des Auftrags (Zins, Anschlusszins, Anschlussregel)
     soll = {"Bankdarlehen": dict(zins=ein.zins + st.zusage_pp,
                                  anschluss_zins=ein.zins + st.zusage_pp + vg.anschluss_aufschlag + st.anschlusszins_pp,
-                                 anschluss_regel=vg.anschluss_regel, bindung=ein.zinsbindung_jahre * p)}
+                                 anschluss_regel=ANSCHLUSSREGEL, bindung=ein.zinsbindung_jahre * p)}
     if bm.kfw > 0:
         soll["KfW-Darlehen"] = dict(zins=bm.kfw_kond["zins"], anschluss_zins=soll["Bankdarlehen"]["anschluss_zins"],
                                     bindung=bm.kfw_kond["bindung"])
@@ -1416,7 +1367,7 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
         anschluss = (d(ue["anschluss_zins"]) if ue.get("anschluss_zins") is not None
                      else ein.zins + st.zusage_pp + vg.anschluss_aufschlag)
         soll["Uebernommenes Darlehen"] = dict(zins=d(ue["zins"]), anschluss_zins=anschluss + st.anschlusszins_pp,
-                                              anschluss_regel=vg.anschluss_regel)
+                                              anschluss_regel=ANSCHLUSSREGEL)
     if ein.foerderung:
         soll["Foerderdarlehen"] = dict(zins=NULL, anschluss_zins=ein.foerderung.zins_danach)
     bef += pruefe_tranchen(tranchen, soll)
@@ -1451,9 +1402,8 @@ def rechne_grob(ein: Grobeingabe, vg: Vorgaben, kat: Katalog, preis=None, stress
         melde("M-25", "Zinsbindung reicht ueber die Haltedauer; Vorfaelligkeit angesetzt", betrag=plan.zeilen[N]["vfe"])
     for kennung, text in renditemeldungen(plan.einlagen_netto, plan.entnahmen_netto, kz):
         melde(kennung, text)
-    if abweichungen or wert_ueber:
-        melde("M-35", "Abweichungen vom Hausstandard oder Wertansatz der Bank ueber dem Kaufpreis",
-              liste=abweichungen, wertansatz_begruendung=ein.wertansatz_begruendung if wert_ueber else "")
+    if abweichungen:
+        melde("M-35", "Abweichungen vom Hausstandard", liste=abweichungen)
     if steuer.status != BEFREIT:                         # R-7.1: bei der befreiten Koerperschaft genuegt M-44
         melde("M-37", "Die Steuer ist vereinfacht gerechnet: ohne Mindestbesteuerung, Zinsschranke, Sonderabschreibung und "
                       "Reinvestitionsruecklage"
@@ -1501,8 +1451,6 @@ def _modellannahmen(erg, tranchen, einbehalten):
         ma.add("MA-033")
     if any(tr.bindung is not None and tr.bindung < N and not tr.foerder for tr in tranchen):
         ma.add("MA-034")
-    if ein.co2_aus_naeherung:
-        ma.add("MA-035")
     if ein.steuer.status in PERSONENGESELLSCHAFT and plan.zeilen[N]["g_v"] != 0:
         ma.add("MA-036")
     vermietet = ein.art == "ankauf" and ein.wohnflaeche > ein.leere_flaeche
@@ -1582,15 +1530,15 @@ def _blatt(erg, pe, rd):
     anschluss = [tr for tr in plan.e.tranchen if tr.art == "annuitaet_prozent" and tr.bindung is not None
                  and tr.tilgungsbeginn <= tr.bindung < N]
     if anschluss and decken:
-        je_regel = {vg.anschluss_regel: (erg.deckung_min, erg.deckung_min_jahr)}
+        je_regel = {ANSCHLUSSREGEL: (erg.deckung_min, erg.deckung_min_jahr)}
         for regel in ANSCHLUSSREGELN:
             if regel not in je_regel:
                 d2 = _deckung_je_jahr(rechne_plan(replace(pe, tranchen=_kopie(pe.tranchen, anschluss_regel=regel))), erstes)
                 if d2:
                     je_regel[regel] = min(d2)
-        regel = min(je_regel, key=lambda x: (je_regel[x][0], x != vg.anschluss_regel, ANSCHLUSSREGELN.index(x)))
+        regel = min(je_regel, key=lambda x: (je_regel[x][0], x != ANSCHLUSSREGEL, ANSCHLUSSREGELN.index(x)))
         erg.deckung_min_anschluss = (je_regel[regel][0], je_regel[regel][1], regel)
-    klein, klein_jahr, klein_regel = erg.deckung_min, erg.deckung_min_jahr, vg.anschluss_regel
+    klein, klein_jahr, klein_regel = erg.deckung_min, erg.deckung_min_jahr, ANSCHLUSSREGEL
     if erg.deckung_min_anschluss and erg.deckung_min_anschluss[0] < klein:
         klein, klein_jahr, klein_regel = erg.deckung_min_anschluss
     if klein is not None and klein < vg.mindestdeckung:
@@ -1601,8 +1549,6 @@ def _blatt(erg, pe, rd):
     # Darlehen zu Kaufpreis oder Gesamtkosten (R-10.15) und Restschuld zum Wert am Ende der Zinsbindung
     nenner = (bm.preis + bm.enk + bm.baukosten) if neubau else bm.preis
     erg.darlehen_zu_wert = (erg.darlehen + bm.uebrige) / nenner if nenner > 0 else None
-    erg.darlehen_zu_wertansatz = ((erg.darlehen + bm.uebrige) / ein.wertansatz_bank
-                                  if ein.wertansatz_bank is not None else None)
     erg.restschuld_zu_wert = None
     tb = ein.zinsbindung_jahre * p
     if erg.darlehen > 0 and tb < N:
@@ -1816,7 +1762,7 @@ def _schwellenpreise(ein, vg, kat, raster, rd, unten, oben):
     """R-11.5: Sprungstelle des Ziels aus der 15-%-Regel (R-6.16): der groesste Preis, bei dem die
     Erhaltungsmassnahme der ersten Jahre noch aktiviert wird, und der Preis einen Euro darueber. Beide werden
     Stuetzstellen der Preissuche. Die Schwelle waechst mit dem Preis; gesucht wird ganzzahlig."""
-    if ein.art != "ankauf" or not ein.stau_betrag or ein.stau_art != "erhaltung" or ein.stau_jahr > min(kat.ahk_jahre, raster.n):
+    if ein.art != "ankauf" or not ein.stau_betrag or ein.stau_jahr > min(kat.ahk_jahre, raster.n):
         return []
     netto = {}
     for stress in (False, True):
@@ -1826,7 +1772,7 @@ def _schwellenpreise(ein, vg, kat, raster, rd, unten, oben):
 
     def aktiviert(x, betrag):
         enk = rd.geld(D(x) * ein.enk_satz)
-        anteil = ein.bodenanteil if ein.bodenanteil is not None else min(EINS, ein.bodenrichtwert * ein.grundstuecksflaeche / D(x))
+        anteil = _bodenanteil(ein, vg, x)
         gebaeude = D(x) + enk - rd.geld((D(x) + enk) * anteil)
         return betrag > kat.ahk_quote * gebaeude
 
@@ -2034,7 +1980,6 @@ BLATTGROESSEN = (
     ("Eigenkapital der Investitionsphase", lambda e: e.eigenkapital_investitionsphase),
     ("laufender Nachschussbedarf", lambda e: e.nachschuss_laufend), ("Fehlbetrag beim Verkauf", lambda e: e.fehlbetrag_verkauf),
     # ergaenzt nach Pruefrunde 2: die uebrigen Groessen des Blatts (R-11.12)
-    ("Darlehen zu Wertansatz", lambda e: e.darlehen_zu_wertansatz),
     ("bindende Grenze des Bankdarlehens", lambda e: e.bemessung.bank["bindend"]),
     ("Deckung im ersten Jahr bei voller Tilgung", lambda e: e.dscr_vj_voll),
     ("Planjahr der kleinsten Deckung", lambda e: e.deckung_min_jahr),
@@ -2052,8 +1997,8 @@ PREISGROESSEN = ("preis", "bindend", "meldung", "faktor", "faktor_ist", "preis_j
 
 # R-3.1: Herkunft der Steuerwerte (Katalog, Eingabe des Anwenders, Lesart einer Modellannahme)
 HERKUNFT_STEUER = {
-    "status": "E", "verlust": "E", "erweiterte_kuerzung": "E", "est_satz": "E", "anteil_natuerliche": "E",
-    "ma030_verkaufsgewinn_pflichtig": "MA", "kuerzung_bleibt_verkaufsjahr": "E", "aufgabegewinn": "MA", "haltedauer": "E",
+    "status": "E", "verlust": "H", "erweiterte_kuerzung": "E", "est_satz": "E", "anteil_natuerliche": "E",
+    "kuerzung_bleibt_verkaufsjahr": "E", "aufgabegewinn": "MA", "haltedauer": "E",
     "satz": "E", "verkaufsgewinn_pflichtig": "E",
 }
 
