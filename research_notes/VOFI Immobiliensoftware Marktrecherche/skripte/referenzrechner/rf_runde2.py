@@ -479,7 +479,7 @@ def rf19_runde2():
         tab[name] = [q(x.deckung_min), q(x.deckung_min_anschluss[0]), x.deckung_min_anschluss[2], [m for m in kennungen(x) if m in ("M-38", "M-39")]]
     pruefe_fest(k, "Bankfall (Zins 3 %, Mietsteigerung 0,5 %): kleinste Deckung, nach der unguenstigsten Anschlussregel, Regel, Meldung", tab)
     pruefe(k, "... Vertragskonditionen, Basis: 'Restlaufzeit bleibt' ergibt 1,1975 und M-38 (Gegenrechnung Bank)", D(tab["Vertragskonditionen, Basis"][1]), "1.1975", "0.00005")
-    pruefe(k, "... Vertragskonditionen, Stress: 0,8966 und M-39 (Gegenrechnung Bank)", D(tab["Vertragskonditionen, Stress"][1]), "0.8966", "0.00005")
+    pruefe(k, "... Vertragskonditionen, Stress: 0,9193 und M-39 (Gegenrechnung Bank 0,8966 mit dem Stress auf die Instandhaltung, der entfallen ist)", D(tab["Vertragskonditionen, Stress"][1]), "0.9193", "0.00005")
     # ---- R-11.8: Stressfall mit neu bemessenem Darlehen
     es = rechne_grob(A.ANKAUF, VG, KAT, stress=True)
     pruefe(k, "Stressfall: Mehrbedarf an Eigenkapital durch den Zinsanstieg bis zur Zusage (Gegenrechnung Bank, Finanzmathematiker)",

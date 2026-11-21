@@ -316,13 +316,13 @@ gewicht = "hoch"
 wirkung = "Wert der beschleunigten Abschreibung und der Anlaufverluste im Neubau; Endwert und Rendite nach Steuern."
 sichtbar = "kunde"
 umschaltbar = true
-klaerung = "Anwender je Vorhaben; im Zweifel Steuerberater des Investors"
+klaerung = "Haus (Katalog des Hauses); im Zweifel Steuerberater des Investors"
 wiedervorlage = "mit der Fachspezifikation des Steuermoduls (Phase 1)"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
-verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus", "Fachspezifikation Rechenkern, R-7.5, R-7.6, Eingabe E-44"]
-bemerkung = "Aus Prüfrunde 3 (Fachexperte). Wird als Merkmal je Vorhaben geführt. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Steuerberater): Annahme über andere Gewinne ausdrücklich genannt; bei der Personengesellschaft keine sofortige Erstattung der Gewerbesteuer. Die Kurzform verrechnet Vorträge unbeschränkt; ein Vortrag über dem Sockelbetrag löst einen Hinweis aus (MA-010). Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18), Steuerberater: Grenze des § 15a EStG bei Kommanditisten ergänzt; gerechnet wird sie erst in der Steuer in Grundform. Beim Einzelunternehmen rechnet die sofortige Verrechnung die Gewerbesteuer ohne Begrenzung auf die Einkommensteuer des Vorhabens an."
+verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus", "Fachspezifikation Rechenkern, R-7.5, R-7.6, Hauswert H-38"]
+bemerkung = "Aus Prüfrunde 3 (Fachexperte). Wird als Merkmal je Vorhaben geführt. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Steuerberater): Annahme über andere Gewinne ausdrücklich genannt; bei der Personengesellschaft keine sofortige Erstattung der Gewerbesteuer. Die Kurzform verrechnet Vorträge unbeschränkt; ein Vortrag über dem Sockelbetrag löst einen Hinweis aus (MA-010). Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18), Steuerberater: Grenze des § 15a EStG bei Kommanditisten ergänzt; gerechnet wird sie erst in der Steuer in Grundform. Beim Einzelunternehmen rechnet die sofortige Verrechnung die Gewerbesteuer ohne Begrenzung auf die Einkommensteuer des Vorhabens an. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Verlustverrechnung ist keine Eingabe des Vorhabens mehr (E-44 entfallen), sondern fester Hauswert H-38 mit der Voreinstellung Vortrag; umschaltbar heißt hier: als Wert des Hauses im Katalog. Gemessene Wirkung von „sofort“: höchstens rund 0,1 Prozentpunkte Rendite (Privatperson im Ankauf), bei der Körperschaft unter 0,04."
 
 [[annahme]]
 id = "MA-017"
@@ -516,13 +516,13 @@ gewicht = "hoch"
 wirkung = "Höhe des Bankdarlehens und damit höchster tragbarer Preis, nötiges Eigenkapital und Rendite in der Grobkalkulation. Ankauf des Referenzfalls: Bankdarlehen 1.226.609,99 Euro; höchster tragbarer Preis 2.317.235 Euro gegen 2.359.366 Euro mit Vertragskonditionen (Lesart 2). Gebundener Bestand mit übernommenem Darlehen: Bankdarlehen 843.802,85 Euro mit dem Bemessungszins gegen 672.374,28 Euro nach Lesart 4. Neubau mit KfW-Darlehen von 3 Mio. Euro: tragbarer Grundstückspreis 1.197.094 Euro gegen 920.435 Euro nach Lesart 4 und 1.283.299 Euro nach Lesart 2. Im geförderten Neubau bleibt nach jeder Lesart kein Bankdarlehen, weil die Deckung bindet."
 sichtbar = "kunde"
 umschaltbar = true
-klaerung = "Hausbank (13 Fragen in der Fachspezifikation des Rechenkerns, Kapitel 16); die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins je Tranchenart, Bemessungszeitraum, Mindestansatz der Bewirtschaftung) sind Vorgaben des Hauses"
+klaerung = "Hausbank (zehn Fragen in der Fachspezifikation des Rechenkerns, Kapitel 16); die Schwellen selbst (Beleihungsquote, Mindestdeckung, Mindesttilgung, kalkulatorischer Zins je Tranchenart, Bemessungszeitraum, Mindestansatz der Bewirtschaftung) sind Vorgaben des Hauses"
 wiedervorlage = "mit den Vorgaben des Hauses vor dem Einsatz von Teilschritt 1a"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation", "Fachspezifikation Rechenkern, R-5.12, R-5.19, R-10.24, R-11.8, R-11.14, R-11.15"]
-bemerkung = "Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Prüfrunde 5: Bezug der Beleihungsquote auf die Summe aller Darlehen festgelegt, Gewicht von mittel auf hoch gesetzt, Wertansatz als Ausnahme von der Vorsichtsregel gekennzeichnet. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Bank und Praktiker): neu geschnitten. Die Deckung über alle Darlehen ist jetzt Festlegung; der frühere Schalter verband Beleihungsraum und Deckung. Neu als vorsichtige Voreinstellung: kalkulatorischer Kapitaldienst und nachhaltiger Reinertrag; der Entwurf rechnete mit Vertragszins und dem Ertrag des Vorhabens. Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Bank, Praktiker, Fachexperte): Der kalkulatorische Kapitaldienst für alle Tranchen ist durch den Bemessungszins je Tranche ersetzt; die frühere Voreinstellung bleibt als Lesart 4 umschaltbar. Die nachhaltige Miete im Neubau ist eigene Eingabe, ihre Voreinstellung Teil dieser Annahme. Am selben Tag aus der Richtlinie gelesen: Das Förderdarlehen ist nachrangig, und die vorrangigen Bankmittel sind mit mindestens 1 % zuzüglich ersparter Zinsen zu tilgen (Katalogwert, Regel)."
+bemerkung = "Aus Prüfrunde 4 (Finanzmathematiker, Fachexperte, Praktiker). Prüfrunde 5: Bezug der Beleihungsquote auf die Summe aller Darlehen festgelegt, Gewicht von mittel auf hoch gesetzt, Wertansatz als Ausnahme von der Vorsichtsregel gekennzeichnet. Prüfrunde 1 zur Fachspezifikation des Rechenkerns (2026-11-18, Bank und Praktiker): neu geschnitten. Die Deckung über alle Darlehen ist jetzt Festlegung; der frühere Schalter verband Beleihungsraum und Deckung. Neu als vorsichtige Voreinstellung: kalkulatorischer Kapitaldienst und nachhaltiger Reinertrag; der Entwurf rechnete mit Vertragszins und dem Ertrag des Vorhabens. Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Bank, Praktiker, Fachexperte): Der kalkulatorische Kapitaldienst für alle Tranchen ist durch den Bemessungszins je Tranche ersetzt; die frühere Voreinstellung bleibt als Lesart 4 umschaltbar. Die nachhaltige Miete im Neubau ist eigene Eingabe, ihre Voreinstellung Teil dieser Annahme. Am selben Tag aus der Richtlinie gelesen: Das Förderdarlehen ist nachrangig, und die vorrangigen Bankmittel sind mit mindestens 1 % zuzüglich ersparter Zinsen zu tilgen (Katalogwert, Regel). Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Umschaltbar sind nur noch die Lesarten 3 und 4, je als Lesart des Hauses und nicht je Vorhaben. Lesart 1 entfällt als Schalter, weil im geförderten Neubau die Schuldendienstdeckung bindet und nicht die Quote (keine Wirkung im Referenzfall). Lesart 2 entfällt als Schalter, weil die Vorgabe H-25 mit einem festen Satz in Höhe des Vertragszinses dasselbe leistet (auf den Cent). Der Wertansatz der Bank ist keine Eingabe mehr (E-61 entfallen); einen niedrigeren Beleihungswert bildet die Quote H-02 ab."
 
 [[annahme]]
 id = "MA-027"
@@ -589,20 +589,20 @@ id = "MA-030"
 titel = "Erweiterte Kürzung und Verkaufsgewinn im Verkaufsjahr"
 annahme = "Bleibt die erweiterte Grundstückskürzung im Verkaufsjahr erhalten – es verbleibt weiterer Grundbesitz im Unternehmen, oder Besitz, Nutzen und Lasten gehen zum 31.12., 23:59 Uhr, über (Eingabe E-69, voreingestellt nein) –, wird nach der Verwaltungsauffassung auch der Gewinn aus dem Verkauf des Objekts gekürzt. Ohne diese Eingabe gilt als Regel und nicht als Annahme: Geht der letzte Grundbesitz im Lauf des Jahres über, entfällt die erweiterte Kürzung für das ganze Verkaufsjahr, für den laufenden Ertrag wie für den Verkaufsgewinn; es bleibt die einfache Kürzung um die Grundsteuer, die die Steuer in Kurzform nicht rechnet. Nicht gerechnete Ausnahmen in jedem Fall: gewerblicher Grundstückshandel, Grundbesitz, der in den drei Jahren zuvor unter dem Teilwert eingebracht wurde, und Gewinne aus Mitunternehmeranteilen."
 grund = "Dass der Verkaufsgewinn mitgekürzt wird, steht in einem Hinweis der Verwaltung, der nur in einer Verlagswiedergabe gelesen ist; das Urteil, auf das er sich stützt, ist nicht gelesen. Ein Gericht kann der Verwaltungsauffassung die Gefolgschaft versagen, und die Verwaltung kann den Hinweis ändern."
-alternative = "Strengere Lesart, nur mit der Eingabe E-69 umschaltbar: Der laufende Ertrag des Verkaufsjahres wird gekürzt, der Verkaufsgewinn ist gewerbesteuerpflichtig."
+alternative = "Strengere Lesart (kein Schalter; wer sie tragen will, lässt E-69 auf nein): Der laufende Ertrag des Verkaufsjahres wird gekürzt, der Verkaufsgewinn ist gewerbesteuerpflichtig."
 grundlage = "H 9.2 (1) und (3) GewStH in R 9.2 GewStR; BFH vom 11.08.2004, I R 89/03; BFH vom 17.10.2024, III R 1/23; § 9 Nr. 1 Satz 2, Satz 5 Nr. 2 und Satz 6 GewStG. Die Voreinstellung ohne E-69 ist die ungünstigste Rechnung und Regel; mit E-69 folgt die Voreinstellung der Verwaltungsauffassung und ist keine Ausnahme von der Vorsichtsregel im Sinn einer ungeprüften Setzung, wohl aber die günstigere der beiden Lesarten. Keine Annahme, sondern am Wortlaut belegt ist, dass Zinserträge nicht gekürzt werden."
 quellen = ["GEWSTG-9", "GEWSTG-7", "GEWSTR-9-2", "BFH-III-R-1-23", "BFH-I-R-89-03"]
 gewicht = "hoch"
 wirkung = "Steuer im Verkaufsjahr, Endwert, Rendite und höchster tragbarer Preis bei Körperschaften und gewerblich geprägten Personengesellschaften mit Kennzeichen; die Weiche E-69 trägt den ganzen Verkaufsgewinn. Ankauf des Referenzfalls: Rendite 4,670 % ohne E-69 (Regel), 5,161 % mit E-69 (Voreinstellung dort) und 4,697 % mit E-69 nach der strengeren Lesart; die Gewerbesteuer auf den Verkaufsgewinn beträgt 139.930,00 Euro, der Wegfall der Kürzung des laufenden Ertrags im Verkaufsjahr kostet 7.952,00 Euro Endwert."
 sichtbar = "kunde"
-umschaltbar = true
+umschaltbar = false
 klaerung = "Steuerberater des Auftraggebers (Risiken aus gewerblichem Grundstückshandel und aus der Einbringung unter dem Teilwert; Gestaltung des Übergangs)"
 wiedervorlage = "mit der Antwort des Steuerberaters; spätestens vor dem Einsatz von Teilschritt 1a"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus", "Spezifikation Kapitel 2, Grobkalkulation", "Fachspezifikation Rechenkern, R-7.8, R-7.14, R-9.5, Eingabe E-69, Meldung M-51"]
-bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 1). Der Entwurf hatte mit dem Kennzeichen den ganzen Gewerbeertrag freigestellt; das war eine nicht gekennzeichnete Ausnahme von der Vorsichtsregel. Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Steuerberater, Hinweis 7) und Quellnotiz 13: Nach dem am 2026-11-18 am Original gelesenen Urteil BFH III R 1/23 ist der Wegfall der Kürzung im Verkaufsjahr Regel und jetzt Voreinstellung; die bisherige Voreinstellung (nur der Verkaufsgewinn gewerbesteuerpflichtig) gilt mit der neuen Eingabe „Übergang zum Jahresende“. Sollwerte der Referenzfälle mit Kennzeichen geändert (Differenzbericht aenderungen-runde2.md). Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): drei Fälle statt drei Lesarten. Die Eingabe E-69 heißt jetzt „Erweiterte Kürzung bleibt im Verkaufsjahr erhalten“; mit ihr ist der Verkaufsgewinn nach H 9.2 (3) GewStH voreingestellt mitgekürzt, die frühere Rechnung (Verkaufsgewinn gewerbesteuerpflichtig) ist die strengere Lesart. Mit Kennzeichen und ohne E-69 gibt der Kern den Hinweis M-51 zurück."
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 1). Der Entwurf hatte mit dem Kennzeichen den ganzen Gewerbeertrag freigestellt; das war eine nicht gekennzeichnete Ausnahme von der Vorsichtsregel. Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Steuerberater, Hinweis 7) und Quellnotiz 13: Nach dem am 2026-11-18 am Original gelesenen Urteil BFH III R 1/23 ist der Wegfall der Kürzung im Verkaufsjahr Regel und jetzt Voreinstellung; die bisherige Voreinstellung (nur der Verkaufsgewinn gewerbesteuerpflichtig) gilt mit der neuen Eingabe „Übergang zum Jahresende“. Sollwerte der Referenzfälle mit Kennzeichen geändert (Differenzbericht aenderungen-runde2.md). Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): drei Fälle statt drei Lesarten. Die Eingabe E-69 heißt jetzt „Erweiterte Kürzung bleibt im Verkaufsjahr erhalten“; mit ihr ist der Verkaufsgewinn nach H 9.2 (3) GewStH voreingestellt mitgekürzt, die frühere Rechnung (Verkaufsgewinn gewerbesteuerpflichtig) ist die strengere Lesart. Mit Kennzeichen und ohne E-69 gibt der Kern den Hinweis M-51 zurück. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter der strengeren Lesart ist entfallen, weil die Eingabe E-69 dasselbe leistet: Die strengere Lesart weicht von „E-69 nein“ nur um die Kürzung des laufenden Ertrags im Verkaufsjahr ab (0,027 Prozentpunkte Rendite). Es gibt zwei Fälle: ohne E-69 entfällt die Kürzung im Verkaufsjahr, mit E-69 bleibt sie einschließlich des Verkaufsgewinns."
 
 [[annahme]]
 id = "MA-031"
@@ -622,27 +622,27 @@ status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-7.3, R-7.4, R-7.19, R-11.14, Eingabe E-70"]
-bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 6; Grenzfälle, Befund 9). Der Entwurf minderte die Abschreibungsgrundlage um den ganzen Zuschuss, auch um den Anteil, der auf das Grundstück entfällt. Übersteigt der Zuschuss die Kosten, auf die er entfällt, rechnet der Kern nicht (Meldung). Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Steuerberater 1, 2 und 4; Praktiker 4): Annahme neu gefasst. Voreinstellung nicht mehr die sofortige Einnahme, sondern je Kennzeichen „verteilt“ oder „Minderung“; die Rückzahlung steht im laufenden Ergebnis; das Entgelt auf den Zuschuss folgt der Lesart des Zuschusses. Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): nach der Vermögenssphäre getrennt. Die Kopplung der Voreinstellung an das Kürzungskennzeichen entfällt. Für die Privatperson ist Befund 1 des Steuerberaters aus Prüfrunde 2 widerlegt (Einnahme im Zuflussjahr ist Regel), für das Betriebsvermögen bestätigt. Der Rechenkern rechnet Verein und Stiftung wie die Privatperson, weil er sie mit Überschusseinkünften führt (MA-041). Das Entgelt auf den Zuschuss folgt weiter der Lesart des Zuschusses; einen Tilgungsnachlass kennt die Grobförderung in Teil 1 nicht."
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 6; Grenzfälle, Befund 9). Der Entwurf minderte die Abschreibungsgrundlage um den ganzen Zuschuss, auch um den Anteil, der auf das Grundstück entfällt. Übersteigt der Zuschuss die Kosten, auf die er entfällt, rechnet der Kern nicht (Meldung). Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Steuerberater 1, 2 und 4; Praktiker 4): Annahme neu gefasst. Voreinstellung nicht mehr die sofortige Einnahme, sondern je Kennzeichen „verteilt“ oder „Minderung“; die Rückzahlung steht im laufenden Ergebnis; das Entgelt auf den Zuschuss folgt der Lesart des Zuschusses. Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): nach der Vermögenssphäre getrennt. Die Kopplung der Voreinstellung an das Kürzungskennzeichen entfällt. Für die Privatperson ist Befund 1 des Steuerberaters aus Prüfrunde 2 widerlegt (Einnahme im Zuflussjahr ist Regel), für das Betriebsvermögen bestätigt. Der Rechenkern rechnet Verein und Stiftung wie die Privatperson, weil er sie mit Überschusseinkünften führt (MA-041). Das Entgelt auf den Zuschuss folgt weiter der Lesart des Zuschusses; einen Tilgungsnachlass kennt die Grobförderung in Teil 1 nicht. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Umschaltbar ist nur noch „sofortige Einnahme“, als Lesart des Hauses. Die Minderung der Herstellungskosten rechnet der Kern nicht mehr: Sie führt im Referenzfall zur selben Rendite wie „verteilt“ (3,958 % gegen 3,956 %)."
 
 [[annahme]]
 id = "MA-032"
 titel = "Bearbeitungsentgelt der NBank in der Steuer"
 annahme = "Das Bearbeitungsentgelt der NBank auf das Darlehen ist laufzeitbezogen und wird über die zinslose Zeit verteilt – im Betriebsvermögen durch Rechnungsabgrenzung, bei Privatperson, Verein und Stiftung als Vorauszahlung für mehr als fünf Jahre. Das Entgelt auf den Zuschuss folgt der Behandlung des Zuschusses (MA-031)."
 grund = "Ob das Entgelt der NBank eine Vergütung für die Überlassung des Kapitals über die Laufzeit ist oder ein einmaliges Entgelt für die Bearbeitung, sagt weder die Richtlinie noch der Entgeltkatalog."
-alternative = "Das Entgelt ist im Jahr der Zahlung abziehbar. Umschaltbar, für jeden Steuerstatus."
+alternative = "Das Entgelt ist im Jahr der Zahlung abziehbar."
 grundlage = "Rechnungsabgrenzung nach § 5 Abs. 5 EStG und Verteilung von Vorauszahlungen nach § 11 Abs. 2 Satz 3 EStG, am Original gelesen. Angesetzt ist der ungünstigere Fall. Nicht mehr Teil der Annahme, sondern Regel: Die Vorfälligkeitsentschädigung der Privatperson beim Verkauf ist Veräußerungskosten (BMF vom 27.07.2015, Nr. 2). Für ein Disagio der Privatperson gilt die Prüfregel der Verwaltung (bis 5 % bei mindestens fünf Jahren Zinsbindung sofort abziehbar, der übersteigende Teil verteilt; BMF vom 20.10.2003, Rz. 15); Teil 1 rechnet kein Disagio der Privatperson, die Regel ist für Teil 2 vorgemerkt."
 quellen = ["ESTG-5", "ESTG-11", "ESTG-23", "BMF-SCHULDZINSEN-2015", "BMF-BAUHERREN-2003"]
 gewicht = "gering"
 wirkung = "Zeitpunkt des Abzugs und damit Steuer der ersten Jahre und des Verkaufsjahres. Geförderter Neubau des Referenzfalls: Endwert 9.477.900,38 Euro mit Verteilung des Entgelts gegen 9.478.243,94 Euro bei Abzug im Jahr der Zahlung, bei gleicher Rendite von 3,956 %."
 sichtbar = "anwender"
-umschaltbar = true
+umschaltbar = false
 klaerung = "Steuerberater des Auftraggebers"
 wiedervorlage = "mit der Antwort des Steuerberaters; mit der Steuer in Grundform (Teil 2 der Fachspezifikation)"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-7.2, R-7.15"]
-bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 5). Der Entwurf zog alle Finanzierungskosten im Jahr der Zahlung ab. Umschaltbar ist die Lesart zu den Entgelten; die beiden Punkte zur Privatperson sind fest gebaut und werden mit der Antwort des Steuerberaters überprüft. Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Steuerberater 5): Laufzeitbezogene Entgelte werden auch bei der Privatperson verteilt (§ 11 Abs. 2 Satz 3 EStG); der Rundungsrest der Verteilung fällt ins Verkaufsjahr; das Entgelt auf den Zuschuss ist kein Entgelt für Schulden und folgt dem Zuschuss. Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): auf das Bearbeitungsentgelt der NBank beschränkt. Die Vorfälligkeitsentschädigung der Privatperson ist Verwaltungsauffassung und in der Fachspezifikation als Regel geführt (R-7.11, R-7.15); das Disagio der Privatperson ist Prüfregel für Teil 2. Gewicht von mittel auf gering, weil im Referenzfall nur 343,56 Euro Endwert daran hängen."
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 5). Der Entwurf zog alle Finanzierungskosten im Jahr der Zahlung ab. Umschaltbar ist die Lesart zu den Entgelten; die beiden Punkte zur Privatperson sind fest gebaut und werden mit der Antwort des Steuerberaters überprüft. Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Steuerberater 5): Laufzeitbezogene Entgelte werden auch bei der Privatperson verteilt (§ 11 Abs. 2 Satz 3 EStG); der Rundungsrest der Verteilung fällt ins Verkaufsjahr; das Entgelt auf den Zuschuss ist kein Entgelt für Schulden und folgt dem Zuschuss. Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): auf das Bearbeitungsentgelt der NBank beschränkt. Die Vorfälligkeitsentschädigung der Privatperson ist Verwaltungsauffassung und in der Fachspezifikation als Regel geführt (R-7.11, R-7.15); das Disagio der Privatperson ist Prüfregel für Teil 2. Gewicht von mittel auf gering, weil im Referenzfall nur 343,56 Euro Endwert daran hängen. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter „im Jahr der Zahlung“ ist entfallen (keine Wirkung auf die Rendite des Referenzfalls); der Kern verteilt die Entgelte. Die Frage an den Steuerberater ist gestrichen."
 
 [[annahme]]
 id = "MA-033"
@@ -669,20 +669,20 @@ id = "MA-034"
 titel = "Prolongation mit unverändertem Tilgungssatz"
 annahme = "Nach dem Ende der Zinsbindung setzt die Bank die Rate neu aus der Restschuld, dem Anschlusszins und dem anfänglichen Tilgungssatz, mindestens der Mindesttilgung des Hauses. Für die KfW-Tranche ist die Anschlusskondition festgelegt: Prolongationsangebot ohne Zinsverbilligung aus Bundesmitteln. Anschlusszins also Marktzins nach H-05, nicht Programmzins."
 grund = "Wie prolongiert wird, vereinbaren Bank und Darlehensnehmer erst am Ende der Zinsbindung."
-alternative = "Die bisherige Rate bleibt; oder die Restlaufzeit bleibt, und die Rate wird als Annuität über die verbleibende Laufzeit neu gerechnet. Beide sind als Vorgabe des Hauses wählbar."
+alternative = "Die bisherige Rate bleibt; oder die Restlaufzeit bleibt, und die Rate wird als Annuität über die verbleibende Laufzeit neu gerechnet. Keine von beiden ist wählbar."
 grundlage = "Übliche Praxis nach Einschätzung der Prüfer; für die KfW-Tranche das KfW-Merkblatt 297/298, Abschnitt Zinssatz. Die drei Regeln lassen sich nicht für jede Größe in dieselbe Reihenfolge bringen: Der unveränderte Tilgungssatz ergibt die niedrigste Rate und damit die höchste Deckung nach der Zinsbindung, aber die niedrigste Endwertdifferenz und den niedrigsten tragbaren Preis. Nach der Rangfolge der Vorsicht (tragbarer Preis vor Endwertdifferenz vor Rendite) ist er die vorsichtige Lesart. Damit er keine Unterdeckung verbirgt, weist das Blatt die kleinste Deckung zusätzlich nach der Regel mit der niedrigsten Deckung aus und meldet danach."
 quellen = ["KFW-297-298-MERKBLATT"]
 gewicht = "mittel"
 wirkung = "Rate, Restschuld und Deckung nach der Zinsbindung; Endwert nur gering. Ankauf des Referenzfalls: tragbarer Preis 2.317.235 Euro (Tilgungssatz bleibt) gegen 2.317.477 Euro (Rate bleibt) und 2.317.632 Euro (Restlaufzeit bleibt); Endwertdifferenz 753.701,96 Euro gegen 754.107,08 und 754.381,58 Euro; Deckung im Jahr 11 2,0853 gegen 1,8358 und 1,7002. Bei 3 % Zins und 0,5 % Mietsteigerung mit Vertragskonditionen: kleinste Deckung 1,3054 laut Finanzplan, 1,1975 nach der ungünstigsten Regel; im Stressfall 1,0181 gegen 0,8966."
 sichtbar = "anwender"
-umschaltbar = true
+umschaltbar = false
 klaerung = "Hausbank"
 wiedervorlage = "nach dem Gespräch mit der Hausbank"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
-verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-5.8, R-5.9, R-10.14, Vorgabe H-07"]
-bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Bank, Frage 9; Controller, Befund 10). Die Regel „Restlaufzeit bleibt“ rundet die Restlaufzeit auf ganze Perioden ab und fällt ohne Tilgung auf den unveränderten Tilgungssatz zurück (Meldung). Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Bank, Befund 3): Gewicht von gering auf mittel; Ausweis der kleinsten Deckung nach der ungünstigsten Anschlussregel. Quellnotiz 13: Anschlusskondition der KfW-Tranche aus dem Merkblatt belegt; der Rechenkern rechnete den Anschluss der KfW-Tranche schon mit dem Marktzins."
+verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-5.8, R-5.9, R-10.14"]
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Bank, Frage 9; Controller, Befund 10). Die Regel „Restlaufzeit bleibt“ rundet die Restlaufzeit auf ganze Perioden ab und fällt ohne Tilgung auf den unveränderten Tilgungssatz zurück (Meldung). Prüfrunde 2 zur Fachspezifikation des Rechenkerns (2026-11-18) (Bank, Befund 3): Gewicht von gering auf mittel; Ausweis der kleinsten Deckung nach der ungünstigsten Anschlussregel. Quellnotiz 13: Anschlusskondition der KfW-Tranche aus dem Merkblatt belegt; der Rechenkern rechnete den Anschluss der KfW-Tranche schon mit dem Marktzins. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Vorgabe H-07 ist entfallen; der Kern rechnet fest mit „Tilgungssatz bleibt“. Die beiden anderen Regeln heben den tragbaren Preis des Referenzfalls um 242 und 397 Euro (unter 0,1 %); das Blatt weist weiter die kleinste Deckung nach der ungünstigsten Regel aus."
 
 [[annahme]]
 id = "MA-035"
@@ -698,11 +698,11 @@ sichtbar = "anwender"
 umschaltbar = false
 klaerung = "Anwender je Vorhaben (Heizkostenabrechnung des Verkäufers)"
 wiedervorlage = "mit der Vollkalkulation Ankauf Bestand (1b-1)"
-status = "offen"
+status = "entfallen"
 gesetzt_am = "2026-11-18"
-erledigt_am = ""
+erledigt_am = "2026-11-21"
 verwendet_in = ["Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-6.9, Eingabe E-34, Katalogwert KAT-09"]
-bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 6). Nicht umschaltbar: Die andere Lesart ist die Eingabe des Ausstoßes. Der CO2-Preis ist keine Modellannahme, sondern eine Vorgabe des Hauses."
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 6). Nicht umschaltbar: Die andere Lesart ist die Eingabe des Ausstoßes. Der CO2-Preis ist keine Modellannahme, sondern eine Vorgabe des Hauses. Entfallen durch die Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Kern nähert den Ausstoß nicht mehr aus Effizienzklasse und Energieträger (E-54, E-55 entfallen). Ohne Angabe des Ausstoßes (E-34, freiwillig) rechnet er keinen Vermieteranteil an den CO2-Kosten; im Referenzfall sind das 0,4 % des tragbaren Preises (benannte Vereinfachung V-11 der Fachspezifikation)."
 
 [[annahme]]
 id = "MA-036"
@@ -722,34 +722,34 @@ status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 1, Steuerstatus", "Fachspezifikation Rechenkern, R-7.18"]
-bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 8). Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): Grundlage ergänzt; die Voreinstellung „laufender Gewinn“ bleibt; die andere Lesart heißt jetzt „Verkauf im Rahmen der Aufgabe des Betriebs“."
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Steuerberater, Befund 8). Nachtrag 2 zur Überarbeitung nach Prüfrunde 2 (2026-11-18, Quellnotiz 15): Grundlage ergänzt; die Voreinstellung „laufender Gewinn“ bleibt; die andere Lesart heißt jetzt „Verkauf im Rahmen der Aufgabe des Betriebs“. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): umschaltbar nur noch als Lesart des Hauses, nicht je Vorhaben; gemessene Wirkung +0,163 Prozentpunkte Rendite, nur mit Kapitalgesellschaften als Gesellschaftern."
 
 [[annahme]]
 id = "MA-037"
 titel = "Kappungsspielraum bei unbekannter Mietenhistorie"
 annahme = "Ist die Mietenhistorie nicht eingegeben, gilt die letzte Mieterhöhung als zum Stichtag erfolgt und die Kappungsgrenze als ausgeschöpft: Die erste Erhöhung fällt frühestens nach der Wartefrist und frühestens einen Monat nach Ablauf des Kappungszeitraums ab dem Stichtag."
 grund = "Wartefrist und Kappungsgrenze hängen davon ab, wann und um wie viel die Miete in den Jahren vor dem Ankauf erhöht wurde. Das Exposé nennt das in der Regel nicht; die Mieterliste liegt erst zur Vollkalkulation vor."
-alternative = "Die letzte Erhöhung liegt mindestens den Kappungszeitraum zurück: Die Wartefrist ist abgelaufen, und die Kappungsgrenze steht voll zur Verfügung. Umschaltbar; mit eingegebener Mietenhistorie entfällt die Annahme."
+alternative = "Die letzte Erhöhung liegt mindestens den Kappungszeitraum zurück: Die Wartefrist ist abgelaufen, und die Kappungsgrenze steht voll zur Verfügung. Mit eingegebener Mietenhistorie entfällt die Annahme."
 grundlage = "Wartefrist und Kappungsgrenze nach § 558 BGB, gelesen vom Fachexperten in der Prüfrunde; Werte je Gemeinde aus dem Katalog. Angesetzt ist der ungünstigere Fall."
 quellen = ["BGB-558"]
 gewicht = "mittel"
 wirkung = "Mietpfad der ersten Jahre im Bestand, Reinertrag, Verkaufspreis und höchster tragbarer Preis. Ankauf des Referenzfalls: höchster tragbarer Preis 2.317.235 Euro gegen 2.322.775 Euro in der anderen Lesart; dort steigt die Miete schon im Monat 13 statt im Monat 37."
 sichtbar = "anwender"
-umschaltbar = true
+umschaltbar = false
 klaerung = "Anwender je Vorhaben (Mieterliste des Verkäufers)"
 wiedervorlage = "mit der Mieterliste der Vollkalkulation Ankauf Bestand (1b-1)"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation", "Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-6.3, Eingabe E-33"]
-bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 1; Praktiker, Befund 5). Der Entwurf führte die Miete linear zur Marktmiete und prüfte nur die Kappung gegen die Miete drei Jahre zuvor."
+bemerkung = "Aus Prüfrunde 1 zur Fachspezifikation des Rechenkerns (Fachexperte, Befund 1; Praktiker, Befund 5). Der Entwurf führte die Miete linear zur Marktmiete und prüfte nur die Kappung gegen die Miete drei Jahre zuvor. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter ist entfallen, weil die Eingabe E-33 dasselbe leistet: Wer die Mietenhistorie kennt oder begründet annimmt, gibt sie ein. Im Referenzfall +0,031 Prozentpunkte; bei einer Ist-Miete 24 % unter der Vergleichsmiete +7,4 % des tragbaren Preises."
 
 [[annahme]]
 id = "MA-038"
 titel = "Rückführung einer Miete über der Vergleichsmiete"
 annahme = "Liegt die Ist-Miete über der ortsüblichen Vergleichsmiete, wird sie ab dem zweiten Planjahr über die Anpassungsdauer linear auf die Vergleichsmiete zurückgeführt; danach folgt sie der Vergleichsmiete."
 grund = "Das Gesetz senkt keine vereinbarte Miete. Ob eine Miete über der Vergleichsmiete hält, hängt von Mieterwechseln, von der Durchsetzbarkeit und vom Markt ab."
-alternative = "Die Miete bleibt stehen, bis die Vergleichsmiete sie eingeholt hat. Umschaltbar."
+alternative = "Die Miete bleibt stehen, bis die Vergleichsmiete sie eingeholt hat. Umschaltbar als Lesart des Hauses."
 grundlage = "Einschätzung der Prüfer in Prüfrunde 2 zur Fachspezifikation (Fachexperte 4, Finanzmathematiker 3). Angesetzt ist die Lesart mit dem niedrigeren tragbaren Preis."
 quellen = ["BGB-558"]
 gewicht = "gering"
@@ -762,47 +762,47 @@ status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation", "Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-6.3"]
-bemerkung = "Aus Prüfrunde 2 zur Fachspezifikation des Rechenkerns (Sichtung, Punkt 14). In der Kapitaldienstrechnung der Bank zählt eine Miete über der Vergleichsmiete ohnehin nicht (MA-026)."
+bemerkung = "Aus Prüfrunde 2 zur Fachspezifikation des Rechenkerns (Sichtung, Punkt 14). In der Kapitaldienstrechnung der Bank zählt eine Miete über der Vergleichsmiete ohnehin nicht (MA-026). Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): umschaltbar nur noch als Lesart des Hauses; gemessene Wirkung +1,90 % des tragbaren Preises bei einer Ist-Miete von 11,00 Euro über der Vergleichsmiete von 9,20 Euro."
 
 [[annahme]]
 id = "MA-039"
 titel = "Fortgeltung der Gebietsverordnungen zu Kappungsgrenze und Mietpreisbremse"
 annahme = "Gilt am Stichtag eine Verordnung zur abgesenkten Kappungsgrenze oder zur Mietpreisbremse, gilt sie nach ihrem Ablauf mit einer Folgeverordnung fort; das Geltungsende ist Katalogwert."
 grund = "Die Verordnungen sind befristet; ob das Land sie verlängert, ist eine Entscheidung der Zukunft. Das Gesetz lässt Verordnungen zur Mietpreisbremse spätestens Ende 2029 enden und begrenzt Kappungsverordnungen auf höchstens fünf Jahre."
-alternative = "Die Verordnung endet mit ihrem Geltungsende; danach gilt die gesetzliche Kappungsgrenze, und die Mietpreisbremse entfällt. Umschaltbar."
+alternative = "Die Verordnung endet mit ihrem Geltungsende; danach gilt die gesetzliche Kappungsgrenze, und die Mietpreisbremse entfällt."
 grundlage = "§ 556d Abs. 2 und § 558 Abs. 3 BGB, gelesen in Prüfrunde 2 zur Fachspezifikation (Fachexperte 10). Angesetzt ist die Lesart mit dem niedrigeren tragbaren Preis. Vorsichtig ist sie nur, wo am Stichtag eine Verordnung gilt."
 quellen = ["BGB-556D", "BGB-558"]
 gewicht = "mittel"
 wirkung = "Mietpfad nach dem Geltungsende, Verkaufspreis und tragbarer Preis. Ankauf des Referenzfalls: tragbarer Preis 2.317.235 Euro gegen 2.319.295 Euro ohne Fortgeltung; Endwertdifferenz 753.701,96 Euro gegen 757.210,62 Euro. Bei längerer Haltedauer und größerem Abstand zur Vergleichsmiete wächst die Wirkung."
 sichtbar = "anwender"
-umschaltbar = true
+umschaltbar = false
 klaerung = "Land als Verordnungsgeber; Beobachtung über den Katalog"
 wiedervorlage = "mit jeder neuen Gebietsverordnung des Landes; spätestens 2029"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation", "Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-6.3, R-6.13, R-6.18"]
-bemerkung = "Aus Prüfrunde 2 zur Fachspezifikation des Rechenkerns (Sichtung, Punkt 17). Die Ausnahme der Mietpreisbremse für die Wohnung nach BGB-556F gilt dauerhaft; „liegt im Gebiet“ ist je Vorhaben überschreibbar. Das Geltungsende der niedersächsischen Verordnungen im Referenzkatalog ist eine Annahme und noch am Verordnungstext zu lesen."
+bemerkung = "Aus Prüfrunde 2 zur Fachspezifikation des Rechenkerns (Sichtung, Punkt 17). Die Ausnahme der Mietpreisbremse für die Wohnung nach BGB-556F gilt dauerhaft; „liegt im Gebiet“ ist je Vorhaben überschreibbar. Das Geltungsende der niedersächsischen Verordnungen im Referenzkatalog ist eine Annahme und noch am Verordnungstext zu lesen. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter ist entfallen, weil das Kennzeichen E-05 dasselbe leistet: „außerhalb“ ergibt im Referenzfall auf den Euro dasselbe wie das Auslaufen der Verordnung. Im Neubau ist E-05 keine Eingabe; dort gilt der Katalogwert."
 
 [[annahme]]
 id = "MA-040"
 titel = "Beginn der tilgungsfreien Jahre des KfW-Darlehens"
 annahme = "Die tilgungsfreien Anlaufjahre und die Laufzeit des KfW-Darlehens zählen ab dem ersten Abruf."
 grund = "Das Merkblatt nennt Laufzeitvarianten mit tilgungsfreien Anlaufjahren, sagt aber nicht, ob sie ab der Zusage, ab dem ersten Abruf oder ab der Bezugsfertigkeit zählen; die Konditionenübersicht der KfW ist nicht gelesen."
-alternative = "Die Anlaufjahre zählen ab der Bezugsfertigkeit; die Tilgung beginnt dann später. Umschaltbar. Zählten sie ab der Zusage, begänne die Tilgung noch früher."
+alternative = "Die Anlaufjahre zählen ab der Bezugsfertigkeit; die Tilgung beginnt dann später. Zählten sie ab der Zusage, begänne die Tilgung noch früher."
 grundlage = "KfW-Merkblatt 297/298, gelesen in Prüfrunde 2 zur Fachspezifikation (Fachexperte 1). Vorsichtig ist die Voreinstellung für die Deckung, weil die Tilgung früher beginnt. Nach der Rangfolge der Vorsicht ist sie es nicht: Der tragbare Grundstückspreis des Referenzfalls liegt mit ihr um 1.447 Euro höher. Die Voreinstellung ist deshalb als Ausnahme gekennzeichnet; sie folgt der Sichtung der Prüfrunde 2."
 quellen = ["KFW-297-298-MERKBLATT"]
 gewicht = "mittel"
 wirkung = "Tilgungsbeginn, Deckung der ersten Jahre und Bemessung des Bankdarlehens im Neubau mit KfW-Darlehen. Referenzfall: Tilgung ab Monat 20 gegen Monat 31; Deckung im ersten Jahr der Vollvermietung 1,3857 gegen 1,6583; tragbarer Grundstückspreis 1.197.094 Euro gegen 1.195.647 Euro."
 sichtbar = "anwender"
-umschaltbar = true
+umschaltbar = false
 klaerung = "Hausbank; KfW"
 wiedervorlage = "nach dem Gespräch mit der Hausbank; mit dem Lesen der Konditionenübersicht der KfW"
 status = "offen"
 gesetzt_am = "2026-11-18"
 erledigt_am = ""
 verwendet_in = ["Spezifikation Kapitel 2, Grobkalkulation", "Spezifikation Kapitel 4, Regeln auf ungeklärter Grundlage", "Fachspezifikation Rechenkern, R-5.10, R-5.19"]
-bemerkung = "Aus Prüfrunde 2 zur Fachspezifikation des Rechenkerns (Sichtung, Punkt 8). Der Zins des KfW-Darlehens ist Eingabe; der Katalogwert ist Platzhalter, solange die Konditionenübersicht nicht im Kataster gelesen ist."
+bemerkung = "Aus Prüfrunde 2 zur Fachspezifikation des Rechenkerns (Sichtung, Punkt 8). Der Zins des KfW-Darlehens ist Eingabe; der Katalogwert ist Platzhalter, solange die Konditionenübersicht nicht im Kataster gelesen ist. Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter ist entfallen (−0,002 Prozentpunkte Rendite); die Annahme bleibt, die Frage an die Hausbank ist gestrichen."
 
 [[annahme]]
 id = "MA-041"

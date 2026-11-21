@@ -440,3 +440,14 @@ Stand auf der Platte: Der Nachtrag 2 ist im Referenzrechner, in der Fachspezifik
 ## Nachvollzug
 
 `python3 wesentlichkeit.py --ausgabe DATEI.json` im Ordner des Referenzrechners; Laufzeit rund zwei Minuten, 278 Messungen. Das Skript ändert kein Modul und keinen Sollwert und ist kein Referenzfall; `python3 referenzfaelle.py` läuft unverändert. Jede Zeile der Tabellen oben nennt Kennung und Variation so, dass sie in der Ausgabe des Skripts zu finden ist.
+
+## Umsetzung
+
+Die Vorschläge sind am 2026-11-21 umgesetzt (Entscheidungsprotokoll, oberster Eintrag; Fachspezifikation R-3.2 bis R-3.6 und Kapitel 16 mit der Liste der benannten Vereinfachungen V-01 bis V-22). Vier Abweichungen von den Vorschlägen oben:
+
+- **R-5.19, Bereitstellungsprovision des KfW-Darlehens:** bleibt (gebaut, kostet kein Feld).
+- **E-44, Verlustverrechnung:** kein Feld im Vorhaben, aber fester Hauswert H-38 mit der Voreinstellung „Vortrag“ statt fest „Vortrag“.
+- **H-27, Forderungsausfall:** fester Katalogwert statt Zusammenlegung mit dem Leerstand H-15, weil nur der Leerstand auf den Verkaufspreis wirkt und die Zusammenlegung jede Leitgröße verschoben hätte.
+- **E-12, Bodenanteil:** wo der Verkauf steuerpflichtig ist, rechnet der Kern mit dem neuen festen Hauswert H-39.
+
+Damit: 27 Vorgaben im Vorhaben änderbar, 16 feste Hauswerte, 10 feste Katalogwerte, 6 Vorgabewerte entfallen; alles Übrige wie in der Zählung oben. Die Zahlen dieser Durchsicht stammen aus dem Stand vor der Umsetzung; `wesentlichkeit.py` misst seither nur noch die verbliebenen Gegenstände (238 Messungen). Im Basisfall hat sich kein Sollwert geändert; im Stressfall rechnet der Kern mit acht statt neun Größen (tragbarer Preis des Ankaufs im Stressfall 1.977.816 statt 1.964.653 Euro).

@@ -22,8 +22,8 @@ from proben import (pruefe_plan, pruefe_mittel, pruefe_stau, pruefe_zuschuss, pr
 import ertrag
 import restwert
 
-KERNVERSION = "referenzrechner-0.3"         # R-3.1: Version des Kerns, mit jedem Ergebnis zurueckgegeben
-REGELSTAND = "Fachspezifikation Teil 1, Stand nach Pruefrunde 2"
+KERNVERSION = "referenzrechner-0.4"         # R-3.1: Version des Kerns, mit jedem Ergebnis zurueckgegeben
+REGELSTAND = "Fachspezifikation Teil 1, eingefroren nach der Durchsicht vom 2026-11-21"
 MONATE = 12                                 # Monate je Jahr
 STOERUNG = [None]                           # nur fuer den Referenzfall mit absichtlich verletzter Probe (RF-16)
 

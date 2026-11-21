@@ -37,7 +37,6 @@
  "RF-11|Ankauf gebundener Bestand mit uebernommenem Darlehen: Endwert der Unterlassensalternative": "1637647.65",
  "RF-11|Ankauf gebundener Bestand mit uebernommenem Darlehen: Endwertdifferenz": "562960.01",
  "RF-11|Ankauf gebundener Bestand mit uebernommenem Darlehen: Meldungen": [
-  "M-35",
   "M-37"
  ],
  "RF-11|Ankauf gebundener Bestand mit uebernommenem Darlehen: VOFI-Rendite (%)": "4.013",
@@ -176,23 +175,22 @@
   "8.0542"
  ],
  "RF-11|Stressfall: Schuldendienstdeckung je Planjahr": [
-  "1.324",
-  "1.315",
-  "1.306",
-  "1.469",
-  "1.525",
-  "1.538",
-  "1.544",
-  "1.578",
-  "1.630",
-  "1.644",
-  "1.694",
-  "1.708"
+  "1.348",
+  "1.340",
+  "1.332",
+  "1.495",
+  "1.552",
+  "1.566",
+  "1.572",
+  "1.607",
+  "1.659",
+  "1.674",
+  "1.725",
+  "1.740"
  ],
  "RF-11|Vergleich zweier Fassungen: Differenz der Endwertdifferenz (gebunden - frei)": "-190741.95",
- "RF-11|Vergleich zweier Fassungen: Zahl der verglichenen Blattgroessen": 36,
+ "RF-11|Vergleich zweier Fassungen: Zahl der verglichenen Blattgroessen": 35,
  "RF-11|Vergleich zweier Fassungen: abweichende Werte des Auftrags": [
-  "begruendungen",
   "bindung_jahre",
   "gebunden_anteil",
   "gebundene_miete",
@@ -203,14 +201,9 @@
  "RF-11|Zielwertsuche: tragbarer Investitionsstau beim Kaufpreis 2,2 Mio. Euro": "246500.00",
  "RF-11|gebundener Bestand im Stressfall: Zins des uebernommenen Darlehens im Jahr 9 (Anschluss mit Aufschlag)": "15772.22",
  "RF-11|gebundener Bestand im Stressfall: kleinste Deckung und Jahr": [
-  "1.3123",
+  "1.3413",
   3
  ],
- "RF-11|gebundener Bestand, Rang des uebernommenen Darlehens nach der Bank: Bankdarlehen": "843802.85",
- "RF-11|gebundener Bestand, Rang nach der Bank: bindende Grenze": [
-  "b"
- ],
- "RF-11|gebundener Bestand, andere Lesart MA-026 (Vertragskonditionen): Bankdarlehen": "1034436.66",
  "RF-11|gebundener Bestand: Deckung im ersten Jahr nach jeder Zinsbindung": {
   "Bankdarlehen": [
    11,
@@ -242,18 +235,18 @@
  ],
  "RF-11|gebundener Bestand: kalkulatorischer Kapitaldienst des uebernommenen Darlehens": "18000.00",
  "RF-11|gebundener Bestand: tatsaechlicher Kapitaldienst des uebernommenen Darlehens im ersten Jahr": "15000.00",
- "RF-11|kombinierter Stressfall: Abstand zur Zielrendite (Prozentpunkte)": "-2.596",
+ "RF-11|kombinierter Stressfall: Abstand zur Zielrendite (Prozentpunkte)": "-2.511",
  "RF-11|kombinierter Stressfall: Ausstiegsfaktor": "16.20",
  "RF-11|kombinierter Stressfall: Bankdarlehen": "1144835.99",
  "RF-11|kombinierter Stressfall: Darlehen zu Kaufpreis oder Gesamtkosten (%)": "47.70",
  "RF-11|kombinierter Stressfall: Eigenkapital der Investitionsphase": "1495164.01",
  "RF-11|kombinierter Stressfall: Einstiegsfaktor": "18.47",
- "RF-11|kombinierter Stressfall: Endwert": "2110007.88",
- "RF-11|kombinierter Stressfall: Endwert der Unterlassensalternative": "1893151.68",
- "RF-11|kombinierter Stressfall: Endwertdifferenz": "216856.20",
- "RF-11|kombinierter Stressfall: Endwertueberschuss": "-739303.12",
+ "RF-11|kombinierter Stressfall: Endwert": "2126728.79",
+ "RF-11|kombinierter Stressfall: Endwert der Unterlassensalternative": "1889404.28",
+ "RF-11|kombinierter Stressfall: Endwertdifferenz": "237324.51",
+ "RF-11|kombinierter Stressfall: Endwertueberschuss": "-716938.74",
  "RF-11|kombinierter Stressfall: Fehlbetrag beim Verkauf": "0.00",
- "RF-11|kombinierter Stressfall: Kapitaldienstreserve": "9197.30",
+ "RF-11|kombinierter Stressfall: Kapitaldienstreserve": "11045.30",
  "RF-11|kombinierter Stressfall: Meldungen": [
   "M-37"
  ],
@@ -266,21 +259,21 @@
   "MA-037",
   "MA-039"
  ],
- "RF-11|kombinierter Stressfall: Nettoanfangsrendite (%)": "3.73",
+ "RF-11|kombinierter Stressfall: Nettoanfangsrendite (%)": "3.80",
  "RF-11|kombinierter Stressfall: Planjahr der kleinsten Deckung": 3,
  "RF-11|kombinierter Stressfall: Restschuld zum Wert am Ende der Zinsbindung (%)": "32.88",
- "RF-11|kombinierter Stressfall: Restwertanteil am Endwert (%)": "80.85",
- "RF-11|kombinierter Stressfall: Schuldendienstdeckung im ersten Jahr der Vollvermietung": "1.3236",
- "RF-11|kombinierter Stressfall: VOFI-Gesamtkapitalrendite (%)": "2.575",
- "RF-11|kombinierter Stressfall: VOFI-Rendite (%)": "2.404",
+ "RF-11|kombinierter Stressfall: Restwertanteil am Endwert (%)": "80.22",
+ "RF-11|kombinierter Stressfall: Schuldendienstdeckung im ersten Jahr der Vollvermietung": "1.3484",
+ "RF-11|kombinierter Stressfall: VOFI-Gesamtkapitalrendite (%)": "2.622",
+ "RF-11|kombinierter Stressfall: VOFI-Rendite (%)": "2.489",
  "RF-11|kombinierter Stressfall: Vergleichsrendite (%)": "1.483",
  "RF-11|kombinierter Stressfall: Verkaufspreis": "2683562.66",
- "RF-11|kombinierter Stressfall: Zinsdeckung im ersten Jahr der Vollvermietung": "1.9298",
+ "RF-11|kombinierter Stressfall: Zinsdeckung im ersten Jahr der Vollvermietung": "1.9660",
  "RF-11|kombinierter Stressfall: bindende Grenze des Darlehens": [
   "b"
  ],
- "RF-11|kombinierter Stressfall: kleinste Schuldendienstdeckung": "1.3062",
- "RF-11|kombinierter Stressfall: laufender Nachschussbedarf nach der Investitionsphase": "94043.24",
+ "RF-11|kombinierter Stressfall: kleinste Schuldendienstdeckung": "1.3321",
+ "RF-11|kombinierter Stressfall: laufender Nachschussbedarf nach der Investitionsphase": "90811.24",
  "RF-11|tragbarer Kaufpreis bei 1,2 Mio. Euro verfuegbarem Eigenkapital: Abstand zum Angebotspreis": "-461090.00",
  "RF-11|tragbarer Kaufpreis bei 1,2 Mio. Euro verfuegbarem Eigenkapital: Grenze, die das Darlehen bestimmt": [
   "b"
@@ -305,18 +298,18 @@
   null
  ],
  "RF-11|tragbarer Kaufpreis, Basisfall: noetiges Eigenkapital": "1322348.51",
- "RF-11|tragbarer Kaufpreis, Stressfall: Abstand zum Angebotspreis": "-635347.00",
+ "RF-11|tragbarer Kaufpreis, Stressfall: Abstand zum Angebotspreis": "-622184.00",
  "RF-11|tragbarer Kaufpreis, Stressfall: Grenze, die das Darlehen bestimmt": [
   "b"
  ],
- "RF-11|tragbarer Kaufpreis, Stressfall: Preis": 1964653,
- "RF-11|tragbarer Kaufpreis, Stressfall: Preis je m2 Wohnflaeche": "1488.37",
+ "RF-11|tragbarer Kaufpreis, Stressfall: Preis": 1977816,
+ "RF-11|tragbarer Kaufpreis, Stressfall: Preis je m2 Wohnflaeche": "1498.35",
  "RF-11|tragbarer Kaufpreis, Stressfall: bindende Grenze und Meldung": [
   "Rendite",
   null
  ],
- "RF-11|tragbarer Kaufpreis, Stressfall: kleinste Deckung": "1.3062",
- "RF-11|tragbarer Kaufpreis, Stressfall: noetiges Eigenkapital": "1016282.31",
+ "RF-11|tragbarer Kaufpreis, Stressfall: kleinste Deckung": "1.3321",
+ "RF-11|tragbarer Kaufpreis, Stressfall: noetiges Eigenkapital": "1030761.61",
  "RF-12|... Eigenkapital ueber dem Mindesteigenkapital": "400858.24",
  "RF-12|... Kapitaldienstreserve": "-22839.14",
  "RF-12|... Miete je m2, bei der die Restfinanzierung moeglich waere": null,
@@ -338,12 +331,6 @@
  "RF-12|... Vorfaelligkeit des Bankdarlehens und des KfW-Darlehens": [
   "35411.17",
   "52203.65"
- ],
- "RF-12|Aufschub der Tilgung um 60 Monate (E-68): Tilgungsbeginn, Zahl der Raten, Rate, Rendite (%)": [
-  83,
-  440,
-  "11889.75",
-  "4.014"
  ],
  "RF-12|Bauabschnitte 40 % und 70 % der Bauzeit (H-37): hoechster Stand der Zwischenfinanzierung, Endwertdifferenz": [
   "697532.19",
@@ -374,10 +361,6 @@
  "RF-12|Grobfoerderung, 20 Jahre: Abloesung des Foerderdarlehens beim Verkauf": "2950561.76",
  "RF-12|Grobfoerderung, 20 Jahre: Rueckzahlung des Zuschusses beim Verkauf (MA-017)": "822091.51",
  "RF-12|Grobfoerderung, 20 Jahre: Verkaufspreis aus der gebundenen Miete": "6655683.14",
- "RF-12|Grobfoerderung, Foerderdarlehen im Nachrang (andere Lesart MA-026): Grenze (a) und Bankdarlehen": [
-  "5859849.0210",
-  "0"
- ],
  "RF-12|Grobfoerderung, Haltedauertabelle 36 bis 39 Jahre: Rendite (%)": [
   "4.027",
   "3.996",
@@ -418,14 +401,6 @@
   "361393.64"
  ],
  "RF-12|KfW, Lesart 4 von MA-026: tragbarer Grundstueckspreis (strengere Lesart; nach Pruefrunde 1 voreingestellt: 924.244)": 920435,
- "RF-12|KfW, andere Lesart MA-026 (Vertragskonditionen): Bankdarlehen": "2425000.00",
- "RF-12|KfW, andere Lesart MA-026: tragbarer Grundstueckspreis": 1283299,
- "RF-12|KfW, andere Lesart MA-040 (tilgungsfreie Jahre ab der Bezugsfertigkeit): Tilgungsbeginn, Deckung im ersten Jahr, bei voller Tilgung, Endwertdifferenz": [
-  31,
-  "1.6583",
-  "1.3857",
-  "3394433.81"
- ],
  "RF-12|KfW-Variante 10 Jahre mit 2 tilgungsfreien Jahren: Rate, kalkulatorischer Kapitaldienst, Bankdarlehen, Endwertdifferenz": [
   "34511.53",
   "414138.36",
@@ -499,14 +474,6 @@
   "2475346.10",
   "14305.24"
  ],
- "RF-12|Leerstandskosten im Anlaufleerstand: laufender Nachschussbedarf, Endwertdifferenz": [
-  "83694.63",
-  "3309547.27"
- ],
- "RF-12|MA-040 in beide Richtungen: tragbarer Grundstueckspreis ab dem ersten Abruf (Voreinstellung) und ab der Bezugsfertigkeit": [
-  1197094,
-  1195647
- ],
  "RF-12|Neubau Stressfall: Baukosten": "8135353.14",
  "RF-12|Neubau frei finanziert: Abstand zur Zielrendite (Prozentpunkte)": "-0.668",
  "RF-12|Neubau frei finanziert: Ausstiegsfaktor": "24.00",
@@ -548,13 +515,13 @@
  "RF-12|Neubau frei finanziert: laufender Nachschussbedarf nach der Investitionsphase": "68394.63",
  "RF-12|Neubau kombinierter Stressfall: Bankdarlehen": "3740000.00",
  "RF-12|Neubau kombinierter Stressfall: Eigenkapital der Investitionsphase": "5851491.95",
- "RF-12|Neubau kombinierter Stressfall: Endwert": "8188364.41",
- "RF-12|Neubau kombinierter Stressfall: Endwert der Unterlassensalternative": "7344039.28",
- "RF-12|Neubau kombinierter Stressfall: Endwertdifferenz": "844325.13",
+ "RF-12|Neubau kombinierter Stressfall: Endwert": "8211748.74",
+ "RF-12|Neubau kombinierter Stressfall: Endwert der Unterlassensalternative": "7343460.94",
+ "RF-12|Neubau kombinierter Stressfall: Endwertdifferenz": "868287.80",
  "RF-12|Neubau kombinierter Stressfall: Meldungen": [
   "M-37"
  ],
- "RF-12|Neubau kombinierter Stressfall: VOFI-Rendite (%)": "2.227",
+ "RF-12|Neubau kombinierter Stressfall: VOFI-Rendite (%)": "2.247",
  "RF-12|Neubau kombinierter Stressfall: bindende Grenze des Darlehens": [
   "b"
  ],
@@ -705,13 +672,12 @@
   ]
  ],
  "RF-12|nachhaltige Miete 15,00 Euro: tragbarer Grundstueckspreis": 606989,
- "RF-12|ohne Bankdarlehen im Stressfall: Planjahr, in dem die Mindestdeckung erreicht ist": 12,
+ "RF-12|ohne Bankdarlehen im Stressfall: Planjahr, in dem die Mindestdeckung erreicht ist": 11,
  "RF-12|ohne Bankdarlehen: Mindestdeckung, bei der die Restfinanzierung moeglich waere; freier Beleihungsraum; Planjahr, in dem die Mindestdeckung erreicht ist": [
   "0.8995",
   "266963.98",
   9
  ],
- "RF-12|ohne KfW, andere Lesart MA-026: tragbarer Grundstueckspreis": 876926,
  "RF-12|tragbarer Grundstueckspreis mit KfW-Darlehen: Abstand zum Angebotspreis": null,
  "RF-12|tragbarer Grundstueckspreis mit KfW-Darlehen: Grenze, die das Darlehen bestimmt": [
   "b"
@@ -742,11 +708,6 @@
  "RF-13|Einzelunternehmen mit Betriebsvermoegen, Hebesatz 440 %: Summe der Steuerzahlungen": "593811.83",
  "RF-13|Einzelunternehmen mit Betriebsvermoegen, Hebesatz 440 %: VOFI-Rendite (%)": "3.585",
  "RF-13|Einzelunternehmen mit Betriebsvermoegen, Hebesatz 440 %: Vergleichsrendite (%)": "1.154",
- "RF-13|Koerperschaft mit Kuerzung, E-69 mit der strengeren Lesart von MA-030 (laufender Ertrag gekuerzt, Verkaufsgewinn gewerbesteuerpflichtig): Endwert, Rendite (%), Abstand zur Voreinstellung": [
-  "2570679.38",
-  "4.697",
-  "7952.00"
- ],
  "RF-13|Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig): Endwert": "2562727.38",
  "RF-13|Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig): Endwertdifferenz": "794477.69",
  "RF-13|Koerperschaft mit erweiterter Kuerzung (MA-030: Verkaufsgewinn gewerbesteuerpflichtig): Steuer auf den Verkaufsgewinn": "245400.69",
@@ -879,10 +840,6 @@
  "RF-14|Neubau, Haltedauer 3 Jahre: Endwert": "5201901.26",
  "RF-14|alle Zinssaetze null: Endwert": "676755.55",
  "RF-14|negativer Endwert: Endwert": "-65633.72",
- "RF-17|... Endwert verteilt gegen Abzug im Jahr der Zahlung (andere Lesart MA-032)": [
-  "9477900.38",
-  "9478243.94"
- ],
  "RF-17|Entgelt auf den Zuschuss 13.078,73, Lesart 'verteilt': abgezogen im Planjahr 1, 2 und 3 (ueber die Bindung)": [
   "0.00",
   "186.84",
@@ -958,20 +915,6 @@
   ],
   "sofort"
  ],
- "RF-17|Zuschuss 'minderung', 20 Jahre: Endwert, Endwertdifferenz, Summe der Steuern, Eigenkapital der Investitionsphase": [
-  "3275573.58",
-  "357090.85",
-  "358972.25",
-  "2144688.71"
- ],
- "RF-17|Zuschuss 'minderung', 20 Jahre: VOFI-Rendite (%)": "2.081",
- "RF-17|Zuschuss 'minderung', 38 Jahre: Endwert, Endwertdifferenz, Summe der Steuern, Eigenkapital der Investitionsphase": [
-  "9483208.93",
-  "5661518.27",
-  "2378681.07",
-  "2144688.71"
- ],
- "RF-17|Zuschuss 'minderung', 38 Jahre: VOFI-Rendite (%)": "3.958",
  "RF-17|Zuschuss 'sofort', 20 Jahre: Endwert, Endwertdifferenz, Summe der Steuern, Eigenkapital der Investitionsphase": [
   "3622803.66",
   "103120.50",
@@ -1005,16 +948,6 @@
   "1439.86",
   "1439.86"
  ],
- "RF-17|mit Kennzeichen, Zuschuss 'minderung', 20 Jahre: Endwertdifferenz, Rendite (%), Summe der Steuern": [
-  "283804.63",
-  "1.965",
-  "431010.60"
- ],
- "RF-17|mit Kennzeichen, Zuschuss 'minderung', 38 Jahre: Endwertdifferenz, Rendite (%), Summe der Steuern": [
-  "5785524.43",
-  "3.993",
-  "2253588.43"
- ],
  "RF-17|mit Kennzeichen, Zuschuss 'sofort', 20 Jahre: Endwertdifferenz, Rendite (%), Summe der Steuern": [
   "246013.90",
   "1.867",
@@ -1035,20 +968,10 @@
   "4.001",
   "2225062.05"
  ],
- "RF-17|mit Kennzeichen: 'minderung' gegen 'verteilt', Endwertdifferenz 38 und 20 Jahre (Rechnung in beide Richtungen)": [
-  "-25527.39",
-  "-8540.00"
- ],
  "RF-18|... Reinertrag des Vorhabens, nachhaltiger Reinertrag der Bank, Bankdarlehen": [
   "141843.24",
   "113901.48",
   "1355969.99"
- ],
- "RF-18|... Reinertrag im ersten Jahr und Bankdarlehen ohne und mit Leerstandskosten": [
-  "100894.92",
-  "99394.92",
-  "1181810.00",
-  "1163952.85"
  ],
  "RF-18|... andere Lesart MA-026 (Ertrag des Vorhabens): Bankdarlehen": "1560000.00",
  "RF-18|200 m2 leer: Sollmiete im Monat 1 und 4, Einstiegsfaktor": [
@@ -1109,7 +1032,6 @@
   "9.9892"
  ],
  "RF-18|Fluktuation 5 %: Endwert": "2563369.40",
- "RF-18|Heizung nach CO2KOSTAUFG-5A: Endwertdifferenz gegen den Basisfall": "-2434.26",
  "RF-18|Ist-Miete 11,00 Euro, andere Lesart MA-038 (bleibt stehen): Miete zu Beginn der Jahre 1 bis 7": [
   "11.0000",
   "11.0000",
@@ -1138,59 +1060,6 @@
   "2299357.95",
   "-277378.77"
  ],
- "RF-18|MA-037 andere Lesart (drei Jahre unveraendert): Erhoehungen (Monat, Miete)": [
-  [
-   13,
-   "8.7210"
-  ],
-  [
-   28,
-   "9.0358"
-  ],
-  [
-   43,
-   "9.4473"
-  ],
-  [
-   58,
-   "9.9584"
-  ],
-  [
-   73,
-   "10.3607"
-  ],
-  [
-   88,
-   "10.5679"
-  ],
-  [
-   103,
-   "10.7793"
-  ],
-  [
-   118,
-   "10.9949"
-  ],
-  [
-   133,
-   "11.4390"
-  ],
-  [
-   148,
-   "11.6678"
-  ]
- ],
- "RF-18|MA-037 andere Lesart: hoechster tragbarer Kaufpreis": 2322775,
- "RF-18|MA-037: Endwert vorsichtig gegen andere Lesart": [
-  "2524305.59",
-  "2527660.46"
- ],
- "RF-18|MA-039: Endwertdifferenz mit Fortgeltung und ohne; die Voreinstellung ist die niedrigere": [
-  "753701.96",
-  "757210.62",
-  true
- ],
- "RF-18|MA-039: tragbarer Kaufpreis ohne Fortgeltung (mit Fortgeltung 2.317.235 Euro)": 2319295,
  "RF-18|Mietenhistorie bekannt (letzte Erhoehung vor 6 Monaten von 7,50 Euro): Erhoehungen": [
   [
    13,
@@ -1270,28 +1139,6 @@
    ]
   ]
  ],
- "RF-18|andere Lesart MA-039 (Verordnung endet 2029, danach 20 %): Monate der Erhoehungen und Mieten": [
-  [
-   37,
-   52,
-   67,
-   82,
-   97,
-   112,
-   127,
-   142
-  ],
-  [
-   "9.4473",
-   "9.9584",
-   "10.1575",
-   "10.3607",
-   "10.7793",
-   "10.9949",
-   "11.2147",
-   "11.4390"
-  ]
- ],
  "RF-18|leerstehendes Objekt: Bankdarlehen, Endwert, Verkaufspreis, Einstiegsfaktor": [
   "930929.99",
   "2927273.47",
@@ -1311,10 +1158,6 @@
   "1637647.65",
   "4.013",
   "1.483"
- ],
- "RF-19|... Vorfaelligkeit nach 5 Jahren mit und ohne Kennzeichen (Zinsbindung 20 Jahre)": [
-  "39434.28",
-  "63454.18"
  ],
  "RF-19|... Wirkung auf Endwertdifferenz und tragbaren Preis bei Zielrendite 5 %": [
   "17737.72",
@@ -1340,37 +1183,6 @@
   3,
   "tilgungssatz"
  ],
- "RF-19|Anpassungsdauer 1 statt 4 Jahre (H-23) und Zinsbindung 5 statt 10 Jahre (H-24): Liste mit Wirkung auf die Endwertdifferenz": [
-  [
-   "E-53 (H-23)",
-   "4",
-   "1",
-   "5300.20"
-  ],
-  [
-   "E-46 (H-24)",
-   "10",
-   "5",
-   "-44927.84"
-  ]
- ],
- "RF-19|Anschlussregeln: Endwert, Deckung im Jahr 11, Endwertdifferenz": {
-  "rate": [
-   "2524710.71",
-   "1.8358",
-   "754107.08"
-  ],
-  "restlaufzeit": [
-   "2524985.21",
-   "1.7002",
-   "754381.58"
-  ],
-  "tilgungssatz": [
-   "2524305.59",
-   "2.0853",
-   "753701.96"
-  ]
- },
  "RF-19|Bankfall (Zins 3 %, Mietsteigerung 0,5 %): kleinste Deckung, nach der unguenstigsten Anschlussregel, Regel, Meldung": {
   "Vertragskonditionen, Basis": [
    "1.3054",
@@ -1381,16 +1193,16 @@
    ]
   ],
   "Vertragskonditionen, Stress": [
-   "1.0181",
-   "0.8966",
+   "1.0439",
+   "0.9193",
    "restlaufzeit",
    [
     "M-39"
    ]
   ],
   "kalkulatorisch, Stress": [
-   "1.2023",
-   "1.0589",
+   "1.2328",
+   "1.0857",
    "restlaufzeit",
    [
     "M-38"
@@ -1417,22 +1229,16 @@
   "60008.94",
   true
  ],
- "RF-19|Lesart 2 von MA-026 im Vorhaben mit Begruendung und als Lesart des Hauses: Liste (Kennung, Art, Begruendung, Wirkung)": [
+ "RF-19|Lesart des Hauses (MA-026, Lesart 3) und Hauswert H-38 'sofort': Liste (Kennung, Art, Begruendung), ohne Begruendungspflicht": [
   [
-   [
-    "MA-026",
-    "Lesart",
-    "Begruendung des Referenzfalls",
-    "-38496.31"
-   ]
+   "MA-026",
+   "Lesart",
+   "Lesart des Hauses"
   ],
   [
-   [
-    "MA-026",
-    "Lesart",
-    "Lesart des Hauses",
-    "-38496.31"
-   ]
+   "H-38 (MA-016)",
+   "Hauswert",
+   "Hauswert"
   ]
  ],
  "RF-19|Massnahme 420.000 im Jahr 0, verfuegbares Eigenkapital 1,2 Mio.: Preis, bindende Grenze, Eigenkapitalbedarf": [
@@ -1476,39 +1282,32 @@
   ],
   [
    "6233.34",
-   "1.0825"
+   "1.0884"
   ]
  ],
  "RF-19|Neubau: Reinertrag des Vorhabens im ersten Jahr der Vollvermietung": "354432.75",
  "RF-19|Stressgroessen einzeln: Aenderung der Endwertdifferenz gegen den Basisfall": {
   "Anschlusszins": "-13920.92",
-  "Instandhaltung": "-20422.72",
   "Investitionsstau": "-11346.91",
   "Leerstand": "-79558.59",
   "Mietsteigerung": "-161319.43",
   "Verkaufsfaktor": "-238744.64",
   "Zinsanstieg bis zur Zusage": "-32897.46"
  },
- "RF-19|Wertansatz 2,6 Mio. Euro: Darlehen zu Kaufpreis und Darlehen zu Wertansatz (%)": [
-  "51.11",
-  "47.18"
- ],
  "RF-19|Zins 3 %, Mietsteigerung 0,5 %, Vertragskonditionen, Basisfall: Deckung Jahr 1, kleinste Deckung, Jahr, Meldungen": [
   "1.3210",
   "1.3054",
   3,
   [
-   "M-35",
    "M-37",
    "M-38"
   ]
  ],
  "RF-19|Zins 3 %, Mietsteigerung 0,5 %, Vertragskonditionen, Stressfall: Deckung Jahr 1, kleinste Deckung, Jahr, Meldungen": [
-  "1.1480",
-  "1.0181",
+  "1.1695",
+  "1.0439",
   12,
   [
-   "M-35",
    "M-37",
    "M-39"
   ]
@@ -1541,12 +1340,8 @@
  },
  "RF-19|andere Lesart MA-026 (Vertragszins): hoechster tragbarer Kaufpreis": 2359366,
  "RF-19|fester kalkulatorischer Zins 6 % (H-25): Bankdarlehen": "1073283.74",
- "RF-19|gebundener Bestand: Bankdarlehen nach Lesart 2 von MA-026 und mit festem kalkulatorischem Zins 4 % fuer uebernommene Darlehen (H-25)": [
-  "1034436.66",
-  "826660.00"
- ],
  "RF-19|gefoerderter Neubau im Stressfall: kleinste Deckung, Jahr, Meldungen": [
-  "1.0131",
+  "1.0258",
   4,
   [
    "M-21",
@@ -1554,26 +1349,20 @@
    "M-38"
   ]
  ],
- "RF-19|tragbarer Kaufpreis je Anschlussregel 'rate' und 'restlaufzeit' (Gegenrechnung Finanzmathematiker: 2.317.477 und 2.317.632)": [
-  2317477,
-  2317632
- ],
- "RF-19|uebernommenes Darlehen, Kennzeichen Foerderdarlehen False, Verkauf nach 5 Jahren: Vorfaelligkeit aller Darlehen": "50629.99",
- "RF-19|uebernommenes Darlehen, Kennzeichen Foerderdarlehen True, Verkauf nach 5 Jahren: Vorfaelligkeit aller Darlehen": "37528.22",
  "RF-20|... Differenz des tragbaren Preises im Basis- und im Stressfall": [
   "-47134",
-  "-37380"
+  "-37800"
  ],
  "RF-20|... Preis, bis zu dem der Endwert ohne Eigenkapital nicht negativ ist (Nebenangabe)": 1569899,
  "RF-20|... kleinster zulaessiger Preis (darunter M-22)": 1818182,
  "RF-20|Herkunft je Wert des Auftrags: Zahl der Werte je Herkunft (E, H, KAT, MA)": {
-  "E": 74,
-  "H": 53,
-  "KAT": 39,
-  "MA": 12
+  "E": 64,
+  "H": 50,
+  "KAT": 37,
+  "MA": 5
  },
  "RF-20|Vergleich gleicher Eingaben mit anderem Katalogstand (Koerperschaftsteuer 15 % in allen Jahren): Zahl der Zeilen, abweichende Werte (Herkunft, Name)": [
-  88,
+  86,
   [
    [
     "KAT",
@@ -1601,7 +1390,6 @@
   [
    "M-25",
    "M-29",
-   "M-35",
    "M-37",
    "M-38",
    "M-42"

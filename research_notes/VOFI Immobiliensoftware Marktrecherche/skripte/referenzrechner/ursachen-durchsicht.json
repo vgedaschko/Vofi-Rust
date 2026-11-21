@@ -1,0 +1,77 @@
+{
+ "umbenannt": [],
+ "ursachen": [
+  [
+   "[Ss]tressfall|Stressgroessen einzeln|Basis und Stress|Bankfall \\(Zins 3 %",
+   "H-06, R-11.8, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Stressgroesse Instandhaltung (+10 %) ist entfallen (unter der Schwelle, benannte Vereinfachung); der kombinierte Stressfall rechnet mit acht Groessen. Wo 'Vertragskonditionen' steht, setzt der Fall den kalkulatorischen Zins H-25 in Hoehe des Vertragszinses statt der entfallenen Lesart 2 von MA-026"
+  ],
+  [
+   "Vertragskonditionen, Basisfall|Verkaufsfaktor 4, Verkauf nach zwei Jahren|Anschlusszins 7 %",
+   "R-3.2, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Fall setzt den kalkulatorischen Zins in Hoehe des Vertragszinses als Vorgabe H-25 des Hauses statt als Lesart 2 von MA-026 (entfallen, deckungsgleich); das ist keine Lesart des Hauses mehr, die Meldung M-35 entfaellt. Zahlen unveraendert"
+  ],
+  [
+   "gebundener Bestand mit uebernommenem Darlehen: Meldungen|Vergleich zweier Fassungen: abweichende Werte|Rang |Kennzeichen Foerderdarlehen|mit und ohne Kennzeichen",
+   "E-59, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Kennzeichen Foerderdarlehen und Rang des uebernommenen Darlehens sind entfallen; uebernommene Darlehen stehen im Rang vor der Bank und rechnen beim Verkauf vor dem Bindungsende mit der Vorfaelligkeit. Das Referenzobjekt fuehrt Kennzeichen und Begruendung nicht mehr; Abweichung und M-35 entfallen"
+  ],
+  [
+   "Zahl der verglichenen Blattgroessen|Wertansatz",
+   "E-61, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Wertansatz der Bank als Eingabe ist entfallen (Wertansatz ist der Kaufpreis, im Neubau die Gesamtkosten); die Blattgroesse 'Darlehen zu Wertansatz' entfaellt"
+  ],
+  [
+   "MA-026 \\(Vertragskonditionen\\)|andere Lesart MA-026|Lesart 2 von MA-026",
+   "MA-026, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Schalter der Lesart 1 (Quote ohne das nachrangige Foerderdarlehen; im gefoerderten Neubau ohne Wirkung) und der Lesart 2 (Vertragskonditionen; deckungsgleich mit H-25) sind entfallen"
+  ],
+  [
+   "MA-030",
+   "MA-030, R-7.8, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter der strengeren Lesart ist entfallen (bis auf 0,027 Prozentpunkte deckungsgleich mit 'E-69 nein'); es gibt zwei Faelle: ohne E-69 entfaellt die Kuerzung im Verkaufsjahr, mit E-69 bleibt sie einschliesslich des Verkaufsgewinns"
+  ],
+  [
+   "MA-037",
+   "MA-037, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter 'Kappungsspielraum frei' ist entfallen; die vorsichtige Annahme bleibt, die Mietenhistorie E-33 leistet dasselbe"
+  ],
+  [
+   "MA-039",
+   "MA-039, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter 'Geltungsende' ist entfallen (deckungsgleich mit E-05 'ausserhalb'); die Fortgeltung ist fest"
+  ],
+  [
+   "MA-040",
+   "MA-040, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter 'ab der Bezugsfertigkeit' ist entfallen (0,002 Prozentpunkte); die Anlaufjahre zaehlen ab dem ersten Abruf"
+  ],
+  [
+   "MA-032",
+   "MA-032, R-7.15, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Schalter 'Entgelte im Jahr der Zahlung' ist entfallen (keine Wirkung auf die Rendite); die Entgelte werden verteilt"
+  ],
+  [
+   "[Mm]inderung",
+   "MA-031, R-7.19, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Lesart 'Minderung der Herstellungskosten' ist entfallen (0,002 Prozentpunkte gegen 'verteilt'); im Betriebsvermoegen bleiben 'verteilt' und als Lesart des Hauses 'sofort'"
+  ],
+  [
+   "Aufschub",
+   "E-68, R-5.11, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Aufschub des Tilgungsbeginns des Foerderdarlehens ist als Eingabe entfallen (benannte Vereinfachung)"
+  ],
+  [
+   "Leerstandskosten",
+   "H-36, R-6.17, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Betriebskosten leerstehender Flaechen sind entfallen (benannte Vereinfachung)"
+  ],
+  [
+   "CO2KOSTAUFG-5A",
+   "E-66, E-67, R-6.9, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die haelftige Teilung der CO2-Kosten und die weiteren Kosten des Vermieters sind entfallen (benannte Vereinfachung)"
+  ],
+  [
+   "Anschlussregel",
+   "H-07, R-5.9, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Auswahl der Regel nach der Zinsbindung ist entfallen; der Kern rechnet fest mit 'Tilgungssatz bleibt' (MA-034). Der Ausweis der kleinsten Deckung nach der unguenstigsten Regel bleibt"
+  ],
+  [
+   "Anpassungsdauer 1 statt 4",
+   "E-53, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Die Anpassungsdauer ist keine Eingabe mehr (fester Katalogwert H-23)"
+  ],
+  [
+   "Herkunft je Wert des Auftrags|Zahl der Zeilen, abweichende Werte",
+   "R-3.1, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Der Auftrag fuehrt weniger Werte: zehn Eingaben, drei Vorgaben netto, zwei Katalogwerte und sieben Schalter sind entfallen; neu sind die Hauswerte H-38 (Verlustverrechnung, bisher E-44) und H-39 (Bodenanteil)"
+  ],
+  [
+   "Lesart des Hauses \\(MA-026, Lesart 3\\)",
+   "neuer Wert zu R-3.2, Durchsicht an der Wesentlichkeitsschwelle (2026-11-21): Lesart des Hauses und Hauswert H-38 stehen in der Liste, ohne Begruendungspflicht"
+  ]
+ ]
+}

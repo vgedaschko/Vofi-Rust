@@ -2,7 +2,7 @@
 
 **Zweck:** Beleg, dass die Regeln in `docs/fachspezifikation-rechenkern.md` eindeutig und rechenbar sind. Jede Zahl des Dokuments kommt aus diesen Skripten. Kein Produktcode; der Rechenkern entsteht in Rust und muss dieselben Werte liefern.
 **Leser:** Entwicklung und Prüfer.
-**Stand:** 2026-11-18, überarbeitet nach Prüfrunde 2 · 20 Referenzfälle, 1.150 Prüfungen, alle bestanden · 525 festgeschriebene Sollwerte.
+**Stand:** 2026-11-21, nach der Durchsicht an der Wesentlichkeitsschwelle (Teil 1 der Fachspezifikation eingefroren) · 20 Referenzfälle, 1.093 Prüfungen, alle bestanden · 490 festgeschriebene Sollwerte.
 
 ## Aufruf
 
@@ -24,6 +24,10 @@ Laufzeit von `referenzfaelle.py` rund 135 Sekunden; den größten Teil brauchen 
 Stand der Prüfrunde 1: `aenderungen-runde1.md` (140 geänderte, 256 neue, 22 entfallene Werte und fünf geänderte Sollwerte im Code), erzeugt aus `ursachen-runde1.json` und `im-code-runde1.json` gegen den Entwurf mit 207 Werten. Die veröffentlichten Werte (RF-01 bis RF-04, RF-05 im Jahresmodus) haben sich nicht geändert.
 
 Stand der Prüfrunde 2: `aenderungen-runde2.md` (134 geänderte, 87 neue, 3 entfallene Werte und elf geänderte Sollwerte im Code), erzeugt aus `ursachen-runde2.json` und `im-code-runde2.json` gegen den Stand nach Prüfrunde 1 mit 441 Werten. Die veröffentlichten Werte, der Testfall und der Basisfall des Ankaufs (Endwert 2.524.305,59 Euro) haben sich nicht geändert.
+
+Nachtrag 2 und Durchsicht: Die Abschnitte „Nachtrag“, „Nachtrag 2“ und „Durchsicht und Nachtrag 2“ in `aenderungen-runde2.md` führen die späteren Festschreibungen fort (`ursachen-runde2-nachtrag2.json`, `im-code-runde2-nachtrag2.json`: 526 Werte; `ursachen-durchsicht.json`: 490 Werte, 39 geändert, 37 entfallen, 1 neu). Die Durchsicht an der Wesentlichkeitsschwelle hat Eingaben, Vorgaben und Schalter gestrichen, deren Wirkung unter der Schwelle liegt; kein Wert des Basisfalls hat sich geändert, die Werte des Stressfalls schon (acht statt neun Stressgrößen).
+
+Wesentlichkeit messen: `python3 wesentlichkeit.py [--ausgabe DATEI.json] [--nur GRUPPE] [--ohne-preis]` variiert je Eingabe, Vorgabe, Lesart und Regel eine Größe und gibt die Wirkung auf tragbaren Preis und Rendite aus (Schwelle: 1 % des Kaufpreises, im Neubau 1 % der Gesamtkosten, oder 0,1 Prozentpunkte Rendite). Das Skript ändert nichts und ist kein Referenzfall; es dient der Durchsicht (`docs/pruefung/2026-11-21-wesentlichkeit/durchsicht.md`, gemessen am Stand vor der Umsetzung) und später Teil 2.
 
 ## Gliederung
 
@@ -47,9 +51,11 @@ Die Module folgen den Kapiteln des Dokuments; die Kommentare nennen die Regelnum
 | `rf_neu.py` | 15 | RF-16 bis RF-20: Sperre der Proben, Steuerregeln, Miete im Bestand, Bankensicht, Ränder und Meldungen |
 | `rf_runde2.py` | 15 | Prüfungen zu den Regeln der zweiten Überarbeitung, eingeordnet in RF-12, RF-13 und RF-16 bis RF-20: Abweichungen vom Hausstandard, Bemessungszins, KfW nach dem Merkblatt, Förderung nach der Richtlinie, Stressfall, Fehlerbilder in der Rechnung (über `zahlen.FEHLER`), Katalog, Suchen, Vergleich |
 | `gegenrechnung.py` | 15 | RF-15: Testfall im Monatsraster, Alternative mit zwei Sätzen, Anlaufverlust und Ankauf Basisfall in gerader Linie nachgerechnet; importiert kein Modul des Referenzrechners und liest nur `erwartete_werte.json` |
-| `erwartete_werte.json` | 15 | festgeschriebene Sollwerte der eigenen Fälle (525 Werte) |
+| `erwartete_werte.json` | 15 | festgeschriebene Sollwerte der eigenen Fälle (490 Werte) |
 | `ursachen-runde1.json`, `im-code-runde1.json`, `aenderungen-runde1.md` | 15 | Ursachen und Differenzbericht der Festschreibung nach Prüfrunde 1 |
 | `ursachen-runde2.json`, `im-code-runde2.json`, `aenderungen-runde2.md` | 15 | dasselbe nach Prüfrunde 2 |
+| `ursachen-runde2-nachtrag2.json`, `im-code-runde2-nachtrag2.json`, `ursachen-durchsicht.json` | 15 | Ursachen der Festschreibungen nach dem Nachtrag 2 und nach der Durchsicht; Bericht in `aenderungen-runde2.md` |
+| `wesentlichkeit.py` | Spezifikation, Zeile „Wesentlichkeit“ | Messskript zur Wesentlichkeitsschwelle; kein Referenzfall |
 | `beispielwerte.py` | – | druckt die Beispielzahlen des Dokuments, die kein Prüfwert sind, je Regel |
 
 ## Woher die Sollwerte stammen

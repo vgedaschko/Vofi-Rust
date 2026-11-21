@@ -212,9 +212,7 @@ if __name__ == "__main__":
     print("  R-13.3 P-03 Testfall Jahr 1:", de(D("-675820.00") + D(700000)), "| P-07:", de(D("1743830.47") - D("822091.51")),
           "| P-04 Neubau:", de(D("5141964.13") + D("4007142.85")), "=", de(D("9015152.34") + D("133954.64")))
     print("  Kapitel 17 KfW-Vorteil:", 924244 - 702767, "| mit Vertragskonditionen:", 1286380 - 876926)
-    fs = rechne_grob(GEFOERDERT, replace(VG, ma032_entgelte_sofort=True), KATN)
-    print("  R-7.15 Entgelte verteilt: Rendite", proz(f.kennzahlen["rendite"], 3), "Endwertdifferenz", de(f.kennzahlen["endwertdifferenz"]),
-          "| im Jahr der Zahlung (andere Lesart MA-032): Rendite", proz(fs.kennzahlen["rendite"], 3), "Endwertdifferenz", de(fs.kennzahlen["endwertdifferenz"]))
+    print("  R-7.15 Entgelte verteilt: Rendite", proz(f.kennzahlen["rendite"], 3), "Endwertdifferenz", de(f.kennzahlen["endwertdifferenz"]))
     zr = [x for x in lauf(Tranche("D", 100000, "raten", "0.03", laufzeit=7), 7, 12)]
     print("  R-5.5 sieben Monatsraten auf 100.000:", [de(x["tilgung"]) for x in zr[1:]])
     tr10 = Tranche("D", 1496000, "annuitaet_prozent", "0.04", tilgungssatz="0.02", rundung="keine")

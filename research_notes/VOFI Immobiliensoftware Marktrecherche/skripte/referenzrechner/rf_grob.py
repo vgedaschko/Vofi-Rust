@@ -123,8 +123,8 @@ def rf11_ankauf():
                   (es.darlehen < e.darlehen, es.darlehen_basis == e.darlehen), (True, True))
     pruefe(k, "Stressfall: Bankdarlehen bei 4,5 % Zins und 5,5 % kalkulatorisch (Gegenrechnung Bank und Finanzmathematiker)",
            es.darlehen, "1144835.99", "0")
-    pruefe(k, "Stressfall: Endwertdifferenz mit neu bemessenem Darlehen (Gegenrechnung Finanzmathematiker)",
-           es.kennzahlen["endwertdifferenz"], "216856.20", "0")
+    pruefe(k, "Stressfall: Endwertdifferenz mit neu bemessenem Darlehen (Gegenrechnung Finanzmathematiker 216.856,20 mit dem Stress auf die Instandhaltung, der entfallen ist)",
+           es.kennzahlen["endwertdifferenz"], "237324.51", "0")
     pruefe_fest(k, "Stressfall: Schuldendienstdeckung je Planjahr",
                 [str(schuldendienstdeckung(es.plan, x)[0].quantize(D("0.001"))) for x in range(1, 13)])
     # hoechster tragbarer Preis

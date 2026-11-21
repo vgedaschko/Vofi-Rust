@@ -282,6 +282,8 @@ def rf19_bank():
     e = rechne_grob(replace(A.ANKAUF, haltedauer=5, zinsbindung_jahre=20, stau_betrag=NULL), VG, KAT)
     pruefe(k, "... Haltedauer 5, Bindung 20: Restbindung 66 Monate bis zum fruehesten Kuendigungstermin",
            e.plan.zeilen[60]["vfe"], str(CENT.geld(e.plan.zeilen[60]["abloesung"] * D("0.01") * 66 / 12)), "0")
+    e = rechne_grob(replace(GEBUNDEN, haltedauer=5), VG, KAT)
+    pruefe(k, "gebundener Bestand, Verkauf nach 5 Jahren: Vorfaelligkeit fuer Bankdarlehen und uebernommenes Darlehen (R-5.16)", e.plan.zeilen[60]["vfe"], "50629.99", "0")
     # Eigenkapitalgrenze mit Nachschuessen (R-11.6): dieselbe Massnahme zum Stichtag und im Jahr 1
     for jahr in (0, 1):
         tp = tragbarer_preis(replace(A.ANKAUF, stau_betrag=D(420000), stau_jahr=jahr, verfuegbares_ek=D(1200000)), VG, KAT)
@@ -408,7 +410,7 @@ def rf20_raender():
     e = rechne_grob(replace(A.ANKAUF, zins=D("0.03"), ist_miete=D("8.50"), vergleichsmiete=D("8.50"), stau_betrag=NULL),
                     replace(VG, mietsteigerung=D("0.005"), kalk_zins=D("0.03"), anschluss_aufschlag=D("0.04")), KAT)
     pruefe_gleich(k, "Anschlusszins 7 % mit kalkulatorischem Zins in Hoehe des Vertragszinses (H-25): kleinste Deckung unter 1, Planjahr, Meldung M-39",
-                  [str(e.deckung_min.quantize(D("0.0001"))), e.deckung_min_jahr, kennungen(e)], ["0.9522", 12, ["M-35", "M-37", "M-39"]])
+                  [str(e.deckung_min.quantize(D("0.0001"))), e.deckung_min_jahr, kennungen(e)], ["0.9522", 12, ["M-37", "M-39"]])
     # R-3.1: keine Zahlenliterale in den Kernmodulen ausser technischen Konstanten
     # erlaubt: 0, 1, 2 (Halbieren), 12 (Monate je Jahr), 3 (Nachkommastellen der Darstellung), 60 (Rechenstellen),
     # 80 (Bisektionsschritte), 1000 (Kilogramm je Tonne), Cent, zwoelf Rechenstellen, Rechentoleranz
