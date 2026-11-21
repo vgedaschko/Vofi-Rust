@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Blindrechnung: Nachbau der Grobkalkulation allein aus docs/fachspezifikation-rechenkern.md.
-Nur Standardbibliothek, decimal. Kein Blick in den Referenzrechner."""
-from decimal import Decimal as D, getcontext, ROUND_HALF_UP, ROUND_FLOOR
+"""Blindrechnung: Nachbau der Grobkalkulation allein aus docs/fachspezifikation-rechenkern.md
+(Stand 2026-11-21, Teil 1 eingefroren). Nur Standardbibliothek, decimal.
+Kein Blick in den Referenzrechner. Der Stand nach Pruefrunde 1 liegt in stand-runde2/."""
+from decimal import Decimal as D, getcontext, ROUND_HALF_UP, ROUND_FLOOR, ROUND_CEILING
 import copy
 
 getcontext().prec = 60
@@ -9,8 +10,11 @@ CENT = D('0.01')
 E12 = D('1e-12')
 
 
+RUNDEN = [True]      # Rundungsmodus "Cent"; [False] = Modus "keine" (R-12.2), nur fuer den Testfall im Jahresmodus
+
+
 def r2(x):
-    return D(x).quantize(CENT, rounding=ROUND_HALF_UP)
+    return D(x).quantize(CENT, rounding=ROUND_HALF_UP) if RUNDEN[0] else D(x)
 
 
 def r12(x):
@@ -19,6 +23,10 @@ def r12(x):
 
 def floor2(x):
     return D(x).quantize(CENT, rounding=ROUND_FLOOR)
+
+
+def ceil_int(x):
+    return int(D(x).to_integral_value(rounding=ROUND_CEILING))
 
 
 _ps = {}
@@ -39,19 +47,30 @@ def index_reihe(steig, n):
     return idx
 
 
+def annuitaet(K, ip, m):
+    """Laufzeitannuitaet R-5.4"""
+    if ip == 0:
+        return r2(K / m)
+    q = (1 + ip) ** m
+    return r2(K * ip * q / (q - 1))
+
+
 # ---------------------------------------------------------------- Vorgaben / Katalog (Anhang A.4)
 def haus():
     return dict(
-        z=D('0.05'), beta=D('0.65'), mu=D('1.2'), mindtilg=D('0.02'), anschl_auf=D('0.01'),
+        z=D('0.05'), z_foerder=None, beta=D('0.65'), mu=D('1.2'), mindtilg=D('0.02'), anschl_auf=D('0.01'),
+        # H-06, acht Groessen
         st_anschl=D('0.01'), st_zins=D('0.005'), st_leer=D('0.02'), st_miete=D('0.005'),
-        st_inst=D('0.10'), st_vf=D('0.10'), st_stau=D('0.10'), st_bk=D('0.05'), st_bz=3,
-        regel='tilgungssatz', h=D('0.02'), aL=D('0.02'), k=D('0.08'), linie=D(0),
+        st_vf=D('0.10'), st_stau=D('0.10'), st_bk=D('0.05'), st_bz=3,
+        h=D('0.02'), aL=None, k=D('0.08'), linie=D(0),
         miet=D('0.02'), kost=D('0.02'), bau=D('0.03'), leer=D('0.015'), vk=D('0.015'),
         verw=D(350), inst=[(0, D('9.00')), (22, D('11.50')), (32, D('14.00'))], bk=D(2),
-        vfe=D('0.01'), such_ober=D(100), raster=40, fenster=20,
+        vfe=D('0.01'), such_ober=D(100), raster=40, fenster=20, miet_ober=D(100),
         e42=D('0.42'), d=4, zb=10, h25=None, flukt=D(0), ford=D('0.005'), anlauf=3,
         co2preis=D(50), co2steig=D('0.05'), zus1=D('0.05'), zus2=D('0.20'), stp=D(20000),
         bz_satz=D('0.0025'), bz_frei=6,
+        h32=None, h33=None, anlauf_nb=3, vorlauf=0, h37=(D('0.5'), D('0.75')),
+        h38='vortrag', h39=D('0.25'),
     )
 
 
@@ -61,17 +80,19 @@ def katalog():
         kst_ab=D('0.10'), kst_bis=D('0.15'), zus=D('0.055'),
         messzahl=D('0.035'), abr=D(100), fb=D(24500), hebesatz=D(4),
         anrf=D(4), frist=10, afa_ankauf=D('0.02'), afa_neubau=D('0.03'),
-        warte=15, kappung=D('0.15'), kap_T=36, bremse=True, bremse_auf=D('0.10'),
-        co2_anteil=D('0.40'), weitere=D(0),
+        warte=15, kappung=D('0.15'), kappung_ohne=D('0.20'), kap_T=36, bremse=True, bremse_auf=D('0.10'),
+        co2_anteil=D('0.40'),
         f_darl=D('0.60'), f_zus=D('0.20'), f_ek=D('0.20'), f_grenze=D(5460), f_miete=D('8.20'),
         f_steig=D('0.0615'), f_fest=3, f_schritt=3, f_bindung=35, f_beitrag=D('0.005'),
         f_entg_d=D('0.01'), f_entg_z=D('0.0075'), f_tilg_j=42, f_zinslos=35, f_zins_danach=D('0.05'),
+        f_frist=24, f_teil=(D('0.3'), D('0.3'), D('0.3'), D('0.1')), f_mindtilg=D('0.01'),
         g_steig=D('0.0615'), g_fest=3, g_schritt=3,
         anh_quote=D('0.15'), anh_jahre=3, ust=D('0.19'),
         kuend_sperr=120, kuend_frist=6, bank_mind=D('0.15'),
-        kfw_max=D(100000), kfw_zins=D('0.025'), kfw_tilg=D('0.02'), kfw_frei=1, kfw_zb=10,
+        kfw_max=D(100000), kfw_max_siegel=D(150000), kfw_var={10: (1, 2), 25: (1, 3), 35: (1, 5)},
+        kfw_zins=D('0.025'), kfw_zb=10, kfw_bp=D('0.0015'), kfw_bp_frei=12, kfw_abruf=12, kfw_abruf_verl=24,
         hz_anteil=D('0.25'), hz_fb=D(200000), hz_pacht=D('0.5'),
-        sockel=D(1000000), kap=D('0.26375'),
+        sockel=D(1000000), kap=D('0.26375'), kat19=5,
     )
 
 
@@ -79,46 +100,69 @@ def ankauf():
     return dict(
         art='ankauf', startjahr=2027, p=12, preis=D(2400000), enk=D('0.10'), boden=D('0.25'),
         baujahr=1990, wfl=D(1320), einh=20, ist=D('8.50'), vm=D('9.20'), markt=D('10.50'),
-        leerfl=D(0), sonst=D(0), co2=D(30), status='koerp', kennz=False, verlust='vortrag',
+        leerfl=D(0), sonst=D(0), co2=D(30), historie=None, im_kappgebiet=True, im_bremsgebiet=True,
+        status='koerp', kennz=False, e69=False,
         zins=D('0.04'), zb=10, tilg=D('0.02'), vf=D(18), n=12,
-        stau=D(120000), stau_jahr=2, stau_art='erhaltung', d=4,
-        geb=D(0), geb_ende=None, geb_miete=None, uebern=None, ek_verf=None, wert=None,
-        erbbau=D(0), anteil=D(1), ma030_alt=False, ma036_alt=False, ma026_2=False, ma026_1=False,
-        ma037_alt=False, H=haus(), K=katalog(), foerder=False, kfw=D(0),
+        stau=D(120000), stau_jahr=2,
+        geb=D(0), geb_ende=None, geb_miete=None, uebern=None, ek_verf=None,
+        erbbau=D(0), anteil=D(1),
+        ma026_3=False, ma026_4=False, ma031='verteilt', ma036_alt=False, ma038_alt=False,
+        H=haus(), K=katalog(), foerder=False, kfw=D(0),
     )
 
 
 def neubau():
     return dict(
         art='neubau', startjahr=2027, p=12, preis=D(1200000), enk=D('0.08'), gfl=D(2500),
-        brw=D(400), wfl=D(2000), einh=30, bgf=D(2600), kkw=D(2320), bauzeit=18, markt=D('16.50'),
-        stp=0, stp_miete=D(0), co2=D(0), kfw=D(0), status='koerp', kennz=False, verlust='vortrag',
+        brw=D(400), wfl=D(2000), einh=30, bgf=D(2600), kkw=D(2320), kkw_gesamt=False, bauzeit=18,
+        vorlauf=None, festpreis=False, vorverm=False, markt=D('16.50'), e65=None,
+        stp=0, stp_miete=D(0), co2=D(0), kfw=D(0), kfw_T=35, kfw_f=1, kfw_zins=None, kfw_siegel=False,
+        status='koerp', kennz=False, e69=False, e70=False,
         zins=D('0.04'), zb=10, tilg=D('0.02'), vf=D(24), n=15, foerder=False,
-        stau=D(0), stau_jahr=1, stau_art='erhaltung', d=0, erbbau=D(0), anteil=D(1),
-        ma030_alt=False, ma036_alt=False, ma026_2=False, ma026_1=False, ma031='zufluss',
-        ma032_sofort=False, wert=None, ek_verf=None, uebern=None,
-        H=haus(), K=katalog(),
-        # Lesart-Schalter fuer Luecken der Spezifikation (siehe Bericht)
-        nb_d=0,                 # Anpassungsdauer der Neubaumiete (0: Ziel = Vergleichsmiete)
-        bind_jahr='planjahr',   # R-6.6 im Neubau: 'planjahr' oder 'bindungsjahr'
-        split='zuschuss_rest',  # Rundung der Aufteilung Foerderdarlehen/Zuschuss im Mittelabruf
+        stau=D(0), stau_jahr=1, erbbau=D(0), anteil=D(1), im_kappgebiet=True,
+        ma026_3=False, ma026_4=False, ma031='verteilt', ma036_alt=False, ma038_alt=False,
+        ek_verf=None, uebern=None, H=haus(), K=katalog(),
     )
 
 
-# ---------------------------------------------------------------- Miete
-def pfad(N, start, anfang, ziel, kap_ref, t_letzte, w, kap, T, erster):
-    """R-6.3: Miete je m2 und Monat fuer m = start..N (ungerundet)."""
+def mit(c, **kw):
+    """Kopie eines Auftrags mit Aenderungen; H_x aendert eine Vorgabe, K_x einen Katalogwert."""
+    c = dict(c)
+    c['H'] = dict(c['H'])
+    c['K'] = dict(c['K'])
+    for k, v in kw.items():
+        if k.startswith('H_'):
+            c['H'][k[2:]] = v
+        elif k.startswith('K_'):
+            c['K'][k[2:]] = v
+        else:
+            c[k] = v
+    return c
+
+
+# ---------------------------------------------------------------- Miete (R-6.3)
+def pfad(N, start, anfang, ziel, bezug_vor, t_letzte, w, kap, T, sperre_bis=0, rueck=False):
+    """Mietpfad je m2 und Monat fuer m = start..N, ungerundet.
+    Zeile (1): m <= sperre_bis; Zeile (2) nur mit rueck; Zeile (3) Erhoehung; Zeile (4) sonst.
+    bezug_vor(k): Miete fuer k < start oder None (keine Erhoehung, MA-037)."""
     miete = {start: anfang}
     for m in range(start + 1, N + 1):
         prev = miete[m - 1]
         neu = prev
-        if m >= erster and m - 1 >= t_letzte + w:
-            ref = kap_ref(m - T, miete)
-            if ref is not None:
-                cand = min(ziel(m), ref * (1 + kap))
-                if cand > prev:
-                    neu = cand
-                    t_letzte = m - 1
+        if m <= sperre_bis:
+            pass
+        else:
+            z = ziel(m)
+            if rueck and z < prev:
+                neu = z
+            elif z > prev and m - 1 >= t_letzte + w:
+                k = m - T
+                ref = miete[k] if k >= start else bezug_vor(k)
+                if ref is not None:
+                    cand = min(z, ref * (1 + kap))
+                    if cand > prev:
+                        neu = cand
+                        t_letzte = m - 1
         miete[m] = neu
     return miete
 
@@ -127,7 +171,11 @@ def stufe(j, fest, schritt):
     return 0 if j <= fest else (j - fest - 1) // schritt + 1
 
 
-# ---------------------------------------------------------------- Steuer
+# ---------------------------------------------------------------- Steuer (Kapitel 7)
+BV = ('koerp', 'pg_gepr', 'pg_orig', 'einzel')          # Betriebsvermoegen
+UEB = ('privat', 'verein')                              # Ueberschusseinkuenfte
+
+
 class Steuer:
     def __init__(self, c, ua=False):
         self.c = c
@@ -144,14 +192,14 @@ class Steuer:
             return K['kst'][jahr]
         return K['kst_bis'] if jahr < min(K['kst']) else K['kst_ab']
 
-    # Grenzsteuersatz auf Zinsertraege (R-7.14)
     def s_z(self, j):
+        """Grenzsteuersatz auf Zinsertraege (R-7.14)"""
         c, K = self.c, self.K
         st = c['status']
         g = K['messzahl'] * K['hebesatz']
         if st == 'koerp':
             return self.kst(j) * (1 + K['zus']) + g
-        if st == 'koerp_ohne':
+        if st == 'verein':
             return self.kst(j) * (1 + K['zus'])
         if st in ('pg_gepr', 'pg_orig', 'einzel'):
             ant = D(1) if st == 'einzel' else c['anteil']
@@ -165,8 +213,32 @@ class Steuer:
             return c['lb_satz']
         raise ValueError(st)
 
+    def s_fk(self, j):
+        """Entlastungssatz der Sollzinsen (R-7.14); nur fuer die Gesamtkapitalrendite."""
+        c, K = self.c, self.K
+        st = c['status']
+        g = K['messzahl'] * K['hebesatz']
+        kennz = c.get('kennz') and st in ('koerp', 'pg_gepr')
+        g_op = D(0) if kennz else g
+        if st == 'koerp':
+            s = self.kst(j) * (1 + K['zus']) + g_op
+            if c['H'].get('h38') == 'sofort' and not kennz:
+                s -= K['hz_anteil'] * g
+            return s
+        if st == 'verein':
+            return self.kst(j) * (1 + K['zus'])
+        if st in ('pg_gepr', 'pg_orig', 'einzel'):
+            ant = D(1) if st == 'einzel' else c['anteil']
+            a = ant * K['messzahl'] * min(K['anrf'], K['hebesatz'])
+            a_op = D(0) if kennz else a
+            return c['H']['e42'] + g_op - a_op
+        if st == 'privat':
+            return c['H']['e42']
+        if st == 'befreit':
+            return D(0)
+        return c['lb_satz']
+
     def _vortrag(self, topf, x):
-        """Verlustvortrag verrechnen; gibt Betrag nach Vortrag zurueck (>=0)."""
         vv = getattr(self, topf)
         if x < 0:
             setattr(self, topf, vv - x)
@@ -175,103 +247,112 @@ class Steuer:
         setattr(self, topf, vv - use)
         return x - use
 
-    def gewst(self, e_op, z_h, g_v, entg, erbbau, personen, sofort_linear, anteil=D(1)):
+    def gewst(self, e_op, z_h, g_v, entg, erbbau, letztes):
+        """R-7.8 mit R-7.6, R-7.16, R-7.18. Rueckgabe (Gewerbesteuer, Messbetrag, Gewerbeertrag)."""
         c, K = self.c, self.K
-        kennz = c['kennz'] and not self.ua and c['status'] in ('koerp', 'pg_gepr')
-        fb_hz = D(0) if sofort_linear else K['hz_fb']
+        st = c['status']
+        sofort = c['H'].get('h38', 'vortrag') == 'sofort'
+        personen = st in ('pg_gepr', 'pg_orig', 'einzel')
+        linear = sofort and st in ('koerp', 'einzel')        # Personengesellschaft: GewSt immer mit Vortrag
+        kennz = c.get('kennz') and not self.ua and st in ('koerp', 'pg_gepr')
+        fb_hz = D(0) if linear else K['hz_fb']
         hinzu = K['hz_anteil'] * max(D(0), entg + K['hz_pacht'] * erbbau - fb_hz)
         gv = g_v
-        if c.get('ma036_alt') and c['status'] in ('pg_gepr', 'pg_orig') and not self.ua:
-            gv = (1 - anteil) * g_v
-        if kennz:
-            ge0 = z_h + (D(0) if c['ma030_alt'] else gv)
+        if c.get('ma036_alt') and st in ('pg_gepr', 'pg_orig') and not self.ua:
+            gv = (1 - c['anteil']) * g_v
+        if kennz and not (letztes and not c.get('e69')):
+            ge0 = z_h                                        # Kuerzung; mit E-69 auch der Verkaufsgewinn
         else:
-            ge0 = e_op + z_h + gv + hinzu
-        if sofort_linear:
+            ge0 = e_op + z_h + gv + hinzu                    # ohne Kennzeichen; Verkaufsjahr ohne E-69
+        if linear:
             ge = ge0
         else:
             ge = self._vortrag('vv_g', ge0)
             ge = (ge / K['abr']).to_integral_value(rounding=ROUND_FLOOR) * K['abr']
             if personen:
                 ge = max(D(0), ge - K['fb'])
+        if st == 'koerp':
+            return r2(ge * K['messzahl'] * K['hebesatz']), ge * K['messzahl'], ge
+        if linear:                                           # Einzelunternehmen, sofort
+            return r2(K['messzahl'] * K['hebesatz'] * ge), K['messzahl'] * ge, ge
         mb = r2(ge * K['messzahl'])
-        return r2(mb * K['hebesatz']), mb
+        return r2(mb * K['hebesatz']), mb, ge
 
     def jahr(self, j, e_op, z_h, g_v, entg=D(0), erbbau=D(0), vfe=D(0), letztes=False):
-        """Jahressteuer. e_op enthaelt die Vorfaelligkeit NICHT bei der Privatperson (Aufrufer)."""
+        """Jahressteuer. Bei Privatperson und Verein/Stiftung enthaelt e_op die Vorfaelligkeit nicht."""
         c, K = self.c, self.K
         st = c['status']
-        sofort = c['verlust'] == 'sofort'
+        sofort = c['H'].get('h38', 'vortrag') == 'sofort'
         det = {}
         if st == 'befreit':
             t = D(0)
-        elif st in ('koerp', 'koerp_ohne'):
-            gew = e_op + z_h + g_v
+        elif st == 'koerp':
+            eink = e_op + z_h + g_v
             satz = self.kst(j) * (1 + K['zus'])
-            if sofort:
-                kst = r2(satz * gew)
-            else:
-                kst = r2(satz * self._vortrag('vv_e', gew))
-            gst = D(0)
-            if st == 'koerp':
-                gst, mb = self.gewst(e_op, z_h, g_v, entg, erbbau, False, sofort)
+            kst = r2(satz * eink) if sofort else r2(satz * self._vortrag('vv_e', eink))
+            gst, mb, ge = self.gewst(e_op, z_h, g_v, entg, erbbau, letztes)
             t = kst + gst
-            det = dict(kst=kst, gst=gst)
+            det = dict(kst=kst, gst=gst, ge=ge)
+        elif st == 'verein':
+            gvs = D(0)
+            if letztes and c['n'] <= K['frist']:
+                gvs = max(D(0), g_v - vfe)
+            eink = e_op + z_h + gvs
+            satz = self.kst(j) * (1 + K['zus'])
+            t = r2(satz * eink) if sofort else r2(satz * self._vortrag('vv_e', eink))
+            det = dict(kst=t, gvs=gvs)
         elif st in ('pg_gepr', 'pg_orig', 'einzel'):
             ant = D(1) if st == 'einzel' else c['anteil']
             gew = e_op + z_h + g_v
             e42 = c['H']['e42']
-            if sofort:
-                est = r2(e42 * gew)
+            est = r2(e42 * gew) if sofort else r2(e42 * self._vortrag('vv_e', gew))
+            gst, mb, ge = self.gewst(e_op, z_h, g_v, entg, erbbau, letztes)
+            if sofort and st == 'einzel':
+                anr = r2(K['messzahl'] * min(K['anrf'], K['hebesatz']) * ge)
+            elif sofort:
+                anr = r2(min(ant * K['anrf'] * mb, ant * gst))
             else:
-                est = r2(e42 * self._vortrag('vv_e', gew))
-            lin = sofort and st == 'einzel'
-            gst, mb = self.gewst(e_op, z_h, g_v, entg, erbbau, True, lin, ant)
-            if sofort:
-                anr = min(ant * K['anrf'] * mb, ant * gst)
-            else:
-                anr = min(ant * K['anrf'] * mb, ant * gst, ant * est)
-            anr = r2(anr)
+                anr = r2(min(ant * K['anrf'] * mb, ant * gst, ant * est))
             t = est + gst - anr
-            det = dict(est=est, gst=gst, anr=anr)
+            det = dict(est=est, gst=gst, anr=anr, ge=ge)
         elif st == 'privat':
             e = e_op
+            gvs = D(0)
             if letztes and c['n'] <= K['frist']:
-                gvs = g_v - vfe
-                if gvs > 0:
-                    e = e + gvs
+                gvs = max(D(0), g_v - vfe)
+                e = e + gvs
             e42 = c['H']['e42']
-            if sofort:
-                tv = r2(e42 * e)
-            else:
-                tv = r2(e42 * self._vortrag('vv_e', e))
+            tv = r2(e42 * e) if sofort else r2(e42 * self._vortrag('vv_e', e))
             tz = r2(K['kap'] * z_h)
             t = tv + tz
-            det = dict(tv=tv, tz=tz)
+            det = dict(tv=tv, tz=tz, gvs=gvs)
         elif st == 'lehrbuch':
             gew = e_op + z_h + (g_v if c.get('lb_gv') else D(0))
-            if sofort:
-                t = r2(c['lb_satz'] * gew)
-            else:
-                t = r2(c['lb_satz'] * self._vortrag('vv_e', gew))
+            t = r2(c['lb_satz'] * gew) if sofort else r2(c['lb_satz'] * self._vortrag('vv_e', gew))
         else:
             raise ValueError(st)
-        self.log.append((j, e_op, z_h, g_v, t, det, self.vv_e, self.vv_g))
+        self.log.append(dict(j=j, e_op=e_op, z_h=z_h, g_v=g_v, t=t, det=det, vv_e=self.vv_e, vv_g=self.vv_g))
         return t
 
 
-# ---------------------------------------------------------------- Darlehen
+# ---------------------------------------------------------------- Darlehen (Kapitel 5)
 class Tranche:
+    """art: 'prozent' (Prozentannuitaet), 'laufzeit' (Laufzeitannuitaet), 'raten' (Ratentilgung)."""
+
     def __init__(self, name, nenn, art, zins, tilg=D(0), bezug=None, ausz=None, einb=D(0),
                  tilg_beginn=1, zb_ende=None, anschluss=None, regel='tilgungssatz', beitrag=D(0),
-                 bz_satz=D(0), bz_frei=0, m=None, foerder=False, bank=False, mindtilg=D(0)):
+                 bz_satz=D(0), bz_frei=0, m=None, foerder=False, mindtilg=D(0), t_voll_fix=None):
         self.name, self.nenn, self.art, self.zins, self.tilg = name, nenn, art, zins, tilg
         self.bezug = nenn if bezug is None else bezug
         self.ausz = ausz or {0: nenn}
         self.einb = einb
         self.tilg_beginn, self.zb_ende, self.anschluss, self.regel = tilg_beginn, zb_ende, anschluss, regel
         self.beitrag, self.bz_satz, self.bz_frei, self.m = beitrag, bz_satz, bz_frei, m
-        self.foerder, self.bank, self.mindtilg = foerder, bank, mindtilg
+        self.foerder, self.mindtilg, self.t_voll_fix = foerder, mindtilg, t_voll_fix
+        self.m40 = False
+
+    def satz(self, u):
+        return self.zins if (self.zb_ende is None or u <= self.zb_ende) else self.anschluss
 
     def plan(self, N, p):
         Z = [D(0)] * (N + 1)
@@ -280,39 +361,64 @@ class Tranche:
         rest = D(0)
         cum = D(0)
         first = min(self.ausz)
-        t_voll = max(self.ausz)
-        rate = r2(self.bezug * (self.zins + self.tilg) / p) if self.art == 'prozent' else None
+        rate = None
+        lz_rest = None              # verbleibende Perioden einer Laufzeitannuitaet (auch 'Restlaufzeit bleibt')
+        self.rate_first = None
+        self.kd_first = None
         rate_r = r2(self.nenn / self.m) if self.art == 'raten' else None
         for u in range(0, N + 1):
             zins = beitr = bz = tilg = D(0)
             if u >= 1:
-                satz = self.zins if (self.zb_ende is None or u <= self.zb_ende) else self.anschluss
+                satz = self.satz(u)
                 zins = r2(rest * satz / p)
                 beitr = r2(rest * self.beitrag / p)
                 if self.bz_satz and u > self.bz_frei and cum < self.nenn:
                     bz = r2((self.nenn - cum) * self.bz_satz * 12 / p)
                 if u >= self.tilg_beginn:
+                    nach_bindung = self.zb_ende is not None and u > self.zb_ende
                     if self.art == 'prozent':
-                        if self.zb_ende is not None and u == self.zb_ende + 1:
-                            if self.regel == 'tilgungssatz':
-                                rate = r2(rest * (self.anschluss + max(self.tilg, self.mindtilg)) / p)
-                            elif self.regel == 'rate':
-                                rate = max(rate, zins)
-                            elif self.regel == 'restlaufzeit':
+                        if u == self.tilg_beginn:
+                            # R-5.10: erste Rate mit dem Zins der Periode des Tilgungsbeginns
+                            tau = max(self.tilg, self.mindtilg) if nach_bindung else self.tilg
+                            rate = r2(self.bezug * (satz + tau) / p)
+                        elif self.zb_ende is not None and u == self.zb_ende + 1:
+                            regel = self.regel
+                            if regel == 'restlaufzeit':
                                 ip_alt = self.zins / p
-                                R, S = rate, rest
-                                if ip_alt == 0:
-                                    m = int(S / R)
+                                R_, S = rate, rest
+                                if R_ <= r2(S * ip_alt):
+                                    regel = 'tilgungssatz'
+                                    self.m40 = True
                                 else:
-                                    m = int(((R / (R - S * ip_alt)).ln() / (1 + ip_alt).ln()))
-                                m = max(1, m)
-                                ip = self.anschluss / p
-                                q = (1 + ip) ** m
-                                rate = r2(S * ip * q / (q - 1)) if ip != 0 else r2(S / m)
+                                    if ip_alt == 0:
+                                        mm = int(S / R_)
+                                    else:
+                                        mm = int((R_ / (R_ - S * ip_alt)).ln() / (1 + ip_alt).ln())
+                                    mm = max(1, mm)
+                                    rate = annuitaet(S, self.anschluss / p, mm)
+                                    lz_rest = mm
+                            if regel == 'tilgungssatz':
+                                rate = r2(rest * (self.anschluss + max(self.tilg, self.mindtilg)) / p)
+                            elif regel == 'rate':
+                                rate = max(rate, zins)
                         tilg = min(rest, max(D(0), rate - zins))
+                        if lz_rest is not None:
+                            lz_rest -= 1
+                            if lz_rest <= 0:
+                                tilg = rest
+                    elif self.art == 'laufzeit':
+                        k = u - self.tilg_beginn + 1
+                        if u == self.tilg_beginn:
+                            rate = annuitaet(self.nenn, satz / p, self.m)
+                        elif self.zb_ende is not None and u == self.zb_ende + 1:
+                            rate = annuitaet(rest, satz / p, self.m - (k - 1))
+                        tilg = rest if k >= self.m else min(rest, max(D(0), rate - zins))
                     elif self.art == 'raten':
                         k = u - self.tilg_beginn + 1
                         tilg = rest if k >= self.m else min(rest, rate_r)
+                    if u == self.tilg_beginn:
+                        self.rate_first = rate if rate is not None else rate_r
+                        self.kd_first = zins + tilg + beitr
             a = self.ausz.get(u, D(0))
             if a:
                 s['ausz'][u] = a
@@ -327,14 +433,19 @@ class Tranche:
                 rest = D(0)
             s['rest'][u] = rest
         self.s = s
-        self.first, self.t_voll = first, t_voll
+        self.first = first
+        self.t_voll = max(self.ausz) if self.t_voll_fix is None else self.t_voll_fix
         return s
 
+    def kd(self, u):
+        return self.s['zins'][u] + self.s['tilg'][u] + self.s['beitr'][u]
 
-# ---------------------------------------------------------------- Unterlassensalternative
+
+# ---------------------------------------------------------------- Unterlassensalternative (Kapitel 9)
 def alternative(c, N, p, e, a):
     H = c['H']
-    aLp, hp, kp = psatz(H['aL'], p), psatz(H['h'], p), psatz(H['k'], p)
+    aL = H['h'] if H.get('aL') is None else H['aL']
+    aLp, hp, kp = psatz(aL, p), psatz(H['h'], p), psatz(H['k'], p)
     st = Steuer(c, ua=True)
     LA = WA = KK = D(0)
     zh_j = zk_j = D(0)
@@ -368,12 +479,18 @@ def alternative(c, N, p, e, a):
     return LA + WA - KK
 
 
-# ---------------------------------------------------------------- Grobkalkulation
-class M22(Exception):
-    pass
+# ---------------------------------------------------------------- Grobkalkulation (Kapitel 11)
+class Meldung(Exception):
+    def __init__(self, kennung, text=''):
+        super().__init__(kennung + ' ' + text)
+        self.kennung = kennung
+        self.text = text
 
 
-def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
+def rechne(c0, stress=False, detail=True, nur_bemessung=False, bem_zins=None):
+    """Ein Lauf der Grobkalkulation. stress=True: kombinierter Stressfall (R-11.8); das Bankdarlehen
+    wird dann mit dem erhoehten Zins und sonst den Annahmen des Basisfalls neu bemessen.
+    nur_bemessung / bem_zins dienen dieser Neubemessung."""
     c = copy.copy(c0)
     H = dict(c['H'])
     K = c['K']
@@ -382,157 +499,203 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
     N = n * p
     nb = c['art'] == 'neubau'
     R = dict(meld=set())
+    foerder = bool(c.get('foerder'))
+    status = c['status']
+    if nb and p != 12:
+        raise Meldung('M-20', 'Neubau nur im Monatsraster')
 
-    # ---- Stress (R-11.8)
+    # ---- Stress (R-11.8), acht Groessen
     zins = c['zins']
-    anschl_auf = H['anschl_auf']
     leer = H['leer']
     miet = H['miet']
-    inst_fakt = D(1)
     vf = c['vf']
     stau = c['stau']
     bk_fakt = D(1)
-    bauzeit = c.get('bauzeit', 0)
+    bauzeit = c.get('bauzeit', 0) if nb else 0
     st_anschl = D(0)
+    basis = None
     if stress:
+        basis = rechne(c0, nur_bemessung=True, bem_zins=c['zins'] + H['st_zins'])
         zins = zins + H['st_zins']
         st_anschl = H['st_anschl']
         leer = min(D(1), leer + H['st_leer'])
         miet = miet - H['st_miete']
-        inst_fakt = 1 + H['st_inst']
         vf = vf * (1 - H['st_vf'])
         stau = stau * (1 + H['st_stau'])
-        bk_fakt = 1 + H['st_bk']
         if nb:
+            bk_fakt = 1 + H['st_bk']
             bauzeit += H['st_bz']
-    anschluss_bank = (c['zins'] if c.get('stress_anschl_alt') else zins) + anschl_auf + st_anschl
+    zins_bem = zins if bem_zins is None else bem_zins          # E-45 der Bemessung
+    anschluss_bank = zins + H['anschl_auf'] + st_anschl        # R-5.8, im Stressfall R-11.8
     ausfall = leer + H['ford']
+    vorlauf = 0
+    if nb:
+        vorlauf = H['vorlauf'] if c.get('vorlauf') is None else c['vorlauf']
+        if n * 12 < vorlauf + c['bauzeit'] + H['st_bz'] + (0 if c.get('vorverm') else H['anlauf_nb']) + 12:
+            raise Meldung('M-23')
+    bauende = vorlauf + bauzeit
+    anlauf_nb = 0 if c.get('vorverm') else H['anlauf_nb']
 
     nj = n + 3
     iM = index_reihe(miet, nj)
     iK = index_reihe(H['kost'], nj)
     iC = index_reihe(H['co2steig'], nj)
     wfl = c['wfl']
+    kap = K['kappung'] if c.get('im_kappgebiet', True) else K['kappung_ohne']
+    w_, T_ = K['warte'], K['kap_T']
+    d = H['d']
 
     def pj(m):
         return (m - 1) // 12 + 1
 
-    NM = n * 12                      # Monate
+    NM = n * 12
     # ---- Mieten je Teilflaeche (Monatswerte, ungerundet)
-    teile = []                       # (Flaeche, {m: Miete})
+    teile = []                       # (Flaeche, {m: Miete}); ein Monat ohne Eintrag traegt keine Miete
     sonst = {m: D(0) for m in range(1, NM + 1)}
     if not nb:
         m0 = 1
-        fl_geb = (wfl - c['leerfl']) * c['geb']
-        fl_frei = (wfl - c['leerfl']) - fl_geb
         vmj = lambda m: c['vm'] * iM[pj(m)]
-        ist, d = c['ist'], c['d']
+        nachh = vmj
+        marktj = lambda m: c['markt'] * iM[pj(m)]
 
-        def ziel(m):
-            j = pj(m)
-            if j == 1 or d == 0:
-                return vmj(m)
-            return ist + (vmj(m) - ist) * min(D(1), D(j - 1) / D(d))
-        if c.get('ma037_alt'):
-            kap_ref = lambda k, mi: mi[k] if k >= 1 else ist
-            tl = -K['kap_T']
-        else:
-            kap_ref = lambda k, mi: mi[k] if k >= 1 else None
-            tl = 0
-        frei = pfad(NM, 1, ist, ziel, kap_ref, tl, K['warte'], K['kappung'], K['kap_T'], 13)
-        teile.append((fl_frei, frei))
+        def nvm(m):                  # Neuvermietungsmiete R-6.13
+            x = marktj(m)
+            if K['bremse'] and c.get('im_bremsgebiet', True):
+                x = min(x, vmj(m) * (1 + K['bremse_auf']))
+            return x
+
+        def neu_vermietet(start):    # bestehendes Mietverhaeltnis ab start, nur Zeile (3), Ziel Vergleichsmiete
+            anf = nvm(start)
+            return pfad(NM, start, anf, vmj, lambda k: anf, start - 1, w_, kap, T_)
+        fl_verm = wfl - c['leerfl']
+        fl_geb = fl_verm * c['geb']
+        fl_frei = fl_verm - fl_geb
+        ist = c['ist']
+        if fl_frei > 0:
+            def ziel(m):
+                j = pj(m)
+                if j == 1:
+                    return ist
+                if d == 0 or j - 1 >= d:
+                    return vmj(m)
+                return ist + (vmj(m) - ist) * (j - 1) / d
+            hist = c.get('historie')
+            if hist is None:         # MA-037: letzte Erhoehung zum Stichtag, Kappung ausgeschoepft
+                bez = lambda k: None
+                tl = 0
+            else:
+                a_mon, m_alt = hist
+                bez = lambda k: ist if k > -a_mon else m_alt
+                tl = -a_mon
+            frei = pfad(NM, 1, ist, ziel, bez, tl, w_, kap, T_, sperre_bis=12, rueck=not c.get('ma038_alt'))
+            # Fluktuation R-6.14: je Planjahr ab dem zweiten wechselt der Anteil H-26 des Restbestands
+            rest_fl = fl_frei
+            if H['flukt'] > 0:
+                for j in range(2, n + 1):
+                    ab = rest_fl * H['flukt']
+                    s_ = (j - 1) * 12 + 1
+                    teile.append((ab, {m: frei[m] for m in range(1, s_)}))
+                    teile.append((ab, neu_vermietet(s_)))
+                    rest_fl -= ab
+            teile.append((rest_fl, frei))
         if fl_geb > 0:
-            b = c['geb_ende']
+            b = c['geb_ende']        # Planjahr des letzten Bindungsmonats (R-6.6)
             A0 = c['geb_miete']
             gm = {}
             last_step = 0
             prev = None
-            for m in range(1, min(NM, (b + 1) * 12) + 1):
+            ende_fest = min(NM, (b + 1) * 12)
+            for m in range(1, ende_fest + 1):
                 j = pj(m)
-                jj = min(j, b)
-                val = min(A0 * (1 + K['g_steig']) ** stufe(jj, K['g_fest'], K['g_schritt']), vmj(m) if j <= b else D('1e9'))
-                if j == b + 1:
+                if j <= b:
+                    val = min(A0 * (1 + K['g_steig']) ** stufe(j, K['g_fest'], K['g_schritt']), vmj(m))
+                else:
                     val = gm[b * 12]
                 if prev is not None and val != prev:
                     last_step = m - 1
                 gm[m] = val
                 prev = val
-            if NM > (b + 1) * 12:
-                aus = gm[(b + 1) * 12]
+            if NM > ende_fest:
+                aus = gm[ende_fest]
 
                 def zielg(m):
-                    j = pj(m)
-                    return aus + (vmj(m) - aus) * min(D(1), D(j - (b + 1)) / D(d)) if d else vmj(m)
-                st_m = (b + 1) * 12
-                rest = pfad(NM, st_m, aus, zielg, lambda k, mi: (mi[k] if k >= st_m else gm[k]) if k >= 1 else None,
-                            last_step, K['warte'], K['kappung'], K['kap_T'], st_m + 1)
+                    k = pj(m) - (b + 1)
+                    if d == 0 or k >= d:
+                        return vmj(m)
+                    return aus + (vmj(m) - aus) * k / d
+                fest = dict(gm)
+                rest = pfad(NM, ende_fest, aus, zielg, lambda k: fest[k] if k >= 1 else None,
+                            last_step, w_, kap, T_)
                 gm.update(rest)
             teile.append((fl_geb, gm))
+        if c['leerfl'] > 0:
+            teile.append((c['leerfl'], neu_vermietet(H['anlauf'] + 1)))
         for m in range(1, NM + 1):
             sonst[m] = c['sonst'] * iM[pj(m)] / 12
     else:
-        m0 = bauzeit + H['anlauf'] + 1
+        bezug = bauende + 1
+        m0 = bauende + anlauf_nb + 1
         vj = lambda m: (m - m0) // 12 + 1          # Vermietungsjahr
         vmj = lambda m: c['markt'] * iM[vj(m)]
-        if not c['foerder']:
+        e65 = c['markt'] if c.get('e65') is None else c['e65']
+        nachh = lambda m: e65 * iM[vj(m)]
+        if not foerder:
             anf = c['markt']
-            dd = c['nb_d']
-
-            def ziel(m):
-                if dd == 0:
-                    return vmj(m)
-                return anf + (vmj(m) - anf) * min(D(1), D(vj(m) - 1) / D(dd))
-            mi = pfad(NM, m0, anf, ziel, lambda k, mi_: mi_[k] if k >= m0 else anf, m0 - 1,
-                      K['warte'], K['kappung'], K['kap_T'], m0 + 1)
+            mi = pfad(NM, m0, anf, vmj, lambda k: anf, m0 - 1, w_, kap, T_)
         else:
-            bz1 = bauzeit + 1
-            bjahr = lambda m: (m - bz1) // 12 + 1
-            B = K['f_bindung']
-            bind_ende = bauzeit + B * 12          # letzter Monat der Bindung
-            if c['bind_jahr'] == 'bindungsjahr':
-                last_m = bind_ende + 12           # Ende von Jahr b+1 (Bindungsjahr)
-                jb = lambda m: bjahr(m) - (B + 1)
-            else:
-                b_pj = pj(bind_ende)              # Planjahr des Bindungsendes
-                last_m = (b_pj + 1) * 12
-                jb = lambda m: pj(m) - (b_pj + 1)
+            bjahr = lambda m: (m - bezug) // 12 + 1          # Bindungsjahr ab Bezugsfertigkeit
+            Bj = K['f_bindung']
+            bind_ende = bauende + Bj * 12                    # letzter Monat der Bindung
+            b_pj = pj(bind_ende)                             # Planjahr b
+            ende_fest = min(NM, (b_pj + 1) * 12)
             gm = {}
             prev = None
             last_step = m0 - 1
-            for m in range(bz1, min(NM, last_m) + 1):
-                bj = min(bjahr(m), B)
-                val = K['f_miete'] * (1 + K['f_steig']) ** stufe(bj, K['f_fest'], K['f_schritt'])
-                if m > bind_ende:
+            for m in range(bezug, ende_fest + 1):
+                if m <= bind_ende:
+                    val = min(K['f_miete'] * (1 + K['f_steig']) ** stufe(bjahr(m), K['f_fest'], K['f_schritt']),
+                              vmj(m) if m >= m0 else K['f_miete'] * D(1000))
+                else:
                     val = gm[bind_ende]
                 if prev is not None and val != prev:
                     last_step = m - 1
                 gm[m] = val
                 prev = val
-            if NM > last_m:
-                aus = gm[last_m]
-                dd = c['nb_d_bind'] if 'nb_d_bind' in c else H['d']
+            if NM > ende_fest:
+                aus = gm[ende_fest]
 
                 def zielg(m):
-                    return aus + (vmj(m) - aus) * min(D(1), D(jb(m)) / D(dd)) if dd else vmj(m)
-                rest = pfad(NM, last_m, aus, zielg, lambda k, mi_: mi_[k] if k >= last_m else gm[k],
-                            last_step, K['warte'], K['kappung'], K['kap_T'], last_m + 1)
+                    k = pj(m) - (b_pj + 1)
+                    if d == 0 or k >= d:
+                        return vmj(m)
+                    return aus + (vmj(m) - aus) * k / d
+                fest = dict(gm)
+                rest = pfad(NM, ende_fest, aus, zielg, lambda k: fest[k] if k >= m0 else K['f_miete'],
+                            last_step, w_, kap, T_)
                 gm.update(rest)
             mi = {m: gm[m] for m in range(m0, NM + 1)}
         teile.append((wfl, mi))
         for m in range(m0, NM + 1):
             sonst[m] = D(c['stp']) * c['stp_miete'] * iM[vj(m)]
 
+    def summe_m(m, nachhaltig=False):
+        x = D(0)
+        for fl, mi_ in teile:
+            v = mi_.get(m)
+            if v is None:
+                continue
+            x += fl * (min(v, nachh(m)) if nachhaltig else v)
+        return x + sonst[m]
+
     def qm(m):
-        return sum((fl * mi.get(m, D(0)) for fl, mi in teile), D(0)) / wfl if m >= m0 else D(0)
+        return (summe_m(m) - sonst[m]) / wfl
 
-    soll_m = {}
-    for m in range(1, NM + 1):
-        if m < m0:
-            soll_m[m] = D(0)
-        else:
-            soll_m[m] = r2(sum((fl * mi[m] for fl, mi in teile), D(0)) + sonst[m])
+    soll_m = {m: r2(summe_m(m)) for m in range(1, NM + 1)}
 
-    # ---- Bewirtschaftung, CO2, Erbbauzins je Monat
+    # ---- Bewirtschaftung, CO2, Erbbauzins
+    # nur zur Ursachensuche (Altstand mit neun Stressgroessen, V-22): H['st_inst'] ist im Auftrag nicht gesetzt
+    inst_fakt = 1 + H.get('st_inst', D(0)) if stress else D(1)
+
     def inst_satz(alter):
         s = None
         for ab, v in H['inst']:
@@ -540,39 +703,31 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
                 s = v
         return s * inst_fakt
 
-    bew_m, co2_m = {}, {}
-    bezug = bauzeit + 1 if nb else 1
-    for m in range(1, NM + 1):
-        j = pj(m)
-        if m < bezug:
-            bew_m[m] = co2_m[m] = D(0)
-            continue
-        alter = (m - bezug) // 12 if nb else c['startjahr'] + j - 1 - c['baujahr']
-        jb_ = (H['verw'] * c['einh'] + inst_satz(alter) * wfl + H['bk'] * wfl + K['weitere'] * wfl) * iK[j]
-        bew_m[m] = r2(jb_ / 12)
-        co2_m[m] = r2(c['co2'] * wfl * K['co2_anteil'] * H['co2preis'] * iC[j] / 1000 / 12)
-    erb_m = {m: r2(c['erbbau'] * index_reihe(H['kost'], nj)[pj(m)] / 12) for m in range(1, NM + 1)}
+    def bew_jahr(j, alter):
+        return (H['verw'] * c['einh'] + inst_satz(alter) * wfl + H['bk'] * wfl) * iK[j]
 
-    # ---- Perioden (p = 12: Monat; p = 1: Jahr)
+    def co2_jahr(j):
+        return c['co2'] * wfl * K['co2_anteil'] * H['co2preis'] * iC[j] / 1000
+
     mp = 12 // p
 
     def monate(u):
         return range((u - 1) * mp + 1, u * mp + 1)
     Zr = [D(0)] * (N + 1)
     soll, miete, bew, erb = list(Zr), list(Zr), list(Zr), list(Zr)
+    bezug_m = bauende + 1 if nb else 1
     for u in range(1, N + 1):
+        j = (u - 1) // p + 1
         if p == 12:
             soll[u] = soll_m[u]
-            bew[u] = bew_m[u] + co2_m[u]
-            erb[u] = erb_m[u]
+            if u >= bezug_m:
+                alter = (u - bezug_m) // 12 if nb else c['startjahr'] + j - 1 - c['baujahr']
+                bew[u] = r2(bew_jahr(j, alter) / 12) + r2(co2_jahr(j) / 12)
+            erb[u] = r2(c['erbbau'] * iK[j] / 12)
         else:
-            soll[u] = r2(sum(sum((fl * mi.get(m, D(0)) for fl, mi in teile), D(0)) + sonst[m] for m in monate(u)))
-            if c.get('jm_soll_alt'):
-                soll[u] = sum((soll_m[m] for m in monate(u)), D(0))
-            j = u
+            soll[u] = r2(sum((summe_m(m) for m in monate(u)), D(0)))      # R-2.2, R-6.4
             alter = c['startjahr'] + j - 1 - c['baujahr']
-            jb_ = (H['verw'] * c['einh'] + inst_satz(alter) * wfl + H['bk'] * wfl + K['weitere'] * wfl) * iK[j]
-            bew[u] = r2(jb_) + r2(c['co2'] * wfl * K['co2_anteil'] * H['co2preis'] * iC[j] / 1000)
+            bew[u] = r2(bew_jahr(j, alter)) + r2(co2_jahr(j))
             erb[u] = r2(c['erbbau'] * iK[j])
         miete[u] = max(D(0), r2(soll[u] * (1 - ausfall)))
 
@@ -583,16 +738,17 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
     erh = list(Zr)
     bau_raten = {}
     if nb:
-        bk0 = r2(c['bgf'] * c['kkw'] * (1 + H['zus1'] + H['zus2']) * bk_fakt) + r2(D(c['stp']) * H['stp'] * bk_fakt)
+        zuschlag = D(0) if c.get('kkw_gesamt') else H['zus1'] + H['zus2']
+        bk0 = r2(c['bgf'] * c['kkw'] * (1 + zuschlag) * bk_fakt) + r2(D(c['stp']) * H['stp'] * bk_fakt)
         for m in range(1, bauzeit + 1):
-            f = r12((1 + H['bau']) ** (D(m) / D(12)))
-            bau_raten[m] = r2(bk0 / bauzeit * f)
+            f = D(1) if c.get('festpreis') else r12((1 + H['bau']) ** (D(vorlauf + m) / D(12)))
+            bau_raten[vorlauf + m] = r2(bk0 / bauzeit * f)
         baukosten = sum(bau_raten.values(), D(0))
         gesamt = preis + enk + baukosten
         inv[0] = preis + enk
         for m, v in bau_raten.items():
             inv[m] += v
-        R.update(bk0=bk0, baukosten=baukosten, gesamt=gesamt, raten=bau_raten)
+        R.update(bk0=bk0, baukosten=baukosten, raten=bau_raten)
         boden_w = preis + enk
         afa_grund = baukosten
         afa_satz = K['afa_neubau']
@@ -601,17 +757,17 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
         baukosten = D(0)
         gesamt = preis + enk
         inv[0] = preis + enk
-        boden_w = r2((preis + enk) * c['boden'])
+        bod = c['boden'] if status in UEB else H['h39']
+        boden_w = r2((preis + enk) * bod)
         afa_grund = preis + enk - boden_w
         afa_satz = K['afa_ankauf']
         W = preis
-    if c.get('wert'):
-        W = c['wert']
+    R['gesamt'] = gesamt
 
     # Investitionsstau (R-6.10, R-6.16, R-8.4)
     stau_zahl = D(0)
     stau_abzug = D(0)
-    akt_massn = {}     # Planjahr der Zahlung -> aktivierter Betrag
+    akt_massn = {}     # Jahr der Ausfuehrung k -> aktivierter Betrag
     stau0 = D(0)
     if stau > 0:
         k = c['stau_jahr']
@@ -620,135 +776,145 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
         else:
             stau_zahl = r2(stau * (1 + H['bau']) ** k)
             u_st = k * p
-            aktiv = c['stau_art'] == 'modernisierung'
+            aktiv = False
             if k <= K['anh_jahre'] and not nb:
                 if stau_zahl / (1 + K['ust']) > K['anh_quote'] * afa_grund:
                     aktiv = True
                     R['meld'].add('M-36')
             if aktiv:
                 inv[u_st] += stau_zahl
-                akt_massn[k if c.get('akt0_ab_j1', True) else max(k, 1)] = stau_zahl
+                akt_massn[k] = stau_zahl
             else:
                 erh[u_st] += stau_zahl
             if k == 0:
                 stau0 = stau_zahl
     R['stau_zahl'] = stau_zahl
 
-    # Foerderung (R-11.14)
+    # Foerderung (R-11.14); im Stressfall auf dem Stand des Basisfalls
     fd = zu = mind_ek = entg_d = entg_z = D(0)
-    if c['foerder']:
-        zk_bau = min(baukosten, K['f_grenze'] * wfl)
-        zk_gr = min(preis + enk, c['brw'] * c['gfl'])
-        zk = zk_bau + zk_gr
-        fd = r2(K['f_darl'] * zk)
-        zu = r2(K['f_zus'] * zk)
-        mind_ek = r2(K['f_ek'] * zk)
-        entg_d = r2(fd * K['f_entg_d'])
-        entg_z = r2(zu * K['f_entg_z'])
-        if basis is not None:      # R-11.8: Foerdermittel bleiben auf dem Stand des Basisfalls
-            fd, zu, mind_ek, entg_d, entg_z = basis['fd'], basis['zu'], basis['mind_ek'], basis['entg_d'], basis['entg_z']
-            zk, zk_bau = basis['zk'], basis['zk_bau']
-        R.update(zk=zk, zk_bau=zk_bau, fd=fd, zu=zu, mind_ek=mind_ek, entg=entg_d + entg_z, entg_d=entg_d, entg_z=entg_z)
+    if foerder:
+        if basis is not None:
+            fd, zu, mind_ek, entg_d, entg_z = (basis[k_] for k_ in ('fd', 'zu', 'mind_ek', 'entg_d', 'entg_z'))
+            zk = basis['zk']
+        else:
+            zk_bau = min(baukosten, K['f_grenze'] * wfl)
+            zk_gr = min(preis + enk, c['brw'] * c['gfl'])
+            zk = zk_bau + zk_gr
+            fd = r2(K['f_darl'] * zk)
+            zu = r2(K['f_zus'] * zk)
+            mind_ek = r2(K['f_ek'] * zk)
+            entg_d = r2(fd * K['f_entg_d'])
+            entg_z = r2(zu * K['f_entg_z'])
+        R.update(zk=zk, fd=fd, zu=zu, mind_ek=mind_ek, entg=entg_d + entg_z, entg_d=entg_d, entg_z=entg_z)
     Mbed = preis + enk + baukosten + stau0 + entg_d + entg_z
     R['M'] = Mbed
 
-    # ---- nachhaltiger Reinertrag (R-5.12) und Reinertrag im ersten Jahr der Vollvermietung
-    vj_mon = range(m0, m0 + 12)
-    vj_per = range((m0 - 1) // mp + 1, (m0 - 1) // mp + 1 + p)
-    roh_n = D(0)
-    roh_mon = []
-    for m in vj_mon:
-        x = D(0)
-        for fl, mi in teile:
-            vgl = vmj(m)
-            x += fl * min(mi[m], vgl) if not c.get('ma026_3') else fl * mi[m]
-        x += sonst[m]
-        roh_mon.append(x)
-        roh_n += x
+    # ---- nachhaltiger Reinertrag (R-5.12) und Reinertrag im ersten Jahr der Vollvermietung (R-6.12)
+    u0 = (m0 - 1) // mp + 1
+    vj_per = range(u0, u0 + p)
+    roh_u, einz_u = [], []
+    for u in vj_per:
+        x = r2(sum((summe_m(m, nachhaltig=True) for m in monate(u)), D(0)))
+        roh_u.append(x)
+        einz_u.append(max(D(0), r2(x * (1 - H['leer'] - H['ford']))))
+    roh_n = sum(roh_u, D(0))
+    ausf_n = roh_n - sum(einz_u, D(0))
     bew_vj = sum((bew[u] for u in vj_per), D(0))
     erb_vj = sum((erb[u] for u in vj_per), D(0))
     miete_vj = sum((miete[u] for u in vj_per), D(0))
     soll_vj = sum((soll[u] for u in vj_per), D(0))
     re_vj = miete_vj - bew_vj - erb_vj
-    lesart_ausfall = c.get('ausfall_lesart', 'monat')
-    if lesart_ausfall == 'exakt':
-        ausf_n = roh_n * ausfall
-    elif lesart_ausfall == 'runde':
-        ausf_n = r2(roh_n * ausfall)
-    else:  # 'monat'
-        # je Monat wie R-6.4: Sollmiete gerundet, Einzahlung gerundet; Ausfall ist die Differenz
-        ausf_n = sum((r2(x) - max(D(0), r2(r2(x) * (1 - ausfall))) for x in roh_mon), D(0))
-        roh_n = sum((r2(x) for x in roh_mon), D(0))
-    abzug = max(bew_vj + ausf_n, r2(K['bank_mind'] * roh_n))
+    h33 = K['bank_mind'] if H.get('h33') is None else H['h33']
+    abzug = max(bew_vj + ausf_n, r2(h33 * roh_n))
     re_n = roh_n - abzug - erb_vj
     if c.get('ma026_3'):
         re_n = re_vj
-    R.update(roh_n=roh_n, re_n=re_n, re_vj=re_vj, bew_vj=bew_vj, miete_vj=miete_vj, soll_vj=soll_vj)
+    R.update(roh_n=roh_n, ausf_n=ausf_n, re_n=re_n, re_vj=re_vj, bew_vj=bew_vj, erb_vj=erb_vj,
+             miete_vj=miete_vj, soll_vj=soll_vj)
 
-    # ---- uebrige Darlehen
-    tr = []
-    U_sum = U_B = KD_U = D(0)
+    # ---- uebrige Darlehen zu Bemessungskonditionen (R-5.12)
     zb_bank = c['zb'] * p
-    i_k_bank = max(c['zins'], H['h25'] if H['h25'] is not None else c['zins'] + H['anschl_auf'])
-    t_k_bank = max(c['tilg'], H['mindtilg'])
-    if c.get('ma026_2'):
-        i_k_bank, t_k_bank = c['zins'], c['tilg']
-    foerd_tr = kfw_tr = ueb_tr = None
+    m_B = (c['zb'] if H.get('h32') is None else H['h32']) * p
+    h25 = H.get('h25')
+    mindtilg = H['mindtilg']
+    mind_bank = max(mindtilg, K['f_mindtilg']) if foerder else mindtilg
+    if foerder and c['tilg'] < K['f_mindtilg']:
+        raise Meldung('M-20', 'E-64 unter der Mindesttilgung nach KAT-10')
+
+    def bem_zins_tr(vertrag, zb_per, anschluss_tr):
+        i_kalk = max(vertrag, anschluss_tr if h25 is None else h25)
+        if c.get('ma026_4'):
+            return r12(i_kalk)
+        m_V = m_B if zb_per is None else min(m_B, zb_per)
+        return r12((vertrag * m_V + i_kalk * (m_B - m_V)) / m_B)
+
+    U_sum = U_B = KD_U = D(0)
+    kd_bem = {}
+    anschluss_bem = zins_bem + H['anschl_auf']            # Anschlusszins, der dem Bankdarlehen folgt (ohne Anschlussstress)
     if c.get('uebern'):
         ue = c['uebern']
-        anschl_u = ue['anschluss'] + st_anschl
-        ueb_tr = Tranche('uebernommen', ue['rest'], 'prozent', ue['zins'], ue['tilg'], bezug=ue['nenn'],
-                         ausz={0: ue['rest']}, zb_ende=ue['zb'] * p, anschluss=anschl_u, regel=H['regel'],
-                         beitrag=ue.get('beitrag', D(0)), foerder=ue.get('foerder', True), mindtilg=H['mindtilg'])
-        tr.append(ueb_tr)
+        nenn_u = ue.get('nenn') or ue['rest']
+        anschl_ue = ue.get('anschluss')
+        if anschl_ue is None:
+            anschl_ue_bem = anschluss_bem
+        else:
+            anschl_ue_bem = anschl_ue
+        zb_u = None if ue.get('zb') is None else ue['zb'] * p
+        iB = bem_zins_tr(ue['zins'], zb_u, anschl_ue_bem)
+        rate_B = r2(nenn_u * (iB + max(ue['tilg'], mindtilg)) / p)
+        kd = p * rate_B + p * r2(ue['rest'] * ue.get('beitrag', D(0)) / p)
         U_sum += ue['rest']
-        if ue.get('rang', 'vor') == 'vor':
-            U_B += ue['rest']
-        vertr = 12 * r2(ue['nenn'] * (ue['zins'] + ue['tilg']) / 12)
-        ik = max(ue['zins'], H['h25'] if H['h25'] is not None else ue['anschluss'])
-        tk = max(ue['tilg'], H['mindtilg'])
-        basis_k = ue['rest'] if c.get('ueb_kalk_basis', 'rest') == 'rest' else ue['nenn']
-        kalk = p * r2(basis_k * (ik + tk) / p) + r2(ue['rest'] * ue.get('beitrag', D(0)))
-        if c.get('ma026_2') or (ue.get('foerder', True) and ue['zb'] * p >= zb_bank):
-            kd = vertr
-        else:
-            kd = max(vertr, kalk)
+        U_B += ue['rest']
         KD_U += kd
-        R['kd_ueb'] = kd
-    if nb and c['kfw'] > 0:
-        U_sum += c['kfw']
-        U_B += c['kfw']
-        ik = max(K['kfw_zins'], H['h25'] if H['h25'] is not None else c['zins'] + H['anschl_auf'])
-        tk = max(K['kfw_tilg'], H['mindtilg'])
-        if c.get('ma026_2'):
-            # Vertragskonditionen: Kapitaldienst der ersten zwoelf Tilgungsmonate
-            kd = 12 * r2(c['kfw'] * (K['kfw_zins'] + K['kfw_tilg']) / 12)
-        else:
-            kd = p * r2(c['kfw'] * (ik + tk) / p)
+        kd_bem['uebernommen'] = dict(iB=iB, kd=kd, rate=rate_B)
+    kfw = c.get('kfw', D(0)) if nb else D(0)
+    if kfw > 0:
+        Tk, fk = c['kfw_T'], c['kfw_f']
+        var = K['kfw_var'].get(Tk)
+        hoechst = c['einh'] * (K['kfw_max_siegel'] if c.get('kfw_siegel') else K['kfw_max'])
+        if var is None or not (var[0] <= fk <= var[1]) or kfw > hoechst:
+            raise Meldung('M-20', 'KfW-Darlehen: Betrag oder Laufzeitvariante')
+        kfw_zins = K['kfw_zins'] if c.get('kfw_zins') is None else c['kfw_zins']
+        kfw_m = (Tk - fk) * 12
+        iB = bem_zins_tr(kfw_zins, K['kfw_zb'] * p, anschluss_bem)
+        rate_B = max(annuitaet(kfw, iB / p, kfw_m), r2(kfw * (iB + mindtilg) / p))
+        kd = p * rate_B
+        U_sum += kfw
+        U_B += kfw
         KD_U += kd
-        R['kd_kfw_kalk'] = kd
+        kd_bem['kfw'] = dict(iB=iB, kd=kd, rate=rate_B)
 
-    # Foerderdarlehen: vertraglicher Kapitaldienst der ersten zwoelf Tilgungsmonate
-    if c['foerder']:
+    # ---- Mittelabruf Teil 1: Termine der Foerdermittel (R-11.3, R-5.11)
+    if foerder:
+        a1, a2, a3, a4 = K['f_teil']
+        bereit = [vorlauf + 1,
+                  vorlauf + ceil_int(H['h37'][0] * bauzeit) + 1,
+                  vorlauf + ceil_int(H['h37'][1] * bauzeit) + 1,
+                  bauende + anlauf_nb + 1]
+        ges_f = fd + zu
+        ober = [r2(a1 * ges_f), r2((a1 + a2) * ges_f), r2((a1 + a2 + a3) * ges_f), ges_f]
+        R.update(bereit=bereit, ober=ober)
+        f_T = min(bereit[3] + 1, vorlauf + 1 + K['f_frist'])                 # Tilgungsbeginn
+        f_m = bauende + K['f_tilg_j'] * 12 - f_T + 1                         # Zahl der Raten
+        f_zb = bauende + K['f_zinslos'] * 12                                 # Ende der zinslosen Zeit
+        iB = bem_zins_tr(D(0), f_zb, K['f_zins_danach'])
+        rate_B = r2(fd * (iB + max(D(p) / D(f_m), mindtilg)) / p)
+        kd = p * rate_B + p * r2(fd * K['f_beitrag'] / p)
         U_sum += fd
-        if not c.get('ma026_1'):
-            U_B += fd
-        mt = K['f_tilg_j'] * 12
-        rate_f = r2(fd / mt)
-        rest = fd
-        kd = D(0)
-        for _ in range(12):
-            kd += r2(rest * K['f_beitrag'] / 12) + rate_f
-            rest -= rate_f
+        U_B += fd
         KD_U += kd
-        R['kd_foerder'] = kd
+        kd_bem['foerder'] = dict(iB=iB, kd=kd, rate=rate_B)
+        R.update(f_T=f_T, f_m=f_m)
+    R['kd_bem'] = kd_bem
 
     # ---- Bankdarlehen (R-5.12)
+    i_k = max(zins_bem, anschluss_bem if h25 is None else h25)
+    t_k = max(c['tilg'], mind_bank)
+    ik_tk = i_k + t_k
     A = H['beta'] * W - U_B
     C = Mbed - U_sum - zu - mind_ek
     if C < 0:
-        raise M22()
-    ik_tk = i_k_bank + t_k_bank
+        raise Meldung('M-22', 'hoechster KfW-Betrag: %s' % floor2(max(D(0), kfw + C)))
     if ik_tk == 0:
         Bv = None if re_n / H['mu'] >= KD_U else D(0)
     else:
@@ -758,119 +924,161 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
     cands = [('a', A), ('c', C)] + ([('b', Bv)] if Bv is not None else [])
     mn = min(v for _, v in cands)
     L = max(D(0), floor2(mn))
-    bind = [k for k, v in cands if v == mn]
+    bind = [k_ for k_, v in cands if v == mn]
     if Bv is not None and Bv <= 0:
         L = D(0)
         R['meld'].add('M-21')
         bind = ['b']
-    if basis is not None:
-        L_fix = basis['L']
-    if L_fix is not None:
-        L = L_fix
+    R.update(A=A, B=Bv, C=C, L=L, bind=bind, W=W, KD_U=KD_U, i_k=i_k, t_k=t_k, U_sum=U_sum)
+    if nur_bemessung:
+        return R
+    if basis is not None:                                  # R-11.8: neu bemessen mit den Annahmen des Basisfalls
+        L = basis['L']
+        R.update(L=L, bind=basis['bind'], A=basis['A'], B=basis['B'], C=basis['C'], re_n=basis['re_n'],
+                 KD_U=basis['KD_U'], i_k=basis['i_k'], t_k=basis['t_k'], kd_bem=basis['kd_bem'],
+                 gesamt_basis=basis['gesamt'])
+        if 'M-21' in basis['meld']:
+            R['meld'].add('M-21')
+        else:
+            R['meld'].discard('M-21')
+        re_n, KD_U, i_k, t_k = basis['re_n'], basis['KD_U'], basis['i_k'], basis['t_k']
+        ik_tk = i_k + t_k
     EK = Mbed - U_sum - zu - L
-    R.update(A=A, B=Bv, C=C, L=L, bind=bind, EK=EK, W=W, KD_U=KD_U)
+    R['EK'] = EK
+    KD_B = KD_U + p * r2(L * ik_tk / p)
+    R.update(KD_B=KD_B, deck_bem=(re_n / KD_B if KD_B else None), res_bem=re_n - H['mu'] * KD_B)
 
     # ---- Mittelabruf (R-11.3)
     einl = list(Zr)
     zus_fl = list(Zr)
     zus_entg = list(Zr)
+    luecke = list(Zr)                     # Stand der Zwischenfinanzierung am Periodenende
     ausz_fd, ausz_kfw, ausz_bank = {}, {}, {}
-    ek_r, fd_r, zu_r, kfw_r, L_r = EK, fd, zu, c.get('kfw', D(0)) if nb else D(0), L
+    ek_r, fd_r, zu_r, kfw_r, L_r = EK, fd, zu, kfw, L
     erster_f = True
-    for u in range(0, (bauzeit if nb else 0) + 1):
-        need = inv[u] + (erh[u] if u == 0 else D(0))
-        if u >= 1 and not nb:
-            need = D(0)
-        if u >= 1 and nb:
+    lue = D(0)
+    ende_abruf = bereit[3] if foerder else bauende
+    for u in range(0, (ende_abruf if nb else 0) + 1):
+        if u == 0:
+            need = inv[0] + erh[0]
+            if c.get('uebern'):
+                need -= c['uebern']['rest']
+        else:
             need = bau_raten.get(u, D(0))
-        if u == 0 and c.get('uebern'):
-            need -= c['uebern']['rest']
         x = min(ek_r, need)
         einl[u] += x
         ek_r -= x
         need -= x
-        if need > 0 and (fd_r + zu_r) > 0:
-            if erster_f:
-                need += entg_d + entg_z
-                zus_entg[u] = entg_z
-                erster_f = False
-            y = min(need, fd_r + zu_r)
-            if y == fd_r + zu_r:
-                yd, yz = fd_r, zu_r
+        if foerder and (fd_r + zu_r) > 0:
+            if u >= bereit[3]:
+                y = fd_r + zu_r
             else:
-                if c['split'] == 'zuschuss_rest':
-                    yd = min(fd_r, r2(y * fd / (fd + zu)))
-                    yz = y - yd
-                else:
-                    yz = min(zu_r, r2(y * zu / (fd + zu)))
+                extra = (entg_d + entg_z) if (erster_f and need > 0) else D(0)
+                frei_ = sum((1 for b_ in bereit[:3] if u >= b_))
+                grenze = (ober[frei_ - 1] if frei_ else D(0)) - (ges_f - fd_r - zu_r)
+                y = max(D(0), min(grenze, need + extra + lue))
+            if y > 0:
+                if erster_f:
+                    need += entg_d + entg_z
+                    zus_entg[u] = entg_z
+                    erster_f = False
+                yd = min(fd_r, r2(y * fd / ges_f))
+                yz = y - yd
+                if yz > zu_r:
+                    yz = zu_r
                     yd = y - yz
-            ausz_fd[u] = yd
-            zus_fl[u] = yz
-            fd_r -= yd
-            zu_r -= yz
-            need -= y
+                ausz_fd[u] = yd
+                zus_fl[u] = yz
+                fd_r -= yd
+                zu_r -= yz
+                need -= y                 # negativ: die Teilrate holt die Luecke nach
         if need > 0 and kfw_r > 0:
             y = min(need, kfw_r)
-            ausz_kfw[u] = y
+            ausz_kfw[u] = ausz_kfw.get(u, D(0)) + y
             kfw_r -= y
             need -= y
         if need > 0 and L_r > 0:
             y = min(need, L_r)
-            ausz_bank[u] = y
+            ausz_bank[u] = ausz_bank.get(u, D(0)) + y
             L_r -= y
             need -= y
-        if need > 0:           # Rest (sollte null sein)
-            einl[u] += need
-    if not nb and c.get('uebern'):
-        pass
-    R['mittelabruf'] = dict(einl=[x for x in einl if x], fd=ausz_fd, kfw=ausz_kfw, bank=ausz_bank)
+        lue += need
+        if u == bauende and nb:           # was am Bauende nicht abgerufen ist, fliesst im Monat des Bauendes
+            if ek_r > 0:
+                einl[u] += ek_r
+                lue -= ek_r
+                ek_r = D(0)
+            if kfw_r > 0:
+                ausz_kfw[u] = ausz_kfw.get(u, D(0)) + kfw_r
+                lue -= kfw_r
+                kfw_r = D(0)
+            if L_r > 0:
+                ausz_bank[u] = ausz_bank.get(u, D(0)) + L_r
+                lue -= L_r
+                L_r = D(0)
+        luecke[u] = max(D(0), lue)
+    R['mittelabruf'] = dict(einl=einl, fd=ausz_fd, kfw=ausz_kfw, bank=ausz_bank, zus=zus_fl, luecke=luecke)
 
     # ---- Tranchen
-    tb = bauzeit + 1 if nb else 1
-    if L > 0:
-        bank_tr = Tranche('bank', L, 'prozent', zins, c['tilg'], ausz=ausz_bank or {0: L}, tilg_beginn=tb,
-                          zb_ende=zb_bank, anschluss=anschluss_bank, regel=H['regel'], bank=True,
-                          bz_satz=H['bz_satz'] if nb else D(0), bz_frei=H['bz_frei'] * p // 12,
-                          mindtilg=H['mindtilg'])
-        tr.append(bank_tr)
-    else:
-        bank_tr = None
-    if nb and c['kfw'] > 0:
-        kfw_tr = Tranche('kfw', c['kfw'], 'prozent', K['kfw_zins'], K['kfw_tilg'], ausz=ausz_kfw,
-                         tilg_beginn=bauzeit + 1 + K['kfw_frei'] * 12, zb_ende=K['kfw_zb'] * 12,
-                         anschluss=anschluss_bank, regel=H['regel'], mindtilg=H['mindtilg'])
-        tr.append(kfw_tr)
-    if c['foerder']:
-        foerd_tr = Tranche('foerder', fd, 'raten', D(0), ausz=ausz_fd, einb=entg_d, tilg_beginn=bauzeit + 1,
-                           zb_ende=bauzeit + K['f_zinslos'] * 12, anschluss=K['f_zins_danach'],
-                           beitrag=K['f_beitrag'], m=K['f_tilg_j'] * 12, foerder=True)
-        tr.append(foerd_tr)
-    for t in tr:
-        t.plan(N, p)
+    def tranchen(regel):
+        tr = []
+        if c.get('uebern'):
+            ue = c['uebern']
+            a_ue = ue.get('anschluss')
+            a_ue = (anschluss_bank if a_ue is None else a_ue + st_anschl)
+            tr.append(Tranche('uebernommen', ue['rest'], 'prozent', ue['zins'], ue['tilg'],
+                              bezug=ue.get('nenn') or ue['rest'], ausz={0: ue['rest']},
+                              zb_ende=None if ue.get('zb') is None else ue['zb'] * p, anschluss=a_ue,
+                              regel=regel, beitrag=ue.get('beitrag', D(0)), mindtilg=mindtilg, t_voll_fix=0))
+        if L > 0:
+            tr.append(Tranche('bank', L, 'prozent', zins, c['tilg'], ausz=ausz_bank or {0: L},
+                              tilg_beginn=bauende + 1 if nb else 1, zb_ende=zb_bank, anschluss=anschluss_bank,
+                              regel=regel, bz_satz=H['bz_satz'] if nb else D(0), bz_frei=H['bz_frei'],
+                              mindtilg=mind_bank))
+        if kfw > 0:
+            uA = min(ausz_kfw)
+            tr.append(Tranche('kfw', kfw, 'laufzeit', kfw_zins, ausz=ausz_kfw,
+                              tilg_beginn=uA + 12 * c['kfw_f'] + 1, zb_ende=K['kfw_zb'] * 12,
+                              anschluss=anschluss_bank, m=kfw_m, bz_satz=K['kfw_bp'],
+                              bz_frei=K['kfw_bp_frei']))
+        if foerder:
+            tr.append(Tranche('foerder', fd, 'raten', D(0), ausz=ausz_fd, einb=entg_d, tilg_beginn=f_T,
+                              zb_ende=f_zb, anschluss=K['f_zins_danach'], beitrag=K['f_beitrag'], m=f_m,
+                              foerder=True))
+        for t in tr:
+            t.plan(N, p)
+        return tr
+    tr = tranchen(c.get('regel', 'tilgungssatz'))      # 'regel' nur zum Nachrechnen der Zahlen zu MA-034 / V-01
+    trd = {t.name: t for t in tr}
+    if kfw > 0 and max(ausz_kfw) > K['kfw_abruf']:
+        R['meld'].add('M-49')
+        R['m49_reicht'] = max(ausz_kfw) <= K['kfw_abruf'] + K['kfw_abruf_verl']
 
-    # ---- Verkauf (Kap. 8)
-    mjm = lambda u: 12 * (soll[u] if p == 12 else r2(sum((fl * mi[u * 12] for fl, mi in teile), D(0)) + sonst[u * 12])) * (1 - leer) \
-        - 12 * (erb[u] if p == 12 else erb_m[u * 12])
-    vpreis = max(D(0), r2(vf * mjm(N)))
+    # ---- Verkauf (Kapitel 8)
+    def mjm_monat(m):
+        return 12 * soll_m[m] * (1 - leer) - 12 * r2(c['erbbau'] * iK[pj(m)] / 12)
+    vpreis = max(D(0), r2(vf * mjm_monat(NM)))
     vkost = r2(vpreis * H['vk'])
     verl = vpreis - vkost - stau_abzug
     rueck = D(0)
     bind_m_ges = K['f_bindung'] * 12
-    if c['foerder']:
-        offen = max(0, bauzeit + bind_m_ges - N)
+    if foerder:
+        offen = max(0, bauende + bind_m_ges - N)
         rueck = r2(zu * offen / bind_m_ges)
-    R.update(vpreis=vpreis, vkost=vkost, verl=verl, rueck=rueck, mjm_N=mjm(N))
+    R.update(vpreis=vpreis, vkost=vkost, verl=verl, rueck=rueck, mjm_N=mjm_monat(NM), mjm_1=mjm_monat(m0),
+             mjm=mjm_monat)
 
     # ---- Vorfaelligkeit (R-5.16)
+    kuend = (K['kuend_sperr'] + K['kuend_frist']) * p
+    kuend = kuend // 12 + (1 if kuend % 12 else 0)             # im Jahresmodus aufgerundet
     vfe = D(0)
     for t in tr:
+        t.vfe = D(0)
         if t.foerder or t.zb_ende is None:
             continue
-        t_voll = 0 if t.name == 'uebernommen' else t.t_voll
-        rb = max(0, min(t.zb_ende, t_voll + (K['kuend_sperr'] + K['kuend_frist']) * p // 12) - N)
-        v = r2(t.abl_rest * H['vfe'] * rb / p)
-        t.vfe = v
-        vfe += v
+        rb = max(0, min(t.zb_ende, t.t_voll + kuend) - N)
+        t.vfe = r2(t.abl_rest * H['vfe'] * rb / p)
+        vfe += t.vfe
     if vfe > 0:
         R['meld'].add('M-25')
     R['vfe'] = vfe
@@ -878,64 +1086,64 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
     # ---- Abschreibung (R-7.3)
     afa = [D(0)] * (n + 1)
     rest_g = afa_grund
-    zu_geb = D(0)
-    ma031 = c.get('ma031', 'zufluss')
-    if c['foerder'] and ma031 == 'minderung':
-        zu_geb = r2(zu * zk_bau / zk)
-        rest_g = afa_grund - zu_geb
-    grund_eff = rest_g
-    akt_rest = {}
-    akt_sum = D(0)
+    akt_rest = dict(akt_massn)
     for j in range(1, n + 1):
-        if nb:
-            mon = sum(1 for m in range((j - 1) * 12 + 1, j * 12 + 1) if m > bauzeit)
-        else:
-            mon = 12
-        x = min(rest_g, r2(grund_eff * afa_satz * mon / 12))
+        mon = sum(1 for m in range((j - 1) * 12 + 1, j * 12 + 1) if m > bauende) if nb else 12
+        x = min(rest_g, r2(afa_grund * afa_satz * mon / 12))
         rest_g -= x
-        for jz, betrag in akt_massn.items():
-            if j > jz:
-                r_ = akt_rest.get(jz, betrag)
-                y = min(r_, r2(betrag * afa_satz))
-                akt_rest[jz] = r_ - y
+        for k_, betrag in akt_massn.items():
+            if j > k_:
+                y = min(akt_rest[k_], r2(betrag * afa_satz))
+                akt_rest[k_] -= y
                 x += y
         afa[j] = x
-    akt_sum = sum(akt_massn.values(), D(0))
-    buchwert = boden_w - (zu - zu_geb if (c['foerder'] and ma031 == 'minderung') else D(0)) + grund_eff + akt_sum - sum(afa)
+    buchwert = boden_w + afa_grund + sum(akt_massn.values(), D(0)) - sum(afa)
     R.update(afa=afa, buchwert=buchwert, boden=boden_w, afa_grund=afa_grund)
 
     # ---- steuerliche Nebenreihen: einbehaltene Betraege (R-7.15), Zuschuss (R-7.19)
-    einb_abz = [D(0)] * (n + 1)
-    einb_ges = entg_d + entg_z
-    if einb_ges > 0:
-        u1 = foerd_tr.first
-        zbe = foerd_tr.zb_ende
-        if c['status'] == 'privat' or c.get('ma032_sofort'):
-            einb_abz[(max(u1, 1) - 1) // p + 1] = einb_ges
+    einb_abz = [D(0)] * (n + 1)           # Entgelt des Foerderdarlehens: Entgelt fuer Schulden
+    zus_ertrag = [D(0)] * (n + 1)         # steuerpflichtiger Ertrag aus dem Zuschuss
+    zentg_abz = [D(0)] * (n + 1)          # abziehbarer Teil des Entgelts auf den Zuschuss
+    rueck_op = D(0)                       # Rueckzahlung im operativen Ergebnis (sofortige Einnahme)
+    if foerder:
+        S_, E_ = trd['foerder'].first, f_zb
+        rest_e = entg_d
+        for j in range(1, n):
+            mon = max(0, min(j * p, E_) - max(S_, (j - 1) * p))
+            x = min(rest_e, r2(entg_d * mon / (E_ - S_)))
+            einb_abz[j] = x
+            rest_e -= x
+        einb_abz[n] = rest_e
+        if status in UEB:
+            verteilt = bool(c.get('e70'))
+            if verteilt and K['f_bindung'] <= K['kat19']:
+                raise Meldung('M-20', 'E-70 nur bei einer Bindung ueber der Mindestdauer KAT-19')
         else:
-            ges_mon = zbe - u1
-            done = D(0)
-            for j in range(1, n + 1):
-                mon = sum(1 for u in range((j - 1) * p + 1, j * p + 1) if u1 < u <= zbe)
-                einb_abz[j] = r2(einb_ges * mon / ges_mon)
-                done += einb_abz[j]
-            if c.get('einb_rest', True):
-                einb_abz[n] += einb_ges - done
-    zus_ertrag = [D(0)] * (n + 1)
-    if c['foerder']:
-        if ma031 == 'zufluss':
+            if c.get('e70'):
+                raise Meldung('M-20', 'E-70 nur bei Privatperson, Verein und Stiftung')
+            verteilt = c.get('ma031', 'verteilt') == 'verteilt'
+        R['zuschuss_lesart'] = 'verteilt' if verteilt else 'sofort'
+        if verteilt:
+            rest_z, rest_ze = zu, entg_z
+            for j in range(1, n):
+                mon = sum(1 for u in range((j - 1) * p + 1, j * p + 1) if bauende < u <= bauende + bind_m_ges)
+                x = min(rest_z, r2(zu * mon / bind_m_ges))
+                zus_ertrag[j] = x
+                rest_z -= x
+                y = min(rest_ze, r2(entg_z * mon / bind_m_ges))
+                zentg_abz[j] = y
+                rest_ze -= y
+            zus_ertrag[n] = rest_z - rueck
+            zentg_abz[n] = rest_ze
+        else:
             for u in range(0, N + 1):
-                if zus_fl[u]:
-                    zus_ertrag[max(1, (u - 1) // p + 1)] += zus_fl[u]
-        elif ma031 == 'verteilt':
-            done = D(0)
-            for j in range(1, n + 1):
-                mon = sum(1 for u in range((j - 1) * p + 1, j * p + 1) if bauzeit < u <= bauzeit + bind_m_ges)
-                zus_ertrag[j] = r2(zu * mon / bind_m_ges)
-                done += zus_ertrag[j]
-            zus_ertrag[n] += (zu - rueck) - done
-    g_v = verl - buchwert - (rueck if ma031 != 'verteilt' else D(0))
+                jj = max(1, (u - 1) // p + 1)
+                zus_ertrag[jj] += zus_fl[u]
+                zentg_abz[jj] += zus_entg[u]
+            rueck_op = rueck
+    g_v = verl - buchwert                 # R-7.4: die Rueckzahlung mindert den Verkaufsgewinn nicht
     R['g_v'] = g_v
+    R.update(einb_abz=einb_abz, zus_ertrag=zus_ertrag, zentg_abz=zentg_abz)
 
     # ---- Finanzplan (R-4.3)
     hp, kp = psatz(H['h'], p), psatz(H['k'], p)
@@ -944,11 +1152,11 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
     linie = H['linie']
     nach = list(Zr)
     steuer_u = list(Zr)
-    hz_u, kz_u = list(Zr), list(Zr)
-    G_u, KK_u = list(Zr), list(Zr)
+    G_u, KK_u, kz_u = list(Zr), list(Zr), list(Zr)
     acc = dict(miete=D(0), bew=D(0), erb=D(0), erh=D(0), zins=D(0), kkz=D(0), beitr=D(0), bz=D(0), hz=D(0))
     jahr = []
     zeilen = []
+    vfe_verkauf = status in UEB           # Vorfaelligkeit gehoert zum Verkauf (R-7.11, R-7.17)
     for u in range(0, N + 1):
         orig = -inv[u] + miete[u] - bew[u] - erb[u] - erh[u] + zus_fl[u]
         if u == N:
@@ -983,11 +1191,11 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
             j = u // p
             letzt = u == N
             entg = acc['zins'] + acc['kkz'] + acc['beitr'] + acc['bz'] + einb_abz[j]
-            e_op = acc['miete'] - acc['bew'] - acc['erb'] - acc['erh'] - afa[j] - entg + zus_ertrag[j]
-            gv = g_v if letzt else D(0)
-            if letzt and c['status'] != 'privat':
-                e_op -= vfe
+            if letzt and not vfe_verkauf:
                 entg += vfe
+            e_op = (acc['miete'] - acc['bew'] - acc['erb'] - acc['erh'] - afa[j] - entg
+                    + zus_ertrag[j] - zentg_abz[j] - (rueck_op if letzt else D(0)))
+            gv = g_v if letzt else D(0)
             if letzt:
                 st_ohne = copy.deepcopy(stz)
                 tax_ohne = st_ohne.jahr(j, e_op, acc['hz'], D(0), entg, acc['erb'], D(0), True)
@@ -996,7 +1204,7 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
                 R['steuer_verkauf'] = tax - tax_ohne
             jahr.append(dict(j=j, e_op=e_op, z_h=acc['hz'], entg=entg, tax=tax, miete=acc['miete'],
                              bew=acc['bew'] + acc['erb'], zins=acc['zins'], beitr=acc['beitr'], bz=acc['bz'],
-                             vv_e=stz.vv_e, vv_g=stz.vv_g, kkz=acc['kkz']))
+                             vv_e=stz.vv_e, vv_g=stz.vv_g, kkz=acc['kkz'], det=stz.log[-1]['det']))
             for kk in acc:
                 acc[kk] = D(0)
         steuer_u[u] = tax
@@ -1010,30 +1218,28 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
             if linie is None:
                 KKt = fehl
             else:
-                KKt = min(fehl, linie)
+                KKt = min(fehl, linie + (luecke[u] if u < len(luecke) else D(0)))
                 nach[u] = fehl - KKt
-        hz_u[u], kz_u[u], G_u[u], KK_u[u] = hz, kz, G, KKt
+        G_u[u], KK_u[u], kz_u[u] = G, KKt, kz
         if detail:
             zeilen.append(dict(u=u, orig=orig, zins=zins_u, tilg=tilg_u, beitr=beitr_u, bz=bz_u, abl=abl_u, hz=hz,
                                kz=kz, tax=tax, einl=einl[u], nach=nach[u], G=G, KK=KKt, miete=miete[u], bew=bew[u],
                                soll=soll[u]))
     EW = G - KKt
-    R.update(st_log=stz.log, EW=EW, jahr=jahr, zeilen=zeilen, nach=nach, einl=einl, tr=tr, steuer_u=steuer_u, soll=soll, miete=miete,
-             bew=bew, qm=qm, m0=m0, teile=teile, zus_fl=zus_fl, bauzeit=bauzeit, N=N)
+    R.update(st_log=stz.log, EW=EW, jahr=jahr, zeilen=zeilen, nach=nach, einl=einl, tr=tr, trd=trd,
+             steuer_u=steuer_u, soll=soll, miete=miete, bew=bew, qm=qm, m0=m0, teile=teile, zus_fl=zus_fl,
+             bauende=bauende, N=N, KK_u=KK_u, kz_u=kz_u, G_u=G_u, zwifi_max=max(luecke), zwifi_zins=sum(kz_u, D(0)))
 
-    # ---- Kennzahlen
+    # ---- Kennzahlen (Kapitel 10)
     e = [einl[u] + nach[u] for u in range(N + 1)]
     a = [D(0)] * (N + 1)
     EWU = alternative(c, N, p, e, a)
-    f = {}
-    for j in range(1, n + 1):
-        f[j] = r12((1 + H['h'] * (1 - stz.s_z(j))) ** (D(1) / D(p)))
+    f = {j: r12((1 + H['h'] * (1 - stz.s_z(j))) ** (D(1) / D(p))) for j in range(1, n + 1)}
     w = [D(1)] * (N + 1)
-    for t in range(N - 1, -1, -1):
-        w[t] = w[t + 1] * f[t // p + 1]
-    Zz = EW + sum((a[u] * w[u] for u in range(N + 1)), D(0))
+    for t_ in range(N - 1, -1, -1):
+        w[t_] = w[t_ + 1] * f[t_ // p + 1]
+    Zz = EW
     Dn = sum((e[u] * w[u] / w[0] for u in range(N + 1) if e[u]), D(0))
-    ZU = EWU
     nn = D(n)
 
     def rend(z_, d_):
@@ -1043,11 +1249,11 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
             return D(-1)
         return (z_ / d_) ** (1 / nn) - 1
     r = rend(Zz, Dn)
-    rU = rend(ZU, Dn)
-    EU = Zz - Dn * (1 + H['z']) ** n
-    inv_ende = bauzeit if nb else 0
-    ek_inv = sum(e[0:inv_ende + 1], D(0))
-    nach_lfd = sum(nach[inv_ende + 1:N], D(0))
+    rU = rend(EWU, Dn)
+    z_ziel = H['z_foerder'] if (foerder and H.get('z_foerder') is not None) else H['z']
+    EU = Zz - Dn * (1 + z_ziel) ** n
+    ek_inv = sum(e[0:bauende + 1], D(0))
+    nach_lfd = sum(nach[bauende + 1:N], D(0))
     fehl_vk = nach[N]
     if r == D(-1):
         R['meld'].add('M-29')
@@ -1056,76 +1262,123 @@ def rechne(c0, stress=False, L_fix=None, detail=True, basis=None):
     if fehl_vk > 0:
         R['meld'].add('M-42')
     R.update(EWU=EWU, dEW=EW - EWU, r=r, rU=rU, EU=EU, Z=Zz, Dn=Dn, w=w, ek_inv=ek_inv, nach_lfd=nach_lfd,
-             fehl_vk=fehl_vk, ek_ges=ek_inv + nach_lfd + fehl_vk, e=e)
+             fehl_vk=fehl_vk, ek_ges=ek_inv + nach_lfd + fehl_vk, e=e, z_ziel=z_ziel)
 
-    # Deckungen je Planjahr
+    # Deckungen (R-10.14)
+    re_j = {jd['j']: jd['miete'] - jd['bew'] for jd in jahr}
+
+    def kd_jahr(trs, j):
+        return sum((t.kd(u) for t in trs for u in range((j - 1) * p + 1, j * p + 1)), D(0))
     deck = {}
-    for jd in jahr:
-        j = jd['j']
-        re_ = jd['miete'] - jd['bew']
-        tilg_j = sum((t.s['tilg'][u] for t in tr for u in range((j - 1) * p + 1, j * p + 1)), D(0))
-        kd = jd['zins'] + jd['beitr'] + tilg_j
-        deck[j] = (re_ / kd if kd else None, re_, kd)
+    for j in re_j:
+        kd = kd_jahr(tr, j)
+        deck[j] = (re_j[j] / kd if kd else None, re_j[j], kd)
     R['deck'] = deck
-    # erstes Jahr der Vollvermietung
-    kd_vj = sum((t.s['zins'][u] + t.s['tilg'][u] + t.s['beitr'][u] for t in tr for u in vj_per), D(0))
+    kd_vj = sum((t.kd(u) for t in tr for u in vj_per), D(0))
     zi_vj = sum((t.s['zins'][u] + t.s['beitr'][u] for t in tr for u in vj_per), D(0))
     R['kd_vj'] = kd_vj
     R['deck_vj'] = re_vj / kd_vj if kd_vj else None
     R['zinsdeck_vj'] = re_vj / zi_vj if zi_vj else None
-    R['kd_je'] = {t.name: sum((t.s['zins'][u] + t.s['tilg'][u] + t.s['beitr'][u] for u in vj_per), D(0)) for t in tr}
-    erstes_voll = (m0 - 1 + 11) // 12 + 1 if nb else 1   # erstes Planjahr ganz in der Vermietung
-    if nb:
-        erstes_voll = (m0 - 1 + 11) // 12 + 1
-    kl = [(deck[j][0], j) for j in deck if j >= erstes_voll and deck[j][0] is not None]
-    if kl:
-        R['deck_min'] = min(kl)
-        if R['deck_min'][0] < H['mu']:
+    R['kd_je'] = {t.name: sum((t.kd(u) for u in vj_per), D(0)) for t in tr}
+    kd_voll = D(0)                                   # Nr. 2: erstes Jahr bei voller Tilgung
+    spaet = False
+    for t in tr:
+        if t.tilg_beginn > vj_per[0] and t.kd_first is not None:
+            kd_voll += p * t.kd_first
+            spaet = True
+        else:
+            kd_voll += sum((t.kd(u) for u in vj_per), D(0))
+    R['deck_voll'] = (re_vj / kd_voll) if (spaet and kd_voll) else None
+    erstes_voll = (m0 - 1 + 11) // 12 + 1            # erstes Planjahr, das ganz in der Vermietung liegt
+
+    def kleinste(trs):
+        kl = []
+        for j in re_j:
+            if j < erstes_voll:
+                continue
+            kd = kd_jahr(trs, j)
+            if kd:
+                kl.append((re_j[j] / kd, j))
+        return min(kl) if kl else None
+    R['deck_min'] = kleinste(tr)
+    R['erstes_voll'] = erstes_voll
+    # Nr. 4: erstes Planjahr nach dem Ende jeder Zinsbindung
+    R['deck_nach_zb'] = {}
+    for t in tr:
+        if t.zb_ende is not None and t.zb_ende < N:
+            j = t.zb_ende // p + 1
+            R['deck_nach_zb'][t.name] = (j, deck[j][0])
+    # Nr. 5: kleinste Deckung nach der unguenstigsten Anschlussregel (MA-034)
+    R['deck_min_regel'] = None
+    if detail and any(t.art == 'prozent' and t.zb_ende is not None and t.zb_ende < N for t in tr) and R['deck_min']:
+        best = (R['deck_min'][0], R['deck_min'][1], 'tilgungssatz')
+        for regel in ('rate', 'restlaufzeit'):
+            trs = tranchen(regel)
+            km = kleinste(trs)
+            if km and km[0] < best[0]:
+                best = (km[0], km[1], regel)
+        R['deck_min_regel'] = best
+    pruef = [x for x in (R['deck_min'][0] if R['deck_min'] else None,
+                         R['deck_min_regel'][0] if R['deck_min_regel'] else None) if x is not None]
+    if pruef:
+        if min(pruef) < H['mu']:
             R['meld'].add('M-38')
-        if R['deck_min'][0] < 1:
+        if min(pruef) < 1:
             R['meld'].add('M-39')
+    if foerder:
+        if (R['deck_bem'] is not None and R['deck_bem'] < 1) or (R['deck_min'] and R['deck_min'][0] < 1):
+            R['meld'].add('M-50')
     # Gesamtkapitalrendite (R-10.11)
-    a0 = sum((inv[u] * w[u] / w[0] for u in range(0, inv_ende + 1)), D(0))
-    ZS = D(0)
-    for jd in jahr:
-        ZS += jd['zins'] * (1 - stz.s_z(jd['j']))     # s_FK = s_op (Vortrag); Koerperschaft ohne Kennzeichen
+    a0 = sum((inv[u] * w[u] / w[0] for u in range(0, bauende + 1)), D(0))
+    ZS = sum((jd['zins'] * (1 - stz.s_fk(jd['j'])) for jd in jahr), D(0))
     R['a0'] = a0
-    R['g'] = ((Zz - Dn + ZS + a0) / a0) ** (1 / nn) - 1 if a0 > 0 and (Zz - Dn + ZS + a0) > 0 else None
-    # Faktoren
-    u0 = (m0 - 1) // mp + 1
-    mj1 = mjm(u0) if p == 12 else None
-    R['mjm_1'] = mj1
+    zg = Zz - Dn + ZS + a0
+    R['g'] = (zg / a0) ** (1 / nn) - 1 if a0 > 0 and zg > 0 else None
     R['restwertbeitrag'] = verl - sum((t.s['abl'][N] for t in tr), D(0)) - vfe - rueck - R.get('steuer_verkauf', D(0))
-    R['darl_quote'] = (L + U_sum) / W
-    R['meld'].add('M-37')
+    nenner = R.get('gesamt_basis', gesamt) if nb else preis
+    R['darl_quote'] = (L + U_sum) / nenner
+    if status != 'befreit':
+        R['meld'].add('M-37')
+    else:
+        R['meld'].add('M-44')
+    if c.get('kennz') and not c.get('e69') and status in ('koerp', 'pg_gepr'):
+        R['meld'].add('M-51')
     return R
 
 
-def ziel_eu(c, P, stress=False):
-    """Endwertueberschuss beim Preis P (Stress mit L_Basis(P))."""
-    cc = copy.copy(c)
-    cc['preis'] = D(P)
-    if stress:
-        return rechne(cc, stress=True, basis=rechne(cc, detail=False), detail=False)
-    return rechne(cc, detail=False)
+def lauf(c, P=None, stress=False, detail=False):
+    cc = c if P is None else mit(c, preis=D(P))
+    return rechne(cc, stress=stress, detail=detail)
 
 
-def preissuche(c, stress=False, krit=None, verbose=False):
-    """R-11.5. krit(R) -> bool (Ziel erreicht)."""
+# ---------------------------------------------------------------- Preissuche (R-11.4 bis R-11.6)
+def preissuche(c, stress=False, krit=None, zusatz=()):
+    """Groesster Preis in vollen Euro, bis zu dem krit fuer jeden kleineren Preis des Suchbereichs gilt.
+    krit(R) -> bool; Voreinstellung Endwertueberschuss >= 0. zusatz: weitere Stuetzstellen (R-6.16)."""
     H = c['H']
     if krit is None:
         krit = lambda R: R['EU'] >= 0
     cache = {}
+    info = {}
 
     def ok(P):
         if P not in cache:
             try:
-                cache[P] = krit(ziel_eu(c, P, stress))
-            except M22:
+                Rr = lauf(c, P, stress)
+                cache[P] = bool(krit(Rr))
+                info[P] = Rr['Dn']
+            except Meldung as m_:
+                if m_.kennung != 'M-22':
+                    raise
                 cache[P] = None
         return cache[P]
-    base = rechne(c, detail=False)
-    O = int(r2(H['such_ober'] * max(base['mjm_1'], base['mjm_N'])).to_integral_value(rounding=ROUND_HALF_UP))
+    base = rechne(mit(c, preis=D(10) ** 7 if c['art'] == 'ankauf' else c['preis']), detail=False)
+    mj = max(base['mjm_1'], base['mjm_N'])
+    if mj <= 0:
+        return dict(P=None, meld='M-31')
+    O = int(r2(H['such_ober'] * mj).to_integral_value(rounding=ROUND_HALF_UP))
+    if 'O' in c:
+        O = c['O']
     U = 1
     if ok(U) is None:
         lo, hi = 1, O
@@ -1137,14 +1390,16 @@ def preissuche(c, stress=False, krit=None, verbose=False):
                 hi = mid
         U = hi
     if not ok(U):
-        return dict(P=None, meld='M-32', U=U, O=O)
-    nst = H['raster']
-    st = [U + (O + 1 - U) * i // nst for i in range(nst + 1)]
+        return dict(P=None, meld='M-32', U=U, O=O, r_U=lauf(c, U, stress)['r'])
+    Rz = H['raster']
+    st = sorted(set([U + (i * (O + 1 - U)) // Rz for i in range(Rz + 1)] + [q for q in zusatz if U <= q <= O + 1]))
     lo = hi = None
-    for i in range(nst):
-        if ok(st[i]) and not ok(st[i + 1]):
-            lo, hi = st[i], st[i + 1]
-            break
+    wechsel = 0
+    for i in range(len(st) - 1):
+        if ok(st[i]) != ok(st[i + 1]):
+            wechsel += 1
+            if lo is None and ok(st[i]):
+                lo, hi = st[i], st[i + 1]
     if lo is None:
         return dict(P=None, meld='M-33', U=U, O=O)
     while hi - lo > 1:
@@ -1153,20 +1408,72 @@ def preissuche(c, stress=False, krit=None, verbose=False):
             lo = mid
         else:
             hi = mid
-    g = lo
+    x = lo
     F = H['fenster']
-    meld = None
+    m34 = wechsel > 1
     while True:
-        bad = [q for q in range(max(U, g - F), g) if not ok(q)]
+        while x > U and not ok(x):
+            x -= 1
+        bad = [q for q in range(max(U, x - F), x) if not ok(q)]
         if not bad:
             break
-        g = min(bad) - 1
-        meld = 'M-34'
-    if any(ok(q) for q in range(g + 2, g + F + 1)):
-        meld = 'M-34'
-    return dict(P=g, meld=meld, U=U, O=O, n_eval=len(cache))
+        x = max(bad) - 1
+        m34 = True
+    if any(ok(q) for q in range(x + 2, x + F + 1)):
+        m34 = True
+    return dict(P=x, meld='M-34' if m34 else None, U=U, O=O, n_eval=len(cache), D=info.get(x))
 
 
+def tragbarer_preis(c, stress=False):
+    """min(P*; P_EK) mit bindender Grenze (R-11.6) und M-41."""
+    ps = preissuche(c, stress)
+    erg = dict(ps, grenze='rendite')
+    if c.get('ek_verf') is not None:
+        pe = preissuche(c, stress, krit=lambda R: R['ek_ges'] <= c['ek_verf'])
+        if pe['P'] is None:
+            return dict(P=None, meld='M-46')
+        if ps['P'] is None or pe['P'] < ps['P']:
+            erg = dict(pe, grenze='eigenkapital', meld=None)
+    if erg.get('P') is not None and lauf(c, erg['P'], stress)['Dn'] == 0:
+        erg = dict(erg, meld='M-41', nebenangabe=erg['P'], P=None)
+    return erg
+
+
+# ---------------------------------------------------------------- Zielwertsuche (R-11.9, R-11.10)
+def zielwertsuche(f, u, o, a, Rz=40):
+    """f(x) -> Zielfunktion (>= 0: erreicht). Gitter der Aufloesung a in [u; o], Rasterzahl Rz."""
+    u, o, a = D(u), D(o), D(a)
+    nsch = int(((o - u) / a).to_integral_value(rounding=ROUND_FLOOR))
+    idx = sorted(set((i * nsch) // Rz for i in range(Rz + 1)))
+    cache = {}
+
+    def ok(i):
+        if i not in cache:
+            try:
+                cache[i] = f(u + a * i) >= 0
+            except Meldung:
+                cache[i] = False
+        return cache[i]
+    loes = []
+    for i0, i1 in zip(idx, idx[1:]):
+        if ok(i0) != ok(i1):
+            lo, hi = i0, i1
+            while hi - lo > 1:
+                mid = (lo + hi) // 2
+                if ok(mid) == ok(lo):
+                    lo = mid
+                else:
+                    hi = mid
+            if ok(lo):
+                loes.append((u + a * lo, 'fallend'))      # erreicht -> verfehlt: letzter erreichter Wert
+            else:
+                loes.append((u + a * hi, 'steigend'))     # verfehlt -> erreicht: erster erreichter Wert
+    if loes:
+        return loes
+    return 'keine Loesung: Ziel an allen Rasterstellen ' + ('erreicht' if ok(idx[0]) else 'verfehlt')
+
+
+# ---------------------------------------------------------------- Ausgabe
 def fmt(x, nd=2):
     if x is None:
         return 'n.d.'
@@ -1177,3 +1484,51 @@ def fmt(x, nd=2):
 
 def pct(x, nd=3):
     return 'n.d.' if x is None else fmt(D(x) * 100, nd) + ' %'
+
+
+class Zaehler:
+    """Sammelt Soll-Ist-Vergleiche je Fall."""
+
+    def __init__(self):
+        self.zeilen = []
+        self.fall = ''
+
+    def titel(self, t):
+        self.fall = t
+        print('\n== ' + t)
+
+    def show(self, name, val, soll, nd=2, p=False):
+        if isinstance(val, str):
+            v = val
+        elif isinstance(val, int) and not isinstance(val, bool):
+            v = str(val)
+        else:
+            v = pct(val, nd) if p else fmt(val, nd)
+        ok = v == soll
+        self.zeilen.append((self.fall, name, v, soll, ok))
+        print(f"{'OK ' if ok else 'ABW'} {name:58s} ist {v:>18s}  soll {soll:>18s}")
+        return ok
+
+    def summe(self):
+        from collections import OrderedDict
+        d = OrderedDict()
+        for fall, name, v, soll, ok in self.zeilen:
+            x = d.setdefault(fall, [0, 0])
+            x[0] += 1
+            x[1] += 1 if ok else 0
+        print('\n== Zaehlung')
+        ges = tr = 0
+        for fall, (n_, k_) in d.items():
+            print(f"{fall:70s} {n_:4d} Sollwerte, {k_:4d} getroffen, {n_ - k_:3d} abweichend")
+            ges += n_
+            tr += k_
+        print(f"{'Summe':70s} {ges:4d} Sollwerte, {tr:4d} getroffen, {ges - tr:3d} abweichend")
+        abw = [z for z in self.zeilen if not z[4]]
+        if abw:
+            print('\n== Abweichungen')
+            for fall, name, v, soll, ok in abw:
+                print(f"   {fall} | {name}: ist {v}, soll {soll}")
+        return ges, tr
+
+
+Z = Zaehler()
